@@ -5,7 +5,13 @@ import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { COMPETENCY_DOMAINS, DOMAIN_SLUGS, ROLE_IDS } from "./lib/domains.ts";
+import {
+  COMPETENCY_DOMAINS,
+  DOMAIN_SLUGS,
+  ROLE_IDS,
+  ROLE_IDS_SENIOR,
+  ROLE_IDS_SUPPORTING,
+} from "./lib/domains.ts";
 import {
   canonicalUrl,
   compileContract,
@@ -239,5 +245,45 @@ describe("roles and competencies (roles.json, competencies.json)", () => {
       );
       expect(bad).toEqual([]);
     });
+  });
+});
+
+describe.skipIf(!hasRoles)("roles: completeness", () => {
+  it("role ids equal the 15 canonical ROLE_IDS", () => {
+    expect([...roles.map((r) => r.id)].sort()).toEqual([...ROLE_IDS].sort());
+  });
+
+  it("senior roles have 5-12 competencies, supporting roles 3-6", () => {
+    for (const r of roles) {
+      const n = r.competencies.length;
+      if (ROLE_IDS_SENIOR.includes(r.id)) {
+        expect(n, `${r.id} has ${n}`).toBeGreaterThanOrEqual(5);
+        expect(n, `${r.id} has ${n}`).toBeLessThanOrEqual(12);
+      } else {
+        expect(ROLE_IDS_SUPPORTING, r.id).toContain(r.id);
+        expect(n, `${r.id} has ${n}`).toBeGreaterThanOrEqual(3);
+        expect(n, `${r.id} has ${n}`).toBeLessThanOrEqual(6);
+      }
+    }
+  });
+
+  it("competencies.json has 35-50 entries and every competency is used by a role", () => {
+    expect(competencies.length).toBeGreaterThanOrEqual(35);
+    expect(competencies.length).toBeLessThanOrEqual(50);
+    const used = new Set(roles.flatMap((r) => r.competencies.map((c) => c.id)));
+    expect(competencies.filter((c) => !used.has(c.id)).map((c) => c.id)).toEqual([]);
+  });
+
+  it("every competency domain is used by at least one competency", () => {
+    const domains = new Set(competencies.map((c) => c.domain));
+    expect(COMPETENCY_DOMAINS.filter((d) => !domains.has(d))).toEqual([]);
+  });
+
+  it("level descriptors are at least 20 characters and distinct within a competency", () => {
+    for (const c of competencies) {
+      const texts = c.levels.map((l) => l.descriptor.trim());
+      for (const t of texts) expect(t.length, `${c.id}: "${t}"`).toBeGreaterThanOrEqual(20);
+      expect(new Set(texts).size, `${c.id} repeats a descriptor`).toBe(texts.length);
+    }
   });
 });
