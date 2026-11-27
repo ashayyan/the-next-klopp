@@ -42,3 +42,7 @@ PARTIAL. `sources.json` and `visual_ideas.md` are written. `findings.md` was NOT
 - kloppy StatsBomb support for formation-change events is unconfirmed.
 - Arsenal build-up label (2-3-5 versus 3-2-5) rests on Sky only in the files.
 - No commits made (orchestrator override).
+
+## Orchestrator note (2026-11-28)
+
+The orchestrator placed the researcher's findings text unchanged; gate passes (20 sources, 1225 findings words). Plan complete.
