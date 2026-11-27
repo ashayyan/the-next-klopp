@@ -87,23 +87,23 @@
   "phase_naming": "sequential",
   "agent_skills": {
     "gsd-ui-researcher": [
-      "global:design-taste-frontend",
+      ".claude/skills/design-taste-frontend",
       "global:frontend-design"
     ],
     "gsd-ui-checker": [
-      "global:design-taste-frontend",
+      ".claude/skills/design-taste-frontend",
       "global:frontend-design"
     ],
     "gsd-ui-auditor": [
-      "global:design-taste-frontend",
+      ".claude/skills/design-taste-frontend",
       "global:frontend-design"
     ],
     "gsd-executor": [
-      "global:design-taste-frontend",
+      ".claude/skills/design-taste-frontend",
       "global:frontend-design"
     ],
     "gsd-planner": [
-      "global:design-taste-frontend"
+      ".claude/skills/design-taste-frontend"
     ]
   },
   "claude_md_path": "./.claude/CLAUDE.md",
