@@ -1,8 +1,8 @@
 // Pure renderers for the generated Markdown views (RSCH-04, RSCH-05). Erasable TypeScript only.
 // Every renderer returns the whole file as a string with "\n" line endings and a trailing newline.
 // Text that comes from agents or the web is escaped before it lands in a table cell (T-02-09).
-import { TRACKS } from "./domains.ts";
-import { layers } from "./graph.ts";
+import { ROLE_IDS, THREADS, TRACKS } from "./domains.ts";
+import { layers, studyOrder } from "./graph.ts";
 import type { Concept, ResearchBundle } from "./research-io.ts";
 
 const PARTS = ["A", "B", "C", "D", "E", "F", "G"] as const;
@@ -108,4 +108,198 @@ export function renderConceptMap(bundle: ResearchBundle): string {
     }
   }
   return finish(lines);
+}
+
+/** Concept ids named as thread starters in curriculum-config.json. */
+export function starterIds(bundle: ResearchBundle): string[] {
+  return Object.values(bundle.config?.thread_starters ?? {}).filter(
+    (id): id is string => id !== undefined,
+  );
+}
+
+export function renderCurriculumDraft(bundle: ResearchBundle): string {
+  const { concepts, config } = bundle;
+  const byId = new Map(concepts.map((c) => [c.id, c]));
+  const { order, stage, cycle } = studyOrder(concepts, { threadStarters: starterIds(bundle) });
+  const threadOf = new Map<string, string>();
+  for (const t of THREADS) {
+    const starter = config?.thread_starters[t.track];
+    if (starter) threadOf.set(starter, t.label);
+  }
+  const stageOf = (id: string | undefined): string =>
+    id !== undefined && stage.has(id) ? String((stage.get(id) as number) + 1) : "-";
+  const firstStageOfTrack = (track: string): string => {
+    const first = order.find((id) => byId.get(id)?.track === track);
+    return stageOf(first);
+  };
+
+  const lines: string[] = [
+    generatedHeader(["concept-map.json", "curriculum-config.json"]),
+    "",
+    "# Curriculum draft",
+    "",
+    "The study order follows the concept map, not track numbers. Concepts are layered by their prerequisites and each layer is one stage. Inside a stage the order is: thread starters first, then lower track number, then concept id.",
+    "",
+    "## Early threads",
+    "",
+    ...table(
+      ["Thread", "Track", "Starter concept", "Starts in stage"],
+      THREADS.map((t) => {
+        const starter = config?.thread_starters[t.track];
+        return [
+          t.label,
+          t.track,
+          starter ?? "none set",
+          starter ? stageOf(starter) : firstStageOfTrack(t.track),
+        ];
+      }),
+    ),
+  ];
+
+  if (config) {
+    lines.push(
+      "",
+      "## Milestone 1 tracks",
+      "",
+      ...table(
+        ["Track", "Title", "Concepts", "First stage"],
+        config.milestone_1_tracks.map((track) => [
+          track,
+          trackTitle(track),
+          String(concepts.filter((c) => c.track === track).length),
+          firstStageOfTrack(track),
+        ]),
+      ),
+    );
+  }
+
+  lines.push("", "## Stages");
+  const stages = [...new Set(order.map((id) => stage.get(id) as number))];
+  let n = 0;
+  for (const s of stages) {
+    const ids = order.filter((id) => stage.get(id) === s);
+    lines.push(
+      "",
+      `### Stage ${s + 1}`,
+      "",
+      ...table(
+        ["#", "Concept", "Track", "Part", "Thread", "Prerequisites"],
+        ids.map((id) => {
+          const c = byId.get(id) as Concept;
+          n++;
+          return [String(n), c.id, c.track, c.part, threadOf.get(id) ?? "", list(c.prerequisites)];
+        }),
+      ),
+    );
+  }
+  if (cycle.length > 0) {
+    lines.push(
+      "",
+      "## Not ordered",
+      "",
+      `These concepts sit on or behind a prerequisite cycle: ${cycle.join(", ")}.`,
+    );
+  }
+  return finish(lines);
+}
+
+function roleRank(id: string): number {
+  const i = ROLE_IDS.indexOf(id);
+  return i === -1 ? ROLE_IDS.length : i;
+}
+
+export function renderRoleCompetencies(bundle: ResearchBundle): string {
+  const competencies = new Map(bundle.competencies.map((k) => [k.id, k]));
+  const roles = [...bundle.roles].sort(
+    (a, b) => roleRank(a.id) - roleRank(b.id) || a.id.localeCompare(b.id),
+  );
+  const lines: string[] = [
+    generatedHeader(["roles.json", "competencies.json"]),
+    "",
+    "# Role competencies",
+    "",
+    `- Roles: ${roles.length}`,
+    `- Competencies: ${bundle.competencies.length}`,
+    "",
+    "Each row shows the level the role needs and the descriptor of that level.",
+  ];
+  for (const role of roles) {
+    lines.push(
+      "",
+      `## ${cell(role.title)}`,
+      "",
+      `Role id: ${role.id}. ${cell(role.summary)}`,
+      "",
+      `Sources: ${list(role.sources)}`,
+      "",
+      ...table(
+        ["Competency", "Domain", "Target level", "What the target level means", "Concepts"],
+        role.competencies.map((req) => {
+          const k = competencies.get(req.id);
+          if (!k) return [`${req.id} (unknown competency)`, "", String(req.target_level), "", ""];
+          const level = k.levels.find((l) => l.level === req.target_level);
+          return [
+            `${k.title} (${k.id})`,
+            k.domain,
+            String(req.target_level),
+            level?.descriptor ?? "",
+            k.concepts.length > 0 ? k.concepts.join(", ") : "none yet",
+          ];
+        }),
+      ),
+    );
+  }
+  return finish(lines);
+}
+
+export function renderGaps(bundle: ResearchBundle): string {
+  const gaps = bundle.gaps;
+  if (!gaps) throw new Error("gaps.json is missing");
+  const section = (title: string, headers: string[], rows: string[][]): string[] => [
+    "",
+    `## ${title}`,
+    "",
+    ...(rows.length > 0 ? table(headers, rows) : ["None recorded."]),
+  ];
+  return finish([
+    generatedHeader(["gaps.json"]),
+    "",
+    "# Gaps",
+    "",
+    `As of ${gaps.as_of}.`,
+    ...section(
+      "Deferred domains",
+      [
+        "Brief domain",
+        "Name",
+        "Why deferred",
+        "Must precede",
+        "Research trigger",
+        "Starting sources",
+      ],
+      gaps.deferred_domains.map((d) => [
+        d.brief_domain,
+        d.name,
+        d.why_deferred,
+        list(d.must_precede),
+        d.research_trigger,
+        list(d.starting_sources),
+      ]),
+    ),
+    ...section(
+      "Sources with unknown licence",
+      ["Source", "Needed by", "Note"],
+      gaps.unknown_licence_sources.map((s) => [s.source_id, list(s.needed_by), s.note]),
+    ),
+    ...section(
+      "Premier League coverage gaps",
+      ["Id", "Gap", "Impact", "Mitigation", "Evidence"],
+      gaps.pl_coverage_gaps.map((g) => [g.id, g.gap, g.impact, g.mitigation, list(g.evidence)]),
+    ),
+    ...section(
+      "Orphan competencies",
+      ["Competency", "Note"],
+      gaps.orphan_competencies.map((o) => [o.competency_id, o.note]),
+    ),
+  ]);
 }

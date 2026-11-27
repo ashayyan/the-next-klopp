@@ -21,6 +21,7 @@
     "pipeline:test": "uv run --project pipeline pytest pipeline/tests -q",
     "research:check": "vitest run scripts/research",
     "research:gate": "node scripts/research/gate.ts",
+    "research:views": "node scripts/research/render-views.ts",
     "smoke": "node scripts/smoke.ts",
     "smoke:dev": "node scripts/smoke.ts dev",
     "verify:setup": "node scripts/verify-setup.ts all",

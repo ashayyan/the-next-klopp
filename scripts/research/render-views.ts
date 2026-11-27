@@ -4,8 +4,15 @@
 // Erasable TypeScript only so it runs under native type stripping.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { checkGraph, layers } from "./lib/graph.ts";
 import { BUNDLE_FILES, loadResearchBundle } from "./lib/research-io.ts";
-import { renderConceptMap } from "./lib/views.ts";
+import {
+  prereqMap,
+  renderConceptMap,
+  renderCurriculumDraft,
+  renderGaps,
+  renderRoleCompetencies,
+} from "./lib/views.ts";
 
 const REPO_ROOT = join(import.meta.dirname, "..", "..");
 
@@ -62,8 +69,31 @@ function main(): number {
     return 1;
   }
 
+  const graph = checkGraph(bundle.concepts);
+  if (graph.errors.length > 0) {
+    console.error(`concept map has graph errors:\n- ${graph.errors.join("\n- ")}`);
+    return 1;
+  }
+
   const views = new Map<string, string>();
+  const skipped: string[] = [];
   views.set("CONCEPT_MAP.md", renderConceptMap(bundle));
+  views.set("CURRICULUM_DRAFT.md", renderCurriculumDraft(bundle));
+  if (bundle.roles.length > 0 && bundle.competencies.length > 0) {
+    views.set("ROLE_COMPETENCIES.md", renderRoleCompetencies(bundle));
+  } else skipped.push("ROLE_COMPETENCIES.md (needs roles.json and competencies.json)");
+  if (bundle.gaps) views.set("GAPS.md", renderGaps(bundle));
+  else skipped.push("GAPS.md (needs gaps.json)");
+
+  const { layer } = layers(prereqMap(bundle.concepts));
+  const roots = bundle.concepts.filter((c) => c.prerequisites.length === 0).length;
+  const maxPrereqs = Math.max(0, ...bundle.concepts.map((c) => c.prerequisites.length));
+  const depth = layer.size > 0 ? Math.max(...layer.values()) + 1 : 0;
+  console.log(
+    `quality: ${bundle.concepts.length} concepts, ${roots} roots, ${depth} layers, max ${maxPrereqs} prerequisites`,
+  );
+  for (const w of graph.warnings) console.log(`warning: ${w}`);
+  for (const s of skipped) console.log(`skipped: ${s}`);
 
   if (args.check) {
     const bad: string[] = [];

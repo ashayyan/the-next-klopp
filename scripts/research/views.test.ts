@@ -193,7 +193,10 @@ describe("renderRoleCompetencies", () => {
 
   it("has one section per role with the descriptor at the target level and linked concepts", () => {
     for (const r of bundle.roles) expect(md).toContain(`## ${r.title}`);
-    const coach = md.slice(md.indexOf("## Head Coach"), md.indexOf("## Sporting Director"));
+    const start = md.indexOf("## Head Coach");
+    const next = md.indexOf("\n## ", start + 1);
+    const coach = md.slice(start, next === -1 ? undefined : next);
+    expect(start).toBeGreaterThan(-1);
     expect(coach).toContain("reading-the-game");
     expect(coach).toContain("Reads the game live and adjusts the plan within minutes.");
     expect(coach).not.toContain("Knows the pitch, the lines and the basic shapes");
