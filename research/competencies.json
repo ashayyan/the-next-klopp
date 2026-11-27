@@ -45,7 +45,13 @@
         "descriptor": "Teaches others what to watch for and checks their match reading against the footage."
       }
     ],
-    "concepts": []
+    "concepts": [
+      "formation-notation",
+      "offside-offence",
+      "offside-position",
+      "pitch-markings",
+      "positions-overview"
+    ]
   },
   {
     "id": "game-planning",
@@ -597,7 +603,7 @@
         "descriptor": "Owns squad renewal and aligns recruitment, academy and the head coach with the plan."
       }
     ],
-    "concepts": []
+    "concepts": ["positions-overview"]
   },
   {
     "id": "scouting-network-management",

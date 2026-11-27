@@ -8,10 +8,13 @@ import { describe, expect, it } from "vitest";
 import {
   COMPETENCY_DOMAINS,
   DOMAIN_SLUGS,
+  partForTrack,
   ROLE_IDS,
   ROLE_IDS_SENIOR,
   ROLE_IDS_SUPPORTING,
+  TRACKS,
 } from "./lib/domains.ts";
+import { checkGraph } from "./lib/graph.ts";
 import {
   canonicalUrl,
   compileContract,
@@ -285,5 +288,129 @@ describe.skipIf(!hasRoles)("roles: completeness", () => {
       for (const t of texts) expect(t.length, `${c.id}: "${t}"`).toBeGreaterThanOrEqual(20);
       expect(new Set(texts).size, `${c.id} repeats a descriptor`).toBe(texts.length);
     }
+  });
+});
+
+// Concept map (02-18, 02-19). Ids are frozen references for placement, mastery, lessons and the
+// Role Map. prerequisites[] is the source of truth; prerequisite edges, concept.roles and
+// competency.concepts are derived by derive-links.ts and checked here.
+const approvalPath = join(root, "research", "APPROVAL.md");
+const hasConceptMap = existsSync(conceptMapPath);
+
+interface ConceptDoc {
+  id: string;
+  title: string;
+  track: string;
+  part: string;
+  summary: string;
+  prerequisites: string[];
+  roles: string[];
+  competencies: string[];
+  sources: string[];
+  status: string;
+}
+
+interface ConceptMapDoc {
+  schema_version: number;
+  concepts: ConceptDoc[];
+  edges: { from: string; to: string; kind: string }[];
+}
+
+const conceptMap = (
+  hasConceptMap ? readJson(conceptMapPath) : { schema_version: 1, concepts: [], edges: [] }
+) as ConceptMapDoc;
+const concepts = conceptMap.concepts;
+
+describe("concept map (concept-map.json)", () => {
+  it.skipIf(hasConceptMap || !gate)("exists under npm run research:gate", () => {
+    expect(hasConceptMap).toBe(true);
+  });
+
+  describe.skipIf(!hasConceptMap)("concepts: integrity", () => {
+    const trackIds = new Set(TRACKS.map((t) => t.id));
+    const conceptIds = new Set(concepts.map((c) => c.id));
+
+    it("is valid against concept.schema.json", () => {
+      const validate = compileContract("concept");
+      expect(validate(conceptMap), JSON.stringify(validate.errors)).toBe(true);
+    });
+
+    it("has unique ids, none equal to a track id", () => {
+      const ids = concepts.map((c) => c.id);
+      expect(new Set(ids).size).toBe(ids.length);
+      expect(ids.filter((id) => trackIds.has(id))).toEqual([]);
+    });
+
+    it("puts every concept on a known track with the Part derived from it", () => {
+      for (const c of concepts) {
+        expect(trackIds.has(c.track), `${c.id}: ${c.track}`).toBe(true);
+        expect(c.part, c.id).toBe(partForTrack(c.track));
+      }
+    });
+
+    it("has an acyclic prerequisite graph with no structural errors", () => {
+      const { errors } = checkGraph(concepts);
+      expect(errors).toEqual([]);
+    });
+
+    it("keeps prerequisites at 4 or fewer, titles at 4 words or fewer, summaries at 140 characters or fewer", () => {
+      const bad: string[] = [];
+      for (const c of concepts) {
+        if (c.prerequisites.length > 4)
+          bad.push(`${c.id}: ${c.prerequisites.length} prerequisites`);
+        const words = c.title.trim().split(/\s+/).length;
+        if (words > 4) bad.push(`${c.id}: title has ${words} words`);
+        if (c.summary.length > 140) bad.push(`${c.id}: summary has ${c.summary.length} characters`);
+      }
+      expect(bad).toEqual([]);
+    });
+
+    it("cites sources that resolve to registry ids through the aliases", () => {
+      const registry = (hasRegistry ? readJson(registryPath) : []) as SourceEntry[];
+      const aliases = hasRegistry
+        ? (readJson(aliasesPath) as { aliases: Record<string, string> }).aliases
+        : {};
+      const ids = new Set(registry.map((s) => s.id));
+      const bad = concepts.flatMap((c) =>
+        c.sources.filter((s) => !ids.has(aliases[s] ?? s)).map((s) => `${c.id} -> ${s}`),
+      );
+      expect(bad).toEqual([]);
+    });
+
+    it("lists only competencies and roles that exist", () => {
+      const competencyIds = new Set(competencies.map((k) => k.id));
+      const roleIds = new Set(roles.map((r) => r.id));
+      const bad = concepts.flatMap((c) => [
+        ...c.competencies.filter((k) => !competencyIds.has(k)).map((k) => `${c.id} -> ${k}`),
+        ...c.roles.filter((r) => !roleIds.has(r)).map((r) => `${c.id} -> role ${r}`),
+      ]);
+      expect(bad).toEqual([]);
+    });
+
+    it("joins two concept ids with every related or contrasts edge", () => {
+      const bad = conceptMap.edges
+        .filter((e) => e.kind !== "prerequisite")
+        .filter((e) => !conceptIds.has(e.from) || !conceptIds.has(e.to) || e.from === e.to)
+        .map((e) => `${e.from} -${e.kind}-> ${e.to}`);
+      expect(bad).toEqual([]);
+    });
+
+    it("matches a fresh derive (derive-links --check exits 0)", () => {
+      const r = spawnSync(
+        process.execPath,
+        [join(root, "scripts", "research", "derive-links.ts"), "--check"],
+        { cwd: root, encoding: "utf8" },
+      );
+      expect(r.status, `${r.stdout}\n${r.stderr}`).toBe(0);
+    });
+
+    it("has no approved concept unless research/APPROVAL.md records the approval", () => {
+      const approved = existsSync(approvalPath)
+        ? /^Status: approved/m.test(readFileSync(approvalPath, "utf8"))
+        : false;
+      if (!approved) {
+        expect(concepts.filter((c) => c.status === "approved").map((c) => c.id)).toEqual([]);
+      }
+    });
   });
 });

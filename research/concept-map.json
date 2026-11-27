@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "concepts": [
+    {
+      "id": "formation-notation",
+      "title": "Formation notation",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A formation counts outfield players per line from the back, so 4-2-3-1 never includes the goalkeeper.",
+      "prerequisites": ["positions-overview"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": [
+        "src-frontiers-formation-id-survey",
+        "src-fourfourtwo-formations-in-football",
+        "src-coachesvoice-formations-explained"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "offside-offence",
+      "title": "Offside offence",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A player in an offside position is penalised only when active: interfering with play or an opponent, or gaining an advantage.",
+      "prerequisites": ["offside-position"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-offside", "src-ifab-laws-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "offside-position",
+      "title": "Offside position",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Nearer the goal line than both the ball and the second-last opponent, in their half. Level is onside.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-offside", "src-ifab-laws-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "pitch-markings",
+      "title": "Pitch markings",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The lines, circles and arcs of Law 1. A line belongs to the area it bounds, so a ball on the line is still in.",
+      "prerequisites": [],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27", "src-fifa-stadium-guidelines-pitch"],
+      "status": "draft"
+    },
+    {
+      "id": "positions-overview",
+      "title": "The positions",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Goalkeeper, defenders, midfielders and forwards: the pitch zone each player starts in and mainly works from.",
+      "prerequisites": ["pitch-markings"],
+      "roles": [
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["match-reading", "squad-planning"],
+      "sources": [
+        "src-wikipedia-association-football-positions",
+        "src-bundesliga-positions-explained"
+      ],
+      "status": "draft"
+    }
+  ],
+  "edges": [
+    {
+      "from": "offside-position",
+      "to": "offside-offence",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "offside-position",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "positions-overview",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "positions-overview",
+      "to": "formation-notation",
+      "kind": "prerequisite"
+    }
+  ]
+}
