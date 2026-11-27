@@ -69,6 +69,10 @@ jobs:
   guards:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    # gitleaks-action lists a PR's commits through the REST API, which needs pull-requests: read.
+    permissions:
+      contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v7
         with:
