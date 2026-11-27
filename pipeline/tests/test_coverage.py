@@ -333,3 +333,43 @@ def test_github_token_is_sent_only_to_api_github_com(
     assert "klopp-pipeline" in raw.get_header("User-agent")
     for path in tmp_path.iterdir():
         assert b"secret-token" not in path.read_bytes()
+
+
+def test_net_cache_write_is_atomic_and_leaves_no_temp_file(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(net, "build_opener", lambda: FakeOpener(b"hello"))
+    net.fetch_bytes("https://raw.githubusercontent.com/x", 100, cache_dir=tmp_path)
+    assert not list(tmp_path.glob("*.tmp"))
+    assert len(list(tmp_path.glob("*.bin"))) == 1
+
+
+def test_net_cache_write_error_is_a_fetch_error_and_cleans_up(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(net, "build_opener", lambda: FakeOpener(b"hello"))
+
+    def boom(src: Any, dst: Any) -> None:
+        raise PermissionError("locked")
+
+    monkeypatch.setattr(net.os, "replace", boom)
+    with pytest.raises(FetchError):
+        net.fetch_bytes("https://raw.githubusercontent.com/x", 100, cache_dir=tmp_path)
+    assert not list(tmp_path.glob("*.tmp"))
+    assert not list(tmp_path.glob("*.bin"))
+
+
+def test_net_unreadable_cache_entry_is_a_miss_not_a_crash(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    opener = FakeOpener(b"fresh")
+    monkeypatch.setattr(net, "build_opener", lambda: opener)
+    url = "https://raw.githubusercontent.com/x"
+    net.fetch_bytes(url, 100, cache_dir=tmp_path)
+
+    def locked(self: Path) -> bytes:
+        raise PermissionError("locked")
+
+    monkeypatch.setattr(Path, "read_bytes", locked)
+    assert net.fetch_bytes(url, 100, cache_dir=tmp_path) == b"fresh"
+    assert len(opener.requests) == 2

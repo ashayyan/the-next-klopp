@@ -76,6 +76,46 @@ def _cache_paths(cache_dir: Path, url: str) -> tuple[Path, Path]:
     return cache_dir / f"{key}.bin", cache_dir / f"{key}.meta.json"
 
 
+def _read_cache(body_path: Path, max_bytes: int, *, offline: bool, ttl_hours: float) -> bytes | None:
+    """Return a usable cached body, or None. An unreadable cache entry counts as a miss."""
+    try:
+        if not body_path.exists():
+            return None
+        age_hours = (time.time() - body_path.stat().st_mtime) / 3600
+        if not (offline or age_hours <= ttl_hours):
+            return None
+        data = body_path.read_bytes()
+    except OSError:
+        return None
+    return data if len(data) <= max_bytes else None
+
+
+def _atomic_write(path: Path, content: bytes) -> None:
+    """Write beside the target, then ``os.replace``: a crash never leaves a truncated target."""
+    tmp = path.with_name(path.name + ".tmp")
+    try:
+        tmp.write_bytes(content)
+        os.replace(tmp, path)
+    except OSError:
+        try:
+            tmp.unlink(missing_ok=True)
+        except OSError:
+            pass
+        raise
+
+
+def _write_cache(
+    cache_dir: Path, body_path: Path, meta_path: Path, data: bytes, meta: dict[str, str]
+) -> None:
+    """Body first, then meta, each atomic. A cache I/O error becomes a FetchError, not a crash."""
+    try:
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        _atomic_write(body_path, data)
+        _atomic_write(meta_path, (json.dumps(meta, indent=2) + "\n").encode("utf-8"))
+    except OSError as exc:
+        raise FetchError(f"{type(exc).__name__} writing the cache for {meta['url']}") from exc
+
+
 def fetch_bytes(
     url: str,
     max_bytes: int,
@@ -89,12 +129,10 @@ def fetch_bytes(
     host = check_url(url)
     body_path, meta_path = _cache_paths(cache_dir, url)
 
-    if body_path.exists() and not refresh:
-        age_hours = (time.time() - body_path.stat().st_mtime) / 3600
-        if offline or age_hours <= ttl_hours:
-            data = body_path.read_bytes()
-            if len(data) <= max_bytes:
-                return data
+    if not refresh:
+        cached = _read_cache(body_path, max_bytes, offline=offline, ttl_hours=ttl_hours)
+        if cached is not None:
+            return cached
     if offline:
         raise FetchError(f"offline mode and no usable cache entry for {url}")
 
@@ -117,8 +155,6 @@ def fetch_bytes(
     if len(data) > max_bytes:
         raise FetchError(f"response for {url} exceeds the {max_bytes} byte cap")
 
-    cache_dir.mkdir(parents=True, exist_ok=True)
-    body_path.write_bytes(data)
     meta = {"url": url, "fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
-    meta_path.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8", newline="\n")
+    _write_cache(cache_dir, body_path, meta_path, data, meta)
     return data
