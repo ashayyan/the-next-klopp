@@ -113,6 +113,11 @@ If everything else slips, this must hold: shipped lessons follow the Lesson Loop
 | Premier League as default reference league | Most free data, writing, video and official documents | — Pending |
 | Research before any lesson content | Brief rule §2.1; curriculum and DESIGN.md depend on it | — Pending |
 | PFSA baseline treated as Intro + Level 1, rusty | Brief §16 correction | — Pending |
+| Phase 0 research split: Wave 1 (what M0/M1 need) + just-in-time research at the start of each later track | Learner chose this on 2026-11-27 over the brief's full-sprint rule (§2.1/§6); full sprint risked a multi-month wait before first lesson. Rule "no lesson content before its research is approved" still holds per track | — Pending |
+| Vite 8 SPA over Next.js (to confirm in `docs/decisions/`) | No server work; avoids hydration issues with local state; first-class workers/WASM (research STACK.md) | — Pending |
+| Research outputs machine-readable (`concept-map.json`, `roles.json`, `competencies.json`, `SOURCE_REGISTRY.json`) with Markdown as views | Placement, mastery, Role Map and coverage checks need them (research ARCHITECTURE.md); amends brief §6 `.md`-only outputs | — Pending |
+| Watch Gym L1 supply: reconstructions from open data + learner local clips; YouTube link-out only; no video stored | No legal clip supply otherwise; no overlay on iframes (research PITFALLS.md) | — Pending |
+| Open questions for learner at checkpoints: study vs dev server split (D6), moving project to a path without spaces (D10) | Change the "one command" expectation / setup | — Pending |
 
 ## Evolution
 
