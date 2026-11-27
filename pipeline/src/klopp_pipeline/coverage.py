@@ -70,7 +70,7 @@ def statsbomb_rows(fetch: Fetch, now: str) -> list[CoverageRow]:
         if is_pl:
             common = _common_clubs(matches)
             notes = (
-                f"All {total} matches involve {', '.join(sorted(common))} only."
+                f"All {total} matches involve {', '.join(sorted(common))}."
                 if common and total
                 else f"{total} Premier League matches."
             )
@@ -518,6 +518,7 @@ def run_coverage(
 
 # --- output -------------------------------------------------------------------------------------
 DATA_TYPES = ["event", "360", "tracking", "broadcast-tracking", "physical"]
+PL_COMPETITION_NAMES = ("Premier League", "English first division")
 
 
 def _headline_cell(rows: list[CoverageRow], provider: str, data_type: str) -> str:
@@ -554,7 +555,11 @@ def render_markdown(matrix: CoverageMatrix) -> str:
     ]
     for p in providers:
         mine = [r for r in rows if r.provider == p]
-        relevant = [r for r in mine if (r.pl_matches or 0) > 0 or r.status != "ok"]
+        relevant = [
+            r
+            for r in mine
+            if (r.pl_matches or 0) > 0 or r.status != "ok" or r.competition in PL_COMPETITION_NAMES
+        ]
         rest = len(mine) - len(relevant)
         lines += ["", f"## {p}", ""]
         lines.append(f"Dataset: {mine[0].dataset}. Licence: `{mine[0].licence_id}`.")
