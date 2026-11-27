@@ -43,14 +43,26 @@ function resolve(c: { id: string; excerpt: string | null }): {
 
 const resolved = citations.map(resolve);
 
-/** Lines of the section that starts at `heading` and ends at the next heading of any level. */
+/**
+ * Body of the section that starts at `heading` (exact line) and ends at the next heading of the
+ * same or a higher level, so a "## Decision" section includes its "###" sub-sections.
+ */
 function section(heading: string): string {
   const lines = adr.split(/\r?\n/);
   const i = lines.findIndex((l) => l.trim() === heading);
   if (i < 0) return "";
+  const level = (heading.match(/^#+/)?.[0] ?? "#").length;
   const rest = lines.slice(i + 1);
-  const end = rest.findIndex((l) => /^#{1,6} /.test(l));
+  const end = rest.findIndex((l) => {
+    const m = l.match(/^(#{1,6}) /);
+    return m !== null && (m[1] as string).length <= level;
+  });
   return (end < 0 ? rest : rest.slice(0, end)).join("\n");
+}
+
+/** List items ("- ...") of a section body. */
+function bullets(body: string): string[] {
+  return body.split(/\r?\n/).filter((l) => /^\s*- /.test(l));
 }
 
 describe("ADR 0008: Watch Gym Level 1 clip supply", () => {
@@ -125,5 +137,58 @@ describe("ADR 0008: Watch Gym Level 1 clip supply", () => {
     expect(decision).toMatch(/Last Row/);
     expect(decision).toMatch(/Only CC BY sources/);
     expect(decision).toMatch(/logo/);
+  });
+});
+
+describe("ADR 0008: shipping policy, PL gaps, consumers and alternatives", () => {
+  it("has a Deploy deny-manifest sub-section inside Decision or Consequences", () => {
+    const deny = section("### Deploy deny-manifest");
+    expect(deny, 'no "### Deploy deny-manifest" heading').not.toBe("");
+    const inside = [section("## Decision"), section("## Consequences")].some((b) =>
+      b.includes("### Deploy deny-manifest"),
+    );
+    expect(inside, "deny-manifest must sit inside Decision or Consequences").toBe(true);
+    const globs = [...deny.matchAll(/`([^`]*\*[^`]*)`/g)].map((m) => m[1] as string);
+    expect(globs.length, "at least two backticked glob patterns").toBeGreaterThanOrEqual(2);
+    expect(globs.some((g) => /statsbomb/i.test(g))).toBe(true);
+    expect(globs.some((g) => /last-row/i.test(g))).toBe(true);
+    expect(deny).toMatch(/dist\//);
+    expect(deny).toMatch(/fail/);
+  });
+
+  it("lists the PL gaps: no 360, tracking only from Last Row, no physical data", () => {
+    const items = bullets(section("### PL gaps"));
+    expect(items.length).toBeGreaterThanOrEqual(3);
+    expect(items.some((l) => /360/.test(l))).toBe(true);
+    expect(items.some((l) => /Last Row/.test(l) && /tracking|off-ball/i.test(l))).toBe(true);
+    expect(items.some((l) => /physical/i.test(l))).toBe(true);
+  });
+
+  it("names the consumers in Phase 3, Phase 3/5 and Phase 8", () => {
+    const lines = bullets(section("## Consequences"));
+    const has = (...res: RegExp[]) => lines.some((l) => res.every((re) => re.test(l)));
+    expect(has(/Phase 3/, /manifest/, /credit/), "Phase 3 manifests carry the data credit").toBe(
+      true,
+    );
+    expect(has(/Phase 3\/5/, /bundle gate/, /deny-manifest/), "Phase 3/5 bundle gate").toBe(true);
+    expect(has(/Phase 8/, /clip spec/, /fallback/), "Phase 8 clip specs carry a fallback").toBe(
+      true,
+    );
+  });
+
+  it("rejects the four alternatives, each with a reason and a citation", () => {
+    const items = bullets(section("## Alternatives"));
+    const wanted: Array<[string, RegExp]> = [
+      ["YouTube embed with overlays", /embed/i],
+      ["downloading broadcast clips", /download/i],
+      ["shipping StatsBomb-derived data publicly", /StatsBomb/],
+      ["waiting for PFF form access", /PFF/],
+    ];
+    for (const [name, re] of wanted) {
+      const line = items.find((l) => re.test(l));
+      expect(line, `Alternatives lack "${name}"`).toBeDefined();
+      expect(line, `"${name}" is not rejected`).toMatch(/rejected/i);
+      expect(parseCitations(line as string).length, `"${name}" has no citation`).toBeGreaterThan(0);
+    }
   });
 });

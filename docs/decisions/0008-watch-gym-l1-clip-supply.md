@@ -40,15 +40,42 @@ Licence evidence:
 - Only CC BY sources may ship in the Vercel bundle: Wyscout PL 2017/18 events and DFL/Sportec data, each with attribution and a licence link.
 - SkillCorner and Metrica stay local with credit until their data licence is settled [src-metrica-sample-data#readme-legal-stuff].
 - Every clip states its dataset and league on screen. A clip built from non-PL data never uses PL wording.
+- The project takes the strict reading of StatsBomb clause 1.2.1: derived clip extracts and small aggregates count as the data, so none of them ship [src-statsbomb-open-data#agreement-1-2-1-no-third-party].
+
+### Deploy deny-manifest
+
+The Phase 3/5 licence and bundle gates copy these patterns into the deny-manifest. The bundle gate must fail when any file in `dist/` matches one of them.
+- `public/data/statsbomb/**` and `**/*statsbomb*`: StatsBomb-derived artifacts.
+- `public/data/last-row/**` and `**/*last-row*`: Last Row clips.
+- `public/data/metrica/**` and `public/data/skillcorner/**`: sources with no settled data licence.
+- Only paths under `public/data/wyscout/**` and `public/data/dfl/**` may hold shipped data, each with its data credit.
 
 Reversibility: costly - the Watch Gym data model, the Phase 3 pipeline licence gate and Phase 8 all depend on this route.
 
 ## Consequences
 
-- Good: every Watch Gym Level 1 clip can be shown without footage rights.
+- Good: every Watch Gym Level 1 clip can be shown without footage rights or a footage download.
+- Good: the deployed bundle carries only CC BY data, so the deploy needs no permission beyond attribution.
 - Bad: PL reconstructions of off-ball movement are thin, so many shape clips use labelled non-PL tracking.
+- Bad: the deployed build shows fewer PL clips than the local study build, because StatsBomb PL clips stay local.
+- Phase 3 must build: pipeline recipes that write the data credit (provider, licence id, licence link, and the StatsBomb logo flag) into every artifact manifest, and the Scene/Frame format that holds a reconstruction.
+- Phase 3/5 must build: the bundle gate that reads the deny-manifest patterns above and fails the build on a match in `dist/`.
+- Phase 4/5 must build: a reusable data-credit element with a logo slot, shown on every clip and chart that uses open data.
+- Phase 8 must build: clip specs with a required `fallback` field naming the reconstruction. A clip whose local file is missing plays its reconstruction fallback instead of an error.
+
+### PL gaps
+
+02-20 carries each gap into GAPS.md.
+- No PL 360 data: StatsBomb has 0 PL matches with 360 frames, only shot freeze frames [src-statsbomb-open-data].
+- PL tracking and off-ball movement only from Last Row: 13 Liverpool goals, informal licence, self-described as too inaccurate for research [src-fot-last-row#readme-accuracy-caveat]. Continuous off-ball reconstructions for PL topics use labelled non-PL tracking (DFL Bundesliga).
+- No PL physical data from any open provider in the matrix [src-skillcorner-opendata].
+- StatsBomb redistribution limits: StatsBomb PL clips cannot ship, so the deployed PL supply is Wyscout 2017/18 events only [src-statsbomb-open-data#agreement-1-2-1-no-third-party].
+- The reusable data-credit element with a logo slot does not exist yet (Phase 4/5).
 
 ## Alternatives
 
-- YouTube embed with question overlays: rejected. Overlays in front of the player are barred [src-youtube-api-rmf#rmf-no-overlays].
-- Downloading broadcast clips: rejected. Downloading is barred [src-youtube-terms#tos-no-download].
+- YouTube embed with question overlays: rejected. Overlays, frames or visual elements in front of the embedded player are barred [src-youtube-api-rmf#rmf-no-overlays].
+- Downloading broadcast clips for a local overlay tool: rejected. Downloading content is barred, and embedding does not allow it [src-youtube-terms#tos-no-download][src-youtube-terms#tos-embeddable-player].
+- Shipping StatsBomb-derived data publicly, even a minimal set of clip extracts with logo credit: rejected. The agreement bars providing the data to any third party and commercial use of derived analysis [src-statsbomb-open-data#agreement-1-2-1-no-third-party][src-statsbomb-open-data#agreement-1-2-2-no-commercial].
+- Waiting for PFF FC form access to broadcast tracking: rejected. Access is a request form with no stated terms, and the 64 matches hold 0 PL matches [src-pff-fc-wc2022].
+- YouTube embed beside a separate pitch panel: rejected for now. An adjacent panel is not an overlay, but CONTEXT locks YouTube to link-out and the Terms bar automated access [src-youtube-terms#tos-no-automated-access].
