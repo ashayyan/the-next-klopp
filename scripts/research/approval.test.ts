@@ -123,3 +123,72 @@ describe("research approval record (research/APPROVAL.md)", () => {
     });
   });
 });
+
+// Status flip. Approval covers Tracks 0-4 (Part A), except concepts whose every cited source is
+// an unverified just-in-time seed: those stay draft until their research lands, and APPROVAL.md
+// names each of them in its Scope section.
+const conceptMapPath = join(root, "research", "concept-map.json");
+const registryPath = join(root, "research", "SOURCE_REGISTRY.json");
+const aliasesPath = join(root, "research", "SOURCE_ALIASES.json");
+const pagePath = join(root, "research", "summary", "index.html");
+const flipInputs = [conceptMapPath, registryPath, aliasesPath].every((p) => existsSync(p));
+const APPROVED_TRACK = /^t0[0-4]-/;
+
+interface MapConcept {
+  id: string;
+  track: string;
+  sources: string[];
+  status: string;
+}
+
+function loadFlipInputs(): { concepts: MapConcept[]; seedOnly: Set<string> } {
+  const map = JSON.parse(readFileSync(conceptMapPath, "utf8")) as { concepts: MapConcept[] };
+  const registry = JSON.parse(readFileSync(registryPath, "utf8")) as {
+    id: string;
+    status: string;
+  }[];
+  const aliases =
+    (JSON.parse(readFileSync(aliasesPath, "utf8")) as { aliases?: Record<string, string> })
+      .aliases ?? {};
+  const status = new Map(registry.map((s) => [s.id, s.status]));
+  const seedOnly = new Set(
+    map.concepts
+      .filter((c) => c.sources.every((s) => status.get(aliases[s] ?? s) === "unverified"))
+      .map((c) => c.id),
+  );
+  return { concepts: map.concepts, seedOnly };
+}
+
+describe.skipIf(!present || !flipInputs)("concept status follows the approval record", () => {
+  it("approves exactly the Tracks 0-4 concepts with a verified source when approved", () => {
+    const md = readApproval();
+    const { concepts, seedOnly } = loadFlipInputs();
+    if (approvalStatus(md) !== "approved") {
+      expect(concepts.filter((c) => c.status === "approved").map((c) => c.id)).toEqual([]);
+      return;
+    }
+    for (const c of concepts) {
+      const expected = APPROVED_TRACK.test(c.track) && !seedOnly.has(c.id) ? "approved" : "draft";
+      expect(c.status, `${c.id} (${c.track})`).toBe(expected);
+    }
+  });
+
+  it("names every held Tracks 0-4 concept in the Scope section", () => {
+    const md = readApproval();
+    if (approvalStatus(md) !== "approved") return;
+    const scope = section(md, "Scope of the approval");
+    const { concepts, seedOnly } = loadFlipInputs();
+    const held = concepts.filter((c) => APPROVED_TRACK.test(c.track) && seedOnly.has(c.id));
+    for (const c of held) expect(scope, `${c.id} not named as held`).toContain(`\`${c.id}\``);
+  });
+
+  it.skipIf(!existsSync(pagePath))("shows the APPROVAL.md status line on the summary page", () => {
+    const line = /^Status:\s*(.+)$/m.exec(readApproval())?.[1]?.trim() ?? "";
+    const text = readFileSync(pagePath, "utf8")
+      .replace(/<[^>]+>/g, "")
+      .replace(/&#39;/g, "'")
+      .replace(/&quot;/g, '"')
+      .replace(/&amp;/g, "&");
+    expect(text).toContain(`Status: ${line}`);
+  });
+});
