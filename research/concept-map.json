@@ -2,6 +2,338 @@
   "schema_version": 1,
   "concepts": [
     {
+      "id": "academy-roles",
+      "title": "The academy roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The academy director runs coaching, education and welfare, and plans each young player's pathway to the first team.",
+      "prerequisites": ["role-map"],
+      "roles": ["academy-director", "sporting-director"],
+      "competencies": ["academy-programme-management", "player-pathway-planning"],
+      "sources": [
+        "src-newcastle-women-academy-manager",
+        "src-liverpool-head-academy-medical-performance"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "analysis-roles",
+      "title": "The analysis roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The head of performance analysis and first-team analysts: opposition reports, live feedback and post-match reviews.",
+      "prerequisites": ["role-map"],
+      "roles": ["first-team-analyst", "head-of-performance-analysis", "set-piece-coach"],
+      "competencies": ["opposition-analysis", "live-match-analysis", "post-match-review"],
+      "sources": [
+        "src-brentford-head-of-analysis-2021",
+        "src-liverpool-first-team-performance-analyst",
+        "src-newcastle-first-team-analyst-post-match"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "club-leadership-roles",
+      "title": "The club leadership roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The sporting director owns the football strategy and the CEO runs the business; both answer to the owners and board.",
+      "prerequisites": ["role-map"],
+      "roles": ["club-ceo", "head-coach", "head-of-recruitment", "sporting-director"],
+      "competencies": ["sporting-strategy", "club-budgeting", "board-and-owner-relations"],
+      "sources": [
+        "src-pl-sporting-directors-explained",
+        "src-slemen-effective-sporting-director",
+        "src-footballbenchmark-ceo-profiles",
+        "src-jobsinfootball-sporting-director-role"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "coaching-roles",
+      "title": "The coaching roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "Head coach, assistant coach and set-piece coach: who plans matches and training, and why England often says manager.",
+      "prerequisites": ["role-map"],
+      "roles": ["assistant-coach", "head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["game-planning", "training-session-design", "set-piece-design"],
+      "sources": [
+        "src-espn-head-coach-vs-manager",
+        "src-pl-assistant-manager-insights",
+        "src-liverpool-set-piece-coach",
+        "src-uefa-coaching-licences"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "data-roles",
+      "title": "The data roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The head of data science, data engineers and recruitment analysts: who builds the club's models, pipelines and dashboards.",
+      "prerequisites": ["role-map"],
+      "roles": [
+        "data-engineer",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["statistical-modelling", "data-pipeline-ownership", "dashboard-building"],
+      "sources": [
+        "src-liverpool-lead-data-scientist",
+        "src-liverpool-data-engineer",
+        "src-newcastle-lead-recruitment-data-analyst"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "how-the-app-works",
+      "title": "How the app works",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "Short visual lessons in the order the concept map sets, with your progress kept on this computer and an export.",
+      "prerequisites": [],
+      "roles": [],
+      "competencies": [],
+      "sources": ["src-noetel-multimedia-design-2021", "src-weinstein-six-strategies-2018"],
+      "status": "draft"
+    },
+    {
+      "id": "performance-roles",
+      "title": "The performance roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The head of performance leads sports science, medicine and conditioning to keep players fit and available.",
+      "prerequisites": ["role-map"],
+      "roles": ["head-of-performance"],
+      "competencies": [
+        "workload-management",
+        "injury-prevention-and-return-to-play",
+        "performance-science-literacy"
+      ],
+      "sources": [
+        "src-slemen-director-high-performance",
+        "src-liverpool-head-academy-medical-performance"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "personal-goals-page",
+      "title": "Your goals page",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "Name your target role and write an if-then plan for when and where you study. Plans like this help people follow through.",
+      "prerequisites": ["how-the-app-works"],
+      "roles": [],
+      "competencies": [],
+      "sources": [
+        "src-gollwitzer-implementation-intentions-2006",
+        "src-gawrilow-adhd-if-then-2011"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "placement-diagnostic",
+      "title": "The placement diagnostic",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "A short quiz at the start marks what you already know so you can skip it. Even a wrong first guess helps you learn.",
+      "prerequisites": ["how-the-app-works"],
+      "roles": [],
+      "competencies": [],
+      "sources": ["src-richland-pretesting-2009", "src-knouse-adhd-self-testing-2011"],
+      "status": "draft"
+    },
+    {
+      "id": "recruitment-roles",
+      "title": "The recruitment roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The head of recruitment, chief scout and loan manager: who finds players, writes the reports and places the loans.",
+      "prerequisites": ["role-map"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "loan-manager"
+      ],
+      "competencies": ["player-identification", "scouting-reports", "loan-placement"],
+      "sources": [
+        "src-liverpool-women-head-of-recruitment",
+        "src-hudl-marshall-head-of-recruitment",
+        "src-liverpool-head-of-loan-management",
+        "src-sky-hammond-loans-manager"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "role-map",
+      "title": "The Role Map",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The senior jobs in a club, who reports to whom, and the competencies each one needs, drawn as paths through this map.",
+      "prerequisites": ["how-the-app-works"],
+      "roles": ["club-ceo", "sporting-director"],
+      "competencies": ["football-department-design"],
+      "sources": [
+        "src-pl-sporting-directors-explained",
+        "src-football365-who-controls-transfers",
+        "src-jobsinfootball-sporting-director-structure"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "the-lesson-loop",
+      "title": "The Lesson Loop",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "Every lesson runs hook, see, touch, predict, do, lock in and connect: each idea is shown, touched, then practised.",
+      "prerequisites": ["how-the-app-works"],
+      "roles": [],
+      "competencies": [],
+      "sources": [
+        "src-freeman-active-learning-2014",
+        "src-agarwal-retrieval-classroom-2021",
+        "src-noetel-multimedia-design-2021"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "attacking-and-defending-shapes",
+      "title": "Attacking and defending shapes",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Teams often attack in one shape and defend in another, like Man City's 3-2-4-1 with the ball and 4-4-2 without it.",
+      "prerequisites": ["formation-vs-structure"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": [
+        "src-theanalyst-stones-hybrid-role",
+        "src-skysports-arteta-tactics-2023",
+        "src-pl-slot-liverpool-shape-2024"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "back-four-formations",
+      "title": "Back-four formations",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "4-4-2, 4-3-3, 4-2-3-1 and 4-1-4-1: what each shape gives in the middle and out wide, and where it leaves space.",
+      "prerequisites": ["formation-notation"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": [
+        "src-pl-442-explained",
+        "src-coachesvoice-formations-explained",
+        "src-pl-451-explained",
+        "src-pl-formation-trends-2024-25"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "back-three-formations",
+      "title": "Back-three formations",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "3-5-2, 3-4-3 and 5-3-2: a back three with wing-backs for width, which drops into a back five without the ball.",
+      "prerequisites": ["formation-notation"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": [
+        "src-pl-352-explained",
+        "src-coachesvoice-formations-explained",
+        "src-jobsinfootball-532",
+        "src-skysports-conte-343-2017"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "ball-in-and-out-of-play",
+      "title": "Ball in and out",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The ball is out only when the whole ball has crossed a touchline or goal line, on the ground or in the air.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "cards-and-misconduct",
+      "title": "Cards and misconduct",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A reckless foul earns a yellow card, excessive force a red; two yellows send a player off and change the match.",
+      "prerequisites": ["fouls-and-free-kicks"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "in-game-adjustment"],
+      "sources": ["src-ifab-laws-2026-27", "src-ifab-law-changes-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "catenaccio",
+      "title": "Catenaccio and the sweeper",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A spare defender behind the line, from Rappan's verrou of the 1930s to Italy's catenaccio. Its inventor is contested.",
+      "prerequisites": ["pyramid-to-wm"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": ["src-wikipedia-catenaccio", "src-90min-nereo-rocco"],
+      "status": "draft"
+    },
+    {
+      "id": "first-laws-and-passing-game",
+      "title": "First laws, first passes",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The FA wrote the first Laws in 1863, and passing and combination play soon replaced the lone dribble.",
+      "prerequisites": [],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-ifab-history-origins-modern-game",
+        "src-whiterose-evolution-football-passing"
+      ],
+      "status": "draft"
+    },
+    {
       "id": "formation-notation",
       "title": "Formation notation",
       "track": "t01-the-game",
@@ -15,6 +347,81 @@
         "src-fourfourtwo-formations-in-football",
         "src-coachesvoice-formations-explained"
       ],
+      "status": "draft"
+    },
+    {
+      "id": "formation-vs-structure",
+      "title": "Formation versus structure",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The formation is the base label; the structure is how the team really stands in a moment, rotations included.",
+      "prerequisites": ["back-four-formations", "back-three-formations"],
+      "roles": [
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "set-piece-coach"
+      ],
+      "competencies": ["match-reading", "opposition-analysis"],
+      "sources": [
+        "src-planetfootball-formations-whiteboard",
+        "src-theanalyst-shape-analysis",
+        "src-yahoo-keble-formations-2016"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "fouls-and-free-kicks",
+      "title": "Fouls and free kicks",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Careless, reckless or excessive contact fouls give a direct free kick; some other offences give an indirect one.",
+      "prerequisites": ["referee-team"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27", "src-pl-laws-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "goal-kick-and-corner-kick",
+      "title": "Goal and corner kicks",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Ball over the goal line: a goal kick if the attackers touched it last, a corner if the defenders did.",
+      "prerequisites": ["ball-in-and-out-of-play", "pitch-areas"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-ifab-laws-2026-27", "src-ifab-law-changes-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "hungary-and-the-4-2-4",
+      "title": "Hungary and the 4-2-4",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Hungary won 6-3 at Wembley in 1953 with a deep-lying centre-forward; Brazil's 4-2-4 won the 1958 World Cup.",
+      "prerequisites": ["pyramid-to-wm"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": ["src-uefa-hungary-1950-56", "src-wikipedia-formation-association-football"],
+      "status": "draft"
+    },
+    {
+      "id": "kick-off-and-dropped-ball",
+      "title": "Kick-off and dropped ball",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Opponents stand 9.15 m away at kick-off; at a dropped ball other players stand at least 4 m away.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-ifab-laws-2026-27"],
       "status": "draft"
     },
     {
@@ -42,15 +449,97 @@
       "status": "draft"
     },
     {
+      "id": "penalty-kick",
+      "title": "The penalty kick",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A direct free-kick foul by a defender inside their own penalty area gives a penalty from the mark, 11 m out.",
+      "prerequisites": ["fouls-and-free-kicks", "pitch-areas"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-ifab-laws-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "pitch-areas",
+      "title": "Boxes and areas",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The 5.5 m goal area, the 16.5 m penalty area, the penalty arc and the technical area, and what each one changes.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27", "src-kloppy-coordinates-docs"],
+      "status": "draft"
+    },
+    {
+      "id": "pitch-dimensions",
+      "title": "Pitch dimensions",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Law 1 gives ranges (touchlines 90-120 m), not one size. PL Rule K.17 sets 105 x 68 m unless the stadium cannot fit it.",
+      "prerequisites": [],
+      "roles": [
+        "academy-director",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "regulatory-compliance"],
+      "sources": [
+        "src-ifab-laws-2026-27",
+        "src-pl-handbook-2026-27",
+        "src-fourfourtwo-pl-pitch-sizes",
+        "src-fifa-stadium-guidelines-pitch"
+      ],
+      "status": "draft"
+    },
+    {
       "id": "pitch-markings",
       "title": "Pitch markings",
       "track": "t01-the-game",
       "part": "A",
       "summary": "The lines, circles and arcs of Law 1. A line belongs to the area it bounds, so a ball on the line is still in.",
-      "prerequisites": [],
+      "prerequisites": ["pitch-dimensions"],
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-ifab-laws-2026-27", "src-fifa-stadium-guidelines-pitch"],
+      "status": "draft"
+    },
+    {
+      "id": "players-and-substitutions",
+      "title": "Players and substitutions",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Eleven players a side, at least seven to play on, and up to five substitutes in three windows in official competitions.",
+      "prerequisites": [],
+      "roles": ["assistant-coach", "head-coach", "head-of-performance"],
+      "competencies": ["team-selection", "in-game-adjustment"],
+      "sources": ["src-ifab-laws-2026-27", "src-pl-laws-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "position-vs-role",
+      "title": "Position versus role",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A position is where a player starts; a role is the job inside it, like an inverted full-back moving into midfield.",
+      "prerequisites": ["positions-overview"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "head-of-recruitment"
+      ],
+      "competencies": ["match-reading", "player-identification"],
+      "sources": [
+        "src-fourfourtwo-inverted-full-back",
+        "src-premierleague-coachesvoice-no6-explained",
+        "src-fourfourtwo-no10"
+      ],
       "status": "draft"
     },
     {
@@ -73,17 +562,320 @@
         "src-bundesliga-positions-explained"
       ],
       "status": "draft"
+    },
+    {
+      "id": "possession-and-gegenpressing",
+      "title": "Possession and gegenpressing",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Guardiola's possession and Klopp's gegenpress, from Barcelona and Dortmund to City's 100 points and Liverpool's 2019/20 title.",
+      "prerequisites": ["total-football-to-sacchi", "premier-league-era-tactics"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-uefa-barcelona-2008-12",
+        "src-bundesliga-klopp-dortmund-years",
+        "src-premier-league-man-city-evolution",
+        "src-premier-league-klopp-liverpool-2019-20"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "premier-league-era-tactics",
+      "title": "The Premier League era",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "From 1992: the back-pass ban, Wenger's Arsenal and Mourinho's 2004/05 Chelsea, who conceded only 15 league goals.",
+      "prerequisites": ["pyramid-to-wm"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-premier-league-history",
+        "src-ifab-history-back-pass-law",
+        "src-premier-league-hall-of-fame-wenger",
+        "src-premier-league-chelsea-2004-05"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "pyramid-to-wm",
+      "title": "From Pyramid to WM",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The 2-3-5 Pyramid ruled early on; after the 1925 offside change Chapman's Arsenal made the WM. Who invented it is contested.",
+      "prerequisites": ["first-laws-and-passing-game", "formation-notation", "offside-position"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-ifab-history-offside-law",
+        "src-arsenal-newcastle-7-0-golden-era",
+        "src-aisa-chapman-new-formation-1925",
+        "src-wikipedia-formation-association-football"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "referee-team",
+      "title": "The referee team",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Referee, assistant referees, fourth official and VAR. The others assist, but the referee's decisions on facts are final.",
+      "prerequisites": [],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27", "src-fa-laws-and-rules"],
+      "status": "draft"
+    },
+    {
+      "id": "scoring-a-goal",
+      "title": "Scoring a goal",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A goal needs the whole ball over the goal line, between the posts and under the bar, with no offence before it.",
+      "prerequisites": ["ball-in-and-out-of-play"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "semi-automated-offside",
+      "title": "Semi-automated offside",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Since April 2025 the PL uses cameras to suggest the kick point and draw offside lines; the VAR still checks the call.",
+      "prerequisites": ["offside-position", "var-basics"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-pl-saot-explainer", "src-ifab-var-protocol"],
+      "status": "draft"
+    },
+    {
+      "id": "squad-numbers",
+      "title": "Squad numbers",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The old 1 to 11 by position, and the fixed squad numbers the Premier League brought in for 1993/94.",
+      "prerequisites": ["positions-overview"],
+      "roles": ["head-of-recruitment", "sporting-director"],
+      "competencies": ["squad-planning"],
+      "sources": [
+        "src-lcfc-squad-numbers-history",
+        "src-wikipedia-squad-number-association-football",
+        "src-squadnumbers-1-11-premier-league-era",
+        "src-goal-squad-numbers-explained"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "throw-in",
+      "title": "The throw-in",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Opponents stand 2 m away, no goal can come straight from it, and from 2026/27 a slow throw-in gets a five-second count.",
+      "prerequisites": ["ball-in-and-out-of-play"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-ifab-laws-2026-27", "src-ifab-law-changes-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "total-football-to-sacchi",
+      "title": "Total Football to Sacchi",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Ajax's 1970s Total Football pressed and swapped positions; Sacchi's Milan added a compact zonal 4-4-2 and a high line.",
+      "prerequisites": ["hungary-and-the-4-2-4"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-uefa-ajax-1971-73",
+        "src-uefa-ac-milan-1988-90",
+        "src-fourfourtwo-who-invented-pressing"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "var-basics",
+      "title": "VAR basics",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "VAR steps in only for a clear and obvious error in a few match-changing categories, such as goals, penalties and red cards.",
+      "prerequisites": ["referee-team"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "in-game-adjustment"],
+      "sources": [
+        "src-ifab-var-protocol",
+        "src-ifab-laws-2026-27",
+        "src-pl-var-faqs",
+        "src-pl-var-accuracy-2024"
+      ],
+      "status": "draft"
     }
   ],
   "edges": [
+    {
+      "from": "back-four-formations",
+      "to": "formation-vs-structure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "back-three-formations",
+      "to": "formation-vs-structure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ball-in-and-out-of-play",
+      "to": "goal-kick-and-corner-kick",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ball-in-and-out-of-play",
+      "to": "scoring-a-goal",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ball-in-and-out-of-play",
+      "to": "throw-in",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "first-laws-and-passing-game",
+      "to": "pyramid-to-wm",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "back-four-formations",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "back-three-formations",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "pyramid-to-wm",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-vs-structure",
+      "to": "attacking-and-defending-shapes",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "fouls-and-free-kicks",
+      "to": "cards-and-misconduct",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "fouls-and-free-kicks",
+      "to": "penalty-kick",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-the-app-works",
+      "to": "personal-goals-page",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-the-app-works",
+      "to": "placement-diagnostic",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-the-app-works",
+      "to": "role-map",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-the-app-works",
+      "to": "the-lesson-loop",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "hungary-and-the-4-2-4",
+      "to": "total-football-to-sacchi",
+      "kind": "prerequisite"
+    },
     {
       "from": "offside-position",
       "to": "offside-offence",
       "kind": "prerequisite"
     },
     {
+      "from": "offside-position",
+      "to": "pyramid-to-wm",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "offside-position",
+      "to": "semi-automated-offside",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-areas",
+      "to": "goal-kick-and-corner-kick",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-areas",
+      "to": "penalty-kick",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-dimensions",
+      "to": "pitch-markings",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "ball-in-and-out-of-play",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "kick-off-and-dropped-ball",
+      "kind": "prerequisite"
+    },
+    {
       "from": "pitch-markings",
       "to": "offside-position",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "pitch-areas",
       "kind": "prerequisite"
     },
     {
@@ -94,6 +886,91 @@
     {
       "from": "positions-overview",
       "to": "formation-notation",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "positions-overview",
+      "to": "position-vs-role",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "positions-overview",
+      "to": "squad-numbers",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "premier-league-era-tactics",
+      "to": "possession-and-gegenpressing",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pyramid-to-wm",
+      "to": "catenaccio",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pyramid-to-wm",
+      "to": "hungary-and-the-4-2-4",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pyramid-to-wm",
+      "to": "premier-league-era-tactics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "referee-team",
+      "to": "fouls-and-free-kicks",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "referee-team",
+      "to": "var-basics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "academy-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "analysis-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "club-leadership-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "coaching-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "data-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "performance-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "recruitment-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "total-football-to-sacchi",
+      "to": "possession-and-gegenpressing",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "var-basics",
+      "to": "semi-automated-offside",
       "kind": "prerequisite"
     }
   ]

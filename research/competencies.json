@@ -21,7 +21,15 @@
         "descriptor": "Sets one playing style from academy to first team and checks that every department follows it."
       }
     ],
-    "concepts": []
+    "concepts": [
+      "catenaccio",
+      "first-laws-and-passing-game",
+      "hungary-and-the-4-2-4",
+      "possession-and-gegenpressing",
+      "premier-league-era-tactics",
+      "pyramid-to-wm",
+      "total-football-to-sacchi"
+    ]
   },
   {
     "id": "match-reading",
@@ -46,11 +54,25 @@
       }
     ],
     "concepts": [
+      "attacking-and-defending-shapes",
+      "back-four-formations",
+      "back-three-formations",
+      "ball-in-and-out-of-play",
+      "cards-and-misconduct",
       "formation-notation",
+      "formation-vs-structure",
+      "fouls-and-free-kicks",
       "offside-offence",
       "offside-position",
+      "pitch-areas",
+      "pitch-dimensions",
       "pitch-markings",
-      "positions-overview"
+      "position-vs-role",
+      "positions-overview",
+      "referee-team",
+      "scoring-a-goal",
+      "semi-automated-offside",
+      "var-basics"
     ]
   },
   {
@@ -75,7 +97,12 @@
         "descriptor": "Owns the game plan for every match and adapts the method to the squad and the opponent."
       }
     ],
-    "concepts": []
+    "concepts": [
+      "attacking-and-defending-shapes",
+      "back-four-formations",
+      "back-three-formations",
+      "coaching-roles"
+    ]
   },
   {
     "id": "in-game-adjustment",
@@ -99,7 +126,7 @@
         "descriptor": "Leads matchday decisions with the staff and sets how live input reaches the bench."
       }
     ],
-    "concepts": []
+    "concepts": ["cards-and-misconduct", "players-and-substitutions", "var-basics"]
   },
   {
     "id": "set-piece-design",
@@ -123,7 +150,13 @@
         "descriptor": "Runs the club's set-piece programme and agrees its training time with the head coach."
       }
     ],
-    "concepts": []
+    "concepts": [
+      "coaching-roles",
+      "goal-kick-and-corner-kick",
+      "kick-off-and-dropped-ball",
+      "penalty-kick",
+      "throw-in"
+    ]
   },
   {
     "id": "team-selection",
@@ -147,7 +180,7 @@
         "descriptor": "Owns selection and sets how fitness and medical advice feed into it."
       }
     ],
-    "concepts": []
+    "concepts": ["players-and-substitutions"]
   },
   {
     "id": "training-session-design",
@@ -171,7 +204,7 @@
         "descriptor": "Leads the coaching staff's day-to-day training and checks the quality of their sessions."
       }
     ],
-    "concepts": []
+    "concepts": ["coaching-roles"]
   },
   {
     "id": "player-development-planning",
@@ -243,7 +276,7 @@
         "descriptor": "Leads the opposition-analysis process and sets the format and quality bar for the department."
       }
     ],
-    "concepts": []
+    "concepts": ["analysis-roles", "formation-vs-structure"]
   },
   {
     "id": "live-match-analysis",
@@ -267,7 +300,7 @@
         "descriptor": "Designs the live-analysis workflow and trains analysts to deliver it."
       }
     ],
-    "concepts": []
+    "concepts": ["analysis-roles"]
   },
   {
     "id": "post-match-review",
@@ -291,7 +324,7 @@
         "descriptor": "Owns the review cycle and turns its findings into actions for coaching and recruitment."
       }
     ],
-    "concepts": []
+    "concepts": ["analysis-roles"]
   },
   {
     "id": "video-analysis-tooling",
@@ -363,7 +396,7 @@
         "descriptor": "Leads the club's modelling work and decides which approach fits each question."
       }
     ],
-    "concepts": []
+    "concepts": ["data-roles"]
   },
   {
     "id": "model-deployment",
@@ -435,7 +468,7 @@
         "descriptor": "Owns the club data platform, its design and its quality standards."
       }
     ],
-    "concepts": []
+    "concepts": ["data-roles"]
   },
   {
     "id": "tracking-data-handling",
@@ -483,7 +516,7 @@
         "descriptor": "Designs the club's self-service platform and its standards for clear charts."
       }
     ],
-    "concepts": []
+    "concepts": ["data-roles"]
   },
   {
     "id": "football-data-programming",
@@ -531,7 +564,7 @@
         "descriptor": "Has a record of identifying talent and sets how the club searches for players."
       }
     ],
-    "concepts": []
+    "concepts": ["position-vs-role", "recruitment-roles"]
   },
   {
     "id": "scouting-reports",
@@ -555,7 +588,7 @@
         "descriptor": "Sets the report template and grading scale and checks scouts' reports."
       }
     ],
-    "concepts": []
+    "concepts": ["recruitment-roles"]
   },
   {
     "id": "data-led-target-ranking",
@@ -603,7 +636,7 @@
         "descriptor": "Owns squad renewal and aligns recruitment, academy and the head coach with the plan."
       }
     ],
-    "concepts": ["positions-overview"]
+    "concepts": ["positions-overview", "squad-numbers"]
   },
   {
     "id": "scouting-network-management",
@@ -723,7 +756,7 @@
         "descriptor": "Leads the club's loan strategy, placements and loan contracts."
       }
     ],
-    "concepts": []
+    "concepts": ["recruitment-roles"]
   },
   {
     "id": "agent-and-club-relationships",
@@ -771,7 +804,7 @@
         "descriptor": "Owns the club's finances and decides budget priorities with the owners."
       }
     ],
-    "concepts": []
+    "concepts": ["club-leadership-roles"]
   },
   {
     "id": "commercial-strategy",
@@ -819,7 +852,7 @@
         "descriptor": "Sets the club's sporting strategy and keeps it stable through changes of coach."
       }
     ],
-    "concepts": []
+    "concepts": ["club-leadership-roles"]
   },
   {
     "id": "staff-appointment",
@@ -891,7 +924,7 @@
         "descriptor": "Sets the club structure and who owns each decision across football and business."
       }
     ],
-    "concepts": []
+    "concepts": ["role-map"]
   },
   {
     "id": "high-performance-culture",
@@ -987,7 +1020,7 @@
         "descriptor": "Represents football at board level and keeps owner support through difficult periods."
       }
     ],
-    "concepts": []
+    "concepts": ["club-leadership-roles"]
   },
   {
     "id": "player-communication",
@@ -1035,7 +1068,7 @@
         "descriptor": "Owns injury prevention and return-to-play decisions for the squad."
       }
     ],
-    "concepts": []
+    "concepts": ["performance-roles"]
   },
   {
     "id": "workload-management",
@@ -1059,7 +1092,7 @@
         "descriptor": "Sets the club's load-management policy and its link to selection."
       }
     ],
-    "concepts": []
+    "concepts": ["performance-roles"]
   },
   {
     "id": "performance-science-literacy",
@@ -1083,7 +1116,7 @@
         "descriptor": "Leads the performance disciplines as one department focused on availability."
       }
     ],
-    "concepts": []
+    "concepts": ["performance-roles"]
   },
   {
     "id": "regulatory-compliance",
@@ -1107,7 +1140,7 @@
         "descriptor": "Owns compliance for a programme and sets the controls that keep it."
       }
     ],
-    "concepts": []
+    "concepts": ["pitch-dimensions"]
   },
   {
     "id": "player-welfare-and-safeguarding",
@@ -1155,7 +1188,7 @@
         "descriptor": "Owns the club's pathway and aligns academy and first team in one style."
       }
     ],
-    "concepts": []
+    "concepts": ["academy-roles"]
   },
   {
     "id": "academy-programme-management",
@@ -1179,6 +1212,6 @@
         "descriptor": "Runs a sustainable academy focused on developing young talent."
       }
     ],
-    "concepts": []
+    "concepts": ["academy-roles"]
   }
 ]
