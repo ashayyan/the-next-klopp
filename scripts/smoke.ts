@@ -60,6 +60,22 @@ function stop(child: ChildProcess, state: { code: number | null }): void {
   }
 }
 
+// Refuse to run against a server that was already listening: the first fetch would hit that
+// stale process while our own freshly spawned vite fails on strictPort, and the run would pass.
+async function portInUse(url: string): Promise<boolean> {
+  try {
+    await fetch(url, { signal: AbortSignal.timeout(1000) });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+if (await portInUse(`${base}/`)) {
+  console.error(`smoke FAILED: ${base} is already in use; stop that server first`);
+  process.exit(1);
+}
+
 const first = start();
 try {
   const res = await waitFor(`${base}/`, 30_000, first.state);
