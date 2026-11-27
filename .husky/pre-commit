@@ -1,0 +1,2 @@
+node scripts/guard-files.ts --staged
+npx lint-staged
