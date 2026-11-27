@@ -108,7 +108,7 @@ Recent decisions affecting current work:
 
 ### Pending Todos
 
-None yet.
+- [Phase 2] Learner: open research/summary/index.html and confirm or re-open the research approval (non-blocking; approved by Claude under delegation 2026-11-27)
 
 ### Blockers/Concerns
 

@@ -14,7 +14,7 @@
         "src-newcastle-women-academy-manager",
         "src-liverpool-head-academy-medical-performance"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "analysis-roles",
@@ -30,7 +30,7 @@
         "src-liverpool-first-team-performance-analyst",
         "src-newcastle-first-team-analyst-post-match"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "club-leadership-roles",
@@ -47,7 +47,7 @@
         "src-footballbenchmark-ceo-profiles",
         "src-jobsinfootball-sporting-director-role"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "coaching-roles",
@@ -64,7 +64,7 @@
         "src-liverpool-set-piece-coach",
         "src-uefa-coaching-licences"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "data-roles",
@@ -85,7 +85,7 @@
         "src-liverpool-data-engineer",
         "src-newcastle-lead-recruitment-data-analyst"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "how-the-app-works",
@@ -97,7 +97,7 @@
       "roles": [],
       "competencies": [],
       "sources": ["src-noetel-multimedia-design-2021", "src-weinstein-six-strategies-2018"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "performance-roles",
@@ -116,7 +116,7 @@
         "src-slemen-director-high-performance",
         "src-liverpool-head-academy-medical-performance"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "personal-goals-page",
@@ -131,7 +131,7 @@
         "src-gollwitzer-implementation-intentions-2006",
         "src-gawrilow-adhd-if-then-2011"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "placement-diagnostic",
@@ -143,7 +143,7 @@
       "roles": [],
       "competencies": [],
       "sources": ["src-richland-pretesting-2009", "src-knouse-adhd-self-testing-2011"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "recruitment-roles",
@@ -166,7 +166,7 @@
         "src-liverpool-head-of-loan-management",
         "src-sky-hammond-loans-manager"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "role-map",
@@ -182,7 +182,7 @@
         "src-football365-who-controls-transfers",
         "src-jobsinfootball-sporting-director-structure"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "the-lesson-loop",
@@ -198,7 +198,7 @@
         "src-agarwal-retrieval-classroom-2021",
         "src-noetel-multimedia-design-2021"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "attacking-and-defending-shapes",
@@ -219,7 +219,7 @@
         "src-skysports-arteta-tactics-2023",
         "src-pl-slot-liverpool-shape-2024"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "back-four-formations",
@@ -241,7 +241,7 @@
         "src-pl-451-explained",
         "src-pl-formation-trends-2024-25"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "back-three-formations",
@@ -263,7 +263,7 @@
         "src-jobsinfootball-532",
         "src-skysports-conte-343-2017"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "ball-in-and-out-of-play",
@@ -275,7 +275,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-ifab-laws-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "cards-and-misconduct",
@@ -292,7 +292,7 @@
       ],
       "competencies": ["match-reading", "in-game-adjustment"],
       "sources": ["src-ifab-laws-2026-27", "src-ifab-law-changes-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "catenaccio",
@@ -310,7 +310,7 @@
       ],
       "competencies": ["playing-style-definition"],
       "sources": ["src-wikipedia-catenaccio", "src-90min-nereo-rocco"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "first-laws-and-passing-game",
@@ -331,7 +331,7 @@
         "src-ifab-history-origins-modern-game",
         "src-whiterose-evolution-football-passing"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "formation-notation",
@@ -347,7 +347,7 @@
         "src-fourfourtwo-formations-in-football",
         "src-coachesvoice-formations-explained"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "formation-vs-structure",
@@ -368,7 +368,7 @@
         "src-theanalyst-shape-analysis",
         "src-yahoo-keble-formations-2016"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "fouls-and-free-kicks",
@@ -380,7 +380,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-ifab-laws-2026-27", "src-pl-laws-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "goal-kick-and-corner-kick",
@@ -392,7 +392,7 @@
       "roles": ["head-coach", "set-piece-coach", "sporting-director"],
       "competencies": ["set-piece-design"],
       "sources": ["src-ifab-laws-2026-27", "src-ifab-law-changes-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "hungary-and-the-4-2-4",
@@ -410,7 +410,7 @@
       ],
       "competencies": ["playing-style-definition"],
       "sources": ["src-uefa-hungary-1950-56", "src-wikipedia-formation-association-football"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "kick-off-and-dropped-ball",
@@ -422,7 +422,7 @@
       "roles": ["head-coach", "set-piece-coach", "sporting-director"],
       "competencies": ["set-piece-design"],
       "sources": ["src-ifab-laws-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "offside-offence",
@@ -434,7 +434,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-ifab-offside", "src-ifab-laws-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "offside-position",
@@ -446,7 +446,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-ifab-offside", "src-ifab-laws-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "penalty-kick",
@@ -458,7 +458,7 @@
       "roles": ["head-coach", "set-piece-coach", "sporting-director"],
       "competencies": ["set-piece-design"],
       "sources": ["src-ifab-laws-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "pitch-areas",
@@ -470,7 +470,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-ifab-laws-2026-27", "src-kloppy-coordinates-docs"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "pitch-dimensions",
@@ -492,7 +492,7 @@
         "src-fourfourtwo-pl-pitch-sizes",
         "src-fifa-stadium-guidelines-pitch"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "pitch-markings",
@@ -504,7 +504,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-ifab-laws-2026-27", "src-fifa-stadium-guidelines-pitch"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "players-and-substitutions",
@@ -516,7 +516,7 @@
       "roles": ["assistant-coach", "head-coach", "head-of-performance"],
       "competencies": ["team-selection", "in-game-adjustment"],
       "sources": ["src-ifab-laws-2026-27", "src-pl-laws-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "position-vs-role",
@@ -540,7 +540,7 @@
         "src-premierleague-coachesvoice-no6-explained",
         "src-fourfourtwo-no10"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "positions-overview",
@@ -561,7 +561,7 @@
         "src-wikipedia-association-football-positions",
         "src-bundesliga-positions-explained"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "possession-and-gegenpressing",
@@ -584,7 +584,7 @@
         "src-premier-league-man-city-evolution",
         "src-premier-league-klopp-liverpool-2019-20"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "premier-league-era-tactics",
@@ -607,7 +607,7 @@
         "src-premier-league-hall-of-fame-wenger",
         "src-premier-league-chelsea-2004-05"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "pyramid-to-wm",
@@ -630,7 +630,7 @@
         "src-aisa-chapman-new-formation-1925",
         "src-wikipedia-formation-association-football"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "referee-team",
@@ -642,7 +642,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-ifab-laws-2026-27", "src-fa-laws-and-rules"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "scoring-a-goal",
@@ -654,7 +654,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-ifab-laws-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "semi-automated-offside",
@@ -666,7 +666,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-pl-saot-explainer", "src-ifab-var-protocol"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "squad-numbers",
@@ -683,7 +683,7 @@
         "src-squadnumbers-1-11-premier-league-era",
         "src-goal-squad-numbers-explained"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "throw-in",
@@ -695,7 +695,7 @@
       "roles": ["head-coach", "set-piece-coach", "sporting-director"],
       "competencies": ["set-piece-design"],
       "sources": ["src-ifab-laws-2026-27", "src-ifab-law-changes-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "total-football-to-sacchi",
@@ -717,7 +717,7 @@
         "src-uefa-ac-milan-1988-90",
         "src-fourfourtwo-who-invented-pressing"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "var-basics",
@@ -739,7 +739,7 @@
         "src-pl-var-faqs",
         "src-pl-var-accuracy-2024"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "eighteen-zone-grid",
@@ -809,7 +809,7 @@
       ],
       "competencies": ["match-reading", "game-planning"],
       "sources": ["src-pl-442-explained", "src-coaches-voice"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "numerical-superiority",
@@ -826,7 +826,7 @@
       ],
       "competencies": ["match-reading", "game-planning"],
       "sources": ["src-coachesvoice-formations-explained", "src-pl-352-explained"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "pitch-thirds-and-zones",
@@ -838,7 +838,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-mastermindsite-how-i-watch", "src-karun-expected-threat"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "width-and-depth",
@@ -855,7 +855,7 @@
       ],
       "competencies": ["match-reading", "game-planning"],
       "sources": ["src-coachesvoice-formations-explained", "src-coaches-voice"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "attacking-transition",
@@ -872,7 +872,7 @@
       ],
       "competencies": ["match-reading", "game-planning"],
       "sources": ["src-fourfourtwo-watch-like-analyst", "src-premier-league-leicester-2015-16"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "defensive-transition",
@@ -893,7 +893,7 @@
         "src-fourfourtwo-watch-like-analyst",
         "src-bundesliga-klopp-dortmund-years"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "four-phases-of-play",
@@ -912,7 +912,7 @@
       ],
       "competencies": ["match-reading", "playing-style-definition"],
       "sources": ["src-fourfourtwo-watch-like-analyst", "src-frontiers-formation-id-survey"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "how-phases-connect",
@@ -940,7 +940,7 @@
         "src-theanalyst-shape-analysis",
         "src-premier-league-counter-pressing-explained"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "in-possession-phase",
@@ -957,7 +957,7 @@
       ],
       "competencies": ["match-reading", "game-planning"],
       "sources": ["src-mastermindsite-how-i-watch", "src-theanalyst-stones-hybrid-role"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "out-of-possession-phase",
@@ -974,7 +974,7 @@
       ],
       "competencies": ["match-reading", "game-planning"],
       "sources": ["src-mastermindsite-how-i-watch", "src-skysports-conte-343-2017"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "set-piece-phase",
@@ -986,7 +986,7 @@
       "roles": ["head-coach", "set-piece-coach", "sporting-director"],
       "competencies": ["set-piece-design"],
       "sources": ["src-liverpool-set-piece-coach", "src-ifab-laws-2026-27"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "answer-on-the-pitch-panel",
@@ -998,7 +998,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-mdpi-pct-team-sports-meta"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "one-question-clips",
@@ -1014,7 +1014,7 @@
         "src-mastermindsite-how-i-watch",
         "src-acm-guo-mooc-video-engagement"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "reading-a-reconstruction",
@@ -1036,7 +1036,7 @@
         "src-dfl-idsse-open-data",
         "src-statsbomb-open-data"
       ],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "short-sessions-first",
@@ -1048,7 +1048,7 @@
       "roles": [],
       "competencies": [],
       "sources": ["src-acm-guo-mooc-video-engagement", "src-aps-bradbury-attention-span"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "story-then-structure",
@@ -1060,7 +1060,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading", "post-match-review"],
       "sources": ["src-fourfourtwo-watch-like-analyst", "src-mastermindsite-how-i-watch"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "watch-in-blocks",
@@ -1072,7 +1072,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading", "live-match-analysis"],
       "sources": ["src-mastermindsite-how-i-watch", "src-jssm-linke-effective-playing-time"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "watch-one-phase",
@@ -1084,7 +1084,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-mastermindsite-how-i-watch", "src-fourfourtwo-watch-like-analyst"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "watch-one-player",
@@ -1104,7 +1104,7 @@
       ],
       "competencies": ["match-reading", "player-identification"],
       "sources": ["src-breakingthelines-watch-space", "src-fourfourtwo-watch-like-analyst"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "watch-one-unit",
@@ -1116,7 +1116,7 @@
       "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
       "competencies": ["match-reading"],
       "sources": ["src-breakingthelines-watch-space"],
-      "status": "draft"
+      "status": "approved"
     },
     {
       "id": "build-up-structures",
