@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.9",
+    "@dagrejs/dagre": "3.1.4",
     "@tailwindcss/vite": "4.3.5",
     "@types/node": "26.6.11",
     "@types/react": "19.3.3",
