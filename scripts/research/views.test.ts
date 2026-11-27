@@ -8,6 +8,7 @@ import { THREADS } from "./lib/domains.ts";
 import { layers, studyOrder } from "./lib/graph.ts";
 import { checkReferences, loadResearchBundle } from "./lib/research-io.ts";
 import {
+  cell,
   prereqMap,
   renderConceptMap,
   renderCurriculumDraft,
@@ -78,7 +79,14 @@ describe("renderConceptMap", () => {
     expect(first).not.toContain("\r");
   });
 
-  it("escapes pipes and strips raw HTML from agent-written text", () => {
+  it("cannot rebuild a tag from nested input or cancel the pipe escape", () => {
+    const nested = cell("<<b>script>alert(1)<</b>/script>");
+    expect(nested).not.toContain("<");
+    expect(nested).not.toContain(">");
+    expect(cell("x\\|y")).toBe("x\\\\\\|y");
+  });
+
+  it("escapes pipes and neutralises raw HTML from agent-written text", () => {
     const first = bundle.concepts[0];
     if (!first) throw new Error("fixture has no concepts");
     const hostile = {
@@ -86,7 +94,7 @@ describe("renderConceptMap", () => {
       concepts: [{ ...first, title: "a|b <script>x</script>", summary: "line\nbreak" }],
     };
     const md = renderConceptMap(hostile);
-    expect(md).toContain("a\\|b x");
+    expect(md).toContain("a\\|b &lt;script&gt;x&lt;/script&gt;");
     expect(md).not.toContain("<script>");
     expect(md).not.toContain("line\nbreak");
   });
