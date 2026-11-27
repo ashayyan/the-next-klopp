@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://the-next-klopp.example/schemas/common.schema.json",
   "title": "Shared definitions",
-  "$comment": "Shared $defs for the contract schemas. URL and UTC date-time rules are patterns on purpose: the JSON Schema uri format and Zod's built-in URL validator disagree on spaces and empty hosts, so both validators use the same regex. Cross-document integrity (referenced ids exist, prerequisite graph is acyclic) is checked by the Phase 2 and Phase 5 validators, not by JSON Schema.",
+  "$comment": "Shared $defs for the contract schemas. URL and UTC date-time rules are patterns on purpose: the JSON Schema uri format and Zod's built-in URL validator disagree on spaces and empty hosts, and ajv-formats accepts a leap second (:60) that Zod rejects, so both validators use the same regex. Cross-document integrity (referenced ids exist, prerequisite graph is acyclic) is checked by the Phase 2 and Phase 5 validators, not by JSON Schema.",
   "$defs": {
     "kebabId": {
       "type": "string",
@@ -16,7 +16,7 @@
     "utcDateTime": {
       "type": "string",
       "format": "date-time",
-      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$"
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(\\.\\d+)?Z$"
     },
     "httpUrl": {
       "type": "string",

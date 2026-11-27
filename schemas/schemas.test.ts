@@ -1,5 +1,7 @@
 // Dual-validator agreement test (SETUP-07): ajv (strict, 2020-12) and the hand-written Zod mirror
-// must reach the same verdict on every fixture of every contract schema.
+// must reach the same verdict on every fixture of every contract schema. Every invalid fixture
+// also names the JSON Pointer it must fail at (`expect_path`), and both validators must report it,
+// so a fixture cannot pass because both validators reject it for an unrelated reason.
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import Ajv2020 from "ajv/dist/2020.js";
@@ -30,7 +32,39 @@ ajv.addSchema(readJson(join(schemasDir, "common.schema.json")) as object);
 interface FixtureEntry {
   name: string;
   reason?: string;
+  /** JSON Pointer both validators must report; required on invalid fixtures. */
+  expect_path?: string;
   doc: unknown;
+}
+
+interface AjvErrorLike {
+  instancePath: string;
+  params: Record<string, unknown>;
+}
+interface ZodIssueLike {
+  code: string;
+  path: PropertyKey[];
+  keys?: string[];
+}
+
+/** JSON Pointers where ajv reports a failure; a missing or extra property is reported at that property. */
+function ajvPaths(errors: AjvErrorLike[] | null | undefined): string[] {
+  return (errors ?? []).map((e) => {
+    const missing = e.params.missingProperty;
+    const extra = e.params.additionalProperty;
+    if (typeof missing === "string") return `${e.instancePath}/${missing}`;
+    if (typeof extra === "string") return `${e.instancePath}/${extra}`;
+    return e.instancePath;
+  });
+}
+
+/** JSON Pointers where Zod reports a failure, in the same shape as ajvPaths. */
+function zodPaths(issues: ZodIssueLike[]): string[] {
+  return issues.flatMap((issue) => {
+    const base = issue.path.map((p) => `/${String(p)}`).join("");
+    if (issue.code === "unrecognized_keys") return (issue.keys ?? []).map((k) => `${base}/${k}`);
+    return [base];
+  });
 }
 interface FixtureFile {
   valid: FixtureEntry[];
@@ -52,9 +86,11 @@ describe("contract schemas", () => {
   });
 });
 
-const mirrors = contractSchemas as Record<
+const mirrors = contractSchemas as unknown as Record<
   string,
-  { safeParse: (v: unknown) => { success: boolean } }
+  {
+    safeParse: (v: unknown) => { success: boolean; error?: { issues: ZodIssueLike[] } };
+  }
 >;
 
 describe.each(schemaNames)("%s schema", (name) => {
@@ -85,9 +121,21 @@ describe.each(schemaNames)("%s schema", (name) => {
 
   it.each(cases)("%s: ajv and Zod agree", (_label, fixture, expected) => {
     const ajvOk = validate(fixture.doc) as boolean;
-    const zodOk = mirror?.safeParse(fixture.doc).success ?? false;
+    const zodResult = mirror?.safeParse(fixture.doc);
+    const zodOk = zodResult?.success ?? false;
     const detail = JSON.stringify(validate.errors ?? []);
     expect(ajvOk, `ajv verdict for ${fixture.name} (${detail})`).toBe(expected);
     expect(zodOk, `Zod verdict for ${fixture.name} (${fixture.reason ?? "valid"})`).toBe(expected);
+    if (expected) return;
+    expect(fixture.expect_path, `invalid fixture ${fixture.name} needs expect_path`).toBeDefined();
+    const want = fixture.expect_path as string;
+    expect(
+      ajvPaths(validate.errors as AjvErrorLike[]),
+      `ajv failure paths for ${fixture.name}`,
+    ).toContain(want);
+    expect(
+      zodPaths(zodResult?.error?.issues ?? []),
+      `Zod failure paths for ${fixture.name}`,
+    ).toContain(want);
   });
 });

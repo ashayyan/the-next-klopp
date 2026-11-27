@@ -12,7 +12,9 @@ export const kebabId = z
   .max(80)
   .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 export const isoDate = z.iso.date();
-export const utcDateTime = z.iso.datetime();
+export const utcDateTime = z.iso
+  .datetime()
+  .regex(/^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?Z$/);
 export const httpUrl = z.string().regex(/^https?:\/\/[^\s/$.?#][^\s]*$/);
 export const sha256 = z.string().regex(/^[a-f0-9]{64}$/);
 export const permission = z.strictObject({
