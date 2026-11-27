@@ -25,6 +25,7 @@ export const coverageRowSchema = z
     data_type: z.enum(DATA_TYPES),
     matches_total: count,
     pl_matches: count,
+    unit: z.enum(["match", "play"]),
     status: z.enum(["ok", "unreachable", "request-only"]),
     method: z.enum(["index", "documented", "manual"]),
     licence_id: z.enum(LICENCE_IDS),

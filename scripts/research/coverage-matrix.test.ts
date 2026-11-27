@@ -25,6 +25,7 @@ const sampleRow = {
   data_type: "event",
   matches_total: 380,
   pl_matches: 380,
+  unit: "match",
   status: "ok",
   method: "index",
   licence_id: "statsbomb-public-data-user-agreement",
@@ -48,6 +49,11 @@ describe("coverageRowSchema", () => {
 
   it("rejects an ok row with a null pl_matches", () => {
     expect(coverageRowSchema.safeParse({ ...sampleRow, pl_matches: null }).success).toBe(false);
+  });
+
+  it("rejects a unit outside match and play", () => {
+    expect(coverageRowSchema.safeParse({ ...sampleRow, unit: "goal" }).success).toBe(false);
+    expect(coverageRowSchema.safeParse({ ...sampleRow, unit: "play" }).success).toBe(true);
   });
 
   it("rejects a licence id outside LICENCE_IDS and a non-http source_url", () => {
@@ -85,6 +91,15 @@ describe("research/pl-data-sources/coverage-matrix.json", () => {
       (r) => r.provider === "Wyscout" && r.competition_id === "364" && r.data_type === "event",
     );
     expect(england).toHaveLength(1);
+  });
+
+  it.skipIf(!mustRun)("labels Last Row counts as plays, never as matches", () => {
+    const lastRow = load().rows.filter((r) => r.provider === "Last Row");
+    expect(lastRow.length).toBeGreaterThan(0);
+    for (const r of lastRow) expect(r.unit).toBe("play");
+    for (const r of load().rows.filter((x) => x.provider !== "Last Row")) {
+      expect(r.unit, r.provider).toBe("match");
+    }
   });
 
   it.skipIf(!mustRun)("has a Markdown companion that names every provider", () => {

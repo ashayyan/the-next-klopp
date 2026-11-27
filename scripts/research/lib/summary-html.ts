@@ -394,6 +394,8 @@ interface CoverageGroup {
   type: string;
   pl: number;
   total: number;
+  /** "play" when every row in the group counts plays (Last Row), else "match". */
+  unit: "match" | "play";
   unreachable: boolean;
   statuses: string[];
 }
@@ -407,9 +409,11 @@ function coverageGroups(rows: NonNullable<ResearchBundle["coverage"]>["rows"]): 
       type: r.data_type,
       pl: 0,
       total: 0,
+      unit: r.unit,
       unreachable: false,
       statuses: [],
     };
+    if (r.unit === "match") g.unit = "match";
     if (r.pl_matches === null || r.matches_total === null) g.unreachable = true;
     else {
       g.pl += r.pl_matches;
@@ -427,6 +431,10 @@ function coverageGroups(rows: NonNullable<ResearchBundle["coverage"]>["rows"]): 
   );
 }
 
+function countText(n: number, unit: "match" | "play"): string {
+  return unit === "play" ? `${n} plays` : String(n);
+}
+
 function coverageScreen(bundle: ResearchBundle, decision: Decision): string {
   const out = [
     `<section class="screen" id="screen-coverage" aria-labelledby="h-coverage">`,
@@ -438,7 +446,7 @@ function coverageScreen(bundle: ResearchBundle, decision: Decision): string {
       `<div class="table-wrap"><table><thead><tr><th>Provider</th><th>Data type</th><th>Premier League matches</th><th>All matches</th><th>Status</th></tr></thead><tbody>`,
       ...coverageGroups(bundle.coverage.rows).map(
         (g) =>
-          `<tr><td>${esc(g.provider)}</td><td>${esc(g.type)}</td><td>${g.unreachable ? "unreachable" : g.pl}</td><td>${g.unreachable ? "unreachable" : g.total}</td><td>${g.unreachable ? "unreachable" : esc(g.statuses.join(", "))}</td></tr>`,
+          `<tr><td>${esc(g.provider)}</td><td>${esc(g.type)}</td><td>${g.unreachable ? "unreachable" : countText(g.pl, g.unit)}</td><td>${g.unreachable ? "unreachable" : countText(g.total, g.unit)}</td><td>${g.unreachable ? "unreachable" : esc(g.statuses.join(", "))}</td></tr>`,
       ),
       `</tbody></table></div>`,
     );

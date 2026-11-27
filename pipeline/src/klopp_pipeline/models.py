@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field, model_validator
 DataType = Literal["event", "360", "tracking", "broadcast-tracking", "physical"]
 Status = Literal["ok", "unreachable", "request-only"]
 Method = Literal["index", "documented", "manual"]
+Unit = Literal["match", "play"]
 LicenceId = Literal[
     "statsbomb-public-data-user-agreement",
     "CC-BY-4.0",
@@ -25,6 +26,8 @@ class CoverageRow(BaseModel):
 
     ``pl_matches`` and ``matches_total`` are ``None`` exactly when the provider was unreachable:
     an unreachable provider never gets a guessed count, and a reachable one never gets ``None``.
+    ``unit`` says what both counts count: whole ``match`` es (default) or ``play`` s, as in Last Row,
+    whose CSV holds one labelled play per Liverpool goal (two goals in one match are two plays).
     """
 
     provider: str
@@ -35,6 +38,7 @@ class CoverageRow(BaseModel):
     data_type: DataType
     matches_total: int | None = Field(ge=0)
     pl_matches: int | None = Field(ge=0)
+    unit: Unit = "match"
     status: Status
     method: Method
     licence_id: LicenceId

@@ -189,6 +189,8 @@ def test_metrica_has_3_anonymised_games() -> None:
 def test_last_row_has_13_premier_league_goals_of_19() -> None:
     (row,) = coverage.lastrow_rows(fake_fetch, NOW)
     assert (row.matches_total, row.pl_matches) == (19, 13)
+    assert row.unit == "play"
+    assert "19 goals, 13 in the Premier League, 6 in the Champions League" in row.notes
     assert row.method == "manual"
     assert row.licence_id == "none-stated-informal-credit"
     assert row.data_type == "tracking"
@@ -414,3 +416,12 @@ def test_a_plain_fetch_function_keeps_the_run_time() -> None:
     matrix = coverage.run_coverage(fake_fetch, NOW, ["metrica"])
     assert matrix.generated_at == NOW
     assert all(r.fetched_at == NOW for r in matrix.rows)
+
+
+def test_headline_labels_play_counts_and_keeps_match_counts_plain() -> None:
+    markdown = coverage.render_markdown(coverage.run_coverage(fake_fetch, NOW, ["wyscout", "lastrow"]))
+    lastrow = next(x for x in markdown.splitlines() if x.startswith("| Last Row |"))
+    wyscout = next(x for x in markdown.splitlines() if x.startswith("| Wyscout |"))
+    assert "13 plays" in lastrow
+    assert "plays" not in wyscout
+    assert "| play | 19 | 13 |" in markdown

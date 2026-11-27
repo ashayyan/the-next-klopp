@@ -338,9 +338,11 @@ def lastrow_rows(fetch: Fetch, now: str, deep: bool = False) -> list[CoverageRow
         raise ValueError("liverpool_2019.csv is missing from the Last Row listing")
     total, pl = LASTROW_MANUAL_TOTAL, LASTROW_MANUAL_PL
     notes = (
-        f"Manual count from the CSV play labels (file is {entry['size']} bytes): 19 goals, 13 in the "
-        "Premier League, 6 in the Champions League. Tracking only, no events. Self-described as too "
-        "inaccurate for research; no licence file, informal request to credit the source."
+        f"Manual count from the CSV play labels (file is {entry['size']} bytes): {total} goals, "
+        f"{pl} in the Premier League, {total - pl} in the Champions League. The counts are plays "
+        "(one per goal), not matches: two goals in one match are two plays. Tracking only, no "
+        "events. Self-described as too inaccurate for research; no licence file, informal request "
+        "to credit the source."
     )
     if deep:
         try:
@@ -350,9 +352,10 @@ def lastrow_rows(fetch: Fetch, now: str, deep: bool = False) -> list[CoverageRow
             total = len(plays)
             pl = sum(1 for p in plays if any(o.lower() in p.lower() for o in LASTROW_PL_OPPONENTS))
             notes = (
-                f"Distinct plays recounted from the CSV play labels ({total}); Premier League opponents "
-                "matched against a hand-written club list. Tracking only, no events; self-described "
-                "as too inaccurate for research; informal request to credit the source."
+                f"Distinct plays recounted from the CSV play labels ({total}, of which {pl} Premier League); "
+                "the counts are plays, not matches. Premier League opponents matched against a "
+                "hand-written club list. Tracking only, no events; self-described as too inaccurate "
+                "for research; informal request to credit the source."
             )
         except (FetchError, ValueError, KeyError) as exc:
             notes += f" Deep recount failed ({type(exc).__name__}); manual count kept."
@@ -366,6 +369,7 @@ def lastrow_rows(fetch: Fetch, now: str, deep: bool = False) -> list[CoverageRow
             data_type="tracking",
             matches_total=total,
             pl_matches=pl,
+            unit="play",
             status="ok",
             method="manual",
             licence_id="none-stated-informal-credit",
@@ -538,7 +542,8 @@ def _headline_cell(rows: list[CoverageRow], provider: str, data_type: str) -> st
     if any(r.status == "unreachable" for r in cell):
         return "unreachable"
     total = sum(r.pl_matches or 0 for r in cell)
-    return f"{total} (request-only)" if any(r.status == "request-only" for r in cell) else str(total)
+    text = f"{total} plays" if all(r.unit == "play" for r in cell) else str(total)
+    return f"{text} (request-only)" if any(r.status == "request-only" for r in cell) else text
 
 
 def render_markdown(matrix: CoverageMatrix) -> str:
@@ -561,7 +566,8 @@ def render_markdown(matrix: CoverageMatrix) -> str:
     lines += [
         "",
         "`unreachable` means the provider could not be read this run (no count is recorded). "
-        "`request-only` means access is by request form.",
+        "`request-only` means access is by request form. "
+        "`N plays` means the provider's unit is a play (one per goal), not a match.",
     ]
     for p in providers:
         mine = [r for r in rows if r.provider == p]
@@ -574,14 +580,16 @@ def render_markdown(matrix: CoverageMatrix) -> str:
         lines += ["", f"## {p}", ""]
         lines.append(f"Dataset: {mine[0].dataset}. Licence: `{mine[0].licence_id}`.")
         lines.append("")
-        lines.append("| Competition | Season | Data type | Matches | PL matches | Status | Method | Source |")
-        lines.append("|---|---|---|---|---|---|---|---|")
+        lines.append(
+            "| Competition | Season | Data type | Unit | Total | PL | Status | Method | Source |"
+        )
+        lines.append("|---|---|---|---|---|---|---|---|---|")
         for r in relevant or mine:
             total = "n/a" if r.matches_total is None else r.matches_total
             pl = "unreachable" if r.pl_matches is None else r.pl_matches
             lines.append(
-                f"| {r.competition} | {r.season} | {r.data_type} | {total} | {pl} | {r.status} |"
-                f" {r.method} | {r.source_url} |"
+                f"| {r.competition} | {r.season} | {r.data_type} | {r.unit} | {total} | {pl} |"
+                f" {r.status} | {r.method} | {r.source_url} |"
             )
         if relevant and rest:
             lines += ["", f"{rest} further row(s) with 0 Premier League matches are in the JSON."]
