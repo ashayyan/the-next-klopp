@@ -58,6 +58,9 @@ const required: Array<[string, string[]]> = [
   ["0001", ["Vite", "Next.js"]],
   ["0002", ["React Router"]],
   ["0003", ["Dexie"]],
+  ["0004", ["All Deployments"]],
+  ["0005", ["4173", "5173"]],
+  ["0006", ["spaces"]],
 ];
 
 describe("ADR coverage", () => {
