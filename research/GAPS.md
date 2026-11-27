@@ -8,16 +8,140 @@ As of 2026-11-28.
 
 | Brief domain | Name | Why deferred | Must precede | Research trigger | Starting sources |
 | --- | --- | --- | --- | --- | --- |
-| 2 | Principles of play, phases of play, the language of space | Not needed for Milestones 0 and 1; Track 2 and 3 concepts are drafted from just-in-time seeds and Wave 1 formations sources only | t02-language-of-space, t03-phases-of-play | start of t02-language-of-space | src-spielverlagerung, src-coaches-voice, src-karun-expected-threat, src-premier-league-counter-pressing-explained |
+| 2 | Principles of play, phases of play, the language of space | Not needed for Milestones 0 and 1; Track 2 concepts (zones, lanes, half-spaces, superiorities) cite only just-in-time seeds and stay draft until this research lands | t02-language-of-space, t03-phases-of-play | start of t02-language-of-space | src-spielverlagerung, src-coaches-voice, src-karun-expected-threat, src-premier-league-counter-pressing-explained |
 | 3 | Positional play, relationism and modern attacking models | Not needed for Milestones 0 and 1; attacking models build on Tracks 2 and 3 | t05-attacking-play | start of t05-attacking-play | src-spielverlagerung, src-coaches-voice, src-theanalyst-stones-hybrid-role, src-pl-box-midfield-explained |
+| 4 | Defending: blocks, pressing schemes, triggers, rest-defence | Not needed for Milestones 0 and 1; defending builds on the shared language of space and phases | t06-defending | start of t06-defending | src-uefa-technical-reports, src-premier-league-counter-pressing-explained, src-fourfourtwo-who-invented-pressing, src-spielverlagerung |
+| 5 | Transitions | Not needed for Milestones 0 and 1; the rest-defence concept cites only unverified seeds and stays draft until this research lands | t07-transitions | start of t07-transitions | src-premier-league-counter-pressing-explained, src-spielverlagerung, src-coaches-voice, src-uefa-technical-reports |
+| 6 | Set pieces | Not needed for Milestones 0 and 1; set-piece lessons sit in Part B and need event data on corners and free kicks | t08-set-pieces | start of t08-set-pieces | src-liverpool-set-piece-coach, src-statsbomb-open-data-spec, src-statsbomb-blog-archive, src-uefa-technical-reports |
+| 7 | Player roles and profiles (role catalogue) | Not needed for Milestones 0 and 1; the role catalogue extends the Wave 1 positions and numbering research | t09-roles-and-profiles | start of t09-roles-and-profiles | src-premierleague-coachesvoice-no6-explained, src-fourfourtwo-inverted-full-back, src-theanalyst-stones-hybrid-role, src-coaches-voice |
+| 8 | Coaching methodology | Not needed for Milestones 0 and 1; tactical periodization and session design cite only unverified seeds and stay draft | t10-coaching-and-game-models | start of t10-coaching-and-game-models | src-fa-coaching-courses, src-fifa-training-centre, src-uefa-coaching-licences, src-coaches-voice |
+| 9 | Training and sports science | Not needed for Milestones 0 and 1; load, recovery and medical topics need peer-reviewed sources graded for evidence | t12-training-sports-science | start of t12-training-sports-science | src-slemen-director-high-performance, src-liverpool-head-academy-medical-performance, src-jssm-linke-effective-playing-time, src-fifa-training-centre |
+| 10 | Match and video analysis workflow | Not needed for Milestones 0 and 1; the analyst workflow builds on the Wave 1 how-analysts-watch research | t13-performance-analysis | start of t13-performance-analysis | src-uefa-performance-analysis, src-asa-day-in-life-analyst, src-newcastle-first-team-analyst-post-match, src-worldrugby-postmatch-analysis |
+| 11 | Football data types and providers (beyond the open PL sources) | Not needed for Milestones 0 and 1; Wave 1 covered only the open PL providers and their licences; paid providers, data contracts and tracking vendors remain | t15-football-data | start of t15-football-data | src-soccerdata, src-kloppy-docs, src-statsbomb-open-data-spec, src-wyscout-public-dataset |
+| 12 | Football metrics and models | Not needed for Milestones 0 and 1; xG, xT, VAEP and possession models need method papers and tested reference values | t16-metrics-and-models | start of t16-metrics-and-models | src-socceraction-docs, src-theanalyst-what-is-xg, src-karun-expected-threat, src-mit-sloan-research-papers |
+| 12b | Stats by position and role | Not needed for Milestones 0 and 1; needs several sub-agents, one per position group, after the metrics research | t17-numbers-by-role | start of t17-numbers-by-role | src-theanalyst-what-is-xg, src-theanalyst-stones-hybrid-role, src-book-the-numbers-game, src-asa-home |
+| 13 | The Python football ecosystem | Not needed for Milestones 0 and 1; library APIs change fast; check them at the start of the Python lab, tested in Pyodide | t18-python-lab | start of t18-python-lab | src-mplsoccer-docs, src-statsbombpy, src-pysport, src-mckay-johns-youtube |
+| 14 | Recruitment and scouting (a talent ID, b technical and video scouting, c reports and grades) | Not needed for Milestones 0 and 1; the Scouting I thread starts early on Wave 1 watching skills; the scout's methods need their own research | t21-scouting-1 | start of t21-scouting-1 | src-hudl-marshall-head-of-recruitment, src-liverpool-women-head-of-recruitment, src-fifa-training-centre, src-uefa-technical-reports |
+| 14 | Recruitment and scouting (d data-led, e structure and workflow, f networks) | Not needed for Milestones 0 and 1; the recruitment system builds on Scouting I and the metrics tracks | t22-scouting-2 | start of t22-scouting-2 | src-newcastle-lead-recruitment-data-analyst, src-newcastle-head-recruitment-analysis-women, src-football365-who-controls-transfers, src-soccermatics |
+| 14c | Writing and speaking analysis | Not needed for Milestones 0 and 1; the Write and Speak thread starts on Wave 1 learning-science evidence; report and presentation craft need their own research | t14-write-and-speak | start of t14-write-and-speak | src-worldrugby-halftime-analysis, src-worldrugby-postmatch-analysis, src-mastermindsite-how-i-watch, src-asa-day-in-life-analyst |
+| 15 | The transfer market, player valuation and salaries (a to f) | Not needed for Milestones 0 and 1; valuation and wage sources have unknown or restrictive terms; figures are typed by hand with a link | t23-transfers-and-valuation | start of t23-transfers-and-valuation | src-fifa-transfer-reports, src-cies-football-observatory, src-transfermarkt-site, src-capology |
+| 16 | Contracts, agents and regulations | Not needed for Milestones 0 and 1; regulation texts (FIFA RSTP, agent rules) must be read at their current edition | t23-transfers-and-valuation | start of t23-transfers-and-valuation | src-fifa-rules-and-reports, src-fifa-football-agents, src-pl-handbook-2026-27, https://inside.fifa.com/en/legal |
+| 17 | Club finance | Not needed for Milestones 0 and 1; accounts, amortisation and revenue need dated filings and reports | t26-club-ceo, t23-transfers-and-valuation | start of t26-club-ceo | src-deloitte-football-money-league, src-companies-house-search, src-uefa-documents-portal, src-pl-handbook-2026-27 |
+| 18 | Club strategy and the sporting director role | Not needed for Milestones 0 and 1; the role definition is in Wave 1; strategy, multi-club ownership and structures need their own research | t25-sporting-director | start of t25-sporting-director | src-parnell-sporting-director-emergence, src-slemen-effective-sporting-director, src-jobsinfootball-sporting-director-structure, src-uefa-documents-portal |
+| 19 | Youth development and talent ID | Not needed for Milestones 0 and 1; relative age effect cites only unverified seeds; EPPP and academy research waits for the academy track | t24-academy | start of t24-academy | src-fifa-training-centre, src-uefa-technical-reports, src-thefa-central-defenders-bootroom, src-newcastle-women-academy-manager |
+| 20 | The Premier League ecosystem (governance, SCR/SSR, accounts, homegrown rules and work permits, EPPP, broadcasting, data departments) | Not needed for Milestones 0 and 1; only the free PL data part was Wave 1 research; governance and rules need the current Handbook edition | t27-premier-league-system | start of t27-premier-league-system | src-pl-handbook-2026-27, src-independent-football-regulator, src-commons-library, src-premierleague-stats-terms |
+| 20 | Saudi Pro League context pack | Not needed for Milestones 0 and 1; the saudi-pro-league-context concept cites only general sources; the registry has no Saudi Pro League source yet, so research must add one before that chapter is written | t27-premier-league-system | start of t27-premier-league-system | https://www.spl.com.sa/en, https://www.saff.com.sa/en/, src-cies-football-observatory, src-fifa-rules-and-reports |
+| 20b | The head coach / manager | Not needed for Milestones 0 and 1; the role is defined in Wave 1; the job itself needs its own research | t11-head-coach | start of t11-head-coach | src-espn-head-coach-vs-manager, src-pl-assistant-manager-insights, src-uefa-coaching-licences, src-coaches-voice |
+| 20c | Performance analysis departments | Not needed for Milestones 0 and 1; department structure builds on the analyst workflow research | t13-performance-analysis | start of t13-performance-analysis | src-brentford-head-of-analysis-2021, src-uefa-performance-analysis, src-liverpool-first-team-performance-analyst, src-newcastle-first-team-analyst-post-match |
+| 20d | Football AI and ML | Not needed for Milestones 0 and 1; fast-moving field; check models and tools at the start of the track | t19-football-ai-ml | start of t19-football-ai-ml | src-unravelsports, src-friends-of-tracking, src-ieee-bialkowski-team-structures, src-mit-sloan-research-papers |
+| 20e | Club data departments | Not needed for Milestones 0 and 1; the role is defined in Wave 1; department structure and stack need their own research | t20-head-of-data-science | start of t20-head-of-data-science | src-liverpool-lead-data-scientist, src-liverpool-data-engineer, src-newcastle-lead-recruitment-data-analyst, src-friends-of-tracking |
+| 20f | Academy and player development | Not needed for Milestones 0 and 1; academy structure and the loan pathway need their own research | t24-academy | start of t24-academy | src-newcastle-women-academy-manager, src-liverpool-head-academy-medical-performance, src-liverpool-head-of-loan-management, src-sky-hammond-loans-manager |
+| 20g | The club CEO/GM and the business of football | Not needed for Milestones 0 and 1; business and commercial topics need dated reports and accounts | t26-club-ceo | start of t26-club-ceo | src-footballbenchmark-ceo-profiles, src-deloitte-football-money-league, src-companies-house-search, src-uefa-documents-portal |
 
 ## Sources with unknown licence
 
-None recorded.
+| Source | Needed by | Note |
+| --- | --- | --- |
+| src-90min-nereo-rocco | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-aisa-chapman-new-formation-1925 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-aps-bradbury-attention-span | t04-watch-gym | Paper; automated access unknown (the domain recorded unknown where the merge saw yes, the conservative value). Cite and paraphrase only |
+| src-arsenal-newcastle-7-0-golden-era | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-breakingthelines-watch-space | t04-watch-gym | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-brentford-head-of-analysis-2021 | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-bundesliga-klopp-dortmund-years | t01-the-game, t03-phases-of-play | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-bundesliga-positions-explained | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-capology | t23-transfers-and-valuation | Read, redistribution and derivative unknown; the terms page returned 403. Wage figures are typed by hand with a link |
+| src-cies-football-observatory | t19-football-ai-ml, t22-scouting-2, t23-transfers-and-valuation, t27-premier-league-system | Automated access and redistribution unknown; read by hand and paraphrase report findings with a link |
+| src-coaches-voice | t02-language-of-space | Just-in-time seed, all four fields unknown; check the terms before Track 2 lessons paraphrase it |
+| src-coachesvoice-formations-explained | t01-the-game, t02-language-of-space | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-espn-head-coach-vs-manager | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-fa-laws-and-rules | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-fifa-stadium-guidelines-pitch | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-football365-who-controls-transfers | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-footballbenchmark-ceo-profiles | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-fourfourtwo-formations-in-football | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-fourfourtwo-inverted-full-back | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-fourfourtwo-no10 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-fourfourtwo-pl-pitch-sizes | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-fourfourtwo-watch-like-analyst | t03-phases-of-play, t04-watch-gym | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-fourfourtwo-who-invented-pressing | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-goal-squad-numbers-explained | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-hudl-marshall-head-of-recruitment | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-ifab-history-back-pass-law | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-ifab-history-offside-law | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-ifab-history-origins-modern-game | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-jarmac-pan-pretesting-video | t04-watch-gym, ADR 0008 | Paper; redistribution unknown. Cite and paraphrase only, never copy figures |
+| src-jobsinfootball-532 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-jobsinfootball-sporting-director-role | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-jobsinfootball-sporting-director-structure | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-jssm-linke-effective-playing-time | t04-watch-gym | Paper; automated access and redistribution unknown. Cite and paraphrase only |
+| src-karun-expected-threat | t02-language-of-space | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-kloppy-coordinates-docs | t01-the-game | Docs page; redistribution and derivative unknown. Link to it and describe the coordinate systems in our own words |
+| src-lcfc-squad-numbers-history | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-liverpool-data-engineer | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-liverpool-first-team-performance-analyst | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-liverpool-head-academy-medical-performance | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-liverpool-head-of-loan-management | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-liverpool-lead-data-scientist | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-liverpool-set-piece-coach | t00-start-here, t03-phases-of-play | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-liverpool-women-head-of-recruitment | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-mastermindsite-how-i-watch | t02-language-of-space, t03-phases-of-play, t04-watch-gym | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-mdpi-pct-team-sports-meta | t04-watch-gym, ADR 0008 | Paper; automated access and redistribution unknown. Cite and paraphrase only |
+| src-metrica-sample-data | ADR 0008 | Redistribution unknown; ADR 0008 keeps Metrica data local only with credit |
+| src-newcastle-first-team-analyst-post-match | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-newcastle-lead-recruitment-data-analyst | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-newcastle-women-academy-manager | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-okabe-ito-cud | research summary page footer | Automated access unknown; the palette hex values are quoted from a verified excerpt and credited in the summary footer |
+| src-pff-fc-wc2022 | ADR 0008 | Redistribution and derivative unknown behind a request form; ADR 0008 rejects waiting for it and it holds 0 PL matches |
+| src-pl-352-explained | t01-the-game, t02-language-of-space | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-442-explained | t01-the-game, t02-language-of-space | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-451-explained | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-assistant-manager-insights | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-formation-trends-2024-25 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-handbook-2026-27 | t01-the-game | Automated access unknown; read by hand. The registry types it official-document, while positions-and-numbering typed it regulation; decide in one place if lessons treat the PL Rules as regulations |
+| src-pl-laws-2026-27 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-saot-explainer | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-slot-liverpool-shape-2024 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-sporting-directors-explained | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-var-accuracy-2024 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-pl-var-faqs | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-planetfootball-formations-whiteboard | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-premier-league-chelsea-2004-05 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-premier-league-counter-pressing-explained | t03-phases-of-play | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-premier-league-hall-of-fame-wenger | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-premier-league-history | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-premier-league-klopp-liverpool-2019-20 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-premier-league-leicester-2015-16 | t03-phases-of-play | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-premier-league-man-city-evolution | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-premierleague-coachesvoice-no6-explained | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-sky-hammond-loans-manager | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-skysports-arteta-tactics-2023 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-skysports-conte-343-2017 | t01-the-game, t03-phases-of-play | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-slemen-director-high-performance | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-slemen-effective-sporting-director | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-spielverlagerung | t02-language-of-space | Just-in-time seed, all four fields unknown; check the terms before Track 2 lessons paraphrase it |
+| src-squadnumbers-1-11-premier-league-era | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-transfermarkt-site | t23-transfers-and-valuation | Read, redistribution and derivative unknown; the terms page was blocked to tools and licence.xml prohibits AI use. Values are typed by hand with a link |
+| src-uefa-ac-milan-1988-90 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-uefa-ajax-1971-73 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-uefa-barcelona-2008-12 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-uefa-coaching-licences | t00-start-here | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-uefa-hungary-1950-56 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
+| src-understat | t16-metrics-and-models | Unverified: only a returning-soon notice on 2026-11-27 and no terms found. Re-check before any Track 16 lesson cites it |
+| src-yahoo-keble-formations-2016 | t01-the-game | Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape |
 
 ## Premier League coverage gaps
 
-None recorded.
+| Id | Gap | Impact | Mitigation | Evidence |
+| --- | --- | --- | --- | --- |
+| no-pl-360 | No open Premier League 360 data: StatsBomb has 0 PL matches with 360 frames, only shot freeze frames | PL lessons cannot show where every player stood at each event | Use shot freeze frames for PL examples; teach 360 ideas on labelled non-PL StatsBomb 360 matches | src-statsbomb-open-data, src-statsbomb-open-data-360-frames |
+| pl-tracking-last-row-only | PL tracking and off-ball movement only from Last Row: 13 Liverpool goals, informal licence, self-described as too inaccurate for research | No continuous PL off-ball footage for Watch Gym, pitch control or pressing lessons | PL off-ball reconstructions use labelled non-PL tracking (DFL Bundesliga); Last Row stays local with credit | src-fot-last-row, src-dfl-idsse-open-data |
+| no-pl-physical | No open provider in the coverage matrix offers Premier League physical data | Sports-science lessons cannot use PL distance, sprint or load numbers from open data | Use published study figures with citation and labelled non-PL tracking; never invent PL physical numbers | src-skillcorner-opendata, src-jssm-linke-effective-playing-time |
+| statsbomb-redistribution | StatsBomb terms bar giving the data to third parties and commercial use of derived analysis | StatsBomb-derived PL clips and tables cannot ship in the Vercel bundle | StatsBomb artifacts stay in the local study build on the deploy deny-manifest; the deployed PL supply is Wyscout 2017/18 events (CC BY) | src-statsbomb-open-data, src-wyscout-public-dataset, src-creativecommons-by-4-0 |
+| data-credit-logo | The reusable data-credit element with a logo slot does not exist yet | No lesson may show StatsBomb-derived visuals until the credit and logo render | Phase 4/5 builds the credit element; Phase 3 manifests carry the credit text | src-statsbomb-open-data, src-fot-last-row |
+| fbref-advanced-removed | FBref advanced (Opta) statistics were removed on 2026-01-20 | No live free source of PL xG and advanced player stats on FBref | Compute metrics from open event data in the pipeline; FBref is recorded as removed and never cited as live | src-fbref-advanced-stats, src-awfulannouncing-fbref-removal |
+| transfermarkt-datasets-paused | transfermarkt-datasets updates are paused and the data stops in July 2026; the CC0 licence does not clear the Transfermarkt terms | No current open market-value or transfer data for Track 23 | Keep transfermarkt-datasets local only; type valuations by hand with a link and an as-of date | src-transfermarkt-datasets, src-transfermarkt-site |
+| understat-capology-terms-unknown | Understat shows only a returning-soon notice and Capology terms returned 403, so neither has known terms | No open xG fallback from Understat and no licensed wage data | Read by hand, never scrape; wage figures typed by hand with a link; re-check both at the start of Tracks 16 and 23 | src-understat, src-capology |
 
 ## Orphan competencies
 
