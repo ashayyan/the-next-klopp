@@ -7,7 +7,11 @@ cannot be read yields one honest ``unreachable`` row; counts are never guessed.
 
 from __future__ import annotations
 
+import csv
+import io
 import json
+import re
+import zipfile
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
@@ -114,6 +118,292 @@ def _common_clubs(matches: list[dict[str, Any]]) -> set[str]:
     return common or set()
 
 
+# --- Wyscout (Pappalardo et al., figshare) ----------------------------------------------------------
+CC_BY_URL = "https://creativecommons.org/licenses/by/4.0/"
+WY_PL_COMPETITION_ID = 364  # "English first division", the 2017/18 Premier League
+MAX_ZIP_MEMBER_BYTES = 5 * MB
+WY_COMPETITIONS = {
+    "England": ("English first division", "2017/2018"),
+    "France": ("French first division", "2017/2018"),
+    "Germany": ("German first division", "2017/2018"),
+    "Italy": ("Italian first division", "2017/2018"),
+    "Spain": ("Spanish first division", "2017/2018"),
+    "European_Championship": ("European Championship", "2016"),
+    "World_Cup": ("World Cup", "2018"),
+}
+
+
+def wyscout_rows(fetch: Fetch, now: str) -> list[CoverageRow]:
+    """Read matches.zip in memory (never extracted); one event row per competition."""
+    data = fetch(WYSCOUT_ZIP_URL, 5 * MB)
+    try:
+        archive = zipfile.ZipFile(io.BytesIO(data))
+    except zipfile.BadZipFile as exc:
+        raise ValueError("Wyscout archive is not a zip file") from exc
+    rows: list[CoverageRow] = []
+    with archive:
+        for info in sorted(archive.infolist(), key=lambda i: i.filename):
+            found = re.fullmatch(r"matches_([A-Za-z_]+)\.json", info.filename)
+            if not found:
+                continue
+            if info.file_size > MAX_ZIP_MEMBER_BYTES:
+                raise ValueError(f"{info.filename} is larger than {MAX_ZIP_MEMBER_BYTES} bytes")
+            with archive.open(info) as member:
+                raw = member.read(MAX_ZIP_MEMBER_BYTES + 1)
+            if len(raw) > MAX_ZIP_MEMBER_BYTES:
+                raise ValueError(f"{info.filename} expands beyond {MAX_ZIP_MEMBER_BYTES} bytes")
+            matches = _load_json(raw)
+            stem = found.group(1)
+            name, season = WY_COMPETITIONS.get(stem, (stem.replace("_", " "), "unknown"))
+            competition_id = matches[0]["competitionId"] if matches else None
+            is_pl = competition_id == WY_PL_COMPETITION_ID
+            notes = ""
+            if is_pl:
+                notes = (
+                    f'Labelled "{name}" (wyId {competition_id}); events only, coordinates 0-100; '
+                    f'first match in the file is "{matches[0].get("label", "unknown")}".'
+                )
+            rows.append(
+                CoverageRow(
+                    provider="Wyscout",
+                    dataset="Wyscout public soccer-logs dataset",
+                    competition=name,
+                    competition_id=None if competition_id is None else str(competition_id),
+                    season=season,
+                    data_type="event",
+                    matches_total=len(matches),
+                    pl_matches=len(matches) if is_pl else 0,
+                    status="ok",
+                    method="index",
+                    licence_id="CC-BY-4.0",
+                    licence_url=CC_BY_URL,
+                    source_url=WYSCOUT_ZIP_URL,
+                    fetched_at=now,
+                    notes=notes,
+                )
+            )
+    if not rows:
+        raise ValueError("Wyscout archive holds no matches_*.json member")
+    return rows
+
+
+# --- SkillCorner ----------------------------------------------------------------------------------
+SC_LICENCE_URL = "https://raw.githubusercontent.com/SkillCorner/opendata/master/LICENSE"
+SC_COMPETITIONS = {61: "A-League"}
+SC_SEASONS = {95: "2024/2025"}
+
+
+def skillcorner_rows(fetch: Fetch, now: str) -> list[CoverageRow]:
+    """Trust matches.json, not the README (which says 10 matches while the index lists 20)."""
+    matches = _load_json(fetch(SKILLCORNER_MATCHES_URL, 2 * MB))
+    groups: dict[tuple[int, int], list[dict[str, Any]]] = {}
+    for match in matches:
+        groups.setdefault((match["competition_id"], match["season_id"]), []).append(match)
+    rows: list[CoverageRow] = []
+    for (cid, sid), entries in sorted(groups.items()):
+        statuses: dict[str, int] = {}
+        for entry in entries:
+            statuses[entry["status"]] = statuses.get(entry["status"], 0) + 1
+        rows.append(
+            CoverageRow(
+                provider="SkillCorner",
+                dataset="SkillCorner open data",
+                competition=SC_COMPETITIONS.get(cid, f"competition {cid}"),
+                competition_id=str(cid),
+                season=SC_SEASONS.get(sid, f"season {sid}"),
+                data_type="broadcast-tracking",
+                matches_total=len(entries),
+                pl_matches=0,
+                status="ok",
+                method="index",
+                licence_id="MIT",
+                licence_url=SC_LICENCE_URL,
+                source_url=SKILLCORNER_MATCHES_URL,
+                fetched_at=now,
+                notes=(
+                    "Index entries by status: "
+                    + ", ".join(f"{n} {s}" for s, n in sorted(statuses.items()))
+                    + ". The README says 10 matches; the index is the source of truth."
+                ),
+            )
+        )
+    if not rows:
+        raise ValueError("SkillCorner matches.json is empty")
+    return rows
+
+
+# --- DFL / Sportec IDSSE ----------------------------------------------------------------------------
+DFL_COMPETITIONS = {"DFL-COM-000001": "Bundesliga", "DFL-COM-000002": "2. Bundesliga"}
+DFL_FILE = re.compile(
+    r"^DFL_\d+_\d+_(matchinformation|events_raw|positions_raw_observed)_(DFL-COM-\d+)_(DFL-MAT-\w+)\.xml$"
+)
+
+
+def dfl_rows(fetch: Fetch, now: str) -> list[CoverageRow]:
+    """Count matches per competition and data kind from the figshare file list."""
+    article = _load_json(fetch(DFL_ARTICLE_URL, 2 * MB))
+    kinds = {"events_raw": "event", "positions_raw_observed": "tracking"}
+    counts: dict[tuple[str, str], set[str]] = {}
+    for file in article["files"]:
+        found = DFL_FILE.match(file["name"])
+        if found and found.group(1) in kinds:
+            counts.setdefault((found.group(2), kinds[found.group(1)]), set()).add(found.group(3))
+    if not counts:
+        raise ValueError("DFL figshare article lists no recognised match files")
+    rows: list[CoverageRow] = []
+    for (com, data_type), mats in sorted(counts.items()):
+        rows.append(
+            CoverageRow(
+                provider="DFL",
+                dataset="DFL / Sportec IDSSE open data",
+                competition=DFL_COMPETITIONS.get(com, com),
+                competition_id=com,
+                season="2022/2023",
+                data_type=data_type,  # type: ignore[arg-type]
+                matches_total=len(mats),
+                pl_matches=0,
+                status="ok",
+                method="index",
+                licence_id="CC-BY-4.0",
+                licence_url=CC_BY_URL,
+                source_url=DFL_ARTICLE_URL,
+                fetched_at=now,
+                notes=(
+                    "Match counts come from the figshare file list; the competition name is mapped "
+                    "from the DFL competition id and the season from the DFL data paper."
+                ),
+            )
+        )
+    return rows
+
+
+# --- Metrica sample data ------------------------------------------------------------------------------
+def metrica_rows(fetch: Fetch, now: str) -> list[CoverageRow]:
+    listing = _load_json(fetch(METRICA_URL, MB))
+    games = [e for e in listing if e["type"] == "dir" and e["name"].startswith("Sample_Game_")]
+    if not games:
+        raise ValueError("Metrica listing holds no Sample_Game folder")
+    rows: list[CoverageRow] = []
+    for data_type in ("event", "tracking"):
+        rows.append(
+            CoverageRow(
+                provider="Metrica",
+                dataset="Metrica Sports sample data",
+                competition="unnamed (anonymised)",
+                competition_id=None,
+                season="unknown",
+                data_type=data_type,  # type: ignore[arg-type]
+                matches_total=len(games),
+                pl_matches=0,
+                status="ok",
+                method="index",
+                licence_id="none-stated-informal-credit",
+                licence_url=None,
+                source_url=METRICA_URL,
+                fetched_at=now,
+                notes=(
+                    "The games are anonymised: teams and competition are not named, so no Premier League "
+                    "match can be identified. Games 1-2 are CSV, game 3 is EPTS FIFA plus JSON events."
+                ),
+            )
+        )
+    return rows
+
+
+# --- Last Row (Friends of Tracking) -------------------------------------------------------------------
+LASTROW_REPO_URL = "https://github.com/Friends-of-Tracking-Data-FoTD/Last-Row"
+LASTROW_MANUAL_TOTAL = 19
+LASTROW_MANUAL_PL = 13
+# Premier League opponents among the 19 Liverpool goals (the other 6 are Champions League).
+LASTROW_PL_OPPONENTS = (
+    "Bournemouth",
+    "Fulham",
+    "Southampton",
+    "Wolves",
+    "Norwich",
+    "Chelsea",
+    "Newcastle",
+    "Man City",
+    "Everton",
+    "Watford",
+    "Leicester",
+)
+
+
+def lastrow_rows(fetch: Fetch, now: str, deep: bool = False) -> list[CoverageRow]:
+    """19 Liverpool goals in 2019, 13 of them Premier League: a manual count unless ``deep``."""
+    listing = _load_json(fetch(LASTROW_URL, MB))
+    entry = next((e for e in listing if e["name"] == "liverpool_2019.csv"), None)
+    if entry is None:
+        raise ValueError("liverpool_2019.csv is missing from the Last Row listing")
+    total, pl = LASTROW_MANUAL_TOTAL, LASTROW_MANUAL_PL
+    notes = (
+        f"Manual count from the CSV play labels (file is {entry['size']} bytes): 19 goals, 13 in the "
+        "Premier League, 6 in the Champions League. Tracking only, no events. Self-described as too "
+        "inaccurate for research; no licence file, informal request to credit the source."
+    )
+    if deep:
+        try:
+            raw = fetch(LASTROW_CSV_URL, 16 * MB).decode("utf-8")
+            reader = csv.DictReader(io.StringIO(raw))
+            plays = list(dict.fromkeys(row["play"] for row in reader))
+            total = len(plays)
+            pl = sum(1 for p in plays if any(o.lower() in p.lower() for o in LASTROW_PL_OPPONENTS))
+            notes = (
+                f"Distinct plays recounted from the CSV play labels ({total}); Premier League opponents "
+                "matched against a hand-written club list. Tracking only, no events; self-described "
+                "as too inaccurate for research; informal request to credit the source."
+            )
+        except (FetchError, ValueError, KeyError) as exc:
+            notes += f" Deep recount failed ({type(exc).__name__}); manual count kept."
+    return [
+        CoverageRow(
+            provider="Last Row",
+            dataset="Last Row: Liverpool 2019 positional data",
+            competition="Liverpool goals (Premier League and Champions League)",
+            competition_id=None,
+            season="2019",
+            data_type="tracking",
+            matches_total=total,
+            pl_matches=pl,
+            status="ok",
+            method="manual",
+            licence_id="none-stated-informal-credit",
+            licence_url=None,
+            source_url=LASTROW_REPO_URL,
+            fetched_at=now,
+            notes=notes,
+        )
+    ]
+
+
+# --- PFF FC (request form, documented only) -----------------------------------------------------------
+def pff_rows(fetch: Fetch, now: str) -> list[CoverageRow]:
+    return [
+        CoverageRow(
+            provider="PFF FC",
+            dataset="PFF FC World Cup 2022",
+            competition="FIFA World Cup",
+            competition_id=None,
+            season="2022",
+            data_type="broadcast-tracking",
+            matches_total=64,
+            pl_matches=0,
+            status="request-only",
+            method="documented",
+            licence_id="request-form-no-terms-stated",
+            licence_url=None,
+            source_url=PFF_URL,
+            fetched_at=now,
+            notes=(
+                "Access is a request form and there is no machine-readable index. The release posts "
+                "document 64 matches with broadcast tracking, events, grades and rosters; no terms are "
+                "stated on the pages read."
+            ),
+        )
+    ]
+
+
 # --- orchestration ------------------------------------------------------------------------------
 ProviderFn = Callable[..., list[CoverageRow]]
 
@@ -126,10 +416,64 @@ PROVIDER_META: dict[str, dict[str, Any]] = {
         "licence_url": SB_LICENCE_URL,
         "source_url": SB_COMPETITIONS_URL,
     },
+    "wyscout": {
+        "provider": "Wyscout",
+        "dataset": "Wyscout public soccer-logs dataset",
+        "data_type": "event",
+        "licence_id": "CC-BY-4.0",
+        "licence_url": CC_BY_URL,
+        "source_url": WYSCOUT_ZIP_URL,
+    },
+    "skillcorner": {
+        "provider": "SkillCorner",
+        "dataset": "SkillCorner open data",
+        "data_type": "broadcast-tracking",
+        "licence_id": "MIT",
+        "licence_url": SC_LICENCE_URL,
+        "source_url": SKILLCORNER_MATCHES_URL,
+    },
+    "dfl": {
+        "provider": "DFL",
+        "dataset": "DFL / Sportec IDSSE open data",
+        "data_type": "event",
+        "licence_id": "CC-BY-4.0",
+        "licence_url": CC_BY_URL,
+        "source_url": DFL_ARTICLE_URL,
+    },
+    "metrica": {
+        "provider": "Metrica",
+        "dataset": "Metrica Sports sample data",
+        "data_type": "tracking",
+        "licence_id": "none-stated-informal-credit",
+        "licence_url": None,
+        "source_url": METRICA_URL,
+    },
+    "lastrow": {
+        "provider": "Last Row",
+        "dataset": "Last Row: Liverpool 2019 positional data",
+        "data_type": "tracking",
+        "licence_id": "none-stated-informal-credit",
+        "licence_url": None,
+        "source_url": LASTROW_REPO_URL,
+    },
+    "pff": {
+        "provider": "PFF FC",
+        "dataset": "PFF FC World Cup 2022",
+        "data_type": "broadcast-tracking",
+        "licence_id": "request-form-no-terms-stated",
+        "licence_url": None,
+        "source_url": PFF_URL,
+    },
 }
 
 PROVIDERS: dict[str, ProviderFn] = {
     "statsbomb": statsbomb_rows,
+    "wyscout": wyscout_rows,
+    "skillcorner": skillcorner_rows,
+    "dfl": dfl_rows,
+    "metrica": metrica_rows,
+    "lastrow": lastrow_rows,
+    "pff": pff_rows,
 }
 
 
