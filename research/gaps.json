@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-28",
+  "deferred_domains": [
+    {
+      "brief_domain": "2",
+      "name": "Principles of play, phases of play, the language of space",
+      "why_deferred": "Not needed for Milestones 0 and 1; Track 2 and 3 concepts are drafted from just-in-time seeds and Wave 1 formations sources only",
+      "must_precede": ["t02-language-of-space", "t03-phases-of-play"],
+      "research_trigger": "start of t02-language-of-space",
+      "starting_sources": [
+        "src-spielverlagerung",
+        "src-coaches-voice",
+        "src-karun-expected-threat",
+        "src-premier-league-counter-pressing-explained"
+      ]
+    },
+    {
+      "brief_domain": "3",
+      "name": "Positional play, relationism and modern attacking models",
+      "why_deferred": "Not needed for Milestones 0 and 1; attacking models build on Tracks 2 and 3",
+      "must_precede": ["t05-attacking-play"],
+      "research_trigger": "start of t05-attacking-play",
+      "starting_sources": [
+        "src-spielverlagerung",
+        "src-coaches-voice",
+        "src-theanalyst-stones-hybrid-role",
+        "src-pl-box-midfield-explained"
+      ]
+    }
+  ],
+  "unknown_licence_sources": [],
+  "pl_coverage_gaps": [],
+  "orphan_competencies": []
+}
