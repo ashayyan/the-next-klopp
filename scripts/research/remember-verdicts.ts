@@ -1,13 +1,16 @@
 // CLI: node scripts/research/remember-verdicts.ts [--dry-run]
 // Writes the short Phase 2 verdicts to agentmemory (rohitg00 server, REST on localhost:3111).
 // Only paraphrased decisions, each at most 600 characters; never research text. Idempotent:
-// a verdict is posted only when no stored entry for the project starts with its title.
+// a verdict is skipped only when its exact text is already stored. When the text changed since an
+// earlier run (the approval verdict is built from research/APPROVAL.md), a superseding memory is
+// posted instead of leaving the stale one as the only answer (see lib/verdict-sync.ts).
 // The secret in ~/.agentmemory/secret is read in-process into the Authorization header only,
 // exactly as scripts/verify/memory.ts does. It is never printed, logged or written.
 // Standalone, dependency-free, erasable TypeScript.
 import { existsSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
+import { listingTruncated, storedState, textToPost } from "./lib/verdict-sync.ts";
 
 const BASE = "http://localhost:3111/agentmemory";
 const PROJECT = "the-next-klopp";
@@ -26,7 +29,9 @@ function approvalOutcome(): string {
   const md = readFileSync(path, "utf8");
   const status = /^Status:\s*(.+)$/m.exec(md)?.[1]?.trim() ?? "unknown";
   const date = /^- Review date:\s*(\S+?)\.?$/m.exec(md)?.[1] ?? "unknown date";
-  return `Status ${status}, reviewed ${date} by an independent Opus pass under learner delegation; the learner may re-open it. Seed-only Track 2 concepts (18 zones, 5 lanes, half-spaces, four superiorities) stay draft until domain 2 research. Phase 4 DESIGN.md may start. Record: research/APPROVAL.md.`;
+  const reviewer = /^- Reviewer:\s*([^;.\n]+)/m.exec(md)?.[1]?.trim() ?? "unknown reviewer";
+  const delegated = /under learner delegation/i.test(md) ? " under learner delegation" : "";
+  return `Status ${status}, reviewed ${date} by ${reviewer}${delegated}; the learner may re-open it. Seed-only Track 2 concepts (18 zones, 5 lanes, half-spaces, four superiorities) stay draft until domain 2 research. Phase 4 DESIGN.md may start. Record: research/APPROVAL.md.`;
 }
 
 const VERDICTS: Verdict[] = [
@@ -112,26 +117,38 @@ async function request(path: string, init: RequestInit): Promise<unknown> {
 
 const listed = (await request(`/memories?project=${PROJECT}`, { method: "GET" })) as {
   memories?: { content?: string }[];
-};
+} & Record<string, unknown>;
 const existing = (listed.memories ?? []).map((m) => m.content ?? "");
+if (listingTruncated(listed, existing.length)) {
+  fail(
+    `the memory list for ${PROJECT} is truncated (${existing.length} returned); refusing to post duplicates`,
+  );
+}
 
 let written = 0;
+let superseded = 0;
 for (const v of VERDICTS) {
-  if (existing.some((c) => c.startsWith(v.title))) {
+  const state = storedState(existing, v.title, contentOf(v));
+  if (state === "current") {
     console.log(`already stored: ${v.title}`);
     continue;
+  }
+  const content = textToPost(state, contentOf(v));
+  if (content.length > MAX_CHARS) {
+    fail(`"${v.title}" is ${content.length} characters with the supersede prefix`);
   }
   await request("/remember", {
     method: "POST",
     body: JSON.stringify({
-      content: contentOf(v),
+      content,
       concepts: [PROJECT, "phase-2", ...v.concepts],
       project: PROJECT,
     }),
   });
   written += 1;
-  console.log(`remembered: ${v.title}`);
+  if (state === "stale") superseded += 1;
+  console.log(`${state === "stale" ? "superseded" : "remembered"}: ${v.title}`);
 }
 console.log(
-  `remember-verdicts: ok (${written} written, ${VERDICTS.length - written} already stored)`,
+  `remember-verdicts: ok (${written} written, ${superseded} of them superseding, ${VERDICTS.length - written} already stored)`,
 );
