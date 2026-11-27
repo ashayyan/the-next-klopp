@@ -1,0 +1,827 @@
+[
+  {
+    "id": "src-pl-sporting-directors-explained",
+    "title": "Who are sporting directors and what do they do?",
+    "url": "https://www.premierleague.com/en/news/3991780",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2025-03-30",
+    "as_of": "2026-11-28",
+    "best_for": ["sporting director remit", "reporting lines"],
+    "notes": "Written by a former sporting director; page footer shows 2026 so club lists inside may be dated.",
+    "status": "active"
+  },
+  {
+    "id": "src-parnell-sporting-director-emergence",
+    "title": "The emergence of the sporting director role in football and the potential of social network theory in future research",
+    "url": "https://doi.org/10.1080/23750472.2018.1577587",
+    "type": "paper",
+    "publisher": "Managing Sport and Leisure (Parnell, Widdop, Groom, Bond)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2019-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["role ambiguity", "academic framing of the role"],
+    "notes": "Only the abstract was read, via search summary; the publisher page was not fetched. Sources give 2018 or 2019 as year, so recency is approximate.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-jobsinfootball-sporting-director-role",
+    "title": "Understanding the role of sporting director",
+    "url": "https://jobsinfootball.com/blog/understanding-the-role-of-sporting-director/",
+    "type": "blog",
+    "publisher": "Jobs in Football",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2020-06-19",
+    "as_of": "2026-11-28",
+    "best_for": ["sporting director duties", "career routes"],
+    "notes": "Page updated since 2020; career-length figures are the blog author view, not measured data.",
+    "status": "active"
+  },
+  {
+    "id": "src-jobsinfootball-sporting-director-structure",
+    "title": "Where should the sporting director sit? The structural challenge in the Premier League",
+    "url": "https://jobsinfootball.com/blog/where-should-the-sporting-director-sit-the-structural-challenge-in-the-premier-league/",
+    "type": "blog",
+    "publisher": "Jobs in Football",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-10-26",
+    "as_of": "2026-11-28",
+    "best_for": ["CEO-led versus board-level models", "contested structure"],
+    "notes": "Opinion piece naming no clubs.",
+    "status": "active"
+  },
+  {
+    "id": "src-slemen-effective-sporting-director",
+    "title": "David Slemen: What makes an effective Sporting Director?",
+    "url": "https://archive.trainingground.guru/articles/what-makes-an-effective-sporting-director",
+    "type": "article",
+    "publisher": "Training Ground Guru",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2020-06-18",
+    "as_of": "2026-11-28",
+    "best_for": ["sporting director competencies", "how directors fail"],
+    "notes": "Opinion by a performance consultant, read on the archive host after the main host redirected.",
+    "status": "active"
+  },
+  {
+    "id": "src-slemen-director-high-performance",
+    "title": "David Slemen: Why top clubs need a Director of High Performance",
+    "url": "https://archive.trainingground.guru/articles/why-top-clubs-need-a-director-of-high-performance",
+    "type": "article",
+    "publisher": "Training Ground Guru",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2020-06-18",
+    "as_of": "2026-11-28",
+    "best_for": ["head of performance remit", "coach translation role"],
+    "notes": "Opinion by a performance consultant; club list is from 2020.",
+    "status": "active"
+  },
+  {
+    "id": "src-uefa-coaching-licences",
+    "title": "UEFA coaching licences: every course for which UEFA sets minimum standards",
+    "url": "https://www.uefa.com/news-media/news/0268-11ef810e73fb-f340214d3d91-1000/",
+    "type": "official-document",
+    "publisher": "UEFA",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 5,
+    "recency": "2021-04-01",
+    "as_of": "2026-11-28",
+    "best_for": ["coaching licence ladder", "Pro Diploma entry"],
+    "notes": "Page last updated 2024-05-19. National associations apply the convention in their own way.",
+    "status": "active"
+  },
+  {
+    "id": "src-espn-head-coach-vs-manager",
+    "title": "Head coach vs manager: why job title matters for Chelsea, Man United",
+    "url": "https://www.espn.com/soccer/story/_/id/47617709/head-coach-managers-chelsea-enzo-maresca-blueco-manchester-united-ruben-amorim",
+    "type": "news",
+    "publisher": "ESPN",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-01-15",
+    "as_of": "2026-11-28",
+    "best_for": ["head coach versus manager", "recruitment friction"],
+    "notes": "News analysis; club situations change quickly.",
+    "status": "active"
+  },
+  {
+    "id": "src-pl-assistant-manager-insights",
+    "title": "Coaching Insights: assistant managers",
+    "url": "https://premierleague.com/news/2573082",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2022-07-03",
+    "as_of": "2026-11-28",
+    "best_for": ["assistant coach duties", "assistant interview"],
+    "notes": "Interview-based feature in the Premier League Coaching Insights series.",
+    "status": "active"
+  },
+  {
+    "id": "src-brentford-head-of-analysis-2021",
+    "title": "Brentford FC recruiting Head of Analysis",
+    "url": "https://www.brentfordfc.com/en/news/brentford-fc-recruiting-head-of-analysis-576528",
+    "type": "official-document",
+    "publisher": "Brentford FC",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2021-06-18",
+    "as_of": "2026-11-28",
+    "best_for": ["head of analysis duties", "job ad"],
+    "notes": "Posted 2021-06-18, closed 2021-07-02; full job spec PDF was not in the page. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-newcastle-head-recruitment-analysis-women",
+    "title": "Head of Recruitment and Performance Analysis (Newcastle United Women)",
+    "url": "https://careers.newcastleunited.com/job/head-of-recruitment-and-performance-analysis",
+    "type": "official-document",
+    "publisher": "Newcastle United",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2024-11-18",
+    "as_of": "2026-11-28",
+    "best_for": ["analysis head duties", "job ad"],
+    "notes": "Women's first team role, expired 2024-11-18; recency is the expiry date. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-newcastle-first-team-analyst-post-match",
+    "title": "First Team Performance Analyst, Post Match (Newcastle United)",
+    "url": "https://careers.newcastleunited.com/job/first-team-performance-analyst-post-match-5928987",
+    "type": "official-document",
+    "publisher": "Newcastle United",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-06-26",
+    "as_of": "2026-11-28",
+    "best_for": ["first-team analyst duties", "job ad"],
+    "notes": "Expired 2026-06-26; recency is the expiry date. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-liverpool-first-team-performance-analyst",
+    "title": "First Team Performance Analyst (Liverpool FC)",
+    "url": "https://jobsearch.liverpoolfc.com/jobs/job/First-Team-Performance-Analyst/429",
+    "type": "official-document",
+    "publisher": "Liverpool FC",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2023-07-07",
+    "as_of": "2026-11-28",
+    "best_for": ["first-team analyst duties", "job ad"],
+    "notes": "Posted 2023-07-07, closed 2023-07-21. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-liverpool-lead-data-scientist",
+    "title": "Lead Data Scientist, Research Department (Liverpool FC)",
+    "url": "https://jobsearch.liverpoolfc.com/jobs/job/Lead-Data-Scientist/826",
+    "type": "official-document",
+    "publisher": "Liverpool FC",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2024-07-12",
+    "as_of": "2026-11-28",
+    "best_for": ["data science lead duties", "job ad"],
+    "notes": "Posted 2024-07-12; no reporting line stated. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-liverpool-data-engineer",
+    "title": "Data Engineer (Liverpool FC)",
+    "url": "https://jobsearch.liverpoolfc.com/jobs/job/Data-Engineer/1416",
+    "type": "official-document",
+    "publisher": "Liverpool FC",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-02-19",
+    "as_of": "2026-11-28",
+    "best_for": ["data engineer duties", "job ad"],
+    "notes": "Posted 2026-02-19, closed 2026-03-13. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-newcastle-lead-recruitment-data-analyst",
+    "title": "Lead Recruitment Data Analyst (Newcastle United)",
+    "url": "https://careers.newcastleunited.com/job/lead-recruitment-data-analyst-5932188",
+    "type": "official-document",
+    "publisher": "Newcastle United",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-08-28",
+    "as_of": "2026-11-28",
+    "best_for": ["recruitment analyst duties", "job ad"],
+    "notes": "Expired 2026-08-28; recency is the expiry date; no skills list on the page. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-liverpool-women-head-of-recruitment",
+    "title": "LFCW Head of Recruitment (Liverpool FC Women)",
+    "url": "https://jobsearch.liverpoolfc.com/jobs/job/LFCW-Head-of-Recruitment/1167",
+    "type": "official-document",
+    "publisher": "Liverpool FC",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2025-06-16",
+    "as_of": "2026-11-28",
+    "best_for": ["head of recruitment duties", "job ad"],
+    "notes": "Women's team role, posted 2025-06-16, closed 2025-06-30; no line manager stated. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-hudl-marshall-head-of-recruitment",
+    "title": "John Marshall interview: the head of recruitment role",
+    "url": "https://www.hudl.com/blog/john-marshall-interview-the-head-of-recruitment-role",
+    "type": "article",
+    "publisher": "Hudl",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2020-05-05",
+    "as_of": "2026-11-28",
+    "best_for": ["head of recruitment interview", "scouting team structure"],
+    "notes": "Vendor blog interview with a Wolves head of recruitment; the vendor sells scouting tools.",
+    "status": "active"
+  },
+  {
+    "id": "src-newcastle-women-academy-manager",
+    "title": "Academy Manager (Newcastle United Women)",
+    "url": "https://careers.newcastleunited.com/job/academy-manager",
+    "type": "official-document",
+    "publisher": "Newcastle United",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2025-02-28",
+    "as_of": "2026-11-28",
+    "best_for": ["academy lead duties", "job ad"],
+    "notes": "Women's Professional Game Academy; expired 2025-02-28; closest public stand-in for the academy director role; no men's Academy Director ad was read. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-liverpool-head-academy-medical-performance",
+    "title": "Head of Academy Medical and Performance (Liverpool FC)",
+    "url": "https://careers.liverpoolfc.com/members/modules/job/detail.php?record=1484&jobboard=TGG",
+    "type": "official-document",
+    "publisher": "Liverpool FC",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-05-15",
+    "as_of": "2026-11-28",
+    "best_for": ["performance and medical lead duties", "job ad"],
+    "notes": "Closed 2026-05-15; recency is the closing date; academy level and medical-led. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-liverpool-head-of-loan-management",
+    "title": "Head of Loan Management, Men's Team (Liverpool FC)",
+    "url": "https://jobsearch.liverpoolfc.com/jobs/job/Head-of-Loan-Management-Mens-Team/942",
+    "type": "official-document",
+    "publisher": "Liverpool FC",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2025-01-10",
+    "as_of": "2026-11-28",
+    "best_for": ["loan management duties", "job ad"],
+    "notes": "Posted 2025-01-10, closed 2025-01-17. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-sky-hammond-loans-manager",
+    "title": "Loans manager role explained: Dean Hammond on why it is so important",
+    "url": "https://www.skysports.com/football/news/11095/11991509/loans-manager-role-explained-dean-hammond-on-why-it-is-so-important",
+    "type": "news",
+    "publisher": "Sky Sports",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2020-05-24",
+    "as_of": "2026-11-28",
+    "best_for": ["loans manager duties", "practitioner account"],
+    "notes": "Account from a former Leicester loans manager.",
+    "status": "active"
+  },
+  {
+    "id": "src-liverpool-set-piece-coach",
+    "title": "First Team Set Piece Coach (Liverpool FC)",
+    "url": "https://jobsearch.liverpoolfc.com/jobs/job/First-Team-Set-Piece-Coach/758",
+    "type": "official-document",
+    "publisher": "Liverpool FC",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2024-05-17",
+    "as_of": "2026-11-28",
+    "best_for": ["set piece coach duties", "job ad"],
+    "notes": "Posted 2024-05-17, closed 2024-06-02; no line manager stated. Job ads expire; record is a paraphrase of duties only, no personal data.",
+    "status": "active"
+  },
+  {
+    "id": "src-footballbenchmark-ceo-profiles",
+    "title": "Who leads Europe's clubs? CEO profiles and pathways across the Big Five leagues",
+    "url": "https://footballbenchmark.com/w/who-leads-europe-s-clubs-ceo-profiles-and-pathways-across-the-big-five-leagues",
+    "type": "report",
+    "publisher": "Football Benchmark (KPMG)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 4,
+    "recency": "2025-09-11",
+    "as_of": "2026-11-28",
+    "best_for": ["club CEO backgrounds", "CEO versus sporting director tenure"],
+    "notes": "Where no formal CEO exists the report treats the top executive as CEO. Numeric figures deliberately not copied into findings.",
+    "status": "active"
+  },
+  {
+    "id": "src-football365-who-controls-transfers",
+    "title": "The people in charge of transfers at every Premier League club",
+    "url": "https://www.football365.com/news/feature-who-is-in-charge-of-transfers-premier-league",
+    "type": "news",
+    "publisher": "Football365",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright, free to read",
+      "read": {
+        "value": "yes",
+        "note": "Public page, no login needed, read on 2026-11-28"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Site terms not checked for automated access; page read once via a single fetch"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; paraphrase and link only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Short paraphrase with credit and link"
+      }
+    },
+    "quality": 3,
+    "recency": "2020-12-30",
+    "as_of": "2026-11-28",
+    "best_for": ["who decides transfers", "club examples"],
+    "notes": "Dated 2020; individuals named have since moved, use only for the pattern.",
+    "status": "active"
+  }
+]
