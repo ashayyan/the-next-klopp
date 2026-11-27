@@ -49,7 +49,7 @@
 
 ### Platform and App Shell
 
-- [ ] **PLAT-01**: The app runs on Windows localhost with one documented command, on a fixed port
+- [x] **PLAT-01**: The app runs on Windows localhost with one documented command, on a fixed port
 - [ ] **PLAT-02**: The app shell has a home screen with one obvious next action, navigation by track/chapter, and a "What's new" changelog page
 - [ ] **PLAT-03**: The app is deployed to the learner's Vercel account with Deployment Protection scope "All Deployments"; a smoke script proves production and preview URLs are not public
 - [ ] **PLAT-04**: The deployed bundle contains no licensed raw data (deny-manifest check)
@@ -170,7 +170,7 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 | SETUP-05 | Phase 1 | Pending |
 | SETUP-06 | Phase 1 | Pending |
 | SETUP-07 | Phase 1 | Pending |
-| PLAT-01 | Phase 1 | Pending |
+| PLAT-01 | Phase 1 | Complete |
 | RSCH-01 | Phase 2 | Pending |
 | RSCH-02 | Phase 2 | Pending |
 | RSCH-03 | Phase 2 | Pending |

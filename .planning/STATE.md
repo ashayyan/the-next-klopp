@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 1
 current_phase_name: Setup & Contracts
 status: executing
-stopped_at: Completed 01-01-PLAN.md
-last_updated: "2026-11-27T18:46:42.449Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-11-27T18:49:55.779Z"
 last_activity: 2026-11-27
 last_activity_desc: Phase 1 execution started
-state_head: c20ab8f6535a1a7b4fd91a0b4532b78de52b8542
+state_head: e40ecf68dd0e83531502508126ce46ee61d9dc2a
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 9
-  completed_plans: 1
+  completed_plans: 2
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 1 (Setup & Contracts) — EXECUTING
-Plan: 2 of 9
+Plan: 3 of 9
 Status: Ready to execute
 Last activity: 2026-11-27 — Phase 1 execution started
 
@@ -57,6 +57,7 @@ Progress: [░░░░░░░░░░] 0%
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | Phase 1 P01 | 15min | 2 tasks | 7 files |
+| Phase 1 P02 | 12min | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,8 @@ Recent decisions affecting current work:
 - [Init]: Watch Gym L1 clips come from open-data reconstructions plus the learner's local clips; YouTube is link-out only; no video stored
 - [Roadmap]: Learner checkpoints are phase boundaries: research approval ends Phase 2, design-direction pick opens Phase 4
 - [Phase 1]: Phase branch gsd/phase-1-setup-contracts; main renamed from master and fast-forwarded to guard commit; private repo ashayyan/the-next-klopp; branching_strategy=phase
+- [Phase 1]: RouterProvider imported from react-router/dom; no react-router-dom; installs run with HUSKY=0 until Plan 04
+- [Phase 1]: No allowScripts block: npm install-scripts ls reported no unreviewed install scripts (Vite 8 uses rolldown)
 
 ### Pending Todos
 
@@ -93,6 +96,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-27T18:46:42.416Z
-Stopped at: Completed 01-01-PLAN.md
+Last session: 2026-11-27T18:49:55.745Z
+Stopped at: Completed 01-02-PLAN.md
 Resume file: None
