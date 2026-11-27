@@ -1,8 +1,11 @@
 // Builds the self-contained research summary page (RSCH-06) as one HTML string. Erasable TypeScript only.
 // The page is a research artefact, not app UI. It makes no network request: a CSP meta with
 // default-src 'none' and a script hash blocks everything, and the data it shows is embedded.
-// Strings that came from the web are escaped at build time or set with textContent in the page script.
+// Strings that came from the web are escaped at build time or set with textContent in the page script
+// (summary-page.js, inlined verbatim and hashed).
 import { createHash } from "node:crypto";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { type Part, THREADS, TRACKS } from "./domains.ts";
 import { studyOrder } from "./graph.ts";
 import type { Layout, LayoutEdge } from "./layout.ts";
@@ -65,6 +68,12 @@ export function esc(text: string): string {
     .replace(/'/g, "&#39;");
 }
 
+/** Keep page prose short: at most `max` words, then an ellipsis. Escaped for markup. */
+function short(text: string, max = 28): string {
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  return esc(words.length > max ? `${words.slice(0, max).join(" ")}…` : words.join(" "));
+}
+
 function luminance(hex: string): number {
   const channel = (i: number): number => {
     const v = Number.parseInt(hex.slice(1 + 2 * i, 3 + 2 * i), 16) / 255;
@@ -84,99 +93,11 @@ export function inkFor(fill: string): string {
   return contrastRatio(fill, "#000000") >= contrastRatio(fill, "#FFFFFF") ? "#000000" : "#FFFFFF";
 }
 
-const PARTS = Object.keys(PART_COLOURS) as Part[];
-
-/** The page script. Built with createElement and textContent only; no network API is used. */
-export const INLINE_SCRIPT = `
-(function () {
-  "use strict";
-  var data = JSON.parse(document.getElementById("data").textContent);
-  var byId = new Map(data.concepts.map(function (c) { return [c.id, c]; }));
-  var unlocks = new Map();
-  data.concepts.forEach(function (c) {
-    c.prerequisites.forEach(function (p) {
-      if (!unlocks.has(p)) unlocks.set(p, []);
-      unlocks.get(p).push(c.id);
-    });
-  });
-  var nodes = new Map();
-  document.querySelectorAll("g.node").forEach(function (g) { nodes.set(g.getAttribute("data-id"), g); });
-  var panel = document.getElementById("detail");
-
-  function make(tag, text, cls) {
-    var e = document.createElement(tag);
-    if (text) e.textContent = text;
-    if (cls) e.className = cls;
-    return e;
-  }
-
-  function link(url, label) {
-    if (/^https?:\\/\\//i.test(url)) {
-      var a = make("a", label);
-      a.href = url;
-      a.rel = "noopener noreferrer";
-      a.target = "_blank";
-      return a;
-    }
-    return make("span", label);
-  }
-
-  function jumpList(title, ids) {
-    var box = make("div");
-    box.appendChild(make("h4", title));
-    if (ids.length === 0) {
-      box.appendChild(make("p", "None", "muted"));
-      return box;
-    }
-    var ul = make("ul");
-    ids.forEach(function (id) {
-      var c = byId.get(id);
-      var li = make("li");
-      var b = make("button", c ? c.title : id, "linkish");
-      b.type = "button";
-      b.addEventListener("click", function () { select(id); });
-      li.appendChild(b);
-      ul.appendChild(li);
-    });
-    box.appendChild(ul);
-    return box;
-  }
-
-  function select(id) {
-    var c = byId.get(id);
-    if (!c) return;
-    nodes.forEach(function (g, key) { g.classList.toggle("sel", key === id); });
-    panel.textContent = "";
-    panel.appendChild(make("h3", c.title));
-    panel.appendChild(make("p", "Part " + c.part + ", " + c.trackTitle, "muted"));
-    panel.appendChild(make("p", c.summary));
-    panel.appendChild(jumpList("Needs first", c.prerequisites));
-    panel.appendChild(jumpList("Unlocks", unlocks.get(id) || []));
-    var srcBox = make("div");
-    srcBox.appendChild(make("h4", "Sources"));
-    var ul = make("ul");
-    c.sources.forEach(function (sid) {
-      var s = data.sources[sid];
-      var li = make("li");
-      li.appendChild(s ? link(s.url, s.title) : make("span", sid));
-      if (s && s.status !== "active") li.appendChild(make("span", " (" + s.status + ")", "muted"));
-      ul.appendChild(li);
-    });
-    srcBox.appendChild(ul);
-    panel.appendChild(srcBox);
-  }
-
-  nodes.forEach(function (g, id) {
-    g.addEventListener("click", function () { select(id); });
-    g.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(id); }
-    });
-  });
-
-  select(data.defaultId);
-  document.documentElement.dataset.ready = "1";
-})();
-`;
+/** The page script: summary-page.js with "\n" line endings. It is hashed into the page CSP. */
+export const INLINE_SCRIPT: string = readFileSync(
+  join(import.meta.dirname, "summary-page.js"),
+  "utf8",
+).replace(/\r\n/g, "\n");
 
 export function scriptHash(script: string): string {
   return createHash("sha256").update(script, "utf8").digest("base64");
@@ -186,18 +107,26 @@ const CSS = `
 :root { color-scheme: light; --ink: #1b1b1b; --muted: #55554f; --line: #c9c9c2; --bg: #fbfaf6; --focus: #0b3d91; }
 * { box-sizing: border-box; }
 body { margin: 0; font: 16px/1.5 system-ui, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
-.top { position: sticky; top: 0; z-index: 2; display: flex; gap: 20px; align-items: baseline; padding: 8px 16px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.top { position: sticky; top: 0; z-index: 2; display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: baseline; padding: 8px 16px; background: var(--bg); border-bottom: 1px solid var(--line); }
 .top h1 { font-size: 1rem; margin: 0; }
 .top a { color: var(--ink); margin-right: 12px; }
-.screen { max-width: 1240px; margin: 0 auto; padding: 24px 16px; border-bottom: 1px solid var(--line); }
+.screen { max-width: 1240px; margin: 0 auto; padding: 24px 16px; border-bottom: 1px solid var(--line); scroll-margin-top: 48px; }
 h2 { font-size: 1.3rem; margin: 0 0 12px; }
-h3 { font-size: 1.05rem; margin: 0 0 4px; }
+h3 { font-size: 1.05rem; margin: 16px 0 4px; }
 h4 { font-size: 0.9rem; margin: 12px 0 4px; }
-.muted { color: var(--muted); margin: 0 0 8px; }
+p { margin: 0 0 8px; max-width: 70ch; }
+.muted { color: var(--muted); }
 a { color: var(--focus); }
 a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 button { font: inherit; }
 button.linkish { background: none; border: 0; padding: 0; color: var(--focus); text-decoration: underline; cursor: pointer; text-align: left; }
+ul.plain { margin: 0 0 12px; padding-left: 20px; max-width: 70ch; }
+ul.plain li { margin-bottom: 6px; }
+.status { font-size: 1.1rem; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 10px; }
+.controls button { border: 2px solid var(--ink); background: #fff; padding: 4px 12px; border-radius: 4px; cursor: pointer; }
+.controls button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.swatch { display: inline-block; min-width: 22px; padding: 0 4px; margin-right: 6px; border-radius: 3px; text-align: center; font-weight: 700; }
 .graph-wrap { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
 .graph { border: 1px solid var(--line); background: #fff; overflow: hidden; }
 .graph svg { display: block; width: 100%; height: 62vh; min-height: 320px; }
@@ -211,6 +140,16 @@ button.linkish { background: none; border: 0; padding: 0; color: var(--focus); t
 .node text.label { font-size: 12px; fill: var(--ink); }
 .node text.part { font-size: 13px; font-weight: 700; text-anchor: middle; }
 .edge { fill: none; stroke: #8a8a84; stroke-width: 1.4; transition: opacity 0.15s; }
+.node.dim, .edge.dim { opacity: 0.16; }
+.node.off, .edge.off { opacity: 0.07; }
+.strip { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.strip li { border: 1px solid var(--line); background: #fff; padding: 8px 12px; min-width: 180px; max-width: 260px; }
+.strip .tn { font-weight: 700; margin-right: 6px; }
+.strip .tag { display: block; font-size: 0.85rem; color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; background: #fff; }
+th, td { border: 1px solid var(--line); padding: 6px 10px; text-align: left; vertical-align: top; }
+th { background: #f0efe8; }
 @media (max-width: 900px) { .graph-wrap { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
 `;
@@ -254,6 +193,11 @@ function trackTitle(trackId: string): string {
   return TRACKS.find((t) => t.id === trackId)?.title ?? trackId;
 }
 
+function swatch(part: string): string {
+  const fill = PART_COLOURS[part as Part] ?? "#999999";
+  return `<span class="swatch" style="background:${fill};color:${inkFor(fill)}">${esc(part)}</span>`;
+}
+
 function graphSvg(bundle: ResearchBundle, layout: Layout): string {
   const byId = new Map(bundle.concepts.map((c) => [c.id, c]));
   const out: string[] = [
@@ -291,26 +235,41 @@ function graphSvg(bundle: ResearchBundle, layout: Layout): string {
   return out.join("");
 }
 
-/** Only `<` needs escaping inside a JSON data block, plus the two line separators. */
+/** `<` and the two line separators become JSON escapes, so no embedded string can end the data block. */
+const JSON_ESCAPES = new Map([
+  [0x3c, "003c"],
+  [0x2028, "2028"],
+  [0x2029, "2029"],
+]);
+
 function embedJson(value: unknown): string {
-  return JSON.stringify(value)
-    .replace(/</g, String.raw`\u003c`)
-    .replace(new RegExp(String.fromCharCode(0x2028), "g"), String.raw`\u2028`)
-    .replace(new RegExp(String.fromCharCode(0x2029), "g"), String.raw`\u2029`);
+  let out = "";
+  for (const ch of JSON.stringify(value)) {
+    const hex = JSON_ESCAPES.get(ch.codePointAt(0) as number);
+    out += hex ? `${String.fromCharCode(92)}u${hex}` : ch;
+  }
+  return out;
 }
 
-function pageData(bundle: ResearchBundle) {
-  const starters = THREADS.map((t) => bundle.config?.thread_starters[t.track]).filter(
+function starterIds(bundle: ResearchBundle): string[] {
+  return THREADS.map((t) => bundle.config?.thread_starters[t.track]).filter(
     (id): id is string => id !== undefined,
   );
-  const { order } = studyOrder(bundle.concepts, { threadStarters: starters });
+}
+
+function pageData(bundle: ResearchBundle, layout: Layout, defaultId: string) {
   const cited = new Set(bundle.concepts.flatMap((c) => c.sources));
   const sources: Record<string, { title: string; url: string; status: string }> = {};
   for (const s of [...bundle.sources].sort((a, b) => (a.id < b.id ? -1 : 1))) {
     if (cited.has(s.id)) sources[s.id] = { title: s.title, url: s.url, status: s.status };
   }
   return {
-    defaultId: starters.find((id) => bundle.concepts.some((c) => c.id === id)) ?? order[0] ?? "",
+    defaultId,
+    layout: {
+      width: layout.width,
+      height: layout.height,
+      nodes: layout.nodes.map((n) => ({ id: n.id, x: n.x, y: n.y, w: n.w, h: n.h })),
+    },
     concepts: [...bundle.concepts]
       .sort((a, b) => (a.id < b.id ? -1 : 1))
       .map((c) => ({
@@ -327,12 +286,193 @@ function pageData(bundle: ResearchBundle) {
   };
 }
 
+function decisionScreen(bundle: ResearchBundle, status: string): string {
+  const tracks = new Set(bundle.concepts.map((c) => c.track)).size;
+  const labels = THREADS.map((t) => t.label).join(", ");
+  return [
+    `<section class="screen" id="screen-decision" aria-labelledby="h-decision">`,
+    `<h2 id="h-decision">What you approve</h2>`,
+    `<ul class="plain">`,
+    `<li>The concept map: ${bundle.concepts.length} concepts in ${tracks} tracks, each with prerequisites and sources.</li>`,
+    `<li>The study order and the four early threads: ${esc(labels)}.</li>`,
+    `<li>The data coverage, the Watch Gym clip decision and the gaps still open.</li>`,
+    `</ul>`,
+    `<p class="status">Status: <strong>${esc(status)}</strong></p>`,
+    `<p class="muted">Approval is recorded in research/APPROVAL.md.</p>`,
+    `</section>`,
+  ].join("\n");
+}
+
+function graphScreen(bundle: ResearchBundle, layout: Layout): string {
+  const present = [...new Set(bundle.concepts.map((c) => c.part))].sort();
+  const chip = (part: string, label: string, pressed: boolean): string =>
+    `<button type="button" class="chip" data-part="${esc(part)}" aria-pressed="${pressed}">${
+      part === "all" ? "" : swatch(part)
+    }${esc(label)}</button>`;
+  return [
+    `<section class="screen" id="screen-graph" aria-labelledby="h-graph">`,
+    `<h2 id="h-graph">Concept map</h2>`,
+    `<p class="muted">Pick a concept to see what it needs first and what it unlocks. The letter in each box is its Part.</p>`,
+    `<div class="controls" role="group" aria-label="Filter by Part">${[
+      chip("all", "All", true),
+      ...present.map((p) => chip(p, `Part ${p}`, false)),
+    ].join("")}</div>`,
+    `<div class="controls"><button type="button" id="btn-view" aria-pressed="false">Show all</button>` +
+      `<span id="zoom" hidden><button type="button" id="zoom-in">Zoom in</button>` +
+      `<button type="button" id="zoom-out">Zoom out</button>` +
+      `<button type="button" id="zoom-reset">Reset view</button></span></div>`,
+    `<div class="graph-wrap">`,
+    `<div id="graph-box" data-view="focus" class="graph" tabindex="0" role="group" aria-label="Concept graph. In the Show all view, press the arrow keys to pan and plus or minus to zoom.">${graphSvg(bundle, layout)}</div>`,
+    `<aside id="detail" aria-live="polite" aria-label="Concept details"></aside>`,
+    `</div>`,
+    `</section>`,
+  ].join("\n");
+}
+
+function curriculumScreen(bundle: ResearchBundle): string {
+  const { order, stage } = studyOrder(bundle.concepts, { threadStarters: starterIds(bundle) });
+  const byId = new Map(bundle.concepts.map((c) => [c.id, c]));
+  const trackStage = new Map<string, number>();
+  for (const id of order) {
+    const track = (byId.get(id) as { track: string }).track;
+    if (!trackStage.has(track)) trackStage.set(track, (stage.get(id) as number) + 1);
+  }
+  const milestone = new Set(bundle.config?.milestone_1_tracks ?? []);
+  const items = [...trackStage].map(([track, firstStage], i) => {
+    const concepts = bundle.concepts.filter((c) => c.track === track);
+    const part = concepts[0]?.part ?? "A";
+    const thread = THREADS.find(
+      (t) => t.track === track && bundle.config?.thread_starters[t.track] !== undefined,
+    );
+    return [
+      `<li class="track" data-track="${esc(track)}">`,
+      `<span class="tn">${i + 1}</span>${swatch(part)}<strong>${esc(trackTitle(track))}</strong>`,
+      `<span class="tag">${concepts.length} ${concepts.length === 1 ? "concept" : "concepts"}, from stage ${firstStage}</span>`,
+      thread ? `<span class="tag">Starter: ${esc(thread.label)}</span>` : "",
+      milestone.has(track) ? `<span class="tag">Milestone 1</span>` : "",
+      `</li>`,
+    ].join("");
+  });
+  return [
+    `<section class="screen" id="screen-curriculum" aria-labelledby="h-curriculum">`,
+    `<h2 id="h-curriculum">Study order</h2>`,
+    `<p class="muted">Tracks appear in the order the concept map lets you reach them, not in track-number order.</p>`,
+    `<ol class="strip">${items.join("")}</ol>`,
+    `</section>`,
+  ].join("\n");
+}
+
+interface CoverageGroup {
+  provider: string;
+  type: string;
+  pl: number;
+  total: number;
+  unreachable: boolean;
+  statuses: string[];
+}
+
+function coverageGroups(rows: NonNullable<ResearchBundle["coverage"]>["rows"]): CoverageGroup[] {
+  const groups = new Map<string, CoverageGroup>();
+  for (const r of rows) {
+    const key = `${r.provider}|${r.data_type}`;
+    const g = groups.get(key) ?? {
+      provider: r.provider,
+      type: r.data_type,
+      pl: 0,
+      total: 0,
+      unreachable: false,
+      statuses: [],
+    };
+    if (r.pl_matches === null || r.matches_total === null) g.unreachable = true;
+    else {
+      g.pl += r.pl_matches;
+      g.total += r.matches_total;
+    }
+    if (!g.statuses.includes(r.status)) g.statuses.push(r.status);
+    groups.set(key, g);
+  }
+  return [...groups.values()].sort(
+    (a, b) =>
+      Number(a.unreachable) - Number(b.unreachable) ||
+      b.pl - a.pl ||
+      a.provider.localeCompare(b.provider) ||
+      a.type.localeCompare(b.type),
+  );
+}
+
+function coverageScreen(bundle: ResearchBundle, decision: Decision): string {
+  const out = [
+    `<section class="screen" id="screen-coverage" aria-labelledby="h-coverage">`,
+    `<h2 id="h-coverage">Data coverage</h2>`,
+  ];
+  if (bundle.coverage) {
+    out.push(
+      `<p class="muted">Premier League matches by provider and data type. Checked ${esc(bundle.coverage.generated_at.slice(0, 10))}.</p>`,
+      `<div class="table-wrap"><table><thead><tr><th>Provider</th><th>Data type</th><th>Premier League matches</th><th>All matches</th><th>Status</th></tr></thead><tbody>`,
+      ...coverageGroups(bundle.coverage.rows).map(
+        (g) =>
+          `<tr><td>${esc(g.provider)}</td><td>${esc(g.type)}</td><td>${g.unreachable ? "unreachable" : g.pl}</td><td>${g.unreachable ? "unreachable" : g.total}</td><td>${g.unreachable ? "unreachable" : esc(g.statuses.join(", "))}</td></tr>`,
+      ),
+      `</tbody></table></div>`,
+    );
+  } else out.push(`<p class="muted">No coverage matrix yet.</p>`);
+  out.push(`<h3>Watch Gym clip decision</h3>`);
+  if (decision.bullets.length > 0) {
+    out.push(
+      `<ul class="plain">${decision.bullets.map((b) => `<li>${short(b, 35)}</li>`).join("")}</ul>`,
+    );
+  } else out.push(`<p class="muted">No decision written yet.</p>`);
+  out.push(`</section>`);
+  return out.join("\n");
+}
+
+function gapsScreen(bundle: ResearchBundle): string {
+  const gaps = bundle.gaps;
+  const out = [
+    `<section class="screen" id="screen-gaps" aria-labelledby="h-gaps">`,
+    `<h2 id="h-gaps">Gaps</h2>`,
+  ];
+  if (!gaps) {
+    out.push(`<p class="muted">No gaps recorded yet.</p>`, `</section>`);
+    return out.join("\n");
+  }
+  out.push(
+    `<h3>Deferred domains</h3>`,
+    `<div class="table-wrap"><table><thead><tr><th>Domain</th><th>Why deferred</th><th>Must precede</th><th>Research trigger</th></tr></thead><tbody>`,
+    ...gaps.deferred_domains.map(
+      (d) =>
+        `<tr><td>${short(d.name, 12)}</td><td>${short(d.why_deferred)}</td><td>${esc(d.must_precede.join(", "))}</td><td>${short(d.research_trigger, 12)}</td></tr>`,
+    ),
+    `</tbody></table></div>`,
+  );
+  if (gaps.pl_coverage_gaps.length > 0) {
+    out.push(
+      `<h3>Premier League coverage gaps</h3>`,
+      `<div class="table-wrap"><table><thead><tr><th>Gap</th><th>Impact</th><th>Mitigation</th></tr></thead><tbody>`,
+      ...gaps.pl_coverage_gaps.map(
+        (g) =>
+          `<tr><td>${short(g.gap)}</td><td>${short(g.impact)}</td><td>${short(g.mitigation)}</td></tr>`,
+      ),
+      `</tbody></table></div>`,
+    );
+  }
+  out.push(
+    `<p class="muted">Unknown licence terms: ${gaps.unknown_licence_sources.length} sources. Competencies with no concept yet: ${gaps.orphan_competencies.length}. As of ${esc(gaps.as_of)}.</p>`,
+    `</section>`,
+  );
+  return out.join("\n");
+}
+
 export function buildSummaryHtml(
   bundle: ResearchBundle,
   layout: Layout,
-  _decision: Decision,
-  _options: SummaryOptions = {},
+  decision: Decision,
+  options: SummaryOptions = {},
 ): string {
+  const starters = starterIds(bundle);
+  const { order } = studyOrder(bundle.concepts, { threadStarters: starters });
+  const defaultId =
+    starters.find((id) => bundle.concepts.some((c) => c.id === id)) ?? order[0] ?? "";
   const csp = `default-src 'none'; style-src 'unsafe-inline'; img-src data:; script-src 'sha256-${scriptHash(INLINE_SCRIPT)}'`;
   const parts = [
     "<!doctype html>",
@@ -345,15 +485,15 @@ export function buildSummaryHtml(
     `<style>${CSS}</style>`,
     "</head>",
     "<body>",
-    `<header class="top"><h1>Research summary</h1></header>`,
+    `<header class="top"><h1>Research summary</h1><nav aria-label="Screens"><a href="#screen-decision">1 Approve</a><a href="#screen-graph">2 Concepts</a><a href="#screen-curriculum">3 Order</a><a href="#screen-coverage">4 Data</a><a href="#screen-gaps">5 Gaps</a></nav></header>`,
     "<main>",
-    `<section class="screen" id="screen-graph" aria-labelledby="h-graph">`,
-    `<h2 id="h-graph">Concept map</h2>`,
-    `<div class="graph-wrap"><div class="graph">${graphSvg(bundle, layout)}</div>`,
-    `<aside id="detail" aria-live="polite" aria-label="Concept details"></aside></div>`,
-    "</section>",
+    decisionScreen(bundle, options.approvalStatus ?? "pending"),
+    graphScreen(bundle, layout),
+    curriculumScreen(bundle),
+    coverageScreen(bundle, decision),
+    gapsScreen(bundle),
     "</main>",
-    `<script type="application/json" id="data">${embedJson(pageData(bundle))}</script>`,
+    `<script type="application/json" id="data">${embedJson(pageData(bundle, layout, defaultId))}</script>`,
     `<script>${INLINE_SCRIPT}</script>`,
     "</body>",
     "</html>",
@@ -361,5 +501,3 @@ export function buildSummaryHtml(
   ];
   return parts.join("\n");
 }
-
-export { PARTS };

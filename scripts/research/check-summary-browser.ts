@@ -1,4 +1,4 @@
-// CLI: node scripts/research/check-summary-browser.ts <html> [--screenshot <png>]
+// CLI: node scripts/research/check-summary-browser.ts <html> [--screenshot <png>] [--interact]
 // Opens the page in headless Edge (else Chrome) and exits 0 only when the page's own script ran
 // under its CSP (data-ready="1") and the browser logged no error. Exit 2 when no browser is installed.
 // The browser is driven over the DevTools protocol because `--dump-dom` output does not reach a pipe
@@ -81,11 +81,69 @@ class Cdp {
   }
 }
 
+/** Runs inside the page: drives the real controls and reports every expectation that failed. */
+const INTERACTION_SCRIPT = `(async () => {
+  const fails = [];
+  const ok = (cond, msg) => { if (!cond) fails.push(msg); };
+  const box = document.getElementById("graph-box");
+  const nodes = [...document.querySelectorAll("g.node")];
+  const title = (g) => g.getAttribute("aria-label").replace(/, Part [A-G]$/, "");
+  const panelTitle = () => document.querySelector("#detail h3")?.textContent;
+  const viewBox = () => document.getElementById("graph-svg").getAttribute("viewBox").split(" ").map(Number);
+  ok(nodes.length > 1, "the graph has nodes");
+  ok(box.dataset.view === "focus", "the page starts in the focus view");
+
+  const last = nodes[nodes.length - 1];
+  last.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+  ok(panelTitle() === title(last), "a click shows the details of " + title(last));
+  ok(last.classList.contains("sel"), "the clicked node is marked selected");
+  ok(document.querySelectorAll("g.node.dim").length > 0, "the focus view dims the rest");
+
+  nodes[0].dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+  ok(panelTitle() === title(nodes[0]), "Enter selects " + title(nodes[0]));
+  nodes[1].dispatchEvent(new KeyboardEvent("keydown", { key: " ", bubbles: true }));
+  ok(panelTitle() === title(nodes[1]), "Space selects " + title(nodes[1]));
+
+  const chips = [...document.querySelectorAll("button.chip")];
+  const all = chips.find((c) => c.dataset.part === "all");
+  const one = chips.find((c) => c.dataset.part !== "all");
+  one.click();
+  ok(one.getAttribute("aria-pressed") === "true", "the Part chip is pressed");
+  ok(all.getAttribute("aria-pressed") === "false", "All is released");
+  for (const g of nodes) {
+    ok(g.classList.contains("off") === (g.getAttribute("data-part") !== one.dataset.part), "filter state of " + title(g));
+  }
+  all.click();
+  ok(!nodes.some((g) => g.classList.contains("off")), "All clears the Part filter");
+
+  const toggle = document.getElementById("btn-view");
+  toggle.click();
+  ok(box.dataset.view === "all", "Show all switches the view");
+  ok(!nodes.some((g) => g.classList.contains("dim")), "nothing is dimmed in Show all");
+  ok(!document.getElementById("zoom").hidden, "the zoom buttons appear");
+  const full = viewBox();
+  document.getElementById("zoom-in").click();
+  const zoomed = viewBox();
+  ok(zoomed[2] < full[2], "zoom in narrows the view box");
+  box.dispatchEvent(new KeyboardEvent("keydown", { key: "ArrowRight", bubbles: true }));
+  ok(viewBox()[0] > zoomed[0], "the right arrow pans right");
+  document.getElementById("zoom-reset").click();
+  ok(viewBox()[2] === full[2], "Reset view restores the whole graph");
+  toggle.click();
+  ok(box.dataset.view === "focus", "Back to focus view returns to the focus view");
+  return fails;
+})()`;
+
 function findBrowser(): string | null {
   return BROWSERS.find((p) => existsSync(p)) ?? null;
 }
 
-async function run(page: string, screenshot: string | null, browser: string): Promise<number> {
+async function run(
+  page: string,
+  screenshot: string | null,
+  interact: boolean,
+  browser: string,
+): Promise<number> {
   const url = pathToFileURL(page).href;
   const profile = mkdtempSync(join(tmpdir(), "klopp-browser-"));
   const child = spawn(
@@ -179,11 +237,29 @@ async function run(page: string, screenshot: string | null, browser: string): Pr
     }
 
     if (screenshot) {
-      const shot = (await tab.send("Page.captureScreenshot", { format: "png" })) as {
-        data: string;
+      // Whole page, not just the first 900 px: the reviewer wants all five screens.
+      const metrics = (await tab.send("Page.getLayoutMetrics")) as {
+        cssContentSize?: { width: number; height: number };
       };
+      const size = metrics.cssContentSize ?? { width: 1440, height: 900 };
+      const shot = (await tab.send("Page.captureScreenshot", {
+        format: "png",
+        captureBeyondViewport: true,
+        clip: { x: 0, y: 0, width: size.width, height: Math.min(size.height, 6000), scale: 1 },
+      })) as { data: string };
       writeFileSync(resolve(screenshot), Buffer.from(shot.data, "base64"));
       console.log(`screenshot: ${resolve(screenshot)}`);
+    }
+    let interactionFailures: string[] = [];
+    if (interact && ready) {
+      const r = (await tab.send("Runtime.evaluate", {
+        expression: INTERACTION_SCRIPT,
+        awaitPromise: true,
+        returnByValue: true,
+      })) as { result?: { value?: string[] }; exceptionDetails?: { text?: string } };
+      interactionFailures = r.result?.value ?? [
+        `interaction script threw: ${r.exceptionDetails?.text ?? "unknown"}`,
+      ];
     }
     tab.close();
 
@@ -197,7 +273,14 @@ async function run(page: string, screenshot: string | null, browser: string): Pr
       for (const p of problems) console.error(`  ${p}`);
       return 1;
     }
+    if (interactionFailures.length > 0) {
+      console.error("interaction checks failed:");
+      for (const f of interactionFailures) console.error(`  ${f}`);
+      return 1;
+    }
     console.log(`ok: page script ran under its CSP with no browser errors (${browser})`);
+    if (interact)
+      console.log("interactions ok: click, Enter, Space, Part filter, Show all, zoom, pan");
     return 0;
   } finally {
     try {
@@ -215,9 +298,11 @@ async function main(): Promise<number> {
   const argv = process.argv.slice(2);
   let html: string | null = null;
   let screenshot: string | null = null;
+  let interact = false;
   for (let i = 0; i < argv.length; i++) {
     const arg = argv[i] as string;
-    if (arg === "--screenshot") screenshot = argv[++i] ?? null;
+    if (arg === "--interact") interact = true;
+    else if (arg === "--screenshot") screenshot = argv[++i] ?? null;
     else if (arg.startsWith("--screenshot=")) screenshot = arg.slice("--screenshot=".length);
     else if (!html) html = arg;
     else {
@@ -227,7 +312,7 @@ async function main(): Promise<number> {
   }
   if (!html) {
     console.error(
-      "usage: node scripts/research/check-summary-browser.ts <html> [--screenshot <png>]",
+      "usage: node scripts/research/check-summary-browser.ts <html> [--screenshot <png>] [--interact]",
     );
     return 2;
   }
@@ -242,7 +327,7 @@ async function main(): Promise<number> {
     return 2;
   }
   try {
-    return await run(page, screenshot, browser);
+    return await run(page, screenshot, interact, browser);
   } catch (e) {
     console.error(`browser check failed: ${(e as Error).message}`);
     return 1;

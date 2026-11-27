@@ -22,6 +22,7 @@
     "research:check": "vitest run scripts/research",
     "research:gate": "node scripts/research/gate.ts",
     "research:views": "node scripts/research/render-views.ts",
+    "research:summary": "node scripts/research/build-summary.ts",
     "smoke": "node scripts/smoke.ts",
     "smoke:dev": "node scripts/smoke.ts dev",
     "verify:setup": "node scripts/verify-setup.ts all",
