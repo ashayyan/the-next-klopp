@@ -1,0 +1,609 @@
+[
+  {
+    "id": "src-ifab-history-origins-modern-game",
+    "title": "Origins of the modern game (IFAB history of the Laws, milestone page)",
+    "url": "https://theifab-history.netlify.app/history/milestones/origins-of-the-modern-game/",
+    "type": "official-document",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright",
+      "read": { "value": "yes", "note": "Public web page, read on 2026-11-27" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched with curl; site terms not checked"
+      },
+      "redistribute": { "value": "no", "note": "IFAB copyright; do not copy text" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["1863 first Laws", "founding of the IFAB in 1886"],
+    "notes": "Milestone text read on the IFAB history microsite (theifab-history.netlify.app). The theifab.com copy of the same milestone path rendered only navigation in WebFetch, so the content was verified on the microsite. No publication date shown; recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "fa-1863-first-laws",
+        "locator": "Section: The Football Association and the 1863 Laws",
+        "fetched_at": "2026-11-27T21:35:00Z",
+        "sha256": "81424491b9c931727f33730123b1356a2c1b5391b6d2cfd2923c1a0582628152",
+        "paraphrase": "The FA, formed in London in 1863, drew up the first widely recognised set of Laws of Association Football."
+      }
+    ]
+  },
+  {
+    "id": "src-ifab-history-offside-law",
+    "title": "Offside Law (IFAB history of the Laws, milestone page)",
+    "url": "https://theifab-history.netlify.app/history/milestones/offside-law/",
+    "type": "official-document",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright",
+      "read": { "value": "yes", "note": "Public web page, read on 2026-11-27" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched with curl; site terms not checked"
+      },
+      "redistribute": { "value": "no", "note": "IFAB copyright; do not copy text" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["offside changes 1925 and 1990", "law changes driving tactics"],
+    "notes": "Official IFAB history microsite. Says the 1925 change had a major impact on tactics. No publication date shown; recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "offside-1925-three-to-two",
+        "locator": "Section: Key changes, 1925",
+        "fetched_at": "2026-11-27T21:35:00Z",
+        "sha256": "0fb33687497b01ff71861bb26cb1c418ad48c03332f7e394298978fd99b6f3bd",
+        "paraphrase": "Before 1925 an attacker needed three opponents between him and the goal line to be onside; the requirement was cut to two."
+      },
+      {
+        "id": "offside-1990-level-is-onside",
+        "locator": "Section: Key changes, 1990",
+        "fetched_at": "2026-11-27T21:35:00Z",
+        "sha256": "3d84f0dee996a4edfc8e487adb31bb21b81d1f17bf93c0911f93422a2e711735",
+        "paraphrase": "In 1990 an attacker level with the second-last opponent became onside, which further favoured attacking play."
+      }
+    ]
+  },
+  {
+    "id": "src-ifab-history-back-pass-law",
+    "title": "Back-pass Law (IFAB history of the Laws, milestone page)",
+    "url": "https://theifab-history.netlify.app/history/milestones/back-pass-law/",
+    "type": "official-document",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright",
+      "read": { "value": "yes", "note": "Public web page, read on 2026-11-27" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched with curl; site terms not checked"
+      },
+      "redistribute": { "value": "no", "note": "IFAB copyright; do not copy text" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["1992 back-pass law", "trial at the 1991 U-17 World Cup"],
+    "notes": "Official IFAB history microsite. States the ban came in the 1992/93 Laws after a 1991 trial, and was extended to throw-ins in 1997. No publication date shown; recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "backpass-1992-introduced",
+        "locator": "Section: The Law in brief",
+        "fetched_at": "2026-11-27T21:35:00Z",
+        "sha256": "e1e6d585e914965518bfa3cff59763a33adfcdc0a61e63da835e7d5db9a4cb8d",
+        "paraphrase": "The ban on keepers handling deliberate back-passes came in 1992 to stop time-wasting between keeper and outfield players."
+      }
+    ]
+  },
+  {
+    "id": "src-whiterose-evolution-football-passing",
+    "title": "The Evolution of Football Passing in Nineteenth-Century Britain (Wilson, Stocks, Wood, Clarke)",
+    "url": "https://eprints.whiterose.ac.uk/id/eprint/232123/",
+    "type": "paper",
+    "publisher": "International Journal of the History of Sport (Taylor & Francis); White Rose Research Online",
+    "free": true,
+    "license": {
+      "name": "CC BY-NC-ND 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by-nc-nd/4.0/",
+      "read": { "value": "yes", "note": "Open access published version" },
+      "automated_access": { "value": "yes", "note": "PDF downloadable from the repository" },
+      "redistribute": {
+        "value": "conditional",
+        "note": "Non-commercial, unchanged, credited only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "NoDerivatives licence; cite and paraphrase ideas, do not adapt the text"
+      }
+    },
+    "quality": 5,
+    "recency": "2025-05-12",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "dribbling to passing in the 1860s-70s",
+      "offside differences London vs Sheffield and Scotland"
+    ],
+    "notes": "Peer-reviewed, volume 42 issue 3, pages 264-282. Challenges the claim that the Scots alone introduced the passing game. Doi 10.1080/09523367.2025.2495072.",
+    "status": "active"
+  },
+  {
+    "id": "src-wikipedia-formation-association-football",
+    "title": "Formation (association football) (Wikipedia)",
+    "url": "https://en.wikipedia.org/wiki/Formation_(association_football)",
+    "type": "website",
+    "publisher": "Wikipedia",
+    "free": true,
+    "license": {
+      "name": "CC BY-SA 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "read": { "value": "yes", "note": "Public encyclopedia" },
+      "automated_access": { "value": "yes", "note": "Raw wikitext served by the API" },
+      "redistribute": { "value": "conditional", "note": "Share-alike with attribution" },
+      "derivative": { "value": "conditional", "note": "Share-alike with attribution" }
+    },
+    "quality": 2,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["overview of 2-3-5, WM, 4-2-4 lineage", "pointers to primary sources"],
+    "notes": "Carries an original-research warning and many truncated references. Use as a pointer, not as final proof. Claims here about 4-2-4 credit (Costa, Guttmann) rest on a dead FIFA page. No page date; recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-arsenal-newcastle-7-0-golden-era",
+    "title": "Why a 7-0 loss at Newcastle led to our golden era (Arsenal.com, Jon Spurling)",
+    "url": "https://www.arsenal.com/feature/why-a-7-0-loss-at-newcastle-led-to-our-golden-era-ajy5Q5Z8Lbbg",
+    "type": "article",
+    "publisher": "Arsenal Football Club",
+    "free": true,
+    "license": {
+      "name": "Club website, all rights reserved",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Copyright the club" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 3,
+    "recency": "2026-11-19",
+    "as_of": "2026-11-27",
+    "best_for": ["club version of the origin of WM", "1925 offside change context"],
+    "notes": "Club-authored; partly leans on captain Charlie Buchan's memoir, so it is one side of the story.",
+    "status": "active"
+  },
+  {
+    "id": "src-aisa-chapman-new-formation-1925",
+    "title": "Did Chapman really introduce a new playing formation in 1925? (The History of Arsenal)",
+    "url": "https://blog.woolwicharsenal.co.uk/archives/4739",
+    "type": "blog",
+    "publisher": "The History of Arsenal (AISA Arsenal History Society), Tony Attwood",
+    "free": true,
+    "license": {
+      "name": "Blog, all rights reserved",
+      "read": { "value": "yes", "note": "Public blog post" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Copyright the author" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 3,
+    "recency": "2012-10-06",
+    "as_of": "2026-11-27",
+    "best_for": ["challenge to the Chapman-invented-WM story", "other formations of the 1920s"],
+    "notes": "Fan-history blog by a known Arsenal historian; treat as a counter-view, not final proof. Its match date for the Newcastle defeat differs from the club article, so no match date is used.",
+    "status": "active"
+  },
+  {
+    "id": "src-uefa-hungary-1950-56",
+    "title": "The greatest teams of all time: Hungary 1950-56 (UEFA.com)",
+    "url": "https://www.uefa.com/uefaeuro/history/news/0253-0d8026b8531a-6be6e23436d1-1000--the-greatest-teams-of-all-time-hungary-1950-56",
+    "type": "article",
+    "publisher": "UEFA",
+    "free": true,
+    "license": {
+      "name": "UEFA website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "UEFA copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2015-06-15",
+    "as_of": "2026-11-27",
+    "best_for": ["Wembley 1953 and Hidegkuti's deep centre-forward role", "Sebes's flexible shape"],
+    "notes": "Governing-body feature, by Matthew Watson-Broughton. Describes the shape as a fluid 2-3-3-2 adapted from the WM; other sources give other labels.",
+    "status": "active"
+  },
+  {
+    "id": "src-wikipedia-catenaccio",
+    "title": "Catenaccio (Wikipedia)",
+    "url": "https://en.wikipedia.org/wiki/Catenaccio",
+    "type": "website",
+    "publisher": "Wikipedia",
+    "free": true,
+    "license": {
+      "name": "CC BY-SA 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "read": { "value": "yes", "note": "Public encyclopedia" },
+      "automated_access": { "value": "yes", "note": "Served by the API" },
+      "redistribute": { "value": "conditional", "note": "Share-alike with attribution" },
+      "derivative": { "value": "conditional", "note": "Share-alike with attribution" }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["verrou vs catenaccio credit map", "pointers to Italian-language sources"],
+    "notes": "Lists rival origin claims (Rappan 1932, Villini 1941, Barbieri 1944-46, Viani 1948, Rocco 1947) with different dates. Only the first 100,000 characters were read. No page date; recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-90min-nereo-rocco",
+    "title": "Nereo Rocco, pioneer of catenaccio and forgotten great of Italian football (90min, hosted on SI)",
+    "url": "https://www.si.com/soccer/2019/07/30/nereo-rocco-el-paron-pioneer-catenaccio-forgotten-great-italian-football",
+    "type": "article",
+    "publisher": "90min via Sports Illustrated",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 3,
+    "recency": "2019-07-30",
+    "as_of": "2026-11-27",
+    "best_for": ["Rocco's role in catenaccio", "Swiss roots of the system"],
+    "notes": "Magazine feature from a Top 50 managers series. It says the origin is not firmly established.",
+    "status": "active"
+  },
+  {
+    "id": "src-fourfourtwo-who-invented-pressing",
+    "title": "Who REALLY invented the pressing game, and why it works (FourFourTwo, Uli Hesse)",
+    "url": "https://www.fourfourtwo.com/features/who-really-invented-pressing-game-and-why-it-works",
+    "type": "article",
+    "publisher": "FourFourTwo",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2016-04-01",
+    "as_of": "2026-11-27",
+    "best_for": ["disputed origin of pressing", "ice-hockey forechecking link"],
+    "notes": "Names no single inventor; weighs Maslov, Happel, Michels and Sacchi.",
+    "status": "active"
+  },
+  {
+    "id": "src-premier-league-counter-pressing-explained",
+    "title": "Counter-pressing and the gegenpress: football tactics explained (Premier League / Coaches' Voice)",
+    "url": "https://www.premierleague.com/news/4244321",
+    "type": "article",
+    "publisher": "Premier League (Coaches' Voice feature)",
+    "free": true,
+    "license": {
+      "name": "Premier League website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2025-06-22",
+    "as_of": "2026-11-27",
+    "best_for": ["pressing lineage from the 1960s", "German coaches and gegenpressing"],
+    "notes": "Lists Maslov, Happel, Michels, Lobanovskyi and Sacchi as aggressive pressers from the 1960s onward; names German coaches behind gegenpressing.",
+    "status": "active"
+  },
+  {
+    "id": "src-fourfourtwo-england-1966-formation",
+    "title": "Fifty years on: was England's 1966 winning XI destiny, fate or a chance affair? (FourFourTwo via Yahoo Sport)",
+    "url": "https://uk.sports.yahoo.com/news/fifty-years-englands-1966-winning-103428602.html",
+    "type": "article",
+    "publisher": "FourFourTwo via Yahoo Sport",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 3,
+    "recency": "2016-07-29",
+    "as_of": "2026-11-27",
+    "best_for": ["what England's 1966 shape really was", "wingless wonders as a cliche"],
+    "notes": "By Paul Simpson. Argues the side was a 4-1-3-2 with Stiles anchoring, not a plain 4-3-3 or 4-4-2.",
+    "status": "active"
+  },
+  {
+    "id": "src-uefa-ajax-1971-73",
+    "title": "The greatest teams of all time: Ajax 1971-73 (UEFA.com)",
+    "url": "https://www.uefa.com/uefachampionsleague/news/0253-0d7ff54908f6-5927d0a16600-1000--the-greatest-teams-of-all-time-ajax-1971-73",
+    "type": "article",
+    "publisher": "UEFA",
+    "free": true,
+    "license": {
+      "name": "UEFA website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "UEFA copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2015-07-18",
+    "as_of": "2026-11-27",
+    "best_for": ["Total Football at Ajax", "three straight European Cups 1971-73"],
+    "notes": "By Berend Scholten. Describes Michels's 4-3-3 with pressing and an offside trap.",
+    "status": "active"
+  },
+  {
+    "id": "src-uefa-ac-milan-1988-90",
+    "title": "The greatest teams of all time: AC Milan 1988-90 (UEFA.com)",
+    "url": "https://www.uefa.com/uefachampionsleague/news/0253-0d7ff547ca01-af062fb1225f-1000--the-greatest-teams-of-all-time-ac-milan-1988-90",
+    "type": "article",
+    "publisher": "UEFA",
+    "free": true,
+    "license": {
+      "name": "UEFA website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "UEFA copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2015-07-04",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "Sacchi's 4-4-2 with zonal marking and a high line",
+      "back-to-back European Cups 1989 and 1990"
+    ],
+    "notes": "By Paolo Menicucci. Gives a compactness figure between lines that is not repeated here because the raw page could not be hashed.",
+    "status": "active"
+  },
+  {
+    "id": "src-premier-league-history",
+    "title": "Premier League history (premierleague.com)",
+    "url": "https://www.premierleague.com/en/history",
+    "type": "website",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Premier League website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["1992 breakaway and first season", "BSkyB deal"],
+    "notes": "League's own account: 22 First Division clubs left the Football League in February 1992, company registered May 1992, first season from 15 August 1992. No page date; recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-premier-league-hall-of-fame-wenger",
+    "title": "Arsene Wenger, Premier League Hall of Fame",
+    "url": "https://www.premierleague.com/en/events/hall-of-fame/inductees/arsene-wenger",
+    "type": "website",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Premier League website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["Wenger's arrival in 1996", "the 2003/04 Invincibles"],
+    "notes": "Short league-authored citation, so claims about changing English football are the league's framing. No page date; recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-premier-league-chelsea-2004-05",
+    "title": "PL30: Chelsea's special 2004/05 title win (Premier League, Adrian Clarke)",
+    "url": "https://www.premierleague.com/en/news/2737934",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Premier League website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2022-08-15",
+    "as_of": "2026-11-27",
+    "best_for": ["Mourinho's 4-3-3 and Makelele anchor", "defensive records of 2004/05"],
+    "notes": "Talking Tactics series. Shape began as a narrow diamond 4-4-2 then moved to 4-3-3.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "fifteen-goals-conceded",
+        "locator": "Section on the defensive record",
+        "fetched_at": "2026-11-27T21:38:00Z",
+        "sha256": "b54711893eb4583d24c92b457c30a9e33591783b25a1ebabdd84150ca1735e2f",
+        "paraphrase": "Mourinho's first Chelsea side let in just 15 league goals all season, six of them at home."
+      }
+    ]
+  },
+  {
+    "id": "src-uefa-barcelona-2008-12",
+    "title": "The greatest teams of all time: Barcelona 2008-12 (UEFA.com)",
+    "url": "https://www.uefa.com/uefachampionsleague/news/0253-0d7ff5460779-90f1672a7e36-1000--the-greatest-teams-of-all-time-barcelona-2008-12",
+    "type": "article",
+    "publisher": "UEFA",
+    "free": true,
+    "license": {
+      "name": "UEFA website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "UEFA copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2015-07-11",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "Guardiola's Barcelona, possession plus pressing",
+      "Cruyff and Rexach as acknowledged sources"
+    ],
+    "notes": "By Dunia Martin. The page does not use the term positional play, so that term is not sourced here.",
+    "status": "active"
+  },
+  {
+    "id": "src-bundesliga-klopp-dortmund-years",
+    "title": "Jurgen Klopp, Liverpool manager: the Borussia Dortmund years (Bundesliga.com)",
+    "url": "https://bundesliga.com/en/bundesliga/news/jurgen-klopp-liverpool-manager-the-borussia-dortmund-years-3211-2122",
+    "type": "article",
+    "publisher": "Bundesliga",
+    "free": true,
+    "license": {
+      "name": "Bundesliga website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2022-05-28",
+    "as_of": "2026-11-27",
+    "best_for": ["Klopp's Dortmund titles 2011 and 2012", "heavy-metal gegenpressing label"],
+    "notes": "League-authored. Gives the 2013 Champions League final loss to Bayern.",
+    "status": "active"
+  },
+  {
+    "id": "src-theanalyst-what-is-xg",
+    "title": "What is expected goals (xG)? (The Analyst, Opta)",
+    "url": "https://theanalyst.com/articles/what-is-expected-goals-xg",
+    "type": "article",
+    "publisher": "Stats Perform (The Analyst)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2023-08-08",
+    "as_of": "2026-11-27",
+    "best_for": ["Opta's xG definition", "2012 introduction by Sam Green"],
+    "notes": "Vendor explainer; the vendor's own origin story. Last modified 2023-11-10.",
+    "status": "active"
+  },
+  {
+    "id": "src-thesefootballtimes-roots-of-xg",
+    "title": "The roots of expected goals (xG) and its journey from nerd nonsense to the mainstream (These Football Times)",
+    "url": "https://thesefootballtimes.co/2020/04/08/the-roots-of-expected-goals-xg-and-its-journey-from-nerd-nonsense-to-the-mainstream/",
+    "type": "article",
+    "publisher": "These Football Times",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 3,
+    "recency": "2020-04-08",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "pre-Opta roots of xG (Reep, Hughes, 1993 term)",
+      "first Match of the Day xG in 2017"
+    ],
+    "notes": "By Adam Williams. Its early-roots dates differ from the Opta account, so xG origin is Contested.",
+    "status": "active"
+  },
+  {
+    "id": "src-premier-league-leicester-2015-16",
+    "title": "PL30: How Ranieri masterminded Leicester's title victory (Premier League, Adrian Clarke)",
+    "url": "https://www.premierleague.com/en/news/2748139",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Premier League website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2022-08-18",
+    "as_of": "2026-11-27",
+    "best_for": ["Leicester's counter-attacking 4-4-2", "lowest-possession champion"],
+    "notes": "Talking Tactics series. Compact 4-4-2 used in 35 of 38 matches.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "lowest-possession-champion",
+        "locator": "Section on the transition-based strategy",
+        "fetched_at": "2026-11-27T21:38:00Z",
+        "sha256": "917b8e6a7ce983ffb6ffa84934d1f216ddea48828eb34d490c87797e2e61112a",
+        "paraphrase": "Leicester's average possession, 42.43 per cent, is the lowest on record for a Premier League champion since data began in 2003/04."
+      }
+    ]
+  },
+  {
+    "id": "src-premier-league-man-city-evolution",
+    "title": "Analysis: how Man City keep evolving under Guardiola (Premier League, Adrian Clarke)",
+    "url": "https://www.premierleague.com/en/news/4171827",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Premier League website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2024-11-19",
+    "as_of": "2026-11-27",
+    "best_for": ["inverted full-backs at City", "100-point 2017/18 title"],
+    "notes": "Written after Guardiola's 2024 contract extension; traces shapes from 2016/17 to 2024.",
+    "status": "active"
+  },
+  {
+    "id": "src-premier-league-klopp-liverpool-2019-20",
+    "title": "PL30: How Klopp transformed Liverpool into champions (Premier League, Adrian Clarke)",
+    "url": "https://www.premierleague.com/en/news/1697253",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Premier League website terms",
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": { "value": "unknown", "note": "Terms not checked" },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit and link" }
+    },
+    "quality": 4,
+    "recency": "2022-08-19",
+    "as_of": "2026-11-27",
+    "best_for": ["Klopp's Liverpool 2019/20", "press first, then defence, then full-backs"],
+    "notes": "Talking Tactics series. It does not give the points total, so none is claimed.",
+    "status": "active"
+  }
+]
