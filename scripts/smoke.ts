@@ -1,4 +1,5 @@
 import { type ChildProcess, spawn, spawnSync } from "node:child_process";
+import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 type Mode = "preview" | "dev";
@@ -92,9 +93,19 @@ try {
     throw new Error("home page missing #root");
   }
   if (mode === "preview") {
+    // `vite preview` serves the SPA fallback for every path, so a 200 on /dev proves only that deep
+    // links resolve, not that the dev route is absent. Absence is checked in the built chunks.
     const deep = await fetch(`${base}/dev`, { signal: AbortSignal.timeout(5000) });
-    if (!deep.ok) throw new Error(`/dev returned HTTP ${deep.status}`);
-    console.log(`smoke ok (preview): ${base}/ and /dev`);
+    if (!deep.ok) throw new Error(`deep link /dev returned HTTP ${deep.status}`);
+    // Text taken from src/routes/dev.tsx; update both together if that copy changes.
+    const devMarker = "left out of the study build";
+    const assetsDir = join(process.cwd(), "dist", "assets");
+    for (const file of readdirSync(assetsDir).filter((f) => f.endsWith(".js"))) {
+      if (readFileSync(join(assetsDir, file), "utf8").includes(devMarker)) {
+        throw new Error(`dev route code leaked into dist/assets/${file}`);
+      }
+    }
+    console.log(`smoke ok (preview): ${base}/, SPA fallback, no dev route code in dist/assets`);
   } else {
     const second = start();
     const end = Date.now() + 20_000;
