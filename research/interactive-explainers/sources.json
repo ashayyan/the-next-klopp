@@ -1,0 +1,742 @@
+[
+  {
+    "id": "src-karun-expected-threat",
+    "title": "Introducing Expected Threat (xT)",
+    "url": "https://karun.in/blog/expected-threat.html",
+    "type": "blog",
+    "publisher": "Karun Singh",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "No terms stated; fetched once"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 5,
+    "recency": "2018-12-31",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "credit-split slider before the answer",
+      "iteration slider on value surfaces",
+      "hover on zones"
+    ],
+    "notes": "No publication date on the page; recency is an estimate from the December 2018 events it cites. No licence statement.",
+    "status": "active"
+  },
+  {
+    "id": "src-ncase-home",
+    "title": "Nicky Case, home page and licence statement",
+    "url": "https://ncase.me/",
+    "type": "website",
+    "publisher": "Nicky Case",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "yes",
+        "note": "Author states a public domain waiver (CC0 1.0)"
+      },
+      "derivative": {
+        "value": "yes",
+        "note": "Author states a public domain waiver (CC0 1.0); we still only record technique notes"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["public-domain explorables hub", "licence reference"],
+    "notes": "Page states all work is under a public domain waiver (CC0). Recency is as_of since the page is undated.",
+    "status": "active"
+  },
+  {
+    "id": "src-ncase-remember",
+    "title": "How To Remember Anything Forever-ish",
+    "url": "https://ncase.me/remember/",
+    "type": "website",
+    "publisher": "Nicky Case",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "yes",
+        "note": "Author states a public domain waiver (CC0 1.0)"
+      },
+      "derivative": {
+        "value": "yes",
+        "note": "Author states a public domain waiver (CC0 1.0); we still only record technique notes"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "spaced repetition taught by doing it",
+      "forgetting-curve sliders",
+      "guess-then-test spacing comparison"
+    ],
+    "notes": "Interactive comic on spaced repetition. Public domain per the author's statement; page undated so recency is as_of.",
+    "status": "active"
+  },
+  {
+    "id": "src-ncase-polygons",
+    "title": "Parable of the Polygons",
+    "url": "https://ncase.me/polygons/",
+    "type": "website",
+    "publisher": "Nicky Case",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Author's site says public domain playables, but this page carries no explicit licence line"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "See redistribute note"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["play first then explain", "bias slider", "open sandbox at the end"],
+    "notes": "Play-then-explain explorable on segregation dynamics. Author's site says public domain playables; this page has no explicit licence line.",
+    "status": "active"
+  },
+  {
+    "id": "src-victor-explorable-explanations",
+    "title": "Explorable Explanations",
+    "url": "https://worrydream.com/ExplorableExplanations/",
+    "type": "article",
+    "publisher": "Bret Victor",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 5,
+    "recency": "2011-03-10",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "definition of explorable explanations",
+      "reactive documents",
+      "explorable examples"
+    ],
+    "notes": "Original essay 2011-03-10 with a 2024 postscript. Page has no licence or copyright statement.",
+    "status": "active"
+  },
+  {
+    "id": "src-ciechanowski-moon",
+    "title": "Moon (Bartosz Ciechanowski)",
+    "url": "https://ciechanow.ski/moon/",
+    "type": "blog",
+    "publisher": "Bartosz Ciechanowski",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 5,
+    "recency": "2024-12-17",
+    "as_of": "2026-11-27",
+    "best_for": ["progressive build-up", "multiple viewpoints", "draggable simulation scenes"],
+    "notes": "Page dated 2024-12-17. Footer licence not read; treated as all rights reserved. The fetch stopped at the first 100000 characters, so the end of the page was not read.",
+    "status": "active"
+  },
+  {
+    "id": "src-redblobgames-astar",
+    "title": "Introduction to the A* Algorithm",
+    "url": "https://www.redblobgames.com/pathfinding/a-star/introduction.html",
+    "type": "article",
+    "publisher": "Red Blob Games",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["step-through control", "drag start and goal", "side-by-side comparison"],
+    "notes": "Footer shows copyright 2026 Red Blob Games; no open licence stated on the page. Recency is as_of since the update date was not read.",
+    "status": "active"
+  },
+  {
+    "id": "src-seeing-theory",
+    "title": "Seeing Theory: a visual introduction to probability and statistics",
+    "url": "https://seeing-theory.brown.edu/",
+    "type": "course",
+    "publisher": "Brown University (Daniel Kunin and team)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["chapter structure from chance to regression", "interactive visualisations on D3"],
+    "notes": "Site is archived for reference; no licence stated. The fetch did not describe per-chapter technique. Recency is as_of.",
+    "status": "active"
+  },
+  {
+    "id": "src-setosa-explained-visually",
+    "title": "Explained Visually (index)",
+    "url": "https://setosa.io/ev/",
+    "type": "website",
+    "publisher": "Setosa (Victor Powell and Lewis Lehe)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["catalogue of live-parameter explainers", "inspired by Bret Victor"],
+    "notes": "Index of nine listed explainers. No licence statement. Recency is as_of.",
+    "status": "active"
+  },
+  {
+    "id": "src-setosa-markov-chains",
+    "title": "Markov Chains, explained visually",
+    "url": "https://setosa.io/ev/markov-chains/",
+    "type": "website",
+    "publisher": "Setosa (Victor Powell and Lewis Lehe)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "editable transition matrix",
+      "presets and random generate",
+      "input validation feedback"
+    ],
+    "notes": "Concept relevant to xT, which is a Markov model. No licence statement. Recency is as_of.",
+    "status": "active"
+  },
+  {
+    "id": "src-distill-about",
+    "title": "About Distill",
+    "url": "https://distill.pub/about/",
+    "type": "website",
+    "publisher": "Distill",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["case for reactive diagrams", "interactive playgrounds as research output"],
+    "notes": "Journal active from 2016 to 2021, now on indefinite hiatus. No licence line found on this page. Recency is as_of.",
+    "status": "active"
+  },
+  {
+    "id": "src-explorables-hub",
+    "title": "Explorable Explanations hub",
+    "url": "https://explorabl.es/",
+    "type": "website",
+    "publisher": "Explorable Explanations community",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["community movement", "directory of explorables"],
+    "notes": "Loose community hub; says the site is open source on GitHub but gives no content licence. Its featured list loads by script and was not visible to the fetch.",
+    "status": "active"
+  },
+  {
+    "id": "src-soccermatics-pitch-control",
+    "title": "Controlling Space (Soccermatics lesson 6)",
+    "url": "https://soccermatics.readthedocs.io/en/latest/lesson6/PitchControl.html",
+    "type": "course",
+    "publisher": "Soccermatics (David Sumpter and contributors)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "intuition then example then model",
+      "passing triangles then Voronoi",
+      "football concept teaching order"
+    ],
+    "notes": "Related seed source src-soccermatics covers the site root. No licence statement on the page; the Voronoi explanation text appeared cut off. Recency is as_of.",
+    "status": "active"
+  },
+  {
+    "id": "src-iib-futbolismo-legends",
+    "title": "Legends, One-Club Men and Journeymen (Fútbolismo), award showcase",
+    "url": "https://informationisbeautifulawards.com/showcase/4082",
+    "type": "website",
+    "publisher": "Information is Beautiful Awards",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 4,
+    "recency": "2019-01-01",
+    "as_of": "2026-11-27",
+    "best_for": ["guided tour plus free explorer", "football career visual essay"],
+    "notes": "Showcase page for a 2019 entry by Carlo Zapponi and Francesco Mistrulli. The showcase page is the audited source, not the project itself. Year is the award year.",
+    "status": "active"
+  },
+  {
+    "id": "src-iib-538-doppelgangers",
+    "title": "50 Years of World Cup Doppelgangers (FiveThirtyEight), award showcase",
+    "url": "https://informationisbeautifulawards.com/showcase/3434-50-years-of-world-cup-doppelgangers",
+    "type": "website",
+    "publisher": "Information is Beautiful Awards",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 3,
+    "recency": "2018-01-01",
+    "as_of": "2026-11-27",
+    "best_for": ["player fingerprint comparison", "search a player then see lookalikes"],
+    "notes": "Showcase page for a 2018 entry by Boice, Dottle and Wezerek. The page does not detail controls. Year is the award year.",
+    "status": "active"
+  },
+  {
+    "id": "src-asa-home",
+    "title": "American Soccer Analysis (home page)",
+    "url": "https://www.americansocceranalysis.com/",
+    "type": "website",
+    "publisher": "American Soccer Analysis",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Home page reachable; whether every tool is free was not stated"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["interactive tables and viz hub", "metric explainers for xG and xP"],
+    "notes": "Lists interactive tables, a viz hub and metric explainers. Pricing and data terms not stated on the page. Recency is as_of.",
+    "status": "active"
+  },
+  {
+    "id": "src-statsbomb-blog-archive",
+    "title": "StatsBomb blog archive (Hudl)",
+    "url": "https://blogarchive.statsbomb.com",
+    "type": "website",
+    "publisher": "Hudl (StatsBomb)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["metrics and explainers category", "static explainer articles"],
+    "notes": "Partial archive of posts from 2013 to 2025. Footer says copyright Hudl; no licence given. Category counts were not independently checked.",
+    "status": "active"
+  },
+  {
+    "id": "src-flourish-pl-visualisation",
+    "title": "8 ways to visualize football data (Flourish)",
+    "url": "https://flourish.studio/blog/visualize-premier-league-football-data/",
+    "type": "blog",
+    "publisher": "Flourish (Canva)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher or author copyright; inspiration only"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Technique notes in our own words only; no code, text or visuals reused"
+      }
+    },
+    "quality": 3,
+    "recency": "2023-08-10",
+    "as_of": "2026-11-27",
+    "best_for": ["draw-the-line guess then reveal", "bar chart races", "annotations for context"],
+    "notes": "Vendor marketing article for chart templates, so it shows common patterns rather than teaching quality. All rights reserved.",
+    "status": "active"
+  },
+  {
+    "id": "src-w3c-wcag22",
+    "title": "Web Content Accessibility Guidelines 2.2",
+    "url": "https://www.w3.org/TR/WCAG22/",
+    "type": "regulation",
+    "publisher": "W3C",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "W3C specification pages are open"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "W3C Document License allows verbatim copies with attribution"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "W3C Document License restricts modified copies; we only paraphrase"
+      }
+    },
+    "quality": 5,
+    "recency": "2024-12-12",
+    "as_of": "2026-11-27",
+    "best_for": ["colour not the only cue", "contrast ratios", "keyboard and motion rules"],
+    "notes": "W3C Recommendation 2024-12-12 under the W3C Document License. Only part of the page was read through the fetch tool; the dragging and target-size criteria were not read.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "use-of-colour",
+        "locator": "WCAG 2.2, criterion 1.4.1 Use of Color",
+        "fetched_at": "2026-11-27T21:47:33Z",
+        "sha256": "d00990df41ba9eed7025daccb39c9d322ff0b6116db204da0367e4496448eb15",
+        "paraphrase": "Colour must not be the only way to convey information, indicate an action, prompt a response or tell visual elements apart."
+      },
+      {
+        "id": "contrast-minimum",
+        "locator": "WCAG 2.2, criterion 1.4.3 Contrast (Minimum)",
+        "fetched_at": "2026-11-27T21:47:33Z",
+        "sha256": "a4584e1971c51bee342dde3c59cd99ee1be7ab017969bebc48a2e4bdb3338ab1",
+        "paraphrase": "Text needs a contrast ratio of at least 4.5 to 1 against its background; large text needs at least 3 to 1."
+      }
+    ]
+  },
+  {
+    "id": "src-okabe-ito-cud",
+    "title": "Color Universal Design (CUD): how to make figures friendly to colorblind people",
+    "url": "https://jfly.uni-koeln.de/color/",
+    "type": "article",
+    "publisher": "Masataka Okabe and Kei Ito (Jikei Medical School, Japan)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, no paywall on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "Page invites use in classes and seminars if Okabe and Ito are credited"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Credit Okabe and Ito"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["origin of the colour-blind-safe palette", "rules for combining palette colours"],
+    "notes": "Original CUD page by Okabe and Ito. The palette itself is a figure image, so the hex values are verified from a package that cites this page (see src-see-okabeito-colors). The page asks users to credit Okabe and Ito. Undated, so recency is as_of.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "vermilion-for-red",
+        "locator": "Section 'Set of colors that is unambiguous', bullet list",
+        "fetched_at": "2026-11-27T21:47:33Z",
+        "sha256": "953f40fa516ec0874947b7265b33baa79a3ffedcfd2b77d106f252f10e9f3262",
+        "paraphrase": "The palette uses vermilion in place of pure red because protanopes can still recognise it."
+      },
+      {
+        "id": "avoid-yellow-green",
+        "locator": "Section 'Set of colors that is unambiguous', bullet list",
+        "fetched_at": "2026-11-27T21:47:33Z",
+        "sha256": "e43b3348ec037fbc2c0fded9138289a432098753c307de84885c196448dbb041",
+        "paraphrase": "Colours between yellow and green are left out because they look the same as yellow and orange to colour-blind viewers."
+      }
+    ]
+  },
+  {
+    "id": "src-see-okabeito-colors",
+    "title": "okabeito_colors source (R package see, rdrr.io)",
+    "url": "https://rdrr.io/cran/see/src/R/scale_color_okabeito.R",
+    "type": "tool",
+    "publisher": "easystats see package (rdrr.io mirror)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public source listing on rdrr.io"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms of service not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Package licence not checked"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Package licence not checked"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["verified hex values of the Okabe-Ito palette"],
+    "notes": "R source that credits the CUD page and lists the hex codes. Used because the CUD page shows the palette only as an image. Package licence not read; used only as a factual list of colour codes.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "hex-seven",
+        "locator": "okabeito_colors_list definition, seven chromatic entries",
+        "fetched_at": "2026-11-27T21:47:33Z",
+        "sha256": "e037d7f741e564ab8d6ffaa24e97e995e0c8ca2702fe77087d6997c795a689c8",
+        "paraphrase": "Lists orange, sky blue, bluish green, yellow, blue, vermilion and reddish purple with their six-digit hex codes."
+      },
+      {
+        "id": "hex-black",
+        "locator": "okabeito_colors_list definition, black entry",
+        "fetched_at": "2026-11-27T21:47:33Z",
+        "sha256": "f9230f3f6625e5364a33de005c63cbee3f05d021d151bad4069836fa90b53a0d",
+        "paraphrase": "Black is the eighth colour, with hex code 000000."
+      }
+    ]
+  }
+]
