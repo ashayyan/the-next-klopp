@@ -740,9 +740,426 @@
         "src-pl-var-accuracy-2024"
       ],
       "status": "draft"
+    },
+    {
+      "id": "eighteen-zone-grid",
+      "title": "The 18-zone grid",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Six bands up the pitch by three across give 18 numbered zones, a shared map for naming where things happen.",
+      "prerequisites": ["pitch-thirds-and-zones"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-coaches-voice", "src-spielverlagerung"],
+      "status": "draft"
+    },
+    {
+      "id": "five-vertical-lanes",
+      "title": "The five lanes",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Five lanes run the length of the pitch: two wide, two half-spaces and the centre. Teams try to keep each lane filled.",
+      "prerequisites": ["pitch-thirds-and-zones"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-spielverlagerung", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "four-superiorities",
+      "title": "The four superiorities",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Beyond numbers: positional (better placed), qualitative (better player) and socio-affective (players who understand each other).",
+      "prerequisites": ["numerical-superiority", "half-spaces"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-spielverlagerung", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "half-spaces",
+      "title": "Half-spaces",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "The lanes between the wing and the centre, where a receiver can see the goal and both sides of the pitch at once.",
+      "prerequisites": ["five-vertical-lanes"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-spielverlagerung", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "lines-and-between-the-lines",
+      "title": "Between the lines",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "One pass can bypass a whole defensive line, and a player who receives in the gap between two lines is hard to mark.",
+      "prerequisites": ["formation-notation", "pitch-thirds-and-zones"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-pl-442-explained", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "numerical-superiority",
+      "title": "Numerical superiority",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "More players than the opponent in one area, like a back three against two strikers in build-up: a 3 v 2 overload.",
+      "prerequisites": ["pitch-thirds-and-zones", "formation-notation"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-coachesvoice-formations-explained", "src-pl-352-explained"],
+      "status": "draft"
+    },
+    {
+      "id": "pitch-thirds-and-zones",
+      "title": "Thirds and zones",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Split the pitch into defensive, middle and attacking thirds, then smaller zones, to say exactly where play happens.",
+      "prerequisites": ["pitch-areas"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-karun-expected-threat"],
+      "status": "draft"
+    },
+    {
+      "id": "width-and-depth",
+      "title": "Width and depth",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Wide players stretch a defence across the pitch and runs in behind stretch it in depth, opening gaps in between.",
+      "prerequisites": ["five-vertical-lanes", "lines-and-between-the-lines"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-coachesvoice-formations-explained", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "attacking-transition",
+      "title": "Attacking transition",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "The seconds after winning the ball, while the opponent is out of shape. Leicester's 2015/16 title was built on them.",
+      "prerequisites": ["four-phases-of-play"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-fourfourtwo-watch-like-analyst", "src-premier-league-leicester-2015-16"],
+      "status": "draft"
+    },
+    {
+      "id": "defensive-transition",
+      "title": "Defensive transition",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "The seconds after losing the ball: press at once to win it back, as Klopp's teams did, or drop back into shape.",
+      "prerequisites": ["four-phases-of-play"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": [
+        "src-premier-league-counter-pressing-explained",
+        "src-fourfourtwo-watch-like-analyst",
+        "src-bundesliga-klopp-dortmund-years"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "four-phases-of-play",
+      "title": "The four phases",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "Open play has four phases: in possession, out of possession and the two transitions. Name the phase before the shape.",
+      "prerequisites": ["formation-notation"],
+      "roles": [
+        "academy-director",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["match-reading", "playing-style-definition"],
+      "sources": ["src-fourfourtwo-watch-like-analyst", "src-frontiers-formation-id-survey"],
+      "status": "draft"
+    },
+    {
+      "id": "how-phases-connect",
+      "title": "How phases connect",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "Shape in one phase sets up the next: where players stand with the ball decides how well they defend when it is lost.",
+      "prerequisites": [
+        "in-possession-phase",
+        "out-of-possession-phase",
+        "attacking-transition",
+        "defensive-transition"
+      ],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition", "game-planning"],
+      "sources": [
+        "src-frontiers-formation-id-survey",
+        "src-theanalyst-shape-analysis",
+        "src-premier-league-counter-pressing-explained"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "in-possession-phase",
+      "title": "In possession",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "With the ball a team builds up, progresses and creates chances, often in a different shape from the one it defends in.",
+      "prerequisites": ["four-phases-of-play"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-theanalyst-stones-hybrid-role"],
+      "status": "draft"
+    },
+    {
+      "id": "out-of-possession-phase",
+      "title": "Out of possession",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "Without the ball a team defends in a low, mid or high block, choosing where to press and where to wait.",
+      "prerequisites": ["four-phases-of-play"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-skysports-conte-343-2017"],
+      "status": "draft"
+    },
+    {
+      "id": "set-piece-phase",
+      "title": "The set-piece phase",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "Corners, free kicks and throw-ins restart a stopped game, so clubs plan them as their own phase, with a specialist coach.",
+      "prerequisites": ["four-phases-of-play", "goal-kick-and-corner-kick"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-liverpool-set-piece-coach", "src-ifab-laws-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "answer-on-the-pitch-panel",
+      "title": "Answer on the pitch",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Answer by tapping the pitch panel, for example where the space is, instead of choosing from a list of words.",
+      "prerequisites": ["one-question-clips", "pitch-markings"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-mdpi-pct-team-sports-meta"],
+      "status": "draft"
+    },
+    {
+      "id": "one-question-clips",
+      "title": "One-question clips",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Watch Gym Level 1: a short reconstruction or local clip, with one question asked before it plays.",
+      "prerequisites": ["the-lesson-loop"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": [
+        "src-jarmac-pan-pretesting-video",
+        "src-mastermindsite-how-i-watch",
+        "src-acm-guo-mooc-video-engagement"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "reading-a-reconstruction",
+      "title": "Reading a reconstruction",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Clips are animated from open event or tracking data. Each names its dataset and league, so a non-PL clip never says PL.",
+      "prerequisites": ["one-question-clips"],
+      "roles": [
+        "data-engineer",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "tracking-data-handling"],
+      "sources": [
+        "src-wyscout-public-dataset",
+        "src-dfl-idsse-open-data",
+        "src-statsbomb-open-data"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "short-sessions-first",
+      "title": "Short sessions first",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Sessions stay short and end before attention drops. You choose when to watch longer; the evidence sets no fixed limit.",
+      "prerequisites": ["one-question-clips"],
+      "roles": [],
+      "competencies": [],
+      "sources": ["src-acm-guo-mooc-video-engagement", "src-aps-bradbury-attention-span"],
+      "status": "draft"
+    },
+    {
+      "id": "story-then-structure",
+      "title": "Story, then structure",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Watch first for the story of the match, then rewatch with pauses to study the tactics, with the commentary muted.",
+      "prerequisites": ["watch-one-phase"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading", "post-match-review"],
+      "sources": ["src-fourfourtwo-watch-like-analyst", "src-mastermindsite-how-i-watch"],
+      "status": "draft"
+    },
+    {
+      "id": "watch-in-blocks",
+      "title": "Watch in blocks",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Split a match into blocks with a different focus each. Quarter-hour blocks are a research habit, not an analyst rule.",
+      "prerequisites": ["watch-one-phase"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading", "live-match-analysis"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-jssm-linke-effective-playing-time"],
+      "status": "draft"
+    },
+    {
+      "id": "watch-one-phase",
+      "title": "Watch one phase",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Pick one phase, such as one team's build-up, and watch only that, one team at a time, to see its pattern.",
+      "prerequisites": ["watch-one-unit", "four-phases-of-play"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-fourfourtwo-watch-like-analyst"],
+      "status": "draft"
+    },
+    {
+      "id": "watch-one-player",
+      "title": "Watch one player",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Follow one player for a spell, such as a full-back who steps into midfield, instead of following the ball.",
+      "prerequisites": ["one-question-clips", "positions-overview"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "head-of-recruitment"
+      ],
+      "competencies": ["match-reading", "player-identification"],
+      "sources": ["src-breakingthelines-watch-space", "src-fourfourtwo-watch-like-analyst"],
+      "status": "draft"
+    },
+    {
+      "id": "watch-one-unit",
+      "title": "Watch one unit",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Follow a group, such as the centre-backs right after a turnover, or the striker while the ball is on the far wing.",
+      "prerequisites": ["watch-one-player", "formation-notation"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-breakingthelines-watch-space"],
+      "status": "draft"
     }
   ],
   "edges": [
+    {
+      "from": "attacking-and-defending-shapes",
+      "to": "how-phases-connect",
+      "kind": "related"
+    },
+    {
+      "from": "attacking-transition",
+      "to": "defensive-transition",
+      "kind": "contrasts"
+    },
+    {
+      "from": "half-spaces",
+      "to": "lines-and-between-the-lines",
+      "kind": "related"
+    },
+    {
+      "from": "in-possession-phase",
+      "to": "out-of-possession-phase",
+      "kind": "contrasts"
+    },
+    {
+      "from": "offside-position",
+      "to": "offside-offence",
+      "kind": "contrasts"
+    },
+    {
+      "from": "pitch-dimensions",
+      "to": "reading-a-reconstruction",
+      "kind": "related"
+    },
+    {
+      "from": "position-vs-role",
+      "to": "watch-one-player",
+      "kind": "related"
+    },
+    {
+      "from": "attacking-transition",
+      "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
     {
       "from": "back-four-formations",
       "to": "formation-vs-structure",
@@ -769,8 +1186,23 @@
       "kind": "prerequisite"
     },
     {
+      "from": "defensive-transition",
+      "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
       "from": "first-laws-and-passing-game",
       "to": "pyramid-to-wm",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "five-vertical-lanes",
+      "to": "half-spaces",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "five-vertical-lanes",
+      "to": "width-and-depth",
       "kind": "prerequisite"
     },
     {
@@ -785,7 +1217,27 @@
     },
     {
       "from": "formation-notation",
+      "to": "four-phases-of-play",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "lines-and-between-the-lines",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "numerical-superiority",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
       "to": "pyramid-to-wm",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "watch-one-unit",
       "kind": "prerequisite"
     },
     {
@@ -801,6 +1253,46 @@
     {
       "from": "fouls-and-free-kicks",
       "to": "penalty-kick",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "attacking-transition",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "defensive-transition",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "in-possession-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "out-of-possession-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "set-piece-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "watch-one-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "goal-kick-and-corner-kick",
+      "to": "set-piece-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "half-spaces",
+      "to": "four-superiorities",
       "kind": "prerequisite"
     },
     {
@@ -829,6 +1321,21 @@
       "kind": "prerequisite"
     },
     {
+      "from": "in-possession-phase",
+      "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "lines-and-between-the-lines",
+      "to": "width-and-depth",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "numerical-superiority",
+      "to": "four-superiorities",
+      "kind": "prerequisite"
+    },
+    {
       "from": "offside-position",
       "to": "offside-offence",
       "kind": "prerequisite"
@@ -844,6 +1351,31 @@
       "kind": "prerequisite"
     },
     {
+      "from": "one-question-clips",
+      "to": "answer-on-the-pitch-panel",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "one-question-clips",
+      "to": "reading-a-reconstruction",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "one-question-clips",
+      "to": "short-sessions-first",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "one-question-clips",
+      "to": "watch-one-player",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "out-of-possession-phase",
+      "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
       "from": "pitch-areas",
       "to": "goal-kick-and-corner-kick",
       "kind": "prerequisite"
@@ -854,8 +1386,18 @@
       "kind": "prerequisite"
     },
     {
+      "from": "pitch-areas",
+      "to": "pitch-thirds-and-zones",
+      "kind": "prerequisite"
+    },
+    {
       "from": "pitch-dimensions",
       "to": "pitch-markings",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "answer-on-the-pitch-panel",
       "kind": "prerequisite"
     },
     {
@@ -884,6 +1426,26 @@
       "kind": "prerequisite"
     },
     {
+      "from": "pitch-thirds-and-zones",
+      "to": "eighteen-zone-grid",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-thirds-and-zones",
+      "to": "five-vertical-lanes",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-thirds-and-zones",
+      "to": "lines-and-between-the-lines",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-thirds-and-zones",
+      "to": "numerical-superiority",
+      "kind": "prerequisite"
+    },
+    {
       "from": "positions-overview",
       "to": "formation-notation",
       "kind": "prerequisite"
@@ -896,6 +1458,11 @@
     {
       "from": "positions-overview",
       "to": "squad-numbers",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "positions-overview",
+      "to": "watch-one-player",
       "kind": "prerequisite"
     },
     {
@@ -964,6 +1531,11 @@
       "kind": "prerequisite"
     },
     {
+      "from": "the-lesson-loop",
+      "to": "one-question-clips",
+      "kind": "prerequisite"
+    },
+    {
       "from": "total-football-to-sacchi",
       "to": "possession-and-gegenpressing",
       "kind": "prerequisite"
@@ -971,6 +1543,26 @@
     {
       "from": "var-basics",
       "to": "semi-automated-offside",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-phase",
+      "to": "story-then-structure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-phase",
+      "to": "watch-in-blocks",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-player",
+      "to": "watch-one-unit",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-unit",
+      "to": "watch-one-phase",
       "kind": "prerequisite"
     }
   ]

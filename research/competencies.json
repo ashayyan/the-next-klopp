@@ -24,6 +24,8 @@
     "concepts": [
       "catenaccio",
       "first-laws-and-passing-game",
+      "four-phases-of-play",
+      "how-phases-connect",
       "hungary-and-the-4-2-4",
       "possession-and-gegenpressing",
       "premier-league-era-tactics",
@@ -54,25 +56,46 @@
       }
     ],
     "concepts": [
+      "answer-on-the-pitch-panel",
       "attacking-and-defending-shapes",
+      "attacking-transition",
       "back-four-formations",
       "back-three-formations",
       "ball-in-and-out-of-play",
       "cards-and-misconduct",
+      "defensive-transition",
+      "eighteen-zone-grid",
+      "five-vertical-lanes",
       "formation-notation",
       "formation-vs-structure",
       "fouls-and-free-kicks",
+      "four-phases-of-play",
+      "four-superiorities",
+      "half-spaces",
+      "in-possession-phase",
+      "lines-and-between-the-lines",
+      "numerical-superiority",
       "offside-offence",
       "offside-position",
+      "one-question-clips",
+      "out-of-possession-phase",
       "pitch-areas",
       "pitch-dimensions",
       "pitch-markings",
+      "pitch-thirds-and-zones",
       "position-vs-role",
       "positions-overview",
+      "reading-a-reconstruction",
       "referee-team",
       "scoring-a-goal",
       "semi-automated-offside",
-      "var-basics"
+      "story-then-structure",
+      "var-basics",
+      "watch-in-blocks",
+      "watch-one-phase",
+      "watch-one-player",
+      "watch-one-unit",
+      "width-and-depth"
     ]
   },
   {
@@ -99,9 +122,18 @@
     ],
     "concepts": [
       "attacking-and-defending-shapes",
+      "attacking-transition",
       "back-four-formations",
       "back-three-formations",
-      "coaching-roles"
+      "coaching-roles",
+      "defensive-transition",
+      "four-superiorities",
+      "how-phases-connect",
+      "in-possession-phase",
+      "lines-and-between-the-lines",
+      "numerical-superiority",
+      "out-of-possession-phase",
+      "width-and-depth"
     ]
   },
   {
@@ -155,6 +187,7 @@
       "goal-kick-and-corner-kick",
       "kick-off-and-dropped-ball",
       "penalty-kick",
+      "set-piece-phase",
       "throw-in"
     ]
   },
@@ -300,7 +333,7 @@
         "descriptor": "Designs the live-analysis workflow and trains analysts to deliver it."
       }
     ],
-    "concepts": ["analysis-roles"]
+    "concepts": ["analysis-roles", "watch-in-blocks"]
   },
   {
     "id": "post-match-review",
@@ -324,7 +357,7 @@
         "descriptor": "Owns the review cycle and turns its findings into actions for coaching and recruitment."
       }
     ],
-    "concepts": ["analysis-roles"]
+    "concepts": ["analysis-roles", "story-then-structure"]
   },
   {
     "id": "video-analysis-tooling",
@@ -492,7 +525,7 @@
         "descriptor": "Sets the club's methods for storing and using tracking data."
       }
     ],
-    "concepts": []
+    "concepts": ["reading-a-reconstruction"]
   },
   {
     "id": "dashboard-building",
@@ -564,7 +597,7 @@
         "descriptor": "Has a record of identifying talent and sets how the club searches for players."
       }
     ],
-    "concepts": ["position-vs-role", "recruitment-roles"]
+    "concepts": ["position-vs-role", "recruitment-roles", "watch-one-player"]
   },
   {
     "id": "scouting-reports",

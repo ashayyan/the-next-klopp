@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "thread_starters": {
+    "t00-start-here": "role-map",
+    "t04-watch-gym": "one-question-clips"
+  },
+  "milestone_1_tracks": ["t00-start-here", "t01-the-game", "t04-watch-gym"],
+  "max_starter_layer": 5
+}
