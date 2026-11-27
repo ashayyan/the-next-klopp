@@ -6,7 +6,17 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { DOMAIN_SLUGS } from "./lib/domains.ts";
+import {
+  BRIEF_DOMAINS,
+  COMPETENCY_DOMAINS,
+  DOMAIN_SLUGS,
+  partForTrack,
+  ROLE_IDS,
+  ROLE_IDS_SENIOR,
+  ROLE_IDS_SUPPORTING,
+  THREADS,
+  TRACKS,
+} from "./lib/domains.ts";
 import {
   canonicalUrl,
   compileContract,
@@ -91,5 +101,76 @@ describe("research completeness (only under npm run research:gate)", () => {
       }
     }
     expect(missing).toEqual([]);
+  });
+});
+
+describe("phase metadata", () => {
+  const brief = readFileSync(join(root, "NEW_PROJECT_INPUT.md"), "utf8");
+
+  it("has 29 kebab track ids t00 to t28 with a Part per brief section 7", () => {
+    expect(TRACKS).toHaveLength(29);
+    expect(new Set(TRACKS.map((t) => t.id)).size).toBe(29);
+    TRACKS.forEach((t, i) => {
+      expect(t.number).toBe(i);
+      expect(t.id).toMatch(new RegExp(`^t${String(i).padStart(2, "0")}-[a-z0-9]+(?:-[a-z0-9]+)*$`));
+      expect(t.id.length).toBeLessThanOrEqual(80);
+      expect(brief).toContain(`Track ${i} —`);
+    });
+    const part = (n: number) => partForTrack(TRACKS[n]?.id as string);
+    for (const n of [0, 1, 2, 3, 4]) expect(part(n)).toBe("A");
+    for (const n of [5, 6, 7, 8, 9, 10, 11, 12]) expect(part(n)).toBe("B");
+    for (const n of [13, 14]) expect(part(n)).toBe("C");
+    for (const n of [15, 16, 17, 18, 19, 20]) expect(part(n)).toBe("D");
+    for (const n of [21, 22, 23]) expect(part(n)).toBe("E");
+    for (const n of [24, 25, 26, 27]) expect(part(n)).toBe("F");
+    expect(part(28)).toBe("G");
+    expect(TRACKS.map((t) => t.part)).toEqual(TRACKS.map((t) => partForTrack(t.id)));
+    expect(() => partForTrack("t99-nope")).toThrow();
+  });
+
+  it("has the 15 canonical role ids (8 senior, 7 supporting) and 12 competency domains", () => {
+    expect(ROLE_IDS).toHaveLength(15);
+    expect(new Set(ROLE_IDS).size).toBe(15);
+    expect(ROLE_IDS_SENIOR).toHaveLength(8);
+    expect(ROLE_IDS_SUPPORTING).toHaveLength(7);
+    expect(COMPETENCY_DOMAINS).toHaveLength(12);
+  });
+
+  it("covers every numbered brief section 6.2 domain once, in brief order", () => {
+    const start = brief.indexOf("### 6.2 Research domains");
+    const end = brief.indexOf("### 6.3");
+    expect(start).toBeGreaterThan(-1);
+    expect(end).toBeGreaterThan(start);
+    const numbers = brief
+      .slice(start, end)
+      .split(/\r?\n/)
+      .map((l) => /^(\d+[a-z]?)\.\s/.exec(l)?.[1])
+      .filter((n): n is string => n !== undefined);
+    expect(numbers.length).toBeGreaterThan(25);
+    expect(BRIEF_DOMAINS.map((d) => d.number)).toEqual(numbers);
+  });
+
+  it("names a real track for every domain that is not fully Wave 1", () => {
+    const trackIds = new Set(TRACKS.map((t) => t.id));
+    for (const d of BRIEF_DOMAINS) {
+      for (const t of d.proposedTracks) expect(trackIds.has(t), `${d.number} ${t}`).toBe(true);
+      for (const s of d.wave1Slugs) expect(DOMAIN_SLUGS).toContain(s);
+      if (d.coverage !== "wave1") expect(d.proposedTracks.length, d.number).toBeGreaterThan(0);
+      if (d.coverage === "wave1") expect(d.wave1Slugs.length, d.number).toBeGreaterThan(0);
+      if (d.coverage === "deferred") expect(d.wave1Slugs).toEqual([]);
+    }
+    const covered = new Set(BRIEF_DOMAINS.flatMap((d) => d.wave1Slugs));
+    for (const slug of DOMAIN_SLUGS) expect(covered.has(slug), slug).toBe(true);
+  });
+
+  it("starts the four early threads on real tracks", () => {
+    expect(THREADS.map((t) => t.label)).toEqual([
+      "Role Map",
+      "Watch Gym",
+      "Write and Speak",
+      "Scouting I",
+    ]);
+    const trackIds = new Set(TRACKS.map((t) => t.id));
+    for (const t of THREADS) expect(trackIds.has(t.track)).toBe(true);
   });
 });

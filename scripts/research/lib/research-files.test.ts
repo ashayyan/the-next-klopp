@@ -268,3 +268,120 @@ describe("validateDomainFolder rejections", () => {
     expect(empty).toContain("files-exist");
   });
 });
+
+describe("slug-specific rules", () => {
+  const ALL_ROLES = [
+    "sporting-director",
+    "head-coach",
+    "head-of-performance-analysis",
+    "head-of-data-science",
+    "head-of-recruitment",
+    "academy-director",
+    "club-ceo",
+    "head-of-performance",
+    "assistant-coach",
+    "set-piece-coach",
+    "loan-manager",
+    "chief-scout",
+    "first-team-analyst",
+    "recruitment-analyst",
+    "data-engineer",
+  ];
+  const NOTHING = "- Nothing else is known yet.";
+
+  it("laws-of-the-game needs the edition and the effective date in findings", () => {
+    const noEdition = rulesFor((f) => {
+      f.findings = f.findings.replace("2026/27", "2025/26");
+    }, "laws-of-the-game");
+    expect(noEdition).toContain("slug-laws-edition");
+    const noDate = rulesFor((f) => {
+      f.findings = f.findings.replace("1 July 2026", "July");
+    }, "laws-of-the-game");
+    expect(noDate).toContain("slug-laws-edition");
+  });
+
+  it("learning-science-adhd needs an evidence grade on every paper and both evidence labels", () => {
+    const withPaper = (notes: string) => (f: SampleFiles) => {
+      const paper = sampleSource("src-review-retrieval", "https://example.org/review");
+      paper.type = "paper";
+      paper.notes = notes;
+      f.sources.push(paper);
+      f.findings = f.findings.replace(
+        NOTHING,
+        "- ADHD-specific evidence is thin. General learning science says retrieval helps [src-review-retrieval].",
+      );
+    };
+    const slug = "learning-science-adhd";
+    expect(
+      rulesFor(withPaper("systematic review, children with ADHD, evidence grade: moderate"), slug),
+    ).toEqual([]);
+    expect(rulesFor(withPaper("systematic review, children with ADHD"), slug)).toContain(
+      "slug-adhd-evidence-grade",
+    );
+    const noLabels = rulesFor((f) => {
+      withPaper("review, evidence grade: low")(f);
+      f.findings = f.findings.replace("ADHD-specific", "specific");
+    }, slug);
+    expect(noLabels).toContain("slug-adhd-sections");
+  });
+
+  it("role-definitions findings must mention every canonical role id", () => {
+    const all = (f: SampleFiles) => {
+      f.findings = f.findings.replace(NOTHING, `- Roles covered: ${ALL_ROLES.join(", ")}.`);
+    };
+    expect(rulesFor(all, "role-definitions")).toEqual([]);
+    const missing = rulesFor((f) => {
+      all(f);
+      f.findings = f.findings.replace("data-engineer", "engineer");
+    }, "role-definitions");
+    expect(missing).toContain("slug-roles-covered");
+  });
+
+  it("pl-data-sources needs FBref advanced stats removed and a coverage-matrix mention", () => {
+    const fbref = seed.find((s) => s.id === "src-fbref-advanced-stats") as SourceEntry;
+    const matrix = (f: SampleFiles) => {
+      f.findings = f.findings.replace(NOTHING, "- See coverage-matrix.json for the counts.");
+    };
+    const good = (f: SampleFiles) => {
+      matrix(f);
+      f.sources.push({ ...fbref });
+      f.findings = f.findings.replace(
+        "[src-sample-toy].\n\n## Must",
+        "[src-sample-toy][src-fbref-advanced-stats].\n\n## Must",
+      );
+    };
+    expect(rulesFor(good, "pl-data-sources")).toEqual([]);
+    expect(rulesFor(matrix, "pl-data-sources")).toContain("slug-pl-fbref-removed");
+    const noMatrix = rulesFor((f) => {
+      good(f);
+      f.findings = f.findings.replace("coverage-matrix.json", "the matrix");
+    }, "pl-data-sources");
+    expect(noMatrix).toContain("slug-pl-coverage-matrix");
+  });
+
+  it("interactive-explainers needs src-okabe-ito-cud with an excerpt", () => {
+    const okabe = (withExcerpt: boolean) => (f: SampleFiles) => {
+      const s = sampleSource("src-okabe-ito-cud", "https://example.org/okabe-ito");
+      if (withExcerpt) {
+        s.excerpts = [
+          {
+            id: "palette-hex",
+            locator: "table 1",
+            fetched_at: "2026-11-27T10:00:00Z",
+            sha256: "b".repeat(64),
+            paraphrase: "Seven colour-blind-safe hues.",
+          },
+        ];
+      }
+      f.sources.push(s);
+      f.findings = f.findings.replace(
+        "[src-sample-toy].\n\n## Must",
+        "[src-sample-toy][src-okabe-ito-cud].\n\n## Must",
+      );
+    };
+    const slug = "interactive-explainers";
+    expect(rulesFor(okabe(true), slug)).toEqual([]);
+    expect(rulesFor(okabe(false), slug)).toContain("slug-explainers-okabe-ito");
+    expect(rulesFor(() => {}, slug)).toContain("slug-explainers-okabe-ito");
+  });
+});
