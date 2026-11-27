@@ -24,6 +24,7 @@
     "concepts": [
       "build-up-structures",
       "catenaccio",
+      "club-football-philosophy",
       "counter-pressing",
       "first-laws-and-passing-game",
       "four-phases-of-play",
@@ -35,6 +36,7 @@
       "premier-league-era-tactics",
       "pressing-schemes",
       "pyramid-to-wm",
+      "squad-mapping-and-profiles",
       "total-football-to-sacchi"
     ]
   },
@@ -150,6 +152,7 @@
       "pressing-traps-and-triggers",
       "progression-and-overloads",
       "rest-defence",
+      "simulator-football-seats",
       "width-and-depth"
     ]
   },
@@ -179,6 +182,7 @@
       "cards-and-misconduct",
       "in-game-management",
       "players-and-substitutions",
+      "simulator-football-seats",
       "var-basics"
     ]
   },
@@ -300,7 +304,11 @@
         "descriptor": "Sets the development-plan method for a squad or an academy and coaches staff in using it."
       }
     ],
-    "concepts": ["first-team-player-development", "post-match-analysis"]
+    "concepts": [
+      "first-team-player-development",
+      "long-term-player-development",
+      "post-match-analysis"
+    ]
   },
   {
     "id": "seasonal-planning",
@@ -358,7 +366,8 @@
       "pressing-traps-and-triggers",
       "report-templates",
       "set-piece-coach-role",
-      "set-piece-marking"
+      "set-piece-marking",
+      "simulator-football-seats"
     ]
   },
   {
@@ -462,7 +471,7 @@
         "descriptor": "Runs the monitoring programme for all loanees and sets the reporting standard."
       }
     ],
-    "concepts": []
+    "concepts": ["academy-pathway-and-value"]
   },
   {
     "id": "statistical-modelling",
@@ -486,7 +495,20 @@
         "descriptor": "Leads the club's modelling work and decides which approach fits each question."
       }
     ],
-    "concepts": ["data-roles"]
+    "concepts": [
+      "club-models",
+      "data-research-agenda",
+      "data-roles",
+      "expected-goals",
+      "ml-toolkit-for-football",
+      "per-90-and-possession-adjustment",
+      "pitch-control",
+      "possession-value-models",
+      "python-lab-models",
+      "simulator-football-seats",
+      "stat-stability-and-comparison",
+      "tracking-ai-and-vision"
+    ]
   },
   {
     "id": "model-deployment",
@@ -510,7 +532,13 @@
         "descriptor": "Decides which models reach production and sets how their accuracy is judged."
       }
     ],
-    "concepts": []
+    "concepts": [
+      "club-models",
+      "data-infrastructure",
+      "honest-model-evaluation",
+      "possession-value-models",
+      "python-lab-models"
+    ]
   },
   {
     "id": "uncertainty-quantification",
@@ -534,7 +562,13 @@
         "descriptor": "Sets how the department states uncertainty and coaches staff to communicate it."
       }
     ],
-    "concepts": []
+    "concepts": [
+      "data-quality-traps",
+      "honest-model-evaluation",
+      "misleading-stats",
+      "stakeholders-and-adoption",
+      "stat-stability-and-comparison"
+    ]
   },
   {
     "id": "data-pipeline-ownership",
@@ -558,7 +592,14 @@
         "descriptor": "Owns the club data platform, its design and its quality standards."
       }
     ],
-    "concepts": ["data-roles"]
+    "concepts": [
+      "data-infrastructure",
+      "data-quality-traps",
+      "data-roles",
+      "event-vs-tracking-data",
+      "open-data-and-licences",
+      "python-lab-tracking"
+    ]
   },
   {
     "id": "tracking-data-handling",
@@ -582,7 +623,14 @@
         "descriptor": "Sets the club's methods for storing and using tracking data."
       }
     ],
-    "concepts": ["reading-a-reconstruction"]
+    "concepts": [
+      "event-vs-tracking-data",
+      "pitch-control",
+      "pitch-coordinates-and-kloppy",
+      "python-lab-tracking",
+      "reading-a-reconstruction",
+      "tracking-ai-and-vision"
+    ]
   },
   {
     "id": "dashboard-building",
@@ -606,7 +654,12 @@
         "descriptor": "Designs the club's self-service platform and its standards for clear charts."
       }
     ],
-    "concepts": ["data-roles"]
+    "concepts": [
+      "data-infrastructure",
+      "data-roles",
+      "per-90-and-possession-adjustment",
+      "python-lab-first-plots"
+    ]
   },
   {
     "id": "football-data-programming",
@@ -630,7 +683,12 @@
         "descriptor": "Reviews others' code and sets the team's coding standards."
       }
     ],
-    "concepts": []
+    "concepts": [
+      "pitch-coordinates-and-kloppy",
+      "python-lab-first-plots",
+      "python-lab-models",
+      "python-lab-tracking"
+    ]
   },
   {
     "id": "player-identification",
@@ -656,7 +714,9 @@
     ],
     "concepts": [
       "attacking-roles",
+      "data-led-shortlists",
       "defensive-roles",
+      "kpis-by-position",
       "live-vs-video-scouting",
       "midfield-roles",
       "one-player-ninety-minutes",
@@ -694,6 +754,7 @@
       "grading-and-scouting-reports",
       "one-player-ninety-minutes",
       "recruitment-roles",
+      "recruitment-workflow",
       "report-templates"
     ]
   },
@@ -719,7 +780,14 @@
         "descriptor": "Decides how data and scouting combine in the club's recruitment process."
       }
     ],
-    "concepts": ["role-signatures-in-data"]
+    "concepts": [
+      "club-models",
+      "data-led-shortlists",
+      "kpis-by-position",
+      "misleading-stats",
+      "player-valuation",
+      "role-signatures-in-data"
+    ]
   },
   {
     "id": "squad-planning",
@@ -743,7 +811,14 @@
         "descriptor": "Owns squad renewal and aligns recruitment, academy and the head coach with the plan."
       }
     ],
-    "concepts": ["positions-overview", "squad-numbers"]
+    "concepts": [
+      "multi-year-squad-plan",
+      "positions-overview",
+      "premier-league-rules",
+      "simulator-club-seats",
+      "squad-mapping-and-profiles",
+      "squad-numbers"
+    ]
   },
   {
     "id": "scouting-network-management",
@@ -767,7 +842,7 @@
         "descriptor": "Builds the scouting, analytics and video structure that recruitment depends on."
       }
     ],
-    "concepts": ["live-vs-video-scouting"]
+    "concepts": ["leading-recruitment", "live-vs-video-scouting"]
   },
   {
     "id": "character-and-fit-assessment",
@@ -791,7 +866,7 @@
         "descriptor": "Sets how the club judges character and fit and makes it part of every recommendation."
       }
     ],
-    "concepts": ["grading-and-scouting-reports", "the-scouts-eye"]
+    "concepts": ["grading-and-scouting-reports", "recruitment-workflow", "the-scouts-eye"]
   },
   {
     "id": "transfer-negotiation",
@@ -815,7 +890,12 @@
         "descriptor": "Leads the club's major negotiations and coaches staff in negotiating."
       }
     ],
-    "concepts": []
+    "concepts": [
+      "how-a-transfer-happens",
+      "multi-year-squad-plan",
+      "player-valuation",
+      "transfer-accounting"
+    ]
   },
   {
     "id": "contract-structuring",
@@ -839,7 +919,7 @@
         "descriptor": "Sets the club's contract policy and approves the structures used."
       }
     ],
-    "concepts": []
+    "concepts": ["contracts-wages-and-agents", "hiring-the-head-coach", "multi-year-squad-plan"]
   },
   {
     "id": "loan-placement",
@@ -863,7 +943,7 @@
         "descriptor": "Leads the club's loan strategy, placements and loan contracts."
       }
     ],
-    "concepts": ["recruitment-roles"]
+    "concepts": ["academy-pathway-and-value", "recruitment-roles"]
   },
   {
     "id": "agent-and-club-relationships",
@@ -887,7 +967,7 @@
         "descriptor": "Builds the club's network of agents, clubs and loan partners."
       }
     ],
-    "concepts": []
+    "concepts": ["contracts-wages-and-agents", "how-a-transfer-happens", "leading-recruitment"]
   },
   {
     "id": "club-budgeting",
@@ -911,7 +991,14 @@
         "descriptor": "Owns the club's finances and decides budget priorities with the owners."
       }
     ],
-    "concepts": ["club-leadership-roles"]
+    "concepts": [
+      "club-leadership-roles",
+      "club-revenue-streams",
+      "premier-league-money",
+      "reading-club-accounts",
+      "simulator-club-seats",
+      "transfer-accounting"
+    ]
   },
   {
     "id": "commercial-strategy",
@@ -935,7 +1022,7 @@
         "descriptor": "Leads the club's commercial strategy and balances it with sporting ambition."
       }
     ],
-    "concepts": []
+    "concepts": ["club-revenue-streams", "premier-league-money"]
   },
   {
     "id": "sporting-strategy",
@@ -959,7 +1046,15 @@
         "descriptor": "Sets the club's sporting strategy and keeps it stable through changes of coach."
       }
     ],
-    "concepts": ["club-leadership-roles"]
+    "concepts": [
+      "club-football-philosophy",
+      "club-leadership-roles",
+      "decisions-and-stakeholders",
+      "multi-club-ownership",
+      "saudi-pro-league-context",
+      "simulator-club-seats",
+      "sporting-director-job"
+    ]
   },
   {
     "id": "staff-appointment",
@@ -983,7 +1078,12 @@
         "descriptor": "Appoints the head coach and senior staff and plans their succession."
       }
     ],
-    "concepts": ["coach-education-pathways", "running-the-analysis-department"]
+    "concepts": [
+      "building-the-data-team",
+      "coach-education-pathways",
+      "hiring-the-head-coach",
+      "running-the-analysis-department"
+    ]
   },
   {
     "id": "department-leadership",
@@ -1007,7 +1107,15 @@
         "descriptor": "Builds and leads a department and develops its staff into leaders."
       }
     ],
-    "concepts": ["head-coach-job", "running-the-analysis-department"]
+    "concepts": [
+      "building-the-data-team",
+      "club-governance-and-leadership",
+      "data-research-agenda",
+      "head-coach-job",
+      "head-of-data-science-job",
+      "leading-recruitment",
+      "running-the-analysis-department"
+    ]
   },
   {
     "id": "football-department-design",
@@ -1031,7 +1139,7 @@
         "descriptor": "Sets the club structure and who owns each decision across football and business."
       }
     ],
-    "concepts": ["role-map"]
+    "concepts": ["role-map", "sporting-director-job"]
   },
   {
     "id": "high-performance-culture",
@@ -1081,9 +1189,13 @@
     ],
     "concepts": [
       "analysis-cycle",
+      "decisions-and-stakeholders",
+      "head-of-data-science-job",
       "match-note-basics",
       "output-rubrics",
+      "recruitment-workflow",
       "spoken-briefings",
+      "stakeholders-and-adoption",
       "visual-evidence"
     ]
   },
@@ -1109,7 +1221,11 @@
         "descriptor": "Acts as the link between the head coach and all specialist departments."
       }
     ],
-    "concepts": ["injury-risk-and-return", "running-the-analysis-department"]
+    "concepts": [
+      "injury-risk-and-return",
+      "running-the-analysis-department",
+      "stakeholders-and-adoption"
+    ]
   },
   {
     "id": "board-and-owner-relations",
@@ -1133,7 +1249,13 @@
         "descriptor": "Represents football at board level and keeps owner support through difficult periods."
       }
     ],
-    "concepts": ["club-leadership-roles", "head-coach-job"]
+    "concepts": [
+      "club-governance-and-leadership",
+      "club-leadership-roles",
+      "decisions-and-stakeholders",
+      "head-coach-job",
+      "reading-club-accounts"
+    ]
   },
   {
     "id": "player-communication",
@@ -1259,7 +1381,17 @@
         "descriptor": "Owns compliance for a programme and sets the controls that keep it."
       }
     ],
-    "concepts": ["pitch-dimensions"]
+    "concepts": [
+      "club-governance-and-leadership",
+      "eppp-and-academy-structure",
+      "multi-club-ownership",
+      "open-data-and-licences",
+      "pitch-dimensions",
+      "premier-league-money",
+      "premier-league-rules",
+      "saudi-pro-league-context",
+      "transfer-accounting"
+    ]
   },
   {
     "id": "player-welfare-and-safeguarding",
@@ -1283,7 +1415,7 @@
         "descriptor": "Owns welfare and safeguarding standards for a programme."
       }
     ],
-    "concepts": []
+    "concepts": ["long-term-player-development"]
   },
   {
     "id": "player-pathway-planning",
@@ -1307,7 +1439,13 @@
         "descriptor": "Owns the club's pathway and aligns academy and first team in one style."
       }
     ],
-    "concepts": ["academy-roles", "first-team-player-development", "relative-age-effect"]
+    "concepts": [
+      "academy-pathway-and-value",
+      "academy-roles",
+      "first-team-player-development",
+      "relative-age-effect",
+      "simulator-club-seats"
+    ]
   },
   {
     "id": "academy-programme-management",
@@ -1331,6 +1469,6 @@
         "descriptor": "Runs a sustainable academy focused on developing young talent."
       }
     ],
-    "concepts": ["academy-roles"]
+    "concepts": ["academy-roles", "eppp-and-academy-structure"]
   }
 ]

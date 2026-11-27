@@ -1865,6 +1865,386 @@
       "status": "draft"
     },
     {
+      "id": "data-quality-traps",
+      "title": "Data quality traps",
+      "track": "t15-football-data",
+      "part": "D",
+      "summary": "Provider definitions that differ, fixed-size frames that bend real distances, and sources that vanish: check before you trust.",
+      "prerequisites": ["pitch-coordinates-and-kloppy"],
+      "roles": ["data-engineer", "head-of-data-science"],
+      "competencies": ["data-pipeline-ownership", "uncertainty-quantification"],
+      "sources": [
+        "src-mplsoccer-standardize-docs",
+        "src-fot-last-row",
+        "src-awfulannouncing-fbref-removal"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "event-vs-tracking-data",
+      "title": "Event and tracking data",
+      "track": "t15-football-data",
+      "part": "D",
+      "summary": "Event data logs each on-ball action; tracking logs every player many times a second. Open PL tracking is almost absent.",
+      "prerequisites": ["reading-a-reconstruction", "data-roles"],
+      "roles": ["data-engineer", "head-of-data-science"],
+      "competencies": ["tracking-data-handling", "data-pipeline-ownership"],
+      "sources": [
+        "src-statsbomb-open-events-spec-v4",
+        "src-statsbomb-open-data",
+        "src-skillcorner-opendata",
+        "src-fot-last-row"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "open-data-and-licences",
+      "title": "Open data and licences",
+      "track": "t15-football-data",
+      "part": "D",
+      "summary": "StatsBomb, Wyscout, DFL, SkillCorner, Metrica: what each holds for the PL, and what its licence lets you share.",
+      "prerequisites": ["event-vs-tracking-data"],
+      "roles": ["academy-director", "data-engineer"],
+      "competencies": ["data-pipeline-ownership", "regulatory-compliance"],
+      "sources": [
+        "src-statsbomb-open-data",
+        "src-wyscout-public-dataset",
+        "src-dfl-idsse-open-data",
+        "src-creativecommons-by-4-0"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "pitch-coordinates-and-kloppy",
+      "title": "Coordinates and kloppy",
+      "track": "t15-football-data",
+      "part": "D",
+      "summary": "Providers draw the pitch differently (StatsBomb 120 x 80, Wyscout 0-100); kloppy converts them to one standard.",
+      "prerequisites": ["event-vs-tracking-data", "pitch-dimensions"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["football-data-programming", "tracking-data-handling"],
+      "sources": [
+        "src-kloppy-coordinates-docs",
+        "src-statsbomb-open-data-spec",
+        "src-wyscout-data-glossary-pitch-coordinates",
+        "src-mplsoccer-standardize-docs"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "expected-goals",
+      "title": "Expected goals (xG)",
+      "track": "t16-metrics-and-models",
+      "part": "D",
+      "summary": "The chance a shot becomes a goal, from where and how it was taken. Built here on open StatsBomb PL 2015/16 events.",
+      "prerequisites": ["scoring-a-goal", "event-vs-tracking-data"],
+      "roles": ["head-of-data-science", "recruitment-analyst"],
+      "competencies": ["statistical-modelling"],
+      "sources": [
+        "src-theanalyst-what-is-xg",
+        "src-thesefootballtimes-roots-of-xg",
+        "src-statsbomb-open-data"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "per-90-and-possession-adjustment",
+      "title": "Per 90 and possession",
+      "track": "t16-metrics-and-models",
+      "part": "D",
+      "summary": "Scale counts to 90 minutes and adjust defending for how much the ball the team had, so players compare fairly.",
+      "prerequisites": ["event-vs-tracking-data"],
+      "roles": ["head-of-data-science", "head-of-performance-analysis", "recruitment-analyst"],
+      "competencies": ["statistical-modelling", "dashboard-building"],
+      "sources": ["src-statsbomb-blog-archive", "src-book-the-numbers-game"],
+      "status": "draft"
+    },
+    {
+      "id": "pitch-control",
+      "title": "Pitch control",
+      "track": "t16-metrics-and-models",
+      "part": "D",
+      "summary": "Which team would reach each point of the pitch first. It needs tracking data, so lessons use labelled non-PL open tracking.",
+      "prerequisites": ["event-vs-tracking-data", "numerical-superiority"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["tracking-data-handling", "statistical-modelling"],
+      "sources": [
+        "src-soccermatics-pitch-control",
+        "src-dfl-idsse-open-data",
+        "src-friends-of-tracking"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "possession-value-models",
+      "title": "Possession value models",
+      "track": "t16-metrics-and-models",
+      "part": "D",
+      "summary": "xT, VAEP, OBV and EPV value every action by how much it raises the chance of scoring soon after.",
+      "prerequisites": ["expected-goals", "pitch-thirds-and-zones"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["statistical-modelling", "model-deployment"],
+      "sources": ["src-karun-expected-threat", "src-socceraction-docs"],
+      "status": "draft"
+    },
+    {
+      "id": "kpis-by-position",
+      "title": "KPIs by position",
+      "track": "t17-numbers-by-role",
+      "part": "D",
+      "summary": "The numbers that matter for each role, from a ball-playing centre-back to a pressing No 9, and good, elite and worrying values.",
+      "prerequisites": ["per-90-and-possession-adjustment", "defensive-roles"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "recruitment-analyst"
+      ],
+      "competencies": ["data-led-target-ranking", "player-identification"],
+      "sources": ["src-statsbomb-blog-archive", "src-asa-home"],
+      "status": "draft"
+    },
+    {
+      "id": "misleading-stats",
+      "title": "Misleading stats",
+      "track": "t17-numbers-by-role",
+      "part": "D",
+      "summary": "Tackles inflated by low possession, safe-pass completion, assists without xA, distance-covered myths and cherry-picked radars.",
+      "prerequisites": ["kpis-by-position", "expected-goals"],
+      "roles": ["head-of-data-science", "head-of-recruitment", "recruitment-analyst"],
+      "competencies": ["uncertainty-quantification", "data-led-target-ranking"],
+      "sources": [
+        "src-breakingthelines-watch-space",
+        "src-theanalyst-what-is-xg",
+        "src-book-the-numbers-game"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "stat-stability-and-comparison",
+      "title": "Stability and fair comparison",
+      "track": "t17-numbers-by-role",
+      "part": "D",
+      "summary": "Which stats repeat season to season, how many minutes you need, and comparing two players in the same role and context.",
+      "prerequisites": ["misleading-stats"],
+      "roles": ["head-of-data-science", "recruitment-analyst"],
+      "competencies": ["uncertainty-quantification", "statistical-modelling"],
+      "sources": ["src-seeing-theory", "src-book-the-numbers-game"],
+      "status": "draft"
+    },
+    {
+      "id": "python-lab-first-plots",
+      "title": "Shot maps and networks",
+      "track": "t18-python-lab",
+      "part": "D",
+      "summary": "In-browser Python on open StatsBomb events: load a match, draw a shot map, a pass network and a radar.",
+      "prerequisites": ["pitch-coordinates-and-kloppy"],
+      "roles": [
+        "data-engineer",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["football-data-programming", "dashboard-building"],
+      "sources": ["src-statsbomb-open-data", "src-mplsoccer-docs", "src-statsbombpy"],
+      "status": "draft"
+    },
+    {
+      "id": "python-lab-models",
+      "title": "Build xG and xT",
+      "track": "t18-python-lab",
+      "part": "D",
+      "summary": "Fit a simple xG model and compute expected threat step by step, then compare your numbers with the published ones.",
+      "prerequisites": ["python-lab-first-plots", "possession-value-models"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["football-data-programming", "statistical-modelling", "model-deployment"],
+      "sources": ["src-karun-expected-threat", "src-soccermatics", "src-socceraction-docs"],
+      "status": "draft"
+    },
+    {
+      "id": "python-lab-tracking",
+      "title": "Tracking data in Python",
+      "track": "t18-python-lab",
+      "part": "D",
+      "summary": "Load open DFL Bundesliga tracking with kloppy, labelled as Bundesliga, and compute pitch control frame by frame.",
+      "prerequisites": ["python-lab-first-plots", "pitch-control"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": [
+        "tracking-data-handling",
+        "football-data-programming",
+        "data-pipeline-ownership"
+      ],
+      "sources": ["src-dfl-idsse-open-data", "src-kloppy-docs", "src-databallpy"],
+      "status": "draft"
+    },
+    {
+      "id": "club-models",
+      "title": "Models clubs use",
+      "track": "t19-football-ai-ml",
+      "part": "D",
+      "summary": "Player projection and ageing curves, league-strength translation, valuation, similarity search and match-outcome models.",
+      "prerequisites": ["ml-toolkit-for-football"],
+      "roles": [
+        "data-engineer",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "recruitment-analyst"
+      ],
+      "competencies": ["statistical-modelling", "data-led-target-ranking", "model-deployment"],
+      "sources": [
+        "src-liverpool-lead-data-scientist",
+        "src-cies-football-observatory",
+        "src-mit-sloan-research-papers"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "honest-model-evaluation",
+      "title": "Evaluating models honestly",
+      "track": "t19-football-ai-ml",
+      "part": "D",
+      "summary": "Validation, leakage, calibration and uncertainty, the risks of LLM-drafted reports, and whether a coach can use the model.",
+      "prerequisites": ["club-models"],
+      "roles": ["data-engineer", "head-of-data-science"],
+      "competencies": ["uncertainty-quantification", "model-deployment"],
+      "sources": ["src-seeing-theory", "src-liverpool-lead-data-scientist"],
+      "status": "draft"
+    },
+    {
+      "id": "ml-toolkit-for-football",
+      "title": "The ML toolkit",
+      "track": "t19-football-ai-ml",
+      "part": "D",
+      "summary": "Classification, regression and clustering taught with football: predicting a shot's xG, grouping players into roles.",
+      "prerequisites": ["expected-goals"],
+      "roles": ["head-of-data-science", "recruitment-analyst"],
+      "competencies": ["statistical-modelling"],
+      "sources": ["src-soccermatics", "src-friends-of-tracking"],
+      "status": "draft"
+    },
+    {
+      "id": "tracking-ai-and-vision",
+      "title": "Tracking AI and vision",
+      "track": "t19-football-ai-ml",
+      "part": "D",
+      "summary": "How broadcast tracking finds players and maps them to the pitch, and deep learning on tracking data, explained visually.",
+      "prerequisites": ["ml-toolkit-for-football", "pitch-control"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["tracking-data-handling", "statistical-modelling"],
+      "sources": [
+        "src-arxiv-crang-broadcast-tracking",
+        "src-skillcorner-opendata",
+        "src-unravelsports"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "building-the-data-team",
+      "title": "Building the data team",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "Hiring data scientists, engineers and analysts, the team structure, and balancing research with weekly operations.",
+      "prerequisites": ["head-of-data-science-job"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "sporting-director"
+      ],
+      "competencies": ["staff-appointment", "department-leadership"],
+      "sources": ["src-liverpool-lead-data-scientist", "src-liverpool-data-engineer"],
+      "status": "draft"
+    },
+    {
+      "id": "data-infrastructure",
+      "title": "Data infrastructure",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "Buying data, building the warehouse, pipelines and internal dashboards, and the build-versus-buy choice.",
+      "prerequisites": ["head-of-data-science-job", "data-quality-traps"],
+      "roles": [
+        "data-engineer",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["data-pipeline-ownership", "model-deployment", "dashboard-building"],
+      "sources": ["src-liverpool-data-engineer", "src-statsbomb-open-data"],
+      "status": "draft"
+    },
+    {
+      "id": "data-research-agenda",
+      "title": "The research agenda",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "Choosing problems that matter, quick wins versus long projects, and measuring what the data department adds.",
+      "prerequisites": ["building-the-data-team"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["statistical-modelling", "department-leadership"],
+      "sources": ["src-liverpool-lead-data-scientist", "src-mit-sloan-research-papers"],
+      "status": "draft"
+    },
+    {
+      "id": "head-of-data-science-job",
+      "title": "Head of data science",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "What the head of data science does, who they report to, and how the job differs at a giant, a mid-table and a selling club.",
+      "prerequisites": ["data-roles", "open-data-and-licences"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["department-leadership", "stakeholder-presentation"],
+      "sources": [
+        "src-liverpool-lead-data-scientist",
+        "src-newcastle-lead-recruitment-data-analyst"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "stakeholders-and-adoption",
+      "title": "Stakeholders and adoption",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "Turning models into decisions the coach, sporting director and recruiters trust, and presenting uncertainty plainly.",
+      "prerequisites": ["head-of-data-science-job", "honest-model-evaluation"],
+      "roles": [
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": [
+        "cross-discipline-translation",
+        "stakeholder-presentation",
+        "uncertainty-quantification"
+      ],
+      "sources": [
+        "src-newcastle-lead-recruitment-data-analyst",
+        "src-liverpool-lead-data-scientist"
+      ],
+      "status": "draft"
+    },
+    {
       "id": "grading-and-scouting-reports",
       "title": "Grading and scouting reports",
       "track": "t21-scouting-1",
@@ -1945,6 +2325,479 @@
         "src-liverpool-women-head-of-recruitment"
       ],
       "status": "draft"
+    },
+    {
+      "id": "data-led-shortlists",
+      "title": "Data-led shortlists",
+      "track": "t22-scouting-2",
+      "part": "E",
+      "summary": "Narrowing the market with data: similarity search, league-strength adjustment and age curves. Whether data leads is contested.",
+      "prerequisites": ["squad-mapping-and-profiles", "kpis-by-position"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "recruitment-analyst"
+      ],
+      "competencies": ["data-led-target-ranking", "player-identification"],
+      "sources": [
+        "src-newcastle-lead-recruitment-data-analyst",
+        "src-hudl-marshall-head-of-recruitment",
+        "src-cies-football-observatory"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "leading-recruitment",
+      "title": "Leading the recruitment department",
+      "track": "t22-scouting-2",
+      "part": "E",
+      "summary": "Running a scout network by market, scout KPIs and report quality, the budget, the window calendar and succession plans.",
+      "prerequisites": ["recruitment-workflow", "recruitment-roles"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "chief-scout",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": [
+        "scouting-network-management",
+        "department-leadership",
+        "agent-and-club-relationships"
+      ],
+      "sources": [
+        "src-liverpool-women-head-of-recruitment",
+        "src-hudl-marshall-head-of-recruitment"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "recruitment-workflow",
+      "title": "The recruitment workflow",
+      "track": "t22-scouting-2",
+      "part": "E",
+      "summary": "Data filter, video, live scouting, references and character, medical, then negotiation, and defending a target in the meeting.",
+      "prerequisites": [
+        "data-led-shortlists",
+        "grading-and-scouting-reports",
+        "live-vs-video-scouting"
+      ],
+      "roles": [
+        "chief-scout",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "recruitment-analyst"
+      ],
+      "competencies": [
+        "character-and-fit-assessment",
+        "scouting-reports",
+        "stakeholder-presentation"
+      ],
+      "sources": [
+        "src-hudl-marshall-head-of-recruitment",
+        "src-football365-who-controls-transfers"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "squad-mapping-and-profiles",
+      "title": "Squad mapping and profiles",
+      "track": "t22-scouting-2",
+      "part": "E",
+      "summary": "Map the squad by position, age and contract, and write role profiles that match the club's playing style.",
+      "prerequisites": ["the-scouts-eye", "midfield-roles"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["squad-planning", "playing-style-definition"],
+      "sources": [
+        "src-liverpool-women-head-of-recruitment",
+        "src-hudl-marshall-head-of-recruitment"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "contracts-wages-and-agents",
+      "title": "Contracts, wages and agents",
+      "track": "t23-transfers-and-valuation",
+      "part": "E",
+      "summary": "Wage structures, bonuses and clauses, renewals and expiry risk, and agents under the FIFA Football Agent Regulations.",
+      "prerequisites": ["how-a-transfer-happens"],
+      "roles": ["head-of-recruitment", "loan-manager", "sporting-director"],
+      "competencies": ["contract-structuring", "agent-and-club-relationships"],
+      "sources": ["src-fifa-football-agents", "src-fifa-rules-and-reports", "src-capology"],
+      "status": "draft"
+    },
+    {
+      "id": "how-a-transfer-happens",
+      "title": "How a transfer happens",
+      "track": "t23-transfers-and-valuation",
+      "part": "E",
+      "summary": "Target, approach, bid, negotiation, medical and registration, inside the transfer windows, and who does each step.",
+      "prerequisites": ["recruitment-roles", "club-leadership-roles"],
+      "roles": ["head-of-recruitment", "loan-manager", "sporting-director"],
+      "competencies": ["transfer-negotiation", "agent-and-club-relationships"],
+      "sources": [
+        "src-football365-who-controls-transfers",
+        "src-fifa-rules-and-reports",
+        "src-fifa-transfer-reports"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "player-valuation",
+      "title": "Player valuation",
+      "track": "t23-transfers-and-valuation",
+      "part": "E",
+      "summary": "Pricing a player from age, contract length, league and comparable deals, and the gap between asking and walk-away prices.",
+      "prerequisites": ["how-a-transfer-happens"],
+      "roles": [
+        "head-of-data-science",
+        "head-of-recruitment",
+        "loan-manager",
+        "recruitment-analyst",
+        "sporting-director"
+      ],
+      "competencies": ["transfer-negotiation", "data-led-target-ranking"],
+      "sources": ["src-cies-football-observatory", "src-transfermarkt-datasets"],
+      "status": "draft"
+    },
+    {
+      "id": "transfer-accounting",
+      "title": "Amortisation and squad cost",
+      "track": "t23-transfers-and-valuation",
+      "part": "E",
+      "summary": "A fee is spread over the contract as amortisation; profit on sale beats book value; the PL caps squad cost against revenue.",
+      "prerequisites": ["player-valuation", "contracts-wages-and-agents"],
+      "roles": [
+        "academy-director",
+        "club-ceo",
+        "head-of-recruitment",
+        "loan-manager",
+        "sporting-director"
+      ],
+      "competencies": ["club-budgeting", "regulatory-compliance", "transfer-negotiation"],
+      "sources": [
+        "src-pl-handbook-2026-27",
+        "src-uefa-documents-portal",
+        "src-companies-house-search"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "academy-pathway-and-value",
+      "title": "Pathway, loans and sales",
+      "track": "t24-academy",
+      "part": "F",
+      "summary": "From academy to first team through loans and the under-21s, homegrown rules, and why selling a graduate is near pure profit.",
+      "prerequisites": ["long-term-player-development", "transfer-accounting"],
+      "roles": ["academy-director", "head-of-recruitment", "loan-manager", "sporting-director"],
+      "competencies": ["player-pathway-planning", "loan-placement", "loan-player-monitoring"],
+      "sources": [
+        "src-liverpool-head-of-loan-management",
+        "src-sky-hammond-loans-manager",
+        "src-pl-handbook-2026-27"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "eppp-and-academy-structure",
+      "title": "EPPP and academy structure",
+      "track": "t24-academy",
+      "part": "F",
+      "summary": "Academy categories under the Elite Player Performance Plan and the foundation, youth and professional phases.",
+      "prerequisites": ["academy-roles"],
+      "roles": ["academy-director"],
+      "competencies": ["academy-programme-management", "regulatory-compliance"],
+      "sources": ["src-pl-handbook-2026-27", "src-newcastle-women-academy-manager"],
+      "status": "draft"
+    },
+    {
+      "id": "long-term-player-development",
+      "title": "Long-term player development",
+      "track": "t24-academy",
+      "part": "F",
+      "summary": "Maturation and relative age, individual development plans, the coaching curriculum by age, and education and welfare.",
+      "prerequisites": ["eppp-and-academy-structure", "relative-age-effect"],
+      "roles": ["academy-director", "first-team-analyst", "head-coach", "loan-manager"],
+      "competencies": ["player-development-planning", "player-welfare-and-safeguarding"],
+      "sources": [
+        "src-liverpool-head-academy-medical-performance",
+        "src-newcastle-women-academy-manager",
+        "src-fifa-training-centre"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "club-football-philosophy",
+      "title": "Club football philosophy",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "The playing identity, player profile and coach profile that every football department follows.",
+      "prerequisites": ["sporting-director-job", "game-model"],
+      "roles": [
+        "academy-director",
+        "club-ceo",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition", "sporting-strategy"],
+      "sources": ["src-slemen-effective-sporting-director", "src-pl-sporting-directors-explained"],
+      "status": "draft"
+    },
+    {
+      "id": "decisions-and-stakeholders",
+      "title": "Decisions and stakeholders",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "Decision frameworks, biases like sunk cost and star power, pre-mortems, and explaining hard calls to owners and fans.",
+      "prerequisites": ["sporting-director-job"],
+      "roles": [
+        "club-ceo",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "recruitment-analyst",
+        "sporting-director"
+      ],
+      "competencies": [
+        "board-and-owner-relations",
+        "sporting-strategy",
+        "stakeholder-presentation"
+      ],
+      "sources": ["src-slemen-effective-sporting-director", "src-pl-sporting-directors-explained"],
+      "status": "draft"
+    },
+    {
+      "id": "hiring-the-head-coach",
+      "title": "Hiring the head coach",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "Profiling coaches with data and video, the shortlist and interviews, the contract, and when and how to make a change.",
+      "prerequisites": ["club-football-philosophy", "head-coach-job"],
+      "roles": [
+        "academy-director",
+        "club-ceo",
+        "head-of-recruitment",
+        "loan-manager",
+        "sporting-director"
+      ],
+      "competencies": ["staff-appointment", "contract-structuring"],
+      "sources": ["src-slemen-effective-sporting-director", "src-espn-head-coach-vs-manager"],
+      "status": "draft"
+    },
+    {
+      "id": "multi-club-ownership",
+      "title": "Multi-club ownership",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "How club groups share players, data and staff, and the competition rules that limit it.",
+      "prerequisites": ["sporting-director-job"],
+      "roles": ["academy-director", "club-ceo", "head-of-recruitment", "sporting-director"],
+      "competencies": ["regulatory-compliance", "sporting-strategy"],
+      "sources": ["src-uefa-documents-portal", "src-commons-library"],
+      "status": "draft"
+    },
+    {
+      "id": "multi-year-squad-plan",
+      "title": "The multi-year squad plan",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "A three-year squad map, succession for every position, renewals, the sell, keep or loan cycle and the window strategy.",
+      "prerequisites": [
+        "sporting-director-job",
+        "leading-recruitment",
+        "academy-pathway-and-value",
+        "transfer-accounting"
+      ],
+      "roles": ["head-of-recruitment", "loan-manager", "sporting-director"],
+      "competencies": ["squad-planning", "contract-structuring", "transfer-negotiation"],
+      "sources": [
+        "src-slemen-effective-sporting-director",
+        "src-football365-who-controls-transfers",
+        "src-jobsinfootball-sporting-director-role"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "sporting-director-job",
+      "title": "The sporting director's job",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "Sporting director, director of football or technical director: the remit, the reporting lines and how clubs differ.",
+      "prerequisites": ["club-leadership-roles"],
+      "roles": ["club-ceo", "head-of-recruitment", "sporting-director"],
+      "competencies": ["sporting-strategy", "football-department-design"],
+      "sources": [
+        "src-pl-sporting-directors-explained",
+        "src-jobsinfootball-sporting-director-role",
+        "src-jobsinfootball-sporting-director-structure",
+        "src-parnell-sporting-director-emergence"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "club-governance-and-leadership",
+      "title": "Governance and club leadership",
+      "track": "t26-club-ceo",
+      "part": "F",
+      "summary": "The board, the owners' and directors' test, the football regulator, fan engagement, and balancing football with business.",
+      "prerequisites": ["club-revenue-streams"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "sporting-director"
+      ],
+      "competencies": [
+        "board-and-owner-relations",
+        "regulatory-compliance",
+        "department-leadership"
+      ],
+      "sources": [
+        "src-independent-football-regulator",
+        "src-commons-library",
+        "src-pl-handbook-2026-27"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "club-revenue-streams",
+      "title": "Club revenue streams",
+      "track": "t26-club-ceo",
+      "part": "F",
+      "summary": "Broadcasting, commercial, matchday and player trading, plus sponsorship, fan engagement and how the PL shares TV money.",
+      "prerequisites": ["club-leadership-roles"],
+      "roles": ["club-ceo"],
+      "competencies": ["commercial-strategy", "club-budgeting"],
+      "sources": ["src-deloitte-football-money-league", "src-pl-handbook-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "reading-club-accounts",
+      "title": "Reading club accounts",
+      "track": "t26-club-ceo",
+      "part": "F",
+      "summary": "Budgets, cash flow, debt and ownership models, read from a real club's annual report and accounts.",
+      "prerequisites": ["club-revenue-streams", "transfer-accounting"],
+      "roles": ["club-ceo", "head-coach", "sporting-director"],
+      "competencies": ["club-budgeting", "board-and-owner-relations"],
+      "sources": ["src-companies-house-search", "src-deloitte-football-money-league"],
+      "status": "draft"
+    },
+    {
+      "id": "premier-league-money",
+      "title": "Premier League money",
+      "track": "t27-premier-league-system",
+      "part": "F",
+      "summary": "Central broadcasting and commercial distribution, squad-cost rules, ownership models and the regulator, dated as of reading.",
+      "prerequisites": ["premier-league-rules", "reading-club-accounts"],
+      "roles": ["academy-director", "club-ceo"],
+      "competencies": ["commercial-strategy", "club-budgeting", "regulatory-compliance"],
+      "sources": [
+        "src-pl-handbook-2026-27",
+        "src-deloitte-football-money-league",
+        "src-independent-football-regulator"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "premier-league-rules",
+      "title": "Premier League rules",
+      "track": "t27-premier-league-system",
+      "part": "F",
+      "summary": "The Handbook's squad, homegrown, registration and pitch rules, read with the edition and rule number each time.",
+      "prerequisites": ["players-and-substitutions", "club-revenue-streams"],
+      "roles": ["academy-director", "head-of-recruitment", "sporting-director"],
+      "competencies": ["regulatory-compliance", "squad-planning"],
+      "sources": ["src-pl-handbook-2026-27", "src-pl-handbook-2025-26"],
+      "status": "draft"
+    },
+    {
+      "id": "saudi-pro-league-context",
+      "title": "Saudi Pro League context",
+      "track": "t27-premier-league-system",
+      "part": "F",
+      "summary": "Applying the PL lessons to the Saudi Pro League: structure, foreign-player rules and career paths, checked and dated.",
+      "prerequisites": ["premier-league-rules"],
+      "roles": ["academy-director", "club-ceo", "head-of-recruitment", "sporting-director"],
+      "competencies": ["regulatory-compliance", "sporting-strategy"],
+      "sources": ["src-cies-football-observatory", "src-fifa-rules-and-reports"],
+      "status": "draft"
+    },
+    {
+      "id": "simulator-club-seats",
+      "title": "The club leadership seats",
+      "track": "t28-capstone",
+      "part": "G",
+      "summary": "Then the sporting director, recruitment, academy and CEO seats, each ending with a portfolio piece you can show.",
+      "prerequisites": [
+        "simulator-football-seats",
+        "recruitment-workflow",
+        "multi-year-squad-plan",
+        "reading-club-accounts"
+      ],
+      "roles": ["academy-director", "club-ceo", "head-of-recruitment", "sporting-director"],
+      "competencies": [
+        "sporting-strategy",
+        "squad-planning",
+        "player-pathway-planning",
+        "club-budgeting"
+      ],
+      "sources": [
+        "src-chernikova-simulation-learning-2020",
+        "src-slemen-effective-sporting-director"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "simulator-football-seats",
+      "title": "The football department seats",
+      "track": "t28-capstone",
+      "part": "G",
+      "summary": "In the Club Simulator you take the head coach, analysis and data seats: game plan, match day, dossier and a model.",
+      "prerequisites": [
+        "how-phases-connect",
+        "in-game-management",
+        "running-the-analysis-department",
+        "stakeholders-and-adoption"
+      ],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst",
+        "set-piece-coach"
+      ],
+      "competencies": [
+        "game-planning",
+        "in-game-adjustment",
+        "opposition-analysis",
+        "statistical-modelling"
+      ],
+      "sources": ["src-chernikova-simulation-learning-2020", "src-pl-sporting-directors-explained"],
+      "status": "draft"
     }
   ],
   "edges": [
@@ -1962,6 +2815,11 @@
       "from": "counter-pressing",
       "to": "rest-defence",
       "kind": "related"
+    },
+    {
+      "from": "data-led-shortlists",
+      "to": "the-scouts-eye",
+      "kind": "contrasts"
     },
     {
       "from": "game-model",
@@ -1984,6 +2842,11 @@
       "kind": "contrasts"
     },
     {
+      "from": "misleading-stats",
+      "to": "kpis-by-position",
+      "kind": "contrasts"
+    },
+    {
       "from": "offside-position",
       "to": "offside-offence",
       "kind": "contrasts"
@@ -1999,14 +2862,34 @@
       "kind": "related"
     },
     {
+      "from": "possession-value-models",
+      "to": "chance-creation",
+      "kind": "related"
+    },
+    {
       "from": "pressing-schemes",
       "to": "counter-pressing",
+      "kind": "related"
+    },
+    {
+      "from": "transfer-accounting",
+      "to": "premier-league-money",
       "kind": "related"
     },
     {
       "from": "watch-one-player",
       "to": "one-player-ninety-minutes",
       "kind": "related"
+    },
+    {
+      "from": "academy-pathway-and-value",
+      "to": "multi-year-squad-plan",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "academy-roles",
+      "to": "eppp-and-academy-structure",
+      "kind": "prerequisite"
     },
     {
       "from": "analysis-cycle",
@@ -2099,8 +2982,53 @@
       "kind": "prerequisite"
     },
     {
+      "from": "building-the-data-team",
+      "to": "data-research-agenda",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-football-philosophy",
+      "to": "hiring-the-head-coach",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-leadership-roles",
+      "to": "club-revenue-streams",
+      "kind": "prerequisite"
+    },
+    {
       "from": "club-leadership-roles",
       "to": "head-coach-job",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-leadership-roles",
+      "to": "how-a-transfer-happens",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-leadership-roles",
+      "to": "sporting-director-job",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-models",
+      "to": "honest-model-evaluation",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-revenue-streams",
+      "to": "club-governance-and-leadership",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-revenue-streams",
+      "to": "premier-league-rules",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-revenue-streams",
+      "to": "reading-club-accounts",
       "kind": "prerequisite"
     },
     {
@@ -2119,6 +3047,31 @@
       "kind": "prerequisite"
     },
     {
+      "from": "contracts-wages-and-agents",
+      "to": "transfer-accounting",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "data-led-shortlists",
+      "to": "recruitment-workflow",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "data-quality-traps",
+      "to": "data-infrastructure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "data-roles",
+      "to": "event-vs-tracking-data",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "data-roles",
+      "to": "head-of-data-science-job",
+      "kind": "prerequisite"
+    },
+    {
       "from": "defensive-blocks",
       "to": "defending-the-box",
       "kind": "prerequisite"
@@ -2129,6 +3082,11 @@
       "kind": "prerequisite"
     },
     {
+      "from": "defensive-roles",
+      "to": "kpis-by-position",
+      "kind": "prerequisite"
+    },
+    {
       "from": "defensive-transition",
       "to": "counter-pressing",
       "kind": "prerequisite"
@@ -2136,6 +3094,51 @@
     {
       "from": "defensive-transition",
       "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "eppp-and-academy-structure",
+      "to": "long-term-player-development",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "expected-goals",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "open-data-and-licences",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "per-90-and-possession-adjustment",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "pitch-control",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "pitch-coordinates-and-kloppy",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "expected-goals",
+      "to": "misleading-stats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "expected-goals",
+      "to": "ml-toolkit-for-football",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "expected-goals",
+      "to": "possession-value-models",
       "kind": "prerequisite"
     },
     {
@@ -2235,6 +3238,11 @@
     },
     {
       "from": "game-model",
+      "to": "club-football-philosophy",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "game-model",
       "to": "opponent-game-plan",
       "kind": "prerequisite"
     },
@@ -2259,6 +3267,11 @@
       "kind": "prerequisite"
     },
     {
+      "from": "grading-and-scouting-reports",
+      "to": "recruitment-workflow",
+      "kind": "prerequisite"
+    },
+    {
       "from": "half-spaces",
       "to": "four-superiorities",
       "kind": "prerequisite"
@@ -2271,6 +3284,11 @@
     {
       "from": "head-coach-job",
       "to": "first-team-player-development",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-coach-job",
+      "to": "hiring-the-head-coach",
       "kind": "prerequisite"
     },
     {
@@ -2289,6 +3307,36 @@
       "kind": "prerequisite"
     },
     {
+      "from": "head-of-data-science-job",
+      "to": "building-the-data-team",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-of-data-science-job",
+      "to": "data-infrastructure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-of-data-science-job",
+      "to": "stakeholders-and-adoption",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "honest-model-evaluation",
+      "to": "stakeholders-and-adoption",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-a-transfer-happens",
+      "to": "contracts-wages-and-agents",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-a-transfer-happens",
+      "to": "player-valuation",
+      "kind": "prerequisite"
+    },
+    {
       "from": "how-phases-connect",
       "to": "game-model",
       "kind": "prerequisite"
@@ -2301,6 +3349,11 @@
     {
       "from": "how-phases-connect",
       "to": "rest-defence",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-phases-connect",
+      "to": "simulator-football-seats",
       "kind": "prerequisite"
     },
     {
@@ -2329,6 +3382,11 @@
       "kind": "prerequisite"
     },
     {
+      "from": "in-game-management",
+      "to": "simulator-football-seats",
+      "kind": "prerequisite"
+    },
+    {
       "from": "in-possession-phase",
       "to": "build-up-structures",
       "kind": "prerequisite"
@@ -2336,6 +3394,21 @@
     {
       "from": "in-possession-phase",
       "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "kpis-by-position",
+      "to": "data-led-shortlists",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "kpis-by-position",
+      "to": "misleading-stats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "leading-recruitment",
+      "to": "multi-year-squad-plan",
       "kind": "prerequisite"
     },
     {
@@ -2354,6 +3427,11 @@
       "kind": "prerequisite"
     },
     {
+      "from": "live-vs-video-scouting",
+      "to": "recruitment-workflow",
+      "kind": "prerequisite"
+    },
+    {
       "from": "load-monitoring",
       "to": "fixture-congestion-and-rotation",
       "kind": "prerequisite"
@@ -2361,6 +3439,11 @@
     {
       "from": "load-monitoring",
       "to": "injury-risk-and-return",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "long-term-player-development",
+      "to": "academy-pathway-and-value",
       "kind": "prerequisite"
     },
     {
@@ -2379,6 +3462,31 @@
       "kind": "prerequisite"
     },
     {
+      "from": "midfield-roles",
+      "to": "squad-mapping-and-profiles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "misleading-stats",
+      "to": "stat-stability-and-comparison",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ml-toolkit-for-football",
+      "to": "club-models",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ml-toolkit-for-football",
+      "to": "tracking-ai-and-vision",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "multi-year-squad-plan",
+      "to": "simulator-club-seats",
+      "kind": "prerequisite"
+    },
+    {
       "from": "numerical-superiority",
       "to": "build-up-structures",
       "kind": "prerequisite"
@@ -2386,6 +3494,11 @@
     {
       "from": "numerical-superiority",
       "to": "four-superiorities",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "numerical-superiority",
+      "to": "pitch-control",
       "kind": "prerequisite"
     },
     {
@@ -2429,6 +3542,11 @@
       "kind": "prerequisite"
     },
     {
+      "from": "open-data-and-licences",
+      "to": "head-of-data-science-job",
+      "kind": "prerequisite"
+    },
+    {
       "from": "opponent-game-plan",
       "to": "in-game-management",
       "kind": "prerequisite"
@@ -2441,6 +3559,11 @@
     {
       "from": "out-of-possession-phase",
       "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "per-90-and-possession-adjustment",
+      "to": "kpis-by-position",
       "kind": "prerequisite"
     },
     {
@@ -2471,6 +3594,31 @@
     {
       "from": "pitch-areas",
       "to": "pitch-thirds-and-zones",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-control",
+      "to": "python-lab-tracking",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-control",
+      "to": "tracking-ai-and-vision",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-coordinates-and-kloppy",
+      "to": "data-quality-traps",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-coordinates-and-kloppy",
+      "to": "python-lab-first-plots",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-dimensions",
+      "to": "pitch-coordinates-and-kloppy",
       "kind": "prerequisite"
     },
     {
@@ -2529,6 +3677,16 @@
       "kind": "prerequisite"
     },
     {
+      "from": "pitch-thirds-and-zones",
+      "to": "possession-value-models",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "player-valuation",
+      "to": "transfer-accounting",
+      "kind": "prerequisite"
+    },
+    {
       "from": "players-and-substitutions",
       "to": "fixture-congestion-and-rotation",
       "kind": "prerequisite"
@@ -2536,6 +3694,11 @@
     {
       "from": "players-and-substitutions",
       "to": "in-game-management",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "players-and-substitutions",
+      "to": "premier-league-rules",
       "kind": "prerequisite"
     },
     {
@@ -2589,8 +3752,23 @@
       "kind": "prerequisite"
     },
     {
+      "from": "possession-value-models",
+      "to": "python-lab-models",
+      "kind": "prerequisite"
+    },
+    {
       "from": "premier-league-era-tactics",
       "to": "possession-and-gegenpressing",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "premier-league-rules",
+      "to": "premier-league-money",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "premier-league-rules",
+      "to": "saudi-pro-league-context",
       "kind": "prerequisite"
     },
     {
@@ -2619,8 +3797,53 @@
       "kind": "prerequisite"
     },
     {
+      "from": "python-lab-first-plots",
+      "to": "python-lab-models",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "python-lab-first-plots",
+      "to": "python-lab-tracking",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "reading-a-reconstruction",
+      "to": "event-vs-tracking-data",
+      "kind": "prerequisite"
+    },
+    {
       "from": "reading-a-reconstruction",
       "to": "role-signatures-in-data",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "reading-club-accounts",
+      "to": "premier-league-money",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "reading-club-accounts",
+      "to": "simulator-club-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "recruitment-roles",
+      "to": "how-a-transfer-happens",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "recruitment-roles",
+      "to": "leading-recruitment",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "recruitment-workflow",
+      "to": "leading-recruitment",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "recruitment-workflow",
+      "to": "simulator-club-seats",
       "kind": "prerequisite"
     },
     {
@@ -2631,6 +3854,11 @@
     {
       "from": "referee-team",
       "to": "var-basics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "relative-age-effect",
+      "to": "long-term-player-development",
       "kind": "prerequisite"
     },
     {
@@ -2684,6 +3912,16 @@
       "kind": "prerequisite"
     },
     {
+      "from": "running-the-analysis-department",
+      "to": "simulator-football-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "scoring-a-goal",
+      "to": "expected-goals",
+      "kind": "prerequisite"
+    },
+    {
       "from": "set-piece-phase",
       "to": "set-piece-marking",
       "kind": "prerequisite"
@@ -2699,8 +3937,43 @@
       "kind": "prerequisite"
     },
     {
+      "from": "simulator-football-seats",
+      "to": "simulator-club-seats",
+      "kind": "prerequisite"
+    },
+    {
       "from": "spoken-briefings",
       "to": "output-rubrics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "sporting-director-job",
+      "to": "club-football-philosophy",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "sporting-director-job",
+      "to": "decisions-and-stakeholders",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "sporting-director-job",
+      "to": "multi-club-ownership",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "sporting-director-job",
+      "to": "multi-year-squad-plan",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "squad-mapping-and-profiles",
+      "to": "data-led-shortlists",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "stakeholders-and-adoption",
+      "to": "simulator-football-seats",
       "kind": "prerequisite"
     },
     {
@@ -2734,8 +4007,28 @@
       "kind": "prerequisite"
     },
     {
+      "from": "the-scouts-eye",
+      "to": "squad-mapping-and-profiles",
+      "kind": "prerequisite"
+    },
+    {
       "from": "total-football-to-sacchi",
       "to": "possession-and-gegenpressing",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "transfer-accounting",
+      "to": "academy-pathway-and-value",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "transfer-accounting",
+      "to": "multi-year-squad-plan",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "transfer-accounting",
+      "to": "reading-club-accounts",
       "kind": "prerequisite"
     },
     {
