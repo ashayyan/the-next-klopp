@@ -38,7 +38,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The private repo `the-next-klopp` exists with protected `main`, and a PR must pass lint, typecheck, unit tests, build and the Windows smoke job; a test commit containing a raw-data file, an oversized file or a fake secret is rejected by the repo guards (`.gitignore`, `.gitattributes` with `eol=lf`, size/path guard, secret scanning, `.env.example` present).
   4. Querying agentmemory returns the learner profile and the project rules, and no raw research dumps are stored in it.
   5. `docs/decisions/` holds a record for each of: Vite SPA vs Next.js, router, storage engine, Vercel scope, study/dev server split, path-with-spaces handling; `/schemas` holds source, concept, competency and role schemas that sample fixtures validate against, before any research agent is spawned.
-**Plans**: 4/9 plans executed in 5 waves
+**Plans**: 5/9 plans executed in 5 waves
 
 Plans:
 **Wave 1**
@@ -52,7 +52,7 @@ Plans:
 - [x] 01-07-PLAN.md — Project-local skills + K-Dense subset, agent_skills fix, model routing, FABLE_LOG, pipeline stub (wave 3)
 
 **Wave 4** *(blocked on Wave 3 completion)*
-- [ ] 01-04-PLAN.md — Guard tests, conventional-commit check, husky hooks proven by verify-setup (wave 4)
+- [x] 01-04-PLAN.md — Guard tests, conventional-commit check, husky hooks proven by verify-setup (wave 4)
 - [ ] 01-05-PLAN.md — Source/concept/competency/role JSON Schemas, Zod mirrors, dual-validator fixtures test (wave 4)
 - [ ] 01-06-PLAN.md — ADRs 0001-0006 with a structure test (wave 4)
 - [ ] 01-08-PLAN.md — docs/SETUP.md toolchain record, learner profile and rules stored in agentmemory (wave 4)
@@ -174,7 +174,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Setup & Contracts | 4/9 | In Progress | - |
+| 1. Setup & Contracts | 5/9 | In Progress | - |
 | 2. Research Wave 1 | 0/TBD | Not started | - |
 | 3. Pitch Standard & Data Pipeline | 0/TBD | Not started | - |
 | 4. Design Direction & System | 0/TBD | Not started | - |
