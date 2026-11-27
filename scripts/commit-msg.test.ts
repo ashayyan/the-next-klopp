@@ -41,13 +41,28 @@ describe("isConventionalCommit: rejects", () => {
   });
 });
 
-describe("isConventionalCommit: repo history", () => {
-  it("accepts every subject in git log", () => {
-    const r = spawnSync("git", ["log", "--format=%s"], { encoding: "utf8" });
-    expect(r.status).toBe(0);
-    const subjects = r.stdout.split(/\r?\n/).filter((s) => s.length > 0);
-    expect(subjects.length).toBeGreaterThan(0);
-    const bad = subjects.filter((s) => !isConventionalCommit(s));
+function git(args: string[]) {
+  return spawnSync("git", args, { encoding: "utf8" });
+}
+
+// Only commits on this branch that are not on main are judged. Judging all of history would fail
+// forever on any one non-conforming historical subject (a UI edit, a bot commit), and history
+// cannot be rewritten. A shallow clone or a missing base ref cannot answer the question, so the
+// check is skipped there instead of silently testing something different.
+function branchSubjects(): string[] | null {
+  if (git(["rev-parse", "--is-shallow-repository"]).stdout.trim() === "true") return null;
+  for (const base of ["origin/main", "main"]) {
+    if (git(["rev-parse", "--verify", "--quiet", `${base}^{commit}`]).status !== 0) continue;
+    const r = git(["log", "--format=%s", `${base}..HEAD`]);
+    if (r.status === 0) return r.stdout.split(/\r?\n/).filter((line) => line.length > 0);
+  }
+  return null;
+}
+
+describe("isConventionalCommit: branch history", () => {
+  const subjects = branchSubjects();
+  it.skipIf(subjects === null)("accepts every subject on this branch since main", () => {
+    const bad = (subjects ?? []).filter((subject) => !isConventionalCommit(subject));
     expect(bad).toEqual([]);
   });
 });
