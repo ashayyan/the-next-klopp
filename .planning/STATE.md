@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 2
 current_phase_name: Research Wave 1
 status: executing
-stopped_at: Completed 02-20-PLAN.md
-last_updated: "2026-11-27T22:58:22.593Z"
+stopped_at: Completed 02-21-PLAN.md
+last_updated: "2026-11-27T23:14:48.522Z"
 last_activity: 2026-11-27
 last_activity_desc: Phase 2 execution started
-state_head: ac4dfeef9b84508e76f88d6ed242693a0190ed75
+state_head: 5a994c252cbd88981ae9c8156c5d5a119fffe344
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 30
-  completed_plans: 29
+  completed_plans: 30
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 2 (Research Wave 1) — EXECUTING
-Plan: 11 of 21
+Plan: 12 of 21
 Status: Ready to execute
 Last activity: 2026-11-27 — Phase 2 execution started
 
@@ -74,6 +74,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02 P18 | 8 min | 3 tasks | 7 files |
 | Phase 02 P19 | 6 min | 3 tasks | 4 files |
 | Phase 02 P20 | 25min | 3 tasks | 7 files |
+| Phase 02 P21 | 45 min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -105,6 +106,8 @@ Recent decisions affecting current work:
 - [Phase 02]: 02-19: Capstone split into football-department and club-leadership seat concepts so it follows every Part within 4 prerequisites
 - [Phase 02]: 02-20: gaps.json splits domain 14 (a-c t21, d-f t22) and domain 20 (PL ecosystem, SPL pack); SPL row uses spl.com.sa and saff.com.sa URLs until a registry source exists
 - [Phase 02]: 02-20: unknown_licence_sources lists all 82 unknown-licence sources cited by Tracks 0-4 or ADR 0008 plus 5 flagged later-track sources; gaps.test.ts derives the expected set
+- [Phase 02]: 02-21: RSCH-06 approved under delegation, scoped to 64 Tracks 0-4 concepts; 4 seed-only Track 2 concepts (eighteen-zone-grid, five-vertical-lanes, half-spaces, four-superiorities) stay draft until domain 2 research
+- [Phase 02]: 02-21: approval rule derived in approval.test.ts: approved iff APPROVAL.md approved, track t00-t04 and at least one verified cited source
 
 ### Pending Todos
 
@@ -134,6 +137,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-27T22:58:22.359Z
-Stopped at: Completed 02-20-PLAN.md
+Last session: 2026-11-27T23:14:48.331Z
+Stopped at: Completed 02-21-PLAN.md
 Resume file: None
