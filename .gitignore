@@ -1,0 +1,36 @@
+# Dependencies and build output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+*.log
+
+# Secrets: real env files never enter git, only the documented example
+.env
+.env.*
+!.env.example
+
+# Raw or licensed data stays local; only publishable parquet under public/data/ is tracked
+pipeline/data/raw/
+pipeline/.venv/
+data/raw/
+**/raw/
+*.parquet
+!public/data/**/*.parquet
+
+# Local-only runtime output
+feedback/
+public/pyodide/
+test-results/
+playwright-report/
+
+# Project-local tooling (restored from skills-lock.json, not committed)
+# Note: .claude/ is NOT ignored as a whole, .claude/CLAUDE.md stays tracked
+.claude/skills/
+.claude/settings.local.json
+.claude/worktrees/
+.agents/
+.taste-skill/
+
+# The learner's original brief copy stays on disk only
+THE_NEXT_KLOPP_MASTER_PROMPT*.md

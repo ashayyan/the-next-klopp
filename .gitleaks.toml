@@ -1,0 +1,10 @@
+title = "the-next-klopp gitleaks config"
+
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "AWS documentation example key"
+regexes = [
+  '''(?:AKIA|ASIA)[A-Z0-9]{9}EXAMPLE''',
+]
