@@ -1,0 +1,827 @@
+[
+  {
+    "id": "src-agarwal-retrieval-classroom-2021",
+    "title": "Retrieval Practice Consistently Benefits Student Learning: a Systematic Review of Applied Research in Schools and Classrooms",
+    "url": "https://doi.org/10.1007/s10648-021-09595-9",
+    "type": "paper",
+    "publisher": "Springer (Educational Psychology Review)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2021-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["retrieval practice in real classrooms", "limits of the evidence"],
+    "notes": "study design: systematic review of 50 classroom experiments (49 effect sizes); population: school and college students, not ADHD-specific; few non-WEIRD samples; evidence grade: moderate (many experiments, but heterogeneous and Western-skewed). DOI 10.1007/s10648-021-09595-9 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-mcdermott-practicing-retrieval-2020",
+    "title": "Practicing Retrieval Facilitates Learning",
+    "url": "https://doi.org/10.1146/annurev-psych-010419-051019",
+    "type": "paper",
+    "publisher": "Annual Reviews",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2020-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["why retrieval slows forgetting", "testing effect overview"],
+    "notes": "study design: narrative review of the testing-effect literature; population: mixed ages and abilities, mostly healthy learners; not ADHD-specific; evidence grade: moderate (expert review of a large experimental literature, no pooled estimate). DOI 10.1146/annurev-psych-010419-051019 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-cepeda-distributed-practice-2006",
+    "title": "Distributed practice in verbal recall tasks: A review and quantitative synthesis",
+    "url": "https://doi.org/10.1037/0033-2909.132.3.354",
+    "type": "paper",
+    "publisher": "American Psychological Association (Psychological Bulletin)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2006-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["spacing effect", "gap length versus retention interval"],
+    "notes": "study design: meta-analysis of 317 experiments in 184 articles; population: mostly adult lab participants learning verbal material; not ADHD-specific; evidence grade: high (large, consistent literature; but verbal lab tasks only). DOI 10.1037/0033-2909.132.3.354 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-dunlosky-learning-techniques-2013",
+    "title": "Improving Students' Learning With Effective Learning Techniques: Promising Directions From Cognitive and Educational Psychology",
+    "url": "https://doi.org/10.1177/1529100612453266",
+    "type": "paper",
+    "publisher": "SAGE (Psychological Science in the Public Interest)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2013-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["ranking of study techniques", "practice testing and spacing"],
+    "notes": "study design: expert monograph reviewing 10 learning techniques; population: students of many ages; not ADHD-specific; evidence grade: moderate (structured expert appraisal, not a meta-analysis). DOI 10.1177/1529100612453266 resolved by validate_citations.py. Recency is the publication year only. The utility ratings (practice testing and distributed practice rated high; rereading and highlighting rated low) were read in secondary summaries on 2026-11-28, not in the paper text.",
+    "status": "active"
+  },
+  {
+    "id": "src-weinstein-six-strategies-2018",
+    "title": "Teaching the science of learning",
+    "url": "https://doi.org/10.1186/s41235-017-0087-y",
+    "type": "paper",
+    "publisher": "Springer Nature (Cognitive Research: Principles and Implications)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2018-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["dual coding", "six strategies tutorial"],
+    "notes": "study design: tutorial narrative review of six strategies; population: general learners; not ADHD-specific; evidence grade: low (non-systematic tutorial, cited for dual coding only). DOI 10.1186/s41235-017-0087-y resolved by validate_citations.py. Recency is the publication year only. Open access.",
+    "status": "active"
+  },
+  {
+    "id": "src-noetel-multimedia-design-2021",
+    "title": "Multimedia Design for Learning: An Overview of Reviews With Meta-Meta-Analysis",
+    "url": "https://doi.org/10.3102/00346543211052329",
+    "type": "paper",
+    "publisher": "SAGE (Review of Educational Research)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2021-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["multimedia principles", "signaling, segmenting, contiguity"],
+    "notes": "study design: overview of 29 systematic reviews (1,189 studies); population: general learners, mostly students; not ADHD-specific; evidence grade: moderate (large synthesis but overlapping studies and mixed designs). DOI 10.3102/00346543211052329 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-barbieri-worked-examples-2023",
+    "title": "A Meta-analysis of the Worked Examples Effect on Mathematics Performance",
+    "url": "https://doi.org/10.1007/s10648-023-09745-1",
+    "type": "paper",
+    "publisher": "Springer (Educational Psychology Review)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2023-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["worked examples", "cognitive load"],
+    "notes": "study design: meta-analysis with robust variance estimation (average g about 0.48 per secondary summaries); population: maths learners, mostly children and adolescents; not ADHD-specific; evidence grade: moderate (pooled effect medium; abstract not machine-readable, figures taken from secondary summaries). DOI 10.1007/s10648-023-09745-1 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-chernikova-simulation-learning-2020",
+    "title": "Simulation-Based Learning in Higher Education: A Meta-Analysis",
+    "url": "https://doi.org/10.3102/0034654320933544",
+    "type": "paper",
+    "publisher": "SAGE (Review of Educational Research)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2020-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["interactive simulations", "scaffolding and prior knowledge"],
+    "notes": "study design: meta-analysis of 145 studies; population: higher-education learners (medical, teacher, management); not ADHD-specific; evidence grade: moderate (large effect, g 0.85, but studies vary in design and controls). DOI 10.3102/0034654320933544 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-freeman-active-learning-2014",
+    "title": "Active learning increases student performance in science, engineering, and mathematics",
+    "url": "https://doi.org/10.1073/pnas.1319030111",
+    "type": "paper",
+    "publisher": "PNAS",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2014-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["active learning versus lecture", "learning by doing"],
+    "notes": "study design: meta-analysis of 225 studies; population: undergraduate STEM students; not ADHD-specific; evidence grade: moderate (many quasi-experimental studies; robust to bias checks reported by authors). DOI 10.1073/pnas.1319030111 resolved by validate_citations.py. Recency is the publication year only. Open access.",
+    "status": "active"
+  },
+  {
+    "id": "src-sailer-gamification-meta-2019",
+    "title": "The Gamification of Learning: a Meta-analysis",
+    "url": "https://doi.org/10.1007/s10648-019-09498-w",
+    "type": "paper",
+    "publisher": "Springer (Educational Psychology Review)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2019-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["gamification effect sizes", "game fiction and social moderators"],
+    "notes": "study design: meta-analysis (k 19, 16 and 9 for cognitive, motivational, behavioural outcomes); population: mixed learners, mostly education settings; not ADHD-specific; evidence grade: moderate for cognitive outcomes, low for motivational and behavioural (less stable in rigorous studies). DOI 10.1007/s10648-019-09498-w resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-deci-extrinsic-rewards-1999",
+    "title": "A meta-analytic review of experiments examining the effects of extrinsic rewards on intrinsic motivation",
+    "url": "https://doi.org/10.1037/0033-2909.125.6.627",
+    "type": "paper",
+    "publisher": "American Psychological Association (Psychological Bulletin)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "1999-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["reward undermining", "feedback versus tangible rewards"],
+    "notes": "study design: meta-analysis of 128 experiments; population: children and college students; not ADHD-specific; evidence grade: moderate (many experiments but old and contested by rival meta-analyses). DOI 10.1037/0033-2909.125.6.627 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-richland-pretesting-2009",
+    "title": "The pretesting effect: Do unsuccessful retrieval attempts enhance learning?",
+    "url": "https://doi.org/10.1037/a0016496",
+    "type": "paper",
+    "publisher": "American Psychological Association (Journal of Experimental Psychology: Applied)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2009-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["predict-then-reveal", "question before study"],
+    "notes": "study design: five laboratory experiments; population: adult university students reading text; not ADHD-specific; evidence grade: low (few experiments, one text domain, short delays). DOI 10.1037/a0016496 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-faraone-wfadhd-consensus-2021",
+    "title": "The World Federation of ADHD International Consensus Statement: 208 Evidence-based conclusions about the disorder",
+    "url": "https://doi.org/10.1016/j.neubiorev.2021.01.022",
+    "type": "paper",
+    "publisher": "Elsevier (Neuroscience and Biobehavioral Reviews)",
+    "free": true,
+    "license": {
+      "name": "CC BY (per Europe PMC)",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2021-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["what is established about ADHD", "reward delay, working memory, persistence"],
+    "notes": "study design: consensus statement built from large studies and meta-analyses, endorsed by 80 authors; population: children, adolescents and adults with ADHD (mostly paediatric samples); evidence grade: high for descriptive facts about ADHD, but not an evidence base for learning-app design. DOI 10.1016/j.neubiorev.2021.01.022 resolved by validate_citations.py. Recency is the publication year only. Europe PMC lists a CC BY licence. Item contents were read from the PMC full text through a summarising fetch, so re-check statement numbers before shipping.",
+    "status": "active"
+  },
+  {
+    "id": "src-rapport-adhd-cognitive-training-2013",
+    "title": "Do programs designed to train working memory, other executive functions, and attention benefit children with ADHD? A meta-analytic review of cognitive, academic, and behavioral outcomes",
+    "url": "https://doi.org/10.1016/j.cpr.2013.08.005",
+    "type": "paper",
+    "publisher": "Elsevier (Clinical Psychology Review)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2013-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["limits of brain training", "far transfer"],
+    "notes": "study design: meta-analysis of 25 studies; population: children with ADHD, not adults; evidence grade: moderate (many studies, but children and older software). DOI 10.1016/j.cpr.2013.08.005 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-cortese-adhd-cognitive-training-2015",
+    "title": "Cognitive Training for Attention-Deficit/Hyperactivity Disorder: Meta-Analysis of Clinical and Neuropsychological Outcomes From Randomized Controlled Trials",
+    "url": "https://doi.org/10.1016/j.jaac.2014.12.010",
+    "type": "paper",
+    "publisher": "Elsevier (JAACAP)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2015-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["blinded versus unblinded outcomes", "academic transfer"],
+    "notes": "study design: meta-analysis of 16 randomised controlled trials (759 children); population: children and adolescents with ADHD, not adults; evidence grade: moderate (RCTs rated with Cochrane tool; small samples; blinded effects smaller). DOI 10.1016/j.jaac.2014.12.010 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-elbe-adult-adhd-cognitive-training-2023",
+    "title": "Computerized cognitive interventions for adults with ADHD: A systematic review and meta-analysis",
+    "url": "https://doi.org/10.1037/neu0000890",
+    "type": "paper",
+    "publisher": "American Psychological Association (Neuropsychology)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2023-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["cognitive training in adults with ADHD"],
+    "notes": "study design: systematic review and meta-analysis of 9 randomised trials; population: adults with ADHD; evidence grade: low (few small trials, interval close to zero). DOI 10.1037/neu0000890 resolved by validate_citations.py. Recency is the publication year only. Open access.",
+    "status": "active"
+  },
+  {
+    "id": "src-minear-adhd-retrieval-2023",
+    "title": "Is practice good enough? Retrieval benefits students with ADHD but does not compensate for poor encoding",
+    "url": "https://doi.org/10.3389/fpsyg.2023.1186566",
+    "type": "paper",
+    "publisher": "Frontiers (Frontiers in Psychology)",
+    "free": true,
+    "license": {
+      "name": "Frontiers open access (check CC licence on the page)",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2023-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["retrieval practice in ADHD college students"],
+    "notes": "study design: single experiment, 36 ADHD versus 36 controls; population: college students with ADHD, some medicated; evidence grade: low (one small lab study with word pairs). DOI 10.3389/fpsyg.2023.1186566 resolved by validate_citations.py. Recency is the publication year only. Open access.",
+    "status": "active"
+  },
+  {
+    "id": "src-skodzik-adult-adhd-memory-2016",
+    "title": "Long-Term Memory Performance in Adult ADHD: A Meta-Analysis",
+    "url": "https://doi.org/10.1177/1087054713510561",
+    "type": "paper",
+    "publisher": "SAGE (Journal of Attention Disorders)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2016-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["encoding versus retrieval in adult ADHD"],
+    "notes": "study design: meta-analysis of memory-test studies; population: adults with ADHD versus controls; evidence grade: moderate (pooled studies, mostly lab tests). DOI 10.1177/1087054713510561 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-knouse-adhd-self-testing-2011",
+    "title": "Isolating Metamemory Deficits in the Self-Regulated Learning of Adults With ADHD",
+    "url": "https://doi.org/10.1177/1087054711417231",
+    "type": "paper",
+    "publisher": "SAGE (Journal of Attention Disorders)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2011-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["self-testing use in adult ADHD", "metamemory"],
+    "notes": "study design: controlled lab experiment, 34 adults with ADHD and 34 matched controls; population: adults with ADHD; evidence grade: low (small sample, paired-associate task). DOI 10.1177/1087054711417231 resolved by validate_citations.py. Recency is the publication year only. Open access.",
+    "status": "active"
+  },
+  {
+    "id": "src-pagespetit-adhd-college-2024",
+    "title": "ADHD and Academic Performance in College Students: A Systematic Review",
+    "url": "https://doi.org/10.1177/10870547241306554",
+    "type": "paper",
+    "publisher": "SAGE (Journal of Attention Disorders)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2024-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["ADHD and university outcomes"],
+    "notes": "study design: systematic review of 15 mostly observational studies; population: university students with ADHD; evidence grade: low (observational, mixed measures; authors rate studies good to fair). DOI 10.1177/10870547241306554 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-luman-adhd-reinforcement-2010",
+    "title": "Identifying the neurobiology of altered reinforcement sensitivity in ADHD: a review and research agenda",
+    "url": "https://doi.org/10.1016/j.neubiorev.2009.11.021",
+    "type": "paper",
+    "publisher": "Elsevier (Neuroscience and Biobehavioral Reviews)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 4,
+    "recency": "2010-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["reward sensitivity models", "inconsistent findings"],
+    "notes": "study design: narrative review comparing seven theoretical models; population: mostly children with ADHD; evidence grade: low (theory-heavy review; authors note inconsistent findings and gaps). DOI 10.1016/j.neubiorev.2009.11.021 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-gawrilow-adhd-if-then-2011",
+    "title": "If-Then Plans Benefit Executive Functions in Children with ADHD",
+    "url": "https://doi.org/10.1521/jscp.2011.30.6.616",
+    "type": "paper",
+    "publisher": "Guilford (Journal of Social and Clinical Psychology)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 3,
+    "recency": "2011-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["if-then plans in ADHD"],
+    "notes": "study design: two lab experiments; population: children with ADHD, not adults; evidence grade: very low for adult app design (two small child studies). DOI 10.1521/jscp.2011.30.6.616 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-gollwitzer-implementation-intentions-2006",
+    "title": "Implementation Intentions and Goal Achievement: A Meta-analysis of Effects and Processes",
+    "url": "https://doi.org/10.1016/s0065-2601(06)38002-1",
+    "type": "paper",
+    "publisher": "Elsevier (Advances in Experimental Social Psychology)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 5,
+    "recency": "2006-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["if-then planning", "starting goals"],
+    "notes": "study design: meta-analysis of 94 independent tests (medium-to-large effect, d about 0.65 per secondary summaries); population: mostly adults, many goal domains; not ADHD-specific; evidence grade: moderate (large pool, but self-report and lab goals; abstract not machine-readable). DOI 10.1016/s0065-2601(06)38002-1 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  },
+  {
+    "id": "src-nber-streaks-2025",
+    "title": "Streaks to Success? The Effects of Highlighting Streaks on Student Effort and Learning",
+    "url": "https://www.nber.org/papers/w34173",
+    "type": "report",
+    "publisher": "NBER (working paper)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 3,
+    "recency": "2025-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["do streaks raise effort", "randomised evidence"],
+    "notes": "study design: randomised trial, about 60,000 students, 1,500 in the learning sample (as summarised on the NBER page); population: children in grades 4 to 6 in Peru using an online maths platform; evidence grade: low (working paper, children, learning outcome from a small sample). DOI 10.3386/w34173 resolved by validate_citations.py. Recency is the publication year only. The NBER page says a peer-reviewed version exists; that was not verified.",
+    "status": "active"
+  },
+  {
+    "id": "src-bradbury-attention-span-2016",
+    "title": "Attention span during lectures: 8 seconds, 10 minutes, or more?",
+    "url": "https://doi.org/10.1152/advan.00109.2016",
+    "type": "paper",
+    "publisher": "American Physiological Society (Advances in Physiology Education)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
+      "read": {
+        "value": "yes",
+        "note": "Abstract is freely readable; full text may need access"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Do not copy the article text; link and paraphrase only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with credit and DOI link"
+      }
+    },
+    "quality": 3,
+    "recency": "2016-01-01",
+    "as_of": "2026-11-28",
+    "best_for": ["attention span myth", "lecture length claims"],
+    "notes": "study design: critical editorial review of claims about attention waning; population: university lecture audiences; not ADHD-specific; evidence grade: low (editorial argument, not new data; read through abstract and search excerpts only). DOI 10.1152/advan.00109.2016 resolved by validate_citations.py. Recency is the publication year only.",
+    "status": "active"
+  }
+]
