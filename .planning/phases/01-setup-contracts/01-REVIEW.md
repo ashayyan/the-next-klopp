@@ -124,7 +124,7 @@ Keep `public/data/` and `.env.example` exceptions case-insensitive too, and add 
 
 **File:** `scripts/lib/guard.ts:97-127`, `scripts/guard-files.ts:24-30`
 **Issue:** `findSecrets` returned `[]` for all of these (verified):
-- `password = "P@ssw0rd!longlongpass"` (value class `[A-Za-z0-9_\-./+=]` excludes `@ ! # $ %`)
+- a `password` assignment whose quoted value contains `@`, `!`, `#`, `$` or `%` (value class `[A-Za-z0-9_\-./+=]` excludes `@ ! # $ %`)
 - `api-key: "..."` (hyphenated key name)
 - `` const token = `...` `` (backtick quote)
 - `Authorization: Bearer ...`

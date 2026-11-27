@@ -4,7 +4,7 @@
 import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { checkFile, findSecrets, MAX_FILE_BYTES } from "./lib/guard.ts";
+import { checkFile, decodeForScan, findSecrets, MAX_FILE_BYTES } from "./lib/guard.ts";
 
 function rules(path: string, size = 10, content: string | null = null): string[] {
   return checkFile({ path, size, content }).map((v) => v.rule);
@@ -18,6 +18,11 @@ const fakeAwsExample = `${awsPrefix}IOSFODNN7EXAMPLE`;
 const fakeGithub = ["gh", "p_"].join("") + "a".repeat(36);
 const fakePem = ["-----BEGIN", "RSA", "PRIVATE", "KEY-----"].join(" ");
 const fakeAssignment = `${["api", "_key"].join("")} = "${"x".repeat(20)}"`;
+const fakeStripe = ["sk", "_live_"].join("") + "a1B2c3D4".repeat(3);
+const fakeGoogle = ["AI", "za"].join("") + "A".repeat(35);
+const fakeNpm = ["npm", "_"].join("") + "a1".repeat(18);
+const fakeBearer = `${["Authorization", ": Bearer "].join("")}${"abcdEFGH1234".repeat(2)}`;
+const fakeAwsSecret = `${["aws_secret", "_access_key"].join("")} = "${"aB3/".repeat(10)}"`;
 
 describe("guard: denied paths", () => {
   it.each(["raw/x.txt", "data/raw/pl.json", "pipeline/data/raw/a.csv", "data\\raw\\b.csv"])(
@@ -97,6 +102,34 @@ describe("guard: secrets", () => {
 
   it("rejects a quoted api_key assignment", () => {
     expect(rules("src/a.ts", 10, fakeAssignment)).toContain("secret:generic-secret-assignment");
+  });
+
+  it.each([
+    ["password with symbols", `${["pass", "word"].join("")} = "P@ss!w0rd#longlongpass"`],
+    ["hyphenated api-key", `${["api", "-key"].join("")}: "${"x".repeat(20)}"`],
+    ["backtick token", `const ${["to", "ken"].join("")} = \`${"y".repeat(20)}\``],
+    ["authorization header", fakeBearer],
+    ["aws secret access key", fakeAwsSecret],
+    ["stripe live key", fakeStripe],
+    ["google api key", fakeGoogle],
+    ["npm token", fakeNpm],
+  ])("rejects %s", (_name, text) => {
+    expect(findSecrets(text).length).toBeGreaterThan(0);
+  });
+
+  it("ignores template placeholders in assignments", () => {
+    const text = `${["to", "ken"].join("")} = "${"$"}{PLACEHOLDER_VALUE_HERE}"`;
+    expect(findSecrets(text)).toEqual([]);
+  });
+
+  it("scans text that contains NUL bytes (leading NUL)", () => {
+    const bytes = Buffer.from(`\0${fakeGithub}`, "latin1");
+    expect(findSecrets(decodeForScan(bytes))).toContain("github-token");
+  });
+
+  it("scans UTF-16 encoded text", () => {
+    const bytes = Buffer.from(fakeGithub, "utf16le");
+    expect(findSecrets(decodeForScan(bytes))).toContain("github-token");
   });
 
   it("finds nothing in ordinary text", () => {

@@ -8,7 +8,7 @@ export const MAX_FILE_BYTES = 5 * 1024 * 1024;
 export interface FileInput {
   path: string;
   size: number;
-  /** null for binary or unread files: only the size and path rules apply. */
+  /** null for unread files: only the size and path rules apply. */
   content: string | null;
 }
 
@@ -133,10 +133,43 @@ const SECRET_RULES: readonly SecretRule[] = [
     pattern: /\bsk-(?:proj-)?[A-Za-z0-9_-]{32,}/g,
   },
   {
+    id: "aws-secret-key",
+    pattern: /\baws_secret_access_key["'`]?\s*[:=]\s*["'`]?[A-Za-z0-9/+=]{40}/gi,
+  },
+  {
+    id: "stripe-key",
+    pattern: /\b[sr]k_live_[A-Za-z0-9]{16,}/g,
+  },
+  {
+    id: "google-api-key",
+    pattern: /\bAIza[0-9A-Za-z_-]{35}/g,
+  },
+  {
+    id: "npm-token",
+    pattern: /\bnpm_[A-Za-z0-9]{36}\b/g,
+  },
+  {
+    id: "authorization-header",
+    pattern: /\bauthorization["'`]?\s*[:=]\s*["'`]?(?:bearer|basic)\s+[A-Za-z0-9._~+/=-]{16,}/gi,
+  },
+  {
     id: "generic-secret-assignment",
-    pattern: /(?:api_?key|secret|token|password)["']?\s*[:=]\s*["'][A-Za-z0-9_\-./+=]{16,}["']/gi,
+    pattern: /(?:api[-_]?key|secret|token|passw(?:or)?d)["'`]?\s*[:=]\s*["'`][^\s"'`]{16,}["'`]/gi,
+    // Template placeholders such as ${VAR} or <your-value> are not literal secrets.
+    ignore: (m) => /["'`](?:\$\{|<|\{\{)/.test(m),
   },
 ];
+
+/**
+ * Decodes file bytes for secret scanning. Files with a NUL in the first 8000 bytes used to be
+ * skipped as "binary", which let a leading NUL or a UTF-16 file hide a secret. They are now
+ * scanned as latin1 plus a NUL-stripped copy, so ASCII tokens inside UTF-16 text still match.
+ */
+export function decodeForScan(bytes: Uint8Array): string {
+  if (!bytes.subarray(0, 8000).includes(0)) return new TextDecoder("utf-8").decode(bytes);
+  const raw = new TextDecoder("latin1").decode(bytes.subarray(0, MAX_FILE_BYTES));
+  return `${raw}\n${raw.replaceAll("\0", "")}`;
+}
 
 /** Returns the ids of every secret rule that matches the text. */
 export function findSecrets(text: string): string[] {
