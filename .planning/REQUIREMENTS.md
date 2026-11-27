@@ -11,8 +11,8 @@
 
 - [ ] **SETUP-01**: GSD Core, agentmemory, K-Dense Scientific Agent Skills and design skills (taste-skill v2 installed project-locally, frontend-design, web-design-guidelines, ui-ux-pro-max, a dataviz skill) are installed and verified against current READMEs, recorded in `docs/SETUP.md`; promotional skills (e.g. `offer-k-dense-web`) are disabled
 - [ ] **SETUP-02**: Model routing (brief §5) is configured and logged in `docs/SETUP.md`; `docs/FABLE_LOG.md` exists with the 4-step escalation protocol and the 3-per-milestone cap
-- [ ] **SETUP-03**: Private GitHub repo `the-next-klopp` exists with protected `main`, branch-per-phase PRs, conventional commits, and CI on GitHub Actions (lint, typecheck, unit tests, build, Windows smoke job)
-- [ ] **SETUP-04**: The first commit carries repo guards: `.gitignore` for raw/licensed data and secrets, `.gitattributes` with `eol=lf`, a large-file/path guard, secret scanning, and `.env.example`
+- [x] **SETUP-03**: Private GitHub repo `the-next-klopp` exists with protected `main`, branch-per-phase PRs, conventional commits, and CI on GitHub Actions (lint, typecheck, unit tests, build, Windows smoke job)
+- [x] **SETUP-04**: The first commit carries repo guards: `.gitignore` for raw/licensed data and secrets, `.gitattributes` with `eol=lf`, a large-file/path guard, secret scanning, and `.env.example`
 - [ ] **SETUP-05**: The learner profile and project rules are stored in agentmemory (no raw research dumps)
 - [ ] **SETUP-06**: Architecture decisions are recorded in `docs/decisions/` (Vite SPA vs Next.js, router, storage engine, Vercel scope, study/dev split, path-with-spaces handling)
 - [ ] **SETUP-07**: Shared contract schemas (source, concept, competency, role) exist in `/schemas` before research agents spawn
@@ -165,8 +165,8 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 |-------------|-------|--------|
 | SETUP-01 | Phase 1 | Pending |
 | SETUP-02 | Phase 1 | Pending |
-| SETUP-03 | Phase 1 | Pending |
-| SETUP-04 | Phase 1 | Pending |
+| SETUP-03 | Phase 1 | Complete |
+| SETUP-04 | Phase 1 | Complete |
 | SETUP-05 | Phase 1 | Pending |
 | SETUP-06 | Phase 1 | Pending |
 | SETUP-07 | Phase 1 | Pending |

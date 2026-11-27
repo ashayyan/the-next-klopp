@@ -38,11 +38,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The private repo `the-next-klopp` exists with protected `main`, and a PR must pass lint, typecheck, unit tests, build and the Windows smoke job; a test commit containing a raw-data file, an oversized file or a fake secret is rejected by the repo guards (`.gitignore`, `.gitattributes` with `eol=lf`, size/path guard, secret scanning, `.env.example` present).
   4. Querying agentmemory returns the learner profile and the project rules, and no raw research dumps are stored in it.
   5. `docs/decisions/` holds a record for each of: Vite SPA vs Next.js, router, storage engine, Vercel scope, study/dev server split, path-with-spaces handling; `/schemas` holds source, concept, competency and role schemas that sample fixtures validate against, before any research agent is spawned.
-**Plans**: 9 plans in 5 waves
+**Plans**: 1/9 plans executed in 5 waves
 
 Plans:
 **Wave 1**
-- [ ] 01-01-PLAN.md — Guard-first commit on the phase branch, private repo created, branch-per-phase on (wave 1)
+- [x] 01-01-PLAN.md — Guard-first commit on the phase branch, private repo created, branch-per-phase on (wave 1)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 01-02-PLAN.md — Pinned Vite/React/TS stack, home route on fixed ports 4173/5173, smoke script (wave 2)
@@ -174,7 +174,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Setup & Contracts | 0/9 | Planned | - |
+| 1. Setup & Contracts | 1/9 | In Progress | - |
 | 2. Research Wave 1 | 0/TBD | Not started | - |
 | 3. Pitch Standard & Data Pipeline | 0/TBD | Not started | - |
 | 4. Design Direction & System | 0/TBD | Not started | - |
