@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-next-klopp.example/schemas/source.schema.json",
+  "title": "Source registry entry",
+  "$comment": "One entry of sources.json or SOURCE_REGISTRY.json. Id uniqueness across a registry and the existence of ids that other documents reference are checked by the Phase 2 and Phase 5 validators, not by JSON Schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "url",
+    "type",
+    "publisher",
+    "free",
+    "license",
+    "quality",
+    "recency",
+    "as_of",
+    "best_for",
+    "notes",
+    "status"
+  ],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+    "title": { "type": "string", "minLength": 1 },
+    "url": { "$ref": "common.schema.json#/$defs/httpUrl" },
+    "type": {
+      "enum": [
+        "dataset",
+        "regulation",
+        "official-document",
+        "paper",
+        "book",
+        "article",
+        "news",
+        "blog",
+        "video",
+        "podcast",
+        "course",
+        "website",
+        "api",
+        "tool",
+        "report"
+      ]
+    },
+    "publisher": { "type": "string", "minLength": 1 },
+    "free": { "type": "boolean" },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["read", "automated_access", "redistribute", "derivative"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "terms_url": { "$ref": "common.schema.json#/$defs/httpUrl" },
+        "read": { "$ref": "common.schema.json#/$defs/permission" },
+        "automated_access": { "$ref": "common.schema.json#/$defs/permission" },
+        "redistribute": { "$ref": "common.schema.json#/$defs/permission" },
+        "derivative": { "$ref": "common.schema.json#/$defs/permission" }
+      }
+    },
+    "quality": { "type": "integer", "minimum": 1, "maximum": 5 },
+    "recency": { "$ref": "common.schema.json#/$defs/isoDate" },
+    "as_of": { "$ref": "common.schema.json#/$defs/isoDate" },
+    "best_for": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "notes": { "type": "string" },
+    "status": { "enum": ["active", "removed", "unverified"] },
+    "removed_reason": { "type": "string", "minLength": 1 },
+    "excerpts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "locator", "fetched_at", "sha256", "paraphrase"],
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+          "locator": { "type": "string", "minLength": 1 },
+          "fetched_at": { "$ref": "common.schema.json#/$defs/utcDateTime" },
+          "sha256": { "$ref": "common.schema.json#/$defs/sha256" },
+          "paraphrase": { "type": "string", "maxLength": 300 }
+        }
+      }
+    }
+  },
+  "if": {
+    "properties": { "status": { "const": "removed" } },
+    "required": ["status"]
+  },
+  "then": {
+    "required": ["removed_reason"],
+    "properties": { "removed_reason": { "type": "string", "minLength": 1 } }
+  }
+}

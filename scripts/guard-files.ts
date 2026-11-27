@@ -4,8 +4,8 @@
 // Dependency-free. Erasable TypeScript only. Git is spawned with argument arrays, never a shell.
 
 import { execFileSync } from "node:child_process";
-import { readFileSync, statSync } from "node:fs";
-import { checkFile, type FileInput, type Violation } from "./lib/guard.ts";
+import { readFileSync, type Stats, statSync } from "node:fs";
+import { checkFile, decodeForScan, type FileInput, type Violation } from "./lib/guard.ts";
 
 const USAGE = "usage: node scripts/guard-files.ts --staged | --tracked";
 const MAX_BUFFER = 256 * 1024 * 1024;
@@ -21,12 +21,8 @@ function splitNul(buf: Buffer): string[] {
     .filter((s) => s.length > 0);
 }
 
-function isBinary(bytes: Buffer): boolean {
-  return bytes.subarray(0, 8000).includes(0);
-}
-
 function toInput(path: string, bytes: Buffer): FileInput {
-  return { path, size: bytes.length, content: isBinary(bytes) ? null : bytes.toString("utf8") };
+  return { path, size: bytes.length, content: decodeForScan(bytes) };
 }
 
 function readIndexBlob(path: string): Buffer {
@@ -41,7 +37,7 @@ function collect(mode: "--staged" | "--tracked"): FileInput[] {
   const paths = splitNul(git(["ls-files", "-z"]));
   const inputs: FileInput[] = [];
   for (const p of paths) {
-    let stat;
+    let stat: Stats;
     try {
       stat = statSync(p);
     } catch {

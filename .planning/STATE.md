@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 1
 current_phase_name: Setup & Contracts
 status: executing
-stopped_at: Roadmap and state initialised; next step is `/gsd-plan-phase 1`
-last_updated: "2026-11-27T18:43:07.096Z"
+stopped_at: "01-09 tasks 1-2 done; task 3 blocked by GitHub billing (PR #1 open)"
+last_updated: "2026-11-27T19:18:04.455Z"
 last_activity: 2026-11-27
 last_activity_desc: Phase 1 execution started
-state_head: ea4318478ad9321e402cc6deeea15ba62e28a5ac
+state_head: ef5ee905d00f9bdf476deb0dbb8c3cf8d70abffd
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 9
-  completed_plans: 0
+  completed_plans: 9
   percent: 0
 ---
 
@@ -28,8 +28,8 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 1 (Setup & Contracts) — EXECUTING
-Plan: 1 of 9
-Status: Executing Phase 1
+Plan: 9 of 9
+Status: Ready to execute
 Last activity: 2026-11-27 — Phase 1 execution started
 
 Progress: [░░░░░░░░░░] 0%
@@ -52,6 +52,18 @@ Progress: [░░░░░░░░░░] 0%
 - Trend: -
 
 *Updated after each plan completion*
+**Per-Plan Metrics:**
+
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| Phase 1 P01 | 15min | 2 tasks | 7 files |
+| Phase 1 P02 | 12min | 2 tasks | 11 files |
+| Phase 1 P03 | 8min | 2 tasks | 12 files |
+| Phase 1 P07 | 12min | 3 tasks | 9 files |
+| Phase 1 P04 | 10min | 3 tasks | 10 files |
+| Phase 1 P05 | 10min | 3 tasks | 11 files |
+| Phase 1 P06 | 6min | 2 tasks | 7 files |
+| Phase 1 P08 | 25min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -65,6 +77,11 @@ Recent decisions affecting current work:
 - [Init]: Research outputs are machine-readable (`concept-map.json`, `roles.json`, `competencies.json`, `SOURCE_REGISTRY.json`); Markdown files are views
 - [Init]: Watch Gym L1 clips come from open-data reconstructions plus the learner's local clips; YouTube is link-out only; no video stored
 - [Roadmap]: Learner checkpoints are phase boundaries: research approval ends Phase 2, design-direction pick opens Phase 4
+- [Phase 1]: Phase branch gsd/phase-1-setup-contracts; main renamed from master and fast-forwarded to guard commit; private repo ashayyan/the-next-klopp; branching_strategy=phase
+- [Phase 1]: RouterProvider imported from react-router/dom; no react-router-dom; installs run with HUSKY=0 until Plan 04
+- [Phase 1]: No allowScripts block: npm install-scripts ls reported no unreviewed install scripts (Vite 8 uses rolldown)
+- [Phase 1]: 01-07: K-Dense curated 14-skill subset plus 3 design skills installed project-local (copy mode); offer-k-dense-web absent upstream v2.72.0; Opus overrides for research-synthesizer, ui-researcher, roadmapper; Fable manual only
+- [Phase 1]: 01-08: agentmemory written via REST (MCP tools only appear in a new session); verify memory matches search hits by id against full memory content
 
 ### Pending Todos
 
@@ -76,6 +93,13 @@ None yet.
 - [Phase 2]: Open-data Premier League coverage and per-source terms of service are unverified; Watch Gym supply depends on the coverage matrix
 - [Phase 5]: Vercel plan must support protection scope "All Deployments"; learner logs into Vercel and `gh` themselves
 - [Later]: Local big-5 and Wyscout data paths not given; ask at the data-pipeline checkpoint before Track 15/18 work
+- 01-09: GitHub Actions jobs do not start (account payment failed / spending limit). Learner must fix Billing & plans, then gh run rerun on PR #1; plan 01-09 task 3 pending
+
+## Deferred Verification
+
+| Phase | State | Resume |
+|-------|-------|--------|
+| 1 | verification_deferred_human (CI never ran: GitHub billing block; fresh-session skill/model check) | fix billing, gh run rerun, then /gsd-verify-work 1 and merge PR #1 |
 
 ## Deferred Items
 
@@ -87,6 +111,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-27
-Stopped at: Roadmap and state initialised; next step is `/gsd-plan-phase 1`
+Last session: 2026-11-27T19:18:04.429Z
+Stopped at: 01-09 tasks 1-2 done; task 3 blocked by GitHub billing (PR #1 open)
 Resume file: None

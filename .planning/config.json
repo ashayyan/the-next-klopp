@@ -11,7 +11,7 @@
   "perplexity": false,
   "jina": false,
   "git": {
-    "branching_strategy": "none",
+    "branching_strategy": "phase",
     "create_tag": true,
     "repo_tagging": "single",
     "phase_branch_template": "gsd/phase-{phase}-{slug}",
@@ -87,23 +87,23 @@
   "phase_naming": "sequential",
   "agent_skills": {
     "gsd-ui-researcher": [
-      "global:design-taste-frontend",
+      ".claude/skills/design-taste-frontend",
       "global:frontend-design"
     ],
     "gsd-ui-checker": [
-      "global:design-taste-frontend",
+      ".claude/skills/design-taste-frontend",
       "global:frontend-design"
     ],
     "gsd-ui-auditor": [
-      "global:design-taste-frontend",
+      ".claude/skills/design-taste-frontend",
       "global:frontend-design"
     ],
     "gsd-executor": [
-      "global:design-taste-frontend",
+      ".claude/skills/design-taste-frontend",
       "global:frontend-design"
     ],
     "gsd-planner": [
-      "global:design-taste-frontend"
+      ".claude/skills/design-taste-frontend"
     ]
   },
   "claude_md_path": "./.claude/CLAUDE.md",
@@ -113,5 +113,10 @@
   },
   "resolve_model_ids": "omit",
   "mode": "yolo",
-  "granularity": "standard"
+  "granularity": "standard",
+  "model_overrides": {
+    "gsd-research-synthesizer": "opus",
+    "gsd-ui-researcher": "opus",
+    "gsd-roadmapper": "opus"
+  }
 }

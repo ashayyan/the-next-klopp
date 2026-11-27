@@ -1,0 +1,184 @@
+{
+  "valid": [
+    {
+      "name": "two-competencies-one-source",
+      "doc": {
+        "id": "head-coach",
+        "title": "Head coach",
+        "summary": "Leads training and matchday decisions for the first team.",
+        "competencies": [
+          {
+            "id": "pressing-design",
+            "target_level": 2
+          },
+          {
+            "id": "game-model",
+            "target_level": 4
+          }
+        ],
+        "sources": ["premier-league-handbook"]
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "target-level-zero",
+      "reason": "target_level 0 is below 1",
+      "expect_path": "/competencies/0/target_level",
+      "doc": {
+        "id": "head-coach",
+        "title": "Head coach",
+        "summary": "Leads training and matchday decisions for the first team.",
+        "competencies": [
+          {
+            "id": "pressing-design",
+            "target_level": 0
+          },
+          {
+            "id": "game-model",
+            "target_level": 4
+          }
+        ],
+        "sources": ["premier-league-handbook"]
+      }
+    },
+    {
+      "name": "target-level-five",
+      "reason": "target_level 5 is above 4",
+      "expect_path": "/competencies/0/target_level",
+      "doc": {
+        "id": "head-coach",
+        "title": "Head coach",
+        "summary": "Leads training and matchday decisions for the first team.",
+        "competencies": [
+          {
+            "id": "pressing-design",
+            "target_level": 5
+          },
+          {
+            "id": "game-model",
+            "target_level": 4
+          }
+        ],
+        "sources": ["premier-league-handbook"]
+      }
+    },
+    {
+      "name": "missing-summary",
+      "reason": "role has no summary",
+      "expect_path": "/summary",
+      "doc": {
+        "id": "head-coach",
+        "title": "Head coach",
+        "competencies": [
+          {
+            "id": "pressing-design",
+            "target_level": 2
+          },
+          {
+            "id": "game-model",
+            "target_level": 4
+          }
+        ],
+        "sources": ["premier-league-handbook"]
+      }
+    },
+    {
+      "name": "empty-competencies",
+      "reason": "competencies array is empty",
+      "expect_path": "/competencies",
+      "doc": {
+        "id": "head-coach",
+        "title": "Head coach",
+        "summary": "Leads training and matchday decisions for the first team.",
+        "competencies": [],
+        "sources": ["premier-league-handbook"]
+      }
+    },
+    {
+      "name": "competency-extra-property",
+      "reason": "role competency objects are closed",
+      "expect_path": "/competencies/0/extra",
+      "doc": {
+        "id": "head-coach",
+        "title": "Head coach",
+        "summary": "Leads training and matchday decisions for the first team.",
+        "competencies": [
+          {
+            "id": "pressing-design",
+            "target_level": 2,
+            "extra": "x"
+          },
+          {
+            "id": "game-model",
+            "target_level": 4
+          }
+        ],
+        "sources": ["premier-league-handbook"]
+      }
+    },
+    {
+      "name": "duplicate-sources",
+      "reason": "sources must be unique",
+      "expect_path": "/sources",
+      "doc": {
+        "id": "head-coach",
+        "title": "Head coach",
+        "summary": "Leads training and matchday decisions for the first team.",
+        "competencies": [
+          {
+            "id": "pressing-design",
+            "target_level": 2
+          },
+          {
+            "id": "game-model",
+            "target_level": 4
+          }
+        ],
+        "sources": ["premier-league-handbook", "premier-league-handbook"]
+      }
+    },
+    {
+      "name": "empty-sources",
+      "reason": "sources needs at least one entry",
+      "expect_path": "/sources",
+      "doc": {
+        "id": "head-coach",
+        "title": "Head coach",
+        "summary": "Leads training and matchday decisions for the first team.",
+        "competencies": [
+          {
+            "id": "pressing-design",
+            "target_level": 2
+          },
+          {
+            "id": "game-model",
+            "target_level": 4
+          }
+        ],
+        "sources": []
+      }
+    },
+    {
+      "name": "id-81-chars",
+      "reason": "kebabId is limited to 80 characters",
+      "expect_path": "/id",
+      "doc": {
+        "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "title": "Head coach",
+        "summary": "Leads training and matchday decisions for the first team.",
+        "competencies": [
+          {
+            "id": "pressing-design",
+            "target_level": 2
+          },
+          {
+            "id": "game-model",
+            "target_level": 4
+          }
+        ],
+        "sources": ["premier-league-handbook"]
+      }
+    }
+  ]
+}

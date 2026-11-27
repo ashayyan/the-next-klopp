@@ -1,0 +1,141 @@
+{
+  "version": 2,
+  "skills": {
+    "citation-management": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/citation-management/SKILL.md",
+      "computedHash": "3b3bb7b57f41f5e6fdab85f7f3081df0cceedf37b377e3125cd87c14552e8650",
+      "installMode": "copy"
+    },
+    "design-taste-frontend": {
+      "source": "Leonxlnx/taste-skill",
+      "commit": "952435f63acece7d2fcb4b4d3c1786c1c43603e0",
+      "sourceType": "github",
+      "skillPath": "skills/taste-skill/SKILL.md",
+      "computedHash": "b10eab0a9684cd09cf34c31ef04a3bf530a5f4404422f9c520d42372d670c7fc",
+      "installMode": "copy"
+    },
+    "experimental-design": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/experimental-design/SKILL.md",
+      "computedHash": "6d55e9719ccbd50d642e1d49f6fe1683e9edaa31b88d1078a8ce36da1dfe71f9",
+      "installMode": "copy"
+    },
+    "exploratory-data-analysis": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/exploratory-data-analysis/SKILL.md",
+      "computedHash": "7ae5e1e2736eb50620e00a07286a6b210217f0923b9780d15ac64f1f959cf58b",
+      "installMode": "copy"
+    },
+    "hypothesis-generation": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/hypothesis-generation/SKILL.md",
+      "computedHash": "f7175c0bcc5fbc820bc6e6e5b8e7260fcc688a99c848fed120e917784961af2c",
+      "installMode": "copy"
+    },
+    "literature-review": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/literature-review/SKILL.md",
+      "computedHash": "0bb3bac7e11a08edf1b9deb29db7eca3e33c61b00b9394e0f9b383b9bc55b5c3",
+      "installMode": "copy"
+    },
+    "matplotlib": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/matplotlib/SKILL.md",
+      "computedHash": "d158b5acb8d907abbeea88f2b32914d88a07ac212b5396a8ba50f5082e971c97",
+      "installMode": "copy"
+    },
+    "peer-review": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/peer-review/SKILL.md",
+      "computedHash": "b626fbbbb2de1eabc016c9426481a7abfb87d76753fd41fd5b143a26d8059ca1",
+      "installMode": "copy"
+    },
+    "scientific-critical-thinking": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/scientific-critical-thinking/SKILL.md",
+      "computedHash": "a79ae9c13bfd7fc39770c4500ee4b2ecf2808c1d77e4561071bee6f166efd1ec",
+      "installMode": "copy"
+    },
+    "scientific-visualization": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/scientific-visualization/SKILL.md",
+      "computedHash": "a9ea119baafe77128193200a93acf35f56ce8c52038253a4bcef4f0da41e7e70",
+      "installMode": "copy"
+    },
+    "scientific-writing": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/scientific-writing/SKILL.md",
+      "computedHash": "2b98539c10a4a176bf98659a8437c0b6d195e8c18be79f19bbe4cd8395efd064",
+      "installMode": "copy"
+    },
+    "scikit-learn": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/scikit-learn/SKILL.md",
+      "computedHash": "072badf63201170ce6ffde828585222bca78b5551cf8e02e10bb8430ab602f1b",
+      "installMode": "copy"
+    },
+    "shap": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/shap/SKILL.md",
+      "computedHash": "1b6b226c6f02a9c8287a2151396ee27b289eabc7d990f7157a9fabe37706926a",
+      "installMode": "copy"
+    },
+    "statistical-analysis": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/statistical-analysis/SKILL.md",
+      "computedHash": "7428d347cfe2f52324cba1aaf30031fc480d47a65dfb932879ec25ca5c7eac7f",
+      "installMode": "copy"
+    },
+    "statsmodels": {
+      "source": "K-Dense-AI/scientific-agent-skills",
+      "commit": "c21d13b3cc2894680229ba9959a53281acb9200e",
+      "sourceType": "github",
+      "skillPath": "skills/statsmodels/SKILL.md",
+      "computedHash": "be462bb27fd17f7f13a7db82011686a333f8aaedd308412bc2406b6f5a289e49",
+      "installMode": "copy"
+    },
+    "ui-ux-pro-max": {
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "11ca2b3bdd555649f278ee348c32a9302b24dcf1",
+      "sourceType": "github",
+      "skillPath": ".claude/skills/ui-ux-pro-max/SKILL.md",
+      "computedHash": "e960cc1c18fed7c3a88e4c2129157e35939e5e039b44b1e8d6b333fafa7653bb",
+      "installMode": "copy"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "commit": "5a37a6329fbad3666c3207392a6a7c0110e92efb",
+      "sourceType": "github",
+      "skillPath": "skills/web-design-guidelines/SKILL.md",
+      "computedHash": "5994e4cfd86144903d2ba750f862b9e36af15e3297aac983679e347b99f6cb71",
+      "installMode": "copy"
+    }
+  }
+}

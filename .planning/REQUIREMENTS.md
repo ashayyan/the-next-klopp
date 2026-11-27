@@ -9,13 +9,13 @@
 
 ### Setup and Toolchain
 
-- [ ] **SETUP-01**: GSD Core, agentmemory, K-Dense Scientific Agent Skills and design skills (taste-skill v2 installed project-locally, frontend-design, web-design-guidelines, ui-ux-pro-max, a dataviz skill) are installed and verified against current READMEs, recorded in `docs/SETUP.md`; promotional skills (e.g. `offer-k-dense-web`) are disabled
-- [ ] **SETUP-02**: Model routing (brief §5) is configured and logged in `docs/SETUP.md`; `docs/FABLE_LOG.md` exists with the 4-step escalation protocol and the 3-per-milestone cap
-- [ ] **SETUP-03**: Private GitHub repo `the-next-klopp` exists with protected `main`, branch-per-phase PRs, conventional commits, and CI on GitHub Actions (lint, typecheck, unit tests, build, Windows smoke job)
-- [ ] **SETUP-04**: The first commit carries repo guards: `.gitignore` for raw/licensed data and secrets, `.gitattributes` with `eol=lf`, a large-file/path guard, secret scanning, and `.env.example`
-- [ ] **SETUP-05**: The learner profile and project rules are stored in agentmemory (no raw research dumps)
-- [ ] **SETUP-06**: Architecture decisions are recorded in `docs/decisions/` (Vite SPA vs Next.js, router, storage engine, Vercel scope, study/dev split, path-with-spaces handling)
-- [ ] **SETUP-07**: Shared contract schemas (source, concept, competency, role) exist in `/schemas` before research agents spawn
+- [x] **SETUP-01**: GSD Core, agentmemory, K-Dense Scientific Agent Skills and design skills (taste-skill v2 installed project-locally, frontend-design, web-design-guidelines, ui-ux-pro-max, a dataviz skill) are installed and verified against current READMEs, recorded in `docs/SETUP.md`; promotional skills (e.g. `offer-k-dense-web`) are disabled
+- [x] **SETUP-02**: Model routing (brief §5) is configured and logged in `docs/SETUP.md`; `docs/FABLE_LOG.md` exists with the 4-step escalation protocol and the 3-per-milestone cap
+- [x] **SETUP-03**: Private GitHub repo `the-next-klopp` exists with protected `main`, branch-per-phase PRs, conventional commits, and CI on GitHub Actions (lint, typecheck, unit tests, build, Windows smoke job)
+- [x] **SETUP-04**: The first commit carries repo guards: `.gitignore` for raw/licensed data and secrets, `.gitattributes` with `eol=lf`, a large-file/path guard, secret scanning, and `.env.example`
+- [x] **SETUP-05**: The learner profile and project rules are stored in agentmemory (no raw research dumps)
+- [x] **SETUP-06**: Architecture decisions are recorded in `docs/decisions/` (Vite SPA vs Next.js, router, storage engine, Vercel scope, study/dev split, path-with-spaces handling)
+- [x] **SETUP-07**: Shared contract schemas (source, concept, competency, role) exist in `/schemas` before research agents spawn
 
 ### Research (Wave 1)
 
@@ -49,7 +49,7 @@
 
 ### Platform and App Shell
 
-- [ ] **PLAT-01**: The app runs on Windows localhost with one documented command, on a fixed port
+- [x] **PLAT-01**: The app runs on Windows localhost with one documented command, on a fixed port
 - [ ] **PLAT-02**: The app shell has a home screen with one obvious next action, navigation by track/chapter, and a "What's new" changelog page
 - [ ] **PLAT-03**: The app is deployed to the learner's Vercel account with Deployment Protection scope "All Deployments"; a smoke script proves production and preview URLs are not public
 - [ ] **PLAT-04**: The deployed bundle contains no licensed raw data (deny-manifest check)
@@ -163,14 +163,14 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SETUP-01 | Phase 1 | Pending |
-| SETUP-02 | Phase 1 | Pending |
-| SETUP-03 | Phase 1 | Pending |
-| SETUP-04 | Phase 1 | Pending |
-| SETUP-05 | Phase 1 | Pending |
-| SETUP-06 | Phase 1 | Pending |
-| SETUP-07 | Phase 1 | Pending |
-| PLAT-01 | Phase 1 | Pending |
+| SETUP-01 | Phase 1 | Complete |
+| SETUP-02 | Phase 1 | Complete |
+| SETUP-03 | Phase 1 | Complete |
+| SETUP-04 | Phase 1 | Complete |
+| SETUP-05 | Phase 1 | Complete |
+| SETUP-06 | Phase 1 | Complete |
+| SETUP-07 | Phase 1 | Complete |
+| PLAT-01 | Phase 1 | Complete |
 | RSCH-01 | Phase 2 | Pending |
 | RSCH-02 | Phase 2 | Pending |
 | RSCH-03 | Phase 2 | Pending |
