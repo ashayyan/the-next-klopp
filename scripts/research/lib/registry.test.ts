@@ -130,7 +130,7 @@ describe("mergeSources", () => {
     );
   });
 
-  it("renames a clashing excerpt id with a different hash and records the excerpt alias", () => {
+  it("renames a clashing excerpt id and records an alias only for a different source id", () => {
     const ex = (sha256: string, paraphrase: string) => ({
       id: "edition",
       locator: "p.4",
@@ -153,8 +153,30 @@ describe("mergeSources", () => {
       },
     ]);
     expect(registry[0]?.excerpts?.map((e) => e.id)).toEqual(["edition", "pitch-geometry-edition"]);
-    expect(excerptAliases).toEqual({ "src-e#edition": "src-e#pitch-geometry-edition" });
+    // Same id as the survivor: `src-e#edition` keeps naming the first-seen excerpt, no alias.
+    expect(excerptAliases).toEqual({});
     expect(report.excerptRenames).toHaveLength(1);
+  });
+
+  it("aliases a renamed excerpt cited under a different source id", () => {
+    const ex = (sha256: string) => ({
+      id: "edition",
+      locator: "p.4",
+      fetched_at: "2026-11-27T00:00:00Z",
+      sha256,
+      paraphrase: "x",
+    });
+    const { excerptAliases } = mergeSources([
+      {
+        origin: "seed",
+        sources: [src("src-e", "https://example.org/e", { excerpts: [ex(HASH_A)] })],
+      },
+      {
+        origin: "pitch-geometry",
+        sources: [src("src-f", "https://example.org/e/", { excerpts: [ex(HASH_B)] })],
+      },
+    ]);
+    expect(excerptAliases).toEqual({ "src-f#edition": "src-e#pitch-geometry-edition" });
   });
 
   it("throws, naming the id, when one id is used on two different canonical URLs", () => {

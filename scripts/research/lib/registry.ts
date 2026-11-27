@@ -304,7 +304,9 @@ export function mergeSources(
         const copy: Excerpt = { ...ex, id: renamed };
         byExcerptId.set(renamed, copy);
         excerpts.push(copy);
-        excerptAliases.set(`${m.source.id}#${ex.id}`, `${id}#${renamed}`);
+        // When the member shares the surviving id, `id#ex.id` already names the first-seen excerpt.
+        // An alias for that key would redirect the still-valid citation, so only other ids get one.
+        if (m.source.id !== id) excerptAliases.set(`${m.source.id}#${ex.id}`, `${id}#${renamed}`);
         report.excerptRenames.push({ id, from: ex.id, to: renamed, origin: m.origin });
       }
     }
