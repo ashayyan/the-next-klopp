@@ -1,0 +1,52 @@
+{
+  "name": "the-next-klopp",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "study": "vite build && vite preview",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome check --write .",
+    "test": "vitest run",
+    "guard": "node scripts/guard-files.ts --tracked",
+    "validate:schemas": "vitest run schemas",
+    "smoke": "node scripts/smoke.ts",
+    "smoke:dev": "node scripts/smoke.ts dev",
+    "verify:setup": "node scripts/verify-setup.ts all",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs,json,jsonc,css}": [
+      "biome check --write --no-errors-on-unmatched"
+    ]
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.9",
+    "@tailwindcss/vite": "4.3.5",
+    "@types/node": "26.6.11",
+    "@types/react": "19.3.3",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.3.0",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "husky": "9.1.7",
+    "lint-staged": "17.6.2",
+    "tailwindcss": "4.3.5",
+    "typescript": "7.0.2",
+    "vite": "8.4.0",
+    "vitest": "5.1.2"
+  },
+  "dependencies": {
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "react-router": "8.5.3",
+    "zod": "4.6.7"
+  }
+}
