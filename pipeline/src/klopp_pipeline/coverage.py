@@ -20,6 +20,23 @@ Fetch = Callable[[str, int], bytes]
 
 MB = 1024 * 1024
 
+# --- other providers: index URLs ------------------------------------------------------------------
+WYSCOUT_ZIP_URL = "https://ndownloader.figshare.com/files/14464622"
+WYSCOUT_COLLECTION_URL = "https://api.figshare.com/v2/collections/4415000"
+SKILLCORNER_MATCHES_URL = (
+    "https://raw.githubusercontent.com/SkillCorner/opendata/master/data/matches.json"
+)
+DFL_ARTICLE_URL = "https://api.figshare.com/v2/articles/28196177"
+METRICA_URL = "https://api.github.com/repos/metrica-sports/sample-data/contents/data"
+LASTROW_URL = (
+    "https://api.github.com/repos/Friends-of-Tracking-Data-FoTD/Last-Row/contents/datasets/positional_data"
+)
+LASTROW_CSV_URL = (
+    "https://raw.githubusercontent.com/Friends-of-Tracking-Data-FoTD/Last-Row/master/datasets/"
+    "positional_data/liverpool_2019.csv"
+)
+PFF_URL = "https://www.blog.fc.pff.com/blog/pff-fc-release-2022-world-cup-data"
+
 # --- StatsBomb ----------------------------------------------------------------------------------
 SB_RAW = "https://raw.githubusercontent.com/statsbomb/open-data/master/data"
 SB_COMPETITIONS_URL = f"{SB_RAW}/competitions.json"

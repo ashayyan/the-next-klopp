@@ -4,13 +4,14 @@ from __future__ import annotations
 
 import io
 import json
+import urllib.request
 import zipfile
 from pathlib import Path
 from typing import Any
 
 import pytest
 
-from klopp_pipeline import coverage
+from klopp_pipeline import coverage, net
 from klopp_pipeline.models import CoverageMatrix, CoverageRow
 from klopp_pipeline.net import FetchError
 
@@ -138,3 +139,197 @@ def test_row_model_rejects_a_guessed_count_for_an_unreachable_provider() -> None
     assert ok.pl_matches is None
     with pytest.raises(ValueError):
         CoverageRow(**{**base, "status": "ok"}, matches_total=None, pl_matches=None)
+
+
+# --- other providers ----------------------------------------------------------------------------
+def test_wyscout_england_is_380_premier_league_matches() -> None:
+    rows = coverage.wyscout_rows(fake_fetch, NOW)
+    assert len(rows) == 7
+    assert all(r.data_type == "event" and r.licence_id == "CC-BY-4.0" for r in rows)
+    england = [r for r in rows if r.matches_total == 380 and r.pl_matches == 380]
+    assert len(england) == 1
+    assert england[0].competition_id == "364"
+    assert "Burnley" in england[0].notes
+    assert all(r.pl_matches == 0 for r in rows if r is not england[0])
+
+
+def test_wyscout_refuses_an_oversized_archive_member() -> None:
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("matches_England.json", "[" + " " * (5 * 1024 * 1024 + 10) + "]")
+    with pytest.raises(ValueError):
+        coverage.wyscout_rows(lambda url, max_bytes: buf.getvalue(), NOW)
+
+
+def test_skillcorner_has_20_matches_and_no_premier_league() -> None:
+    (row,) = coverage.skillcorner_rows(fake_fetch, NOW)
+    assert (row.matches_total, row.pl_matches) == (20, 0)
+    assert row.data_type == "broadcast-tracking"
+    assert row.licence_id == "MIT"
+    assert "not_started" in row.notes
+
+
+def test_dfl_has_7_matches_for_events_and_tracking() -> None:
+    rows = coverage.dfl_rows(fake_fetch, NOW)
+    for data_type in ("event", "tracking"):
+        mine = [r for r in rows if r.data_type == data_type]
+        assert sum(r.matches_total or 0 for r in mine) == 7
+    assert all(r.pl_matches == 0 and r.licence_id == "CC-BY-4.0" for r in rows)
+
+
+def test_metrica_has_3_anonymised_games() -> None:
+    rows = coverage.metrica_rows(fake_fetch, NOW)
+    assert {r.data_type for r in rows} == {"event", "tracking"}
+    for r in rows:
+        assert (r.matches_total, r.pl_matches) == (3, 0)
+        assert r.licence_id == "none-stated-informal-credit"
+        assert "anonymised" in r.notes
+
+
+def test_last_row_has_13_premier_league_goals_of_19() -> None:
+    (row,) = coverage.lastrow_rows(fake_fetch, NOW)
+    assert (row.matches_total, row.pl_matches) == (19, 13)
+    assert row.method == "manual"
+    assert row.licence_id == "none-stated-informal-credit"
+    assert row.data_type == "tracking"
+
+
+def test_last_row_deep_recount_agrees_with_the_manual_count() -> None:
+    (row,) = coverage.lastrow_rows(fake_fetch, NOW, deep=True)
+    assert (row.matches_total, row.pl_matches) == (19, 13)
+    assert "recounted" in row.notes
+
+
+def test_last_row_deep_falls_back_when_the_download_is_refused() -> None:
+    def fetch(url: str, max_bytes: int) -> bytes:
+        if url == coverage.LASTROW_CSV_URL:
+            raise FetchError("refused")
+        return fake_fetch(url, max_bytes)
+
+    (row,) = coverage.lastrow_rows(fetch, NOW, deep=True)
+    assert (row.matches_total, row.pl_matches) == (19, 13)
+    assert "manual count kept" in row.notes
+
+
+def test_pff_is_a_documented_request_only_row() -> None:
+    (row,) = coverage.pff_rows(fake_fetch, NOW)
+    assert row.status == "request-only" and row.method == "documented"
+    assert (row.matches_total, row.pl_matches) == (64, 0)
+    assert row.licence_id == "request-form-no-terms-stated"
+
+
+def test_an_unreachable_provider_gives_one_honest_row_and_the_rest_continue() -> None:
+    def fetch(url: str, max_bytes: int) -> bytes:
+        if url == coverage.SKILLCORNER_MATCHES_URL:
+            raise FetchError("host down")
+        return fake_fetch(url, max_bytes)
+
+    matrix = coverage.run_coverage(fetch, NOW)
+    sc = rows_for("SkillCorner", matrix.rows)
+    assert len(sc) == 1
+    assert sc[0].status == "unreachable" and sc[0].pl_matches is None
+    assert sc[0].matches_total is None
+    others = [r for r in matrix.rows if r.provider != "SkillCorner"]
+    assert others and all(r.status in ("ok", "request-only") for r in others)
+    assert {r.provider for r in others} == {
+        "StatsBomb",
+        "Wyscout",
+        "DFL",
+        "Metrica",
+        "Last Row",
+        "PFF FC",
+    }
+
+
+def test_markdown_shows_unreachable_instead_of_zero() -> None:
+    def fetch(url: str, max_bytes: int) -> bytes:
+        if url == coverage.SKILLCORNER_MATCHES_URL:
+            raise FetchError("host down")
+        return fake_fetch(url, max_bytes)
+
+    markdown = coverage.render_markdown(coverage.run_coverage(fetch, NOW))
+    line = next(x for x in markdown.splitlines() if x.startswith("| SkillCorner |"))
+    assert "unreachable" in line
+
+
+# --- fetcher rules (threats T-02-04 to T-02-06) --------------------------------------------------
+class FakeResponse:
+    def __init__(self, body: bytes, headers: dict[str, str] | None = None) -> None:
+        self._body = body
+        self.headers = headers or {}
+
+    def read(self, n: int = -1) -> bytes:
+        return self._body if n < 0 else self._body[:n]
+
+    def __enter__(self) -> FakeResponse:
+        return self
+
+    def __exit__(self, *exc: object) -> None:
+        return None
+
+
+class FakeOpener:
+    def __init__(self, body: bytes = b"{}") -> None:
+        self.body = body
+        self.requests: list[Any] = []
+
+    def open(self, request: Any, timeout: float = 0) -> FakeResponse:
+        self.requests.append(request)
+        return FakeResponse(self.body)
+
+
+def test_net_rejects_http_and_hosts_off_the_allow_list(tmp_path: Path) -> None:
+    with pytest.raises(FetchError):
+        net.fetch_bytes("http://raw.githubusercontent.com/x", 10, cache_dir=tmp_path)
+    with pytest.raises(FetchError):
+        net.fetch_bytes("https://example.org/x", 10, cache_dir=tmp_path)
+
+
+def test_net_refuses_redirects_to_other_hosts() -> None:
+    handler = net._SafeRedirectHandler()
+    request = urllib.request.Request("https://api.figshare.com/v2/x")
+    with pytest.raises(FetchError):
+        handler.redirect_request(request, None, 302, "Found", {}, "https://evil.example.org/x")
+    with pytest.raises(FetchError):
+        handler.redirect_request(request, None, 302, "Found", {}, "http://api.figshare.com/x")
+
+
+def test_net_rejects_a_body_over_the_cap(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr(net, "build_opener", lambda: FakeOpener(b"x" * 11))
+    with pytest.raises(FetchError):
+        net.fetch_bytes("https://raw.githubusercontent.com/x", 10, cache_dir=tmp_path)
+
+
+def test_net_offline_with_an_empty_cache_raises(tmp_path: Path) -> None:
+    with pytest.raises(FetchError):
+        net.fetch_bytes("https://raw.githubusercontent.com/x", 10, cache_dir=tmp_path, offline=True)
+
+
+def test_net_caches_and_serves_the_second_call_from_disk(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    opener = FakeOpener(b"hello")
+    monkeypatch.setattr(net, "build_opener", lambda: opener)
+    url = "https://raw.githubusercontent.com/x"
+    assert net.fetch_bytes(url, 100, cache_dir=tmp_path) == b"hello"
+    assert net.fetch_bytes(url, 100, cache_dir=tmp_path) == b"hello"
+    assert len(opener.requests) == 1
+    assert net.fetch_bytes(url, 100, cache_dir=tmp_path, offline=True) == b"hello"
+    metas = list(tmp_path.glob("*.meta.json"))
+    assert len(metas) == 1 and "fetched_at" in metas[0].read_text(encoding="utf-8")
+
+
+def test_github_token_is_sent_only_to_api_github_com(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setenv("GITHUB_TOKEN", "secret-token")
+    opener = FakeOpener()
+    monkeypatch.setattr(net, "build_opener", lambda: opener)
+    net.fetch_bytes("https://api.github.com/repos/x", 100, cache_dir=tmp_path)
+    net.fetch_bytes("https://raw.githubusercontent.com/y", 100, cache_dir=tmp_path)
+    api, raw = opener.requests
+    assert api.get_header("Authorization") == "Bearer secret-token"
+    assert raw.get_header("Authorization") is None
+    assert "klopp-pipeline" in raw.get_header("User-agent")
+    for path in tmp_path.iterdir():
+        assert b"secret-token" not in path.read_bytes()

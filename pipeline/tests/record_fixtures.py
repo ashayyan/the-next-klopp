@@ -11,8 +11,11 @@ are kept, so the fixture stays small and carries no licensed payload.
 
 from __future__ import annotations
 
+import csv
+import io
 import json
 import sys
+import zipfile
 from pathlib import Path
 from typing import Any
 
@@ -82,7 +85,76 @@ def record_statsbomb(fixtures: dict[str, Any]) -> None:
         fixtures[url] = {"kind": "json", "body": [_trim_sb_match(m) for m in matches_of(c)]}
 
 
-RECORDERS = {"statsbomb": record_statsbomb}
+def record_wyscout(fixtures: dict[str, Any]) -> None:
+    """matches_*.json members trimmed to ids and season; the first match label confirms identity."""
+    data = _fetch(coverage.WYSCOUT_ZIP_URL, 5 * coverage.MB)
+    body: dict[str, Any] = {}
+    with zipfile.ZipFile(io.BytesIO(data)) as zf:
+        for name in sorted(zf.namelist()):
+            members = json.loads(zf.read(name))
+            trimmed = [
+                {"wyId": m["wyId"], "competitionId": m["competitionId"], "seasonId": m["seasonId"]}
+                for m in members
+            ]
+            trimmed[0]["label"] = members[0]["label"]
+            body[name] = trimmed
+    fixtures[coverage.WYSCOUT_ZIP_URL] = {"kind": "zip", "body": body}
+
+
+def record_skillcorner(fixtures: dict[str, Any]) -> None:
+    matches = json.loads(_fetch(coverage.SKILLCORNER_MATCHES_URL, 2 * coverage.MB))
+    fixtures[coverage.SKILLCORNER_MATCHES_URL] = {
+        "kind": "json",
+        "body": [
+            {k: m[k] for k in ("id", "status", "competition_id", "season_id")} for m in matches
+        ],
+    }
+
+
+def record_dfl(fixtures: dict[str, Any]) -> None:
+    article = json.loads(_fetch(coverage.DFL_ARTICLE_URL, 2 * coverage.MB))
+    fixtures[coverage.DFL_ARTICLE_URL] = {
+        "kind": "json",
+        "body": {
+            "title": article["title"],
+            "license": {"name": article["license"]["name"], "url": article["license"]["url"]},
+            "files": [{"name": f["name"], "size": f["size"]} for f in article["files"]],
+        },
+    }
+
+
+def record_metrica(fixtures: dict[str, Any]) -> None:
+    listing = json.loads(_fetch(coverage.METRICA_URL, coverage.MB))
+    fixtures[coverage.METRICA_URL] = {
+        "kind": "json",
+        "body": [{"name": e["name"], "type": e["type"]} for e in listing],
+    }
+
+
+def record_lastrow(fixtures: dict[str, Any]) -> None:
+    listing = json.loads(_fetch(coverage.LASTROW_URL, coverage.MB))
+    fixtures[coverage.LASTROW_URL] = {
+        "kind": "json",
+        "body": [{"name": e["name"], "type": e["type"], "size": e["size"]} for e in listing],
+    }
+    raw = _fetch(coverage.LASTROW_CSV_URL, 16 * coverage.MB).decode("utf-8")
+    plays = list(dict.fromkeys(row["play"] for row in csv.DictReader(io.StringIO(raw))))
+    out = io.StringIO()
+    writer = csv.writer(out, lineterminator=chr(10))
+    writer.writerow(["", "play"])
+    for i, play in enumerate(plays):
+        writer.writerow([i, play])
+    fixtures[coverage.LASTROW_CSV_URL] = {"kind": "text", "body": out.getvalue()}
+
+
+RECORDERS = {
+    "statsbomb": record_statsbomb,
+    "wyscout": record_wyscout,
+    "skillcorner": record_skillcorner,
+    "dfl": record_dfl,
+    "metrica": record_metrica,
+    "lastrow": record_lastrow,
+}
 
 
 def main(argv: list[str]) -> int:
