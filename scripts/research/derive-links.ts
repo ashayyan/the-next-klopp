@@ -8,6 +8,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { isDeepStrictEqual } from "node:util";
 import { deriveLinks, toJson } from "./lib/derive.ts";
+import { isMainModule } from "./lib/is-main.ts";
 import type { Competency, Concept, Edge, Role } from "./lib/research-io.ts";
 
 export const CONCEPT_MAP_FILE = "concept-map.json";
@@ -72,6 +73,6 @@ function main(argv: string[]): number {
   return 0;
 }
 
-if (process.argv[1] && import.meta.filename === process.argv[1]) {
+if (isMainModule(import.meta.filename, process.argv[1])) {
   process.exit(main(process.argv.slice(2)));
 }

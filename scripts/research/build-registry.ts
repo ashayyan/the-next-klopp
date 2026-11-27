@@ -9,6 +9,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { isDeepStrictEqual } from "node:util";
 import { DOMAIN_SLUGS } from "./lib/domains.ts";
+import { isMainModule } from "./lib/is-main.ts";
 import {
   type MergeInput,
   type MergeReport,
@@ -141,6 +142,6 @@ function main(argv: string[]): number {
   return 0;
 }
 
-if (process.argv[1] && import.meta.filename === process.argv[1]) {
+if (isMainModule(import.meta.filename, process.argv[1])) {
   process.exit(main(process.argv.slice(2)));
 }
