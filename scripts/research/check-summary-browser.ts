@@ -56,6 +56,14 @@ class Cdp {
       if (msg.id !== undefined) this.pending.get(msg.id)?.(msg);
       else for (const l of this.listeners) l(msg);
     });
+    // A crashed browser closes the socket: fail every call still waiting instead of hanging until
+    // the caller's own timeout.
+    ws.addEventListener("close", () => {
+      for (const reply of [...this.pending.values()]) {
+        reply({ error: { message: "the browser connection closed" } });
+      }
+      this.pending.clear();
+    });
   }
   static connect(url: string): Promise<Cdp> {
     return new Promise((ok, fail) => {
@@ -289,8 +297,20 @@ async function run(
       // the browser may already be gone
     }
     browserWs?.close();
+    // Browser.close needs a live debug connection; when the wait or connect step failed the
+    // browser is still running and holds the profile folder, so stop the process we started.
+    try {
+      child.kill();
+    } catch {
+      // already gone
+    }
     await sleep(500);
-    rmSync(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 300 });
+    try {
+      rmSync(profile, { recursive: true, force: true, maxRetries: 10, retryDelay: 300 });
+    } catch (e) {
+      // Never let a locked temp folder replace the real result or error.
+      console.error(`could not remove ${profile}: ${(e as Error).message}`);
+    }
   }
 }
 
