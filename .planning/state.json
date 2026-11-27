@@ -1,0 +1,53 @@
+{
+  "contract": "1.0.0",
+  "flavor": "core",
+  "milestone": null,
+  "phases": [
+    {
+      "number": "1",
+      "name": "Setup & Contracts",
+      "status": "in_progress"
+    },
+    {
+      "number": "2",
+      "name": "Research Wave 1",
+      "status": "pending"
+    },
+    {
+      "number": "3",
+      "name": "Pitch Standard & Data Pipeline",
+      "status": "pending"
+    },
+    {
+      "number": "4",
+      "name": "Design Direction & System",
+      "status": "pending"
+    },
+    {
+      "number": "5",
+      "name": "Content Engine, App Shell & Deploy",
+      "status": "pending"
+    },
+    {
+      "number": "6",
+      "name": "Learner Experience & Progress",
+      "status": "pending"
+    },
+    {
+      "number": "7",
+      "name": "Golden Lesson & Track 0",
+      "status": "pending"
+    },
+    {
+      "number": "8",
+      "name": "Track 1 & Watch Gym Level 1",
+      "status": "pending"
+    }
+  ],
+  "next": {
+    "command": "/gsd-progress --next",
+    "label": "Advance to the next step",
+    "reason": "Phase 1 of 8 · 0% · executing"
+  },
+  "updated_at": "2026-11-27T18:43:07.161Z"
+}
