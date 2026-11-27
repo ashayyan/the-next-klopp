@@ -31,6 +31,30 @@ describe("guard: denied paths", () => {
     expect(rules(p)).toContain("denied-path");
   });
 
+  it.each([
+    ".ENV",
+    ".Env.Local",
+    "Raw/a.csv",
+    "data/RAW/a",
+    "Feedback/x",
+    "sub/node_modules/x.js",
+    "a/dist/x.js",
+    "Public/Pyodide/x.wasm",
+  ])("rejects case or depth variant %s", (p) => {
+    expect(rules(p)).toContain("denied-path");
+  });
+
+  it.each(["x.webm", "clip.M4V", "a.wmv", "x.sqlite3", "x.db-wal", "x.db-shm"])(
+    "rejects media or database file %s",
+    (p) => {
+      expect(rules(p)).toContain("denied-path");
+    },
+  );
+
+  it("allows .env.example in any case", () => {
+    expect(rules(".ENV.EXAMPLE")).toEqual([]);
+  });
+
   it("allows .env.example", () => {
     expect(rules(".env.example")).toEqual([]);
   });

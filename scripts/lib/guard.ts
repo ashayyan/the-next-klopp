@@ -43,6 +43,12 @@ const DENIED_EXTENSIONS: readonly string[] = [
   ".mkv",
   ".mov",
   ".avi",
+  ".webm",
+  ".m4v",
+  ".wmv",
+  ".sqlite3",
+  ".db-wal",
+  ".db-shm",
 ];
 
 const DENIED_BASENAMES: readonly string[] = ["credentials.json"];
@@ -58,25 +64,31 @@ function basename(p: string): string {
   return i === -1 ? p : p.slice(i + 1);
 }
 
-/** Returns a human reason when the path must never be committed, otherwise null. */
+/**
+ * Returns a human reason when the path must never be committed, otherwise null.
+ * Matching is case-insensitive (Windows and macOS file systems are) and prefix rules apply at
+ * any depth, so `.ENV`, `Raw/a.csv` and `sub/node_modules/x.js` are all rejected.
+ */
 export function isDeniedPath(path: string): string | null {
   const p = normalise(path);
-  const segments = p.split("/");
-  const base = basename(p);
-  const lower = base.toLowerCase();
+  const lowerPath = p.toLowerCase();
+  const segments = lowerPath.split("/");
+  const lower = basename(lowerPath);
 
   if (segments.includes("raw")) return "raw data folder";
-  if (base === ".env" || (base.startsWith(".env.") && base !== ".env.example")) {
+  if (lower === ".env" || (lower.startsWith(".env.") && lower !== ".env.example")) {
     return "env file";
   }
-  if (lower.endsWith(".parquet") && !p.startsWith("public/data/")) {
+  if (lower.endsWith(".parquet") && !lowerPath.startsWith("public/data/")) {
     return "parquet outside public/data/";
   }
   for (const prefix of DENIED_PREFIXES) {
-    if (p.startsWith(prefix)) return `under ${prefix}`;
+    if (lowerPath.startsWith(prefix) || lowerPath.includes(`/${prefix}`)) {
+      return `under ${prefix}`;
+    }
   }
-  if (p === ".claude/settings.local.json") return "local settings";
-  if (base.startsWith("THE_NEXT_KLOPP_MASTER_PROMPT")) return "learner brief copy";
+  if (lowerPath === ".claude/settings.local.json") return "local settings";
+  if (lower.startsWith("the_next_klopp_master_prompt")) return "learner brief copy";
   for (const ext of DENIED_EXTENSIONS) {
     if (lower.endsWith(ext)) return `forbidden extension ${ext}`;
   }
