@@ -95,6 +95,12 @@ None yet.
 - [Later]: Local big-5 and Wyscout data paths not given; ask at the data-pipeline checkpoint before Track 15/18 work
 - 01-09: GitHub Actions jobs do not start (account payment failed / spending limit). Learner must fix Billing & plans, then gh run rerun on PR #1; plan 01-09 task 3 pending
 
+## Deferred Verification
+
+| Phase | State | Resume |
+|-------|-------|--------|
+| 1 | verification_deferred_human (CI never ran: GitHub billing block; fresh-session skill/model check) | fix billing, gh run rerun, then /gsd-verify-work 1 and merge PR #1 |
+
 ## Deferred Items
 
 Items acknowledged and deferred at milestone close, most recent first:
