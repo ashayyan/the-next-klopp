@@ -17,7 +17,7 @@ The quality gates (QA-01 to QA-05) are standing gates for every lesson. Each is 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Setup & Contracts** - Verified toolchain, guarded private repo with CI, running app skeleton, decision records and shared schemas
-- [ ] **Phase 2: Research Wave 1** - Parallel research, data-coverage matrix, clip-supply decision, machine-readable registry and concept map, learner approval checkpoint
+- [x] **Phase 2: Research Wave 1** - Parallel research, data-coverage matrix, clip-supply decision, machine-readable registry and concept map, learner approval checkpoint (completed 2026-11-28)
 - [ ] **Phase 3: Pitch Standard & Data Pipeline** - Canonical pitch renderer, coordinate converters, glyphs and legend, Scene/Frame format, kloppy pipeline with licence gates
 - [ ] **Phase 4: Design Direction & System** - 2-3 rendered directions, learner pick, DESIGN.md, tokens, component gallery, screenshot-review gate
 - [ ] **Phase 5: Content Engine, App Shell & Deploy** - Lesson-as-data engine, validator, claim components, Playwright walker, quality gates, shell, protected Vercel deploy
@@ -72,7 +72,7 @@ Plans:
   3. `research/SOURCE_REGISTRY.json` (with read / automated_access / redistribute / derivative licence fields and a defined fetched-excerpt format the verifier can check), `concept-map.json`, `roles.json` and `competencies.json` validate against the schemas; `CONCEPT_MAP.md`, `CURRICULUM_DRAFT.md` and `ROLE_COMPETENCIES.md` regenerate from them; FBref advanced stats are recorded as a removed source.
   4. `research/GAPS.md` lists every domain deferred to just-in-time research together with the track it must precede.
   5. Learner reads a short visual summary of the concept map and curriculum draft and approves it (or sends feedback) before any DESIGN.md work begins.
-**Plans**: 21/21 plans executed in 9 waves
+**Plans**: 21/21 plans complete in 9 waves
 
 Plans:
 **Wave 1**
@@ -216,7 +216,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Setup & Contracts | 8/9 | In Progress | - |
-| 2. Research Wave 1 | 21/21 | In Progress | - |
+| 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
 | 3. Pitch Standard & Data Pipeline | 0/TBD | Not started | - |
 | 4. Design Direction & System | 0/TBD | Not started | - |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |
