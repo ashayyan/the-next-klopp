@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-next-klopp.example/schemas/common.schema.json",
+  "title": "Shared definitions",
+  "$comment": "Shared $defs for the contract schemas. URL and UTC date-time rules are patterns on purpose: the JSON Schema uri format and Zod's built-in URL validator disagree on spaces and empty hosts, so both validators use the same regex. Cross-document integrity (referenced ids exist, prerequisite graph is acyclic) is checked by the Phase 2 and Phase 5 validators, not by JSON Schema.",
+  "$defs": {
+    "kebabId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "maxLength": 80
+    },
+    "isoDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "utcDateTime": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?Z$"
+    },
+    "httpUrl": {
+      "type": "string",
+      "pattern": "^https?://[^\\s/$.?#][^\\s]*$"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "permission": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "note"],
+      "properties": {
+        "value": { "enum": ["yes", "no", "unknown", "conditional"] },
+        "note": { "type": "string" }
+      }
+    }
+  }
+}

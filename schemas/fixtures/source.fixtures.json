@@ -1,0 +1,548 @@
+{
+  "valid": [
+    {
+      "name": "active-with-excerpt",
+      "doc": {
+        "id": "premier-league-handbook",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/handbook",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "yes",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 5,
+        "recency": "2025-08-01",
+        "as_of": "2026-11-20",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T09:30:00Z",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcdef",
+            "paraphrase": "Clubs may register up to 25 senior players, with homegrown quotas applied."
+          }
+        ]
+      }
+    },
+    {
+      "name": "removed-fbref-advanced-stats",
+      "doc": {
+        "id": "fbref-advanced-stats",
+        "title": "FBref advanced match and player statistics",
+        "url": "https://fbref.com/en/",
+        "type": "website",
+        "publisher": "Sports Reference",
+        "free": true,
+        "license": {
+          "read": {
+            "value": "yes",
+            "note": "Public pages"
+          },
+          "automated_access": {
+            "value": "no",
+            "note": "Scraping prohibited"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Data provider terms"
+          },
+          "derivative": {
+            "value": "no",
+            "note": "Not permitted"
+          }
+        },
+        "quality": 4,
+        "recency": "2026-01-20",
+        "as_of": "2026-11-20",
+        "best_for": ["historic advanced stats"],
+        "notes": "Advanced stats were removed after the data provider ended the agreement.",
+        "status": "removed",
+        "removed_reason": "Advanced stats removed on 2026-01-20 after the provider ended the agreement."
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "removed-without-reason",
+      "reason": "status removed but removed_reason missing",
+      "doc": {
+        "id": "fbref-advanced-stats",
+        "title": "FBref advanced match and player statistics",
+        "url": "https://fbref.com/en/",
+        "type": "website",
+        "publisher": "Sports Reference",
+        "free": true,
+        "license": {
+          "read": {
+            "value": "yes",
+            "note": "Public pages"
+          },
+          "automated_access": {
+            "value": "no",
+            "note": "Scraping prohibited"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Data provider terms"
+          },
+          "derivative": {
+            "value": "no",
+            "note": "Not permitted"
+          }
+        },
+        "quality": 4,
+        "recency": "2026-01-20",
+        "as_of": "2026-11-20",
+        "best_for": ["historic advanced stats"],
+        "notes": "Advanced stats were removed after the data provider ended the agreement.",
+        "status": "removed"
+      }
+    },
+    {
+      "name": "url-with-space",
+      "reason": "url contains a space",
+      "doc": {
+        "id": "premier-league-handbook",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/hand book",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "yes",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 5,
+        "recency": "2025-08-01",
+        "as_of": "2026-11-20",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T09:30:00Z",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcdef",
+            "paraphrase": "Clubs may register up to 25 senior players, with homegrown quotas applied."
+          }
+        ]
+      }
+    },
+    {
+      "name": "excerpt-offset-timestamp",
+      "reason": "excerpt fetched_at carries a +03:00 offset instead of UTC Z",
+      "doc": {
+        "id": "premier-league-handbook",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/handbook",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "yes",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 5,
+        "recency": "2025-08-01",
+        "as_of": "2026-11-20",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T12:30:00+03:00",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcdef",
+            "paraphrase": "Clubs may register up to 25 senior players, with homegrown quotas applied."
+          }
+        ]
+      }
+    },
+    {
+      "name": "paraphrase-too-long",
+      "reason": "paraphrase has 301 characters",
+      "doc": {
+        "id": "premier-league-handbook",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/handbook",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "yes",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 5,
+        "recency": "2025-08-01",
+        "as_of": "2026-11-20",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T09:30:00Z",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcdef",
+            "paraphrase": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+          }
+        ]
+      }
+    },
+    {
+      "name": "quality-out-of-range",
+      "reason": "quality 6 exceeds the 1-5 scale",
+      "doc": {
+        "id": "premier-league-handbook",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/handbook",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "yes",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 6,
+        "recency": "2025-08-01",
+        "as_of": "2026-11-20",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T09:30:00Z",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcdef",
+            "paraphrase": "Clubs may register up to 25 senior players, with homegrown quotas applied."
+          }
+        ]
+      }
+    },
+    {
+      "name": "license-value-maybe",
+      "reason": "license permission value maybe is not in the enum",
+      "doc": {
+        "id": "premier-league-handbook",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/handbook",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "maybe",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 5,
+        "recency": "2025-08-01",
+        "as_of": "2026-11-20",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T09:30:00Z",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcdef",
+            "paraphrase": "Clubs may register up to 25 senior players, with homegrown quotas applied."
+          }
+        ]
+      }
+    },
+    {
+      "name": "unknown-top-level-property",
+      "reason": "extra property rating is not allowed",
+      "doc": {
+        "id": "premier-league-handbook",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/handbook",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "yes",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 5,
+        "recency": "2025-08-01",
+        "as_of": "2026-11-20",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T09:30:00Z",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcdef",
+            "paraphrase": "Clubs may register up to 25 senior players, with homegrown quotas applied."
+          }
+        ],
+        "rating": 3
+      }
+    },
+    {
+      "name": "id-uppercase",
+      "reason": "id contains uppercase letters",
+      "doc": {
+        "id": "Premier-League",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/handbook",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "yes",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 5,
+        "recency": "2025-08-01",
+        "as_of": "2026-11-20",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T09:30:00Z",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcdef",
+            "paraphrase": "Clubs may register up to 25 senior players, with homegrown quotas applied."
+          }
+        ]
+      }
+    },
+    {
+      "name": "sha256-too-short",
+      "reason": "excerpt sha256 has 63 hex characters",
+      "doc": {
+        "id": "premier-league-handbook",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/handbook",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "yes",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 5,
+        "recency": "2025-08-01",
+        "as_of": "2026-11-20",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T09:30:00Z",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcde",
+            "paraphrase": "Clubs may register up to 25 senior players, with homegrown quotas applied."
+          }
+        ]
+      }
+    },
+    {
+      "name": "as-of-impossible-date",
+      "reason": "as_of 2026-02-30 is not a real calendar date",
+      "doc": {
+        "id": "premier-league-handbook",
+        "title": "Premier League Handbook",
+        "url": "https://www.premierleague.com/handbook",
+        "type": "regulation",
+        "publisher": "Premier League",
+        "free": true,
+        "license": {
+          "name": "All rights reserved",
+          "terms_url": "https://www.premierleague.com/terms",
+          "read": {
+            "value": "yes",
+            "note": "Public page"
+          },
+          "automated_access": {
+            "value": "conditional",
+            "note": "Respect robots.txt and rate limits"
+          },
+          "redistribute": {
+            "value": "no",
+            "note": "Link and paraphrase only"
+          },
+          "derivative": {
+            "value": "conditional",
+            "note": "Short paraphrase with credit"
+          }
+        },
+        "quality": 5,
+        "recency": "2025-08-01",
+        "as_of": "2026-02-30",
+        "best_for": ["rules of competition", "financial regulations"],
+        "notes": "Official rulebook for the league.",
+        "status": "active",
+        "excerpts": [
+          {
+            "id": "squad-size-rule",
+            "locator": "Section Q, squad composition",
+            "fetched_at": "2026-11-20T09:30:00Z",
+            "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa0123456789abcdef0123456789abcdef",
+            "paraphrase": "Clubs may register up to 25 senior players, with homegrown quotas applied."
+          }
+        ]
+      }
+    }
+  ]
+}
