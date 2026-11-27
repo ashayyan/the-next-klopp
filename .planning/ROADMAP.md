@@ -72,7 +72,7 @@ Plans:
   3. `research/SOURCE_REGISTRY.json` (with read / automated_access / redistribute / derivative licence fields and a defined fetched-excerpt format the verifier can check), `concept-map.json`, `roles.json` and `competencies.json` validate against the schemas; `CONCEPT_MAP.md`, `CURRICULUM_DRAFT.md` and `ROLE_COMPETENCIES.md` regenerate from them; FBref advanced stats are recorded as a removed source.
   4. `research/GAPS.md` lists every domain deferred to just-in-time research together with the track it must precede.
   5. Learner reads a short visual summary of the concept map and curriculum draft and approves it (or sends feedback) before any DESIGN.md work begins.
-**Plans**: 4/21 plans executed in 9 waves
+**Plans**: 15/21 plans executed in 9 waves
 
 Plans:
 **Wave 1**
@@ -80,23 +80,23 @@ Plans:
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [x] 02-02-PLAN.md — Coverage-matrix script (`klopp-pipeline coverage`), fixtures, committed PL matrix (wave 2)
-- [ ] 02-05-PLAN.md — Research: laws-of-the-game (wave 2)
-- [ ] 02-06-PLAN.md — Research: pitch-geometry (wave 2)
-- [ ] 02-07-PLAN.md — Research: positions-and-numbering (wave 2)
-- [ ] 02-08-PLAN.md — Research: formations (wave 2)
-- [ ] 02-09-PLAN.md — Research: tactics-history (wave 2)
+- [x] 02-05-PLAN.md — Research: laws-of-the-game (wave 2)
+- [x] 02-06-PLAN.md — Research: pitch-geometry (wave 2)
+- [x] 02-07-PLAN.md — Research: positions-and-numbering (wave 2)
+- [x] 02-08-PLAN.md — Research: formations (wave 2)
+- [x] 02-09-PLAN.md — Research: tactics-history (wave 2)
 
 **Wave 3** *(blocked on Wave 2 completion)*
 - [x] 02-03-PLAN.md — Graph library and Markdown view generator on fixtures (wave 3)
-- [ ] 02-10-PLAN.md — Research: how-analysts-watch (wave 3)
-- [ ] 02-11-PLAN.md — Research: learning-science-adhd (K-Dense skills) (wave 3)
-- [ ] 02-12-PLAN.md — Research: role-definitions (wave 3)
-- [ ] 02-13-PLAN.md — Research: pl-data-sources (licences, terms, coverage summary) (wave 3)
-- [ ] 02-14-PLAN.md — Research: interactive-explainers (inspiration audit, Okabe-Ito source) (wave 3)
+- [x] 02-10-PLAN.md — Research: how-analysts-watch (wave 3)
+- [x] 02-11-PLAN.md — Research: learning-science-adhd (K-Dense skills) (wave 3)
+- [x] 02-12-PLAN.md — Research: role-definitions (wave 3)
+- [x] 02-13-PLAN.md — Research: pl-data-sources (licences, terms, coverage summary) (wave 3)
+- [x] 02-14-PLAN.md — Research: interactive-explainers (inspiration audit, Okabe-Ito source) (wave 3)
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [x] 02-04-PLAN.md — Self-contained summary page generator (dagre layout, CSP, five screens) (wave 4)
-- [ ] 02-15-PLAN.md — SOURCE_REGISTRY.json merge, aliases, just-in-time seeds (wave 4)
+- [x] 02-15-PLAN.md — SOURCE_REGISTRY.json merge, aliases, just-in-time seeds (wave 4)
 
 **Wave 5** *(blocked on Wave 4 completion)*
 - [ ] 02-16-PLAN.md — ADR 0008 Watch Gym L1 clip supply with licence evidence (wave 5)
@@ -216,7 +216,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Setup & Contracts | 8/9 | In Progress | - |
-| 2. Research Wave 1 | 4/21 | In Progress | - |
+| 2. Research Wave 1 | 15/21 | In Progress | - |
 | 3. Pitch Standard & Data Pipeline | 0/TBD | Not started | - |
 | 4. Design Direction & System | 0/TBD | Not started | - |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |

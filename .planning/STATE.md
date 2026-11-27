@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 2
 current_phase_name: Research Wave 1
 status: executing
-stopped_at: Completed 2-04-PLAN.md
-last_updated: "2026-11-27T21:31:07.258Z"
+stopped_at: Completed 2-15-PLAN.md
+last_updated: "2026-11-27T22:13:50.545Z"
 last_activity: 2026-11-27
 last_activity_desc: Phase 2 execution started
-state_head: c225c7e192fd8a236568b74508defb1d597a86e8
+state_head: 3f1bbb7528ec6e557e299c81f99a403de33e4004
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 30
-  completed_plans: 13
+  completed_plans: 24
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 2 (Research Wave 1) — EXECUTING
-Plan: 5 of 21
+Plan: 6 of 21
 Status: Ready to execute
 Last activity: 2026-11-27 — Phase 2 execution started
 
@@ -68,6 +68,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 2 P02 | 10 min | 3 tasks | 15 files |
 | Phase 2 P03 | 14 min | 2 tasks | 14 files |
 | Phase 2 P04 | 45 min | 2 tasks | 10 files |
+| Phase 2 P15 | 20 min | 3 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -86,6 +87,8 @@ Recent decisions affecting current work:
 - [Phase 1]: No allowScripts block: npm install-scripts ls reported no unreviewed install scripts (Vite 8 uses rolldown)
 - [Phase 1]: 01-07: K-Dense curated 14-skill subset plus 3 design skills installed project-local (copy mode); offer-k-dense-web absent upstream v2.72.0; Opus overrides for research-synthesizer, ui-researcher, roadmapper; Fable manual only
 - [Phase 1]: 01-08: agentmemory written via REST (MCP tools only appear in a new session); verify memory matches search hits by id against full memory content
+- [Phase 2]: 02-15: SOURCE_REGISTRY.json frozen at 218 entries (5 id aliases); later phases only add sources
+- [Phase 2]: 02-15: same_as overrides only for same work and edition (Bradbury PubMed=DOI, Pappalardo nature=PMC); jit seeds are unverified, licence unknown, type official-document not regulation
 
 ### Pending Todos
 
@@ -115,6 +118,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-27T21:31:07.047Z
-Stopped at: Completed 2-04-PLAN.md
+Last session: 2026-11-27T22:13:49.520Z
+Stopped at: Completed 2-15-PLAN.md
 Resume file: None
