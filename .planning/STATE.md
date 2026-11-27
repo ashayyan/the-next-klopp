@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 2
 current_phase_name: Research Wave 1
 status: executing
-stopped_at: Completed 02-16-PLAN.md
-last_updated: "2026-11-27T22:20:00.405Z"
+stopped_at: Completed 02-17-PLAN.md
+last_updated: "2026-11-27T22:26:19.912Z"
 last_activity: 2026-11-27
 last_activity_desc: Phase 2 execution started
-state_head: aaf8c8ac555b9ce023e66de2d07825a3a7dfb2dd
+state_head: 14a4bd7b5cbba6c8dee8a16763807dfb187b5d50
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 30
-  completed_plans: 25
+  completed_plans: 26
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 2 (Research Wave 1) — EXECUTING
-Plan: 7 of 21
+Plan: 8 of 21
 Status: Ready to execute
 Last activity: 2026-11-27 — Phase 2 execution started
 
@@ -70,6 +70,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 2 P04 | 45 min | 2 tasks | 10 files |
 | Phase 2 P15 | 20 min | 3 tasks | 8 files |
 | Phase 02 P16 | 9 min | 2 tasks | 3 files |
+| Phase 02 P17 | 6 min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -92,6 +93,7 @@ Recent decisions affecting current work:
 - [Phase 2]: 02-15: same_as overrides only for same work and edition (Bradbury PubMed=DOI, Pappalardo nature=PMC); jit seeds are unverified, licence unknown, type official-document not regulation
 - [Phase 02]: ADR 0008: Watch Gym L1 supply is open-data reconstructions first, local files second, YouTube link-out only; every clip spec declares a reconstruction fallback
 - [Phase 02]: ADR 0008: strict reading of StatsBomb 1.2.1, no StatsBomb-derived artifact ships; deny-manifest covers statsbomb, last-row, metrica, skillcorner; only Wyscout and DFL (CC BY) ship
+- [Phase 02]: 02-17: roles.json frozen at the 15 canonical roles; competencies.json frozen at 49 role-neutral competencies over all 12 domains (scale 1 Aware to 4 Leads and teaches); concepts empty until 02-18 derive
 
 ### Pending Todos
 
@@ -121,6 +123,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-27T22:20:00.243Z
-Stopped at: Completed 02-16-PLAN.md
+Last session: 2026-11-27T22:26:19.682Z
+Stopped at: Completed 02-17-PLAN.md
 Resume file: None
