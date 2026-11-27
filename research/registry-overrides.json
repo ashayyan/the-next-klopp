@@ -1,4 +1,7 @@
 {
   "schema_version": 1,
-  "same_as": []
+  "same_as": [
+    ["src-aps-bradbury-attention-span", "src-bradbury-attention-span-2016"],
+    ["src-nature-pappalardo-wyscout-events", "src-pappalardo-wyscout-dataset-paper"]
+  ]
 }

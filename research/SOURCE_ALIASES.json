@@ -1,7 +1,9 @@
 {
   "schema_version": 1,
   "aliases": {
+    "src-bradbury-attention-span-2016": "src-aps-bradbury-attention-span",
     "src-nature-wyscout-soccer-logs-paper": "src-nature-pappalardo-wyscout-events",
+    "src-pappalardo-wyscout-dataset-paper": "src-nature-pappalardo-wyscout-events",
     "src-premierleague-handbook-2026-27": "src-pl-handbook-2026-27",
     "src-statsbomb-events-spec-v4": "src-statsbomb-open-events-spec-v4"
   },

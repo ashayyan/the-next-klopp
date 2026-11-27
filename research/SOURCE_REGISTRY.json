@@ -155,28 +155,33 @@
     "publisher": "Advances in Physiology Education",
     "free": true,
     "license": {
+      "name": "Publisher copyright; open-access status not checked per article",
       "read": {
         "value": "yes",
-        "note": "Public page, read on 2026-11-27"
+        "note": "how-analysts-watch: Public page, read on 2026-11-27 | learning-science-adhd: Abstract is freely readable; full text may need access"
       },
       "automated_access": {
         "value": "unknown",
-        "note": "Fetched once with the fetch tool; terms not read"
+        "note": "how-analysts-watch: Fetched once with the fetch tool; terms not read | learning-science-adhd: Metadata and abstract fetched through public scholarly APIs, no scraping"
       },
       "redistribute": {
         "value": "no",
-        "note": "Publisher copyright"
+        "note": "how-analysts-watch: Publisher copyright | learning-science-adhd: Do not copy the article text; link and paraphrase only"
       },
       "derivative": {
         "value": "conditional",
-        "note": "Paraphrase with attribution"
+        "note": "how-analysts-watch: Paraphrase with attribution | learning-science-adhd: Paraphrase with credit and DOI link"
       }
     },
     "quality": 3,
     "recency": "2016-12-01",
     "as_of": "2026-11-27",
-    "best_for": ["the 10 to 15 minute attention claim has thin evidence"],
-    "notes": "DOI 10.1152/advan.00109.2016 validated. Personal-view article, not a study; read through a Europe PMC abstract record because the full text returned 403. Argues the claim rests on repeated citation and flawed measures.",
+    "best_for": [
+      "the 10 to 15 minute attention claim has thin evidence",
+      "attention span myth",
+      "lecture length claims"
+    ],
+    "notes": "DOI 10.1152/advan.00109.2016 validated. Personal-view article, not a study; read through a Europe PMC abstract record because the full text returned 403. Argues the claim rests on repeated citation and flawed measures. | study design: critical editorial review of claims about attention waning; population: university lecture audiences; not ADHD-specific; evidence grade: low (editorial argument, not new data; read through abstract and search excerpts only). DOI 10.1152/advan.00109.2016 resolved by validate_citations.py. Recency is the publication year only.",
     "status": "active"
   },
   {
@@ -418,39 +423,6 @@
     "best_for": ["brief section 6.2 domain 12: Football metrics and models"],
     "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
     "status": "unverified"
-  },
-  {
-    "id": "src-bradbury-attention-span-2016",
-    "title": "Attention span during lectures: 8 seconds, 10 minutes, or more?",
-    "url": "https://doi.org/10.1152/advan.00109.2016",
-    "type": "paper",
-    "publisher": "American Physiological Society (Advances in Physiology Education)",
-    "free": true,
-    "license": {
-      "name": "Publisher copyright; open-access status not checked per article",
-      "read": {
-        "value": "yes",
-        "note": "Abstract is freely readable; full text may need access"
-      },
-      "automated_access": {
-        "value": "yes",
-        "note": "Metadata and abstract fetched through public scholarly APIs, no scraping"
-      },
-      "redistribute": {
-        "value": "no",
-        "note": "Do not copy the article text; link and paraphrase only"
-      },
-      "derivative": {
-        "value": "conditional",
-        "note": "Paraphrase with credit and DOI link"
-      }
-    },
-    "quality": 3,
-    "recency": "2016-01-01",
-    "as_of": "2026-11-28",
-    "best_for": ["attention span myth", "lecture length claims"],
-    "notes": "study design: critical editorial review of claims about attention waning; population: university lecture audiences; not ADHD-specific; evidence grade: low (editorial argument, not new data; read through abstract and search excerpts only). DOI 10.1152/advan.00109.2016 resolved by validate_citations.py. Recency is the publication year only.",
-    "status": "active"
   },
   {
     "id": "src-breakingthelines-watch-space",
@@ -4825,19 +4797,19 @@
       "terms_url": "https://creativecommons.org/licenses/by/4.0/",
       "read": {
         "value": "yes",
-        "note": "Open access article"
+        "note": "pitch-geometry: Open access article | positions-and-numbering: Open access article on PubMed Central"
       },
       "automated_access": {
         "value": "unknown",
-        "note": "pitch-geometry: Nature served a cookie redirect on first request; fetched with a cookie jar; terms not read | formations: Fetched with curl on 2026-11-27 after a cookie redirect"
+        "note": "pitch-geometry: Nature served a cookie redirect on first request; fetched with a cookie jar; terms not read | positions-and-numbering: Fetched with curl and a descriptive user agent | formations: Fetched with curl on 2026-11-27 after a cookie redirect"
       },
       "redistribute": {
-        "value": "yes",
-        "note": "pitch-geometry: Article states it is licensed under CC BY 4.0, attribution required | formations: CC BY 4.0, credit required"
+        "value": "unknown",
+        "note": "pitch-geometry: Article states it is licensed under CC BY 4.0, attribution required | positions-and-numbering: Article licence line not read | formations: CC BY 4.0, credit required"
       },
       "derivative": {
-        "value": "yes",
-        "note": "pitch-geometry: CC BY 4.0, attribution required | formations: CC BY 4.0, credit required"
+        "value": "conditional",
+        "note": "pitch-geometry: CC BY 4.0, attribution required | positions-and-numbering: Paraphrase with attribution | formations: CC BY 4.0, credit required"
       }
     },
     "quality": 5,
@@ -4846,10 +4818,11 @@
     "best_for": [
       "how the public Wyscout events encode x and y",
       "attacking-team perspective of the coordinates",
+      "what the Wyscout public players table holds",
       "what the public Wyscout matches file holds about lineups",
       "dataset description for the PL 2017/18 season"
     ],
-    "notes": "Data descriptor for the public Wyscout soccer-logs dataset (seed id src-wyscout-public-dataset). Published 28 October 2019. | DOI 10.1038/s41597-019-0247-7, checked with validate_citations.py. Recency day is approximate (published October 2019).",
+    "notes": "Data descriptor for the public Wyscout soccer-logs dataset (seed id src-wyscout-public-dataset). Published 28 October 2019. | DOI 10.1038/s41597-019-0247-7. Documents the players role field; the role is one coarse label per player. | DOI 10.1038/s41597-019-0247-7, checked with validate_citations.py. Recency day is approximate (published October 2019).",
     "status": "active",
     "excerpts": [
       {
@@ -4865,6 +4838,13 @@
         "fetched_at": "2026-11-27T21:42:03Z",
         "sha256": "6e8839c895c06aca6e81341732bd1e73c6263cd27a7dd3f3f881b07634f08a1f",
         "paraphrase": "x measures nearness to the opponent's goal and y nearness to the right side of the field, both in percent."
+      },
+      {
+        "id": "wyscout-player-role-field",
+        "locator": "Scientific Data 2019, Methods, players data set",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "3f652b8bf1aba009d300b3cec7f44847bee39d979cfbc1848df50030aae3df2d",
+        "paraphrase": "The Wyscout players table holds one main role per player, stored as a name plus two abbreviations."
       },
       {
         "id": "cc-by-licence",
@@ -5253,47 +5233,6 @@
     "best_for": ["ADHD and university outcomes"],
     "notes": "study design: systematic review of 15 mostly observational studies; population: university students with ADHD; evidence grade: low (observational, mixed measures; authors rate studies good to fair). DOI 10.1177/10870547241306554 resolved by validate_citations.py. Recency is the publication year only.",
     "status": "active"
-  },
-  {
-    "id": "src-pappalardo-wyscout-dataset-paper",
-    "title": "A public data set of spatio-temporal match events in soccer competitions (Scientific Data)",
-    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6817871/",
-    "type": "paper",
-    "publisher": "Pappalardo et al., Scientific Data (Nature Portfolio)",
-    "free": true,
-    "license": {
-      "read": {
-        "value": "yes",
-        "note": "Open access article on PubMed Central"
-      },
-      "automated_access": {
-        "value": "yes",
-        "note": "Fetched with curl and a descriptive user agent"
-      },
-      "redistribute": {
-        "value": "unknown",
-        "note": "Article licence line not read"
-      },
-      "derivative": {
-        "value": "conditional",
-        "note": "Paraphrase with attribution"
-      }
-    },
-    "quality": 5,
-    "recency": "2019-10-28",
-    "as_of": "2026-11-27",
-    "best_for": ["what the Wyscout public players table holds"],
-    "notes": "DOI 10.1038/s41597-019-0247-7. Documents the players role field; the role is one coarse label per player.",
-    "status": "active",
-    "excerpts": [
-      {
-        "id": "wyscout-player-role-field",
-        "locator": "Scientific Data 2019, Methods, players data set",
-        "fetched_at": "2026-11-27T22:05:00Z",
-        "sha256": "3f652b8bf1aba009d300b3cec7f44847bee39d979cfbc1848df50030aae3df2d",
-        "paraphrase": "The Wyscout players table holds one main role per player, stored as a name plus two abbreviations."
-      }
-    ]
   },
   {
     "id": "src-parnell-sporting-director-emergence",
