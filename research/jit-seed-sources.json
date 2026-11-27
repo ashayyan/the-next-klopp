@@ -1,0 +1,780 @@
+[
+  {
+    "id": "src-fifa-rules-and-reports",
+    "title": "FIFA Rules and Reports library (includes the Regulations on the Status and Transfer of Players)",
+    "url": "https://inside.fifa.com/legal/documents",
+    "type": "official-document",
+    "publisher": "FIFA",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 16: Contracts, agents and regulations"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. The page text names the RSTP among the regulations it hosts; the current RSTP edition itself is not yet located.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-fifa-football-agents",
+    "title": "FIFA football agents hub (FIFA Football Agent Regulations)",
+    "url": "https://inside.fifa.com/transfer-system/agents",
+    "type": "official-document",
+    "publisher": "FIFA",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 16: Contracts, agents and regulations"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. Reached through the redirect from inside.fifa.com/legal/football-regulatory/agents.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-fifa-transfer-reports",
+    "title": "FIFA transfer reports (Global Transfer Report series)",
+    "url": "https://inside.fifa.com/transfer-system/transfer-reports",
+    "type": "report",
+    "publisher": "FIFA",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t23-transfers-and-valuation"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": [
+      "brief section 6.2 domain 15: The transfer market, player valuation and salaries (a to f)"
+    ],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. Reached through the redirect from inside.fifa.com/transfer-system/global-transfer-report.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-uefa-documents-portal",
+    "title": "UEFA Documents portal (regulations and reports)",
+    "url": "https://documents.uefa.com/",
+    "type": "website",
+    "publisher": "UEFA",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 17: Club finance"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. Starting point for the UEFA European Club Finance and Investment Landscape report; www.uefa.com gave no response to this client on the check date, so the report page itself is not recorded.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-deloitte-football-money-league",
+    "title": "Deloitte Football Money League (free summary)",
+    "url": "https://www.deloitte.com/uk/en/services/financial-advisory/analysis/deloitte-football-money-league.html",
+    "type": "report",
+    "publisher": "Deloitte UK",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 17: Club finance"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-companies-house-search",
+    "title": "Companies House: find and update company information (club annual reports and accounts)",
+    "url": "https://find-and-update.company-information.service.gov.uk/",
+    "type": "website",
+    "publisher": "Companies House (UK government)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t26-club-ceo"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 17: Club finance"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-commons-library",
+    "title": "House of Commons Library (research briefings, including football governance)",
+    "url": "https://commonslibrary.parliament.uk/",
+    "type": "website",
+    "publisher": "House of Commons Library",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t27-premier-league-system"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t27-premier-league-system"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t27-premier-league-system"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t27-premier-league-system"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": [
+      "brief section 6.2 domain 20: The Premier League ecosystem and the Saudi Pro League context pack"
+    ],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. The home page answers 200 to a GET but serves a Cloudflare challenge to tools; the football governance briefing is not yet located.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-independent-football-regulator",
+    "title": "Independent Football Regulator (GOV.UK organisation page)",
+    "url": "https://www.gov.uk/government/organisations/independent-football-regulator",
+    "type": "website",
+    "publisher": "Independent Football Regulator (GOV.UK)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t27-premier-league-system"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t27-premier-league-system"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t27-premier-league-system"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t27-premier-league-system"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": [
+      "brief section 6.2 domain 20: The Premier League ecosystem and the Saudi Pro League context pack"
+    ],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-spielverlagerung",
+    "title": "Spielverlagerung (tactical analysis site)",
+    "url": "https://spielverlagerung.com/",
+    "type": "blog",
+    "publisher": "Spielverlagerung",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t05-attacking-play"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t05-attacking-play"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t05-attacking-play"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t05-attacking-play"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": [
+      "brief section 6.2 domain 3: Positional play, relationism and modern attacking models"
+    ],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-coaches-voice",
+    "title": "Coaches' Voice (home page)",
+    "url": "https://learning.coachesvoice.com/",
+    "type": "website",
+    "publisher": "Coaches' Voice",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 8: Coaching methodology"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. www.coachesvoice.com redirects here; one Coaches' Voice article is already a verified formations source.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-fifa-training-centre",
+    "title": "FIFA Training Centre",
+    "url": "https://www.fifatrainingcentre.com/en/",
+    "type": "course",
+    "publisher": "FIFA",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 8: Coaching methodology"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-uefa-technical-reports",
+    "title": "UEFA Technical Reports",
+    "url": "https://www.uefatechnicalreports.com/",
+    "type": "report",
+    "publisher": "UEFA",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t06-defending"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t06-defending"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t06-defending"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t06-defending"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": [
+      "brief section 6.2 domain 4: Defending: blocks, pressing schemes, triggers, rest-defence"
+    ],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-mckay-johns-youtube",
+    "title": "McKay Johns (YouTube channel: football analytics in Python)",
+    "url": "https://www.youtube.com/@McKayJohns",
+    "type": "video",
+    "publisher": "McKay Johns",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 13: The Python football ecosystem"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-pysport",
+    "title": "PySport (open-source sports analytics community)",
+    "url": "https://pysport.org/",
+    "type": "website",
+    "publisher": "PySport",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 13: The Python football ecosystem"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-mplsoccer-docs",
+    "title": "mplsoccer documentation (home)",
+    "url": "https://mplsoccer.readthedocs.io/en/latest/",
+    "type": "tool",
+    "publisher": "mplsoccer",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 13: The Python football ecosystem"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. Two mplsoccer gallery pages are already verified pitch-geometry and formations sources; this is the library home.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-socceraction-docs",
+    "title": "socceraction documentation (SPADL, VAEP, xT)",
+    "url": "https://socceraction.readthedocs.io/en/latest/",
+    "type": "tool",
+    "publisher": "ML-KULeuven (socceraction)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 12: Football metrics and models"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-statsbombpy",
+    "title": "statsbombpy (StatsBomb data client)",
+    "url": "https://github.com/hudl/statsbombpy",
+    "type": "tool",
+    "publisher": "Hudl StatsBomb",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 13: The Python football ecosystem"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. github.com/statsbomb/statsbombpy redirects to the hudl organisation.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-databallpy",
+    "title": "databallpy (synchronised event and tracking data)",
+    "url": "https://github.com/Alek050/databallpy",
+    "type": "tool",
+    "publisher": "databallpy maintainers",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 13: The Python football ecosystem"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-floodlight",
+    "title": "floodlight (team sports data framework)",
+    "url": "https://github.com/floodlight-sports/floodlight",
+    "type": "tool",
+    "publisher": "floodlight-sports",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t18-python-lab"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 13: The Python football ecosystem"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-unravelsports",
+    "title": "unravelsports (graph neural networks on tracking data)",
+    "url": "https://github.com/UnravelSports/unravelsports",
+    "type": "tool",
+    "publisher": "UnravelSports",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t19-football-ai-ml"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t19-football-ai-ml"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t19-football-ai-ml"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t19-football-ai-ml"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 20d: Football AI and ML"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-soccerdata",
+    "title": "soccerdata (scrapers for public football data sites)",
+    "url": "https://github.com/probberechts/soccerdata",
+    "type": "tool",
+    "publisher": "soccerdata maintainers",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t15-football-data"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t15-football-data"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t15-football-data"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t15-football-data"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 11: Football data types and providers"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. Scrapes third-party sites; each scraped site has its own terms, check them before any use.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-mit-sloan-research-papers",
+    "title": "MIT Sloan Sports Analytics Conference research paper competition",
+    "url": "https://www.sloansportsconference.com/research-paper-competition",
+    "type": "website",
+    "publisher": "MIT Sloan Sports Analytics Conference",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 12: Football metrics and models"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28. www.sloansportsconference.com/research-papers returned 404.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-fa-coaching-courses",
+    "title": "The FA coaching courses",
+    "url": "https://www.thefa.com/learning/coaching-courses",
+    "type": "course",
+    "publisher": "The Football Association",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t10-coaching-and-game-models"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 8: Coaching methodology"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  },
+  {
+    "id": "src-book-the-numbers-game",
+    "title": "The Numbers Game (Chris Anderson and David Sally), publisher page",
+    "url": "https://www.penguin.co.uk/books/187604/the-numbers-game-by-sally-chris-anderson-and-david/9780241963623",
+    "type": "book",
+    "publisher": "Penguin",
+    "free": false,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "paid book, reference only (brief section 6.3: summarise in own words, link the publisher, no PDFs); not yet checked; just-in-time research before t16-metrics-and-models"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "not yet checked; just-in-time research before t16-metrics-and-models"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-28",
+    "as_of": "2026-11-28",
+    "best_for": ["brief section 6.2 domain 12: Football metrics and models"],
+    "notes": "not appraised; brief section 6.3 seed, URL answered 2xx/3xx on 2026-11-28",
+    "status": "unverified"
+  }
+]
