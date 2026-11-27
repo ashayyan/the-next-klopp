@@ -14,13 +14,14 @@ import {
   ROLE_IDS_SUPPORTING,
   TRACKS,
 } from "./lib/domains.ts";
-import { checkGraph } from "./lib/graph.ts";
+import { checkGraph, layers } from "./lib/graph.ts";
 import {
   canonicalUrl,
   compileContract,
   parseCitations,
   type SourceEntry,
 } from "./lib/research-files.ts";
+import { curriculumConfigSchema } from "./lib/research-io.ts";
 
 const root = join(import.meta.dirname, "..", "..");
 const gate = process.env.RESEARCH_GATE === "1";
@@ -295,6 +296,7 @@ describe.skipIf(!hasRoles)("roles: completeness", () => {
 // Role Map. prerequisites[] is the source of truth; prerequisite edges, concept.roles and
 // competency.concepts are derived by derive-links.ts and checked here.
 const approvalPath = join(root, "research", "APPROVAL.md");
+const curriculumConfigPath = join(root, "research", "curriculum-config.json");
 const hasConceptMap = existsSync(conceptMapPath);
 
 interface ConceptDoc {
@@ -411,6 +413,55 @@ describe("concept map (concept-map.json)", () => {
       if (!approved) {
         expect(concepts.filter((c) => c.status === "approved").map((c) => c.id)).toEqual([]);
       }
+    });
+  });
+
+  describe.skipIf(!hasConceptMap)("concepts: band 1", () => {
+    const band1 = concepts.filter((c) => /^t0[0-4]-/.test(c.track));
+    const byId = new Map(concepts.map((c) => [c.id, c]));
+    const config = existsSync(curriculumConfigPath)
+      ? curriculumConfigSchema.safeParse(readJson(curriculumConfigPath))
+      : null;
+
+    it("has 45-70 concepts in Tracks t00-t04", () => {
+      expect(band1.length).toBeGreaterThanOrEqual(45);
+      expect(band1.length).toBeLessThanOrEqual(70);
+    });
+
+    it("has a valid curriculum-config.json with Band 1 starters and Milestone 1 tracks", () => {
+      expect(config?.success, JSON.stringify(config?.error?.issues ?? "missing")).toBe(true);
+      const c = config?.data;
+      expect(c?.max_starter_layer).toBe(5);
+      expect(c?.milestone_1_tracks).toEqual(
+        expect.arrayContaining(["t00-start-here", "t01-the-game", "t04-watch-gym"]),
+      );
+      for (const track of ["t00-start-here", "t04-watch-gym"]) {
+        const id = c?.thread_starters[track];
+        expect(id, `starter for ${track}`).toBeTruthy();
+        expect(byId.get(id as string)?.track, `${id} sits on ${track}`).toBe(track);
+      }
+    });
+
+    it("keeps every named thread starter at or below max_starter_layer", () => {
+      const c = config?.data;
+      expect(c).toBeTruthy();
+      const layer = layers(new Map(concepts.map((k) => [k.id, k.prerequisites]))).layer;
+      for (const [track, id] of Object.entries(c?.thread_starters ?? {})) {
+        if (id === undefined) continue;
+        const l = layer.get(id);
+        expect(l, `${track} starter ${id} has no layer`).toBeDefined();
+        expect(l as number, `${track} starter ${id}`).toBeLessThanOrEqual(
+          c?.max_starter_layer ?? 5,
+        );
+      }
+    });
+
+    it("keeps Watch Gym Level 1 consistent with ADR 0008 (reconstructions answered on a pitch panel)", () => {
+      const t04 = concepts.filter((c) => c.track === "t04-watch-gym");
+      expect(t04.length).toBeGreaterThan(0);
+      expect(t04.some((c) => /reconstruct|pitch panel/i.test(`${c.title} ${c.summary}`))).toBe(
+        true,
+      );
     });
   });
 });
