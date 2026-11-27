@@ -4,7 +4,7 @@
 // Dependency-free. Erasable TypeScript only. Git is spawned with argument arrays, never a shell.
 
 import { execFileSync } from "node:child_process";
-import { readFileSync, statSync } from "node:fs";
+import { readFileSync, type Stats, statSync } from "node:fs";
 import { checkFile, type FileInput, type Violation } from "./lib/guard.ts";
 
 const USAGE = "usage: node scripts/guard-files.ts --staged | --tracked";
@@ -41,7 +41,7 @@ function collect(mode: "--staged" | "--tracked"): FileInput[] {
   const paths = splitNul(git(["ls-files", "-z"]));
   const inputs: FileInput[] = [];
   for (const p of paths) {
-    let stat;
+    let stat: Stats;
     try {
       stat = statSync(p);
     } catch {

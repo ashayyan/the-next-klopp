@@ -7,15 +7,13 @@ import { buildRoutes } from "./routes.ts";
 
 const rootElement = document.getElementById("root");
 if (!rootElement) {
-	throw new Error("Missing #root element in index.html");
+  throw new Error("Missing #root element in index.html");
 }
 
-const router = createBrowserRouter(
-	buildRoutes({ includeDev: import.meta.env.DEV }),
-);
+const router = createBrowserRouter(buildRoutes({ includeDev: import.meta.env.DEV }));
 
 createRoot(rootElement).render(
-	<StrictMode>
-		<RouterProvider router={router} />
-	</StrictMode>,
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>,
 );
