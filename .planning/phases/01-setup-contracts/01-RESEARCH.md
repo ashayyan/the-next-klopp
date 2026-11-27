@@ -628,11 +628,13 @@ Not a rename/refactor/migration phase: omitted.
 | A8 | The `ci.yml` above is correct on GitHub (each command was run locally; the YAML itself was not executed) | Code Examples | First CI run may need small fixes; Phase 1 plan must include "watch CI to green" |
 | A9 | The pre-existing commits (brief with learner profile) are acceptable to push to a private repo | Pattern 1 | Personal profile data leaves the machine; brief section 13 and CONTEXT authorise the push, flagged for transparency |
 
-## Open Questions
+## Open Questions (RESOLVED)
 
-1. **Which plan is the learner's GitHub account on?** Unknown (`plan: null`). Recommendation: the plan attempts the protection call and records the result; no learner question needed unless it is 403, then the end-of-phase digest tells the learner "protection needs GitHub Pro; fallback active".
-2. **Should `.claude/skills/` stay gitignored long-term?** Recommendation: yes (39 MB images from taste-skill). Cost: a fresh clone must run `npx skills experimental_install -a claude-code` and delete the duplicate `.agents/skills/`. Put the exact commands in SETUP.md.
-3. **Does GSD's executor guard also trip on `main` after rename for orchestrator commits (`commit_docs`)?** `gsd-tools query commit` for `.planning` docs commits on the current branch; during Phase 1 that is the phase branch, so fine. For doc-only commits made while on `main` (e.g. after merge), set `git.allow_default_branch_commits` only if a later flow needs it; not for Phase 1.
+Note 2026-11-27: the learner granted the gh `workflow` scope before execution (verified with `gh auth status`). Script runner: plans use native Node 24 type stripping (`node file.ts`) instead of `tsx`; record this deviation from CLAUDE.md in docs/SETUP.md.
+
+1. **RESOLVED (Plan 01-09 + ADR 0007): Which plan is the learner's GitHub account on?** Unknown (`plan: null`). Recommendation: the plan attempts the protection call and records the result; no learner question needed unless it is 403, then the end-of-phase digest tells the learner "protection needs GitHub Pro; fallback active".
+2. **RESOLVED (Plan 01-07, yes): Should `.claude/skills/` stay gitignored long-term?** Recommendation: yes (39 MB images from taste-skill). Cost: a fresh clone must run `npx skills experimental_install -a claude-code` and delete the duplicate `.agents/skills/`. Put the exact commands in SETUP.md.
+3. **RESOLVED (no action for Phase 1; work stays on the phase branch): Does GSD's executor guard also trip on `main` after rename for orchestrator commits (`commit_docs`)?** `gsd-tools query commit` for `.planning` docs commits on the current branch; during Phase 1 that is the phase branch, so fine. For doc-only commits made while on `main` (e.g. after merge), set `git.allow_default_branch_commits` only if a later flow needs it; not for Phase 1.
 
 ## Environment Availability
 
