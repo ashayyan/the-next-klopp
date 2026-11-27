@@ -1,0 +1,768 @@
+[
+  {
+    "id": "src-statsbomb-open-data",
+    "title": "StatsBomb open data",
+    "url": "https://github.com/statsbomb/open-data",
+    "type": "dataset",
+    "publisher": "StatsBomb",
+    "free": true,
+    "license": {
+      "name": "StatsBomb Public Data User Agreement",
+      "terms_url": "https://raw.githubusercontent.com/statsbomb/open-data/master/LICENSE.pdf",
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, README invites research use"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Agreement 1.2.1 bars providing the data to any external or third party"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Agreement 1.4 and README require the StatsBomb logo credit on any published analysis"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["Premier League 2015/16 event data (380 matches)", "shot freeze frames"],
+    "notes": "418 Premier League matches (2015/16 all 380, 2003/04 Arsenal 38), zero with 360 data. Local-use only: derived artefacts must stay out of the deployed bundle. No publication date stated, so recency is the as_of date. Agreement footer says terms last updated 8 September 2023. Excerpts hashed from the pypdf text layer, where spaces are missing.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "agreement-1-2-1-no-third-party",
+        "locator": "LICENSE.pdf p.1, clause 1.2.1 (pypdf extraction, words run together)",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "0525a19b6cf58ca337c938710e1d3c3ff3b2bdc4213a82d526ce65b136d18227",
+        "paraphrase": "The user may not edit, distribute, reproduce, sell or in any way provide the data to any external or third party."
+      },
+      {
+        "id": "agreement-1-2-2-no-commercial",
+        "locator": "LICENSE.pdf p.1, clause 1.2.2 (pypdf extraction)",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "30db6f200bb00c4df193266d3a646009dc5eb215a0d23527cb3382d56aeed782",
+        "paraphrase": "The user may not commercially exploit the data or any analysis derived from using the service."
+      },
+      {
+        "id": "agreement-1-4-logo-credit",
+        "locator": "LICENSE.pdf p.2, clause 1.4 (pypdf extraction)",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "ca620f74894e8bc22d8d32e4cf542c94820b294c38d5202d90b1f35dbdd5a3cd",
+        "paraphrase": "Any publication of analysis built from StatsBomb data must credit StatsBomb with its brand logo."
+      }
+    ]
+  },
+  {
+    "id": "src-fbref-advanced-stats",
+    "title": "FBref advanced (Opta) statistics",
+    "url": "https://fbref.com/en/",
+    "type": "website",
+    "publisher": "Sports Reference (FBref)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Basic stats remain readable"
+      },
+      "automated_access": {
+        "value": "no",
+        "note": "Cloudflare 403 challenge on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Not permitted"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Not permitted"
+      }
+    },
+    "quality": 1,
+    "recency": "2026-01-20",
+    "as_of": "2026-11-27",
+    "best_for": ["historical reference only"],
+    "notes": "Registry keeps this as removed so lessons never cite it as a live free xG source. Basic stats are a separate matter.",
+    "status": "removed",
+    "removed_reason": "Opta advanced data removed from FBref on 2026-01-20 after the provider ended the data feed"
+  },
+  {
+    "id": "src-awfulannouncing-fbref-removal",
+    "title": "Sports Reference pulls advanced data in agreement dispute",
+    "url": "https://awfulannouncing.com/soccer/sports-reference-pulls-advanced-data-agreement-violation-dispute.html",
+    "type": "news",
+    "publisher": "Awful Announcing",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once during research; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-01-23",
+    "as_of": "2026-11-27",
+    "best_for": ["evidence for the FBref advanced stats removal"],
+    "notes": "Secondary evidence: the official Sports Reference post returned 403 to the fetch tool.",
+    "status": "active"
+  },
+  {
+    "id": "src-wyscout-public-dataset",
+    "title": "Wyscout public soccer-logs dataset (Pappalardo et al.)",
+    "url": "https://api.figshare.com/v2/collections/4415000",
+    "type": "dataset",
+    "publisher": "Pappalardo et al. via figshare",
+    "free": true,
+    "license": {
+      "name": "CC BY 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "CC BY 4.0"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public figshare API"
+      },
+      "redistribute": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      },
+      "derivative": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["Premier League 2017/18 event data (380 matches)", "shippable open PL events"],
+    "notes": "Seven competitions; England league wyId 364 labelled \"English first division\", 380 matches, events only, coordinates 0-100. No publication date stated, so recency is the as_of date. The collection record has no licence field; the licence sits on each article, so the check was done on the events article.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "figshare-article-license-field",
+        "locator": "figshare API v2 article 7770599 (Events), license field",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "ee613754b11215a0589722ac3279889767dcfd079c32d89c24e30dd0bdc4bb98",
+        "paraphrase": "The figshare record for the Wyscout events file lists its licence as CC BY 4.0."
+      }
+    ]
+  },
+  {
+    "id": "src-dfl-idsse-open-data",
+    "title": "DFL / Sportec IDSSE open event and tracking data",
+    "url": "https://api.figshare.com/v2/articles/28196177",
+    "type": "dataset",
+    "publisher": "DFL / Sportec (Bassek et al.) via figshare",
+    "free": true,
+    "license": {
+      "name": "CC BY 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "CC BY 4.0"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public figshare API"
+      },
+      "redistribute": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      },
+      "derivative": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["official tracking and event data", "Bundesliga 2022/23, 7 matches"],
+    "notes": "Zero Premier League matches. Position XML files are 350-420 MB each. kloppy loads a Hugging Face mirror. No publication date stated, so recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "figshare-article-license-field",
+        "locator": "figshare API v2 article 28196177, license field",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "3fa5bfb5ef5deb0017eb99280b7d7367cb0b4b90367ef1637183a18aa2d680c8",
+        "paraphrase": "The figshare record for the DFL/Sportec dataset lists the licence as CC BY and points to the CC BY 4.0 deed."
+      }
+    ]
+  },
+  {
+    "id": "src-creativecommons-by-4-0",
+    "title": "Creative Commons Attribution 4.0 International deed",
+    "url": "https://creativecommons.org/licenses/by/4.0/",
+    "type": "regulation",
+    "publisher": "Creative Commons",
+    "free": true,
+    "license": {
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "Public deed"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public page"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Creative Commons page copyright; paraphrase and link"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "what CC BY allows: share and adapt, even commercially",
+      "attribution duties for shippable data"
+    ],
+    "notes": "Human-readable deed. No publication date shown, so recency is the as_of date. Explains why Wyscout and DFL data may ship with credit.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "cc-by-share-adapt",
+        "locator": "deed, You are free to",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "1aa10ea3729bfac775760bf9b13d31b5c4aebcfb1ecfad51b3643fa6eb57d8f4",
+        "paraphrase": "CC BY lets anyone copy and redistribute the material in any format for any purpose, including commercial use."
+      },
+      {
+        "id": "cc-by-attribution",
+        "locator": "deed, Under the following terms",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "4395423316ead3547b2407f3a9be0b2d4475461164313a5e538e26d664aa2709",
+        "paraphrase": "The condition is attribution: credit appropriately, link the licence, and say if changes were made."
+      }
+    ]
+  },
+  {
+    "id": "src-skillcorner-opendata",
+    "title": "SkillCorner open data",
+    "url": "https://github.com/SkillCorner/opendata",
+    "type": "dataset",
+    "publisher": "SkillCorner",
+    "free": true,
+    "license": {
+      "name": "MIT",
+      "terms_url": "https://raw.githubusercontent.com/SkillCorner/opendata/master/LICENSE",
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, raw files"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "MIT text names software and documentation files; data is not named"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "MIT text names software; README asks to credit SkillCorner"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["broadcast tracking worked examples", "A-League 2024/25 dynamic events"],
+    "notes": "Zero Premier League matches. matches.json lists 20 matches (one not_started) while the README says 10: trust the index. No publication date stated, so recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "readme-credit-request",
+        "locator": "README, Motivation section",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "43ed16f8ad9be10cad14ac89f9be71555a9deafdf989a706e1be2c3144df1477",
+        "paraphrase": "The README asks users of the data to credit SkillCorner; the separate MIT file names software, not data."
+      }
+    ]
+  },
+  {
+    "id": "src-metrica-sample-data",
+    "title": "Metrica Sports sample data",
+    "url": "https://github.com/metrica-sports/sample-data",
+    "type": "dataset",
+    "publisher": "Metrica Sports",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, raw files"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "No licence file (GitHub licence API 404)"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "README asks to acknowledge the source and be responsible"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["tutorial tracking and event data", "EPTS FIFA format example"],
+    "notes": "Three anonymised games, no teams or competitions named, so zero identifiable Premier League matches. No publication date stated, so recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "readme-legal-stuff",
+        "locator": "README, Legal stuff",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "273954a61647a65d675119c6565ad2290adec66c7240f7b3255872df827029f6",
+        "paraphrase": "The only legal text asks for responsible use and an acknowledgement of the source on any public use."
+      }
+    ]
+  },
+  {
+    "id": "src-fot-last-row",
+    "title": "Last Row: Liverpool 2019 positional data",
+    "url": "https://github.com/Friends-of-Tracking-Data-FoTD/Last-Row",
+    "type": "dataset",
+    "publisher": "Friends of Tracking",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, raw CSV"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "No licence file; README: feel free to use for whatever purpose, credit the source"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Informal credit request; README says it lacks the accuracy needed for research"
+      }
+    },
+    "quality": 2,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "feel for off-ball runs on 13 Liverpool Premier League goals",
+      "20 fps tracking sample"
+    ],
+    "notes": "13 of 19 goals are Premier League, tracking only, no events. Self-described as too inaccurate for research. No publication date stated, so recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "readme-credit-request",
+        "locator": "README, Getting started",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "e1386a7cba7d8abb0724d90915fe3b885c618c30d9293569ad70daab1b1e1671",
+        "paraphrase": "The README invites any use of the dataset with a credit and a heads-up; no formal licence file exists."
+      },
+      {
+        "id": "readme-accuracy-caveat",
+        "locator": "README intro",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "46df4cfba4739f7fdf7df6f56189b172be07b24dc062f8096b6322c79344ad56",
+        "paraphrase": "The authors say the data is not accurate enough for research."
+      }
+    ]
+  },
+  {
+    "id": "src-pff-fc-wc2022",
+    "title": "PFF FC World Cup 2022 data release",
+    "url": "https://www.blog.fc.pff.com/blog/pff-fc-release-2022-world-cup-data",
+    "type": "dataset",
+    "publisher": "PFF FC",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "conditional",
+        "note": "Access through a request form"
+      },
+      "automated_access": {
+        "value": "no",
+        "note": "Request form, no machine-indexable access"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "No terms stated on the pages read"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "No terms stated on the pages read"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["64 World Cup matches with broadcast tracking", "kloppy pff provider"],
+    "notes": "Zero Premier League matches. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-transfermarkt-datasets",
+    "title": "transfermarkt-datasets",
+    "url": "https://github.com/dcaribou/transfermarkt-datasets",
+    "type": "dataset",
+    "publisher": "dcaribou",
+    "free": true,
+    "license": {
+      "name": "CC0-1.0",
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, CC0 repository licence"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "Repo is CC0 but the underlying data is Transfermarkt's and its terms are not stated here"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Same: underlying Transfermarkt terms not stated"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-07-06",
+    "as_of": "2026-11-27",
+    "best_for": ["dated snapshot of transfers and valuations"],
+    "notes": "Updates paused: current to 2026-07-06 (2026/27 squads absent). Treat as a dated snapshot.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "readme-updates-paused",
+        "locator": "README, status banner",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "aca457c39b2a7975707c236d805392c790747790b0934c655e1000d6b2b26bd6",
+        "paraphrase": "The maintainer states updates are paused and the data is current to 6 July 2026."
+      }
+    ]
+  },
+  {
+    "id": "src-transfermarkt-site",
+    "title": "Transfermarkt robots.txt and licence.xml",
+    "url": "https://www.transfermarkt.com/robots.txt",
+    "type": "website",
+    "publisher": "Transfermarkt",
+    "free": true,
+    "license": {
+      "name": "RSL licence.xml (ai-all usage prohibited)",
+      "terms_url": "https://www.transfermarkt.de/license.xml",
+      "read": {
+        "value": "unknown",
+        "note": "Terms page blocked to tools on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "no",
+        "note": "robots.txt disallows many named bots and licence.xml prohibits AI usage; nothing scraped"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Site terms of use not read"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Site terms of use not read"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["valuations and transfer history read by hand", "evidence for the no-scrape rule"],
+    "notes": "Terms-of-use fetch failed (blocked). Evidence: robots.txt points to a licence.xml, and licence.xml prohibits ai-all usage. Nothing scraped.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "robots-license-pointer",
+        "locator": "robots.txt first line",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "db2f5c18865c67401e2b153c2b0d511f22ac13da8bc8724d8629c55ba871a3ca",
+        "paraphrase": "The robots file points to a licence.xml file."
+      },
+      {
+        "id": "license-xml-prohibits-ai-all",
+        "locator": "licence.xml, content block",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "7c9777979b9b6b1354ff81e14b58b41fc982c49c2559ed4c38f5ff9913e0310b",
+        "paraphrase": "The RSL licence file prohibits all AI usage of the site content."
+      }
+    ]
+  },
+  {
+    "id": "src-understat",
+    "title": "Understat.com",
+    "url": "https://understat.com/",
+    "type": "website",
+    "publisher": "Understat",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "conditional",
+        "note": "Home page fetched on 2026-11-27 showed only a notice that the site will return soon"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "robots.txt returns an error page and no terms were found"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "No terms or licence found"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "No terms or licence found"
+      }
+    },
+    "quality": 2,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["historical PL xG reference if the site returns"],
+    "notes": "No official terms found; the site was in a returning-soon state when fetched. Not used as a data source; nothing scraped.",
+    "status": "unverified"
+  },
+  {
+    "id": "src-capology",
+    "title": "Capology robots.txt",
+    "url": "https://www.capology.com/robots.txt",
+    "type": "website",
+    "publisher": "Capology",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "unknown",
+        "note": "Terms page returned 403 to tools on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "conditional",
+        "note": "robots.txt content signal allows search, forbids AI training, reference use only"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Terms not read"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Terms not read"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["evidence for wage-data terms", "hand-read PL wage reference"],
+    "notes": "Terms blocked. robots.txt carries a Content-Signal line and Disallow rules for named AI crawlers. Nothing scraped.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "robots-content-signal",
+        "locator": "robots.txt, User-agent * block",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "13dac87869c08c1f28512e9eb0375bf727cb81eb790d4c1b671f63ef65fedc46",
+        "paraphrase": "The default content signal allows search, forbids AI training and limits AI use to reference."
+      }
+    ]
+  },
+  {
+    "id": "src-premierleague-stats-terms",
+    "title": "Premier League website and app terms and conditions",
+    "url": "https://www.premierleague.com/terms-and-conditions",
+    "type": "official-document",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Site terms and conditions",
+      "terms_url": "https://www.premierleague.com/terms-and-conditions",
+      "read": {
+        "value": "yes",
+        "note": "Public page; private personal use allowed"
+      },
+      "automated_access": {
+        "value": "no",
+        "note": "Terms bar reuse and database building; no API terms found"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Redistribution barred without written approval"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Re-utilisation barred without written approval"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "official PL tables and player stats read by hand",
+      "evidence that site stats cannot be bulk reused"
+    ],
+    "notes": "No publication date on the page, so recency is the as_of date. Terms do not name scraping; they bar building a database from site material.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "terms-no-reuse-no-database",
+        "locator": "Terms, Intellectual property rights",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "fd712a9bfe78e1fc7153ae6694cba18ea4a4c77a2dfc0484754dc08ceb3090f4",
+        "paraphrase": "The site may not be reused commercially, nor reproduced, redistributed or turned into a database, nor framed or deep-linked, without written approval."
+      }
+    ]
+  },
+  {
+    "id": "src-cies-football-observatory",
+    "title": "CIES Football Observatory reports",
+    "url": "https://football-observatory.com/reports",
+    "type": "report",
+    "publisher": "CIES Football Observatory",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Monthly report PDFs are offered for download on the reports page"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "No terms page found"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "No copyright or reuse statement on the page read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "No statement; cite and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["market value and player-flow research reports", "squad-age and transfer context"],
+    "notes": "The reports page shows no terms, copyright or citation statement, only a contact address. Treat as read-and-cite only.",
+    "status": "active"
+  },
+  {
+    "id": "src-youtube-terms",
+    "title": "YouTube Terms of Service",
+    "url": "https://www.youtube.com/t/terms",
+    "type": "official-document",
+    "publisher": "YouTube",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public terms page"
+      },
+      "automated_access": {
+        "value": "no",
+        "note": "Terms forbid accessing the Service by automated means such as robots or scrapers"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Terms forbid downloading, reproducing or distributing content except as the Service permits"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Not permitted outside the Service"
+      }
+    },
+    "quality": 5,
+    "recency": "2023-12-15",
+    "as_of": "2026-11-27",
+    "best_for": ["why Watch Gym never downloads or embeds YouTube footage"],
+    "notes": "English page (hl=en) shows Effective as of December 15, 2023, newer than the 2022 date in the seed. The default page served to this machine was Arabic; the English text was used for excerpts.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "tos-no-download",
+        "locator": "Terms of Service, Permissions and Restrictions",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "d263887c877250e1f16ece71d8d82e6cf3ed1a2934f22cde6a07eca69236a040",
+        "paraphrase": "Users may not access, reproduce or download any Content except as the Service authorises or with written permission from YouTube and rights holders."
+      },
+      {
+        "id": "tos-no-automated-access",
+        "locator": "Terms of Service, Permissions and Restrictions",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "a2f5cf85cc3feb597d6451fa7d530d506387778f6464e056a29ca10c06bd02ad",
+        "paraphrase": "Accessing the Service by robots or scrapers is barred, except public search engines following robots.txt or with written permission."
+      },
+      {
+        "id": "tos-embeddable-player",
+        "locator": "Terms of Service, Permissions and Restrictions",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "b47b668bf98e190d2290283b54f470fad3f60b5bab57396671413151287be3d5",
+        "paraphrase": "Showing YouTube videos through the embeddable YouTube player is expressly allowed."
+      }
+    ]
+  },
+  {
+    "id": "src-youtube-api-rmf",
+    "title": "YouTube API Services required minimum functionality",
+    "url": "https://developers.google.com/youtube/terms/required-minimum-functionality",
+    "type": "official-document",
+    "publisher": "Google",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public developer documentation"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public documentation page"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Google copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["embedded player rules: no overlays or frames in front of the player"],
+    "notes": "The embedded player policy forbids visual elements in front of any part of the player. No publication date stated, so recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "rmf-no-overlays",
+        "locator": "Required minimum functionality, Overlays and frames",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "a674139645e043262e7f2da5eb0a07c28adeb2ecbe35f3b2f23906ba6c2f5c30",
+        "paraphrase": "Apps must not place overlays, frames or other visual elements in front of any part of an embedded YouTube player, controls included."
+      }
+    ]
+  }
+]
