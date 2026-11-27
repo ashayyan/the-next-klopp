@@ -12,6 +12,7 @@ import {
   ROLE_IDS,
   ROLE_IDS_SENIOR,
   ROLE_IDS_SUPPORTING,
+  THREADS,
   TRACKS,
 } from "./lib/domains.ts";
 import { checkGraph, layers } from "./lib/graph.ts";
@@ -463,5 +464,26 @@ describe("concept map (concept-map.json)", () => {
         true,
       );
     });
+  });
+
+  describe.skipIf(!hasConceptMap)("concepts: threads", () => {
+    const byId = new Map(concepts.map((c) => [c.id, c]));
+    const parsed = existsSync(curriculumConfigPath)
+      ? curriculumConfigSchema.safeParse(readJson(curriculumConfigPath))
+      : null;
+    const config = parsed?.success ? parsed.data : null;
+    const layer = layers(new Map(concepts.map((k) => [k.id, k.prerequisites]))).layer;
+
+    for (const thread of THREADS) {
+      it(`starts the ${thread.label} thread (${thread.track}) early with a starter on its track`, () => {
+        expect(config, "curriculum-config.json is missing or invalid").toBeTruthy();
+        const id = config?.thread_starters[thread.track];
+        expect(id, `no starter for ${thread.track}`).toBeTruthy();
+        expect(byId.get(id as string)?.track, `${id} sits on ${thread.track}`).toBe(thread.track);
+        const l = layer.get(id as string);
+        expect(l, `${id} has no layer`).toBeDefined();
+        expect(l as number, `${id} layer`).toBeLessThanOrEqual(config?.max_starter_layer ?? 5);
+      });
+    }
   });
 });

@@ -1117,6 +1117,186 @@
       "competencies": ["match-reading"],
       "sources": ["src-breakingthelines-watch-space"],
       "status": "draft"
+    },
+    {
+      "id": "match-note-basics",
+      "title": "The match note",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "Turn what you watched into three short lines: what happened, why it happened, and the evidence you saw.",
+      "prerequisites": ["the-lesson-loop"],
+      "roles": [
+        "club-ceo",
+        "first-team-analyst",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["post-match-review", "stakeholder-presentation"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-barbieri-worked-examples-2023"],
+      "status": "draft"
+    },
+    {
+      "id": "output-rubrics",
+      "title": "Rubrics and model answers",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "Each output is scored for clarity, evidence, structure and actionability, then compared with a model answer.",
+      "prerequisites": ["report-templates", "spoken-briefings"],
+      "roles": [
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["stakeholder-presentation"],
+      "sources": ["src-barbieri-worked-examples-2023", "src-agarwal-retrieval-classroom-2021"],
+      "status": "draft"
+    },
+    {
+      "id": "report-templates",
+      "title": "Report templates",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "Tactical, opposition, post-match, scouting and board reports each get a template, and the scaffolding fades over time.",
+      "prerequisites": ["match-note-basics"],
+      "roles": [
+        "chief-scout",
+        "first-team-analyst",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "set-piece-coach"
+      ],
+      "competencies": ["opposition-analysis", "post-match-review", "scouting-reports"],
+      "sources": [
+        "src-barbieri-worked-examples-2023",
+        "src-brentford-head-of-analysis-2021",
+        "src-newcastle-first-team-analyst-post-match"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "spoken-briefings",
+      "title": "Spoken briefings",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "The 60-second match summary, the three-point half-time talk and the coach or board presentation, recorded on this computer.",
+      "prerequisites": ["match-note-basics"],
+      "roles": [
+        "assistant-coach",
+        "club-ceo",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["player-communication", "stakeholder-presentation"],
+      "sources": ["src-worldrugby-halftime-analysis", "src-pl-assistant-manager-insights"],
+      "status": "draft"
+    },
+    {
+      "id": "visual-evidence",
+      "title": "Clips, stills and annotations",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "Pick the clip or still that proves the point, annotate the frame, and build a one-page report graphic.",
+      "prerequisites": ["report-templates"],
+      "roles": [
+        "club-ceo",
+        "first-team-analyst",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["video-analysis-tooling", "stakeholder-presentation"],
+      "sources": [
+        "src-asa-day-in-life-analyst",
+        "src-flourish-pl-visualisation",
+        "src-okabe-ito-cud"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "grading-and-scouting-reports",
+      "title": "Grading and scouting reports",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "Grade a player on a fixed scale and write a report a head of recruitment can act on, with footage behind each claim.",
+      "prerequisites": ["one-player-ninety-minutes", "report-templates"],
+      "roles": ["chief-scout", "head-of-recruitment"],
+      "competencies": ["scouting-reports", "character-and-fit-assessment"],
+      "sources": [
+        "src-hudl-marshall-head-of-recruitment",
+        "src-liverpool-women-head-of-recruitment"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "live-vs-video-scouting",
+      "title": "Live versus video scouting",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "Live viewing shows off-ball work and attitude; video covers more players. Broadcast footage often misses off-ball play.",
+      "prerequisites": ["the-scouts-eye"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["player-identification", "scouting-network-management"],
+      "sources": ["src-hudl-marshall-head-of-recruitment", "src-arxiv-crang-broadcast-tracking"],
+      "status": "draft"
+    },
+    {
+      "id": "one-player-ninety-minutes",
+      "title": "One player, ninety minutes",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "Track one player for a whole match: decisions, body shape, scanning, off-ball work and reactions to mistakes.",
+      "prerequisites": ["the-scouts-eye", "watch-in-blocks"],
+      "roles": ["academy-director", "chief-scout", "head-of-data-science", "head-of-recruitment"],
+      "competencies": ["player-identification", "scouting-reports"],
+      "sources": [
+        "src-breakingthelines-watch-space",
+        "src-frontiers-cognition-elite-soccer",
+        "src-frontiers-visual-search-meta"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "relative-age-effect",
+      "title": "The relative age effect",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "In youth football, players born early in the selection year are often picked more, so scouts must allow for maturity.",
+      "prerequisites": ["the-scouts-eye"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["player-identification", "player-pathway-planning"],
+      "sources": ["src-fifa-training-centre", "src-uefa-technical-reports"],
+      "status": "draft"
+    },
+    {
+      "id": "the-scouts-eye",
+      "title": "The scout's eye",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "What a scout looks for in one player by position and age: technique, tactics, physique and character, on and off the ball.",
+      "prerequisites": ["watch-one-player", "position-vs-role"],
+      "roles": ["academy-director", "chief-scout", "head-of-data-science", "head-of-recruitment"],
+      "competencies": ["player-identification", "character-and-fit-assessment"],
+      "sources": [
+        "src-hudl-marshall-head-of-recruitment",
+        "src-liverpool-women-head-of-recruitment"
+      ],
+      "status": "draft"
     }
   ],
   "edges": [
@@ -1129,6 +1309,11 @@
       "from": "attacking-transition",
       "to": "defensive-transition",
       "kind": "contrasts"
+    },
+    {
+      "from": "grading-and-scouting-reports",
+      "to": "output-rubrics",
+      "kind": "related"
     },
     {
       "from": "half-spaces",
@@ -1153,6 +1338,11 @@
     {
       "from": "position-vs-role",
       "to": "watch-one-player",
+      "kind": "related"
+    },
+    {
+      "from": "watch-one-player",
+      "to": "one-player-ninety-minutes",
       "kind": "related"
     },
     {
@@ -1331,6 +1521,16 @@
       "kind": "prerequisite"
     },
     {
+      "from": "match-note-basics",
+      "to": "report-templates",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "match-note-basics",
+      "to": "spoken-briefings",
+      "kind": "prerequisite"
+    },
+    {
       "from": "numerical-superiority",
       "to": "four-superiorities",
       "kind": "prerequisite"
@@ -1348,6 +1548,11 @@
     {
       "from": "offside-position",
       "to": "semi-automated-offside",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "one-player-ninety-minutes",
+      "to": "grading-and-scouting-reports",
       "kind": "prerequisite"
     },
     {
@@ -1446,6 +1651,11 @@
       "kind": "prerequisite"
     },
     {
+      "from": "position-vs-role",
+      "to": "the-scouts-eye",
+      "kind": "prerequisite"
+    },
+    {
       "from": "positions-overview",
       "to": "formation-notation",
       "kind": "prerequisite"
@@ -1496,6 +1706,21 @@
       "kind": "prerequisite"
     },
     {
+      "from": "report-templates",
+      "to": "grading-and-scouting-reports",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "report-templates",
+      "to": "output-rubrics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "report-templates",
+      "to": "visual-evidence",
+      "kind": "prerequisite"
+    },
+    {
       "from": "role-map",
       "to": "academy-roles",
       "kind": "prerequisite"
@@ -1531,8 +1756,33 @@
       "kind": "prerequisite"
     },
     {
+      "from": "spoken-briefings",
+      "to": "output-rubrics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-lesson-loop",
+      "to": "match-note-basics",
+      "kind": "prerequisite"
+    },
+    {
       "from": "the-lesson-loop",
       "to": "one-question-clips",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-scouts-eye",
+      "to": "live-vs-video-scouting",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-scouts-eye",
+      "to": "one-player-ninety-minutes",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-scouts-eye",
+      "to": "relative-age-effect",
       "kind": "prerequisite"
     },
     {
@@ -1546,6 +1796,11 @@
       "kind": "prerequisite"
     },
     {
+      "from": "watch-in-blocks",
+      "to": "one-player-ninety-minutes",
+      "kind": "prerequisite"
+    },
+    {
       "from": "watch-one-phase",
       "to": "story-then-structure",
       "kind": "prerequisite"
@@ -1553,6 +1808,11 @@
     {
       "from": "watch-one-phase",
       "to": "watch-in-blocks",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-player",
+      "to": "the-scouts-eye",
       "kind": "prerequisite"
     },
     {

@@ -309,7 +309,7 @@
         "descriptor": "Leads the opposition-analysis process and sets the format and quality bar for the department."
       }
     ],
-    "concepts": ["analysis-roles", "formation-vs-structure"]
+    "concepts": ["analysis-roles", "formation-vs-structure", "report-templates"]
   },
   {
     "id": "live-match-analysis",
@@ -357,7 +357,7 @@
         "descriptor": "Owns the review cycle and turns its findings into actions for coaching and recruitment."
       }
     ],
-    "concepts": ["analysis-roles", "story-then-structure"]
+    "concepts": ["analysis-roles", "match-note-basics", "report-templates", "story-then-structure"]
   },
   {
     "id": "video-analysis-tooling",
@@ -381,7 +381,7 @@
         "descriptor": "Chooses the department's video tools and trains staff to use them."
       }
     ],
-    "concepts": []
+    "concepts": ["visual-evidence"]
   },
   {
     "id": "loan-player-monitoring",
@@ -597,7 +597,15 @@
         "descriptor": "Has a record of identifying talent and sets how the club searches for players."
       }
     ],
-    "concepts": ["position-vs-role", "recruitment-roles", "watch-one-player"]
+    "concepts": [
+      "live-vs-video-scouting",
+      "one-player-ninety-minutes",
+      "position-vs-role",
+      "recruitment-roles",
+      "relative-age-effect",
+      "the-scouts-eye",
+      "watch-one-player"
+    ]
   },
   {
     "id": "scouting-reports",
@@ -621,7 +629,12 @@
         "descriptor": "Sets the report template and grading scale and checks scouts' reports."
       }
     ],
-    "concepts": ["recruitment-roles"]
+    "concepts": [
+      "grading-and-scouting-reports",
+      "one-player-ninety-minutes",
+      "recruitment-roles",
+      "report-templates"
+    ]
   },
   {
     "id": "data-led-target-ranking",
@@ -693,7 +706,7 @@
         "descriptor": "Builds the scouting, analytics and video structure that recruitment depends on."
       }
     ],
-    "concepts": []
+    "concepts": ["live-vs-video-scouting"]
   },
   {
     "id": "character-and-fit-assessment",
@@ -717,7 +730,7 @@
         "descriptor": "Sets how the club judges character and fit and makes it part of every recommendation."
       }
     ],
-    "concepts": []
+    "concepts": ["grading-and-scouting-reports", "the-scouts-eye"]
   },
   {
     "id": "transfer-negotiation",
@@ -1005,7 +1018,7 @@
         "descriptor": "Coaches staff in presenting and sets how insight reaches decision makers."
       }
     ],
-    "concepts": []
+    "concepts": ["match-note-basics", "output-rubrics", "spoken-briefings", "visual-evidence"]
   },
   {
     "id": "cross-discipline-translation",
@@ -1077,7 +1090,7 @@
         "descriptor": "Sets how the staff talk to players and filters issues before they reach the manager."
       }
     ],
-    "concepts": []
+    "concepts": ["spoken-briefings"]
   },
   {
     "id": "injury-prevention-and-return-to-play",
@@ -1221,7 +1234,7 @@
         "descriptor": "Owns the club's pathway and aligns academy and first team in one style."
       }
     ],
-    "concepts": ["academy-roles"]
+    "concepts": ["academy-roles", "relative-age-effect"]
   },
   {
     "id": "academy-programme-management",
