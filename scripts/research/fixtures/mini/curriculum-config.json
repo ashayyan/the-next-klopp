@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "thread_starters": {
+    "t00-start-here": "role-map-intro",
+    "t04-watch-gym": "watch-one-player",
+    "t14-write-and-speak": "one-line-match-note",
+    "t21-scouting-1": "scouting-eye-basics"
+  },
+  "milestone_1_tracks": ["t00-start-here", "t01-the-game", "t04-watch-gym"],
+  "max_starter_layer": 5
+}
