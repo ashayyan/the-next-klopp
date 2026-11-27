@@ -151,3 +151,29 @@ The secret in `~/.agentmemory/secret` is read into a process variable only. It i
 - Skills installed mid-session may not show in the skill list until Claude Code is restarted.
 - Pushing `.github/workflows/*` needs the `workflow` token scope. The learner grants it themselves with `gh auth refresh -h github.com -s workflow`. Claude never handles the login.
 - `uv sync` prints a harmless hardlink warning when cache and target are on different drives. Set `UV_LINK_MODE=copy` to silence it.
+
+## GitHub
+
+| Item | Value |
+|------|-------|
+| Repo | `ashayyan/the-next-klopp`, PRIVATE |
+| Default branch | `main` |
+| Phase branches | `gsd/phase-{N}-{slug}`, one per phase |
+| Token scopes (`gh auth status`) | `gist`, `read:org`, `repo`, `workflow` (the `workflow` scope is present, so workflow files can be pushed) |
+| Account plan | `null` in the API (`gh api user`) |
+
+Branch protection outcome ([ADR 0007](decisions/0007-branch-protection.md)):
+
+- `PUT /branches/main/protection` with `.github/branch-protection.json` answered `HTTP/2.0 200 OK`. It was not refused.
+- Confirmed with a GET: required checks `build,guards,lint,test,typecheck,windows-smoke`, up-to-date branch required, PR required with 0 approvals, admins enforced, force pushes off, deletions off.
+- `POST /rulesets` with `.github/ruleset-main.json` answered `HTTP/2.0 201 Created`. It duplicated the classic rule, so it was deleted (`HTTP/2.0 204`). The payload stays in the repo as an alternative.
+- Secret scanning: `security_and_analysis` is `null`, so GitHub secret scanning is not reported as available. Gitleaks over the full history in CI plus `scripts/guard-files.ts` are the controls.
+
+Merge routine:
+
+1. Work on the `gsd/phase-{N}-{slug}` branch and push it. The pre-push hook blocks direct pushes to `main`.
+2. Open a PR to `main`.
+3. Wait for all six checks (`lint`, `typecheck`, `test`, `build`, `guards`, `windows-smoke`) to be green.
+4. Merge with `gh pr merge --merge`. Never push to `main` and never set `ALLOW_MAIN_PUSH`.
+
+Release tags: one per shipped milestone, for example `v0.1-golden`, `v0.2-track1`.
