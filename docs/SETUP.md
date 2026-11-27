@@ -122,6 +122,29 @@ claude mcp add agentmemory --scope local -- npx -y @agentmemory/mcp@0.9.33
 
 The secret in `~/.agentmemory/secret` is read into a process variable only. It is never written to a file, a commit or chat.
 
+### Verification (2026-11-27)
+
+- Write path: REST (`POST /agentmemory/remember`, bearer auth read in-process). The MCP tools wired by the command above only appear in a new Claude Code session, so they were not available while writing. Each entry carries `project: the-next-klopp` and a `the-next-klopp` concept tag.
+- Server: `GET /agentmemory/livez` returned status ok (viewer port 3113).
+- Five entries stored, all paraphrased, none a research dump:
+
+| Entry | Size (characters) |
+|-------|-------------------|
+| learner profile | 1320 |
+| non-negotiables | 1078 |
+| communication rules | 552 |
+| model routing | 966 |
+| decisions D6 D10 | 640 |
+
+- Search is keyword BM25 (keyless mode). Compact search results carry ids and titles only, so `scripts/verify/memory.ts` reads the full content from `GET /agentmemory/memories?project=the-next-klopp` and matches by id.
+- Query `the-next-klopp learner profile ADHD PFSA` returned the learner profile entry first (content contains PFSA).
+- Query `the-next-klopp non-negotiables` returned the non-negotiables entry first (content contains non-negotiable).
+- Check run: `node scripts/verify-setup.ts memory` prints `verify memory: ok`. It also fails if any stored entry reaches 4000 characters.
+- MCP wiring: `claude mcp add agentmemory --scope local -- npx -y @agentmemory/mcp@0.9.33` was run from the repo root and reported success. The entry lives in `~/.claude.json` under this project, not in the repo. `--with-hooks` was not used.
+- Mirror to the inline agent-memory plugin store: not mirrored. Its tools were not exposed to this executor session. The orchestrator can copy the five entries from agentmemory if it wants them there.
+- Fix during writing: a backslash in the project path was dropped by the server on the first write (path showed as `E:To become`). The two affected entries were forgotten and re-stored with `E:/To become new klop`.
+- Human check for a fresh session: ask "Recall the-next-klopp learner profile and project rules from agentmemory". The profile and rules should come back from memory, not from reading the brief.
+
 ## Known issues
 
 - `uv self update` fails: uv was not installed by the standalone installer. Upgrade with `pip install --upgrade uv` or winget instead. Installed 0.12.5 works for the stub; `uv_build` is pinned `>=0.12,<0.13`. Widen it if uv moves to 0.13.
