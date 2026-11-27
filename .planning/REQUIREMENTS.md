@@ -159,16 +159,86 @@ Deferred to later milestones. Each track gets just-in-time research before it is
 
 ## Traceability
 
-Populated during roadmap creation.
+Populated during roadmap creation (2026-11-27). Each requirement maps to exactly one phase: the phase that first builds and enforces it. QA-01 to QA-05 are standing gates for every lesson, so lessons in Phases 7 and 8 must pass them.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
+| SETUP-01 | Phase 1 | Pending |
+| SETUP-02 | Phase 1 | Pending |
+| SETUP-03 | Phase 1 | Pending |
+| SETUP-04 | Phase 1 | Pending |
+| SETUP-05 | Phase 1 | Pending |
+| SETUP-06 | Phase 1 | Pending |
+| SETUP-07 | Phase 1 | Pending |
+| PLAT-01 | Phase 1 | Pending |
+| RSCH-01 | Phase 2 | Pending |
+| RSCH-02 | Phase 2 | Pending |
+| RSCH-03 | Phase 2 | Pending |
+| RSCH-04 | Phase 2 | Pending |
+| RSCH-05 | Phase 2 | Pending |
+| RSCH-06 | Phase 2 | Pending |
+| PITCH-01 | Phase 3 | Pending |
+| PITCH-02 | Phase 3 | Pending |
+| PITCH-03 | Phase 3 | Pending |
+| PITCH-04 | Phase 3 | Pending |
+| PIPE-01 | Phase 3 | Pending |
+| PIPE-02 | Phase 3 | Pending |
+| PIPE-03 | Phase 3 | Pending |
+| PIPE-04 | Phase 3 | Pending |
+| DSGN-01 | Phase 4 | Pending |
+| DSGN-02 | Phase 4 | Pending |
+| DSGN-03 | Phase 4 | Pending |
+| DSGN-04 | Phase 4 | Pending |
+| QA-02 | Phase 4 | Pending |
+| CONT-01 | Phase 5 | Pending |
+| CONT-02 | Phase 5 | Pending |
+| CONT-03 | Phase 5 | Pending |
+| CONT-04 | Phase 5 | Pending |
+| CONT-05 | Phase 5 | Pending |
+| CONT-06 | Phase 5 | Pending |
+| PLAT-02 | Phase 5 | Pending |
+| PLAT-03 | Phase 5 | Pending |
+| PLAT-04 | Phase 5 | Pending |
+| QA-01 | Phase 5 | Pending |
+| QA-03 | Phase 5 | Pending |
+| QA-04 | Phase 5 | Pending |
+| QA-05 | Phase 5 | Pending |
+| LRN-01 | Phase 6 | Pending |
+| LRN-02 | Phase 6 | Pending |
+| LRN-03 | Phase 6 | Pending |
+| LRN-04 | Phase 6 | Pending |
+| LRN-05 | Phase 6 | Pending |
+| LRN-06 | Phase 6 | Pending |
+| LRN-07 | Phase 6 | Pending |
+| PROG-01 | Phase 6 | Pending |
+| PROG-02 | Phase 6 | Pending |
+| PROG-03 | Phase 6 | Pending |
+| PROG-04 | Phase 6 | Pending |
+| PROG-05 | Phase 6 | Pending |
+| PROG-06 | Phase 6 | Pending |
+| GOLD-01 | Phase 7 | Pending |
+| GOLD-02 | Phase 7 | Pending |
+| T0-01 | Phase 7 | Pending |
+| T0-02 | Phase 7 | Pending |
+| T0-03 | Phase 7 | Pending |
+| T0-04 | Phase 7 | Pending |
+| T0-05 | Phase 7 | Pending |
+| T1-01 | Phase 8 | Pending |
+| T1-02 | Phase 8 | Pending |
+| T1-03 | Phase 8 | Pending |
+| T1-04 | Phase 8 | Pending |
+| T1-05 | Phase 8 | Pending |
+| T1-06 | Phase 8 | Pending |
+| WG-01 | Phase 8 | Pending |
+| WG-02 | Phase 8 | Pending |
+| WG-03 | Phase 8 | Pending |
+| WG-04 | Phase 8 | Pending |
 
 **Coverage:**
-- v1 requirements: 66 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 66 ⚠️
+- v1 requirements: 70 total
+- Mapped to phases: 70 (100%)
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-11-27*
-*Last updated: 2026-11-27 after initial definition*
+*Last updated: 2026-11-27 after roadmap creation (traceability populated)*
