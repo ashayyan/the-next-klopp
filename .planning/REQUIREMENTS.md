@@ -15,7 +15,7 @@
 - [x] **SETUP-04**: The first commit carries repo guards: `.gitignore` for raw/licensed data and secrets, `.gitattributes` with `eol=lf`, a large-file/path guard, secret scanning, and `.env.example`
 - [ ] **SETUP-05**: The learner profile and project rules are stored in agentmemory (no raw research dumps)
 - [ ] **SETUP-06**: Architecture decisions are recorded in `docs/decisions/` (Vite SPA vs Next.js, router, storage engine, Vercel scope, study/dev split, path-with-spaces handling)
-- [ ] **SETUP-07**: Shared contract schemas (source, concept, competency, role) exist in `/schemas` before research agents spawn
+- [x] **SETUP-07**: Shared contract schemas (source, concept, competency, role) exist in `/schemas` before research agents spawn
 
 ### Research (Wave 1)
 
@@ -169,7 +169,7 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 | SETUP-04 | Phase 1 | Complete |
 | SETUP-05 | Phase 1 | Pending |
 | SETUP-06 | Phase 1 | Pending |
-| SETUP-07 | Phase 1 | Pending |
+| SETUP-07 | Phase 1 | Complete |
 | PLAT-01 | Phase 1 | Complete |
 | RSCH-01 | Phase 2 | Pending |
 | RSCH-02 | Phase 2 | Pending |
