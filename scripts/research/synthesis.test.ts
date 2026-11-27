@@ -5,7 +5,7 @@ import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import { DOMAIN_SLUGS } from "./lib/domains.ts";
+import { COMPETENCY_DOMAINS, DOMAIN_SLUGS, ROLE_IDS } from "./lib/domains.ts";
 import {
   canonicalUrl,
   compileContract,
@@ -139,5 +139,105 @@ describe("source registry (SOURCE_REGISTRY.json, SOURCE_ALIASES.json)", () => {
         }
       },
     );
+  });
+});
+
+// Roles and competencies (02-17). Ids are frozen references for the Role Map, the readiness meter
+// and the role exams. competency.concepts stays empty until the concept map exists (02-18).
+const rolesPath = join(root, "research", "roles.json");
+const competenciesPath = join(root, "research", "competencies.json");
+const conceptMapPath = join(root, "research", "concept-map.json");
+const hasRoles = existsSync(rolesPath) && existsSync(competenciesPath);
+
+interface RoleDoc {
+  id: string;
+  title: string;
+  summary: string;
+  competencies: { id: string; target_level: number }[];
+  sources: string[];
+}
+
+interface CompetencyDoc {
+  id: string;
+  title: string;
+  domain: string;
+  levels: { level: number; descriptor: string }[];
+  concepts: string[];
+}
+
+const roles = (hasRoles ? readJson(rolesPath) : []) as RoleDoc[];
+const competencies = (hasRoles ? readJson(competenciesPath) : []) as CompetencyDoc[];
+
+describe("roles and competencies (roles.json, competencies.json)", () => {
+  it.skipIf(hasRoles || !gate)("exist under npm run research:gate", () => {
+    expect(hasRoles).toBe(true);
+  });
+
+  describe.skipIf(!hasRoles)("roles: integrity", () => {
+    const competencyIds = new Set(competencies.map((c) => c.id));
+
+    it("every role is valid against role.schema.json", () => {
+      expect(Array.isArray(roles)).toBe(true);
+      const validate = compileContract("role");
+      for (const r of roles) {
+        expect(validate(r), `${r.id}: ${JSON.stringify(validate.errors)}`).toBe(true);
+      }
+    });
+
+    it("role ids are unique and canonical (ROLE_IDS)", () => {
+      const ids = roles.map((r) => r.id);
+      expect(new Set(ids).size).toBe(ids.length);
+      for (const id of ids) expect(ROLE_IDS, id).toContain(id);
+    });
+
+    it("no role repeats a competency, and every role competency exists", () => {
+      for (const r of roles) {
+        const ids = r.competencies.map((c) => c.id);
+        expect(new Set(ids).size, `${r.id} repeats a competency`).toBe(ids.length);
+        for (const id of ids) expect(competencyIds.has(id), `${r.id} -> ${id}`).toBe(true);
+      }
+    });
+
+    it("every role source resolves to a registry id through the aliases", () => {
+      const registry = (hasRegistry ? readJson(registryPath) : []) as SourceEntry[];
+      const aliases = hasRegistry
+        ? (readJson(aliasesPath) as { aliases: Record<string, string> }).aliases
+        : {};
+      const ids = new Set(registry.map((s) => s.id));
+      const bad = roles.flatMap((r) =>
+        r.sources.filter((s) => !ids.has(aliases[s] ?? s)).map((s) => `${r.id} -> ${s}`),
+      );
+      expect(bad).toEqual([]);
+    });
+  });
+
+  describe.skipIf(!hasRoles)("competencies: integrity", () => {
+    it("every competency is valid against competency.schema.json", () => {
+      expect(Array.isArray(competencies)).toBe(true);
+      const validate = compileContract("competency");
+      for (const c of competencies) {
+        expect(validate(c), `${c.id}: ${JSON.stringify(validate.errors)}`).toBe(true);
+      }
+    });
+
+    it("competency ids are unique and domains are canonical (COMPETENCY_DOMAINS)", () => {
+      const ids = competencies.map((c) => c.id);
+      expect(new Set(ids).size).toBe(ids.length);
+      for (const c of competencies) expect(COMPETENCY_DOMAINS, c.id).toContain(c.domain);
+    });
+
+    it("every concepts entry exists in concept-map.json (empty until 02-18)", () => {
+      const listed = competencies.flatMap((c) => c.concepts.map((k) => `${c.id} -> ${k}`));
+      if (!existsSync(conceptMapPath)) {
+        expect(listed).toEqual([]);
+        return;
+      }
+      const doc = readJson(conceptMapPath) as { concepts: { id: string }[] };
+      const conceptIds = new Set(doc.concepts.map((k) => k.id));
+      const bad = competencies.flatMap((c) =>
+        c.concepts.filter((k) => !conceptIds.has(k)).map((k) => `${c.id} -> ${k}`),
+      );
+      expect(bad).toEqual([]);
+    });
   });
 });

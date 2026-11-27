@@ -1,0 +1,266 @@
+[
+  {
+    "id": "playing-style-definition",
+    "title": "Defining a playing style",
+    "domain": "game-knowledge",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Describes a club's playing style in a few words, for example how it presses and builds up."
+      },
+      {
+        "level": 2,
+        "descriptor": "Breaks a playing style into principles for each phase of play and spots them in a match."
+      },
+      {
+        "level": 3,
+        "descriptor": "Writes a club playing-style document that coaches, analysts and recruiters can apply."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets one playing style from academy to first team and checks that every department follows it."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "set-piece-design",
+    "title": "Set-piece design",
+    "domain": "tactics",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Names the main set-piece types and the roles players take in them."
+      },
+      {
+        "level": 2,
+        "descriptor": "Reads an opponent's set-piece routine from footage and points out its weak spot."
+      },
+      {
+        "level": 3,
+        "descriptor": "Designs attacking and defensive set-piece routines and coaches them in a session."
+      },
+      {
+        "level": 4,
+        "descriptor": "Runs the club's set-piece programme and agrees its training time with the head coach."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "squad-planning",
+    "title": "Squad planning",
+    "domain": "recruitment",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Reads a squad list by position, age and contract end date."
+      },
+      {
+        "level": 2,
+        "descriptor": "Maps the squad's gaps for the next season."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds a multi-year squad plan with succession for every position."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns squad renewal and aligns recruitment, academy and the head coach with the plan."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "scouting-network-management",
+    "title": "Scouting network management",
+    "domain": "recruitment",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how a scouting network is organised by region and level."
+      },
+      {
+        "level": 2,
+        "descriptor": "Assigns matches to scouts and tracks their coverage."
+      },
+      {
+        "level": 3,
+        "descriptor": "Runs a scouting network and moves its coverage to where the club needs players."
+      },
+      {
+        "level": 4,
+        "descriptor": "Builds the scouting, analytics and video structure that recruitment depends on."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "transfer-negotiation",
+    "title": "Transfer and loan negotiation",
+    "domain": "transfers-and-finance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains the parties in a transfer: clubs, player, agent."
+      },
+      {
+        "level": 2,
+        "descriptor": "Prepares a negotiation brief with fee and wage limits."
+      },
+      {
+        "level": 3,
+        "descriptor": "Negotiates transfers, loans or contracts inside agreed limits."
+      },
+      {
+        "level": 4,
+        "descriptor": "Leads the club's major negotiations and coaches staff in negotiating."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "contract-structuring",
+    "title": "Contract structures",
+    "domain": "transfers-and-finance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Names the parts of a player contract: length, wage, bonuses and clauses."
+      },
+      {
+        "level": 2,
+        "descriptor": "Compares two contract offers and their cost over time."
+      },
+      {
+        "level": 3,
+        "descriptor": "Designs contract structures that fit the squad plan and the budget."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the club's contract policy and approves the structures used."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "sporting-strategy",
+    "title": "Sporting strategy",
+    "domain": "leadership",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what a club's sporting strategy covers: style, squad, academy and staff."
+      },
+      {
+        "level": 2,
+        "descriptor": "Writes how one department supports the sporting strategy."
+      },
+      {
+        "level": 3,
+        "descriptor": "Writes a multi-year sporting strategy and links it to recruitment and the academy."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the club's sporting strategy and keeps it stable through changes of coach."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "staff-appointment",
+    "title": "Appointing staff",
+    "domain": "leadership",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how clubs hire coaches and specialist staff."
+      },
+      {
+        "level": 2,
+        "descriptor": "Writes a role profile and interview questions for one post."
+      },
+      {
+        "level": 3,
+        "descriptor": "Runs a hiring process and recommends a candidate with evidence."
+      },
+      {
+        "level": 4,
+        "descriptor": "Appoints the head coach and senior staff and plans their succession."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "football-department-design",
+    "title": "Football department design",
+    "domain": "leadership",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Draws a club's football structure and its reporting lines."
+      },
+      {
+        "level": 2,
+        "descriptor": "Compares two club structures and their trade-offs."
+      },
+      {
+        "level": 3,
+        "descriptor": "Designs a department structure with clear roles and decision rights."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the club structure and who owns each decision across football and business."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "board-and-owner-relations",
+    "title": "Board and owner relations",
+    "domain": "communication",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how owners, the board and the chief executive govern a club."
+      },
+      {
+        "level": 2,
+        "descriptor": "Prepares a short board update on one football topic."
+      },
+      {
+        "level": 3,
+        "descriptor": "Presents football plans to the board and wins support for them."
+      },
+      {
+        "level": 4,
+        "descriptor": "Represents football at board level and keeps owner support through difficult periods."
+      }
+    ],
+    "concepts": []
+  },
+  {
+    "id": "player-pathway-planning",
+    "title": "Player pathway planning",
+    "domain": "academy-development",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains the pathway from academy to first team."
+      },
+      {
+        "level": 2,
+        "descriptor": "Maps one player's next steps on the pathway."
+      },
+      {
+        "level": 3,
+        "descriptor": "Plans pathways for a group of players with coaches and recruitment."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns the club's pathway and aligns academy and first team in one style."
+      }
+    ],
+    "concepts": []
+  }
+]

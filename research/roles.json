@@ -1,0 +1,59 @@
+[
+  {
+    "id": "sporting-director",
+    "title": "Sporting Director / Director of Football",
+    "summary": "Holds overall responsibility for football operations: sets the sporting strategy, appoints the head coach, runs squad renewal and aligns academy and first team behind one playing style.",
+    "competencies": [
+      {
+        "id": "sporting-strategy",
+        "target_level": 4
+      },
+      {
+        "id": "staff-appointment",
+        "target_level": 4
+      },
+      {
+        "id": "squad-planning",
+        "target_level": 4
+      },
+      {
+        "id": "football-department-design",
+        "target_level": 4
+      },
+      {
+        "id": "playing-style-definition",
+        "target_level": 4
+      },
+      {
+        "id": "board-and-owner-relations",
+        "target_level": 4
+      },
+      {
+        "id": "contract-structuring",
+        "target_level": 3
+      },
+      {
+        "id": "transfer-negotiation",
+        "target_level": 3
+      },
+      {
+        "id": "scouting-network-management",
+        "target_level": 3
+      },
+      {
+        "id": "player-pathway-planning",
+        "target_level": 3
+      },
+      {
+        "id": "set-piece-design",
+        "target_level": 2
+      }
+    ],
+    "sources": [
+      "src-pl-sporting-directors-explained",
+      "src-jobsinfootball-sporting-director-role",
+      "src-slemen-effective-sporting-director",
+      "src-jobsinfootball-sporting-director-structure"
+    ]
+  }
+]
