@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-next-klopp.example/schemas/role.schema.json",
+  "title": "Role",
+  "$comment": "One element of research/roles.json. Cross-document integrity is checked by the Phase 2 and Phase 5 validators, not by JSON Schema: competency ids exist and are unique within a role, source ids exist.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "summary", "competencies", "sources"],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+    "title": { "type": "string", "minLength": 1 },
+    "summary": { "type": "string", "minLength": 1 },
+    "competencies": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "target_level"],
+        "properties": {
+          "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+          "target_level": { "type": "integer", "minimum": 1, "maximum": 4 }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+    }
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "valid": [
+    {
+      "name": "four-levels-in-order",
+      "doc": {
+        "id": "pressing-design",
+        "title": "Pressing design",
+        "domain": "tactics",
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": "Names the common pressing triggers when watching a match."
+          },
+          {
+            "level": 2,
+            "descriptor": "Explains how a press is organised by line and by zone."
+          },
+          {
+            "level": 3,
+            "descriptor": "Designs a pressing scheme against a given build-up shape."
+          },
+          {
+            "level": 4,
+            "descriptor": "Adapts pressing in-game and coaches it across a squad."
+          }
+        ],
+        "concepts": ["pressing-triggers", "offside-rule"]
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "only-three-levels",
+      "reason": "only three level descriptors",
+      "doc": {
+        "id": "pressing-design",
+        "title": "Pressing design",
+        "domain": "tactics",
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": "Names the common pressing triggers when watching a match."
+          },
+          {
+            "level": 2,
+            "descriptor": "Explains how a press is organised by line and by zone."
+          },
+          {
+            "level": 3,
+            "descriptor": "Designs a pressing scheme against a given build-up shape."
+          }
+        ],
+        "concepts": ["pressing-triggers", "offside-rule"]
+      }
+    },
+    {
+      "name": "levels-out-of-order",
+      "reason": "levels appear as 2, 1, 3, 4",
+      "doc": {
+        "id": "pressing-design",
+        "title": "Pressing design",
+        "domain": "tactics",
+        "levels": [
+          {
+            "level": 2,
+            "descriptor": "Explains how a press is organised by line and by zone."
+          },
+          {
+            "level": 1,
+            "descriptor": "Names the common pressing triggers when watching a match."
+          },
+          {
+            "level": 3,
+            "descriptor": "Designs a pressing scheme against a given build-up shape."
+          },
+          {
+            "level": 4,
+            "descriptor": "Adapts pressing in-game and coaches it across a squad."
+          }
+        ],
+        "concepts": ["pressing-triggers", "offside-rule"]
+      }
+    },
+    {
+      "name": "fifth-level",
+      "reason": "a fifth level descriptor is present",
+      "doc": {
+        "id": "pressing-design",
+        "title": "Pressing design",
+        "domain": "tactics",
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": "Names the common pressing triggers when watching a match."
+          },
+          {
+            "level": 2,
+            "descriptor": "Explains how a press is organised by line and by zone."
+          },
+          {
+            "level": 3,
+            "descriptor": "Designs a pressing scheme against a given build-up shape."
+          },
+          {
+            "level": 4,
+            "descriptor": "Adapts pressing in-game and coaches it across a squad."
+          },
+          {
+            "level": 5,
+            "descriptor": "Extra."
+          }
+        ],
+        "concepts": ["pressing-triggers", "offside-rule"]
+      }
+    },
+    {
+      "name": "empty-descriptor",
+      "reason": "level 3 has an empty descriptor",
+      "doc": {
+        "id": "pressing-design",
+        "title": "Pressing design",
+        "domain": "tactics",
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": "Names the common pressing triggers when watching a match."
+          },
+          {
+            "level": 2,
+            "descriptor": "Explains how a press is organised by line and by zone."
+          },
+          {
+            "level": 3,
+            "descriptor": ""
+          },
+          {
+            "level": 4,
+            "descriptor": "Adapts pressing in-game and coaches it across a squad."
+          }
+        ],
+        "concepts": ["pressing-triggers", "offside-rule"]
+      }
+    }
+  ]
+}

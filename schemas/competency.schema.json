@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-next-klopp.example/schemas/competency.schema.json",
+  "title": "Competency",
+  "$comment": "One element of research/competencies.json. Cross-document integrity is checked by the Phase 2 and Phase 5 validators, not by JSON Schema: competency ids are unique across the file and every concept id exists in the concept map.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "title", "domain", "levels", "concepts"],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+    "title": { "type": "string", "minLength": 1 },
+    "domain": { "$ref": "common.schema.json#/$defs/kebabId" },
+    "levels": {
+      "type": "array",
+      "minItems": 4,
+      "items": false,
+      "prefixItems": [
+        { "$ref": "#/$defs/level1" },
+        { "$ref": "#/$defs/level2" },
+        { "$ref": "#/$defs/level3" },
+        { "$ref": "#/$defs/level4" }
+      ]
+    },
+    "concepts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+    }
+  },
+  "$defs": {
+    "level1": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "descriptor"],
+      "properties": {
+        "level": { "const": 1 },
+        "descriptor": { "type": "string", "minLength": 1 }
+      }
+    },
+    "level2": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "descriptor"],
+      "properties": {
+        "level": { "const": 2 },
+        "descriptor": { "type": "string", "minLength": 1 }
+      }
+    },
+    "level3": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "descriptor"],
+      "properties": {
+        "level": { "const": 3 },
+        "descriptor": { "type": "string", "minLength": 1 }
+      }
+    },
+    "level4": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["level", "descriptor"],
+      "properties": {
+        "level": { "const": 4 },
+        "descriptor": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

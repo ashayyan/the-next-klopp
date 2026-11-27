@@ -117,5 +117,40 @@ export const conceptMapSchema = z.strictObject({
 export type Concept = z.infer<typeof conceptSchema>;
 export type ConceptMap = z.infer<typeof conceptMapSchema>;
 
+function levelDescriptor<L extends 1 | 2 | 3 | 4>(level: L) {
+  return z.strictObject({ level: z.literal(level), descriptor: nonEmpty });
+}
+
+export const competencySchema = z.strictObject({
+  id: kebabId,
+  title: nonEmpty,
+  domain: kebabId,
+  levels: z.tuple([levelDescriptor(1), levelDescriptor(2), levelDescriptor(3), levelDescriptor(4)]),
+  concepts: uniqueIds(),
+});
+
+export const roleSchema = z.strictObject({
+  id: kebabId,
+  title: nonEmpty,
+  summary: nonEmpty,
+  competencies: z
+    .array(
+      z.strictObject({
+        id: kebabId,
+        target_level: z.number().int().min(1).max(4),
+      }),
+    )
+    .min(1),
+  sources: uniqueIds().refine((a) => a.length >= 1, { message: "at least one source" }),
+});
+
+export type Competency = z.infer<typeof competencySchema>;
+export type Role = z.infer<typeof roleSchema>;
+
 /** One entry per schemas/<name>.schema.json (common excluded). The test checks the key set. */
-export const contractSchemas = { source: sourceSchema, concept: conceptMapSchema };
+export const contractSchemas = {
+  source: sourceSchema,
+  concept: conceptMapSchema,
+  competency: competencySchema,
+  role: roleSchema,
+};
