@@ -41,14 +41,23 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 9 plans in 5 waves
 
 Plans:
+**Wave 1**
 - [ ] 01-01-PLAN.md — Guard-first commit on the phase branch, private repo created, branch-per-phase on (wave 1)
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 01-02-PLAN.md — Pinned Vite/React/TS stack, home route on fixed ports 4173/5173, smoke script (wave 2)
+
+**Wave 3** *(blocked on Wave 2 completion)*
 - [ ] 01-03-PLAN.md — Biome + Vitest config, dev-only /dev and not-found routes, README one-command start (wave 3)
 - [ ] 01-07-PLAN.md — Project-local skills + K-Dense subset, agent_skills fix, model routing, FABLE_LOG, pipeline stub (wave 3)
+
+**Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 01-04-PLAN.md — Guard tests, conventional-commit check, husky hooks proven by verify-setup (wave 4)
 - [ ] 01-05-PLAN.md — Source/concept/competency/role JSON Schemas, Zod mirrors, dual-validator fixtures test (wave 4)
 - [ ] 01-06-PLAN.md — ADRs 0001-0006 with a structure test (wave 4)
 - [ ] 01-08-PLAN.md — docs/SETUP.md toolchain record, learner profile and rules stored in agentmemory (wave 4)
+
+**Wave 5** *(blocked on Wave 4 completion)*
 - [ ] 01-09-PLAN.md — CI workflow, branch protection attempt + ADR 0007, Phase 1 PR with six green checks (wave 5)
 **Research flag**: none (standard patterns). Two decisions need the learner's confirmation at the next checkpoint: study vs dev server split (D6) and moving the project to a path without spaces (D10).
 
