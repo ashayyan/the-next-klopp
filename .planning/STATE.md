@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 2
 current_phase_name: Research Wave 1
 status: executing
-stopped_at: Completed 02-19-PLAN.md
-last_updated: "2026-11-27T22:48:55.672Z"
+stopped_at: Completed 02-20-PLAN.md
+last_updated: "2026-11-27T22:58:22.593Z"
 last_activity: 2026-11-27
 last_activity_desc: Phase 2 execution started
-state_head: 6d811e45ae9569b1a4e4740a870fbbe29a37af1b
+state_head: ac4dfeef9b84508e76f88d6ed242693a0190ed75
 progress:
   total_phases: 8
   completed_phases: 0
   total_plans: 30
-  completed_plans: 28
+  completed_plans: 29
   percent: 0
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 2 (Research Wave 1) — EXECUTING
-Plan: 10 of 21
+Plan: 11 of 21
 Status: Ready to execute
 Last activity: 2026-11-27 — Phase 2 execution started
 
@@ -73,6 +73,7 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 02 P17 | 6 min | 2 tasks | 3 files |
 | Phase 02 P18 | 8 min | 3 tasks | 7 files |
 | Phase 02 P19 | 6 min | 3 tasks | 4 files |
+| Phase 02 P20 | 25min | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -102,6 +103,8 @@ Recent decisions affecting current work:
 - [Phase 02]: 02-19: Concept map covers all 29 tracks with 164 concepts (Band 2 at 3-6, Band 3 at 2-6 chapter umbrellas); longest chain 13 layers; no orphan competencies
 - [Phase 02]: 02-19: Thread starters match-note-basics (t14, layer 2) and the-scouts-eye (t21, layer 4) complete the four early threads
 - [Phase 02]: 02-19: Capstone split into football-department and club-leadership seat concepts so it follows every Part within 4 prerequisites
+- [Phase 02]: 02-20: gaps.json splits domain 14 (a-c t21, d-f t22) and domain 20 (PL ecosystem, SPL pack); SPL row uses spl.com.sa and saff.com.sa URLs until a registry source exists
+- [Phase 02]: 02-20: unknown_licence_sources lists all 82 unknown-licence sources cited by Tracks 0-4 or ADR 0008 plus 5 flagged later-track sources; gaps.test.ts derives the expected set
 
 ### Pending Todos
 
@@ -131,6 +134,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-27T22:48:55.491Z
-Stopped at: Completed 02-19-PLAN.md
+Last session: 2026-11-27T22:58:22.359Z
+Stopped at: Completed 02-20-PLAN.md
 Resume file: None
