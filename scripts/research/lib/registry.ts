@@ -114,7 +114,9 @@ function sortedRecord(rec: Map<string, string>): Record<string, string> {
  * Merges ordered source lists into one deduplicated registry.
  * - Groups by canonical URL, then joins groups named together in `overrides.same_as`.
  * - Keeps the first-seen id per group; every other id becomes an alias of it.
- * - Licence fields take the most restrictive value; status removed > active > unverified.
+ * - Licence fields take the most restrictive value (an unrecognised value throws); a differing
+ *   licence name or terms URL is reported as a conflict. `regulation` wins over other types.
+ * - Status: removed > active > unverified.
  * - Throws when one id names two different works (two canonical URLs outside an override group).
  */
 export function mergeSources(
@@ -213,6 +215,17 @@ export function mergeSources(
     conflict("quality", (s) => s.quality);
     conflict("as_of", (s) => s.as_of);
 
+    // Name and terms URL come from the first member that has one; a second, different value is
+    // a conflict the report must show (members without the field are not a conflict).
+    for (const field of ["name", "terms_url"] as const) {
+      const values = members
+        .filter((m) => typeof m.source.license[field] === "string")
+        .map((m) => ({ origin: m.origin, value: String(m.source.license[field]) }));
+      if (distinct(values.map((v) => v.value)).length > 1) {
+        report.conflicts.push({ id, field: `license.${field}`, values });
+      }
+    }
+
     const license: Record<string, Permission | string> = {};
     const name = members.find((m) => typeof m.source.license.name === "string")?.source.license
       .name;
@@ -226,9 +239,16 @@ export function mergeSources(
         origin: m.origin,
         perm: asPermission(m.source.license[field]),
       }));
+      for (const p of perms) {
+        if (!(p.perm.value in RESTRICTIVENESS)) {
+          throw new Error(
+            `source ${id} (${p.origin}) has license.${field} value ${JSON.stringify(p.perm.value)}; expected one of ${Object.keys(RESTRICTIVENESS).join(", ")}`,
+          );
+        }
+      }
       let value = perms[0]?.perm.value ?? "unknown";
       for (const p of perms) {
-        if ((RESTRICTIVENESS[p.perm.value] ?? 2) > (RESTRICTIVENESS[value] ?? 2))
+        if ((RESTRICTIVENESS[p.perm.value] as number) > (RESTRICTIVENESS[value] as number))
           value = p.perm.value;
       }
       if (distinct(perms.map((p) => p.perm.value)).length > 1) {
@@ -293,7 +313,9 @@ export function mergeSources(
       id,
       title: first.source.title,
       url: first.source.url,
-      type: first.source.type,
+      // "regulation" is the stricter evidence class (it needs excerpts), so it wins over a looser
+      // type another origin gave the same work; every other type is first-seen.
+      type: members.some((m) => m.source.type === "regulation") ? "regulation" : first.source.type,
       publisher: first.source.publisher,
       free,
       license,

@@ -217,4 +217,60 @@ describe("mergeSources", () => {
     expect(registry.map((s) => s.id)).toEqual(["src-aa", "src-zz"]);
     expect(report.unverified).toEqual(["src-aa", "src-zz"]);
   });
+
+  it("reports a differing licence name or terms URL and keeps the first one", () => {
+    const withLicence = (name: string, terms: string) => {
+      const base = src("src-a", "https://example.org/a");
+      return { ...base, license: { ...base.license, name, terms_url: terms } };
+    };
+    const { registry, report } = mergeSources([
+      { origin: "seed", sources: [withLicence("CC BY 4.0", "https://example.org/by")] },
+      {
+        origin: "formations",
+        sources: [
+          {
+            ...withLicence("All rights reserved", "https://example.org/arr"),
+            id: "src-b",
+            url: "https://example.org/a/",
+          },
+        ],
+      },
+    ]);
+    expect(registry[0]?.license.name).toBe("CC BY 4.0");
+    const fields = report.conflicts.map((c) => c.field);
+    expect(fields).toContain("license.name");
+    expect(fields).toContain("license.terms_url");
+  });
+
+  it("does not report a licence name conflict when only one member has a name", () => {
+    const named = src("src-a", "https://example.org/a");
+    named.license.name = "CC BY 4.0";
+    const { report } = mergeSources([
+      { origin: "seed", sources: [named] },
+      { origin: "formations", sources: [src("src-b", "https://example.org/a/")] },
+    ]);
+    expect(report.conflicts.map((c) => c.field)).not.toContain("license.name");
+  });
+
+  it("lets type regulation win over a looser first-seen type", () => {
+    const { registry } = mergeSources([
+      {
+        origin: "pitch-geometry",
+        sources: [src("src-a", "https://example.org/a", { type: "official-document" })],
+      },
+      {
+        origin: "positions",
+        sources: [src("src-b", "https://example.org/a/", { type: "regulation" })],
+      },
+    ]);
+    expect(registry[0]?.type).toBe("regulation");
+  });
+
+  it("rejects a licence value that is not yes, conditional, unknown or no", () => {
+    const bad = src("src-a", "https://example.org/a");
+    bad.license.read = { value: "maybe", note: "typo" };
+    expect(() => mergeSources([{ origin: "seed", sources: [bad] }])).toThrow(
+      /license\.read.*maybe/,
+    );
+  });
 });
