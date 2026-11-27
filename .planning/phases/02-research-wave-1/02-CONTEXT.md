@@ -75,6 +75,14 @@ The learner delegated every grey area to Claude for this autonomous run ("choose
 ### Memory
 - Store in agentmemory only verdicts and decisions (source-quality verdicts such as "FBref advanced stats removed", the clip-supply decision, the Wave 1 domain list). Never store raw research text.
 
+### Post-research decisions (2026-11-27, after 02-RESEARCH.md)
+- Domain research plans are dispatched by the orchestrator to the  agent type (it has WebSearch/WebFetch/Write/Bash); synthesis and review plans go to Opus agents. No custom agent files are installed into  and no  routing is needed. Plans must not assume the default  can browse. — **Reversibility:** reversible — dispatch choice only.
+- StatsBomb open data licence forbids providing data to external parties: StatsBomb-derived artifacts (and Last Row clips, which have no licence file) are generated locally by the pipeline for the learner's local study build only, carry StatsBomb attribution/logo, and are listed in the deploy deny-manifest so they never enter the Vercel bundle. Only CC BY sources (Wyscout/Pappalardo PL 2017/18 events, DFL/Sportec) may ship in the deployed bundle. ADR 0008 records this. — **Reversibility:** costly — Watch Gym supply and deploy gate depend on it.
+- role-definitions stays one plan (15 roles, 25-source cap; prefer one high-quality source per role family).
+- PL stadium pitch dimensions are researched inside .
+-  3.1.4 is allowed as an exact-pinned devDependency for build-time layout of the summary page; Okabe-Ito palette hex values must be verified from a source, not memory.
+- The research completeness test is skipped unless RESEARCH_GATE=1 until the final wave, so CI stays green mid-phase.
+
 ### Decided autonomously
 - [Layout] Q: "Where do research files live?" → Selected: "research/ at repo root, one folder per domain slug, plus research/summary/" — moving folders is cheap before IDs freeze.
 - [Validation] Q: "How are sources.json files validated?" → Selected: "Vitest test runs ajv against schemas/source.schema.json for every research/*/sources.json and the registry" — test-only.
