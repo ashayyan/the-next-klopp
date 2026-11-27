@@ -373,3 +373,44 @@ def test_net_unreadable_cache_entry_is_a_miss_not_a_crash(
     monkeypatch.setattr(Path, "read_bytes", locked)
     assert net.fetch_bytes(url, 100, cache_dir=tmp_path) == b"fresh"
     assert len(opener.requests) == 2
+
+
+# --- provenance: rows carry the real download time, not the run time (WR-03) -----------------------
+def test_cache_fetched_at_reads_the_meta_file_and_falls_back_to_the_body_mtime(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.setattr(net, "build_opener", lambda: FakeOpener(b"hello"))
+    url = "https://raw.githubusercontent.com/x"
+    assert net.cache_fetched_at(url, tmp_path) is None
+    net.fetch_bytes(url, 100, cache_dir=tmp_path)
+    (meta,) = tmp_path.glob("*.meta.json")
+    meta.write_text(json.dumps({"url": url, "fetched_at": "2026-01-02T03:04:05Z"}), encoding="utf-8")
+    assert net.cache_fetched_at(url, tmp_path) == "2026-01-02T03:04:05Z"
+    meta.write_text("{not json", encoding="utf-8")
+    stamp = net.cache_fetched_at(url, tmp_path)
+    assert stamp is not None and stamp.endswith("Z")
+
+
+def test_an_offline_run_stamps_rows_with_the_cached_download_time(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    url = coverage.METRICA_URL
+    listing = json.dumps([{"type": "dir", "name": "Sample_Game_1"}]).encode("utf-8")
+    monkeypatch.setattr(net, "build_opener", lambda: FakeOpener(listing))
+    net.fetch_bytes(url, coverage.MB, cache_dir=tmp_path)
+    (meta,) = tmp_path.glob("*.meta.json")
+    meta.write_text(json.dumps({"url": url, "fetched_at": "2026-10-01T08:00:00Z"}), encoding="utf-8")
+
+    fetch = net.RecordingFetch(cache_dir=tmp_path, offline=True)
+    matrix = coverage.run_coverage(fetch, NOW, ["metrica", "pff"])
+    metrica = [r for r in matrix.rows if r.provider == "Metrica"]
+    assert metrica and all(r.fetched_at == "2026-10-01T08:00:00Z" for r in metrica)
+    (pff,) = [r for r in matrix.rows if r.provider == "PFF FC"]
+    assert pff.fetched_at == NOW
+    assert matrix.generated_at == "2026-10-01T08:00:00Z"
+
+
+def test_a_plain_fetch_function_keeps_the_run_time() -> None:
+    matrix = coverage.run_coverage(fake_fetch, NOW, ["metrica"])
+    assert matrix.generated_at == NOW
+    assert all(r.fetched_at == NOW for r in matrix.rows)

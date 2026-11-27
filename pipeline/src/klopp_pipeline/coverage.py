@@ -506,14 +506,24 @@ def run_coverage(
     deep: bool = False,
 ) -> CoverageMatrix:
     """Run each provider in its own try/except; an unreadable provider becomes one unreachable row."""
+    # A fetcher with ``take_oldest`` (net.RecordingFetch) reports when the bodies it served were
+    # really downloaded; rows and the matrix then carry that time, never "now" for a cached body.
+    take_oldest: Callable[[], str | None] | None = getattr(fetch, "take_oldest", None)
     rows: list[CoverageRow] = []
     for name in providers or list(PROVIDERS):
+        if take_oldest:
+            take_oldest()
         try:
             extra = {"deep": deep} if name == "lastrow" else {}
-            rows.extend(PROVIDERS[name](fetch, now, **extra))
+            new_rows = PROVIDERS[name](fetch, now, **extra)
         except (FetchError, ValueError, KeyError, TypeError) as exc:
-            rows.append(_unreachable_row(name, now, exc))
-    return CoverageMatrix(generated_at=now, script_version=__version__, rows=rows)
+            new_rows = [_unreachable_row(name, now, exc)]
+        stamp = take_oldest() if take_oldest else None
+        if stamp:
+            new_rows = [r.model_copy(update={"fetched_at": stamp}) for r in new_rows]
+        rows.extend(new_rows)
+    generated_at = min((r.fetched_at for r in rows), default=now) if take_oldest else now
+    return CoverageMatrix(generated_at=generated_at, script_version=__version__, rows=rows)
 
 
 # --- output -------------------------------------------------------------------------------------

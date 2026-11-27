@@ -11,6 +11,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import time
 import urllib.error
 import urllib.request
@@ -158,3 +159,68 @@ def fetch_bytes(
     meta = {"url": url, "fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
     _write_cache(cache_dir, body_path, meta_path, data, meta)
     return data
+
+
+_UTC_Z = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
+
+
+def cache_fetched_at(url: str, cache_dir: Path = DEFAULT_CACHE_DIR) -> str | None:
+    """UTC time the cached body for ``url`` was really downloaded, or None without a cache entry.
+
+    Reads ``*.meta.json``; falls back to the body file's modification time when the meta file is
+    missing or damaged (a crash between the two writes).
+    """
+    body_path, meta_path = _cache_paths(cache_dir, url)
+    try:
+        stamp = json.loads(meta_path.read_text(encoding="utf-8")).get("fetched_at")
+        if isinstance(stamp, str) and _UTC_Z.fullmatch(stamp):
+            return stamp
+    except (OSError, ValueError, AttributeError):
+        pass
+    try:
+        mtime = body_path.stat().st_mtime
+    except OSError:
+        return None
+    return datetime.fromtimestamp(mtime, timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+class RecordingFetch:
+    """``fetch_bytes`` that remembers when each body it served was really downloaded.
+
+    A cached body can be days old (``--offline`` never expires). The coverage matrix labels every
+    row with the oldest download time behind it, not with the time of the run.
+    """
+
+    def __init__(
+        self,
+        *,
+        cache_dir: Path = DEFAULT_CACHE_DIR,
+        refresh: bool = False,
+        offline: bool = False,
+        ttl_hours: float = 24,
+    ) -> None:
+        self.cache_dir = cache_dir
+        self.refresh = refresh
+        self.offline = offline
+        self.ttl_hours = ttl_hours
+        self._stamps: list[str] = []
+
+    def __call__(self, url: str, max_bytes: int) -> bytes:
+        data = fetch_bytes(
+            url,
+            max_bytes,
+            cache_dir=self.cache_dir,
+            refresh=self.refresh,
+            offline=self.offline,
+            ttl_hours=self.ttl_hours,
+        )
+        stamp = cache_fetched_at(url, self.cache_dir)
+        if stamp is not None:
+            self._stamps.append(stamp)
+        return data
+
+    def take_oldest(self) -> str | None:
+        """Oldest download time seen since the last call (then forget), or None."""
+        oldest = min(self._stamps) if self._stamps else None
+        self._stamps.clear()
+        return oldest

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
-from functools import partial
 from pathlib import Path
 from typing import Annotated
 
@@ -37,7 +36,7 @@ def coverage(
     unknown = [n for n in names if n not in PROVIDERS]
     if unknown:
         raise typer.BadParameter(f"unknown provider(s) {unknown}; choose from {list(PROVIDERS)}")
-    fetch = partial(net.fetch_bytes, cache_dir=net.DEFAULT_CACHE_DIR, refresh=refresh, offline=offline)
+    fetch = net.RecordingFetch(cache_dir=net.DEFAULT_CACHE_DIR, refresh=refresh, offline=offline)
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     matrix = run_coverage(fetch, now, names, deep=deep)
     json_path, md_path = write_outputs(matrix, out)
