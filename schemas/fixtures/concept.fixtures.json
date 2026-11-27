@@ -1,0 +1,403 @@
+{
+  "valid": [
+    {
+      "name": "three-concepts-two-edges",
+      "doc": {
+        "schema_version": 1,
+        "concepts": [
+          {
+            "id": "pitch-and-lines",
+            "title": "Pitch and lines",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Pitch and lines explained in one plain sentence.",
+            "prerequisites": [],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "offside-rule",
+            "title": "Offside rule",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Offside rule explained in one plain sentence.",
+            "prerequisites": ["pitch-and-lines"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "pressing-triggers",
+            "title": "Pressing triggers",
+            "track": "track-2-tactics",
+            "part": "B",
+            "summary": "Pressing triggers explained in one plain sentence.",
+            "prerequisites": ["offside-rule"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          }
+        ],
+        "edges": [
+          {
+            "from": "pitch-and-lines",
+            "to": "offside-rule",
+            "kind": "prerequisite"
+          },
+          {
+            "from": "offside-rule",
+            "to": "pressing-triggers",
+            "kind": "related"
+          }
+        ]
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "prerequisite-with-space",
+      "reason": "a prerequisite id contains a space",
+      "doc": {
+        "schema_version": 1,
+        "concepts": [
+          {
+            "id": "pitch-and-lines",
+            "title": "Pitch and lines",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Pitch and lines explained in one plain sentence.",
+            "prerequisites": [],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "offside-rule",
+            "title": "Offside rule",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Offside rule explained in one plain sentence.",
+            "prerequisites": ["pitch and lines"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "pressing-triggers",
+            "title": "Pressing triggers",
+            "track": "track-2-tactics",
+            "part": "B",
+            "summary": "Pressing triggers explained in one plain sentence.",
+            "prerequisites": ["offside-rule"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          }
+        ],
+        "edges": [
+          {
+            "from": "pitch-and-lines",
+            "to": "offside-rule",
+            "kind": "prerequisite"
+          },
+          {
+            "from": "offside-rule",
+            "to": "pressing-triggers",
+            "kind": "related"
+          }
+        ]
+      }
+    },
+    {
+      "name": "part-h",
+      "reason": "part H is outside A to G",
+      "doc": {
+        "schema_version": 1,
+        "concepts": [
+          {
+            "id": "pitch-and-lines",
+            "title": "Pitch and lines",
+            "track": "track-1-the-game",
+            "part": "H",
+            "summary": "Pitch and lines explained in one plain sentence.",
+            "prerequisites": [],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "offside-rule",
+            "title": "Offside rule",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Offside rule explained in one plain sentence.",
+            "prerequisites": ["pitch-and-lines"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "pressing-triggers",
+            "title": "Pressing triggers",
+            "track": "track-2-tactics",
+            "part": "B",
+            "summary": "Pressing triggers explained in one plain sentence.",
+            "prerequisites": ["offside-rule"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          }
+        ],
+        "edges": [
+          {
+            "from": "pitch-and-lines",
+            "to": "offside-rule",
+            "kind": "prerequisite"
+          },
+          {
+            "from": "offside-rule",
+            "to": "pressing-triggers",
+            "kind": "related"
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing-summary",
+      "reason": "concept has no summary",
+      "doc": {
+        "schema_version": 1,
+        "concepts": [
+          {
+            "id": "pitch-and-lines",
+            "title": "Pitch and lines",
+            "track": "track-1-the-game",
+            "part": "A",
+            "prerequisites": [],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "offside-rule",
+            "title": "Offside rule",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Offside rule explained in one plain sentence.",
+            "prerequisites": ["pitch-and-lines"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "pressing-triggers",
+            "title": "Pressing triggers",
+            "track": "track-2-tactics",
+            "part": "B",
+            "summary": "Pressing triggers explained in one plain sentence.",
+            "prerequisites": ["offside-rule"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          }
+        ],
+        "edges": [
+          {
+            "from": "pitch-and-lines",
+            "to": "offside-rule",
+            "kind": "prerequisite"
+          },
+          {
+            "from": "offside-rule",
+            "to": "pressing-triggers",
+            "kind": "related"
+          }
+        ]
+      }
+    },
+    {
+      "name": "edge-kind-causes",
+      "reason": "edge kind causes is not in the enum",
+      "doc": {
+        "schema_version": 1,
+        "concepts": [
+          {
+            "id": "pitch-and-lines",
+            "title": "Pitch and lines",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Pitch and lines explained in one plain sentence.",
+            "prerequisites": [],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "offside-rule",
+            "title": "Offside rule",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Offside rule explained in one plain sentence.",
+            "prerequisites": ["pitch-and-lines"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "pressing-triggers",
+            "title": "Pressing triggers",
+            "track": "track-2-tactics",
+            "part": "B",
+            "summary": "Pressing triggers explained in one plain sentence.",
+            "prerequisites": ["offside-rule"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          }
+        ],
+        "edges": [
+          {
+            "from": "pitch-and-lines",
+            "to": "offside-rule",
+            "kind": "causes"
+          },
+          {
+            "from": "offside-rule",
+            "to": "pressing-triggers",
+            "kind": "related"
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty-sources",
+      "reason": "concept has an empty sources array",
+      "doc": {
+        "schema_version": 1,
+        "concepts": [
+          {
+            "id": "pitch-and-lines",
+            "title": "Pitch and lines",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Pitch and lines explained in one plain sentence.",
+            "prerequisites": [],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": [],
+            "status": "draft"
+          },
+          {
+            "id": "offside-rule",
+            "title": "Offside rule",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Offside rule explained in one plain sentence.",
+            "prerequisites": ["pitch-and-lines"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "pressing-triggers",
+            "title": "Pressing triggers",
+            "track": "track-2-tactics",
+            "part": "B",
+            "summary": "Pressing triggers explained in one plain sentence.",
+            "prerequisites": ["offside-rule"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          }
+        ],
+        "edges": [
+          {
+            "from": "pitch-and-lines",
+            "to": "offside-rule",
+            "kind": "prerequisite"
+          },
+          {
+            "from": "offside-rule",
+            "to": "pressing-triggers",
+            "kind": "related"
+          }
+        ]
+      }
+    },
+    {
+      "name": "duplicate-prerequisite",
+      "reason": "duplicate id inside one prerequisites array",
+      "doc": {
+        "schema_version": 1,
+        "concepts": [
+          {
+            "id": "pitch-and-lines",
+            "title": "Pitch and lines",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Pitch and lines explained in one plain sentence.",
+            "prerequisites": [],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "offside-rule",
+            "title": "Offside rule",
+            "track": "track-1-the-game",
+            "part": "A",
+            "summary": "Offside rule explained in one plain sentence.",
+            "prerequisites": ["pitch-and-lines", "pitch-and-lines"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          },
+          {
+            "id": "pressing-triggers",
+            "title": "Pressing triggers",
+            "track": "track-2-tactics",
+            "part": "B",
+            "summary": "Pressing triggers explained in one plain sentence.",
+            "prerequisites": ["offside-rule"],
+            "roles": ["head-coach"],
+            "competencies": ["game-model"],
+            "sources": ["premier-league-handbook"],
+            "status": "draft"
+          }
+        ],
+        "edges": [
+          {
+            "from": "pitch-and-lines",
+            "to": "offside-rule",
+            "kind": "prerequisite"
+          },
+          {
+            "from": "offside-rule",
+            "to": "pressing-triggers",
+            "kind": "related"
+          }
+        ]
+      }
+    }
+  ]
+}

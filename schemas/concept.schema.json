@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-next-klopp.example/schemas/concept.schema.json",
+  "title": "Concept map",
+  "$comment": "Document written to research/concept-map.json: concept nodes plus edges. Cross-document integrity is checked by the Phase 2 and Phase 5 validators, not by JSON Schema: referenced concept, role, competency and source ids must exist, edge endpoints must be concept ids, the prerequisite graph must be acyclic.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "concepts", "edges"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "concepts": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/concept" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/edge" }
+    }
+  },
+  "$defs": {
+    "concept": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "track",
+        "part",
+        "summary",
+        "prerequisites",
+        "roles",
+        "competencies",
+        "sources",
+        "status"
+      ],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "title": { "type": "string", "minLength": 1 },
+        "track": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "part": { "enum": ["A", "B", "C", "D", "E", "F", "G"] },
+        "summary": { "type": "string", "minLength": 1 },
+        "prerequisites": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+        },
+        "roles": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+        },
+        "competencies": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+        },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+        },
+        "status": { "enum": ["draft", "approved", "deprecated"] }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["from", "to", "kind"],
+      "properties": {
+        "from": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "to": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "kind": { "enum": ["prerequisite", "related", "contrasts"] }
+      }
+    }
+  }
+}

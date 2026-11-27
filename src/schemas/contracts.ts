@@ -5,7 +5,7 @@
 import { z } from "zod";
 
 // Shared helpers, mirroring schemas/common.schema.json $defs.
-// URLs and UTC date-times use the same patterns as the JSON Schema, never z.url() or the
+// URLs and UTC date-times use the same patterns as the JSON Schema, never the built-in Zod URL check or the
 // JSON Schema uri format: they disagree on spaces and empty hosts.
 export const kebabId = z
   .string()
@@ -87,5 +87,35 @@ export const sourceSchema = z
 
 export type Source = z.infer<typeof sourceSchema>;
 
+export const conceptParts = ["A", "B", "C", "D", "E", "F", "G"] as const;
+
+export const conceptSchema = z.strictObject({
+  id: kebabId,
+  title: nonEmpty,
+  track: kebabId,
+  part: z.enum(conceptParts),
+  summary: nonEmpty,
+  prerequisites: uniqueIds(),
+  roles: uniqueIds(),
+  competencies: uniqueIds(),
+  sources: uniqueIds().refine((a) => a.length >= 1, { message: "at least one source" }),
+  status: z.enum(["draft", "approved", "deprecated"]),
+});
+
+export const edgeSchema = z.strictObject({
+  from: kebabId,
+  to: kebabId,
+  kind: z.enum(["prerequisite", "related", "contrasts"]),
+});
+
+export const conceptMapSchema = z.strictObject({
+  schema_version: z.literal(1),
+  concepts: z.array(conceptSchema).min(1),
+  edges: z.array(edgeSchema),
+});
+
+export type Concept = z.infer<typeof conceptSchema>;
+export type ConceptMap = z.infer<typeof conceptMapSchema>;
+
 /** One entry per schemas/<name>.schema.json (common excluded). The test checks the key set. */
-export const contractSchemas = { source: sourceSchema };
+export const contractSchemas = { source: sourceSchema, concept: conceptMapSchema };
