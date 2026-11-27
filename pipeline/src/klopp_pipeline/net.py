@@ -17,6 +17,7 @@ import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 from urllib.parse import urlsplit
 
 from klopp_pipeline import __version__
@@ -34,7 +35,10 @@ ALLOWED_HOSTS = frozenset(
     }
 )
 
-TIMEOUT_SECONDS = 30
+TIMEOUT_SECONDS = 30  # per socket operation
+TOTAL_TIMEOUT_SECONDS = 120  # wall-clock budget for the whole body, so a slow drip cannot hang a run
+CHUNK_BYTES = 64 * 1024
+HTTPS_PORT = 443
 TOKEN_HOST = "api.github.com"
 USER_AGENT = f"klopp-pipeline/{__version__} (open-data coverage check)"
 
@@ -52,6 +56,12 @@ def check_url(url: str) -> str:
     if parts.scheme != "https":
         raise FetchError(f"refused non-https URL scheme {parts.scheme!r}")
     host = (parts.hostname or "").lower()
+    try:
+        port = parts.port
+    except ValueError as exc:
+        raise FetchError("refused URL with an invalid port") from exc
+    if port not in (None, HTTPS_PORT):
+        raise FetchError(f"refused port {port}: only the default https port is allowed")
     if host not in ALLOWED_HOSTS:
         raise FetchError(f"refused host {host!r}: not on the allow-list")
     return host
@@ -75,6 +85,22 @@ def build_opener() -> urllib.request.OpenerDirector:
 def _cache_paths(cache_dir: Path, url: str) -> tuple[Path, Path]:
     key = hashlib.sha256(url.encode("utf-8")).hexdigest()
     return cache_dir / f"{key}.bin", cache_dir / f"{key}.meta.json"
+
+
+def _read_capped(response: Any, max_bytes: int, url: str) -> bytes:
+    """Read at most ``max_bytes + 1`` bytes in chunks under a total wall-clock budget."""
+    deadline = time.monotonic() + TOTAL_TIMEOUT_SECONDS
+    chunks: list[bytes] = []
+    size = 0
+    while size <= max_bytes:
+        chunk = response.read(min(CHUNK_BYTES, max_bytes + 1 - size))
+        if not chunk:
+            break
+        chunks.append(chunk)
+        size += len(chunk)
+        if time.monotonic() > deadline:
+            raise FetchError(f"response for {url} took longer than {TOTAL_TIMEOUT_SECONDS} s")
+    return b"".join(chunks)
 
 
 def _read_cache(body_path: Path, max_bytes: int, *, offline: bool, ttl_hours: float) -> bytes | None:
@@ -146,7 +172,7 @@ def fetch_bytes(
             declared = response.headers.get("Content-Length")
             if declared is not None and declared.isdigit() and int(declared) > max_bytes:
                 raise FetchError(f"response for {url} declares {declared} bytes, cap is {max_bytes}")
-            data = response.read(max_bytes + 1)
+            data = _read_capped(response, max_bytes, url)
     except FetchError:
         raise
     except urllib.error.HTTPError as exc:

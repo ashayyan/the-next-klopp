@@ -257,11 +257,11 @@ def test_markdown_shows_unreachable_instead_of_zero() -> None:
 # --- fetcher rules (threats T-02-04 to T-02-06) --------------------------------------------------
 class FakeResponse:
     def __init__(self, body: bytes, headers: dict[str, str] | None = None) -> None:
-        self._body = body
+        self._stream = io.BytesIO(body)
         self.headers = headers or {}
 
     def read(self, n: int = -1) -> bytes:
-        return self._body if n < 0 else self._body[:n]
+        return self._stream.read(n)
 
     def __enter__(self) -> FakeResponse:
         return self
@@ -271,13 +271,16 @@ class FakeResponse:
 
 
 class FakeOpener:
-    def __init__(self, body: bytes = b"{}") -> None:
+    def __init__(self, body: bytes = b"{}", headers: dict[str, str] | None = None) -> None:
         self.body = body
+        self.headers = headers
         self.requests: list[Any] = []
+        self.timeouts: list[float] = []
 
     def open(self, request: Any, timeout: float = 0) -> FakeResponse:
         self.requests.append(request)
-        return FakeResponse(self.body)
+        self.timeouts.append(timeout)
+        return FakeResponse(self.body, self.headers)
 
 
 def test_net_rejects_http_and_hosts_off_the_allow_list(tmp_path: Path) -> None:
@@ -465,3 +468,59 @@ def test_last_row_deep_recount_survives_a_csv_error() -> None:
     (row,) = coverage.lastrow_rows(fetch, NOW, deep=True)
     assert (row.matches_total, row.pl_matches) == (19, 13)
     assert "manual count kept" in row.notes
+
+
+# --- fetcher rules, second pass (WR-11) ---------------------------------------------------------
+def test_net_strips_the_token_when_a_redirect_leaves_api_github_com() -> None:
+    handler = net._SafeRedirectHandler()
+    request = urllib.request.Request(
+        "https://api.github.com/repos/x", headers={"Authorization": "Bearer secret-token"}
+    )
+    away = handler.redirect_request(
+        request, None, 302, "Found", {}, "https://raw.githubusercontent.com/y"
+    )
+    assert away is not None and away.get_header("Authorization") is None
+    same = handler.redirect_request(request, None, 302, "Found", {}, "https://api.github.com/z")
+    assert same is not None and same.get_header("Authorization") == "Bearer secret-token"
+
+
+def test_net_rejects_a_declared_content_length_over_the_cap(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    opener = FakeOpener(b"tiny", headers={"Content-Length": "999"})
+    monkeypatch.setattr(net, "build_opener", lambda: opener)
+    with pytest.raises(FetchError, match="declares 999"):
+        net.fetch_bytes("https://raw.githubusercontent.com/x", 10, cache_dir=tmp_path)
+    assert not list(tmp_path.iterdir())
+
+
+def test_net_passes_the_timeout_to_every_request(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    opener = FakeOpener()
+    monkeypatch.setattr(net, "build_opener", lambda: opener)
+    net.fetch_bytes("https://raw.githubusercontent.com/x", 100, cache_dir=tmp_path)
+    assert opener.timeouts == [net.TIMEOUT_SECONDS]
+
+
+def test_net_stops_a_slow_drip_at_the_wall_clock_budget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    clock = iter([0.0, 1.0, net.TOTAL_TIMEOUT_SECONDS + 5.0, net.TOTAL_TIMEOUT_SECONDS + 6.0])
+    monkeypatch.setattr(net.time, "monotonic", lambda: next(clock))
+    monkeypatch.setattr(net, "build_opener", lambda: FakeOpener(b"x" * 90, headers=None))
+    monkeypatch.setattr(net, "CHUNK_BYTES", 10)
+    with pytest.raises(FetchError, match="took longer"):
+        net.fetch_bytes("https://raw.githubusercontent.com/x", 1000, cache_dir=tmp_path)
+    assert not list(tmp_path.iterdir())
+
+
+def test_net_rejects_a_non_default_port_and_an_invalid_port() -> None:
+    for url in (
+        "https://api.github.com:8443/x",
+        "https://raw.githubusercontent.com:80/x",
+        "https://api.github.com:notaport/x",
+    ):
+        with pytest.raises(FetchError):
+            net.check_url(url)
+    assert net.check_url("https://api.github.com:443/x") == "api.github.com"
