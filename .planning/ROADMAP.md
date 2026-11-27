@@ -72,7 +72,7 @@ Plans:
   3. `research/SOURCE_REGISTRY.json` (with read / automated_access / redistribute / derivative licence fields and a defined fetched-excerpt format the verifier can check), `concept-map.json`, `roles.json` and `competencies.json` validate against the schemas; `CONCEPT_MAP.md`, `CURRICULUM_DRAFT.md` and `ROLE_COMPETENCIES.md` regenerate from them; FBref advanced stats are recorded as a removed source.
   4. `research/GAPS.md` lists every domain deferred to just-in-time research together with the track it must precede.
   5. Learner reads a short visual summary of the concept map and curriculum draft and approves it (or sends feedback) before any DESIGN.md work begins.
-**Plans**: 17/21 plans executed in 9 waves
+**Plans**: 18/21 plans executed in 9 waves
 
 Plans:
 **Wave 1**
@@ -103,7 +103,7 @@ Plans:
 - [x] 02-17-PLAN.md — roles.json and competencies.json (wave 5)
 
 **Wave 6** *(blocked on Wave 5 completion)*
-- [ ] 02-18-PLAN.md — Concept map Band 1 (Tracks 0-4) and derive-links (wave 6)
+- [x] 02-18-PLAN.md — Concept map Band 1 (Tracks 0-4) and derive-links (wave 6)
 
 **Wave 7** *(blocked on Wave 6 completion)*
 - [ ] 02-19-PLAN.md — Concept map Bands 2-3 (Tracks 5-28) and thread starters (wave 7)
@@ -216,7 +216,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Setup & Contracts | 8/9 | In Progress | - |
-| 2. Research Wave 1 | 17/21 | In Progress | - |
+| 2. Research Wave 1 | 18/21 | In Progress | - |
 | 3. Pitch Standard & Data Pipeline | 0/TBD | Not started | - |
 | 4. Design Direction & System | 0/TBD | Not started | - |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |
