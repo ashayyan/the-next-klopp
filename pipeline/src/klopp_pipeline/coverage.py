@@ -357,7 +357,7 @@ def lastrow_rows(fetch: Fetch, now: str, deep: bool = False) -> list[CoverageRow
                 "hand-written club list. Tracking only, no events; self-described as too inaccurate "
                 "for research; informal request to credit the source."
             )
-        except (FetchError, ValueError, KeyError) as exc:
+        except (FetchError, ValueError, KeyError, csv.Error) as exc:
             notes += f" Deep recount failed ({type(exc).__name__}); manual count kept."
     return [
         CoverageRow(
@@ -520,7 +520,7 @@ def run_coverage(
         try:
             extra = {"deep": deep} if name == "lastrow" else {}
             new_rows = PROVIDERS[name](fetch, now, **extra)
-        except (FetchError, ValueError, KeyError, TypeError) as exc:
+        except Exception as exc:  # noqa: BLE001 - per-provider boundary: any failure is one honest row
             new_rows = [_unreachable_row(name, now, exc)]
         stamp = take_oldest() if take_oldest else None
         if stamp:

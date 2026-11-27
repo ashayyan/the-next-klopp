@@ -425,3 +425,43 @@ def test_headline_labels_play_counts_and_keeps_match_counts_plain() -> None:
     assert "13 plays" in lastrow
     assert "plays" not in wyscout
     assert "| play | 19 | 13 |" in markdown
+
+
+def test_malformed_provider_json_gives_an_unreachable_row_not_a_crash() -> None:
+    def fetch(url: str, max_bytes: int) -> bytes:
+        if url == coverage.METRICA_URL:
+            return b'["not a dict"]'  # entries are strings: e["type"] raises TypeError
+        if url == coverage.SKILLCORNER_MATCHES_URL:
+            return b"[null]"  # None["competition_id"] raises TypeError
+        if url == coverage.DFL_ARTICLE_URL:
+            return b'{"files": "oops"}'  # str has no mapping access: TypeError
+        return fake_fetch(url, max_bytes)
+
+    matrix = coverage.run_coverage(fetch, NOW, ["metrica", "skillcorner", "dfl", "pff"])
+    status = {r.provider: r.status for r in matrix.rows}
+    assert status["Metrica"] == status["SkillCorner"] == status["DFL"] == "unreachable"
+    assert status["PFF FC"] == "request-only"
+
+
+def test_a_provider_bug_that_is_not_a_listed_error_is_still_one_unreachable_row(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    def broken(fetch: Any, now: str) -> list[CoverageRow]:
+        raise AttributeError("'list' object has no attribute 'get'")
+
+    monkeypatch.setitem(coverage.PROVIDERS, "metrica", broken)
+    matrix = coverage.run_coverage(fake_fetch, NOW, ["metrica", "pff"])
+    (row,) = [r for r in matrix.rows if r.provider == "Metrica"]
+    assert row.status == "unreachable" and "AttributeError" in row.notes
+    assert any(r.provider == "PFF FC" for r in matrix.rows)
+
+
+def test_last_row_deep_recount_survives_a_csv_error() -> None:
+    def fetch(url: str, max_bytes: int) -> bytes:
+        if url == coverage.LASTROW_CSV_URL:
+            return b'play\n"' + b"x" * 200_000 + b'"\n'  # one field over csv's size limit
+        return fake_fetch(url, max_bytes)
+
+    (row,) = coverage.lastrow_rows(fetch, NOW, deep=True)
+    assert (row.matches_total, row.pl_matches) == (19, 13)
+    assert "manual count kept" in row.notes
