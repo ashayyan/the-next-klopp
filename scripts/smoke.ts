@@ -1,4 +1,4 @@
-import { type ChildProcess, spawn } from "node:child_process";
+import { type ChildProcess, spawn, spawnSync } from "node:child_process";
 import { join } from "node:path";
 
 type Mode = "preview" | "dev";
@@ -38,7 +38,7 @@ async function waitFor(url: string, ms: number, state: { code: number | null }):
       throw new Error(`vite exited early (code ${state.code}); is port ${port} busy?`);
     }
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
       if (res.ok) return res;
       last = `HTTP ${res.status}`;
     } catch (error) {
@@ -52,12 +52,21 @@ async function waitFor(url: string, ms: number, state: { code: number | null }):
 function stop(child: ChildProcess, state: { code: number | null }): void {
   if (state.code !== null || child.pid === undefined) return;
   if (process.platform === "win32") {
-    spawn("taskkill", ["/pid", String(child.pid), "/T", "/F"], {
+    // Synchronous so the process tree is gone before this script exits.
+    spawnSync("taskkill", ["/pid", String(child.pid), "/T", "/F"], {
       stdio: "ignore",
     });
   } else {
     child.kill();
   }
+}
+
+// A cancelled CI run or Ctrl-C must not orphan vite (and its port).
+for (const signal of ["SIGINT", "SIGTERM"] as const) {
+  process.on(signal, () => {
+    for (const child of children) stop(child, { code: child.exitCode });
+    process.exit(130);
+  });
 }
 
 // Refuse to run against a server that was already listening: the first fetch would hit that
@@ -83,7 +92,7 @@ try {
     throw new Error("home page missing #root");
   }
   if (mode === "preview") {
-    const deep = await fetch(`${base}/dev`);
+    const deep = await fetch(`${base}/dev`, { signal: AbortSignal.timeout(5000) });
     if (!deep.ok) throw new Error(`/dev returned HTTP ${deep.status}`);
     console.log(`smoke ok (preview): ${base}/ and /dev`);
   } else {
