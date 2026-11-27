@@ -1,0 +1,45 @@
+[
+  {
+    "id": "src-ifab-laws-2026-27",
+    "title": "Laws of the Game 2026/27 (IFAB, single pages PDF)",
+    "url": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+    "type": "regulation",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright, no reproduction without permission",
+      "read": { "value": "yes", "note": "Freely downloadable PDF from the IFAB site" },
+      "automated_access": {
+        "value": "yes",
+        "note": "Direct PDF download, read during research on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "booklet p.4: may not be reproduced or translated without IFAB permission"
+      },
+      "derivative": { "value": "conditional", "note": "paraphrase with short attributed quotes" }
+    },
+    "quality": 5,
+    "recency": "2026-07-01",
+    "as_of": "2026-11-27",
+    "best_for": ["current Laws edition and effective date", "Law 1 pitch dimensions and markings"],
+    "notes": "Edition effective from 1 July 2026 (PDF p.4). Excerpt hashes come from the 02-RESEARCH.md live read; the time of day was not recorded, so fetched_at carries midnight UTC.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "effective-date",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.4",
+        "fetched_at": "2026-11-27T00:00:00Z",
+        "sha256": "b93f6f59e7458b59d2a9abe37762bc2b6557ba0ffbcdf6df5796a0dfd88c0ee0",
+        "paraphrase": "The 2026/27 edition of the Laws of the Game applies from 1 July 2026."
+      },
+      {
+        "id": "law1-touchline-length",
+        "locator": "IFAB Laws 2026/27 PDF p.47, Law 1",
+        "fetched_at": "2026-11-27T00:00:00Z",
+        "sha256": "a5e8cee54bd909f003367c6d6b5f19925cc44623e63ee085b8dc3ff9c79c39da",
+        "paraphrase": "Law 1 sets the touchline length between a minimum of 90 m and a maximum of 120 m."
+      }
+    ]
+  }
+]
