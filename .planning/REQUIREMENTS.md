@@ -19,7 +19,7 @@
 
 ### Research (Wave 1)
 
-- [ ] **RSCH-01**: Parallel research sub-agents cover the domains Milestone 0/1 needs (laws, pitch geometry, positions, formations, tactics history, how analysts watch, learning science for ADHD, role definitions, PL data sources, interactive explainer inspiration), each writing `findings.md`, `sources.json` and `visual_ideas.md` in `research/<domain>/`
+- [x] **RSCH-01**: Parallel research sub-agents cover the domains Milestone 0/1 needs (laws, pitch geometry, positions, formations, tactics history, how analysts watch, learning science for ADHD, role definitions, PL data sources, interactive explainer inspiration), each writing `findings.md`, `sources.json` and `visual_ideas.md` in `research/<domain>/`
 - [x] **RSCH-02**: A script-generated data-coverage matrix (provider × competition × season × data type) shows which open data actually contains Premier League matches
 - [x] **RSCH-03**: A Watch Gym L1 clip-supply decision is recorded (reconstruction from open data, learner local clips, YouTube link-out) with licensing checked
 - [x] **RSCH-04**: Synthesis produces machine-readable `research/SOURCE_REGISTRY.json` (with read / automated_access / redistribute / derivative licence fields), `concept-map.json`, `roles.json` and `competencies.json`, plus Markdown views (`CONCEPT_MAP.md`, `CURRICULUM_DRAFT.md`, `ROLE_COMPETENCIES.md`)
@@ -171,7 +171,7 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 | SETUP-06 | Phase 1 | Complete |
 | SETUP-07 | Phase 1 | Complete |
 | PLAT-01 | Phase 1 | Complete |
-| RSCH-01 | Phase 2 | Pending |
+| RSCH-01 | Phase 2 | Complete |
 | RSCH-02 | Phase 2 | Complete |
 | RSCH-03 | Phase 2 | Complete |
 | RSCH-04 | Phase 2 | Complete |
