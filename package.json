@@ -17,6 +17,8 @@
     "test": "vitest run",
     "guard": "node scripts/guard-files.ts --tracked",
     "validate:schemas": "vitest run schemas",
+    "research:check": "vitest run scripts/research",
+    "research:gate": "node scripts/research/gate.ts",
     "smoke": "node scripts/smoke.ts",
     "smoke:dev": "node scripts/smoke.ts dev",
     "verify:setup": "node scripts/verify-setup.ts all",
