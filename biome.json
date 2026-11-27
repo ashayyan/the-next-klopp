@@ -13,6 +13,7 @@
       "!!.claude",
       "!!.agents",
       "!!pipeline/.venv",
+      "!!pipeline/tests/fixtures",
       "!!**/package-lock.json",
       "!!skills-lock.json",
       "!!**/*.md"

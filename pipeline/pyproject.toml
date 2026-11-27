@@ -3,8 +3,22 @@ name = "klopp-pipeline"
 version = "0.0.0"
 description = "Open-data pipeline for The Next Klopp"
 requires-python = ">=3.11,<3.13"
-dependencies = []
+dependencies = [
+    "pydantic==2.14.4",
+    "typer==0.29.3",
+]
 
 [build-system]
 requires = ["uv_build>=0.12,<0.13"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest==9.2.0",
+]
+
+[project.scripts]
+klopp-pipeline = "klopp_pipeline.cli:app"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
