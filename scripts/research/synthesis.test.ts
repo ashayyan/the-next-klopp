@@ -486,4 +486,69 @@ describe("concept map (concept-map.json)", () => {
       });
     }
   });
+
+  describe.skipIf(!hasConceptMap)("concepts: full map", () => {
+    const perTrack = new Map<string, number>();
+    for (const c of concepts) perTrack.set(c.track, (perTrack.get(c.track) ?? 0) + 1);
+    const band2 = new Set([
+      "t05-attacking-play",
+      "t06-defending",
+      "t07-transitions",
+      "t08-set-pieces",
+      "t09-roles-and-profiles",
+      "t10-coaching-and-game-models",
+      "t11-head-coach",
+      "t12-training-sports-science",
+      "t13-performance-analysis",
+      "t14-write-and-speak",
+      "t21-scouting-1",
+    ]);
+    const wide = new Set([
+      "t11-head-coach",
+      "t13-performance-analysis",
+      "t20-head-of-data-science",
+      "t25-sporting-director",
+    ]);
+
+    it("covers every track with at least 2 concepts and holds 80-170 concepts in total", () => {
+      expect(TRACKS.filter((t) => (perTrack.get(t.id) ?? 0) < 2).map((t) => t.id)).toEqual([]);
+      expect(concepts.length).toBeGreaterThanOrEqual(80);
+      expect(concepts.length).toBeLessThanOrEqual(170);
+    });
+
+    it("keeps Band 2 tracks at 3-5 concepts and Band 3 tracks at 2-4 (t11, t13, t20, t25 up to 6)", () => {
+      const bad: string[] = [];
+      for (const t of TRACKS) {
+        if (t.number <= 4) continue;
+        const n = perTrack.get(t.id) ?? 0;
+        const min = band2.has(t.id) ? 3 : 2;
+        const max = wide.has(t.id) ? 6 : band2.has(t.id) ? 5 : 4;
+        if (n < min || n > max) bad.push(`${t.id}: ${n} (allowed ${min}-${max})`);
+      }
+      expect(bad).toEqual([]);
+    });
+
+    it("lets every role reach at least 3 concepts through its competencies", () => {
+      const reach = new Map<string, number>();
+      for (const c of concepts) for (const r of c.roles) reach.set(r, (reach.get(r) ?? 0) + 1);
+      const thin = ROLE_IDS.filter((r) => (reach.get(r) ?? 0) < 3).map(
+        (r) => `${r}: ${reach.get(r) ?? 0}`,
+      );
+      expect(thin).toEqual([]);
+    });
+
+    it("reports competencies with no concept as orphans (warning only, listed for GAPS.md)", () => {
+      const used = new Set(concepts.flatMap((c) => c.competencies));
+      const orphans = competencies.filter((k) => !used.has(k.id)).map((k) => k.id);
+      if (orphans.length > 0) console.warn(`orphan competencies: ${orphans.join(", ")}`);
+      expect(Array.isArray(orphans)).toBe(true);
+    });
+
+    it("keeps the longest prerequisite chain at 20 layers or fewer (warning above 14)", () => {
+      const layer = layers(new Map(concepts.map((k) => [k.id, k.prerequisites]))).layer;
+      const depth = layer.size > 0 ? Math.max(...layer.values()) + 1 : 0;
+      if (depth > 14) console.warn(`longest prerequisite chain is ${depth} layers (above 14)`);
+      expect(depth).toBeLessThanOrEqual(20);
+    });
+  });
 });
