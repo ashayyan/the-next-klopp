@@ -15,6 +15,7 @@ import {
   inkFor,
   PART_COLOURS,
   parseDecision,
+  shortSentences,
 } from "./lib/summary-html.ts";
 
 const MINI = join(import.meta.dirname, "fixtures", "mini");
@@ -298,6 +299,18 @@ describe("parseDecision", () => {
   it("falls back to the lines of the section and to nothing when it is absent", () => {
     expect(parseDecision("# T\n\n## Decision\nWe ship it.\n").bullets).toEqual(["We ship it."]);
     expect(parseDecision("# T\n\n## Status\nAccepted\n").bullets).toEqual([]);
+  });
+
+  it("drops citation tokens, backticks and ### sub-sections from the bullets", () => {
+    const md =
+      "# T\n\n## Decision\n\n- Link out only [src-yt#tos-a][src-yt#tos-b].\n- Keep `public/x/**` local.\n\n### Deny\n\n- `**/*secret*`: never.\n\n## Consequences\n";
+    expect(parseDecision(md).bullets).toEqual(["Link out only.", "Keep public/x/** local."]);
+  });
+
+  it("cuts long bullets at the last full sentence that fits", () => {
+    expect(shortSentences("One two three. Four five six seven.", 5)).toBe("One two three.");
+    expect(shortSentences("One two three four five six", 3)).toBe("One two three…");
+    expect(shortSentences("Short one.", 5)).toBe("Short one.");
   });
 });
 

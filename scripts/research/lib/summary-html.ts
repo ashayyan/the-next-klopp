@@ -38,7 +38,20 @@ export interface SummaryOptions {
   approvalStatus?: string;
 }
 
-/** The `## Decision` section of an ADR: its list items, else its non-empty lines. */
+/** Drop ADR citation tokens like `[src-id#anchor]` and Markdown code backticks for learner text. */
+export function plainDecisionText(text: string): string {
+  return text
+    .replace(/\s*\[src-[^\]]*\](?:\[src-[^\]]*\])*/g, "")
+    .replace(/`/g, "")
+    .replace(/\s+([.,;:])/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * The `## Decision` section of an ADR: its list items, else its non-empty lines. Stops at the
+ * next heading of any level, so `###` sub-sections (such as a deny-manifest list) stay out.
+ */
 export function parseDecision(markdown: string): Decision {
   const lines = markdown.replace(/\r\n/g, "\n").split("\n");
   const title =
@@ -50,12 +63,26 @@ export function parseDecision(markdown: string): Decision {
   if (start === -1) return { title, bullets: [] };
   const body: string[] = [];
   for (const line of lines.slice(start + 1)) {
-    if (/^##\s/.test(line)) break;
+    if (/^#{2,}\s/.test(line)) break;
     body.push(line.trim());
   }
   const items = body.filter((l) => /^[-*]\s+/.test(l)).map((l) => l.replace(/^[-*]\s+/, ""));
-  const bullets = items.length > 0 ? items : body.filter((l) => l.length > 0);
+  const bullets = (items.length > 0 ? items : body.filter((l) => l.length > 0))
+    .map(plainDecisionText)
+    .filter((b) => b.length > 0);
   return { title, bullets };
+}
+
+/** At most `max` words, cut at the last full sentence that fits; an ellipsis only when none fits. */
+export function shortSentences(text: string, max: number): string {
+  const words = text.trim().split(/\s+/).filter(Boolean);
+  if (words.length <= max) return esc(words.join(" "));
+  const head = words.slice(0, max);
+  let end = -1;
+  head.forEach((w, i) => {
+    if (/[.!?]$/.test(w)) end = i;
+  });
+  return esc(end >= 0 ? head.slice(0, end + 1).join(" ") : `${head.join(" ")}…`);
 }
 
 /** HTML-escape text that goes into the static markup. */
@@ -419,7 +446,7 @@ function coverageScreen(bundle: ResearchBundle, decision: Decision): string {
   out.push(`<h3>Watch Gym clip decision</h3>`);
   if (decision.bullets.length > 0) {
     out.push(
-      `<ul class="plain">${decision.bullets.map((b) => `<li>${short(b, 35)}</li>`).join("")}</ul>`,
+      `<ul class="plain">${decision.bullets.map((b) => `<li>${shortSentences(b, 35)}</li>`).join("")}</ul>`,
     );
   } else out.push(`<p class="muted">No decision written yet.</p>`);
   out.push(`</section>`);
