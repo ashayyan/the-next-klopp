@@ -22,13 +22,18 @@
       }
     ],
     "concepts": [
+      "build-up-structures",
       "catenaccio",
+      "counter-pressing",
       "first-laws-and-passing-game",
       "four-phases-of-play",
+      "game-model",
       "how-phases-connect",
       "hungary-and-the-4-2-4",
+      "positional-and-relational-play",
       "possession-and-gegenpressing",
       "premier-league-era-tactics",
+      "pressing-schemes",
       "pyramid-to-wm",
       "total-football-to-sacchi"
     ]
@@ -125,14 +130,26 @@
       "attacking-transition",
       "back-four-formations",
       "back-three-formations",
+      "build-up-structures",
+      "chance-creation",
       "coaching-roles",
+      "counter-attacks",
+      "counter-pressing",
+      "defending-the-box",
+      "defensive-blocks",
       "defensive-transition",
       "four-superiorities",
+      "game-model",
       "how-phases-connect",
       "in-possession-phase",
       "lines-and-between-the-lines",
       "numerical-superiority",
+      "opponent-game-plan",
       "out-of-possession-phase",
+      "pressing-schemes",
+      "pressing-traps-and-triggers",
+      "progression-and-overloads",
+      "rest-defence",
       "width-and-depth"
     ]
   },
@@ -158,7 +175,12 @@
         "descriptor": "Leads matchday decisions with the staff and sets how live input reaches the bench."
       }
     ],
-    "concepts": ["cards-and-misconduct", "players-and-substitutions", "var-basics"]
+    "concepts": [
+      "cards-and-misconduct",
+      "in-game-management",
+      "players-and-substitutions",
+      "var-basics"
+    ]
   },
   {
     "id": "set-piece-design",
@@ -187,7 +209,10 @@
       "goal-kick-and-corner-kick",
       "kick-off-and-dropped-ball",
       "penalty-kick",
+      "set-piece-coach-role",
+      "set-piece-marking",
       "set-piece-phase",
+      "set-piece-routines",
       "throw-in"
     ]
   },
@@ -213,7 +238,14 @@
         "descriptor": "Owns selection and sets how fitness and medical advice feed into it."
       }
     ],
-    "concepts": ["players-and-substitutions"]
+    "concepts": [
+      "attacking-roles",
+      "defensive-roles",
+      "fixture-congestion-and-rotation",
+      "in-game-management",
+      "midfield-roles",
+      "players-and-substitutions"
+    ]
   },
   {
     "id": "training-session-design",
@@ -237,7 +269,14 @@
         "descriptor": "Leads the coaching staff's day-to-day training and checks the quality of their sessions."
       }
     ],
-    "concepts": ["coaching-roles"]
+    "concepts": [
+      "coaching-roles",
+      "defending-the-box",
+      "session-design-and-methods",
+      "set-piece-coach-role",
+      "tactical-periodization",
+      "weekly-microcycle"
+    ]
   },
   {
     "id": "player-development-planning",
@@ -261,7 +300,7 @@
         "descriptor": "Sets the development-plan method for a squad or an academy and coaches staff in using it."
       }
     ],
-    "concepts": []
+    "concepts": ["first-team-player-development", "post-match-analysis"]
   },
   {
     "id": "seasonal-planning",
@@ -285,7 +324,7 @@
         "descriptor": "Owns the seasonal plan and aligns the coaching, performance and medical staff behind it."
       }
     ],
-    "concepts": []
+    "concepts": ["fixture-congestion-and-rotation", "tactical-periodization", "weekly-microcycle"]
   },
   {
     "id": "opposition-analysis",
@@ -309,7 +348,18 @@
         "descriptor": "Leads the opposition-analysis process and sets the format and quality bar for the department."
       }
     ],
-    "concepts": ["analysis-roles", "formation-vs-structure", "report-templates"]
+    "concepts": [
+      "analysis-cycle",
+      "analysis-roles",
+      "chance-creation",
+      "defensive-blocks",
+      "formation-vs-structure",
+      "opposition-dossier",
+      "pressing-traps-and-triggers",
+      "report-templates",
+      "set-piece-coach-role",
+      "set-piece-marking"
+    ]
   },
   {
     "id": "live-match-analysis",
@@ -333,7 +383,7 @@
         "descriptor": "Designs the live-analysis workflow and trains analysts to deliver it."
       }
     ],
-    "concepts": ["analysis-roles", "watch-in-blocks"]
+    "concepts": ["analysis-roles", "in-game-management", "live-analysis", "watch-in-blocks"]
   },
   {
     "id": "post-match-review",
@@ -357,7 +407,14 @@
         "descriptor": "Owns the review cycle and turns its findings into actions for coaching and recruitment."
       }
     ],
-    "concepts": ["analysis-roles", "match-note-basics", "report-templates", "story-then-structure"]
+    "concepts": [
+      "analysis-cycle",
+      "analysis-roles",
+      "match-note-basics",
+      "post-match-analysis",
+      "report-templates",
+      "story-then-structure"
+    ]
   },
   {
     "id": "video-analysis-tooling",
@@ -381,7 +438,7 @@
         "descriptor": "Chooses the department's video tools and trains staff to use them."
       }
     ],
-    "concepts": ["visual-evidence"]
+    "concepts": ["analysis-tools", "live-analysis", "visual-evidence"]
   },
   {
     "id": "loan-player-monitoring",
@@ -598,11 +655,15 @@
       }
     ],
     "concepts": [
+      "attacking-roles",
+      "defensive-roles",
       "live-vs-video-scouting",
+      "midfield-roles",
       "one-player-ninety-minutes",
       "position-vs-role",
       "recruitment-roles",
       "relative-age-effect",
+      "role-signatures-in-data",
       "the-scouts-eye",
       "watch-one-player"
     ]
@@ -658,7 +719,7 @@
         "descriptor": "Decides how data and scouting combine in the club's recruitment process."
       }
     ],
-    "concepts": []
+    "concepts": ["role-signatures-in-data"]
   },
   {
     "id": "squad-planning",
@@ -922,7 +983,7 @@
         "descriptor": "Appoints the head coach and senior staff and plans their succession."
       }
     ],
-    "concepts": []
+    "concepts": ["coach-education-pathways", "running-the-analysis-department"]
   },
   {
     "id": "department-leadership",
@@ -946,7 +1007,7 @@
         "descriptor": "Builds and leads a department and develops its staff into leaders."
       }
     ],
-    "concepts": []
+    "concepts": ["head-coach-job", "running-the-analysis-department"]
   },
   {
     "id": "football-department-design",
@@ -994,7 +1055,7 @@
         "descriptor": "Sets and protects the club's performance culture across staff and players."
       }
     ],
-    "concepts": []
+    "concepts": ["leadership-media-and-pressure"]
   },
   {
     "id": "stakeholder-presentation",
@@ -1018,7 +1079,13 @@
         "descriptor": "Coaches staff in presenting and sets how insight reaches decision makers."
       }
     ],
-    "concepts": ["match-note-basics", "output-rubrics", "spoken-briefings", "visual-evidence"]
+    "concepts": [
+      "analysis-cycle",
+      "match-note-basics",
+      "output-rubrics",
+      "spoken-briefings",
+      "visual-evidence"
+    ]
   },
   {
     "id": "cross-discipline-translation",
@@ -1042,7 +1109,7 @@
         "descriptor": "Acts as the link between the head coach and all specialist departments."
       }
     ],
-    "concepts": []
+    "concepts": ["injury-risk-and-return", "running-the-analysis-department"]
   },
   {
     "id": "board-and-owner-relations",
@@ -1066,7 +1133,7 @@
         "descriptor": "Represents football at board level and keeps owner support through difficult periods."
       }
     ],
-    "concepts": ["club-leadership-roles"]
+    "concepts": ["club-leadership-roles", "head-coach-job"]
   },
   {
     "id": "player-communication",
@@ -1090,7 +1157,13 @@
         "descriptor": "Sets how the staff talk to players and filters issues before they reach the manager."
       }
     ],
-    "concepts": ["spoken-briefings"]
+    "concepts": [
+      "leadership-media-and-pressure",
+      "opponent-game-plan",
+      "post-match-analysis",
+      "session-design-and-methods",
+      "spoken-briefings"
+    ]
   },
   {
     "id": "injury-prevention-and-return-to-play",
@@ -1114,7 +1187,7 @@
         "descriptor": "Owns injury prevention and return-to-play decisions for the squad."
       }
     ],
-    "concepts": ["performance-roles"]
+    "concepts": ["injury-risk-and-return", "performance-roles"]
   },
   {
     "id": "workload-management",
@@ -1138,7 +1211,7 @@
         "descriptor": "Sets the club's load-management policy and its link to selection."
       }
     ],
-    "concepts": ["performance-roles"]
+    "concepts": ["fixture-congestion-and-rotation", "load-monitoring", "performance-roles"]
   },
   {
     "id": "performance-science-literacy",
@@ -1162,7 +1235,7 @@
         "descriptor": "Leads the performance disciplines as one department focused on availability."
       }
     ],
-    "concepts": ["performance-roles"]
+    "concepts": ["load-monitoring", "performance-roles", "physical-demands-by-position"]
   },
   {
     "id": "regulatory-compliance",
@@ -1234,7 +1307,7 @@
         "descriptor": "Owns the club's pathway and aligns academy and first team in one style."
       }
     ],
-    "concepts": ["academy-roles", "relative-age-effect"]
+    "concepts": ["academy-roles", "first-team-player-development", "relative-age-effect"]
   },
   {
     "id": "academy-programme-management",
