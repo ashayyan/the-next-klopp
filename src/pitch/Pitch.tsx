@@ -1,4 +1,14 @@
-import { createContext, type ReactNode, useContext, useId, useMemo } from "react";
+import {
+  createContext,
+  type PointerEvent,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { type PitchGeometry, pitchGeometry } from "./geometry.ts";
 import { makeView, type Orientation, type View } from "./view.ts";
 
@@ -146,12 +156,27 @@ export function Pitch({
   desc,
   interactive = false,
   canvas,
+  onPointerCanonical,
   initialCssWidth = 960,
   children,
 }: PitchProps) {
   const titleId = useId();
   const descId = useId();
-  const cssWidth = initialCssWidth;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const topRef = useRef<SVGSVGElement>(null);
+  // Server render and first paint use initialCssWidth; the ResizeObserver then measures.
+  const [cssWidth, setCssWidth] = useState(initialCssWidth);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver((entries) => {
+      const w = entries[0]?.contentRect.width;
+      if (w !== undefined && w > 0) setCssWidth(w);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const view = useMemo(
     () => makeView({ length, width, runoff, orientation, cssWidth }),
@@ -171,11 +196,27 @@ export function Pitch({
     [view, length, width, orientation, runoff],
   );
 
+  // Pointer to canonical metres through the canonical-root group's screen CTM, never the root
+  // <svg> CTM: the group carries the orientation matrix, so the inverse is orientation-agnostic.
+  function handlePointerMove(e: PointerEvent<SVGSVGElement>) {
+    if (!onPointerCanonical) return;
+    const group = topRef.current?.querySelector<SVGGElement>("[data-canonical-root]");
+    const inverse = group?.getScreenCTM()?.inverse();
+    if (!inverse) return;
+    const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(inverse);
+    onPointerCanonical({ x: p.x, y: p.y });
+  }
+
+  function handlePointerLeave() {
+    onPointerCanonical?.(null);
+  }
+
   const layer = "absolute inset-0 block h-full w-full";
 
   return (
     <PitchContext.Provider value={context}>
       <div
+        ref={containerRef}
         data-pitch
         className="relative w-full"
         style={{ aspectRatio: `${view.vbWidth} / ${view.vbHeight}` }}
@@ -210,9 +251,12 @@ export function Pitch({
           role={interactive ? "group" : "img"}
           aria-labelledby={titleId}
           aria-describedby={desc ? descId : undefined}
+          ref={topRef}
           className={layer}
           viewBox={view.viewBox}
           preserveAspectRatio="xMidYMid meet"
+          onPointerMove={onPointerCanonical ? handlePointerMove : undefined}
+          onPointerLeave={onPointerCanonical ? handlePointerLeave : undefined}
         >
           <title id={titleId}>{`Pitch, ${length} by ${width} metres — ${title}`}</title>
           {desc ? <desc id={descId}>{desc}</desc> : null}
