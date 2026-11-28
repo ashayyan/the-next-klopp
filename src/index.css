@@ -11,6 +11,25 @@ body {
   color: var(--ink);
 }
 
+/*
+ * Layout grid gutter (04-UI-SPEC "Spacing Scale" grid line): 4 columns / 16 px below 768 px,
+ * 8 columns / 24 px to 1279 px, 12 columns / 32 px from 1280 px. The taste-skill layout checker
+ * reads --gutter on the root to place the column lines it measures page edges against.
+ */
+:root {
+  --gutter: 16px;
+}
+@media (min-width: 768px) {
+  :root {
+    --gutter: 24px;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --gutter: 32px;
+  }
+}
+
 /* Portals (Base UI popups) stack above page content inside the app root. */
 #root {
   isolation: isolate;

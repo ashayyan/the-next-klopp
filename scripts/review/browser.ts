@@ -392,7 +392,8 @@ function collectPage(): PageData {
       svgEl &&
       /^(path|circle|rect|ellipse|line|polyline|polygon|text|tspan)$/i.test(el.tagName)
     ) {
-      addColour(el, "fill", style.fill);
+      // A <line> has no interior, so its fill (black by default) is never painted.
+      if (!/^line$/i.test(el.tagName)) addColour(el, "fill", style.fill);
       if (Number.parseFloat(style.strokeWidth) > 0) addColour(el, "stroke", style.stroke);
     }
     const backdrop = style.backdropFilter || style.getPropertyValue("-webkit-backdrop-filter");

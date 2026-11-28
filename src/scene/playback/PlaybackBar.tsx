@@ -5,7 +5,7 @@ import { NextFrameIcon, PauseIcon, PlayIcon, PreviousFrameIcon, ReplayIcon } fro
 import { type PlaybackState, SPEEDS } from "./store.ts";
 
 const focusRing =
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring";
 const quietButton = `inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-sm border border-control-border bg-transparent text-ink hover:bg-surface-panel ${focusRing}`;
 
 export interface PlaybackBarProps {

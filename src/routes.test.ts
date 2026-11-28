@@ -4,7 +4,15 @@ import { buildRoutes } from "./routes.ts";
 describe("buildRoutes", () => {
   it("includes the /dev routes in the dev build", () => {
     const paths = buildRoutes({ includeDev: true }).map((route) => route.path);
-    expect(paths).toEqual(["/", "/dev", "/dev/pitch", "/dev/review-fixture", "*"]);
+    expect(paths).toEqual([
+      "/",
+      "/dev",
+      "/dev/pitch",
+      "/dev/review-fixture",
+      "/dev/directions",
+      "/dev/directions/:id/:screen",
+      "*",
+    ]);
   });
 
   it("leaves /dev out of the study build", () => {

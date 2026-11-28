@@ -13,6 +13,11 @@ export default function DevPage() {
             Pitch Standard
           </Link>
         </li>
+        <li>
+          <Link to="/dev/directions" className="underline">
+            Visual directions
+          </Link>
+        </li>
       </ul>
       <p className="mt-4">
         <Link to="/" className="underline">
