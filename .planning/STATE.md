@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 5
 current_phase_name: Content Engine, App Shell & Deploy
 status: executing
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-11-28T15:49:27.511Z"
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-11-28T16:05:05.416Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 complete, transitioned to Phase 5
-state_head: ce57eea73d4f48bc21df14bc252412102b4030f0
+state_head: dd7aa0338ab14ee6e07204a3a1661501cdf67c6e
 progress:
   total_phases: 8
   completed_phases: 4
   total_plans: 78
-  completed_plans: 59
+  completed_plans: 60
   percent: 50
 ---
 
@@ -28,8 +28,8 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 5 (Content Engine, App Shell & Deploy) — EXECUTING
-Plan: 2 of 20
-Status: In progress
+Plan: 3 of 20
+Status: Ready to execute
 Last activity: 2026-11-28 — Completed 05-01 (MDX lessons through virtual:tnk-lessons, /learn/:lessonId, fixtures build)
 
 Progress: [█████░░░░░] 50%
@@ -107,6 +107,7 @@ Progress: [█████░░░░░] 50%
 | Phase 04 P16 | 150min | 3 tasks | 20 files |
 | Phase 04 P17 | 70min | 3 tasks | 6 files |
 | Phase 05 P01 | 15min | 2 tasks | 22 files |
+| Phase 05 P02 | 12min | 3 tasks | 22 files |
 
 ## Accumulated Context
 
@@ -186,6 +187,10 @@ Recent decisions affecting current work:
 - [Phase 04]: 04-17: visual baselines are CI-only Linux; update-snapshots is a two-job workflow (generate in the Playwright image, commit on the hosted runner); first baseline dispatch deferred until the workflow is on main
 - [Phase 05]: 05-01: MDX plugin limited to .mdx (include /\.mdx$/) because @mdx-js/rollup strips queries and would compile DESIGN.md?raw
 - [Phase 05]: 05-01: lesson selection runs at build time in virtual:tnk-lessons; study build ships shipped lessons only, fixtures only in dist-walker
+- [Phase 05]: Lesson spec v1 frozen: steps[].dataRefs required, concepts[] min 1, schema bounds durationMin 1-60 and title 40 chars; friendly limits are validator rules
+- [Phase 05]: Verification claimId pattern <stepId>/<component>-<n>(.side-<n>); claim url is http(s) or /data/ path
+- [Phase 05]: virtual:tnk-lessons sources slice keyed by cited id (alias carries target entry); unknown ids left out for the citation rule
+- [Phase 05]: TRACKS moved to src/content/tracks.ts; scripts/research/lib/domains.ts re-exports it
 
 ### Pending Todos
 
@@ -215,6 +220,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T15:49:15.032Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-11-28T16:05:04.979Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None
