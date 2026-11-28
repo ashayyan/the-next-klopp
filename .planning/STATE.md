@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 current_phase: 4
 current_phase_name: Design Direction & System
-status: executing
-stopped_at: Completed 04-16-PLAN.md
-last_updated: "2026-11-28T10:22:15.784Z"
+status: verifying
+stopped_at: Completed 04-17-PLAN.md
+last_updated: "2026-11-28T10:39:38.321Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 execution started
-state_head: cc75d62f55aab42ffd77fcd6dac61323ea9203ea
+state_head: 92f68bd5da08ab5d484c16e110e183b10eadf2b4
 progress:
   total_phases: 8
   completed_phases: 3
   total_plans: 58
-  completed_plans: 57
+  completed_plans: 58
   percent: 38
 ---
 
@@ -29,7 +29,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 
 Phase: 4 (Design Direction & System) — EXECUTING
 Plan: 17 of 17
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-11-28 — Phase 4 execution started
 
 Progress: [████░░░░░░] 38%
@@ -104,6 +104,7 @@ Progress: [████░░░░░░] 38%
 | Phase 04 P14 | 75min | 3 tasks | 15 files |
 | Phase 4 P15 | 95 min | 3 tasks | 21 files |
 | Phase 04 P16 | 150min | 3 tasks | 20 files |
+| Phase 04 P17 | 70min | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -180,6 +181,7 @@ Recent decisions affecting current work:
 - [Phase 04]: 04-14: gallery frames are real same-origin iframes; glyph sheet has a team B state so ring discs and hollow arrowheads are reviewed in both themes; wide primitives use fewer columns; drag uses a six-player board
 - [Phase 4]: 04-15: Base UI controls and overlays shown in the gallery; the open AlertDialog state is a non-modal Dialog with role alertdialog so a screenshot is not made inert; the safe action Keep board takes focus on open
 - [Phase 04]: 04-16: inventory.json is the single list of the 37 gallery ids and states; revealed quiz answers stay focusable with aria-disabled and feedback is icon plus words
+- [Phase 04]: 04-17: visual baselines are CI-only Linux; update-snapshots is a two-job workflow (generate in the Playwright image, commit on the hosted runner); first baseline dispatch deferred until the workflow is on main
 
 ### Pending Todos
 
@@ -197,6 +199,7 @@ Recent decisions affecting current work:
 
 | Phase | State | Resume |
 |-------|-------|--------|
+| Phase 4 | visual baselines not generated | after Phase 4 merges to main, run `gh workflow run update-snapshots.yml --ref <next branch>` (GitHub only dispatches a workflow file that exists on the default branch; the first attempt on the phase branch answered HTTP 404) and confirm the `visual` job of the dispatched `ci` run is green |
 
 ## Deferred Items
 
@@ -208,6 +211,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T10:22:14.620Z
-Stopped at: Completed 04-16-PLAN.md
+Last session: 2026-11-28T10:39:37.668Z
+Stopped at: Completed 04-17-PLAN.md
 Resume file: None
