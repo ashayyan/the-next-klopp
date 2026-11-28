@@ -178,6 +178,47 @@ test.describe("data screen", () => {
     await expect(row6).toHaveAttribute("aria-selected", "true");
   });
 
+  test("shows the pitch markings and the loading line while the scene loads", async ({ page }) => {
+    let release: () => void = () => {};
+    const held = new Promise<void>((resolve) => {
+      release = resolve;
+    });
+    await page.route("**/scene-wyscout-*.json", async (route) => {
+      await held;
+      await route.continue();
+    });
+    await page.goto("/dev/directions/notebook/data");
+    const status = page.getByRole("status").filter({ hasText: "Loading the goal…" });
+    await expect(status).toBeVisible();
+    await expect(page.locator('[data-pitch] [data-marking="halfway-line"]')).toBeAttached();
+    // Nothing covers the pitch: the element at its centre belongs to the pitch.
+    const covered = await page.evaluate(() => {
+      const pitch = document.querySelector("[data-pitch]");
+      if (!pitch) return true;
+      const r = pitch.getBoundingClientRect();
+      const hit = document.elementFromPoint(r.x + r.width / 2, r.y + r.height / 2);
+      return hit === null || !pitch.contains(hit);
+    });
+    expect(covered).toBe(false);
+    release();
+    await expect(page.locator("table")).toBeVisible();
+  });
+
+  test("a missing scene file shows the error panel and no table", async ({ page }) => {
+    await page.route("**/scene-wyscout-*.json", (route) =>
+      route.fulfill({ status: 404, body: "not found" }),
+    );
+    await page.goto("/dev/directions/programme/data");
+    const panel = page.locator("[data-error-panel]");
+    await expect(panel).toBeVisible();
+    await expect(panel.getByRole("heading", { name: "The goal data didn't load" })).toBeVisible();
+    await expect(panel).toContainText("Run npm run data, then reload this page.");
+    await expect(page.locator("table")).toHaveCount(0);
+    await expect(page.locator("[data-stat-card]")).toHaveCount(0);
+    await expect(page.locator("[data-chart-figure]")).toHaveCount(0);
+    await expect(page.locator('[data-pitch] [data-marking="halfway-line"]')).toBeAttached();
+  });
+
   test("bar 6 carries the direct label and its tooltip", async ({ page }) => {
     await page.goto("/dev/directions/floodlit/data");
     await expect(page.locator('div[data-direction="floodlit"][data-ready="1"]')).toBeVisible();

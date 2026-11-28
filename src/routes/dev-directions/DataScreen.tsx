@@ -3,7 +3,7 @@ import { type ReactNode, useEffect, useLayoutEffect, useMemo, useState } from "r
 import { useSearchParams } from "react-router";
 import { useStore } from "zustand";
 import { createStore, type StoreApi } from "zustand/vanilla";
-import { HighlightGlyph } from "../../pitch/glyphs/MarkGlyphs.tsx";
+import { BadgeShape, HighlightGlyph } from "../../pitch/glyphs/MarkGlyphs.tsx";
 import { SceneLayer } from "../../pitch/glyphs/SceneLayer.tsx";
 import { describeScene } from "../../pitch/legend/glyphIds.ts";
 import { Legend } from "../../pitch/legend/Legend.tsx";
@@ -144,7 +144,7 @@ interface MetresChartProps {
 /**
  * "Metres forward, per action": one series of bars around a zero baseline (−20 to +35 m,
  * gridlines every 10 m) in the team colour, a direct label on action 6, and a tooltip on hover or
- * focus. From 768 px each bar has a focusable hit area at least 44 px tall and 8 px from its
+ * focus. From 768 px each bar has a focusable hit area at least 44 px tall and 10 px from its
  * neighbours (Enter seeks the clock); below 768 px the chart is a labelled image and the table
  * rows are the interactive path.
  */
@@ -232,8 +232,8 @@ function MetresChart({
           ) : null}
           {interactive
             ? rows.map((r, i) => {
-                const hitW = Math.max(1, band - 8);
-                const hx = bandX(i) + 4;
+                const hitW = Math.max(1, band - 10);
+                const hx = bandX(i) + 5;
                 return (
                   // biome-ignore lint/a11y/useSemanticElements: an SVG mark has no <button>; the group is the focus target
                   <g
@@ -287,7 +287,9 @@ function MetresChart({
 interface Blocks {
   shell: (className: string) => ReactNode;
   rail: (form: StepRailForms, numbered?: boolean) => ReactNode;
-  title: ReactNode;
+  title: (className?: string) => ReactNode;
+  /** The match line, "Manchester City 5–0 Liverpool" (programme's header band). */
+  scoreLine: ReactNode;
   context: ReactNode;
   heading: ReactNode;
   body: ReactNode;
@@ -298,6 +300,8 @@ interface Blocks {
   stat: (layout: "stack" | "row", className?: string, labelClassName?: string) => ReactNode;
   chart: ReactNode;
   table: (className?: string, rowClassName?: string) => ReactNode;
+  /** notebook's three margin notes, each with its sequence badge; null before the scene loads. */
+  notes: ReactNode;
   legend: (columnsClassName: string) => ReactNode;
   source: ReactNode;
   cta: (className: string) => ReactNode;
@@ -316,7 +320,7 @@ function FloodlitLayout({ b }: { b: Blocks }) {
       <main>
         <div className="wrap flex flex-col gap-6 px-4 pt-2 pb-16 md:px-6 md:pt-4 xl:grid xl:grid-cols-12 xl:gap-x-8 xl:gap-y-6 xl:px-8 xl:pt-6">
           <div className="order-2 flex flex-col gap-1 xl:order-none xl:col-span-12">
-            {b.title}
+            {b.title()}
             {b.context}
           </div>
           <div className="order-1 xl:order-none xl:col-span-2">
@@ -356,10 +360,126 @@ function FloodlitLayout({ b }: { b: Blocks }) {
   );
 }
 
+const RULE = "border-ink [border-width:var(--border-rule)]";
+const INK_EDGE_LIGHT = "border-2 border-transparent in-data-[theme=light]:border-ink";
+
+/**
+ * programme: a match header band between two 3 px ink rules (the score line in the condensed
+ * display, the lesson title and context, the numbered step strip), then 7/5: the pitch printed in
+ * an ink frame with playback and legend, beside the team-sheet table; then a full-width row with
+ * the chart (8 columns) and the yellow stat block (4). Below 1280 px one column in the 768 and
+ * 375 orders of 04-UI-SPEC.
+ */
+function ProgrammeLayout({ b }: { b: Blocks }) {
+  return (
+    <>
+      {b.shell("border-ink border-b-[length:var(--border-rule)] px-4 md:px-6 xl:px-8")}
+      <main>
+        <div className="wrap flex flex-col gap-6 px-4 pt-4 pb-16 md:px-6 md:pt-6 xl:grid xl:grid-cols-12 xl:gap-x-8 xl:gap-y-8 xl:px-8">
+          <div className="order-1 flex flex-col gap-4 border-ink border-y-[length:var(--border-rule)] py-4 xl:order-none xl:col-span-12 xl:flex-row xl:items-end xl:justify-between xl:gap-8">
+            <div className="flex flex-col gap-1">
+              {b.scoreLine}
+              {b.title("text-heading")}
+              {b.context}
+            </div>
+            {b.rail({ base: "compact", md: "strip" }, true)}
+          </div>
+          <div className="contents xl:col-span-7 xl:flex xl:min-w-0 xl:flex-col xl:gap-6">
+            <div className="order-2 xl:order-none">
+              <div className={RULE}>{b.stage}</div>
+            </div>
+            {b.problem ? <div className="order-3 xl:order-none">{b.problem}</div> : null}
+            <div className="order-8 xl:order-none">
+              {b.legend("grid-cols-1 md:grid-cols-2 xl:grid-cols-2")}
+            </div>
+          </div>
+          <div className="contents xl:col-span-5 xl:flex xl:min-w-0 xl:flex-col xl:gap-6">
+            <div
+              data-lesson-step
+              className="contents xl:flex xl:flex-col xl:gap-2 [&>h2]:order-4 md:[&>h2]:order-3 [&>p]:order-5 md:[&>p]:order-4 xl:[&>*]:order-none"
+            >
+              {b.heading}
+              {b.body}
+            </div>
+            <div className="order-7 xl:order-none">
+              {b.table(undefined, "[&>td]:border-ink [&>td]:border-b-[length:var(--border-rule)]")}
+            </div>
+          </div>
+          <div className="order-6 xl:order-none xl:col-span-8">{b.chart}</div>
+          <div className="order-3 md:order-5 xl:order-none xl:col-span-4">
+            {b.stat(
+              "stack",
+              `bg-surface-highlight p-4 text-surface-highlight-ink md:flex-row md:flex-wrap md:gap-x-8 xl:flex-col ${INK_EDGE_LIGHT}`,
+              "text-surface-highlight-ink",
+            )}
+          </div>
+          <div className="contents xl:col-span-12 xl:flex xl:items-end xl:justify-between xl:gap-8">
+            {b.source ? (
+              <div className="order-9 xl:order-none xl:max-w-[65ch]">{b.source}</div>
+            ) : null}
+            <div className="order-10 xl:order-none">{b.cta("w-full xl:w-auto")}</div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}
+
+/**
+ * notebook: the sheet again. Head (title, context, quiet step row), the step, the stat card as one
+ * row of three figures, then 720 + 280: pitch, playback and chart in the main column; the three
+ * margin notes (each with its sequence badge) and the legend in the margin. The event table runs
+ * the full sheet width below. At 375 the sheet is flush and the notes become a list after the pitch.
+ */
+function NotebookLayout({ b }: { b: Blocks }) {
+  return (
+    <>
+      {b.shell("px-4 md:px-6 xl:mx-auto xl:max-w-[1144px] xl:px-0")}
+      <main>
+        <div className="wrap md:px-6 md:pb-16 xl:px-8">
+          <div className="flex flex-col gap-6 bg-surface-raised px-4 pt-4 pb-8 md:rounded-lg md:p-8 md:[box-shadow:var(--shadow-sheet)] xl:mx-auto xl:max-w-[1144px] xl:p-12">
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1">
+                {b.title()}
+                {b.context}
+              </div>
+              {b.rail({ base: "compact", md: "row" })}
+            </div>
+            <div data-lesson-step className="flex flex-col gap-2">
+              {b.heading}
+              {b.body}
+            </div>
+            {b.stat("row", "border-control-border border-y py-4")}
+            <div className="flex flex-col gap-6 xl:grid xl:grid-cols-[720px_280px] xl:gap-12">
+              <div className="contents xl:flex xl:min-w-0 xl:flex-col xl:gap-6">
+                <div className="order-1 xl:order-none">{b.stage}</div>
+                {b.problem ? <div className="order-2 xl:order-none">{b.problem}</div> : null}
+                <div className="order-4 xl:order-none">{b.chart}</div>
+              </div>
+              <aside
+                aria-label="Margin"
+                className="contents xl:flex xl:min-w-0 xl:flex-col xl:gap-6 xl:border-control-border xl:border-l xl:pl-6"
+              >
+                {b.notes ? <div className="order-3 xl:order-none">{b.notes}</div> : null}
+                <div className="order-6 xl:order-none">
+                  {b.legend("grid-cols-1 md:grid-cols-2 xl:grid-cols-1")}
+                </div>
+              </aside>
+              <div className="order-5 xl:col-span-2 xl:order-none">{b.table()}</div>
+            </div>
+            {b.source}
+            <div className="flex xl:justify-end">{b.cta("w-full xl:w-auto")}</div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}
+
 const LAYOUTS: Record<Direction["id"], (props: { b: Blocks }) => ReactNode> = {
   floodlit: FloodlitLayout,
-  programme: FloodlitLayout,
-  notebook: FloodlitLayout,
+  programme: ProgrammeLayout,
+  notebook: NotebookLayout,
 };
 
 export function DataScreen({ direction }: { direction: Direction }) {
@@ -425,7 +545,14 @@ export function DataScreen({ direction }: { direction: Direction }) {
     ),
     rail: (form, numbered) =>
       focus ? null : <StepRail current="see-it" form={form} numbered={numbered} />,
-    title: <h1 className={`${DISPLAY} text-display text-balance`}>A goal in ten actions</h1>,
+    title: (className) => (
+      <h1 className={`${DISPLAY} text-balance ${className ?? "text-display"}`}>
+        A goal in ten actions
+      </h1>
+    ),
+    scoreLine: (
+      <p className={`${DISPLAY} text-display text-balance`}>Manchester City 5–0 Liverpool</p>
+    ),
     context: (
       <p className="text-label text-ink-muted">
         Manchester City 5–0 Liverpool, Premier League, 9 September 2017. Leroy Sané's goal in the
@@ -511,6 +638,30 @@ export function DataScreen({ direction }: { direction: Direction }) {
           rowClassName={rowClassName}
         />
       ) : null,
+    notes: goal ? (
+      <section aria-labelledby="margin-notes" className="flex flex-col gap-3">
+        <h2 id="margin-notes" className="sr-only">
+          Notes on the sequence
+        </h2>
+        <ol className="flex flex-col gap-3">
+          {goal.notes.map((note) => (
+            <li key={note.range} data-margin-note={note.badge} className="flex items-start gap-2">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                focusable="false"
+                className="mt-0.5 shrink-0"
+              >
+                <BadgeShape x={12} y={12} n={note.badge} u={1} />
+              </svg>
+              <span className="text-body">{note.text}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ) : null,
     legend: (columnsClassName) => (
       <Legend scene={scene} density={false} sticky={false} columnsClassName={columnsClassName} />
     ),

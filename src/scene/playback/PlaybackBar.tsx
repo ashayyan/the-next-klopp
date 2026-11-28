@@ -27,7 +27,9 @@ function TransportButton({ store }: PlaybackBarProps) {
       type="button"
       aria-label={`${label} sequence`}
       onClick={toggle}
-      className={`order-2 inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-1 rounded-sm bg-accent px-3 text-sm font-semibold text-accent-ink ${focusRing}`}
+      // A direction whose accent is too light for its page draws this fill's edge (data-fill-edge).
+      data-fill-edge="always"
+      className={`order-2 inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-1 rounded-sm border-2 border-transparent bg-accent px-3 text-sm font-semibold text-accent-ink ${focusRing}`}
     >
       <Icon />
       <span className="hidden md:inline">{`${label} sequence`}</span>
