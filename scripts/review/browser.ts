@@ -226,6 +226,7 @@ function collectPage(): PageData {
     return s.visibility !== "hidden" && s.display !== "none";
   };
   const textOf = (el: Element): string =>
+    // biome-ignore lint/performance/useDomNodeTextContent: innerText is wanted, it skips hidden text.
     ((el as HTMLElement).innerText ?? el.textContent ?? "").replace(/\s+/g, " ").trim();
 
   const controlEls = [...document.querySelectorAll(CONTROLS)].filter(shown);
