@@ -153,3 +153,20 @@ The learner delegated every grey area and checkpoint to Claude for this autonomo
 
 *Phase: 05-content-engine-app-shell-deploy*
 *Context gathered: 2026-11-28*
+
+## Post-research decisions (2026-11-28, after 05-RESEARCH.md)
+
+- Lessons carry no frontmatter (spec JSON is the only metadata); validator rule `mdx-frontmatter`; `remark-mdx-frontmatter` not installed.
+- Lesson MDX may not contain `export`, `import` or `{expression}` blocks except JSX attribute expressions on registered components (rule `mdx-code`); block components (`<Step>`, `<Contested>`, interactions) must be on their own lines (rule `block-component`).
+- `as_of` already exists in the registry schema; only `effective_date` is added, through the domain `sources.json` files and the `build-registry.ts` merge so `build-registry --check` stays green.
+- Chapter ids are `part-a`, `part-b`… from the concept-map `part` field.
+- The fixture lesson has status `shippable` so the verification gate runs on it in CI; fixtures still never enter study/Vercel builds.
+- "Law 10" style references stay inside `<Rule>` children; the `<Num kind>` list is not widened.
+- Validator runs in the `test` CI job (has `npm ci`); `check-frozen` stays dependency-free in `guards`.
+- Required `build` job runs in the `mcr.microsoft.com/playwright:v1.65.1-noble` container with a 20-minute timeout; job key stays `build` (branch protection unchanged).
+- Drafts and fixtures are excluded from bundles by a Vite virtual-module plugin (not a runtime filter); `check-bundle` gains content-leak markers. Walker build goes to `dist-walker/`, served on port 4174 by `playwright.walker.config.ts`; main config adds `testIgnore: ["walker/**"]`.
+- `review:screens` skips `[data-claim-meta]`; a shared `countWords` is used by validator and review.
+- Perf budget (recorded in DESIGN.md §8): shell entry ≤ 180 KB gzip (existing), lesson route JS ≤ 300 KB gzip, MDX chunk ≤ 20 KB, interaction chunk ≤ 60 KB, LCP ≤ 2.5 s (median of 3), long-task total ≤ 200 ms, CLS < 0.1, interaction latency ≤ 200 ms warn-only.
+- Vercel order: `vercel project create` → `vercel api PATCH /v9/projects/{name}` `{"ssoProtection":{"deploymentType":"all"}}` → read back with `vercel project protection --json` → only then `vercel git connect` and first deploy. Never run `vercel curl` (can mint a bypass secret). If the Vercel GitHub App install needs the learner, that is the single learner checkpoint; fallback is CLI deploys (`vercel deploy` for preview, `--prod` for production).
+- Public-repo hygiene: `05-VERIFICATION.md` and any committed file redact the Vercel team slug and generated deployment URLs (store them only in git-ignored `test-results/`).
+- Stale doc: ADR 0007 says "private repo"; add an additive status note that the repo is public since 2026-11-28 (no decision change).
