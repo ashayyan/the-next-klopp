@@ -68,7 +68,7 @@ function reportWith(checks: CheckResult[]) {
     server: "dev",
     url: "http://localhost:5184/dev/review-fixture",
     generatedAt: "2026-11-28T10:00:00.000Z",
-    tokensSha256: "abcdef123456",
+    tokensSha256: "000000000000",
     widths: [375],
     themes: ["dark"],
     checks,
@@ -228,7 +228,7 @@ describe("report and exit codes", () => {
     expect(report.counts.skipped).toBe(21);
     expect(report.tasteSkill).toBeNull();
     expect(report.reviewer.status).toBe("pending");
-    expect(report.designRef).toEqual({ file: "docs/DESIGN.md", tokensSha256: "abcdef123456" });
+    expect(report.designRef).toEqual({ file: "docs/DESIGN.md", tokensSha256: "000000000000" });
   });
 
   it("the Markdown holds the check table, the offenders and the screenshot paths", () => {
@@ -536,7 +536,7 @@ describe("taste results in the report", () => {
       server: "dev",
       url: "http://localhost:1/dev/x",
       generatedAt: "2026-11-28T10:00:00.000Z",
-      tokensSha256: "abc",
+      tokensSha256: "000000000000",
       widths: [375],
       themes: ["dark"],
       checks: [
