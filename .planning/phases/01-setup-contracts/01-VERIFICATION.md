@@ -1,7 +1,7 @@
 ---
 phase: 01-setup-contracts
 verified: 2026-11-27T20:00:00Z
-status: human_needed
+status: passed
 score: 5/5 must-haves verified locally (2 have GitHub-CI-only sub-clauses routed to human)
 covered_files: [".env.example", ".gitattributes", ".github/workflows/ci.yml", ".gitignore", ".planning/phases/01-setup-contracts/01-01-PLAN.md", ".planning/phases/01-setup-contracts/01-01-SUMMARY.md", ".planning/phases/01-setup-contracts/01-02-PLAN.md", ".planning/phases/01-setup-contracts/01-02-SUMMARY.md", ".planning/phases/01-setup-contracts/01-03-PLAN.md", ".planning/phases/01-setup-contracts/01-03-SUMMARY.md", ".planning/phases/01-setup-contracts/01-04-PLAN.md", ".planning/phases/01-setup-contracts/01-04-SUMMARY.md", ".planning/phases/01-setup-contracts/01-05-PLAN.md", ".planning/phases/01-setup-contracts/01-05-SUMMARY.md", ".planning/phases/01-setup-contracts/01-06-PLAN.md", ".planning/phases/01-setup-contracts/01-06-SUMMARY.md", ".planning/phases/01-setup-contracts/01-07-PLAN.md", ".planning/phases/01-setup-contracts/01-07-SUMMARY.md", ".planning/phases/01-setup-contracts/01-08-PLAN.md", ".planning/phases/01-setup-contracts/01-08-SUMMARY.md", ".planning/phases/01-setup-contracts/01-09-PLAN.md", ".planning/phases/01-setup-contracts/01-09-SUMMARY.md", "biome.json", "docs/FABLE_LOG.md", "docs/SETUP.md", "docs/decisions/0001-vite-spa-not-nextjs.md", "docs/decisions/0007-branch-protection.md", "package.json", "schemas/schemas.test.ts", "scripts/guard-files.ts", "scripts/lib/guard.ts", "scripts/smoke.ts", "scripts/verify-setup.ts", "src/main.tsx", "src/routes.ts", "src/schemas/contracts.ts", "tsconfig.json", "vite.config.ts"]
 covered_digest: "v4:sha256:77152facb688c9d29e7a39d6bb57c1056f22fb41af40220f5535424b7c3078a7"
@@ -123,3 +123,10 @@ No code gaps. Every locally checkable must-have holds with real evidence (comman
 
 _Verified: 2026-11-27T20:00:00Z_
 _Verifier: Claude (gsd-verifier)_
+
+
+## Human Verification Resolution (2026-11-28)
+
+- GitHub CI: learner made the repo public (removing the Actions billing block); run 46075424097 passed all six required jobs (lint, typecheck, test, build, guards, windows-smoke); PR #1 merged to main (e82a867).
+- Fresh-session skill load: the project-local K-Dense and design skills appear in the session skill list.
+- Model aliases: opus/sonnet subagents ran successfully throughout Phases 1-3.

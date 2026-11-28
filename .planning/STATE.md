@@ -80,6 +80,8 @@ Progress: [█░░░░░░░░░] 13%
 
 ### Decisions
 
+- [2026-11-28] Learner made the GitHub repo public (overrides SETUP-03 "private"); brief and learner profile are now publicly readable; no secrets in history (guard + gitleaks pass)
+
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
@@ -125,7 +127,6 @@ Recent decisions affecting current work:
 
 | Phase | State | Resume |
 |-------|-------|--------|
-| 1 | verification_deferred_human (CI never ran: GitHub billing block; fresh-session skill/model check) | fix billing, gh run rerun, then /gsd-verify-work 1 and merge PR #1 |
 
 ## Deferred Items
 
