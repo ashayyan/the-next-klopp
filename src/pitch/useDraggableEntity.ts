@@ -13,6 +13,7 @@ import {
   useState,
 } from "react";
 import { dragPosition, type NudgeKey, nudgePosition, type PitchSize } from "./drag.ts";
+import { createNudgeTracker } from "./nudgeTracker.ts";
 import type { Pt, View } from "./view.ts";
 
 export interface UseDraggableEntityOptions {
@@ -81,9 +82,6 @@ const NUDGE_KEYS: ReadonlySet<string> = new Set([
   "ArrowRight",
 ]);
 
-/** Wait this long after the last nudge before announcing the new position. */
-export const NUDGE_ANNOUNCE_MS = 500;
-
 export function useDraggableEntity(options: UseDraggableEntityOptions): DraggableBinding {
   const { position, view, pitch, runoff = 3, onMove, onEnd, onDragChange } = options;
   const active = useRef<ActiveDrag | null>(null);
@@ -92,21 +90,15 @@ export function useDraggableEntity(options: UseDraggableEntityOptions): Draggabl
   // The handlers read the latest callbacks and position without being re-created per render.
   const latest = useRef({ position, view, pitch, runoff, onMove, onEnd, onDragChange });
   latest.current = { position, view, pitch, runoff, onMove, onEnd, onDragChange };
-  // A run of arrow presses is announced once, 500 ms after the last one.
-  const nudged = useRef<Pt | null>(null);
-  const nudgeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const clearNudge = useCallback(() => {
-    nudged.current = null;
-    if (nudgeTimer.current !== null) clearTimeout(nudgeTimer.current);
-    nudgeTimer.current = null;
-  }, []);
+  // A run of arrow presses is announced once, 500 ms after the last one (rules in nudgeTracker.ts).
+  const [tracker] = useState(createNudgeTracker);
+  const clearNudge = tracker.clear;
   useEffect(() => clearNudge, [clearNudge]);
   // A position that is not the one the last nudge produced came from outside (a reset, another
-  // drag): forget the pending nudge so it is neither announced nor used as the next start point.
+  // drag): the tracker forgets the pending nudge.
   useEffect(() => {
-    const pending = nudged.current;
-    if (pending && (pending.x !== position.x || pending.y !== position.y)) clearNudge();
-  }, [position.x, position.y, clearNudge]);
+    tracker.sync({ x: position.x, y: position.y });
+  }, [position.x, position.y, tracker]);
 
   const finish = useCallback(() => {
     active.current = null;
@@ -218,7 +210,7 @@ export function useDraggableEntity(options: UseDraggableEntityOptions): Draggabl
     e.preventDefault();
     const now = latest.current;
     const next = nudgePosition(
-      nudged.current ?? now.position,
+      tracker.from(now.position),
       now.view,
       e.key as NudgeKey,
       e.shiftKey,
@@ -227,15 +219,8 @@ export function useDraggableEntity(options: UseDraggableEntityOptions): Draggabl
         runoff: now.runoff,
       },
     );
-    nudged.current = next;
     now.onMove(next);
-    if (nudgeTimer.current !== null) clearTimeout(nudgeTimer.current);
-    nudgeTimer.current = setTimeout(() => {
-      const end = nudged.current;
-      nudged.current = null;
-      nudgeTimer.current = null;
-      if (end) latest.current.onEnd?.(end);
-    }, NUDGE_ANNOUNCE_MS);
+    tracker.push(next, (end) => latest.current.onEnd?.(end));
   }
 
   return {
