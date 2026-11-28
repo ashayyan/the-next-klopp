@@ -9,10 +9,9 @@ import { autoOrientation } from "../../pitch/view.ts";
 import type { Scene, ScenePoint } from "../../scene/schema.ts";
 import { parseScene } from "../../scene/validate.ts";
 import { Button } from "../../ui/Button.tsx";
-import { ShellBar } from "../../ui/lesson/ShellBar.tsx";
 import { StepRail, type StepRailForms } from "../../ui/lesson/StepRail.tsx";
 import { Segmented } from "../../ui/Segmented.tsx";
-import { type Direction, DirectionScope } from "./DirectionScope.tsx";
+import { type Direction, DirectionScope, DirectionShellBar } from "./DirectionScope.tsx";
 import {
   type Line,
   lineOf,
@@ -348,7 +347,7 @@ export function TacticsScreen({ direction }: { direction: Direction }) {
 
   const blocks: Blocks = {
     shell: (className) => (
-      <ShellBar
+      <DirectionShellBar
         minutes={6}
         focus={focus}
         onFocusChange={setFocus}

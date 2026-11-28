@@ -1,5 +1,14 @@
 import type { ReactNode } from "react";
+import { MoreIcon, ThemeIcon } from "../icons/index.tsx";
+import { RadioMenu } from "../Menu.tsx";
 import { Switch } from "../Switch.tsx";
+import type { ThemeChoice } from "../theme.ts";
+
+export const THEME_OPTIONS = [
+  { value: "system", label: "Match my system" },
+  { value: "light", label: "Light" },
+  { value: "dark", label: "Dark" },
+] as const;
 
 export interface FocusToggleProps {
   checked: boolean;
@@ -30,11 +39,11 @@ export interface ShellBarProps {
   minutes: number;
   focus: boolean;
   onFocusChange: (focus: boolean) => void;
-  /** The "I'm confused here" control (04-08 Task 3). */
+  /** The learner's theme choice; with onThemeChange the bar shows the theme menus. */
+  theme?: ThemeChoice;
+  onThemeChange?: (theme: ThemeChoice) => void;
+  /** The "I'm confused here" control. */
   confusion?: ReactNode;
-  /** The theme menu (wide) and the overflow menu (375), when the screen provides them. */
-  themeMenu?: ReactNode;
-  overflowMenu?: ReactNode;
   /** Classes for the bar: padding and any direction rule under it. */
   className?: string;
   /** Classes for the wordmark: the display face and its stretch. */
@@ -45,15 +54,15 @@ export interface ShellBarProps {
 /**
  * The 56 px lesson top bar: wordmark, lesson time, Focus mode, "I'm confused here" and the theme
  * menu. Focus mode hides the time and the theme menu. Below 768 px the time and theme choices
- * move into the overflow menu ("More options").
+ * move into the overflow menu ("More options"), so the bar fits at 320 px.
  */
 export function ShellBar({
   minutes,
   focus,
   onFocusChange,
+  theme,
+  onThemeChange,
   confusion,
-  themeMenu,
-  overflowMenu,
   className,
   wordmarkClassName,
   state,
@@ -78,9 +87,28 @@ export function ShellBar({
         )}
         <FocusToggle checked={focus} onCheckedChange={onFocusChange} />
         {confusion}
-        {focus || !themeMenu ? null : <span className="hidden md:inline-flex">{themeMenu}</span>}
-        {focus || !overflowMenu ? null : (
-          <span className="inline-flex md:hidden">{overflowMenu}</span>
+        {focus || !theme || !onThemeChange ? null : (
+          <>
+            <span className="hidden md:inline-flex">
+              <RadioMenu
+                label="Theme"
+                icon={<ThemeIcon />}
+                value={theme}
+                onValueChange={onThemeChange}
+                options={THEME_OPTIONS}
+              />
+            </span>
+            <span className="inline-flex md:hidden">
+              <RadioMenu
+                label="More options"
+                icon={<MoreIcon />}
+                value={theme}
+                onValueChange={onThemeChange}
+                options={THEME_OPTIONS}
+                before={`About ${minutes} min`}
+              />
+            </span>
+          </>
         )}
       </div>
     </header>
