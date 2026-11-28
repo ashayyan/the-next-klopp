@@ -56,7 +56,7 @@
 
 ### Content Engine
 
-- [ ] **CONT-01**: Each lesson is an MDX file plus a JSON spec (steps, components, data refs, quiz items, sources, prerequisites, role tags, duration, effort)
+- [x] **CONT-01**: Each lesson is an MDX file plus a JSON spec (steps, components, data refs, quiz items, sources, prerequisites, role tags, duration, effort)
 - [ ] **CONT-02**: A validator blocks shipping when a screen exceeds 60 words, Lesson Loop stages are missing or out of order, citations don't resolve to the source registry, prerequisites form a cycle, data refs are missing, or prose contains bare unsourced numbers
 - [ ] **CONT-03**: An interaction registry gives every interaction a props schema, an accessibility fallback and a test oracle
 - [ ] **CONT-04**: A generic Playwright walker completes every shipped lesson end-to-end with no per-lesson test code
@@ -190,7 +190,7 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 | DSGN-03 | Phase 4 | Complete |
 | DSGN-04 | Phase 4 | Complete |
 | QA-02 | Phase 4 | Complete |
-| CONT-01 | Phase 5 | Pending |
+| CONT-01 | Phase 5 | Complete |
 | CONT-02 | Phase 5 | Pending |
 | CONT-03 | Phase 5 | Pending |
 | CONT-04 | Phase 5 | Pending |

@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 5
 current_phase_name: Content Engine, App Shell & Deploy
 status: executing
-stopped_at: Phase 5 context gathered
-last_updated: "2026-11-28T15:36:39.350Z"
+stopped_at: Completed 05-01-PLAN.md
+last_updated: "2026-11-28T15:49:27.511Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 complete, transitioned to Phase 5
-state_head: db23fc143b9996a37ebe5a6a94ba549670914a6e
+state_head: ce57eea73d4f48bc21df14bc252412102b4030f0
 progress:
   total_phases: 8
   completed_phases: 4
   total_plans: 78
-  completed_plans: 58
+  completed_plans: 59
   percent: 50
 ---
 
@@ -27,10 +27,10 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 
 ## Current Position
 
-Phase: 5 (Content Engine, App Shell & Deploy) — READY TO EXECUTE
-Plan: Not started
-Status: Ready to execute
-Last activity: 2026-11-28 — Phase 4 complete, transitioned to Phase 5
+Phase: 5 (Content Engine, App Shell & Deploy) — EXECUTING
+Plan: 2 of 20
+Status: In progress
+Last activity: 2026-11-28 — Completed 05-01 (MDX lessons through virtual:tnk-lessons, /learn/:lessonId, fixtures build)
 
 Progress: [█████░░░░░] 50%
 
@@ -106,6 +106,7 @@ Progress: [█████░░░░░] 50%
 | Phase 4 P15 | 95 min | 3 tasks | 21 files |
 | Phase 04 P16 | 150min | 3 tasks | 20 files |
 | Phase 04 P17 | 70min | 3 tasks | 6 files |
+| Phase 05 P01 | 15min | 2 tasks | 22 files |
 
 ## Accumulated Context
 
@@ -183,6 +184,8 @@ Recent decisions affecting current work:
 - [Phase 4]: 04-15: Base UI controls and overlays shown in the gallery; the open AlertDialog state is a non-modal Dialog with role alertdialog so a screenshot is not made inert; the safe action Keep board takes focus on open
 - [Phase 04]: 04-16: inventory.json is the single list of the 37 gallery ids and states; revealed quiz answers stay focusable with aria-disabled and feedback is icon plus words
 - [Phase 04]: 04-17: visual baselines are CI-only Linux; update-snapshots is a two-job workflow (generate in the Playwright image, commit on the hosted runner); first baseline dispatch deferred until the workflow is on main
+- [Phase 05]: 05-01: MDX plugin limited to .mdx (include /\.mdx$/) because @mdx-js/rollup strips queries and would compile DESIGN.md?raw
+- [Phase 05]: 05-01: lesson selection runs at build time in virtual:tnk-lessons; study build ships shipped lessons only, fixtures only in dist-walker
 
 ### Pending Todos
 
@@ -212,6 +215,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T13:33:16.224Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-content-engine-app-shell-deploy/05-CONTEXT.md
+Last session: 2026-11-28T15:49:15.032Z
+Stopped at: Completed 05-01-PLAN.md
+Resume file: None
