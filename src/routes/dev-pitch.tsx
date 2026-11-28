@@ -72,14 +72,19 @@ const MOTIONS = [
   { id: "stepped", label: "Stepped" },
 ] as const;
 
-/** Smooth or Stepped; disabled (Smooth shown) for scenes without a clock. */
-function MotionGroup({ store }: { store: StoreApi<PlaybackState> | null }) {
+/** Smooth or Stepped; disabled (Smooth shown) for scenes without a clock, with the reason shown. */
+function MotionGroup({ store, reason }: { store: StoreApi<PlaybackState> | null; reason: string }) {
+  const reasonId = useId();
   const [idle] = useState(() =>
     createStore<{ motion: "smooth" | "stepped" }>(() => ({ motion: "smooth" })),
   );
   const motion = useStore(store ?? idle, (s) => s.motion);
   return (
-    <fieldset className="flex min-w-0 flex-col gap-1" disabled={store === null}>
+    <fieldset
+      className="flex min-w-0 flex-col gap-1"
+      disabled={store === null}
+      aria-describedby={store === null ? reasonId : undefined}
+    >
       <legend className="text-sm">Motion</legend>
       <div className="flex flex-wrap gap-2">
         {MOTIONS.map((m) => (
@@ -99,6 +104,11 @@ function MotionGroup({ store }: { store: StoreApi<PlaybackState> | null }) {
           </label>
         ))}
       </div>
+      {store === null ? (
+        <p id={reasonId} className="text-sm text-ink-muted">
+          {reason}
+        </p>
+      ) : null}
     </fieldset>
   );
 }
@@ -119,6 +129,7 @@ export default function DevPitchPage() {
   const sceneId = useId();
   const sizeId = useId();
   const inspectorId = useId();
+  const densityReasonId = useId();
   const [params, setParams] = useSearchParams();
   const [sizeKey, setSizeKey] = useState<string>("105x68");
   const [choice, setChoice] = useState<OrientationChoice>("auto");
@@ -320,7 +331,10 @@ export default function DevPitchPage() {
           </div>
         </fieldset>
 
-        <MotionGroup store={store} />
+        <MotionGroup
+          store={store}
+          reason={scene ? "Still scene: no motion to play" : "No scene drawn: no motion to play"}
+        />
 
         <fieldset className="flex min-w-0 flex-col gap-1">
           <legend className="text-sm">Layers</legend>
@@ -330,6 +344,7 @@ export default function DevPitchPage() {
               name="layer-density"
               checked={densityOn}
               disabled={!hasEvents}
+              aria-describedby={hasEvents ? undefined : densityReasonId}
               onChange={(e) =>
                 setDensityChoice((prev) => ({ ...prev, [activeId]: e.target.checked }))
               }
@@ -337,6 +352,11 @@ export default function DevPitchPage() {
             />
             <span>Density layer (Canvas)</span>
           </label>
+          {hasEvents ? null : (
+            <p id={densityReasonId} className="text-sm text-ink-muted">
+              No events to draw in this scene
+            </p>
+          )}
           <label className="flex min-h-11 cursor-pointer items-center gap-2 rounded-sm px-2 text-sm has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent">
             <input
               type="checkbox"

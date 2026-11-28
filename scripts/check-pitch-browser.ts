@@ -391,6 +391,54 @@ async function checkToolbarRow(page: Page): Promise<void> {
   }
 }
 
+/** (1c) A disabled Motion group or density checkbox shows its reason, linked by aria-describedby. */
+async function checkDisabledReasons(page: Page): Promise<void> {
+  const probe = `(() => {
+    const text = (el) =>
+      (el?.getAttribute("aria-describedby") ?? "")
+        .split(" ")
+        .map((id) => document.getElementById(id)?.textContent ?? "")
+        .join(" ")
+        .trim();
+    const motion = document.querySelector("fieldset:has(input[name=motion])");
+    const density = document.querySelector("input[name=layer-density]");
+    return {
+      motionDisabled: motion.disabled,
+      motionReason: text(motion),
+      densityDisabled: density.disabled,
+      densityReason: text(density),
+    };
+  })()`;
+  type Reasons = {
+    motionDisabled: boolean;
+    motionReason: string;
+    densityDisabled: boolean;
+    densityReason: string;
+  };
+  await page.goto("/dev/pitch?scene=glyph-sheet", { width: 1440 });
+  await page.until("the glyph sheet", SCENE_DRAWN);
+  const still = await page.eval<Reasons>(probe);
+  report(
+    still.motionDisabled && still.motionReason === "Still scene: no motion to play",
+    "still scene: disabled Motion group shows its reason",
+    `"${still.motionReason}"`,
+  );
+  await page.goto("/dev/pitch?scene=pitch-only", { width: 1440 });
+  const none = await page.eval<Reasons>(probe);
+  report(
+    none.densityDisabled && none.densityReason !== "",
+    "pitch only: disabled density checkbox shows its reason",
+    `"${none.densityReason}"`,
+  );
+  await page.goto("/dev/pitch?scene=reconstruction", { width: 1440 });
+  await page.until("the reconstruction", SCENE_DRAWN);
+  const live = await page.eval<Reasons>(probe);
+  report(
+    !live.motionDisabled && live.motionReason === "" && !live.densityDisabled,
+    "reconstruction: enabled Motion group and density checkbox show no reason",
+  );
+}
+
 /** (2) Canvas backing store = CSS size × devicePixelRatio. */
 async function checkCanvasDpr(page: Page): Promise<void> {
   await page.goto("/dev/pitch?scene=glyph-sheet", { width: 768, dpr: 2 });
@@ -725,6 +773,7 @@ async function main(): Promise<number> {
     page.problems = [];
     await checkWidths(page);
     await checkToolbarRow(page);
+    await checkDisabledReasons(page);
     await checkCanvasDpr(page);
     await checkVerticalReadout(page);
     await checkPlayback(page);
