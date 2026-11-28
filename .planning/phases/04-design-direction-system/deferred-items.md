@@ -23,6 +23,12 @@ gaps. No Phase 4 plan fixes them: 04-17 asserts badge against disc only.
   1440).
 - The direction screens label discs with position codes (GK, CB, ST), but the legend says "shirt
   number". Section 4 now requires the legend description to say which one is shown.
+- **Resolved in the 04-UI-REVIEW UI fixes.** `placeBadge` takes the badges already placed as
+  obstacles (`799f8e5`); the owned ball sits beside its disc, disc radius plus ball radius from the
+  owner, so it never covers the label (`f13c8d5`); the legend description names the disc text from
+  the scene data: position code on the City shapes, player initials on the Wyscout goal (`22fdcd1`);
+  two-letter labels use the condensed width so they fit inside the disc (`ee958e3`). DESIGN.md
+  sections 2 and 4 now agree that no pitch-layer gap from the ADR 0010 review is open.
 
 ## From plan 04-14 (component gallery)
 
