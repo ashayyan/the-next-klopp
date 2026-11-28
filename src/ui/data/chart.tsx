@@ -14,9 +14,11 @@ export function linear(
   return (v) => r0 + (v - d0) * k;
 }
 
-/** Evenly spaced ticks from `from` to `to` (inclusive) every `step`. */
+/** Evenly spaced ticks from `from` to `to` (inclusive) every `step`; none unless step > 0. */
 export function ticks(from: number, to: number, step: number): number[] {
   const out: number[] = [];
+  // A zero, negative or NaN step (or an infinite bound) would never reach `to`.
+  if (!(step > 0) || !Number.isFinite(from) || !Number.isFinite(to)) return out;
   for (let v = Math.ceil(from / step) * step; v <= to + 1e-9; v += step)
     out.push(Math.round(v * 1e6) / 1e6);
   return out;

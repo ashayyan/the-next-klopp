@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { loadTokens } from "../../scripts/design/build-tokens.ts";
 import { SYSTEM_INPUT } from "../../scripts/design/tokens.ts";
 import { Checkbox, RadioGroup } from "./Choice.tsx";
-import { ChartLegend, formatNumber, Line, Marker } from "./data/chart.tsx";
+import { ChartLegend, formatNumber, Line, Marker, ticks } from "./data/chart.tsx";
 import { DataTable } from "./data/DataTable.tsx";
 import { StatCard } from "./data/StatCard.tsx";
 import { NumberInput, TextInput } from "./Field.tsx";
@@ -27,6 +27,16 @@ import {
 } from "./theme.ts";
 
 const count = (html: string, needle: string) => html.split(needle).length - 1;
+
+describe("ticks", () => {
+  it("returns no ticks for a step that is not positive or a bound that is not finite (IN-10)", () => {
+    expect(ticks(0, 10, -1)).toEqual([]);
+    expect(ticks(0, 10, 0)).toEqual([]);
+    expect(ticks(0, 10, Number.NaN)).toEqual([]);
+    expect(ticks(0, Number.POSITIVE_INFINITY, 1)).toEqual([]);
+    expect(ticks(0, 10, 5)).toEqual([0, 5, 10]);
+  });
+});
 
 describe("StepRail", () => {
   it("lists the seven Lesson Loop steps in order with exactly one current step", () => {
