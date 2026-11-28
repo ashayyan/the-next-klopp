@@ -127,7 +127,7 @@ Plans:
   2. StatsBomb, Opta, Wyscout and tracking coordinate converters pass landmark and round-trip tests built from the provider specs, including a left/right asymmetry test, so the same landmark lands on the same spot of the pitch whichever provider it came from.
   3. `npm run data` runs the pipeline on Windows with no `make`: it downloads only allow-listed open sources, standardises them with kloppy and writes small immutable versioned artifacts with a manifest; raw data stays git-ignored, and CI fails when raw or licensed data, or an oversized file, is staged or would enter the bundle.
   4. At least one open-data sequence recipe produces a Scene/Frame sequence that plays back on the canonical pitch, and the same Scene/Frame format also holds a hand-authored board, a quiz answer and a reconstruction (one fixture of each renders).
-**Plans**: 10/11 plans executed in 6 waves
+**Plans**: 11/11 plans executed in 6 waves
 
 Plans:
 **Wave 1**
@@ -151,7 +151,7 @@ Plans:
 - [x] 03-10-PLAN.md — Published artifact on /dev/pitch, load states, local-only StatsBomb freeze-frame recipe (wave 5)
 
 **Wave 6** *(blocked on Wave 5 completion)*
-- [ ] 03-11-PLAN.md — Headless Edge browser checks (backstops, screenshots) and ADR 0009 pitch layer API (wave 6)
+- [x] 03-11-PLAN.md — Headless Edge browser checks (backstops, screenshots) and ADR 0009 pitch layer API (wave 6)
 **UI hint**: yes
 **Research flag**: needs deeper research on provider coordinate specs (encode from the specs, not from memory) and metric reference values. Includes a spike on the pitch layer API against three consumers: static markings, Tactics Board drag, 22-player playback.
 
@@ -241,7 +241,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 |-------|----------------|--------|-----------|
 | 1. Setup & Contracts | 9/9 | Complete    | 2026-11-28 |
 | 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
-| 3. Pitch Standard & Data Pipeline | 10/11 | In Progress | - |
+| 3. Pitch Standard & Data Pipeline | 11/11 | In Progress | - |
 | 4. Design Direction & System | 0/TBD | Not started | - |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |
 | 6. Learner Experience & Progress | 0/TBD | Not started | - |

@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 current_phase: 3
 current_phase_name: Pitch Standard & Data Pipeline
-status: executing
-stopped_at: Completed 03-10-PLAN.md
-last_updated: "2026-11-28T02:48:57.108Z"
+status: verifying
+stopped_at: Completed 03-11-PLAN.md
+last_updated: "2026-11-28T03:13:32.628Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 3 execution started
-state_head: "0bf9349f7d51e368a1dcbb2cbd46d95423da9057"
+state_head: 11177e187418253fe2c13c5c628555d2996c3a97
 progress:
   total_phases: 8
   completed_phases: 2
   total_plans: 41
-  completed_plans: 40
+  completed_plans: 41
   percent: 25
 ---
 
@@ -29,7 +29,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 
 Phase: 3 (Pitch Standard & Data Pipeline) — EXECUTING
 Plan: 11 of 11
-Status: Ready to execute
+Status: Phase complete — ready for verification
 Last activity: 2026-11-28 — Phase 3 execution started
 
 Progress: [███░░░░░░░] 25%
@@ -86,6 +86,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 03 P08 | 25min | 3 tasks | 14 files |
 | Phase 03 P09 | 40min | 3 tasks | 13 files |
 | Phase 03 P10 | 55min | 3 tasks | 13 files |
+| Phase 3 P11 | 25min | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -136,6 +137,9 @@ Recent decisions affecting current work:
 - [Phase 03]: 03-09: draggable handle lives in an interaction layer separate from the visible disc so pointer capture survives the dragged-on-top reorder
 - [Phase 03]: 03-10: StatsBomb freeze-frame players are never scaled by hand; kloppy's event.freeze_frame carries the same piecewise 105 x 68 warp as the shot (linear scaling would be off by about 0.25 m)
 - [Phase 03]: 03-10: dev scene loads end in a LoadResult and check the content type before parsing; local-only StatsBomb is read through a non-eager import.meta.glob inside the dev-only chunk
+- [Phase 3]: 03-11: playback keeps the React selector render path (3.7-4.2 ms mean work, p95 16.8 ms in headless Edge on a Ryzen 9 7900X); imperative transforms are the escape hatch (ADR 0009)
+- [Phase 3]: 03-11: ball owner offset fades over two disc diameters around the latest or next owner, so a ball in flight keeps its sampled path
+- [Phase 3]: 03-11: npm run check:pitch is the real-browser gate for /dev/pitch until Playwright (Phase 5); CHECK_PITCH_PORT runs it beside a dev server holding 5173
 
 ### Pending Todos
 
@@ -163,6 +167,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T02:48:56.700Z
-Stopped at: Completed 03-10-PLAN.md
+Last session: 2026-11-28T03:13:32.121Z
+Stopped at: Completed 03-11-PLAN.md
 Resume file: None
