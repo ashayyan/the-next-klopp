@@ -533,7 +533,7 @@ describe("the gate fails unsafe palettes", () => {
 });
 
 describe("--json and --markdown", () => {
-  it("--json prints 6 entries for 3 sets x 2 themes", () => {
+  it("--json prints 2 entries for the one system set x 2 themes", () => {
     const r = run(["--json"]);
     expect(r.status).toBe(0);
     const parsed = JSON.parse(r.stdout) as {
@@ -541,17 +541,15 @@ describe("--json and --markdown", () => {
       theme: string;
       checks: unknown[];
     }[];
-    expect(parsed).toHaveLength(6);
-    expect(new Set(parsed.map((p) => p.direction))).toEqual(
-      new Set(["floodlit", "programme", "notebook"]),
-    );
+    expect(parsed).toHaveLength(2);
+    expect(new Set(parsed.map((p) => p.direction))).toEqual(new Set(["floodlit"]));
     expect(parsed.every((p) => p.checks.length > 20)).toBe(true);
   });
 
   it("--markdown prints one row per set and theme in both tables", () => {
     const r = run(["--markdown"]);
     expect(r.status).toBe(0);
-    for (const name of ["floodlit dark", "floodlit light", "programme light", "notebook dark"]) {
+    for (const name of ["floodlit dark", "floodlit light"]) {
       expect(r.stdout.match(new RegExp(`^\\| ${name} \\|`, "gm"))).toHaveLength(2);
     }
     expect(r.stdout).toContain(

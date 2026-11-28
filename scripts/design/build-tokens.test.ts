@@ -1,7 +1,7 @@
 // Token pipeline tests: the floodlit tracer path through Tailwind, generated-file drift, and the
 // Phase 3 variable names. The refusal and CLI behaviours follow in the second block.
 import { spawnSync } from "node:child_process";
-import { copyFileSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { compile } from "tailwindcss";
@@ -68,12 +68,10 @@ describe("floodlit tracer: schema, generator, Tailwind", () => {
     expect(read(SYSTEM_OUT)).toBe(css);
   });
 
-  it("lists the system file and every direction file", () => {
+  it("lists the system file and no direction sets (04-13 collapse)", () => {
     const inputs = listTokenInputs(root);
     expect(inputs.system).toEqual({ input: SYSTEM_INPUT, out: SYSTEM_OUT, scope: null });
-    expect(inputs.directions.map((d) => d.input)).toContain(
-      `${DIRECTION_DIR}/floodlit.tokens.json`,
-    );
+    expect(inputs.directions).toEqual([]);
   });
 
   it("keeps every Phase 3 variable name in the light and in the dark block", () => {
@@ -111,42 +109,16 @@ const SCRIPT = join(root, "scripts", "design", "build-tokens.ts");
 const run = (args: string[]) =>
   spawnSync(process.execPath, [SCRIPT, ...args], { cwd: root, encoding: "utf8" });
 
-describe("all three direction sets", () => {
-  const ids = ["floodlit", "programme", "notebook"] as const;
-  const primary = { floodlit: "dark", programme: "light", notebook: "light" } as const;
-
-  for (const id of ids) {
-    it(`${id}: parses with every required key in both themes`, () => {
-      const doc = loadTokens(root, `${DIRECTION_DIR}/${id}.tokens.json`);
-      expect(doc.meta.direction).toBe(id);
-      expect(doc.meta.primaryTheme).toBe(primary[id]);
-      for (const theme of ["light", "dark"] as const) {
-        for (const k of REQUIRED_COLOR_KEYS) expect(doc.resolved[theme].color[k]).toBeDefined();
-        for (const k of REQUIRED_PITCH_KEYS) expect(doc.resolved[theme].pitch[k]).toBeDefined();
-        for (const k of REQUIRED_DATA_KEYS) expect(doc.resolved[theme].data[k]).toBeDefined();
-      }
-    });
-
-    it(`${id}: scoped CSS file equals the generator output`, () => {
-      const rel = `${DIRECTION_DIR}/${id}.tokens.json`;
-      const doc = loadTokens(root, rel);
-      expect(read(`${DIRECTION_DIR}/${id}.css`)).toBe(generateScopedCss(doc, scopeFor(id), rel));
-    });
-  }
-
-  it("programme keeps accent for fills and rings focus in ink on the light page", () => {
-    const doc = loadTokens(root, `${DIRECTION_DIR}/programme.tokens.json`);
-    expect(doc.resolved.light.color["focus-ring"]).toBe(doc.resolved.light.color.ink);
-    expect(doc.resolved.dark.color["focus-ring"]).toBe(doc.resolved.dark.color.accent);
-    expect(doc.resolved.light.color["surface-highlight"]).toBe("#F5D90A");
-    expect(doc.resolved.light.color["surface-highlight-ink"]).toBe("#10241A");
+describe("the direction token files are gone", () => {
+  it("the folder is deleted and a missing folder gives no direction sets", () => {
+    expect(existsSync(join(root, DIRECTION_DIR))).toBe(false);
+    expect(listTokenInputs(root).directions).toEqual([]);
   });
 
-  it("the three directions use three different display families", () => {
-    const families = ids.map(
-      (id) => loadTokens(root, `${DIRECTION_DIR}/${id}.tokens.json`).font.display.$value[0],
-    );
-    expect(new Set(families).size).toBe(3);
+  it("DESIGN.md is the one token source: floodlit, dark primary", () => {
+    const doc = loadTokens(root, SYSTEM_INPUT);
+    expect(doc.meta.direction).toBe("floodlit");
+    expect(doc.meta.primaryTheme).toBe("dark");
   });
 });
 
@@ -220,25 +192,17 @@ describe("validation refuses malformed input", () => {
 });
 
 describe("CLI", () => {
-  it("--check exits 0 on the unchanged tree and prints the file count", () => {
+  it("--check exits 0 on the unchanged tree and prints one output file", () => {
     const r = run(["--check"]);
     expect(r.status).toBe(0);
-    expect(r.stdout).toMatch(/tokens ok: 4 file\(s\)/);
+    expect(r.stdout).toContain("tokens ok: 1 file(s)");
   });
 
   it("--check exits 1 and prints 'tokens drift:' after one changed byte", () => {
     const dir = mkdtempSync(join(tmpdir(), "tnk-tokens-"));
-    const out = join(dir, "floodlit.css");
-    copyFileSync(join(root, DIRECTION_DIR, "floodlit.css"), out);
-    const args = [
-      "--input",
-      `${DIRECTION_DIR}/floodlit.tokens.json`,
-      "--out",
-      out,
-      "--scope",
-      scopeFor("floodlit"),
-      "--check",
-    ];
+    const out = join(dir, "tokens.css");
+    copyFileSync(join(root, SYSTEM_OUT), out);
+    const args = ["--input", SYSTEM_INPUT, "--out", out, "--check"];
     expect(run(args).status).toBe(0);
     writeFileSync(out, readFileSync(out, "utf8").replace("#F3F5F7", "#F3F5F8"));
     const r = run(args);
@@ -249,7 +213,7 @@ describe("CLI", () => {
   it("exits 1 on a refused scope", () => {
     const r = run([
       "--input",
-      join(root, DIRECTION_DIR, "floodlit.tokens.json"),
+      join(root, SYSTEM_INPUT),
       "--out",
       join(tmpdir(), "never-written.css"),
       "--scope",

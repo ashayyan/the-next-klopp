@@ -15,7 +15,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { collectReferences, FONT_BUDGET_BYTES } from "./copy-fonts.ts";
-import { DIRECTION_DIR, SYSTEM_INPUT } from "./tokens.ts";
+import { SYSTEM_INPUT } from "./tokens.ts";
 
 const root = join(import.meta.dirname, "..", "..");
 const packages = join(root, "node_modules", "@fontsource-variable");
@@ -28,11 +28,6 @@ function tempRoot(): string {
   const dir = mkdtempSync(join(tmpdir(), "tnk-fonts-"));
   mkdirSync(join(dir, dirname(SYSTEM_INPUT)), { recursive: true });
   cpSync(join(root, SYSTEM_INPUT), join(dir, SYSTEM_INPUT));
-  mkdirSync(join(dir, DIRECTION_DIR), { recursive: true });
-  for (const f of readdirSync(join(root, DIRECTION_DIR))) {
-    if (f.endsWith(".tokens.json"))
-      cpSync(join(root, DIRECTION_DIR, f), join(dir, DIRECTION_DIR, f));
-  }
   return dir;
 }
 
@@ -66,13 +61,24 @@ describe("tracer: Mona Sans is copied byte for byte with its licence", () => {
   });
 });
 
-describe("all seven families", () => {
+describe("the system families", () => {
   const refs = collectReferences(root);
   const files = [...new Set(refs.flatMap((i) => i.refs.map((x) => x.src)))];
 
-  it("references seven families and eight files across the three directions", () => {
-    expect(new Set(refs.flatMap((i) => i.refs.map((x) => x.family))).size).toBe(7);
-    expect(files).toHaveLength(7);
+  it("references the two DESIGN.md families (Mona Sans, Geist Mono) and nothing else", () => {
+    expect(refs.map((i) => i.input)).toEqual([SYSTEM_INPUT]);
+    expect(new Set(refs.flatMap((i) => i.refs.map((x) => x.family)))).toEqual(
+      new Set(["mona-sans", "geist-mono"]),
+    );
+    expect(files).toHaveLength(2);
+  });
+
+  it("holds exactly one folder per referenced family under public/fonts", () => {
+    const families = new Set(refs.flatMap((i) => i.refs.map((x) => x.family)));
+    const folders = readdirSync(join(root, "public", "fonts"), { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => d.name);
+    expect(new Set(folders)).toEqual(families);
   });
 
   it("serves every referenced file from public/fonts, byte for byte", () => {
@@ -92,12 +98,12 @@ describe("all seven families", () => {
     }
   });
 
-  it("lists one OFL-1.1 section per family with version 5.3.0 and the licence text", () => {
+  it("lists one OFL-1.1 section per shipped family with version 5.3.0 and the licence text", () => {
     const md = readFileSync(join(root, "public", "fonts", "LICENSES.md"), "utf8");
-    expect(md.match(/^## /gm)).toHaveLength(7);
-    expect(md.match(/- Licence: OFL-1\.1/g)).toHaveLength(7);
-    expect(md.match(/ 5\.3\.0$/gm)).toHaveLength(7);
-    expect(md.match(/SIL Open Font License, Version 1\.1/g)?.length).toBeGreaterThanOrEqual(7);
+    expect(md.match(/^## /gm)).toHaveLength(2);
+    expect(md.match(/- Licence: OFL-1\.1/g)).toHaveLength(2);
+    expect(md.match(/ 5\.3\.0$/gm)).toHaveLength(2);
+    expect(md.match(/SIL Open Font License, Version 1\.1/g)?.length).toBeGreaterThanOrEqual(2);
   });
 
   it("--check exits 0 on the repo tree", () => {

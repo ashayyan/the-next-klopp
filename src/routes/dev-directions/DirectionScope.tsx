@@ -7,6 +7,10 @@ import {
   useState,
 } from "react";
 import { useSearchParams } from "react-router";
+// The system tokens (src/styles/tokens.css) are already loaded by the app entry; the primary
+// theme is read from the DESIGN.md tokens block. Dev-only chunk: this module is never in the study build.
+import designMd from "../../../docs/DESIGN.md?raw";
+import { extractTokensBlock } from "../../../scripts/design/tokens.ts";
 import { ShellBar, type ShellBarProps } from "../../ui/lesson/ShellBar.tsx";
 import {
   readStoredTheme,
@@ -15,13 +19,6 @@ import {
   type ThemeName,
   writeStoredTheme,
 } from "../../ui/theme.ts";
-import floodlitTokens from "./tokens/floodlit.tokens.json";
-import notebookTokens from "./tokens/notebook.tokens.json";
-import programmeTokens from "./tokens/programme.tokens.json";
-// The three scoped token files: each one only applies under its own [data-direction="<id>"].
-import "./tokens/floodlit.css";
-import "./tokens/programme.css";
-import "./tokens/notebook.css";
 import "./directions.css";
 
 export type { ThemeName };
@@ -39,25 +36,19 @@ function primaryOf(meta: { primaryTheme: string }): ThemeName {
   return meta.primaryTheme === "dark" ? "dark" : "light";
 }
 
-/** The fixed direction list. A URL `:id` is only ever looked up here, never used as a path. */
+const systemMeta = (JSON.parse(extractTokensBlock(designMd)) as { meta: { primaryTheme: string } })
+  .meta;
+
+/**
+ * The fixed direction list: only the picked direction (ADR 0010). A URL `:id` is only ever looked
+ * up here, never used as a path.
+ */
 export const DIRECTIONS: readonly Direction[] = [
   {
     id: "floodlit",
     name: "Floodlit",
     idea: "The analysts’ video room at night: the pitch is the one lit object.",
-    primaryTheme: primaryOf(floodlitTokens.meta),
-  },
-  {
-    id: "programme",
-    name: "Matchday Programme",
-    idea: "The printed matchday programme and team sheet: condensed type, ink rules, one yellow block.",
-    primaryTheme: primaryOf(programmeTokens.meta),
-  },
-  {
-    id: "notebook",
-    name: "Analyst’s Notebook",
-    idea: "A clean page from an analyst’s notebook: one sheet, the pitch drawn on it, notes in the margin.",
-    primaryTheme: primaryOf(notebookTokens.meta),
+    primaryTheme: primaryOf(systemMeta),
   },
 ];
 
