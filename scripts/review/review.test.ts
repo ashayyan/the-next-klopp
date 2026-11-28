@@ -1,7 +1,12 @@
 // Pure review logic: arguments, slugging, the check registry, evaluators, report and exit codes.
 // No browser here; the page-side collectors are exercised by the CLI itself.
+import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { DIRECTION_DIR, SYSTEM_INPUT } from "../design/tokens.ts";
 import {
+  activeTokenInput,
   buildReport,
   CHECKS,
   type CheckResult,
@@ -16,14 +21,25 @@ import {
   evalTapSize,
   evalTextContrast,
   exitCodeFor,
+  loadActiveTokens,
   parseArgs,
+  ReviewUnavailableError,
   renderReportMd,
   resolveBackground,
   slugRoute,
   type TextProbe,
+  tasteCopyResult,
+  tasteLayoutResult,
   toResult,
   undoMsysPathConversion,
 } from "./lib.ts";
+import {
+  assertTasteSkill,
+  mapCopyFindings,
+  mapLayoutFindings,
+  TASTE_IGNORED,
+  tasteProfile,
+} from "./taste.ts";
 
 const ctx = { width: 375, theme: "dark" as const, state: null };
 
@@ -393,5 +409,168 @@ describe("step-words", () => {
 
   it("passes a page with no step", () => {
     expect(evalStepWords([]).violated).toBe(false);
+  });
+});
+
+describe("taste layout mapping", () => {
+  const f = (rule: string) => ({ rule, where: "main", detail: "d" });
+  const raw = [
+    {
+      size: "375x812",
+      findings: [
+        "overflow-x",
+        "spill",
+        "edge-left",
+        "container",
+        "hero-fold",
+        "screen-short",
+        "neighbour-ground",
+        "lines",
+        "edge-right",
+      ].map(f),
+    },
+    { size: "1440x900", findings: [f("hero-fold"), f("photo-none")] },
+  ];
+
+  it("fails overflow-x and spill, warns the other app ids, ignores landing-page ids with a reason", () => {
+    const m = mapLayoutFindings(raw);
+    expect(m.fails.map((x) => x.rule)).toEqual(["overflow-x", "spill"]);
+    expect(m.warns.map((x) => x.rule)).toEqual(["lines", "edge-right"]);
+    expect(m.ignored.map((x) => x.id)).toEqual([
+      "container",
+      "edge-left",
+      "hero-fold",
+      "neighbour-ground",
+      "photo-none",
+      "screen-short",
+    ]);
+    for (const i of m.ignored) expect(i.reason).toBe("landing-page rule, not an app-screen rule");
+    expect(m.fails[0]?.size).toBe("375x812");
+  });
+
+  it("keeps an id outside the ignore list as a warning", () => {
+    expect(TASTE_IGNORED.some((re) => re.test("sparse"))).toBe(false);
+    expect(mapLayoutFindings([{ size: "x", findings: [f("sparse")] }]).warns).toHaveLength(1);
+  });
+
+  it("maps a clean checker run to nothing", () => {
+    expect(mapLayoutFindings([{ size: "375x812", findings: [] }])).toEqual({
+      fails: [],
+      warns: [],
+      ignored: [],
+    });
+  });
+});
+
+describe("copy-lint mapping", () => {
+  it("one FAIL and two WARN ids give one failure and two warnings; INFO is dropped", () => {
+    const m = mapCopyFindings({
+      files: [
+        {
+          findings: [
+            { sev: "FAIL", id: "copy-slop-word", count: 2, msg: "slop" },
+            { sev: "WARN", id: "copy-two-fragment", count: 1, msg: "fragments" },
+            { sev: "WARN", id: "copy-unread", msg: "unread" },
+            { sev: "INFO", id: "copy-contrast", count: 1, msg: "contrast" },
+          ],
+        },
+      ],
+    });
+    expect(m.fails.map((x) => x.id)).toEqual(["copy-slop-word"]);
+    expect(m.warns.map((x) => x.id)).toEqual(["copy-two-fragment", "copy-unread"]);
+    expect(m.warns[1]?.count).toBe(1);
+  });
+});
+
+describe("taste results in the report", () => {
+  const layout = (rules: string[]) => ({
+    command: "node check.mjs",
+    exitCode: rules.length > 0 ? 1 : 0,
+    findings: rules.map((rule) => ({ rule, where: "main", detail: "", size: "375x812" })),
+    ignored: [{ id: "hero-fold", reason: "landing-page rule, not an app-screen rule" }],
+  });
+
+  it("taste-layout fails for overflow-x, warns for lines, passes when clean", () => {
+    expect(tasteLayoutResult(layout(["overflow-x", "lines"]), "dark").status).toBe("fail");
+    expect(tasteLayoutResult(layout(["lines"]), "dark").status).toBe("warn");
+    expect(tasteLayoutResult(layout([]), "dark").status).toBe("pass");
+  });
+
+  it("taste-copy fails on FAIL ids, warns on WARN ids", () => {
+    const c = (fails: number, warns: number) => ({
+      command: "node copy-lint.mjs",
+      exitCode: fails > 0 ? 1 : 0,
+      fails: Array.from({ length: fails }, () => ({ id: "f", count: 1, msg: "m" })),
+      warns: Array.from({ length: warns }, () => ({ id: "w", count: 1, msg: "m" })),
+    });
+    expect(tasteCopyResult(c(1, 2), "dark").status).toBe("fail");
+    expect(tasteCopyResult(c(0, 2), "dark").status).toBe("warn");
+    expect(tasteCopyResult(c(0, 0), "dark").status).toBe("pass");
+  });
+
+  it("report.md lists each ignored taste id with its reason, and the table shows once-per-run checks under every width", () => {
+    const base = reportWith([
+      toResult("no-overflow", ctx, evalNoOverflow({ scrollWidth: 375, innerWidth: 375 })),
+    ]);
+    const withTaste = buildReport({
+      route: "/dev/x",
+      server: "dev",
+      url: "http://localhost:1/dev/x",
+      generatedAt: "2026-11-28T10:00:00.000Z",
+      tokensSha256: "abc",
+      widths: [375],
+      themes: ["dark"],
+      checks: [
+        ...base.checks.filter((c) => c.status !== "skipped"),
+        tasteLayoutResult(layout(["lines"]), "dark"),
+      ],
+      screenshots: [],
+      tasteSkill: {
+        layout: layout(["lines"]),
+        copy: { command: "c", exitCode: 0, fails: [], warns: [] },
+      },
+    });
+    const md = renderReportMd(withTaste);
+    expect(md).toContain("## Ignored taste ids");
+    expect(md).toContain("- hero-fold: landing-page rule, not an app-screen rule");
+    expect(md).toContain("| taste-layout | fail | warn |");
+    expect(withTaste.tasteSkill?.layout.command).toBe("node check.mjs");
+  });
+});
+
+describe("skill gate and active token set", () => {
+  it("assertTasteSkill throws a ReviewUnavailableError naming the skill folder when it is absent", () => {
+    const dir = mkdtempSync(join(tmpdir(), "tnk-skill-"));
+    expect(() => assertTasteSkill(dir)).toThrow(ReviewUnavailableError);
+    expect(() => assertTasteSkill(dir)).toThrow(".claude/skills/design-taste-frontend");
+  });
+
+  it("a /dev/directions/<id> route uses the direction file when it exists, else the system input", () => {
+    const dir = mkdtempSync(join(tmpdir(), "tnk-dir-"));
+    expect(activeTokenInput("/dev/directions/floodlit/data", dir)).toBe(SYSTEM_INPUT);
+    mkdirSync(join(dir, DIRECTION_DIR), { recursive: true });
+    writeFileSync(join(dir, DIRECTION_DIR, "floodlit.tokens.json"), "{}");
+    expect(activeTokenInput("/dev/directions/floodlit/data", dir)).toBe(
+      `${DIRECTION_DIR}/floodlit.tokens.json`,
+    );
+    expect(activeTokenInput("/dev/directions/floodlit", dir)).toBe(
+      `${DIRECTION_DIR}/floodlit.tokens.json`,
+    );
+    expect(activeTokenInput("/dev/pitch", dir)).toBe(SYSTEM_INPUT);
+  });
+
+  it("the repo's system input resolves to a primary theme", () => {
+    const doc = loadActiveTokens("/dev/pitch", process.cwd());
+    expect(["light", "dark"]).toContain(doc.meta.primaryTheme);
+  });
+});
+
+describe("taste profile folder", () => {
+  it("is a folder of its own under the git-ignored .taste-skill folder, new for every run", () => {
+    const a = tasteProfile(10, 1000);
+    expect(a.startsWith(".taste-skill/chrome-review-10-")).toBe(true);
+    expect(a).not.toContain("..");
+    expect(tasteProfile(10, 2000)).not.toBe(a);
+    expect(tasteProfile(11, 1000)).not.toBe(a);
   });
 });

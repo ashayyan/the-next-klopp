@@ -4,7 +4,14 @@
 // Vitest covers all of it in CI. The browser module collects the data; thresholds live here.
 // Erasable TypeScript only (run by `node` directly).
 
+import { existsSync } from "node:fs";
+import { join } from "node:path";
+import { loadTokens } from "../design/build-tokens.ts";
 import { composite, contrast, parseCssColor, toHex } from "../design/lib/color.ts";
+import { DIRECTION_DIR, SYSTEM_INPUT, type TokenDocument } from "../design/tokens.ts";
+
+/** The review cannot run (no server, no browser, no taste skill): the CLI exits 2. */
+export class ReviewUnavailableError extends Error {}
 
 export type Theme = "light" | "dark";
 export type Severity = "fail" | "warn";
@@ -126,6 +133,27 @@ export function parseArgs(argv: readonly string[]): ReviewArgs | { error: string
   if (!isSafeRoute(route)) return { error: ROUTE_ERROR };
   out.route = route;
   return out;
+}
+
+// ---------------------------------------------------------------- active token set
+
+const DIRECTION_ROUTE = /^\/dev\/directions\/([a-z0-9-]+)(?:[/?#]|$)/;
+
+/**
+ * The token file a route is reviewed against: a direction's own file for /dev/directions/<id>/...
+ * while that file exists, else the system input. Repo-relative path.
+ */
+export function activeTokenInput(route: string, root: string): string {
+  const id = DIRECTION_ROUTE.exec(route)?.[1];
+  if (id) {
+    const own = `${DIRECTION_DIR}/${id}.tokens.json`;
+    if (existsSync(join(root, own))) return own;
+  }
+  return SYSTEM_INPUT;
+}
+
+export function loadActiveTokens(route: string, root: string): TokenDocument {
+  return loadTokens(root, activeTokenInput(route, root));
 }
 
 // ---------------------------------------------------------------- check registry
@@ -534,6 +562,76 @@ export interface ScreenshotRecord {
   sha256: string;
 }
 
+export interface TasteLayoutFinding {
+  rule: string;
+  where: string;
+  detail: string;
+  size: string;
+}
+
+export interface TasteSkillBlock {
+  layout: {
+    command: string;
+    exitCode: number;
+    findings: TasteLayoutFinding[];
+    ignored: { id: string; reason: string }[];
+  };
+  copy: {
+    command: string;
+    exitCode: number;
+    fails: { id: string; count: number; msg: string }[];
+    warns: { id: string; count: number; msg: string }[];
+  };
+}
+
+const NO_BOX: Box = [0, 0, 0, 0];
+
+/** `taste-layout`: fail only for overflow-x and spill, warn for the other app-relevant ids. */
+export function tasteLayoutResult(block: TasteSkillBlock["layout"], theme: Theme): CheckResult {
+  const fails = block.findings.filter((f) => f.rule === "overflow-x" || f.rule === "spill");
+  const warns = block.findings.filter((f) => !fails.includes(f));
+  const offender = (f: TasteLayoutFinding): Offender => ({
+    selector: f.where,
+    text: "",
+    box: NO_BOX,
+    value: `${f.rule} at ${f.size}${f.detail ? `: ${f.detail}` : ""}`,
+  });
+  const def = checkDef("taste-layout");
+  return {
+    id: def.id,
+    source: def.source,
+    severity: def.severity,
+    width: null,
+    theme,
+    state: null,
+    status: fails.length > 0 ? "fail" : warns.length > 0 ? "warn" : "pass",
+    detail: `check.mjs: ${fails.length} fail, ${warns.length} warn, ${block.ignored.length} ignored id(s)`,
+    offenders: [...fails, ...warns].map(offender),
+  };
+}
+
+/** `taste-copy`: copy-lint FAIL ids fail, WARN ids warn. */
+export function tasteCopyResult(block: TasteSkillBlock["copy"], theme: Theme): CheckResult {
+  const def = checkDef("taste-copy");
+  const offender = (f: { id: string; count: number; msg: string }): Offender => ({
+    selector: f.id,
+    text: "",
+    box: NO_BOX,
+    value: `${f.count} x ${f.msg}`,
+  });
+  return {
+    id: def.id,
+    source: def.source,
+    severity: def.severity,
+    width: null,
+    theme,
+    state: null,
+    status: block.fails.length > 0 ? "fail" : block.warns.length > 0 ? "warn" : "pass",
+    detail: `copy-lint: ${block.fails.length} fail, ${block.warns.length} warn`,
+    offenders: [...block.fails, ...block.warns].map(offender),
+  };
+}
+
 export interface ReportInput {
   route: string;
   server: "dev" | "preview";
@@ -544,6 +642,7 @@ export interface ReportInput {
   themes: Theme[];
   checks: CheckResult[];
   screenshots: ScreenshotRecord[];
+  tasteSkill?: TasteSkillBlock | null;
 }
 
 export interface ReviewReport {
@@ -559,7 +658,7 @@ export interface ReviewReport {
   counts: Record<Status, number>;
   checks: CheckResult[];
   screenshots: ScreenshotRecord[];
-  tasteSkill: null;
+  tasteSkill: TasteSkillBlock | null;
   reviewer: { status: "pending"; by: null; notes: null };
 }
 
@@ -594,7 +693,7 @@ export function buildReport(input: ReportInput): ReviewReport {
     counts,
     checks,
     screenshots: input.screenshots,
-    tasteSkill: null,
+    tasteSkill: input.tasteSkill ?? null,
     reviewer: { status: "pending", by: null, notes: null },
   };
 }
@@ -625,8 +724,10 @@ export function renderReportMd(report: ReviewReport): string {
   lines.push(`| --- | --- | ${widths.map(() => "---").join(" | ")} |`);
   for (const def of CHECKS) {
     const rows = report.checks.filter((c) => c.id === def.id);
+    // A check that runs once per review (width null) shows its status under every width.
+    const once = rows.filter((r) => r.width === null && r.status !== "skipped");
     const cells = widths.map((w) => {
-      const s = worst(rows.filter((r) => r.width === w));
+      const s = worst(once.length > 0 ? once : rows.filter((r) => r.width === w));
       return s === null ? "-" : s;
     });
     const allSkipped = rows.every((r) => r.status === "skipped");
@@ -649,6 +750,12 @@ export function renderReportMd(report: ReviewReport): string {
       if (c.offenders.length > 20) lines.push(`- and ${c.offenders.length - 20} more`);
       lines.push("");
     }
+  }
+  if (report.tasteSkill) {
+    lines.push("## Ignored taste ids", "");
+    if (report.tasteSkill.layout.ignored.length === 0) lines.push("None.");
+    for (const i of report.tasteSkill.layout.ignored) lines.push(`- ${i.id}: ${i.reason}`);
+    lines.push("");
   }
   lines.push("## Screenshots", "");
   for (const s of report.screenshots) lines.push(`- ${s.path}`);

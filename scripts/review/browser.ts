@@ -21,6 +21,7 @@ import {
   evalTextContrast,
   type HeadingProbe,
   heightFor,
+  ReviewUnavailableError,
   type ScreenshotRecord,
   type StepProbe,
   type TapTarget,
@@ -31,8 +32,6 @@ import {
 
 export const DEV_PORT = 5173;
 export const PREVIEW_PORT = 4173;
-
-export class ReviewUnavailableError extends Error {}
 
 // ---------------------------------------------------------------- server
 
@@ -334,11 +333,15 @@ export interface CaptureInput {
   themes: Theme[];
   states: string[];
   outDir: string;
+  /** The theme whose capture supplies the visible text for copy-lint. */
+  primaryTheme: Theme;
 }
 
 export interface CaptureOutput {
   screenshots: ScreenshotRecord[];
   results: CheckResult[];
+  /** Visible text of the primary-theme capture at 1440 (else the widest), for copy-lint. */
+  copyText: string;
 }
 
 const stateSlug = (state: string): string =>
@@ -347,7 +350,7 @@ const stateSlug = (state: string): string =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
 
-function urlFor(base: string, route: string, theme: Theme, state: string | null): string {
+export function urlFor(base: string, route: string, theme: Theme, state: string | null): string {
   const url = new URL(route, base);
   url.searchParams.set("theme", theme);
   if (state) {
@@ -361,6 +364,11 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
   const screenshots: ScreenshotRecord[] = [];
   const results: CheckResult[] = [];
   const states: (string | null)[] = [null, ...input.states];
+  let copyText = "";
+  const copyTheme = input.themes.includes(input.primaryTheme)
+    ? input.primaryTheme
+    : input.themes[0];
+  const copyWidth = input.widths.includes(1440) ? 1440 : Math.max(...input.widths);
   for (const theme of input.themes) {
     for (const width of input.widths) {
       for (const state of states) {
@@ -400,6 +408,9 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
             sha256: createHash("sha256").update(bytes).digest("hex"),
           });
 
+          if (theme === copyTheme && width === copyWidth && state === null) {
+            copyText = await page.evaluate(() => document.body.innerText);
+          }
           const data = await page.evaluate(collectPage);
           const ctx = { width, theme, state };
           results.push(
@@ -433,7 +444,7 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
       }
     }
   }
-  return { screenshots, results };
+  return { screenshots, results, copyText };
 }
 
 export function tokensHash(root: string): string {
