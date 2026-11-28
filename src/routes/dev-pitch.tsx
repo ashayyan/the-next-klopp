@@ -1,5 +1,7 @@
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router";
+import { useStore } from "zustand";
+import type { StoreApi } from "zustand/vanilla";
 import { CanvasLayer } from "../pitch/CanvasLayer.tsx";
 import { drawDensity, SceneLayer } from "../pitch/glyphs/SceneLayer.tsx";
 import { describeScene } from "../pitch/legend/glyphIds.ts";
@@ -7,7 +9,10 @@ import { Legend } from "../pitch/legend/Legend.tsx";
 import { Pitch } from "../pitch/Pitch.tsx";
 import { autoOrientation, type Orientation } from "../pitch/view.ts";
 import { DEV_SCENES, FALLBACK_SCENE_ID, findDevScene } from "../scene/fixtures/index.ts";
+import { markCommitted, startPlaybackLoop } from "../scene/playback/loop.ts";
+import { PlaybackBar } from "../scene/playback/PlaybackBar.tsx";
 import { sceneDuration } from "../scene/playback/sample.ts";
+import { createPlaybackStore, type PlaybackState } from "../scene/playback/store.ts";
 import type { Scene } from "../scene/schema.ts";
 import { parseScene, type SceneIssue } from "../scene/validate.ts";
 
@@ -43,6 +48,18 @@ const control = `min-h-11 w-full rounded-sm border border-control-border bg-surf
 
 function formatMetres(n: number): string {
   return n.toFixed(2);
+}
+
+/** Draws the scene at the clock's time; subscribes to `t` and `motion` only. */
+function PlaybackLayer({ scene, store }: { scene: Scene; store: StoreApi<PlaybackState> }) {
+  const t = useStore(store, (s) => s.t);
+  const motion = useStore(store, (s) => s.motion);
+  // Marks the end of this frame's work for the frame statistics (03-07, measured in 03-11).
+  // biome-ignore lint/correctness/useExhaustiveDependencies: runs once per committed t on purpose
+  useLayoutEffect(() => {
+    markCommitted();
+  }, [t]);
+  return <SceneLayer scene={scene} t={t} mode={motion} />;
 }
 
 export default function DevPitchPage() {
@@ -121,6 +138,14 @@ export default function DevPitchPage() {
   const hasEvents = (scene?.events.length ?? 0) > 0;
   const densityOn = hasEvents && (densityChoice[activeId] ?? true);
   const draw = useMemo(() => (scene ? drawDensity(scene) : null), [scene]);
+
+  // One clock per loaded scene, never autoplaying; a still scene (1 frame) has no clock.
+  const store = useMemo(
+    () =>
+      scene && scene.frames.length > 1 ? createPlaybackStore(scene, { motion: "smooth" }) : null,
+    [scene],
+  );
+  useEffect(() => (store ? startPlaybackLoop(store) : undefined), [store]);
   const orientation: Orientation = choice === "auto" ? autoOrientation(stageWidth) : choice;
   const onPitch =
     pointer !== null &&
@@ -261,7 +286,8 @@ export default function DevPitchPage() {
             canvas={densityOn && draw ? <CanvasLayer draw={draw} /> : undefined}
             onPointerCanonical={setPointer}
           >
-            {scene ? <SceneLayer scene={scene} t={0} mode="smooth" /> : null}
+            {scene && store ? <PlaybackLayer scene={scene} store={store} /> : null}
+            {scene && !store ? <SceneLayer scene={scene} t={0} mode="smooth" /> : null}
           </Pitch>
           <div className="mt-2 flex flex-col gap-1 text-sm text-ink-muted">
             {unknownId !== null ? (
@@ -273,6 +299,7 @@ export default function DevPitchPage() {
               <p>{`Source: ${source.attribution} · Licence: ${source.licence}${source.localOnly ? " · Local only, not shipped" : ""}`}</p>
             ) : null}
           </div>
+          {store ? <PlaybackBar store={store} /> : null}
         </section>
 
         <aside className="flex min-w-0 flex-col gap-4 md:gap-6">

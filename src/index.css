@@ -10,6 +10,7 @@
   --surface-page: #f7f7f4;
   --surface-panel: #ecede8;
   --accent: #00745a;
+  --accent-ink: #ffffff;
   --danger: #b3261e;
   --ink: #1a1a1a;
   --ink-muted: #5e625f;
@@ -60,6 +61,7 @@
   --color-surface-page: var(--surface-page);
   --color-surface-panel: var(--surface-panel);
   --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
   --color-danger: var(--danger);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
