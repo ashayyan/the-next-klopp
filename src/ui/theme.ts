@@ -68,3 +68,33 @@ export function resolveTheme({
   if (primary) return primary;
   return prefersDark ? "dark" : "light";
 }
+
+/** The part of `document.documentElement` the theme touches; a plain object in unit tests. */
+export interface ThemeRoot {
+  dataset: Record<string, string | undefined>;
+}
+
+export interface ApplyThemeOptions {
+  root?: ThemeRoot | null;
+  storage?: ThemeStorage | null;
+}
+
+function defaultRoot(): ThemeRoot | null {
+  return typeof document === "undefined" ? null : document.documentElement;
+}
+
+/**
+ * Applies and remembers the learner's theme choice for the whole app: "light" or "dark" sets
+ * `data-theme` on the html element, "system" removes it so the `prefers-color-scheme` block of
+ * tokens.css applies. The same rule as the inline script in index.html, which applies a stored
+ * choice before first paint. A blocked storage only loses persistence; the attribute still changes.
+ */
+export function applyDocumentTheme(
+  choice: ThemeChoice,
+  { root = defaultRoot(), storage = defaultStorage() }: ApplyThemeOptions = {},
+): void {
+  writeStoredTheme(choice, storage);
+  if (!root) return;
+  if (choice === "light" || choice === "dark") root.dataset.theme = choice;
+  else delete root.dataset.theme;
+}

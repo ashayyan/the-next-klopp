@@ -1,10 +1,20 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+import { loadTokens } from "../../scripts/design/build-tokens.ts";
+import { SYSTEM_INPUT } from "../../scripts/design/tokens.ts";
 import { DataTable } from "./data/DataTable.tsx";
 import { StatCard } from "./data/StatCard.tsx";
 import { ShellBar } from "./lesson/ShellBar.tsx";
 import { LESSON_LOOP_STEPS, StepRail } from "./lesson/StepRail.tsx";
-import { readStoredTheme, resolveTheme, THEME_KEY, writeStoredTheme } from "./theme.ts";
+import {
+  applyDocumentTheme,
+  readStoredTheme,
+  resolveTheme,
+  THEME_KEY,
+  writeStoredTheme,
+} from "./theme.ts";
 
 const count = (html: string, needle: string) => html.split(needle).length - 1;
 
@@ -114,6 +124,76 @@ describe("theme storage", () => {
 
   it("swallows a throwing setItem", () => {
     expect(() => writeStoredTheme("light", throwingStorage)).not.toThrow();
+  });
+});
+
+describe("applyDocumentTheme", () => {
+  const fakeRoot = (theme?: string) => {
+    const dataset: Record<string, string | undefined> = {};
+    if (theme !== undefined) dataset.theme = theme;
+    return { dataset };
+  };
+
+  it('sets data-theme="dark" on the html element and stores dark', () => {
+    const root = fakeRoot();
+    const storage = memoryStorage();
+    applyDocumentTheme("dark", { root, storage });
+    expect(root.dataset.theme).toBe("dark");
+    expect(storage.data.get("tnk:theme")).toBe("dark");
+  });
+
+  it("removes the attribute for system and stores system", () => {
+    const root = fakeRoot("light");
+    const storage = memoryStorage({ "tnk:theme": "light" });
+    applyDocumentTheme("system", { root, storage });
+    expect("theme" in root.dataset).toBe(false);
+    expect(storage.data.get("tnk:theme")).toBe("system");
+  });
+
+  it("still sets the attribute and throws nothing when setItem throws", () => {
+    const root = fakeRoot();
+    expect(() => applyDocumentTheme("light", { root, storage: throwingStorage })).not.toThrow();
+    expect(root.dataset.theme).toBe("light");
+  });
+});
+
+describe("index.html theme script and font preload", () => {
+  const root = join(import.meta.dirname, "..", "..");
+  const html = readFileSync(join(root, "index.html"), "utf8");
+  const head = html.slice(0, html.indexOf("</head>"));
+
+  it("runs one classic inline script in <head>, before the module script, with the same key", () => {
+    const inline = [...head.matchAll(/<script>([\s\S]*?)<\/script>/g)].map((m) => m[1] ?? "");
+    expect(inline).toHaveLength(1);
+    const body = inline[0] as string;
+    expect(body).toContain(`localStorage.getItem("${THEME_KEY}")`);
+    expect(body).toMatch(/try\s*{/);
+    expect(body).toMatch(/catch/);
+    expect(body).toContain(`stored === "light" || stored === "dark"`);
+    expect(body).not.toMatch(/innerHTML|eval\(|document\.write/);
+    expect(html.indexOf("<script>")).toBeLessThan(html.indexOf(`<script type="module"`));
+  });
+
+  it("preloads exactly the display and body font files of the DESIGN.md tokens block", () => {
+    const doc = loadTokens(root, SYSTEM_INPUT);
+    const filesOf = (family: string) =>
+      Object.values(doc.font)
+        .filter((leaf) => leaf.$value[0] === family)
+        .flatMap((leaf) => leaf.$extensions?.tnk.files ?? [])
+        .map((f) => f.src);
+    const expected = new Set([
+      ...filesOf(doc.font.display.$value[0] as string),
+      ...filesOf(doc.font.sans.$value[0] as string),
+    ]);
+    const preloads = [...head.matchAll(/<link\s[^>]*rel="preload"[^>]*>/g)].map((m) => m[0]);
+    const hrefs = preloads.map((l) => /href="([^"]+)"/.exec(l)?.[1]);
+    expect(new Set(hrefs)).toEqual(expected);
+    expect(hrefs).toHaveLength(expected.size);
+    for (const link of preloads) {
+      expect(link).toContain(`as="font"`);
+      expect(link).toContain(`type="font/woff2"`);
+      expect(link).toContain("crossorigin");
+    }
   });
 });
 

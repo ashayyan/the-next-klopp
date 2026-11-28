@@ -4,6 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Next Klopp</title>
+    <!--
+      Theme before first paint: a stored "light" or "dark" sets data-theme on <html>; anything else,
+      or a blocked storage, sets nothing so tokens.css follows prefers-color-scheme. The value is only
+      compared with two literals, never written into the page. Same key and values as src/ui/theme.ts.
+    -->
+    <script>
+      try {
+        const stored = window.localStorage.getItem("tnk:theme");
+        if (stored === "light" || stored === "dark") {
+          document.documentElement.dataset.theme = stored;
+        }
+      } catch (_) {}
+    </script>
+    <!-- Display and body share one Mona Sans variable file (docs/DESIGN.md section 3.2). -->
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      crossorigin
+      href="/fonts/mona-sans/mona-sans-latin-wdth-normal.woff2"
+    />
   </head>
   <body>
     <div id="root"></div>
