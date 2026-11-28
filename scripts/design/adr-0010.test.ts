@@ -46,7 +46,7 @@ type Gate = { G1: string; G2: string; G3: string };
 function gates(): Map<string, Gate> {
   const out = new Map<string, Gate>();
   for (const row of tableAfter(/^\| Direction \|.*\| G1 \| G2 \| G3 \|$/)) {
-    const [id, , g1, g2, g3] = row;
+    const [id = "", , g1 = "", g2 = "", g3 = ""] = row;
     out.set(id.replace(/`/g, ""), { G1: g1, G2: g2, G3: g3 });
   }
   return out;
@@ -70,11 +70,12 @@ function scores(): Map<string, Map<string, number>> {
   const byDir = new Map<string, Map<string, number>>();
   for (const d of DIRECTIONS) byDir.set(d, new Map());
   for (const row of scoreRows()) {
-    const [, name, , ...values] = row;
+    const [, name = "", , ...values] = row;
     if (name === "Total") continue;
     DIRECTIONS.forEach((d, i) => {
-      const n = Number(values[i]);
-      if (Number.isInteger(n)) byDir.get(d)?.set(name, n);
+      const cell = values[i] ?? "";
+      const n = Number(cell);
+      if (cell !== "" && Number.isInteger(n)) byDir.get(d)?.set(name, n);
     });
   }
   return byDir;
@@ -97,7 +98,7 @@ function winner(): string {
       (s.get(b)?.get("ADHD calm and focus") ?? 0) - (s.get(a)?.get("ADHD calm and focus") ?? 0) ||
       total(b) - total(a),
   );
-  return contenders[0];
+  return contenders[0] ?? "";
 }
 
 describe("ADR 0010: gates and evidence", () => {
@@ -152,7 +153,7 @@ describe("ADR 0010: scores, totals and the pick", () => {
         const score = s.get(d)?.get(name);
         expect(score, `${d} ${name}`).toBeGreaterThanOrEqual(1);
         expect(score, `${d} ${name}`).toBeLessThanOrEqual(4);
-        const row = evidence.find((r) => r[0] === name && r[1].replace(/`/g, "") === d);
+        const row = evidence.find((r) => r[0] === name && (r[1] ?? "").replace(/`/g, "") === d);
         expect(row, `evidence for ${d} ${name}`).toBeDefined();
         expect(Number(row?.[2]), `evidence score for ${d} ${name}`).toBe(score);
         expect((row?.[3] ?? "").length, `evidence text for ${d} ${name}`).toBeGreaterThan(20);
@@ -179,7 +180,7 @@ describe("ADR 0010: scores, totals and the pick", () => {
   it("names the highest total after the tie-break as the pick", () => {
     const picked = lines.filter((l) => l.startsWith("Picked: "));
     expect(picked).toHaveLength(1);
-    expect(picked[0].replace("Picked: ", "").replace(/`/g, "").trim()).toBe(winner());
+    expect((picked[0] ?? "").replace("Picked: ", "").replace(/`/g, "").trim()).toBe(winner());
   });
 
   it("carries the delegation line verbatim, once", () => {
