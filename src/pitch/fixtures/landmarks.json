@@ -171,6 +171,772 @@
       },
       "input": [0.0, 44.0],
       "expected": [0.0, 37.66]
+    },
+    {
+      "provider": "opta",
+      "name": "centre spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [50.0, 50.0],
+      "expected": [52.5, 34.0]
+    },
+    {
+      "provider": "opta",
+      "name": "left penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [11.5, 50.0],
+      "expected": [11.0, 34.0]
+    },
+    {
+      "provider": "opta",
+      "name": "right penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [88.5, 50.0],
+      "expected": [94.0, 34.0]
+    },
+    {
+      "provider": "opta",
+      "name": "left penalty-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [17.0, 78.9],
+      "expected": [16.5, 13.839999999999996]
+    },
+    {
+      "provider": "opta",
+      "name": "left penalty-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [17.0, 21.1],
+      "expected": [16.5, 54.16]
+    },
+    {
+      "provider": "opta",
+      "name": "right penalty-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [83.0, 78.9],
+      "expected": [88.5, 13.839999999999996]
+    },
+    {
+      "provider": "opta",
+      "name": "right penalty-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [83.0, 21.1],
+      "expected": [88.5, 54.16]
+    },
+    {
+      "provider": "opta",
+      "name": "left goal-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [5.8, 63.2],
+      "expected": [5.5, 24.840000000000003]
+    },
+    {
+      "provider": "opta",
+      "name": "left goal-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [5.8, 36.8],
+      "expected": [5.5, 43.16]
+    },
+    {
+      "provider": "opta",
+      "name": "right goal-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [94.2, 63.2],
+      "expected": [99.5, 24.840000000000003]
+    },
+    {
+      "provider": "opta",
+      "name": "right goal-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [94.2, 36.8],
+      "expected": [99.5, 43.16]
+    },
+    {
+      "provider": "opta",
+      "name": "corner flag, top-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 100.0],
+      "expected": [0.0, 0.0]
+    },
+    {
+      "provider": "opta",
+      "name": "corner flag, bottom-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 0.0],
+      "expected": [0.0, 68.0]
+    },
+    {
+      "provider": "opta",
+      "name": "corner flag, top-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [100.0, 100.0],
+      "expected": [105.0, 0.0]
+    },
+    {
+      "provider": "opta",
+      "name": "corner flag, bottom-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [100.0, 0.0],
+      "expected": [105.0, 68.0]
+    },
+    {
+      "provider": "wyscout",
+      "name": "centre spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [50.0, 50.0],
+      "expected": [52.5, 34.0]
+    },
+    {
+      "provider": "wyscout",
+      "name": "left penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [10.0, 50.0],
+      "expected": [11.0, 34.0]
+    },
+    {
+      "provider": "wyscout",
+      "name": "right penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [90.0, 50.0],
+      "expected": [94.0, 34.0]
+    },
+    {
+      "provider": "wyscout",
+      "name": "left penalty-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [16.0, 19.0],
+      "expected": [16.5, 13.84]
+    },
+    {
+      "provider": "wyscout",
+      "name": "left penalty-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [16.0, 81.0],
+      "expected": [16.5, 54.16]
+    },
+    {
+      "provider": "wyscout",
+      "name": "right penalty-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [84.0, 19.0],
+      "expected": [88.5, 13.84]
+    },
+    {
+      "provider": "wyscout",
+      "name": "right penalty-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [84.0, 81.0],
+      "expected": [88.5, 54.16]
+    },
+    {
+      "provider": "wyscout",
+      "name": "left goal-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [6.0, 37.0],
+      "expected": [5.5, 24.84]
+    },
+    {
+      "provider": "wyscout",
+      "name": "left goal-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [6.0, 63.0],
+      "expected": [5.5, 43.16]
+    },
+    {
+      "provider": "wyscout",
+      "name": "right goal-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [94.0, 37.0],
+      "expected": [99.5, 24.84]
+    },
+    {
+      "provider": "wyscout",
+      "name": "right goal-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [94.0, 63.0],
+      "expected": [99.5, 43.16]
+    },
+    {
+      "provider": "wyscout",
+      "name": "corner flag, top-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 0.0],
+      "expected": [0.0, 0.0]
+    },
+    {
+      "provider": "wyscout",
+      "name": "corner flag, bottom-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 100.0],
+      "expected": [0.0, 68.0]
+    },
+    {
+      "provider": "wyscout",
+      "name": "corner flag, top-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [100.0, 0.0],
+      "expected": [105.0, 0.0]
+    },
+    {
+      "provider": "wyscout",
+      "name": "corner flag, bottom-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [100.0, 100.0],
+      "expected": [105.0, 68.0]
+    },
+    {
+      "provider": "tracab",
+      "name": "centre spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 0.0],
+      "expected": [52.5, 34.0]
+    },
+    {
+      "provider": "tracab",
+      "name": "left penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-4150.0, 0.0],
+      "expected": [11.0, 34.0]
+    },
+    {
+      "provider": "tracab",
+      "name": "right penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [4150.0, 0.0],
+      "expected": [94.0, 34.0]
+    },
+    {
+      "provider": "tracab",
+      "name": "left penalty-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-3600.0, 2016.0],
+      "expected": [16.5, 13.840000000000003]
+    },
+    {
+      "provider": "tracab",
+      "name": "corner flag, bottom-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-5250.0, -3400.0],
+      "expected": [0.0, 68.0]
+    },
+    {
+      "provider": "tracab",
+      "name": "corner flag, top-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [5250.0, 3400.0],
+      "expected": [105.0, 0.0]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "centre spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 0.0],
+      "expected": [52.5, 34.0]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "left penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-41.5, 0.0],
+      "expected": [11.0, 34.0]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "right penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [41.5, 0.0],
+      "expected": [94.0, 34.0]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "left penalty-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-36.0, 20.16],
+      "expected": [16.5, 13.840000000000003]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "corner flag, bottom-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-52.5, -34.0],
+      "expected": [0.0, 68.0]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "corner flag, top-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [52.5, 34.0],
+      "expected": [105.0, 0.0]
+    },
+    {
+      "provider": "metrica",
+      "name": "centre spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.5, 0.5],
+      "expected": [52.5, 34.0]
+    },
+    {
+      "provider": "metrica",
+      "name": "left penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.10476190476190476, 0.5],
+      "expected": [11.0, 34.0]
+    },
+    {
+      "provider": "metrica",
+      "name": "corner flag, top-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 0.0],
+      "expected": [0.0, 0.0]
+    },
+    {
+      "provider": "metrica",
+      "name": "corner flag, bottom-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [1.0, 1.0],
+      "expected": [105.0, 68.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "asymmetry: near left spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [14.0, 40.0],
+      "expected": [12.833333333333334, 34.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "asymmetry: near right spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [106.0, 40.0],
+      "expected": [92.16666666666667, 34.0]
+    },
+    {
+      "provider": "opta",
+      "name": "asymmetry: left, top (y flips)",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [20.0, 80.0],
+      "expected": [19.720588235294116, 13.118483412322277]
+    },
+    {
+      "provider": "opta",
+      "name": "asymmetry: left, bottom (y flips)",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [20.0, 20.0],
+      "expected": [19.720588235294116, 54.88151658767772]
+    },
+    {
+      "provider": "wyscout",
+      "name": "asymmetry: left, bottom (no y flip)",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [20.0, 80.0],
+      "expected": [22.388770281810416, 53.54888888888889]
+    },
+    {
+      "provider": "wyscout",
+      "name": "asymmetry: left, top (no y flip)",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [20.0, 20.0],
+      "expected": [22.388770281810416, 14.45111111111111]
+    },
+    {
+      "provider": "tracab",
+      "name": "asymmetry: left half, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-3000.0, 2000.0],
+      "expected": [22.5, 14.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "fulham: left penalty spot",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [12.0, 40.0],
+      "expected": [11.0, 32.5]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "fulham: right penalty spot",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [108.0, 40.0],
+      "expected": [89.0, 32.5]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "fulham: left penalty-area corner, top",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [18.0, 18.0],
+      "expected": [16.5, 12.34]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "fulham: right penalty-area corner, bottom",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [102.0, 62.0],
+      "expected": [83.5, 52.66]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "fulham: corner flag, bottom-right",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [120.0, 80.0],
+      "expected": [100.0, 65.0]
+    },
+    {
+      "provider": "opta",
+      "name": "fulham: left penalty spot",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [11.5, 50.0],
+      "expected": [11.0, 32.5]
+    },
+    {
+      "provider": "opta",
+      "name": "fulham: right penalty spot",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [88.5, 50.0],
+      "expected": [89.0, 32.5]
+    },
+    {
+      "provider": "opta",
+      "name": "fulham: left penalty-area corner, top",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [17.0, 78.9],
+      "expected": [16.5, 12.339999999999996]
+    },
+    {
+      "provider": "wyscout",
+      "name": "fulham: left penalty spot",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [10.0, 50.0],
+      "expected": [11.0, 32.5]
+    },
+    {
+      "provider": "wyscout",
+      "name": "fulham: right penalty spot",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [90.0, 50.0],
+      "expected": [89.0, 32.5]
+    },
+    {
+      "provider": "wyscout",
+      "name": "fulham: left penalty-area corner, top",
+      "targetPitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [16.0, 19.0],
+      "expected": [16.5, 12.34]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "100x65 source: centre spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "sourcePitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [0.0, 0.0],
+      "expected": [52.5, 34.0]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "100x65 source: left penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "sourcePitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [-39.0, 0.0],
+      "expected": [11.0, 34.0]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "100x65 source: corner flag, bottom-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "sourcePitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [-50.0, -32.5],
+      "expected": [0.0, 68.0]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "100x65 source: corner flag, top-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "sourcePitch": {
+        "length": 100.0,
+        "width": 65.0
+      },
+      "input": [50.0, 32.5],
+      "expected": [105.0, 0.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "run-off: before top-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-2.0, -2.0],
+      "expected": [-1.75, -1.7]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "run-off: beyond bottom-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [122.0, 82.0],
+      "expected": [106.75, 69.7]
+    },
+    {
+      "provider": "opta",
+      "name": "run-off: before bottom-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-2.0, -2.0],
+      "expected": [-2.1, 69.36]
+    },
+    {
+      "provider": "opta",
+      "name": "run-off: beyond top-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [102.0, 102.0],
+      "expected": [107.1, -1.3599999999999994]
+    },
+    {
+      "provider": "wyscout",
+      "name": "run-off: before top-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-2.0, -2.0],
+      "expected": [-2.1, -1.36]
+    },
+    {
+      "provider": "wyscout",
+      "name": "run-off: beyond bottom-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [102.0, 102.0],
+      "expected": [107.1, 69.36]
+    },
+    {
+      "provider": "tracking-metres",
+      "name": "run-off: behind the left goal line",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [-55.5, 0.0],
+      "expected": [-3.0, 34.0]
     }
   ]
 }
