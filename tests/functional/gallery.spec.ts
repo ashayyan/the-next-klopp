@@ -178,3 +178,84 @@ test.describe("index, fallbacks and foundations", () => {
     );
   });
 });
+
+test.describe("pitch and interactions", () => {
+  test("playback shows three bars and the still scene without one", async ({ page }) => {
+    await page.goto("/dev/gallery/playback?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    await expect(page.locator('[role="toolbar"][aria-label="Playback"]')).toHaveCount(3);
+    await expect(page.getByText("Still scene — 1 frame")).toBeVisible();
+    await expect(
+      page.locator('[data-gallery-state="playback/still"] [role="toolbar"]'),
+    ).toHaveCount(0);
+    await expect(
+      page.locator('[data-gallery-state="playback/at-end"]').getByRole("button", {
+        name: "Replay sequence",
+      }),
+    ).toBeVisible();
+    await expect(
+      page.locator('[data-gallery-state="playback/playing"]').getByRole("button", {
+        name: "Pause sequence",
+      }),
+    ).toBeVisible();
+  });
+
+  test("the empty legend explains itself", async ({ page }) => {
+    await page.goto("/dev/gallery/legend?bare=1&theme=light");
+    await expect(
+      page.locator('[data-gallery-state="legend/empty"]').getByText("No marks to explain yet."),
+    ).toBeVisible();
+  });
+
+  for (const theme of ["light", "dark"]) {
+    test(`the glyph sheet draws team B discs, ring and hollow arrowheads in the ${theme} theme`, async ({
+      page,
+    }) => {
+      await page.goto(`/dev/gallery/glyphs?bare=1&theme=${theme}`);
+      await expect(page.locator('[data-ready="1"]')).toBeAttached();
+      const sheet = page.locator('[data-gallery-state="glyphs/team-b"]');
+      const pitch = sheet.locator("[data-pitch]");
+      await expect(pitch.locator('[data-glyph="player-b"]').first()).toBeVisible();
+      await expect(pitch.locator('[data-glyph="goalkeeper-b"]')).toHaveCount(1);
+      // Team B's arrowheads are hollow with a 2 px stroke; team A's are filled.
+      const heads = pitch.locator('[data-part="arrowhead"]');
+      await expect(heads).not.toHaveCount(0);
+      for (const head of await heads.all()) {
+        await expect(head).toHaveAttribute("fill", "none");
+      }
+      const legend = sheet.locator("[data-legend]");
+      await expect(legend.locator('[data-legend-entry="player-b"]')).toBeVisible();
+      // Team A's sheet carries all the shared marks and the Canvas density layer.
+      const a = page.locator('[data-gallery-state="glyphs/team-a"]');
+      await expect(a.locator("canvas")).toHaveCount(1);
+      await expect(a.locator('[data-legend-entry="density"]')).toBeVisible();
+    });
+  }
+
+  test("the drag states force the focus ring and the ghost", async ({ page }) => {
+    await page.goto("/dev/gallery/drag?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    const focused = page.locator('[data-gallery-state="drag/focused"]');
+    await expect(focused.locator('[data-entity="home-8"]')).toHaveAttribute(
+      "data-state",
+      "focus-visible",
+    );
+    await expect(focused.locator('[data-entity="home-8"] [data-focus-ring]').first()).toBeVisible();
+    await expect(
+      page.locator('[data-gallery-state="drag/dragging"] [data-ghost="home-8"]'),
+    ).toHaveCount(1);
+  });
+
+  test("the converter probe shows idle, a valid conversion and a range error", async ({ page }) => {
+    await page.goto("/dev/gallery/converter-probe?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    await expect(
+      page.locator('[data-gallery-state="converter-probe/idle"] [data-readout="probe"]'),
+    ).toHaveText("Enter provider coordinates to convert");
+    await expect(
+      page.locator('[data-gallery-state="converter-probe/valid"] [data-readout="probe"]'),
+    ).toContainText("Canonical x");
+    const error = page.locator('[data-gallery-state="converter-probe/range-error"] .text-danger');
+    await expect(error).toBeVisible();
+  });
+});

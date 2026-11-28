@@ -7,6 +7,14 @@ import {
   SpaceRadiusDemo,
   TypeDemo,
 } from "./demos/foundations.tsx";
+import {
+  ConverterProbeDemo,
+  DragDemo,
+  GlyphsDemo,
+  LegendDemo,
+  PitchDemo,
+  PlaybackDemo,
+} from "./demos/pitch.tsx";
 
 // The gallery's primitive registry. A URL `:primitiveId` is only ever looked up here by id
 // (findPrimitive); it is never used as a path or an import specifier (threat T-04-26).
@@ -32,6 +40,11 @@ export interface Primitive {
   states: readonly string[];
   /** Draws one state. The matrix wraps it in a StateCell. */
   Demo: ComponentType<{ state: string }>;
+  /**
+   * The state needs room (a pitch with its bar): the matrix uses one column below 1280 px and two
+   * from there, so a cell is never narrower than about 680 px next to a wide viewport's media queries.
+   */
+  wide?: boolean;
 }
 
 export const GALLERY: readonly Primitive[] = [
@@ -76,6 +89,51 @@ export const GALLERY: readonly Primitive[] = [
     label: "Button",
     states: ["default", "hover", "focus-visible", "pressed", "disabled", "loading"],
     Demo: ButtonDemo,
+  },
+  {
+    id: "pitch",
+    group: "Pitch",
+    label: "Pitch",
+    states: ["horizontal", "vertical", "100x65", "density"],
+    Demo: PitchDemo,
+  },
+  {
+    id: "glyphs",
+    group: "Pitch",
+    label: "Glyphs",
+    states: ["team-a", "team-b"],
+    Demo: GlyphsDemo,
+    wide: true,
+  },
+  {
+    id: "legend",
+    group: "Pitch",
+    label: "Legend",
+    states: ["expanded", "collapsed", "empty"],
+    Demo: LegendDemo,
+  },
+  {
+    id: "playback",
+    group: "Interactions",
+    label: "Playback",
+    states: ["paused", "playing", "at-end", "still"],
+    Demo: PlaybackDemo,
+    wide: true,
+  },
+  {
+    id: "drag",
+    group: "Interactions",
+    label: "Drag",
+    states: ["board", "focused", "dragging"],
+    Demo: DragDemo,
+    wide: true,
+  },
+  {
+    id: "converter-probe",
+    group: "Interactions",
+    label: "Converter probe",
+    states: ["idle", "valid", "range-error"],
+    Demo: ConverterProbeDemo,
   },
 ];
 

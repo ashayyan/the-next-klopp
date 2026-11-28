@@ -59,6 +59,7 @@ body {
 [data-draggable] [data-focus-ring] {
   visibility: hidden;
 }
-[data-draggable]:focus-visible [data-focus-ring] {
+[data-draggable]:focus-visible [data-focus-ring],
+[data-draggable][data-state~="focus-visible"] [data-focus-ring] {
   visibility: visible;
 }

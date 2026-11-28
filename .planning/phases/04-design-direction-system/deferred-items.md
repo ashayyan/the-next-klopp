@@ -23,3 +23,16 @@ gaps. No Phase 4 plan fixes them: 04-17 asserts badge against disc only.
   1440).
 - The direction screens label discs with position codes (GK, CB, ST), but the legend says "shirt
   number". Section 4 now requires the legend description to say which one is shown.
+
+## From plan 04-14 (component gallery)
+
+- The 22-player board scene (`board.json`, `/dev/pitch?scene=board`) fails the `tap-size` check at 375 px:
+  the invisible 44 px drag targets of neighbouring players overlap (0 px apart, 8 px needed) because
+  the pitch is only 343 px wide. The gallery `drag` primitive uses a six-player board whose targets stay
+  clear of each other, so its review passes. A real board on a phone needs either fewer draggable
+  players per screen, a zoom, or a smaller hit radius with a larger gap rule; that is a Phase 8
+  (Tactics Board) decision, not a gallery fix.
+- `PlaybackBar` controls sit 7.9 px apart when the bar is in a container narrower than about 640 px
+  while the viewport is 768 px or wider (the transport label shows at `md:` by viewport, not by
+  container). The gallery gives the playback cells two columns from 1280 px and one below, so each is
+  at least 680 px wide. The lesson screens give the bar its full column, so they are not affected.

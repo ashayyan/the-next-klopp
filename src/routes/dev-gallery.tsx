@@ -175,7 +175,9 @@ function BareMatrix({ primitive, themes }: { primitive: Primitive; themes: reado
             <p className="mb-4 text-label font-semibold">{theme === "light" ? "Light" : "Dark"}</p>
           ) : null}
           <GalleryThemeProvider value={theme}>
-            <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-2 xl:grid-cols-3">
+            <div
+              className={`grid grid-cols-1 gap-x-8 gap-y-6 ${primitive.wide ? "xl:grid-cols-2" : "md:grid-cols-2 xl:grid-cols-3"}`}
+            >
               {primitive.states.map((state) => (
                 <StateCell key={state} primitiveId={primitive.id} state={state} anchor={copy === 0}>
                   <primitive.Demo state={state} />

@@ -1,8 +1,11 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { MemoryRouter, Route, Routes } from "react-router";
 import { describe, expect, it } from "vitest";
+import { GLYPH_IDS } from "../../pitch/glyphs/registry.ts";
+import { glyphIdsForScene } from "../../pitch/legend/glyphIds.ts";
 import { GalleryIndex, GalleryPrimitive, parseTheme, parseWidth } from "../dev-gallery.tsx";
 import { ColourDemo, contrastOnPage, TOKENS } from "./demos/foundations.tsx";
+import { glyphSheet } from "./demos/pitch.tsx";
 import { frameSrc } from "./Frames.tsx";
 import { findPrimitive, GALLERY, GROUPS, groupedPrimitives, stateFromHash } from "./registry.ts";
 import { GalleryThemeProvider } from "./StateCell.tsx";
@@ -147,5 +150,60 @@ describe("colour demo", () => {
   it("reports 1.0:1 for the page against itself", () => {
     const page = TOKENS.resolved.dark.color["surface-page"] as string;
     expect(contrastOnPage(page, page)?.toFixed(1)).toBe("1.0");
+  });
+});
+
+describe("glyph sheet", () => {
+  const a = glyphSheet("a");
+  const b = glyphSheet("b");
+
+  it("is a valid scene for both sides", () => {
+    expect(a.id).toBe("gallery-glyphs-a");
+    expect(b.id).toBe("gallery-glyphs-b");
+    expect(a.events.map((e) => e.team)).toEqual(Array(5).fill("home"));
+    expect(b.events.map((e) => e.team)).toEqual(Array(5).fill("away"));
+  });
+
+  it("draws all 17 registry glyphs between the two sides", () => {
+    const ids = new Set([
+      ...glyphIdsForScene(a, { density: true }),
+      ...glyphIdsForScene(b, { density: false }),
+    ]);
+    expect([...ids].sort()).toEqual([...GLYPH_IDS].sort());
+  });
+
+  it("shows team B's own marks in the team B sheet", () => {
+    const ids = new Set(glyphIdsForScene(b, { density: false }));
+    expect(ids.has("player-b")).toBe(true);
+    expect(ids.has("goalkeeper-b")).toBe(true);
+  });
+
+  it("spaces every pair of entities at least 8 m apart", () => {
+    for (const scene of [a, b]) {
+      const positions = Object.entries(scene.frames[0]?.positions ?? {});
+      for (let i = 0; i < positions.length; i += 1) {
+        for (let j = i + 1; j < positions.length; j += 1) {
+          const [ida, pa] = positions[i] as [string, { x: number; y: number }];
+          const [idb, pb] = positions[j] as [string, { x: number; y: number }];
+          expect(
+            Math.hypot(pa.x - pb.x, pa.y - pb.y),
+            `${scene.id} ${ida} ${idb}`,
+          ).toBeGreaterThanOrEqual(8);
+        }
+      }
+    }
+  });
+});
+
+describe("registry after the Pitch and Interactions groups", () => {
+  it("registers the pitch, glyphs and legend and the three interactions", () => {
+    const ids = (group: string) => GALLERY.filter((p) => p.group === group).map((p) => p.id);
+    expect(ids("Pitch")).toEqual(["pitch", "glyphs", "legend"]);
+    expect(ids("Interactions")).toEqual(["playback", "drag", "converter-probe"]);
+  });
+
+  it("lists the playback and legend states of the gallery table", () => {
+    expect(findPrimitive("playback")?.states).toEqual(["paused", "playing", "at-end", "still"]);
+    expect(findPrimitive("legend")?.states).toEqual(["expanded", "collapsed", "empty"]);
   });
 });
