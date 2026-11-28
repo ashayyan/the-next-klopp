@@ -370,6 +370,27 @@ async function checkWidths(page: Page): Promise<void> {
   }
 }
 
+/** (1b) At 1440 px the toolbar is one row for every scene: no group is wrapped onto a second row. */
+async function checkToolbarRow(page: Page): Promise<void> {
+  for (const scene of ["pitch-only", "glyph-sheet", "reconstruction", "board"]) {
+    await page.goto(`/dev/pitch?scene=${scene}`, { width: 1440, height: 900 });
+    await page.frames();
+    const row = await page.eval<{ groups: number; band: boolean }>(`(() => {
+      const kids = [...document.querySelector("[data-toolbar]").children];
+      const rects = kids.map((k) => k.getBoundingClientRect());
+      // One row = every group overlaps the band shared by all of them.
+      const top = Math.max(...rects.map((r) => r.top));
+      const bottom = Math.min(...rects.map((r) => r.bottom));
+      return { groups: kids.length, band: top < bottom };
+    })()`);
+    report(
+      row.band && row.groups > 0,
+      `1440 px: ${scene} toolbar in one row`,
+      `${row.groups} groups`,
+    );
+  }
+}
+
 /** (2) Canvas backing store = CSS size × devicePixelRatio. */
 async function checkCanvasDpr(page: Page): Promise<void> {
   await page.goto("/dev/pitch?scene=glyph-sheet", { width: 768, dpr: 2 });
@@ -703,6 +724,7 @@ async function main(): Promise<number> {
     await checkPitchOnly(page);
     page.problems = [];
     await checkWidths(page);
+    await checkToolbarRow(page);
     await checkCanvasDpr(page);
     await checkVerticalReadout(page);
     await checkPlayback(page);

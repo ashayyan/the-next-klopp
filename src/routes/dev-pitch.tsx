@@ -251,46 +251,52 @@ export default function DevPitchPage() {
         </p>
       </header>
 
-      <div className="mt-4 flex flex-col gap-4 bg-surface-panel p-4 sm:flex-row sm:flex-wrap sm:items-end md:mt-6 lg:mt-12">
-        <div className="flex min-w-0 flex-col gap-1">
-          <label htmlFor={sceneId} className="text-sm">
-            Scene
-          </label>
-          <select
-            id={sceneId}
-            name="scene"
-            className={control}
-            value={activeId}
-            onChange={(e) => setParams({ scene: e.target.value }, { replace: true })}
-          >
-            {DEV_SCENES.map((s) => (
-              <option key={s.id} value={s.id}>
-                {sceneOptionLabel(s, localStatsbomb)}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {usesSizeSelect ? (
+      <div
+        data-toolbar
+        className="mt-4 flex flex-col gap-4 bg-surface-panel p-4 sm:flex-row sm:flex-wrap sm:items-end md:mt-6 lg:mt-12"
+      >
+        {/* Scene and Pitch size share one cell, so the glyph sheet's toolbar stays one row at 1440 px. */}
+        <div className="flex min-w-0 flex-col gap-4">
           <div className="flex min-w-0 flex-col gap-1">
-            <label htmlFor={sizeId} className="text-sm">
-              Pitch size
+            <label htmlFor={sceneId} className="text-sm">
+              Scene
             </label>
             <select
-              id={sizeId}
-              name="pitch-size"
+              id={sceneId}
+              name="scene"
               className={control}
-              value={sizeKey}
-              onChange={(e) => setSizeKey(e.target.value)}
+              value={activeId}
+              onChange={(e) => setParams({ scene: e.target.value }, { replace: true })}
             >
-              {PITCH_SIZES.map((s) => (
+              {DEV_SCENES.map((s) => (
                 <option key={s.id} value={s.id}>
-                  {s.label}
+                  {sceneOptionLabel(s, localStatsbomb)}
                 </option>
               ))}
             </select>
           </div>
-        ) : null}
+
+          {usesSizeSelect ? (
+            <div className="flex min-w-0 flex-col gap-1">
+              <label htmlFor={sizeId} className="text-sm">
+                Pitch size
+              </label>
+              <select
+                id={sizeId}
+                name="pitch-size"
+                className={control}
+                value={sizeKey}
+                onChange={(e) => setSizeKey(e.target.value)}
+              >
+                {PITCH_SIZES.map((s) => (
+                  <option key={s.id} value={s.id}>
+                    {s.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          ) : null}
+        </div>
 
         <fieldset className="flex min-w-0 flex-col gap-1">
           <legend className="text-sm">Pitch orientation</legend>
