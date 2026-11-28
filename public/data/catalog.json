@@ -4,6 +4,7 @@
     {
       "dataset": "wyscout",
       "version": "v1-809b8aff1fda",
+      "generatedAt": "2026-11-28T01:48:01Z",
       "license": "CC-BY-4.0",
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
       "attribution": "Pappalardo, L. et al. A public data set of spatio-temporal match events in soccer competitions. Sci Data 6, 236 (2019). doi:10.1038/s41597-019-0247-7",

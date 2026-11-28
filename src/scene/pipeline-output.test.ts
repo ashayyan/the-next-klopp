@@ -42,6 +42,7 @@ interface Manifest {
 interface CatalogEntry {
   dataset: string;
   version: string;
+  generatedAt: string;
   license: string;
   licenceUrl: string;
   attribution: string;
@@ -193,7 +194,8 @@ describe("public/data/catalog.json", () => {
   it("lists exactly the shipped versions and files, with matching sha256 and bytes", () => {
     const catalog = readJson(catalogPath) as Catalog;
     expect(catalog.schemaVersion).toBe(1);
-    expect(JSON.stringify(catalog)).not.toMatch(/generatedAt|timestamp/);
+    // The only time in the catalog is each manifest's stored generatedAt, never a build time.
+    expect(JSON.stringify(catalog)).not.toMatch(/timestamp/);
     expect(catalog.datasets.map((d) => `${d.dataset}/${d.version}`)).toEqual(
       publicVersions.map((v) => `${v.dataset}/${v.version}`),
     );
@@ -201,6 +203,7 @@ describe("public/data/catalog.json", () => {
       const dir = join(publicRoot, entry.dataset, entry.version);
       const manifest = readJson(join(dir, "manifest.json")) as Manifest;
       expect(entry.manifest).toBe(`${entry.dataset}/${entry.version}/manifest.json`);
+      expect(entry.generatedAt).toBe(manifest.generatedAt);
       expect(entry.license).toBe(manifest.license);
       expect(entry.licenceUrl).toBe(manifest.licenceUrl);
       expect(entry.attribution).toBe(manifest.attribution);

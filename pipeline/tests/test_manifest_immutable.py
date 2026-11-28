@@ -176,7 +176,22 @@ def test_publish_copies_shippable_versions_and_writes_a_catalog(tmp_path: Path) 
         data_bytes = (public / f["path"]).read_bytes()
         assert f["sha256"] == hashlib.sha256(data_bytes).hexdigest() and f["bytes"] == len(data_bytes)
     assert [s["id"] for s in entry["scenes"]] == ["demo-scene", "other"]
-    assert "generatedAt" not in json.dumps(catalog) and "timestamp" not in json.dumps(catalog)
+    # The only time in the catalog is the manifest's stored generatedAt, never the current time.
+    manifest = json.loads((public / "demo" / version.name / MANIFEST_NAME).read_bytes())
+    assert entry["generatedAt"] == manifest["generatedAt"]
+    assert json.dumps(catalog).count("generatedAt") == 1
+
+
+def test_catalog_orders_versions_of_a_dataset_by_generated_at_not_by_hash(tmp_path: Path) -> None:
+    other = {"scene-other.json": b'{"id": "other", "label": "Other", "n": 2}\n'}
+    for older, newer in ((FILES, other), (other, FILES)):
+        root = tmp_path / f"run-{len(list(tmp_path.iterdir()))}"
+        data, public = root / "data", root / "public"
+        first = write_version("demo", older, meta(), data_root=data, now="2026-01-01T00:00:00Z").path
+        second = write_version("demo", newer, meta(), data_root=data, now="2026-02-01T00:00:00Z").path
+        publish(data_root=data, public_root=public, allow=allow())
+        catalog = json.loads((public / "catalog.json").read_bytes())
+        assert [d["version"] for d in catalog["datasets"]] == [first.name, second.name]
 
 
 def test_publish_skips_a_version_whose_manifest_says_not_shippable(tmp_path: Path) -> None:

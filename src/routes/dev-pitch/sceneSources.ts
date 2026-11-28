@@ -25,9 +25,13 @@ export type LocalGlob = Record<string, () => Promise<unknown>>;
 
 // Vite replaces import.meta.glob at build time. Nothing in the repo matches in a clean checkout
 // (data/statsbomb/ is git-ignored), so the object is empty until `npm run data` has run here.
-export const LOCAL_STATSBOMB: LocalGlob = import.meta.glob("/data/statsbomb/*/scene-*.json", {
-  import: "default",
-});
+// The manifests are globbed beside the scenes: they carry `generatedAt`, which orders versions.
+export const LOCAL_STATSBOMB: LocalGlob = import.meta.glob(
+  ["/data/statsbomb/*/scene-*.json", "/data/statsbomb/*/manifest.json"],
+  { import: "default" },
+);
+
+const LOCAL_SCENE = /\/scene-[^/]+\.json$/;
 
 const CATALOG_PATH = "/data/catalog.json";
 
@@ -35,6 +39,9 @@ const catalogSchema = z.object({
   datasets: z.array(
     z.object({
       dataset: z.string(),
+      version: z.string().optional(),
+      // The manifest's generation time. Version ids are content hashes, so only this orders them.
+      generatedAt: z.string().optional(),
       scenes: z.array(z.object({ id: z.string(), label: z.string(), path: z.string() })),
     }),
   ),
@@ -78,8 +85,12 @@ async function loadPublished(entry: DevScene, fetchImpl: FetchLike): Promise<unk
   if (!catalog.success) {
     throw new SourceError(`${CATALOG_PATH} is not a data catalog.`);
   }
-  // Versions are add-only, so the last entry for a dataset is its newest version.
-  const found = catalog.data.datasets.filter((d) => d.dataset === dataset).at(-1);
+  // Versions are add-only and their ids are content hashes, so "newest" is the latest generatedAt.
+  const found = newestBy(
+    catalog.data.datasets.filter((d) => d.dataset === dataset),
+    (d) => d.generatedAt,
+    (d) => d.version,
+  );
   const scene = found?.scenes[0];
   if (!scene) {
     throw new SourceError(`${CATALOG_PATH} lists no “${dataset}” scene. Run npm run data.`);
@@ -87,10 +98,50 @@ async function loadPublished(entry: DevScene, fetchImpl: FetchLike): Promise<unk
   return fetchJson(fetchImpl, `/data/${scene.path}`);
 }
 
-/** The newest local version: version directories are content-hashed, so sort by path. */
-function newestLocal(glob: LocalGlob): (() => Promise<unknown>) | undefined {
-  const key = Object.keys(glob).sort().at(-1);
-  return key === undefined ? undefined : glob[key];
+/**
+ * The newest item by timestamp. Items without one rank oldest; a tie falls back to the tie-break
+ * string, so the result never depends on input order.
+ */
+function newestBy<T>(
+  items: readonly T[],
+  stamp: (item: T) => string | undefined,
+  tieBreak: (item: T) => string | undefined,
+): T | undefined {
+  let best: T | undefined;
+  for (const item of items) {
+    if (best === undefined) {
+      best = item;
+      continue;
+    }
+    const stampA = stamp(item) ?? "";
+    const stampB = stamp(best) ?? "";
+    const newer =
+      stampA === stampB ? (tieBreak(item) ?? "") > (tieBreak(best) ?? "") : stampA > stampB;
+    if (newer) best = item;
+  }
+  return best;
+}
+
+async function manifestStamp(glob: LocalGlob, sceneKey: string): Promise<string | undefined> {
+  const load = glob[sceneKey.replace(LOCAL_SCENE, "/manifest.json")];
+  if (!load) return undefined;
+  const manifest = await load();
+  const parsed = z.object({ generatedAt: z.string() }).safeParse(manifest);
+  return parsed.success ? parsed.data.generatedAt : undefined;
+}
+
+/** The newest local version, ordered by its manifest's generatedAt (path order breaks ties). */
+async function newestLocal(glob: LocalGlob): Promise<(() => Promise<unknown>) | undefined> {
+  const keys = Object.keys(glob).filter((k) => LOCAL_SCENE.test(k));
+  const stamped = await Promise.all(
+    keys.map(async (key) => ({ key, at: await manifestStamp(glob, key) })),
+  );
+  const best = newestBy(
+    stamped,
+    (e) => e.at,
+    (e) => e.key,
+  );
+  return best === undefined ? undefined : glob[best.key];
 }
 
 function classify(raw: unknown): LoadResult {
@@ -115,7 +166,7 @@ export async function loadDevScene(
   try {
     if (entry.published) return classify(await loadPublished(entry, fetchImpl));
     if (entry.local) {
-      const loader = newestLocal(localGlob);
+      const loader = await newestLocal(localGlob);
       return loader ? classify(await loader()) : { status: "missing-local" };
     }
     const pending = entry.load();
@@ -129,7 +180,7 @@ export async function loadDevScene(
 
 /** True when a local-only StatsBomb scene exists on this machine. */
 export function hasLocalStatsbomb(localGlob: LocalGlob = LOCAL_STATSBOMB): boolean {
-  return Object.keys(localGlob).length > 0;
+  return Object.keys(localGlob).some((k) => LOCAL_SCENE.test(k));
 }
 
 /** The label shown in the Scene select: the local-only option says when its file is absent. */

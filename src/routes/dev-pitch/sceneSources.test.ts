@@ -5,7 +5,13 @@
 import { describe, expect, it } from "vitest";
 import { DEV_SCENES, type DevScene, findDevScene } from "../../scene/fixtures/index.ts";
 import reconstruction from "../../scene/fixtures/reconstruction.json";
-import { type LoadResult, loadDevScene, sceneOptionLabel, toPanelIssues } from "./sceneSources.ts";
+import {
+  hasLocalStatsbomb,
+  type LoadResult,
+  loadDevScene,
+  sceneOptionLabel,
+  toPanelIssues,
+} from "./sceneSources.ts";
 
 const CATALOG = {
   schemaVersion: 1,
@@ -113,6 +119,36 @@ describe("loadDevScene: published scene", () => {
     expect(result.message).toContain("/data/wyscout/v1-test/scene-s1.json");
   });
 
+  it("picks the version with the latest generatedAt, not the last listed or the greatest id", async () => {
+    const catalog = {
+      schemaVersion: 1,
+      datasets: [
+        {
+          dataset: "wyscout",
+          version: "v1-newest",
+          generatedAt: "2026-03-01T00:00:00Z",
+          scenes: [{ id: "s", label: "Newest", path: "wyscout/v1-newest/scene-s.json" }],
+        },
+        {
+          dataset: "wyscout",
+          version: "v1-zzz-older",
+          generatedAt: "2026-01-01T00:00:00Z",
+          scenes: [{ id: "s", label: "Older", path: "wyscout/v1-zzz-older/scene-s.json" }],
+        },
+      ],
+    };
+    const seen: string[] = [];
+    const f = fakeFetch(
+      {
+        "/data/catalog.json": () => jsonResponse(catalog),
+        "/data/wyscout/v1-newest/scene-s.json": () => jsonResponse(reconstruction),
+      },
+      seen,
+    );
+    expectStatus(await loadDevScene(entry("reconstruction"), f), "ready");
+    expect(seen).toEqual(["/data/catalog.json", "/data/wyscout/v1-newest/scene-s.json"]);
+  });
+
   it("reports a catalog without a Wyscout dataset", async () => {
     const f = fakeFetch({
       "/data/catalog.json": () => jsonResponse({ schemaVersion: 1, datasets: [] }),
@@ -208,6 +244,28 @@ describe("loadDevScene: local-only StatsBomb scene", () => {
     // StatsBomb; what matters here is that the newest file was chosen and no network was used.
     expect(["ready", "invalid"]).toContain(result.status);
     if (result.status === "ready") expect(result.localOnly).toBe(true);
+  });
+});
+
+describe("loadDevScene: local version ordering", () => {
+  it("orders local versions by manifest generatedAt, not by path", async () => {
+    const wrapped = async () => reconstruction;
+    const files: Record<string, () => Promise<unknown>> = {
+      "/data/statsbomb/v1-zzz/scene-x.json": async () => {
+        throw new Error("older version must not be loaded");
+      },
+      "/data/statsbomb/v1-zzz/manifest.json": async () => ({ generatedAt: "2026-01-01T00:00:00Z" }),
+      "/data/statsbomb/v1-aaa/scene-x.json": wrapped,
+      "/data/statsbomb/v1-aaa/manifest.json": async () => ({ generatedAt: "2026-02-01T00:00:00Z" }),
+    };
+    const result = await loadDevScene(LOCAL_ENTRY, fakeFetch({}), files);
+    expect(["ready", "invalid"]).toContain(result.status);
+  });
+
+  it("does not count a manifest alone as a local scene", () => {
+    expect(hasLocalStatsbomb({ "/data/statsbomb/v1-aaa/manifest.json": async () => ({}) })).toBe(
+      false,
+    );
   });
 });
 

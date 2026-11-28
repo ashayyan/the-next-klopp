@@ -4,8 +4,10 @@ A version is copied only when its own manifest and the allow-list entry for its 
 ``shippable: true`` (threat T-03-16); anything else, including every local-only provider, never
 reaches ``public/``. Copies are byte for byte and follow the same immutability rule as the writer:
 an existing public version must already hold the same bytes. ``catalog.json`` is the only mutable
-file under ``public/data``; it lists every shipped file with sha256 and byte count, carries no
-timestamp, and is rewritten only when its content changes.
+file under ``public/data``; it lists every shipped file with sha256 and byte count and is rewritten
+only when its content changes. Each dataset entry copies its manifest's ``generatedAt`` (stored once
+per immutable version, never the current time), because version ids are content hashes and carry no
+order: readers pick the newest version by ``generatedAt``.
 """
 
 from __future__ import annotations
@@ -76,7 +78,7 @@ def _copy_version(target: Path, files: dict[str, bytes], manifest_bytes: bytes) 
 
 
 def build_catalog(public_root: Path) -> bytes:
-    """The catalog for every version currently under ``public_root`` (no timestamps)."""
+    """The catalog for every version currently under ``public_root``, oldest version first per dataset."""
     datasets: list[dict[str, Any]] = []
     for version_dir in _versions(public_root):
         manifest, files = read_version(version_dir)
@@ -94,6 +96,7 @@ def build_catalog(public_root: Path) -> bytes:
             {
                 "dataset": manifest.dataset,
                 "version": manifest.version,
+                "generatedAt": manifest.generatedAt,
                 "license": manifest.license,
                 "licenceUrl": manifest.licenceUrl,
                 "attribution": manifest.attribution,
@@ -102,7 +105,7 @@ def build_catalog(public_root: Path) -> bytes:
                 "scenes": scenes,
             }
         )
-    datasets.sort(key=lambda d: (d["dataset"], d["version"]))
+    datasets.sort(key=lambda d: (d["dataset"], d["generatedAt"], d["version"]))
     doc = {"schemaVersion": 1, "datasets": datasets}
     return (json.dumps(doc, indent=2, ensure_ascii=False) + "\n").encode("utf-8")
 
