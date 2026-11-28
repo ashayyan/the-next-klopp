@@ -1,0 +1,580 @@
+{
+  "valid": [
+    {
+      "name": "minimal-authored-1-frame",
+      "doc": {
+        "id": "minimal-authored",
+        "schemaVersion": 1,
+        "kind": "authored",
+        "label": "One player",
+        "pitch": {
+          "length": 105,
+          "width": 68
+        },
+        "teams": [
+          {
+            "id": "home",
+            "name": "Home",
+            "side": "a",
+            "attack": {
+              "1": "ltr"
+            }
+          }
+        ],
+        "entities": [
+          {
+            "id": "home-9",
+            "type": "player",
+            "team": "home",
+            "number": 9
+          }
+        ],
+        "frames": [
+          {
+            "t": 0,
+            "positions": {
+              "home-9": {
+                "x": 60,
+                "y": 34
+              }
+            }
+          }
+        ],
+        "events": [],
+        "annotations": [],
+        "source": {
+          "type": "authored",
+          "sourceIds": [],
+          "licence": "project-authored",
+          "attribution": "Authored for The Next Klopp",
+          "shippable": true
+        }
+      }
+    },
+    {
+      "name": "minimal-reconstruction-with-presence",
+      "doc": {
+        "id": "minimal-reconstruction",
+        "schemaVersion": 1,
+        "kind": "reconstruction",
+        "label": "Two-pass chain",
+        "pitch": {
+          "length": 105,
+          "width": 68
+        },
+        "teams": [
+          {
+            "id": "city",
+            "name": "City",
+            "side": "a",
+            "venue": "home",
+            "attack": {
+              "2": "ltr"
+            }
+          }
+        ],
+        "entities": [
+          {
+            "id": "a",
+            "type": "player",
+            "team": "city",
+            "label": "AA",
+            "presence": "sampled"
+          },
+          {
+            "id": "b",
+            "type": "player",
+            "team": "city",
+            "label": "BB"
+          },
+          {
+            "id": "ball",
+            "type": "ball",
+            "presence": "always"
+          }
+        ],
+        "frames": [
+          {
+            "t": 0,
+            "positions": {
+              "a": {
+                "x": 40,
+                "y": 30
+              },
+              "ball": {
+                "x": 40,
+                "y": 30
+              }
+            },
+            "ballOwner": "a"
+          },
+          {
+            "t": 1.5,
+            "positions": {
+              "a": {
+                "x": 40,
+                "y": 30
+              },
+              "b": {
+                "x": 55,
+                "y": 32
+              },
+              "ball": {
+                "x": 55,
+                "y": 32
+              }
+            },
+            "ballOwner": "b"
+          }
+        ],
+        "events": [
+          {
+            "id": "ev-1",
+            "type": "pass",
+            "t": 0,
+            "team": "city",
+            "player": "a",
+            "receiver": "b",
+            "start": {
+              "x": 40,
+              "y": 30
+            },
+            "end": {
+              "x": 55,
+              "y": 32
+            },
+            "ref": "1"
+          }
+        ],
+        "annotations": [
+          {
+            "id": "seq",
+            "type": "sequence",
+            "events": ["ev-1"]
+          }
+        ],
+        "source": {
+          "type": "open-data",
+          "provider": "wyscout",
+          "sourceIds": ["src-wyscout-public-dataset"],
+          "licence": "CC-BY-4.0",
+          "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+          "attribution": "Pappalardo et al. 2019",
+          "shippable": true,
+          "matchId": "2499754",
+          "clock": {
+            "period": 2,
+            "offsetSec": 1852.91
+          },
+          "recipe": "wyscout-goal"
+        }
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "schema-version-2",
+      "reason": "schemaVersion must be 1",
+      "expect_path": "/schemaVersion",
+      "doc": {
+        "id": "minimal-authored",
+        "schemaVersion": 2,
+        "kind": "authored",
+        "label": "One player",
+        "pitch": {
+          "length": 105,
+          "width": 68
+        },
+        "teams": [
+          {
+            "id": "home",
+            "name": "Home",
+            "side": "a",
+            "attack": {
+              "1": "ltr"
+            }
+          }
+        ],
+        "entities": [
+          {
+            "id": "home-9",
+            "type": "player",
+            "team": "home",
+            "number": 9
+          }
+        ],
+        "frames": [
+          {
+            "t": 0,
+            "positions": {
+              "home-9": {
+                "x": 60,
+                "y": 34
+              }
+            }
+          }
+        ],
+        "events": [],
+        "annotations": [],
+        "source": {
+          "type": "authored",
+          "sourceIds": [],
+          "licence": "project-authored",
+          "attribution": "Authored for The Next Klopp",
+          "shippable": true
+        }
+      }
+    },
+    {
+      "name": "unknown-kind",
+      "reason": "kind is not in the enum",
+      "expect_path": "/kind",
+      "doc": {
+        "id": "minimal-authored",
+        "schemaVersion": 1,
+        "kind": "replay",
+        "label": "One player",
+        "pitch": {
+          "length": 105,
+          "width": 68
+        },
+        "teams": [
+          {
+            "id": "home",
+            "name": "Home",
+            "side": "a",
+            "attack": {
+              "1": "ltr"
+            }
+          }
+        ],
+        "entities": [
+          {
+            "id": "home-9",
+            "type": "player",
+            "team": "home",
+            "number": 9
+          }
+        ],
+        "frames": [
+          {
+            "t": 0,
+            "positions": {
+              "home-9": {
+                "x": 60,
+                "y": 34
+              }
+            }
+          }
+        ],
+        "events": [],
+        "annotations": [],
+        "source": {
+          "type": "authored",
+          "sourceIds": [],
+          "licence": "project-authored",
+          "attribution": "Authored for The Next Klopp",
+          "shippable": true
+        }
+      }
+    },
+    {
+      "name": "pitch-too-long",
+      "reason": "pitch length 130 is above the Law 1 maximum 120",
+      "expect_path": "/pitch/length",
+      "doc": {
+        "id": "minimal-authored",
+        "schemaVersion": 1,
+        "kind": "authored",
+        "label": "One player",
+        "pitch": {
+          "length": 130,
+          "width": 68
+        },
+        "teams": [
+          {
+            "id": "home",
+            "name": "Home",
+            "side": "a",
+            "attack": {
+              "1": "ltr"
+            }
+          }
+        ],
+        "entities": [
+          {
+            "id": "home-9",
+            "type": "player",
+            "team": "home",
+            "number": 9
+          }
+        ],
+        "frames": [
+          {
+            "t": 0,
+            "positions": {
+              "home-9": {
+                "x": 60,
+                "y": 34
+              }
+            }
+          }
+        ],
+        "events": [],
+        "annotations": [],
+        "source": {
+          "type": "authored",
+          "sourceIds": [],
+          "licence": "project-authored",
+          "attribution": "Authored for The Next Klopp",
+          "shippable": true
+        }
+      }
+    },
+    {
+      "name": "unknown-top-level-property",
+      "reason": "additionalProperties is false",
+      "expect_path": "/extra",
+      "doc": {
+        "id": "minimal-authored",
+        "schemaVersion": 1,
+        "kind": "authored",
+        "label": "One player",
+        "pitch": {
+          "length": 105,
+          "width": 68
+        },
+        "teams": [
+          {
+            "id": "home",
+            "name": "Home",
+            "side": "a",
+            "attack": {
+              "1": "ltr"
+            }
+          }
+        ],
+        "entities": [
+          {
+            "id": "home-9",
+            "type": "player",
+            "team": "home",
+            "number": 9
+          }
+        ],
+        "frames": [
+          {
+            "t": 0,
+            "positions": {
+              "home-9": {
+                "x": 60,
+                "y": 34
+              }
+            }
+          }
+        ],
+        "events": [],
+        "annotations": [],
+        "source": {
+          "type": "authored",
+          "sourceIds": [],
+          "licence": "project-authored",
+          "attribution": "Authored for The Next Klopp",
+          "shippable": true
+        },
+        "extra": true
+      }
+    },
+    {
+      "name": "unknown-event-type",
+      "reason": "event type dribble is not a known branch",
+      "expect_path": "/events/0/type",
+      "doc": {
+        "id": "minimal-authored",
+        "schemaVersion": 1,
+        "kind": "authored",
+        "label": "One player",
+        "pitch": {
+          "length": 105,
+          "width": 68
+        },
+        "teams": [
+          {
+            "id": "home",
+            "name": "Home",
+            "side": "a",
+            "attack": {
+              "1": "ltr"
+            }
+          }
+        ],
+        "entities": [
+          {
+            "id": "home-9",
+            "type": "player",
+            "team": "home",
+            "number": 9
+          }
+        ],
+        "frames": [
+          {
+            "t": 0,
+            "positions": {
+              "home-9": {
+                "x": 60,
+                "y": 34
+              }
+            }
+          }
+        ],
+        "events": [
+          {
+            "id": "ev-1",
+            "type": "dribble",
+            "t": 0,
+            "team": "home",
+            "player": "home-9",
+            "start": {
+              "x": 60,
+              "y": 34
+            },
+            "end": {
+              "x": 70,
+              "y": 34
+            }
+          }
+        ],
+        "annotations": [],
+        "source": {
+          "type": "authored",
+          "sourceIds": [],
+          "licence": "project-authored",
+          "attribution": "Authored for The Next Klopp",
+          "shippable": true
+        }
+      }
+    },
+    {
+      "name": "shot-without-goal",
+      "reason": "a shot must say whether it was a goal",
+      "expect_path": "/events/0/goal",
+      "doc": {
+        "id": "minimal-authored",
+        "schemaVersion": 1,
+        "kind": "authored",
+        "label": "One player",
+        "pitch": {
+          "length": 105,
+          "width": 68
+        },
+        "teams": [
+          {
+            "id": "home",
+            "name": "Home",
+            "side": "a",
+            "attack": {
+              "1": "ltr"
+            }
+          }
+        ],
+        "entities": [
+          {
+            "id": "home-9",
+            "type": "player",
+            "team": "home",
+            "number": 9
+          }
+        ],
+        "frames": [
+          {
+            "t": 0,
+            "positions": {
+              "home-9": {
+                "x": 60,
+                "y": 34
+              }
+            }
+          }
+        ],
+        "events": [
+          {
+            "id": "ev-1",
+            "type": "shot",
+            "t": 0,
+            "team": "home",
+            "player": "home-9",
+            "start": {
+              "x": 90,
+              "y": 34
+            },
+            "end": {
+              "x": 105,
+              "y": 34
+            }
+          }
+        ],
+        "annotations": [],
+        "source": {
+          "type": "authored",
+          "sourceIds": [],
+          "licence": "project-authored",
+          "attribution": "Authored for The Next Klopp",
+          "shippable": true
+        }
+      }
+    },
+    {
+      "name": "team-side-c",
+      "reason": "team side must be a or b",
+      "expect_path": "/teams/0/side",
+      "doc": {
+        "id": "minimal-authored",
+        "schemaVersion": 1,
+        "kind": "authored",
+        "label": "One player",
+        "pitch": {
+          "length": 105,
+          "width": 68
+        },
+        "teams": [
+          {
+            "id": "home",
+            "name": "Home",
+            "side": "c",
+            "attack": {
+              "1": "ltr"
+            }
+          }
+        ],
+        "entities": [
+          {
+            "id": "home-9",
+            "type": "player",
+            "team": "home",
+            "number": 9
+          }
+        ],
+        "frames": [
+          {
+            "t": 0,
+            "positions": {
+              "home-9": {
+                "x": 60,
+                "y": 34
+              }
+            }
+          }
+        ],
+        "events": [],
+        "annotations": [],
+        "source": {
+          "type": "authored",
+          "sourceIds": [],
+          "licence": "project-authored",
+          "attribution": "Authored for The Next Klopp",
+          "shippable": true
+        }
+      }
+    }
+  ]
+}

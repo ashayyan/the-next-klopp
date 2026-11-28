@@ -3,6 +3,7 @@
 // validators reach the same verdict on every fixture. Cross-document integrity (referenced ids
 // exist, prerequisite graph is acyclic) is checked by the Phase 2 and Phase 5 validators.
 import { z } from "zod";
+import { sceneSchema } from "../scene/schema.ts";
 
 // Shared helpers, mirroring schemas/common.schema.json $defs.
 // URLs and UTC date-times use the same patterns as the JSON Schema, never the built-in Zod URL check or the
@@ -155,4 +156,5 @@ export const contractSchemas = {
   concept: conceptMapSchema,
   competency: competencySchema,
   role: roleSchema,
+  scene: sceneSchema,
 };
