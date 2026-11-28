@@ -1,0 +1,80 @@
+name: update-snapshots
+
+# Manual only. Generates the Linux visual baselines in the same Playwright image the `visual` job of
+# ci.yml compares in, then commits only tests/visual/__baselines__/*-linux.png back to the branch it
+# was dispatched on and dispatches `ci` there (a push made with GITHUB_TOKEN starts no workflow, so
+# without the dispatch the new head would carry no checks). It refuses `main`.
+#
+# Two jobs, so the write token never sits next to `npm ci`: `generate` runs the third-party image with
+# read-only permissions, `commit` runs on the hosted runner (which has the gh CLI) and only handles the
+# artefact. Dispatch with: gh workflow run update-snapshots.yml --ref <branch>
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  HUSKY: "0"
+
+jobs:
+  generate:
+    if: github.ref != 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    container:
+      image: mcr.microsoft.com/playwright:v1.65.1-noble
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright test --project=visual
+        env:
+          HOME: /root
+          CI: "true"
+          UPDATE_BASELINES: "1"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: linux-baselines
+          path: tests/visual/__baselines__
+          if-no-files-found: error
+          retention-days: 3
+
+  commit:
+    if: github.ref != 'refs/heads/main'
+    needs: generate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      actions: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: linux-baselines
+          path: tests/visual/__baselines__
+      # The branch name reaches the script only through env, never interpolated into the script body.
+      - name: Commit the Linux baselines and dispatch ci
+        env:
+          BRANCH: ${{ github.ref_name }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/visual/__baselines__/*-linux.png
+          if git diff --cached --quiet; then
+            echo "No baseline changed; nothing to commit."
+            exit 0
+          fi
+          git commit -m "test(visual): update Linux baselines"
+          git push origin "HEAD:$BRANCH"
+          gh workflow run ci --ref "$BRANCH"
