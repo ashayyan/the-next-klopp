@@ -9,14 +9,39 @@ export interface DevScene {
   load: () => Promise<unknown> | null;
 }
 
+// Order follows the 03-UI-SPEC "Scene options" table for the options that exist so far.
 export const DEV_SCENES: readonly DevScene[] = [
   { id: "pitch-only", label: "Pitch only", load: () => null },
+  {
+    id: "glyph-sheet",
+    label: "Glyph sheet",
+    load: () => import("./glyph-sheet.json").then((m) => m.default),
+  },
+  {
+    id: "authored",
+    label: "Authored visual",
+    load: () => import("./authored.json").then((m) => m.default),
+  },
   {
     id: "board",
     label: "Saved board (drag spike)",
     load: () => import("./board.json").then((m) => m.default),
   },
+  {
+    id: "quiz-answer",
+    label: "Quiz answer",
+    load: () => import("./quiz-answer.json").then((m) => m.default),
+  },
+  {
+    // Until 03-10 publishes the recipe artifact, this loads the 03-02 fixture.
+    id: "reconstruction",
+    label: "Reconstruction · Wyscout PL 2017/18",
+    load: () => import("./reconstruction.json").then((m) => m.default),
+  },
 ];
+
+/** The scene shown when ?scene= names nothing known. */
+export const FALLBACK_SCENE_ID = "glyph-sheet";
 
 export function findDevScene(id: string | null | undefined): DevScene | undefined {
   return DEV_SCENES.find((s) => s.id === id);

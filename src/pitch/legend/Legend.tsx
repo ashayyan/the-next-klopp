@@ -63,7 +63,7 @@ export function Legend({ scene, density, initialExpanded = true }: LegendProps) 
           id={listId}
           className={
             expanded
-              ? "mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1"
+              ? "mt-2 grid grid-cols-1 gap-2 min-[600px]:grid-cols-2 lg:grid-cols-1"
               : "mt-2 flex flex-wrap gap-x-4 gap-y-2"
           }
         >

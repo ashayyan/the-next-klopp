@@ -1,11 +1,13 @@
-import { useEffect, useId, useRef, useState } from "react";
-import { Link } from "react-router";
-import { SceneLayer } from "../pitch/glyphs/SceneLayer.tsx";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { Link, useSearchParams } from "react-router";
+import { CanvasLayer } from "../pitch/CanvasLayer.tsx";
+import { drawDensity, SceneLayer } from "../pitch/glyphs/SceneLayer.tsx";
 import { describeScene } from "../pitch/legend/glyphIds.ts";
 import { Legend } from "../pitch/legend/Legend.tsx";
 import { Pitch } from "../pitch/Pitch.tsx";
 import { autoOrientation, type Orientation } from "../pitch/view.ts";
-import { DEV_SCENES, findDevScene } from "../scene/fixtures/index.ts";
+import { DEV_SCENES, FALLBACK_SCENE_ID, findDevScene } from "../scene/fixtures/index.ts";
+import { sceneDuration } from "../scene/playback/sample.ts";
 import type { Scene } from "../scene/schema.ts";
 import { parseScene, type SceneIssue } from "../scene/validate.ts";
 
@@ -13,16 +15,19 @@ import { parseScene, type SceneIssue } from "../scene/validate.ts";
 // The subline text below is the marker scripts/smoke.ts looks for in the study build.
 
 type SceneState =
-  | { status: "none" }
-  | { status: "loading" }
-  | { status: "ready"; scene: Scene }
-  | { status: "invalid"; issues: SceneIssue[] };
+  | { id: string; status: "none" }
+  | { id: string; status: "loading" }
+  | { id: string; status: "ready"; scene: Scene }
+  | { id: string; status: "invalid"; issues: SceneIssue[] };
 
 const PITCH_SIZES = [
   { id: "105x68", length: 105, width: 68, label: "105 × 68 m (Premier League standard)" },
   { id: "100x65", length: 100, width: 65, label: "100 × 65 m (Fulham, registered)" },
   { id: "101x68", length: 101, width: 68, label: "101 × 68 m (Liverpool, registered)" },
 ] as const;
+
+/** Scenes drawn on the chosen pitch size instead of their own. */
+const SIZE_SELECT_SCENES: ReadonlySet<string> = new Set(["pitch-only", "glyph-sheet"]);
 
 type OrientationChoice = "auto" | Orientation;
 
@@ -44,10 +49,21 @@ export default function DevPitchPage() {
   const sceneId = useId();
   const sizeId = useId();
   const inspectorId = useId();
-  const [scene, setScene] = useState<string>("pitch-only");
+  const [params, setParams] = useSearchParams();
   const [sizeKey, setSizeKey] = useState<string>("105x68");
   const [choice, setChoice] = useState<OrientationChoice>("auto");
+  const [densityChoice, setDensityChoice] = useState<Record<string, boolean>>({});
   const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null);
+
+  // ?scene= is looked up only through the fixed registry: it is never a path or import specifier.
+  const requested = params.get("scene");
+  const known = findDevScene(requested);
+  const unknownId = requested !== null && known === undefined ? requested : null;
+  const devScene =
+    known ??
+    findDevScene(requested === null ? DEV_SCENES[0]?.id : FALLBACK_SCENE_ID) ??
+    DEV_SCENES[0];
+  const activeId = devScene?.id ?? "pitch-only";
 
   // Auto orientation reads the measured stage width (vertical below 480 px).
   const stageRef = useRef<HTMLElement>(null);
@@ -63,35 +79,48 @@ export default function DevPitchPage() {
     return () => observer.disconnect();
   }, []);
 
-  const devScene = findDevScene(scene) ?? DEV_SCENES[0];
-  const [state, setState] = useState<SceneState>({ status: "none" });
+  const [state, setState] = useState<SceneState>({ id: "pitch-only", status: "none" });
   useEffect(() => {
     const pending = devScene?.load();
     if (!pending) {
-      setState({ status: "none" });
+      setState({ id: activeId, status: "none" });
       return;
     }
     let cancelled = false;
-    setState({ status: "loading" });
+    setState({ id: activeId, status: "loading" });
     pending.then((raw) => {
       if (cancelled) return;
       const parsed = parseScene(raw);
       setState(
         parsed.ok
-          ? { status: "ready", scene: parsed.scene }
-          : { status: "invalid", issues: parsed.issues },
+          ? { id: activeId, status: "ready", scene: parsed.scene }
+          : { id: activeId, status: "invalid", issues: parsed.issues },
       );
     });
     return () => {
       cancelled = true;
     };
-  }, [devScene]);
+  }, [devScene, activeId]);
 
-  const loaded = state.status === "ready" ? state.scene : null;
-  const sceneLabel = loaded?.label ?? devScene?.label ?? "Pitch only";
+  // A state that belongs to the previous scene id is treated as loading, never drawn.
+  const current: SceneState = state.id === activeId ? state : { id: activeId, status: "loading" };
+  const usesSizeSelect = SIZE_SELECT_SCENES.has(activeId);
   const size = PITCH_SIZES.find((s) => s.id === sizeKey) ?? PITCH_SIZES[0];
-  const length = loaded?.pitch.length ?? size.length;
-  const width = loaded?.pitch.width ?? size.width;
+  const loaded = current.status === "ready" ? current.scene : null;
+  // The glyph sheet is drawn on the chosen pitch size; every other scene keeps its own pitch.
+  const scene = useMemo<Scene | null>(
+    () =>
+      loaded && usesSizeSelect
+        ? { ...loaded, pitch: { length: size.length, width: size.width } }
+        : loaded,
+    [loaded, usesSizeSelect, size.length, size.width],
+  );
+
+  const length = scene?.pitch.length ?? size.length;
+  const width = scene?.pitch.width ?? size.width;
+  const hasEvents = (scene?.events.length ?? 0) > 0;
+  const densityOn = hasEvents && (densityChoice[activeId] ?? true);
+  const draw = useMemo(() => (scene ? drawDensity(scene) : null), [scene]);
   const orientation: Orientation = choice === "auto" ? autoOrientation(stageWidth) : choice;
   const onPitch =
     pointer !== null &&
@@ -99,6 +128,8 @@ export default function DevPitchPage() {
     pointer.x <= length &&
     pointer.y >= 0 &&
     pointer.y <= width;
+  const sceneLabel = scene?.label ?? devScene?.label ?? "Pitch only";
+  const source = scene?.source;
 
   return (
     <main className="mx-auto min-h-screen max-w-[1280px] bg-surface-page p-4 pb-16 font-sans text-ink md:p-6 lg:p-8">
@@ -124,8 +155,8 @@ export default function DevPitchPage() {
             id={sceneId}
             name="scene"
             className={control}
-            value={scene}
-            onChange={(e) => setScene(e.target.value)}
+            value={activeId}
+            onChange={(e) => setParams({ scene: e.target.value }, { replace: true })}
           >
             {DEV_SCENES.map((s) => (
               <option key={s.id} value={s.id}>
@@ -135,7 +166,7 @@ export default function DevPitchPage() {
           </select>
         </div>
 
-        {scene === "pitch-only" ? (
+        {usesSizeSelect ? (
           <div className="flex min-w-0 flex-col gap-1">
             <label htmlFor={sizeId} className="text-sm">
               Pitch size
@@ -177,32 +208,104 @@ export default function DevPitchPage() {
             ))}
           </div>
         </fieldset>
+
+        <fieldset className="flex min-w-0 flex-col gap-1">
+          <legend className="text-sm">Layers</legend>
+          <label className="flex min-h-11 cursor-pointer items-center gap-2 rounded-sm px-2 text-sm has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent">
+            <input
+              type="checkbox"
+              name="layer-density"
+              checked={densityOn}
+              disabled={!hasEvents}
+              onChange={(e) =>
+                setDensityChoice((prev) => ({ ...prev, [activeId]: e.target.checked }))
+              }
+              className="size-4 accent-accent"
+            />
+            <span>Density layer (Canvas)</span>
+          </label>
+        </fieldset>
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 md:mt-6 md:gap-6 lg:grid-cols-[minmax(0,1fr)_288px] lg:gap-8">
         {/* A <section> with an accessible name has the implicit role "region" (Biome noRedundantRoles). */}
         <section ref={stageRef} aria-label="Pitch stage" data-stage className="min-w-0">
+          {current.status === "invalid" ? (
+            <div
+              role="alert"
+              className="mb-4 border-l-4 border-danger bg-surface-panel p-4"
+              data-state="invalid-scene"
+            >
+              <h2 className="text-base leading-tight font-semibold">Scene failed validation</h2>
+              <p className="mt-2 text-base">
+                {`${current.issues.length} ${current.issues.length === 1 ? "problem" : "problems"} in “${activeId}”. Fix the fixture file and save; the page reloads with the change.`}
+              </p>
+              <ul className="mt-2 font-mono text-sm">
+                {current.issues.slice(0, 5).map((issue) => (
+                  <li
+                    key={`${issue.path}:${issue.message}`}
+                  >{`${issue.path}: ${issue.message}`}</li>
+                ))}
+              </ul>
+              {current.issues.length > 5 ? (
+                <p className="mt-1 text-sm">{`and ${current.issues.length - 5} more`}</p>
+              ) : null}
+            </div>
+          ) : null}
           <Pitch
             title={sceneLabel}
-            desc={loaded ? describeScene(loaded) : undefined}
+            desc={scene ? describeScene(scene) : undefined}
             length={length}
             width={width}
             orientation={orientation}
+            canvas={densityOn && draw ? <CanvasLayer draw={draw} /> : undefined}
             onPointerCanonical={setPointer}
           >
-            {loaded ? <SceneLayer scene={loaded} t={0} mode="smooth" /> : null}
+            {scene ? <SceneLayer scene={scene} t={0} mode="smooth" /> : null}
           </Pitch>
+          <div className="mt-2 flex flex-col gap-1 text-sm text-ink-muted">
+            {unknownId !== null ? (
+              <p role="status">{`No scene called “${unknownId}”. Showing the glyph sheet instead.`}</p>
+            ) : null}
+            {current.status === "loading" ? <p role="status">Loading scene…</p> : null}
+            {scene && scene.frames.length === 1 ? <p>Still scene — 1 frame</p> : null}
+            {source?.type === "open-data" ? (
+              <p>{`Source: ${source.attribution} · Licence: ${source.licence}${source.localOnly ? " · Local only, not shipped" : ""}`}</p>
+            ) : null}
+          </div>
         </section>
 
         <aside className="flex min-w-0 flex-col gap-4 md:gap-6">
-          <Legend scene={loaded} density={false} />
+          <Legend scene={scene} density={densityOn} />
           <section aria-labelledby={inspectorId} className="bg-surface-panel p-4">
             <h2 id={inspectorId} className="text-base leading-tight font-semibold">
               Scene
             </h2>
             <dl className="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
+              <dt className="text-ink-muted">Scene id</dt>
+              <dd className="min-w-0 break-words">{scene?.id ?? "none"}</dd>
+              <dt className="text-ink-muted">Kind</dt>
+              <dd>{scene?.kind ?? "none"}</dd>
+              <dt className="text-ink-muted">Schema version</dt>
+              <dd>{scene ? scene.schemaVersion : "none"}</dd>
               <dt className="text-ink-muted">Pitch</dt>
               <dd>{`${length} × ${width} m`}</dd>
+              <dt className="text-ink-muted">Frames</dt>
+              <dd>{scene ? scene.frames.length : 0}</dd>
+              <dt className="text-ink-muted">Duration</dt>
+              <dd>{scene ? `${sceneDuration(scene).toFixed(1)} s` : "none"}</dd>
+              <dt className="text-ink-muted">Teams</dt>
+              <dd className="min-w-0 break-words">
+                {scene && scene.teams.length > 0
+                  ? scene.teams.map((t) => `${t.name} (${t.side.toUpperCase()})`).join(" · ")
+                  : "none"}
+              </dd>
+              <dt className="text-ink-muted">Source</dt>
+              <dd>{source ? (source.provider ?? source.type) : "none"}</dd>
+              <dt className="text-ink-muted">Licence</dt>
+              <dd className="min-w-0 break-words">{source?.licence ?? "none"}</dd>
+              <dt className="text-ink-muted">Shippable</dt>
+              <dd>{source ? (source.shippable ? "Yes" : "No") : "none"}</dd>
               <dt className="text-ink-muted">Orientation</dt>
               <dd>{choice === "auto" ? `Auto (${orientation})` : orientation}</dd>
             </dl>
