@@ -166,11 +166,11 @@ Plans:
   3. Design tokens are generated from DESIGN.md and drive the Tailwind theme: changing a token and regenerating visibly changes the app and the pitch.
   4. A dev gallery (`/dev/gallery`) shows every primitive and interaction at 3 widths, and visual baselines are generated only by CI on Linux, never overwritten by a local run.
   5. A screenshot-review command captures any screen at 3 widths and runs the taste-skill review against DESIGN.md, producing a pass/fail report.
-**Plans**: 17 plans in 15 waves
+**Plans**: 1/17 plans executed in 15 waves
 
 Plans:
 **Wave 1**
-- [ ] 04-01-PLAN.md — Token generator, three direction token sets, src/index.css on generated tokens (wave 1)
+- [x] 04-01-PLAN.md — Token generator, three direction token sets, src/index.css on generated tokens (wave 1)
 - [ ] 04-02-PLAN.md — Pitch legibility fixes: badge and chip placement, 22 px discs (wave 1)
 
 **Wave 2** *(blocked on Wave 1 completion)*
@@ -290,7 +290,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 | 1. Setup & Contracts | 9/9 | Complete    | 2026-11-28 |
 | 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
 | 3. Pitch Standard & Data Pipeline | 11/11 | Complete    | 2026-11-28 |
-| 4. Design Direction & System | 0/17 | Planned | - |
+| 4. Design Direction & System | 1/17 | In Progress | - |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |
 | 6. Learner Experience & Progress | 0/TBD | Not started | - |
 | 7. Golden Lesson & Track 0 | 0/TBD | Not started | - |
