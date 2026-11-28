@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 3
 current_phase_name: Pitch Standard & Data Pipeline
 status: executing
-stopped_at: Completed 03-09-PLAN.md
-last_updated: "2026-11-28T02:27:40.571Z"
+stopped_at: Completed 03-10-PLAN.md
+last_updated: "2026-11-28T02:48:57.108Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 3 execution started
-state_head: fb0307cf19ceeee4abc8ffe3c1829a23f04c7c02
+state_head: "0bf9349f7d51e368a1dcbb2cbd46d95423da9057"
 progress:
   total_phases: 8
   completed_phases: 2
   total_plans: 41
-  completed_plans: 39
+  completed_plans: 40
   percent: 25
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 3 (Pitch Standard & Data Pipeline) — EXECUTING
-Plan: 10 of 11
+Plan: 11 of 11
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 3 execution started
 
@@ -85,6 +85,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 03 P07 | 14min | 3 tasks | 12 files |
 | Phase 03 P08 | 25min | 3 tasks | 14 files |
 | Phase 03 P09 | 40min | 3 tasks | 13 files |
+| Phase 03 P10 | 55min | 3 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -133,6 +134,8 @@ Recent decisions affecting current work:
 - [Phase 03]: Playback clock is a per-scene vanilla zustand store with a pure tick; one rAF loop runs only while playing; keyboard map is a pure handler on the stage region; added --accent-ink token
 - [Phase 03]: 03-08: deny-manifest is the single licence gate config; path.posix.matchesGlob used without picomatch (no warning on Node 24.21)
 - [Phase 03]: 03-09: draggable handle lives in an interaction layer separate from the visible disc so pointer capture survives the dragged-on-top reorder
+- [Phase 03]: 03-10: StatsBomb freeze-frame players are never scaled by hand; kloppy's event.freeze_frame carries the same piecewise 105 x 68 warp as the shot (linear scaling would be off by about 0.25 m)
+- [Phase 03]: 03-10: dev scene loads end in a LoadResult and check the content type before parsing; local-only StatsBomb is read through a non-eager import.meta.glob inside the dev-only chunk
 
 ### Pending Todos
 
@@ -160,6 +163,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T02:27:40.301Z
-Stopped at: Completed 03-09-PLAN.md
+Last session: 2026-11-28T02:48:56.700Z
+Stopped at: Completed 03-10-PLAN.md
 Resume file: None
