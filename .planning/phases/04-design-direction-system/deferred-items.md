@@ -36,3 +36,10 @@ gaps. No Phase 4 plan fixes them: 04-17 asserts badge against disc only.
   while the viewport is 768 px or wider (the transport label shows at `md:` by viewport, not by
   container). The gallery gives the playback cells two columns from 1280 px and one below, so each is
   at least 680 px wide. The lesson screens give the bar its full column, so they are not affected.
+  - **Resolved in the 04-REVIEW fix pass (WR-02).** The tap-size check now judges unrounded boxes
+    with a 1/64 px margin (no 0.15 px rounding allowance). Measured unrounded in Chrome at viewport
+    1024 with the bar's container set to 480 to 639 px (plus fractional offsets), every pair of
+    playback targets is at least 8.00 px apart: the 7.9 px reading came from the 0.1 px box
+    rounding, not from the layout. The real narrow-container defect was the scrubber: with
+    `min-w-0` it shrank to about 33 px wide at a 560 px container. It now has `min-w-11`, so the
+    row wraps before the scrubber drops below 44 px.

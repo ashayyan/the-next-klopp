@@ -271,9 +271,18 @@ export interface TapTarget {
    * outside any link or button (WCAG 2.5.8 inline exception). Exempt from size and spacing.
    */
   runningText: boolean;
+  /**
+   * The unrounded box (`getBoundingClientRect()` plus scroll). Sizes and gaps are judged on it;
+   * `box` is the 0.1 px display copy. Falls back to `box` when absent.
+   */
+  exact?: Box;
 }
 
-const TAP_GAP_ROUNDING_PX = 0.15;
+/**
+ * Chrome lays out in 1/64 px units, so two edges that are truly 8 px apart can differ from 8 by
+ * no more than that. Anything larger is a real layout gap, not a measuring artefact.
+ */
+export const TAP_EPSILON_PX = 1 / 64;
 
 function gapBetween(a: Box, b: Box): number {
   const dx = Math.max(a[0] - (b[0] + b[2]), b[0] - (a[0] + a[2]), 0);
@@ -299,20 +308,22 @@ export function evalTapSize(targets: readonly TapTarget[]): Outcome {
     if (prior) prior.value = `${prior.value}; ${value}`;
     else found.set(key, { selector: t.selector, text: clip(t.text), box: t.box, value });
   };
+  const exact = (t: TapTarget): Box => t.exact ?? t.box;
   for (const t of live) {
-    const w = round1(t.box[2]);
-    const h = round1(t.box[3]);
-    if (w < TAP_MIN_PX || h < TAP_MIN_PX)
-      add(t, `${w} x ${h} px, needs ${TAP_MIN_PX} x ${TAP_MIN_PX}`);
+    const [, , w, h] = exact(t);
+    if (w + TAP_EPSILON_PX < TAP_MIN_PX || h + TAP_EPSILON_PX < TAP_MIN_PX)
+      add(t, `${round1(w)} x ${round1(h)} px, needs ${TAP_MIN_PX} x ${TAP_MIN_PX}`);
   }
   for (let i = 0; i < live.length; i += 1) {
     for (let j = i + 1; j < live.length; j += 1) {
       const a = live[i] as TapTarget;
       const b = live[j] as TapTarget;
-      if (contains(a.box, b.box) || contains(b.box, a.box)) continue;
-      const gap = gapBetween(a.box, b.box);
-      // Boxes are captured to 0.1 px, so a true 8 px gap can read 7.9; allow that rounding only.
-      if (gap + TAP_GAP_ROUNDING_PX < TAP_GAP_PX) {
+      const ea = exact(a);
+      const eb = exact(b);
+      if (contains(ea, eb) || contains(eb, ea)) continue;
+      // Judged on the unrounded boxes: only a sub-layout-unit difference is forgiven.
+      const gap = gapBetween(ea, eb);
+      if (gap + TAP_EPSILON_PX < TAP_GAP_PX) {
         add(a, `${round1(gap)} px from ${b.selector}, needs ${TAP_GAP_PX}`);
         add(b, `${round1(gap)} px from ${a.selector}, needs ${TAP_GAP_PX}`);
       }

@@ -293,6 +293,30 @@ describe("tap-size", () => {
     expect(apart.violated).toBe(false);
   });
 
+  it("judges gaps on the unrounded boxes with a 1/64 px margin only (WR-02)", () => {
+    const pair = (gap: number) => [
+      { ...btn("a", [0, 0, 44, 44]), exact: [0, 0, 44, 44] as [number, number, number, number] },
+      {
+        ...btn("b", [Math.round((44 + gap) * 10) / 10, 0, 44, 44]),
+        exact: [44 + gap, 0, 44, 44] as [number, number, number, number],
+      },
+    ];
+    // The PlaybackBar defect from deferred-items.md: 7.9 px is a real layout gap.
+    expect(evalTapSize(pair(7.9)).violated).toBe(true);
+    expect(evalTapSize(pair(7.95)).violated).toBe(true);
+    // A true 8 px gap that Chrome lays out a fraction of a layout unit short still passes.
+    expect(evalTapSize(pair(8 - 1 / 128)).violated).toBe(false);
+    expect(evalTapSize(pair(8)).violated).toBe(false);
+  });
+
+  it("judges size on the unrounded box: 43.95 px fails although it displays as 44", () => {
+    const t = {
+      ...btn("a", [0, 0, 44, 44]),
+      exact: [0, 0, 43.95, 44] as [number, number, number, number],
+    };
+    expect(evalTapSize([t]).violated).toBe(true);
+  });
+
   it("exempts a link in running text and skips zero-size elements", () => {
     expect(evalTapSize([btn("p a", [0, 0, 30, 16], true)]).violated).toBe(false);
     expect(evalTapSize([btn("hidden", [0, 0, 0, 0])]).violated).toBe(false);

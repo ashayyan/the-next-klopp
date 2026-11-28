@@ -227,9 +227,14 @@ function collectPage(): PageData {
     }
     return parts.join(" > ");
   };
-  const boxOf = (el: Element): [number, number, number, number] => {
+  // Unrounded page box: the tap-size check judges sizes and gaps on these, then rounds for display.
+  const exactBoxOf = (el: Element): [number, number, number, number] => {
     const r = el.getBoundingClientRect();
-    return [round(r.x + scrollX), round(r.y + scrollY), round(r.width), round(r.height)];
+    return [r.x + scrollX, r.y + scrollY, r.width, r.height];
+  };
+  const boxOf = (el: Element): [number, number, number, number] => {
+    const [x, y, w, h] = exactBoxOf(el);
+    return [round(x), round(y), round(w), round(h)];
   };
 
   const gradients: PageData["gradients"] = [];
@@ -278,7 +283,7 @@ function collectPage(): PageData {
       el.tagName === "INPUT" &&
       (input.type === "checkbox" || input.type === "radio") &&
       label?.contains(el) === true;
-    return wrapped && label && shown(label) ? boxOf(label) : boxOf(el);
+    return wrapped && label && shown(label) ? exactBoxOf(label) : exactBoxOf(el);
   };
   // The inline exception of WCAG 2.5.8 covers a target inside a sentence only: an inline link, or
   // a button laid out inline (a glossary term), whose paragraph or list item also holds words that
@@ -303,12 +308,16 @@ function collectPage(): PageData {
     }
     return false;
   };
-  const targets: PageData["targets"] = controlEls.map((el) => ({
-    selector: selectorOf(el),
-    text: textOf(el),
-    box: hitBox(el),
-    runningText: inSentence(el),
-  }));
+  const targets: PageData["targets"] = controlEls.map((el) => {
+    const exact = hitBox(el);
+    return {
+      selector: selectorOf(el),
+      text: textOf(el),
+      box: [round(exact[0]), round(exact[1]), round(exact[2]), round(exact[3])],
+      exact,
+      runningText: inSentence(el),
+    };
+  });
   const controls: PageData["controls"] = controlEls.map((el) => {
     const labelledBy = (el.getAttribute("aria-labelledby") ?? "")
       .split(/\s+/)

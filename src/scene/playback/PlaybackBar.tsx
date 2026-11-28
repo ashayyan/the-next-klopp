@@ -100,7 +100,7 @@ export function PlaybackBar({ store }: PlaybackBarProps) {
           step={0.04}
           value={t}
           onChange={(e) => seek(Number(e.target.value))}
-          className={`order-5 min-h-11 min-w-0 basis-[calc(100%-9rem)] accent-accent md:order-4 md:basis-0 md:flex-1 ${focusRing}`}
+          className={`order-5 min-h-11 min-w-11 basis-[calc(100%-9rem)] accent-accent md:order-4 md:basis-0 md:flex-1 ${focusRing}`}
         />
         <output className="order-4 font-mono text-sm tabular-nums md:order-5">
           {`${seconds(t)} s / ${seconds(duration)} s`}
