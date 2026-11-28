@@ -14,6 +14,7 @@ import { parseScene } from "../../scene/validate.ts";
 import { describeScene, glyphIdsForScene } from "../legend/glyphIds.ts";
 import { Pitch } from "../Pitch.tsx";
 import { makeView } from "../view.ts";
+import { CONDENSED_CHAR_PX, fitLabel, labelMaxWidthPx } from "./glyphSize.ts";
 import { GLYPH_IDS, GLYPHS } from "./registry.ts";
 import { drawDensity, SceneLayer } from "./SceneLayer.tsx";
 
@@ -239,6 +240,51 @@ describe("Canvas density layer", () => {
     expect(arcs.map(([x, y]) => [x, y])).toEqual(sheet.events.map((e) => [e.start.x, e.start.y]));
     for (const a of arcs) expect(a[2]).toBeCloseTo(1.5 / view960.pxPerMetre, 9);
     expect(ctx.fillStyle).toBe("dot-colour");
+  });
+});
+
+describe("disc labels fit inside the disc (04-UI-REVIEW fix 1)", () => {
+  it("keeps the 22 px disc chord at half the cap height above two condensed capitals", () => {
+    // Team B has the wider ring (3 px), so it gives the narrowest chord.
+    const chord = labelMaxWidthPx(22, 3);
+    expect(chord).toBeGreaterThan(2 * CONDENSED_CHAR_PX);
+    expect(chord).toBeLessThan(22 - 3);
+  });
+
+  it("leaves shirt numbers and single letters at the normal width", () => {
+    expect(fitLabel("7", 22, 2)).toEqual({});
+    expect(fitLabel("10", 22, 2)).toEqual({});
+    expect(fitLabel("W", 22, 2)).toEqual({});
+  });
+
+  it("condenses a two-letter code and squeezes a longer label to the chord", () => {
+    expect(fitLabel("RW", 22, 2)).toEqual({ stretch: "75%" });
+    expect(fitLabel("CDM", 22, 3)).toEqual({ stretch: "75%", lengthPx: labelMaxWidthPx(22, 3) });
+  });
+
+  it("draws a position code condensed and a shirt number unchanged", () => {
+    const labelled = load({
+      ...structuredClone(board),
+      id: "label-fit",
+      kind: "authored",
+      entities: [
+        { id: "home-2", type: "player", team: "home", label: "RW" },
+        { id: "home-3", type: "player", team: "home", number: 10 },
+      ],
+      frames: [
+        {
+          t: 0,
+          positions: { "home-2": { x: 20, y: 30 }, "home-3": { x: 60, y: 30 } },
+        },
+      ],
+    });
+    const texts = tags(render(labelled), "--team-a-ink");
+    expect(texts).toHaveLength(2);
+    const [rw, ten] = texts;
+    expect(rw).toContain("font-stretch:75%");
+    expect(attr(rw ?? "", "data-fit")).toBe("condensed");
+    expect(ten).not.toContain("font-stretch");
+    expect(attr(ten ?? "", "textLength")).toBeUndefined();
   });
 });
 

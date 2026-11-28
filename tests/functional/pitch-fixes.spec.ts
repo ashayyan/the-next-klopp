@@ -89,6 +89,100 @@ for (const [width, height] of [
   });
 }
 
+/**
+ * Every player and goalkeeper label whose ink box (advance width by the label's own cap height and
+ * descent, from the font metrics) pokes out of the inside of its disc or square outline. The inside
+ * is the shape's radius (or half side) minus half its outline, so a label never sits on the ring.
+ */
+async function labelSpills(page: Page): Promise<string[]> {
+  return page.evaluate(() => {
+    const ctx = document.createElement("canvas").getContext("2d");
+    if (!ctx) return ["no canvas"];
+    const out: string[] = [];
+    const glyphs = document.querySelectorAll(
+      '[data-layer="players"] [data-glyph^="player-"], [data-layer="players"] [data-glyph^="goalkeeper-"]',
+    );
+    for (const g of glyphs) {
+      const text = g.querySelector("text");
+      const shape = g.querySelector("circle, rect");
+      if (!text || !shape) continue;
+      const label = text.textContent ?? "";
+      const style = getComputedStyle(text);
+      ctx.font = `${style.fontWeight} 100px ${style.fontFamily}`;
+      const m = ctx.measureText(label);
+      const em = (m.fontBoundingBoxAscent + m.fontBoundingBoxDescent) / 100;
+      const t = text.getBoundingClientRect();
+      const fs = t.height / em; // font size in screen pixels
+      const baseline = t.y + (m.fontBoundingBoxAscent / 100) * fs;
+      const ink = {
+        x0: t.x,
+        x1: t.x + t.width,
+        y0: baseline - (m.actualBoundingBoxAscent / 100) * fs,
+        y1: baseline + (m.actualBoundingBoxDescent / 100) * fs,
+      };
+      const s = shape.getBoundingClientRect();
+      const half = Number(shape.getAttribute("stroke-width") ?? 0) / 2;
+      const cx = s.x + s.width / 2;
+      const cy = s.y + s.height / 2;
+      const corners = [
+        [ink.x0, ink.y0],
+        [ink.x1, ink.y0],
+        [ink.x0, ink.y1],
+        [ink.x1, ink.y1],
+      ] as const;
+      const inside =
+        shape.tagName === "circle"
+          ? corners.every(([x, y]) => Math.hypot(x - cx, y - cy) <= s.width / 2 - half + 0.25)
+          : corners.every(
+              ([x, y]) =>
+                x >= s.x + half - 0.25 &&
+                x <= s.x + s.width - half + 0.25 &&
+                y >= s.y + half - 0.25 &&
+                y <= s.y + s.height - half + 0.25,
+            );
+      if (!inside) {
+        out.push(
+          `${label}: ink ${(ink.x1 - ink.x0).toFixed(1)} x ${(ink.y1 - ink.y0).toFixed(1)} px in a ${s.width.toFixed(1)} px ${shape.tagName}`,
+        );
+      }
+    }
+    return out;
+  });
+}
+
+async function labelCount(page: Page): Promise<number> {
+  return page.locator('[data-layer="players"] text').count();
+}
+
+for (const [width, height] of [
+  [375, 812],
+  [1440, 900],
+] as const) {
+  test(`${width} px: every position code and initial sits inside its disc`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    await page.goto("/dev/directions/floodlit/tactics");
+    await expect(page.locator('[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
+    expect(await labelCount(page), "the tactics screen labels 11 discs").toBe(11);
+    expect(await labelSpills(page), "tactics, without the ball").toEqual([]);
+    await page.getByRole("button", { name: "With the ball" }).click();
+    await expect(page.locator('[data-readout="shape"]')).toHaveText("Shape now: 3-2-4-1");
+    expect(await labelSpills(page), "tactics, with the ball").toEqual([]);
+
+    await page.goto("/dev/directions/floodlit/data");
+    await expect(page.locator('div[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+    await page.evaluate(() => document.fonts.ready);
+    expect(await labelCount(page), "the data screen labels a disc at 0.0 s").toBeGreaterThan(0);
+    expect(await labelSpills(page), "data screen at 0.0 s").toEqual([]);
+
+    await page.goto("/dev/pitch?scene=glyph-sheet");
+    await page.locator('[data-layer="scene"]').first().waitFor({ state: "attached" });
+    await page.evaluate(() => document.fonts.ready);
+    expect(await labelCount(page), "the glyph sheet numbers its discs").toBeGreaterThan(0);
+    expect(await labelSpills(page), "glyph sheet shirt numbers").toEqual([]);
+  });
+}
+
 for (const width of [768, 1440]) {
   test(`${width} px: the play button reads "Play sequence"`, async ({ page }) => {
     await openScene(page, width, 900);

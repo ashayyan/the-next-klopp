@@ -909,7 +909,7 @@ Glyph sizes are screen pixels converted to metres with the live pixels-per-metre
 | Player disc diameter | `clamp(22px, 2.0 m, 28px)`; 22 px is the minimum that fits a 12 px number |
 | Ball diameter | `clamp(10px, 1.0 m, 14px)` |
 | Arrowhead | 8 px long, 8 px wide |
-| Glyph text | 12 px, weight 600, line height 1 (`pitch.glyphText`, `--pitch-glyph-text`) |
+| Glyph text | 12 px, weight 600, line height 1 (`pitch.glyphText`, `--pitch-glyph-text`). A disc label of two or more letters (a position code or initials) uses the family's condensed width (`font-stretch: 75%`), and one too long even then is squeezed to the disc's inner chord (`textLength`), so the label never crosses the disc edge (`fitLabel` in `src/pitch/glyphs/glyphSize.ts`). Shirt numbers keep the normal width |
 | Hit target for a draggable player | at least 22 px on the pitch; controls outside the pitch keep the 44 px rule |
 
 ### Legend
