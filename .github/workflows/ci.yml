@@ -4,6 +4,8 @@ on:
   pull_request:
   push:
     branches: [main]
+  # Manual run on a branch that has no pull request yet: gh workflow run ci --ref <branch>
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -85,7 +87,7 @@ jobs:
       # PR metadata reaches the script only through env, never interpolated into the script body.
       - name: Version directories are add-only
         env:
-          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event.before }}
+          BASE: ${{ github.event_name == 'pull_request' && format('origin/{0}', github.base_ref) || github.event_name == 'push' && github.event.before || 'origin/main' }}
         run: node scripts/check-immutable.ts --base "$BASE"
       - uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3.0.0
         env:
