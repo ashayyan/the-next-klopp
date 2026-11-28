@@ -55,6 +55,14 @@ function attackSign(scene: Scene, team: SceneTeam | undefined): 1 | -1 {
   return direction === "rtl" ? -1 : 1;
 }
 
+/** The owner of the latest frame at or before t, then the owner of the next frame, if any. */
+export function ballOwnerCandidates(scene: Scene, t: number, latest: string | null): string[] {
+  const next = scene.frames.find((f) => f.t > t)?.ballOwner;
+  const ids = latest ? [latest] : [];
+  if (next && next !== latest) ids.push(next);
+  return ids;
+}
+
 /** An annotation with a from/to range shows only inside that range. */
 function inRange(annotation: SceneAnnotation, t: number): boolean {
   if (annotation.type === "sequence") return true;
@@ -129,14 +137,25 @@ export function SceneLayer({
   const ballAt = ballEntity ? at.get(ballEntity.id) : undefined;
   let ball = ballAt ? { x: ballAt.x, y: ballAt.y } : null;
   // An owned ball sits 0.6 x the disc diameter from the owner, toward the owner team attack.
-  const owner = sampled.ballOwner ? at.get(sampled.ballOwner) : undefined;
-  const ownerEntity = sampled.ballOwner ? entityById.get(sampled.ballOwner) : undefined;
-  if (ball && owner && ownerEntity) {
-    const team = scene.teams.find((candidate) => candidate.id === ownerEntity.team);
-    ball = {
-      x: owner.x + attackSign(scene, team) * 0.6 * discDiameter(view.pxPerMetre),
-      y: owner.y,
-    };
+  // Between two frames the ball may be in flight (a pass), so the offset applies only while the
+  // sampled ball is at a player: the owner of the latest frame or of the next one. It fades out
+  // over two disc diameters, so the ball never jumps when it leaves or reaches a player (03-11).
+  if (ball) {
+    const d = discDiameter(view.pxPerMetre);
+    const reach = 2 * d;
+    let best: { dx: number; w: number } | null = null;
+    for (const id of ballOwnerCandidates(scene, sampled.t, sampled.ballOwner)) {
+      const p = at.get(id);
+      const entity = entityById.get(id);
+      if (!p || !entity) continue;
+      const w = Math.max(0, 1 - Math.hypot(ball.x - p.x, ball.y - p.y) / reach);
+      if (w <= 0 || (best && best.w >= w)) continue;
+      const team = scene.teams.find((candidate) => candidate.id === entity.team);
+      best = { dx: attackSign(scene, team) * 0.6 * d, w };
+    }
+    // At a frame the sampled ball is on its owner, so w = 1 gives owner + offset (the 03-UI-SPEC
+    // rule); in flight w falls to 0 and the ball keeps its sampled path, moving forward throughout.
+    if (best) ball = { x: ball.x + best.dx * best.w, y: ball.y };
   }
 
   const annotations = scene.annotations.filter((a) => inRange(a, sampled.t));

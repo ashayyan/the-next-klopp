@@ -239,3 +239,64 @@ describe("Canvas density layer", () => {
     expect(ctx.fillStyle).toBe("dot-colour");
   });
 });
+
+describe("ball ownership offset (03-11)", () => {
+  // A passes to B along y = 30: the ball is owned at both frames and in flight between them.
+  const pass = load({
+    ...structuredClone(board),
+    id: "ball-owner-pass",
+    kind: "authored",
+    entities: [
+      { id: "home-2", type: "player", team: "home", number: 2 },
+      { id: "home-3", type: "player", team: "home", number: 3 },
+      { id: "ball", type: "ball" },
+    ],
+    frames: [
+      {
+        t: 0,
+        ballOwner: "home-2",
+        positions: {
+          "home-2": { x: 20, y: 30 },
+          "home-3": { x: 60, y: 30 },
+          ball: { x: 20, y: 30 },
+        },
+      },
+      {
+        t: 2,
+        ballOwner: "home-3",
+        positions: {
+          "home-2": { x: 20, y: 30 },
+          "home-3": { x: 60, y: 30 },
+          ball: { x: 60, y: 30 },
+        },
+      },
+    ],
+  });
+  // render() draws at the 960 px default width; home attacks left to right (+x).
+  const offset =
+    0.6 *
+    (20 /
+      makeView({ length: 105, width: 68, runoff: 3, orientation: "horizontal", cssWidth: 960 })
+        .pxPerMetre);
+  const ballX = (t: number) => Number(attr(tags(render(pass, t), "--ball-fill")[0] ?? "", "cx"));
+
+  it("puts an owned ball at the owner plus the offset at a frame", () => {
+    expect(ballX(0)).toBeCloseTo(20 + offset, 6);
+    expect(ballX(2)).toBeCloseTo(60 + offset, 6);
+  });
+
+  it("draws a ball in flight at its sampled position, not on the passer", () => {
+    expect(ballX(1)).toBeCloseTo(40, 6);
+  });
+
+  it("moves the ball continuously as it leaves the passer", () => {
+    // The sampled ball moves 0.2 m per 0.01 s; the drawn ball always moves forward and never jumps
+    // (the fading offset adds at most offset / reach, about 30 %, near a player).
+    const xs = Array.from({ length: 201 }, (_, i) => ballX(i * 0.01));
+    for (let i = 1; i < xs.length; i++) {
+      const step = (xs[i] ?? 0) - (xs[i - 1] ?? 0);
+      expect(step).toBeGreaterThan(0);
+      expect(step).toBeLessThan(0.3);
+    }
+  });
+});
