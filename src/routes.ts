@@ -5,16 +5,23 @@ export interface BuildRoutesOptions {
   includeDev: boolean;
 }
 
-// URL surface: `/`, `/dev`, `/dev/pitch`, `/dev/review-fixture`, `/dev/directions` and
+// URL surface: `/`, `/learn/:lessonId` (both builds; the lessons each build includes are chosen at
+// build time in virtual:tnk-lessons), `/dev`, `/dev/pitch`, `/dev/review-fixture`, `/dev/directions` and
 // `/dev/directions/:id/:screen`, `/dev/gallery` and `/dev/gallery/:primitiveId` (dev only) and the
 // catch-all not-found route.
-// `/learn/:trackId/:chapterId/:lessonId`, `/review` and `/whats-new` arrive with their phases.
+// `/review` and `/whats-new` arrive with their phases.
 export function buildRoutes({ includeDev }: BuildRoutesOptions): RouteObject[] {
   const routes: RouteObject[] = [
     {
       path: "/",
       lazy: async () => ({
         Component: (await import("./routes/home.tsx")).default,
+      }),
+    },
+    {
+      path: "/learn/:lessonId",
+      lazy: async () => ({
+        Component: (await import("./routes/learn/LessonPage.tsx")).default,
       }),
     },
   ];

@@ -1,0 +1,30 @@
+{
+  "id": "fx-a-goal-in-ten-actions",
+  "version": 1,
+  "title": "A goal in ten actions",
+  "track": "t01-the-game",
+  "chapter": "part-a",
+  "concepts": ["scoring-a-goal", "formation-notation", "formation-vs-structure"],
+  "prerequisites": [],
+  "durationMin": 7,
+  "effort": "normal",
+  "status": "draft",
+  "author": "gsd-executor/phase-05-fixture",
+  "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis", "set-piece-coach"],
+  "competencies": ["match-reading", "opposition-analysis"],
+  "template": "data-lab",
+  "steps": [
+    { "id": "hook-ten-actions", "stage": "hook" },
+    { "id": "see-the-chain", "stage": "see" },
+    { "id": "touch-the-order", "stage": "touch" },
+    { "id": "predict-the-shooter", "stage": "predict" },
+    { "id": "reveal-the-shooter", "stage": "reveal" },
+    { "id": "do-the-goal-rule", "stage": "do" },
+    { "id": "lock-in-quiz", "stage": "lock-in" },
+    { "id": "lock-in-recall", "stage": "lock-in" },
+    { "id": "connect-shapes", "stage": "connect" }
+  ],
+  "quiz": [],
+  "sources": [],
+  "dataRefs": []
+}

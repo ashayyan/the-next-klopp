@@ -6,6 +6,7 @@ describe("buildRoutes", () => {
     const paths = buildRoutes({ includeDev: true }).map((route) => route.path);
     expect(paths).toEqual([
       "/",
+      "/learn/:lessonId",
       "/dev",
       "/dev/pitch",
       "/dev/review-fixture",
@@ -19,7 +20,7 @@ describe("buildRoutes", () => {
 
   it("leaves /dev out of the study build", () => {
     const paths = buildRoutes({ includeDev: false }).map((route) => route.path);
-    expect(paths).toEqual(["/", "*"]);
+    expect(paths).toEqual(["/", "/learn/:lessonId", "*"]);
   });
 
   it("resolves every lazy route to a component function", async () => {

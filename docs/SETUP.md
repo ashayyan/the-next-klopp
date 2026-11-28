@@ -105,6 +105,8 @@ Mitigations in place:
 
 Confirmation by the learner is batched into the end-of-phase human check, not asked per package.
 
+Phase 5 packages: `@mdx-js/react` 3.1.1 and `@dnd-kit/react` 0.5.3 (runtime), `@mdx-js/rollup` 3.1.1, `@mdx-js/mdx` 3.1.1, `@types/mdx` 2.0.14, `@axe-core/playwright` 4.14.1 and `remark-frontmatter` 5.0.0 (dev). The audit flagged `@axe-core/playwright` and `@dnd-kit/react` SUS for release recency only. The learner delegated every checkpoint, so, as in Phase 4, an automated identity gate replaced the human pause. Before any install, `npm view <name>@<version> name version license repository.url scripts.preinstall scripts.install scripts.postinstall` was checked for those seven packages plus `axe-core` 4.14.1 and the five `@dnd-kit/*` dependencies (`dom`, `state`, `abstract`, `geometry`, `collision`, all 0.5.3): the version exists, the repository is the official one (mdx-js/mdx, DefinitelyTyped, dequelabs/axe-core-npm, dequelabs/axe-core, clauderic/dnd-kit, remarkjs/remark-frontmatter), the licence is MIT or MPL-2.0 and there is no install script. Verdict: all 13 ok. Installed with `--save-exact`; `npm audit signatures` then reported 244 verified registry signatures and 81 verified attestations, and `npm install-scripts ls` reported no packages with unreviewed install scripts. `remark-mdx-frontmatter` is not installed: lessons carry no frontmatter.
+
 ## agentmemory
 
 Two separate memory systems exist on this machine. Do not confuse them.
