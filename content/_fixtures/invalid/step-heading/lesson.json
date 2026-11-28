@@ -1,0 +1,61 @@
+{
+  "id": "fx-invalid-step-heading",
+  "version": 1,
+  "title": "Invalid fixture: step-heading",
+  "track": "t01-the-game",
+  "chapter": "part-a",
+  "concepts": ["scoring-a-goal"],
+  "prerequisites": [],
+  "durationMin": 5,
+  "effort": "normal",
+  "status": "draft",
+  "author": "gsd-executor/phase-05-fixture",
+  "roles": ["head-coach"],
+  "competencies": ["match-reading"],
+  "template": "concept",
+  "steps": [
+    {
+      "id": "hook-the-goal",
+      "stage": "hook",
+      "dataRefs": []
+    },
+    {
+      "id": "see-the-line",
+      "stage": "see",
+      "dataRefs": []
+    },
+    {
+      "id": "touch-the-ball",
+      "stage": "touch",
+      "dataRefs": []
+    },
+    {
+      "id": "predict-the-call",
+      "stage": "predict",
+      "dataRefs": []
+    },
+    {
+      "id": "reveal-the-call",
+      "stage": "reveal",
+      "dataRefs": []
+    },
+    {
+      "id": "do-the-check",
+      "stage": "do",
+      "dataRefs": []
+    },
+    {
+      "id": "lock-in-recall",
+      "stage": "lock-in",
+      "dataRefs": []
+    },
+    {
+      "id": "connect-next",
+      "stage": "connect",
+      "dataRefs": []
+    }
+  ],
+  "quiz": [],
+  "sources": [],
+  "dataRefs": []
+}

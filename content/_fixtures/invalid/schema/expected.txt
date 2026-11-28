@@ -1,0 +1,1 @@
+content/_fixtures/invalid/schema/lesson.json:1 schema: lesson.json does not match the lesson schema at /chapter: Invalid string: must match pattern /^part-[a-g]$/. Fix that field; schemas/lesson.schema.json lists every field.

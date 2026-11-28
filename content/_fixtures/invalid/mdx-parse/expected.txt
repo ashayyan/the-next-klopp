@@ -1,0 +1,1 @@
+content/_fixtures/invalid/mdx-parse/lesson.mdx:57 mdx-parse: lesson.mdx is not valid MDX: Expected a closing tag for `<Step>`. Fix the markup on this line.

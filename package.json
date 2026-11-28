@@ -19,6 +19,7 @@
     "guard": "node scripts/guard-files.ts --tracked",
     "guard:bundle": "node scripts/check-bundle.ts",
     "guard:immutable": "node scripts/check-immutable.ts --base origin/main",
+    "validate": "node scripts/validate-content.ts",
     "validate:schemas": "vitest run schemas",
     "data": "uv run --locked --project pipeline klopp-pipeline run-all",
     "data:fetch": "uv run --locked --project pipeline klopp-pipeline fetch --all",

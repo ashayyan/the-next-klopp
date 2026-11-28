@@ -9,6 +9,10 @@ import { join } from "node:path";
 import { loadTokens } from "../design/build-tokens.ts";
 import { composite, contrast, parseCssColor, toHex } from "../design/lib/color.ts";
 import { DIRECTION_DIR, SYSTEM_INPUT, type TokenDocument } from "../design/tokens.ts";
+import { countWords } from "../lib/words.ts";
+
+// One word counter for the review and the content validator (scripts/lib/words.ts).
+export { countWords };
 
 /** The review cannot run (no server, no browser, no taste skill): the CLI exits 2. */
 export class ReviewUnavailableError extends Error {}
@@ -510,10 +514,6 @@ export interface StepProbe {
   selector: string;
   text: string;
   box: Box;
-}
-
-export function countWords(text: string): number {
-  return text.split(/\s+/).filter((w) => w !== "").length;
 }
 
 export function evalStepWords(steps: readonly StepProbe[]): Outcome {

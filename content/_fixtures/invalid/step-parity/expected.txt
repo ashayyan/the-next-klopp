@@ -1,0 +1,4 @@
+content/_fixtures/invalid/step-parity/lesson.json:43 step-parity: Step “do-the-check” is in steps[] of lesson.json but not in lesson.mdx. Add a <Step id=“do-the-check”> or remove the entry.
+content/_fixtures/invalid/step-parity/lesson.mdx:25 step-parity: Step “reveal-the-call” is out of order: lesson.mdx and steps[] must list the steps in the same order.
+content/_fixtures/invalid/step-parity/lesson.mdx:33 step-parity: Step “predict-the-call” is out of order: lesson.mdx and steps[] must list the steps in the same order.
+content/_fixtures/invalid/step-parity/lesson.mdx:41 step-parity: Step “do-a-finish” is in lesson.mdx but not in steps[] of lesson.json. Add it to steps[] in the same order.

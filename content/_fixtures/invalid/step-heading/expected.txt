@@ -1,0 +1,2 @@
+content/_fixtures/invalid/step-heading/lesson.mdx:9 step-heading: Step “see-the-line” does not start with one ## heading. Start the step with a single ## heading line.
+content/_fixtures/invalid/step-heading/lesson.mdx:39 step-heading: Step “do-the-check” does not start with one ## heading. Start the step with a single ## heading line.

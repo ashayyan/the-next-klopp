@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "lessons": [
+    {
+      "id": "fx-a-goal-in-ten-actions",
+      "title": "A goal in ten actions",
+      "status": "draft",
+      "fixture": true,
+      "dir": "content/_fixtures/fx-a-goal-in-ten-actions",
+      "route": "/learn/fx-a-goal-in-ten-actions",
+      "template": "data-lab",
+      "track": "t01-the-game",
+      "chapter": "part-a",
+      "durationMin": 7,
+      "steps": [
+        {
+          "id": "hook-ten-actions",
+          "screen": "hook-ten-actions",
+          "stage": "hook",
+          "heading": "One goal, many small decisions",
+          "line": 1,
+          "words": 30,
+          "interaction": null,
+          "dataRefs": []
+        },
+        {
+          "id": "see-the-chain",
+          "screen": "see-the-chain",
+          "stage": "see",
+          "heading": "Watch the chain from start to finish",
+          "line": 9,
+          "words": 31,
+          "interaction": null,
+          "dataRefs": []
+        },
+        {
+          "id": "touch-the-order",
+          "screen": "touch-the-order",
+          "stage": "touch",
+          "heading": "Put the actions in order",
+          "line": 17,
+          "words": 22,
+          "interaction": null,
+          "dataRefs": []
+        },
+        {
+          "id": "predict-the-shooter",
+          "screen": "predict-the-shooter",
+          "stage": "predict",
+          "heading": "Who takes the shot?",
+          "line": 25,
+          "words": 18,
+          "interaction": null,
+          "dataRefs": []
+        },
+        {
+          "id": "reveal-the-shooter",
+          "screen": "reveal-the-shooter",
+          "stage": "reveal",
+          "heading": "Sané finishes the move",
+          "line": 33,
+          "words": 21,
+          "interaction": null,
+          "dataRefs": []
+        },
+        {
+          "id": "do-the-goal-rule",
+          "screen": "do-the-goal-rule",
+          "stage": "do",
+          "heading": "When does a goal count?",
+          "line": 41,
+          "words": 30,
+          "interaction": null,
+          "dataRefs": []
+        },
+        {
+          "id": "lock-in-quiz",
+          "screen": "lock-in-quiz",
+          "stage": "lock-in",
+          "heading": "How long was the chain?",
+          "line": 49,
+          "words": 21,
+          "interaction": null,
+          "dataRefs": []
+        },
+        {
+          "id": "lock-in-recall",
+          "screen": "lock-in-recall",
+          "stage": "lock-in",
+          "heading": "Who started the move?",
+          "line": 57,
+          "words": 15,
+          "interaction": null,
+          "dataRefs": []
+        },
+        {
+          "id": "connect-shapes",
+          "screen": "connect-shapes",
+          "stage": "connect",
+          "heading": "A shape is more than numbers",
+          "line": 65,
+          "words": 29,
+          "interaction": null,
+          "dataRefs": []
+        }
+      ],
+      "quiz": []
+    }
+  ]
+}
