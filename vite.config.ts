@@ -53,6 +53,9 @@ export default defineConfig({
       "@mdx-js/react",
     ],
   },
+  // Only the fixtures build (dist-walker) writes .vite/manifest.json, for the per-chunk budget;
+  // dist/ never carries one.
+  build: { manifest: process.env.VITE_INCLUDE_FIXTURES === "1" },
   server: { port: 5173, strictPort: true, host: "localhost" },
   preview: { port: 4173, strictPort: true, host: "localhost" },
 });

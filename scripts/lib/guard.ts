@@ -28,6 +28,8 @@ const DENIED_PREFIXES: readonly string[] = [
   "pipeline/.venv/",
   "node_modules/",
   "dist/",
+  "dist-walker/",
+  ".vercel/",
   "test-results/",
   "playwright-report/",
 ];

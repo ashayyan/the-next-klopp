@@ -1,6 +1,10 @@
 # Dependencies and build output
 node_modules/
 dist/
+# Fixtures build for the walker (CI only, never deployed)
+dist-walker/
+# Vercel CLI link folder: account-specific project and org ids, and the repo is public
+.vercel/
 coverage/
 *.tsbuildinfo
 *.log

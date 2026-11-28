@@ -3,8 +3,9 @@
 // A lesson that is not emitted has no dynamic import, so it never becomes a chunk.
 // Erasable TypeScript only.
 import { existsSync, readdirSync, readFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative } from "node:path";
 import type { Plugin } from "vite";
+import { type SelectMode, selectLessons } from "./select.ts";
 
 export const VIRTUAL_ID = "virtual:tnk-lessons";
 const RESOLVED_ID = `\0${VIRTUAL_ID}`;
@@ -83,19 +84,44 @@ export function renderModule(included: DiscoveredLesson[]): string {
   ].join("\n");
 }
 
+// True for a `lesson.json` or `lesson.mdx` anywhere under content/, the files the module reads.
+export function isLessonFile(root: string, file: string): boolean {
+  const rel = relative(root, file).replaceAll("\\", "/");
+  return /^content\/.+\/lesson\.(json|mdx)$/.test(rel);
+}
+
 export function lessonsPlugin(): Plugin {
   let root = process.cwd();
+  let mode: SelectMode = { command: "build", includeFixtures: false, test: false };
   return {
     name: "tnk-lessons",
     configResolved(config) {
       root = config.root;
+      mode = {
+        command: config.command,
+        includeFixtures: process.env.VITE_INCLUDE_FIXTURES === "1",
+        test: config.mode === "test",
+      };
+    },
+    configureServer(server) {
+      // Adding, editing or deleting a lesson changes what the module lists: rebuild it and reload.
+      const refresh = (file: string) => {
+        if (!isLessonFile(root, file)) return;
+        const mod = server.moduleGraph.getModuleById(RESOLVED_ID);
+        if (mod) server.moduleGraph.invalidateModule(mod);
+        server.ws.send({ type: "full-reload" });
+      };
+      server.watcher.on("add", refresh);
+      server.watcher.on("change", refresh);
+      server.watcher.on("unlink", refresh);
     },
     resolveId(id) {
       return id === VIRTUAL_ID ? RESOLVED_ID : null;
     },
     load(id) {
       if (id !== RESOLVED_ID) return null;
-      return renderModule(discoverLessons(root));
+      // Selection happens here, at build time: an excluded lesson gets no dynamic import, so no chunk.
+      return renderModule(selectLessons(discoverLessons(root), mode));
     },
   };
 }
