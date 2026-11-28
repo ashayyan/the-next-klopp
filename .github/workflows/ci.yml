@@ -59,9 +59,14 @@ jobs:
       - run: npm run validate
       - run: npx vitest run
 
+  # Required check (docs/decisions/0007-branch-protection.md): the job key stays `build`. The lesson
+  # walker runs here, in the Playwright image whose tag equals the @playwright/test pin, against the
+  # fixtures build (dist-walker/) on port 4174.
   build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    container:
+      image: mcr.microsoft.com/playwright:v1.65.1-noble
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
@@ -71,6 +76,18 @@ jobs:
       - run: npm ci
       - run: npx vite build
       - run: node scripts/check-bundle.ts
+      - run: node scripts/content/build-fixtures.ts
+      - run: npx playwright test -c playwright.walker.config.ts
+        env:
+          HOME: /root
+      - if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: walker-report
+          path: |
+            playwright-report/
+            test-results/walker/
+          retention-days: 14
 
   guards:
     runs-on: ubuntu-latest

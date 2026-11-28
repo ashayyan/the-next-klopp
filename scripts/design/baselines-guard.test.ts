@@ -175,7 +175,10 @@ describe("workflow files", () => {
 
   it("run the visual job of ci.yml in the image whose tag equals the @playwright/test pin", () => {
     expect(PLAYWRIGHT_VERSION).toMatch(/^\d+\.\d+\.\d+$/);
-    expect(occurrences(CI, IMAGE)).toBe(1);
+    // The visual job and the required build job (which runs the lesson walker) carry the image.
+    expect(occurrences(CI, IMAGE)).toBe(2);
+    const buildJob = CI.slice(CI.indexOf("\n  build:"), CI.indexOf("\n  guards:"));
+    expect(buildJob).toContain(`image: ${IMAGE}`);
     const visualJob = CI.slice(CI.indexOf("\n  visual:"));
     expect(visualJob).toContain(`image: ${IMAGE}`);
     expect(visualJob).toContain("--project=functional");
