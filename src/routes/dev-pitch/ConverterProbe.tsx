@@ -113,7 +113,7 @@ export function ConverterProbe({ value, onChange, result }: ConverterProbeProps)
         <p data-readout="probe" aria-live="polite" className="font-mono text-sm tabular-nums">
           {result.ok
             ? `Canonical x ${result.point.x.toFixed(2)} m · y ${result.point.y.toFixed(2)} m`
-            : "Canonical x — m · y — m"}
+            : "Enter provider coordinates to convert"}
         </p>
       </div>
     </section>
