@@ -7,6 +7,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadTokens } from "./build-tokens.ts";
+import { checkPalette, renderMarkdown } from "./check-palette.ts";
 import {
   checkDesignHeadings,
   DESIGN_HEADINGS,
@@ -106,6 +107,61 @@ describe("DESIGN.md tokens block", () => {
   it("generates src/styles/tokens.css byte for byte", () => {
     const doc = loadTokens(root, SYSTEM_INPUT);
     expect(read(SYSTEM_OUT)).toBe(generateSystemCss(doc, SYSTEM_INPUT));
+  });
+});
+
+describe("DESIGN.md sections 2 and 3", () => {
+  const START = "<!-- palette:start -->\n";
+  const END = "<!-- palette:end -->";
+
+  it("embeds the check-palette --markdown output between the palette markers", () => {
+    expect(design.split(START).length - 1).toBe(1);
+    expect(design.split(END).length - 1).toBe(1);
+    const embedded = design.slice(design.indexOf(START) + START.length, design.indexOf(END));
+    const doc = parseTokens(JSON.parse(extractTokensBlock(design)), SYSTEM_INPUT);
+    expect(embedded).toBe(renderMarkdown(checkPalette(doc)));
+  });
+
+  it("passes the palette gate in both themes", () => {
+    const results = checkPalette(loadTokens(root, SYSTEM_INPUT));
+    expect(results.map((r) => r.theme).sort()).toEqual(["dark", "light"]);
+    for (const r of results) expect(r.checks.filter((c) => !c.pass)).toEqual([]);
+  });
+
+  it("section 2 names the pick, links ADR 0010 and carries the override note", () => {
+    const s2 = design.slice(
+      design.indexOf("## 2. Visual direction"),
+      design.indexOf("## 3. Foundations"),
+    );
+    expect(s2).toContain("decisions/0010-visual-direction.md");
+    expect(s2).toContain(
+      "picked by Claude under learner delegation; the learner may override by asking",
+    );
+    for (const total of ["81.25", "73.75"]) expect(s2).toContain(total);
+  });
+
+  it("section 3 has the subsections 3.1 to 3.7 in order", () => {
+    const subs = design
+      .split("\n")
+      .filter((l) => /^### 3\.\d /.test(l))
+      .map((l) => l.trim());
+    expect(subs).toEqual([
+      "### 3.1 Colour",
+      "### 3.2 Typography",
+      "### 3.3 Spacing and grid",
+      "### 3.4 Radius and elevation",
+      "### 3.5 Iconography",
+      "### 3.6 Motion language",
+      "### 3.7 Tokens",
+    ]);
+  });
+
+  it("every hex value the prose quotes for a role exists in the tokens block", () => {
+    const s3 = design.slice(design.indexOf("## 3. Foundations"), design.indexOf("### 3.7 Tokens"));
+    const block = extractTokensBlock(design).toUpperCase();
+    const quoted = new Set([...s3.matchAll(/`(#[0-9A-F]{6}(?:[0-9A-F]{2})?)`/g)].map((m) => m[1]));
+    expect(quoted.size).toBeGreaterThan(40);
+    for (const hex of quoted) expect(block).toContain(`"${hex}"`);
   });
 });
 
