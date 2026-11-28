@@ -233,25 +233,50 @@ Plans:
 **Plans**: 20 plans in 13 waves
 
 Plans:
+**Wave 1**
 - [ ] 05-01-PLAN.md — Tracer: deps gate, MDX + virtual:tnk-lessons, fixture renders at /learn, build-time selection (wave 1)
+
+**Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 05-02-PLAN.md — Lesson, verification and What's new schemas v1; curriculum, sources and order in the virtual module; ADR 0011 (wave 2)
+
+**Wave 3** *(blocked on Wave 2 completion)*
 - [ ] 05-03-PLAN.md — Validator CLI, manifest, shared countWords, structural and safety rules, pre-commit and CI test job (wave 3)
+
+**Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 05-04-PLAN.md — Generic walker with axe, required build job in the Playwright image, review:screens --fixtures (wave 4)
 - [ ] 05-06-PLAN.md — Rules: screen-words, heading-words, loop-stage, unknown-ids, duration, prereq-cycle, template-unbuilt (wave 4)
+
+**Wave 5** *(blocked on Wave 4 completion)*
 - [ ] 05-05-PLAN.md — Lesson frame: rail mapping, step nav and CTA copy, deep links, focus, complete view, layout (wave 5)
 - [ ] 05-08-PLAN.md — Registry effective_date, claim extractor, rule-dates, citation, data-ref, bare-number (wave 5)
+
+**Wave 6** *(blocked on Wave 5 completion)*
 - [ ] 05-07-PLAN.md — Lesson states: StatusPanel, loading, failed chunk, unknown ids, dev badges (wave 6)
+
+**Wave 7** *(blocked on Wave 6 completion)*
 - [ ] 05-09-PLAN.md — Claim components: chips, popover, source line, Rule, Contested, Stat, Visual scene (wave 7)
 - [ ] 05-10-PLAN.md — Shell A: app bar, home with nextAction, not-found, route error (wave 7)
+
+**Wave 8** *(blocked on Wave 7 completion)*
 - [ ] 05-11-PLAN.md — Interaction registry, slot, quiz-choice, predict-then-reveal, interaction rules (wave 8)
 - [ ] 05-17-PLAN.md — Shell B: tracks, track, part, What's new, shell review (wave 8)
+
+**Wave 9** *(blocked on Wave 8 completion)*
 - [ ] 05-12-PLAN.md — order-sequence, scene-playback, drag-player, converter-probe, second fixture (wave 9)
 - [ ] 05-13-PLAN.md — Shippable gate: content hash, verification rules, verifier helper, What's new rule (wave 9)
+
+**Wave 10** *(blocked on Wave 9 completion)*
 - [ ] 05-14-PLAN.md — Walker keyboard pass at three widths, reduced-motion pass, axe on every state (wave 10)
 - [ ] 05-16-PLAN.md — Frozen ids (content:freeze, check-frozen in guards) and role-coverage report (wave 10)
+
+**Wave 11** *(blocked on Wave 10 completion)*
 - [ ] 05-15-PLAN.md — Performance budget, word-count parity, full fixture review (wave 11)
 - [ ] 05-19-PLAN.md — build:vercel with content-leak gate, vercel.json, .vercelignore, smoke:protection (wave 11)
+
+**Wave 12** *(blocked on Wave 11 completion)*
 - [ ] 05-18-PLAN.md — Fresh Opus verifier writes the fixture's verification record; fixture becomes shippable (wave 12)
+
+**Wave 13** *(blocked on Wave 12 completion)*
 - [ ] 05-20-PLAN.md — Live Vercel: protection before first deploy, production and preview proven protected, docs (wave 13)
 **UI hint**: yes
 **Checkpoint**: learner logs into Vercel and `gh` themselves; Claude never handles their passwords.
