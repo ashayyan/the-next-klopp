@@ -281,3 +281,98 @@ def test_total_timeout_is_a_keyword_and_defaults_to_120(
     net.fetch_bytes(URL, 1000, cache_dir=tmp_path / "a")
     net.fetch_bytes(URL, 1000, cache_dir=tmp_path / "b", total_timeout_seconds=900)
     assert seen == [120, 900]
+
+
+# --- the CLI and the cached extract ------------------------------------------------------------
+
+
+def _wyscout_allow(bodies: dict[str, bytes]) -> AllowListFile:
+    files = [
+        {
+            "name": name,
+            "url": f"https://ndownloader.figshare.com/files/{i}",
+            "maxBytes": 10_000_000,
+            "sha256": hashlib.sha256(body).hexdigest(),
+        }
+        for i, (name, body) in enumerate(bodies.items(), start=1)
+    ]
+    return allow(files, source_id="wyscout")
+
+
+def _synthetic_bodies() -> dict[str, bytes]:
+    import synthetic as syn
+
+    return {
+        "events.zip": syn.events_zip(),
+        "matches.zip": syn.matches_zip(),
+        "players.json": json.dumps(syn.players()).encode("utf-8"),
+        "teams.json": json.dumps(syn.teams()).encode("utf-8"),
+    }
+
+
+def test_the_extract_is_cached_and_rebuilt_when_an_input_changes(tmp_path: Path) -> None:
+    import synthetic as syn
+
+    from klopp_pipeline import standardise
+
+    bodies = _synthetic_bodies()
+    by_url = {f"https://ndownloader.figshare.com/files/{i}": b for i, b in enumerate(bodies.values(), 1)}
+
+    def fetcher(url: str, max_bytes: int, **kwargs: Any) -> bytes:
+        return by_url[url]
+
+    spec = _wyscout_allow(bodies)
+    first = standardise.wyscout_match_extract(
+        syn.MATCH_ID, raw_root=tmp_path, allow=spec, fetcher=fetcher
+    )
+    cache = tmp_path / "wyscout" / "extract" / f"{syn.MATCH_ID}.json"
+    assert cache.is_file() and first["match"]["matchId"] == str(syn.MATCH_ID)
+
+    # Offline run with no fetcher use: served from the cache.
+    again = standardise.wyscout_match_extract(
+        syn.MATCH_ID, raw_root=tmp_path, allow=spec, offline=True, fetcher=FakeFetcher(AssertionError("no"))
+    )
+    assert again == first
+
+    # A stale cache (inputs differ) is ignored and rebuilt.
+    doc = json.loads(cache.read_bytes())
+    doc["inputs"]["teams.json"] = "0" * 64
+    doc["extract"]["match"]["matchId"] = "stale"
+    cache.write_bytes(json.dumps(doc).encode("utf-8"))
+    rebuilt = standardise.wyscout_match_extract(
+        syn.MATCH_ID, raw_root=tmp_path, allow=spec, offline=True, fetcher=FakeFetcher(AssertionError("no"))
+    )
+    assert rebuilt["match"]["matchId"] == str(syn.MATCH_ID)
+
+
+def test_the_cli_fetch_offline_reports_a_missing_file_and_exits_1(tmp_path: Path) -> None:
+    from typer.testing import CliRunner
+
+    from klopp_pipeline.cli import app
+
+    result = CliRunner().invoke(app, ["fetch", "wyscout", "--offline", "--raw-dir", str(tmp_path)])
+    assert result.exit_code == 1
+    assert "fetch failed" in result.output and "events.zip" in result.output
+
+
+def test_the_cli_fetch_help_lists_offline_and_all() -> None:
+    from typer.testing import CliRunner
+
+    from klopp_pipeline.cli import app
+
+    result = CliRunner().invoke(app, ["fetch", "--help"])
+    assert result.exit_code == 0
+    assert "--offline" in result.output and "--all" in result.output
+
+
+def test_the_cli_refuses_a_source_and_all_together_and_an_unknown_recipe(tmp_path: Path) -> None:
+    from typer.testing import CliRunner
+
+    from klopp_pipeline.cli import app
+
+    runner = CliRunner()
+    assert runner.invoke(app, ["fetch"]).exit_code != 0
+    assert runner.invoke(app, ["fetch", "wyscout", "--all"]).exit_code != 0
+    result = runner.invoke(app, ["recipe", "nope", "--out", str(tmp_path / "x.json")])
+    assert result.exit_code != 0
+    assert not (tmp_path / "x.json").exists()

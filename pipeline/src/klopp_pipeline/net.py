@@ -40,7 +40,7 @@ TOTAL_TIMEOUT_SECONDS = 120  # wall-clock budget for the whole body, so a slow d
 CHUNK_BYTES = 64 * 1024
 HTTPS_PORT = 443
 TOKEN_HOST = "api.github.com"
-USER_AGENT = f"klopp-pipeline/{__version__} (open-data coverage check)"
+USER_AGENT = f"klopp-pipeline/{__version__} (open-data pipeline)"
 
 # pipeline/src/klopp_pipeline/net.py -> parents[2] is the pipeline/ folder
 DEFAULT_CACHE_DIR = Path(__file__).resolve().parents[2] / "data" / "raw" / "coverage"
@@ -87,9 +87,11 @@ def _cache_paths(cache_dir: Path, url: str) -> tuple[Path, Path]:
     return cache_dir / f"{key}.bin", cache_dir / f"{key}.meta.json"
 
 
-def _read_capped(response: Any, max_bytes: int, url: str) -> bytes:
+def _read_capped(
+    response: Any, max_bytes: int, url: str, total_timeout_seconds: float = TOTAL_TIMEOUT_SECONDS
+) -> bytes:
     """Read at most ``max_bytes + 1`` bytes in chunks under a total wall-clock budget."""
-    deadline = time.monotonic() + TOTAL_TIMEOUT_SECONDS
+    deadline = time.monotonic() + total_timeout_seconds
     chunks: list[bytes] = []
     size = 0
     while size <= max_bytes:
@@ -99,7 +101,7 @@ def _read_capped(response: Any, max_bytes: int, url: str) -> bytes:
         chunks.append(chunk)
         size += len(chunk)
         if time.monotonic() > deadline:
-            raise FetchError(f"response for {url} took longer than {TOTAL_TIMEOUT_SECONDS} s")
+            raise FetchError(f"response for {url} took longer than {total_timeout_seconds} s")
     return b"".join(chunks)
 
 
@@ -151,12 +153,18 @@ def fetch_bytes(
     refresh: bool = False,
     offline: bool = False,
     ttl_hours: float = 24,
+    cache: bool = True,
+    total_timeout_seconds: float = TOTAL_TIMEOUT_SECONDS,
 ) -> bytes:
-    """GET ``url`` (cached) and return at most ``max_bytes`` bytes, else raise FetchError."""
+    """GET ``url`` and return at most ``max_bytes`` bytes, else raise FetchError.
+
+    With ``cache=False`` nothing is read from or written to the cache (``fetch.py`` keeps its own
+    hash-verified copy); ``total_timeout_seconds`` is the wall-clock budget for the whole body.
+    """
     host = check_url(url)
     body_path, meta_path = _cache_paths(cache_dir, url)
 
-    if not refresh:
+    if cache and not refresh:
         cached = _read_cache(body_path, max_bytes, offline=offline, ttl_hours=ttl_hours)
         if cached is not None:
             return cached
@@ -172,7 +180,7 @@ def fetch_bytes(
             declared = response.headers.get("Content-Length")
             if declared is not None and declared.isdigit() and int(declared) > max_bytes:
                 raise FetchError(f"response for {url} declares {declared} bytes, cap is {max_bytes}")
-            data = _read_capped(response, max_bytes, url)
+            data = _read_capped(response, max_bytes, url, total_timeout_seconds)
     except FetchError:
         raise
     except urllib.error.HTTPError as exc:
@@ -182,8 +190,9 @@ def fetch_bytes(
     if len(data) > max_bytes:
         raise FetchError(f"response for {url} exceeds the {max_bytes} byte cap")
 
-    meta = {"url": url, "fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
-    _write_cache(cache_dir, body_path, meta_path, data, meta)
+    if cache:
+        meta = {"url": url, "fetched_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+        _write_cache(cache_dir, body_path, meta_path, data, meta)
     return data
 
 

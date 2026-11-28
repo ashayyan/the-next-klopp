@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import io
 import json
+import os
 import re
 import zipfile
 from pathlib import Path
@@ -19,6 +20,10 @@ from typing import Any
 
 from kloppy import wyscout
 from kloppy.domain import Dimension, EventDataset, MetricPitchDimensions, Orientation
+
+from klopp_pipeline import net
+from klopp_pipeline.fetch import RAW_ROOT, Fetcher, fetch_source, sha256_of
+from klopp_pipeline.sources import AllowListFile
 
 # T-03-11: the England events member is 189 MB uncompressed; anything above this cap is refused.
 MEMBER_CAP_BYTES = 250 * 1024 * 1024
@@ -171,3 +176,45 @@ def load_wyscout_match(
     if orientation is None:
         return dataset.transform(to_pitch_dimensions=metric)
     return dataset.transform(to_pitch_dimensions=metric, to_orientation=orientation)
+
+
+def wyscout_match_extract(
+    match_id: int,
+    *,
+    raw_root: Path = RAW_ROOT,
+    offline: bool = False,
+    allow: AllowListFile | None = None,
+    fetcher: Fetcher = net.fetch_bytes,
+) -> dict[str, Any]:
+    """The per-match extract, built from the verified raw files and cached beside them.
+
+    ``fetch_source`` makes sure the four Wyscout files are present and match their sha256 pins. The
+    extract is cached at ``raw_root/wyscout/extract/<matchId>.json`` together with the sha256 of
+    each input, and rebuilt whenever an input hash differs (so a changed pin never serves a stale
+    extract). The cache lives in the git-ignored raw folder.
+    """
+    paths = fetch_source("wyscout", allow=allow, raw_root=raw_root, offline=offline, fetcher=fetcher)
+    inputs = {name: sha256_of(path) for name, path in sorted(paths.items())}
+    cache = raw_root / "wyscout" / "extract" / f"{match_id}.json"
+    try:
+        cached = json.loads(cache.read_bytes())
+        if cached.get("inputs") == inputs and isinstance(cached.get("extract"), dict):
+            return cached["extract"]
+    except (OSError, ValueError, AttributeError):
+        pass  # missing or damaged cache: rebuild
+    extract = build_extract(
+        match_id,
+        events_zip=paths["events.zip"],
+        matches_zip=paths["matches.zip"],
+        players_json=paths["players.json"],
+        teams_json=paths["teams.json"],
+    )
+    cache.parent.mkdir(parents=True, exist_ok=True)
+    tmp = cache.with_name(cache.name + ".tmp")
+    try:
+        tmp.write_bytes(json.dumps({"inputs": inputs, "extract": extract}).encode("utf-8"))
+        os.replace(tmp, cache)
+    except OSError:
+        tmp.unlink(missing_ok=True)
+        raise
+    return extract

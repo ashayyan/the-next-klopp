@@ -17,6 +17,7 @@ class Recipe:
     source_id: str  # an id in pipeline/sources.allow.json
     dataset: str  # output folder under data/<dataset>/ (used by the versioned writer)
     build: Callable[[Path, bool], Scene]  # (raw_root, offline) -> Scene
+    extract_ids: tuple[int, ...] = ()  # matches the `standardise` command extracts for this recipe
 
 
 def _registry() -> dict[str, Recipe]:
@@ -29,6 +30,7 @@ def _registry() -> dict[str, Recipe]:
             source_id="wyscout",
             dataset="wyscout",
             build=wyscout_goal.build,
+            extract_ids=(wyscout_goal.MATCH_ID,),
         )
     }
 

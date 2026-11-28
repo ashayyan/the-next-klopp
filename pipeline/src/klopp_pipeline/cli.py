@@ -9,8 +9,13 @@ from typing import Annotated
 import typer
 
 from klopp_pipeline import landmarks as landmarks_mod
-from klopp_pipeline import net
+from klopp_pipeline import net, standardise
 from klopp_pipeline.coverage import PROVIDERS, run_coverage, write_outputs
+from klopp_pipeline.fetch import RAW_ROOT, fetch_source
+from klopp_pipeline.net import FetchError
+from klopp_pipeline.recipes import RECIPES
+from klopp_pipeline.scene import dump_scene
+from klopp_pipeline.sources import load_allow_list
 
 app = typer.Typer(help="Open-data pipeline for The Next Klopp.", no_args_is_help=True)
 
@@ -63,3 +68,68 @@ def landmarks(
         return
     landmarks_mod.write(out)
     typer.echo(f"wrote {out}")
+
+
+RAW_DIR_HELP = "Folder for downloaded raw files (git-ignored)."
+OFFLINE_HELP = "Use only files already in the raw folder; never touch the network."
+
+
+@app.command()
+def fetch(
+    source: Annotated[str | None, typer.Argument(help="Source id from pipeline/sources.allow.json.")] = None,
+    all_sources: Annotated[bool, typer.Option("--all", help="Fetch every source that lists files.")] = False,
+    offline: Annotated[bool, typer.Option(help=OFFLINE_HELP)] = False,
+    raw_dir: Annotated[Path, typer.Option(help=RAW_DIR_HELP)] = RAW_ROOT,
+) -> None:
+    """Download allow-listed source files and verify their sha256 pins."""
+    allow = load_allow_list()
+    if all_sources == (source is not None):
+        raise typer.BadParameter("give a source id or --all, not both and not neither")
+    ids = [s.id for s in allow.sources if s.files] if all_sources else [source or ""]
+    try:
+        for source_id in ids:
+            paths = fetch_source(source_id, allow=allow, raw_root=raw_dir, offline=offline)
+            for name, path in paths.items():
+                typer.echo(f"{source_id}/{name}: ok ({path.stat().st_size} bytes)")
+    except FetchError as exc:
+        typer.echo(f"fetch failed: {exc}")
+        raise typer.Exit(code=1) from exc
+
+
+@app.command("standardise")
+def standardise_cmd(
+    source: Annotated[str, typer.Argument(help="Source id; builds the extracts its recipes need.")],
+    offline: Annotated[bool, typer.Option(help=OFFLINE_HELP)] = False,
+    raw_dir: Annotated[Path, typer.Option(help=RAW_DIR_HELP)] = RAW_ROOT,
+) -> None:
+    """Build the per-match extracts that the registered recipes of a source read."""
+    if source != "wyscout":
+        raise typer.BadParameter(f"no standardiser for {source!r}; only 'wyscout' is wired")
+    ids = sorted({i for r in RECIPES.values() if r.source_id == source for i in r.extract_ids})
+    try:
+        for match_id in ids:
+            extract = standardise.wyscout_match_extract(match_id, raw_root=raw_dir, offline=offline)
+            typer.echo(f"{source}: match {match_id} extract ok ({len(extract['events'])} events)")
+    except (FetchError, standardise.StandardiseError) as exc:
+        typer.echo(f"standardise failed: {exc}")
+        raise typer.Exit(code=1) from exc
+
+
+@app.command()
+def recipe(
+    name: Annotated[str, typer.Argument(help=f"Recipe name: {', '.join(RECIPES)}.")],
+    out: Annotated[Path, typer.Option(help="Scene JSON file to write.")],
+    offline: Annotated[bool, typer.Option(help=OFFLINE_HELP)] = False,
+    raw_dir: Annotated[Path, typer.Option(help=RAW_DIR_HELP)] = RAW_ROOT,
+) -> None:
+    """Build one scene from a registered recipe and write it as canonical JSON."""
+    if name not in RECIPES:
+        raise typer.BadParameter(f"unknown recipe {name!r}; choose from {list(RECIPES)}")
+    try:
+        scene = RECIPES[name].build(raw_dir, offline)
+    except (FetchError, standardise.StandardiseError) as exc:
+        typer.echo(f"recipe failed: {exc}")
+        raise typer.Exit(code=1) from exc
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_bytes(dump_scene(scene))
+    typer.echo(f"wrote {out}: {scene.id} ({len(scene.events)} events, {scene.frames[-1].t:.1f} s)")
