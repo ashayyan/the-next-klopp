@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import shutil
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -193,6 +194,40 @@ def test_catalog_orders_versions_of_a_dataset_by_generated_at_not_by_hash(tmp_pa
         publish(data_root=data, public_root=public, allow=allow())
         catalog = json.loads((public / "catalog.json").read_bytes())
         assert [d["version"] for d in catalog["datasets"]] == [first.name, second.name]
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"license": "CC0-1.0"},
+        {"attribution": "Data: someone else"},
+        {"licence_url": "https://example.org/other"},
+        {"shippable": False},
+        {"logo_required": True},
+        {"source_id": "other"},
+    ],
+)
+def test_rewriting_a_version_with_changed_licence_facts_is_refused(
+    tmp_path: Path, change: dict[str, object]
+) -> None:
+    write_version("demo", FILES, meta(), data_root=tmp_path)
+    changed = replace(meta(), **change)
+    with pytest.raises(ImmutableVersionError, match="licence facts"):
+        write_version("demo", FILES, changed, data_root=tmp_path)
+
+
+def test_rewriting_a_version_with_a_new_timestamp_and_row_counts_is_still_a_no_op(
+    tmp_path: Path,
+) -> None:
+    first = write_version("demo", FILES, meta(), data_root=tmp_path, now="2026-01-01T00:00:00Z")
+    again = write_version(
+        "demo",
+        FILES,
+        replace(meta(), row_counts={"scenes": 9}),
+        data_root=tmp_path,
+        now="2026-06-01T00:00:00Z",
+    )
+    assert first.created and not again.created
 
 
 def test_a_leftover_staging_folder_does_not_break_publish_or_the_catalog(tmp_path: Path) -> None:

@@ -146,6 +146,28 @@ def _same_bytes(directory: Path, files: dict[str, bytes]) -> bool:
     return all((directory / name).read_bytes() == data for name, data in files.items())
 
 
+def _licence_facts_differ(directory: Path, meta: VersionMeta) -> list[str]:
+    """Names of the licence facts in the stored manifest that differ from ``meta``.
+
+    The version id hashes file bytes only, so a changed licence, attribution, licence URL, source,
+    ``shippable`` or logo flag would otherwise be dropped silently and the old facts would keep
+    shipping. ``generatedAt``, ``kloppyVersion``, row counts and inputs may differ between runs.
+    """
+    try:
+        stored = Manifest.model_validate_json((directory / MANIFEST_NAME).read_bytes())
+    except (OSError, ValueError) as exc:
+        raise ManifestError(f"{directory.name} has no readable manifest: {exc}") from exc
+    wanted = {
+        "sourceId": meta.source_id,
+        "license": meta.license,
+        "licenceUrl": meta.licence_url,
+        "attribution": meta.attribution,
+        "shippable": meta.shippable,
+        "logoRequired": meta.logo_required,
+    }
+    return [name for name, value in wanted.items() if getattr(stored, name) != value]
+
+
 def write_version(
     dataset: str,
     files: dict[str, bytes],
@@ -169,6 +191,14 @@ def write_version(
 
     if target.exists():
         if _same_bytes(target, files):
+            changed = _licence_facts_differ(target, meta)
+            if changed:
+                raise ImmutableVersionError(
+                    f"{dataset}/{version} already exists with different licence facts "
+                    f"({', '.join(changed)}); versions are immutable, so the stored manifest "
+                    "would keep the old facts. Change the scene content for a new version, or "
+                    "delete an unpublished local copy under data/ on purpose."
+                )
             return WriteResult(target, created=False)
         raise ImmutableVersionError(
             f"{dataset}/{version} already exists with different content; versions are immutable"
