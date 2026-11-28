@@ -6,6 +6,8 @@ import { existsSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { GLYPH_IDS } from "../../src/pitch/glyphs/registry.ts";
+import { CHECKS } from "../review/lib.ts";
 import { loadTokens } from "./build-tokens.ts";
 import { checkPalette, renderMarkdown } from "./check-palette.ts";
 import {
@@ -362,5 +364,69 @@ describe("section 5: interaction component catalogue", () => {
     expect(prim).not.toBeNull();
     for (const id of GALLERY_IDS) expect(prim).toContain(`/dev/gallery/${id})`);
     expect(s5.indexOf("### Primitives")).toBeLessThan(s5.indexOf("### Interaction components"));
+  });
+});
+
+/** The banned-pattern checks of the review registry: every `banned-*` id plus the slop and token checks. */
+const BANNED_IDS = [
+  ...CHECKS.filter((c) => c.id.startsWith("banned-")).map((c) => c.id),
+  "card-grid",
+  "arrow-suffix",
+  "no-hex-in-source",
+  "token-colours",
+];
+
+describe("section 1: principles and anti-slop rules", () => {
+  const s1 = section(1);
+
+  it("has a Do list, a Don't list and the voice rules", () => {
+    for (const h of ["### Do", "### Don't", "### Voice"]) expect(s1.split("\n")).toContain(h);
+  });
+
+  it("names the review check of every banned pattern in the Don't list", () => {
+    const dont = under(s1, "### Don't") as string;
+    expect(BANNED_IDS.length).toBeGreaterThanOrEqual(9);
+    for (const id of BANNED_IDS) expect(dont).toContain(`\`${id}\``);
+  });
+});
+
+describe("section 4: Pitch Standard", () => {
+  const s4 = section(4);
+
+  it("has one registry table row per glyph id, in registry order", () => {
+    const rows = s4
+      .split("\n")
+      .map((l) => /^\| `([a-z-]+)` \|/.exec(l)?.[1])
+      .filter((id): id is string => id !== undefined);
+    expect(rows).toEqual([...GLYPH_IDS]);
+  });
+
+  it("states the disc sizing, legend and placement rules and links ADR 0009", () => {
+    expect(s4).toContain("clamp(22px, 2.0 m, 28px)");
+    expect(s4).toContain("decisions/0009-pitch-layer-api.md");
+    expect(s4).toContain("`legend-present`");
+    expect(s4).toContain("disc radius plus 8 px");
+    expect(s4).toContain("inside the SVG");
+  });
+});
+
+describe("section 7: data-viz standards", () => {
+  const s7 = section(7);
+
+  it("covers form, colour by job, axes, annotation, uncertainty, hover and table view", () => {
+    for (const h of [
+      "### Form choice",
+      "### Colour by job",
+      "### Axes and labels",
+      "### Annotation",
+      "### Uncertainty",
+      "### Hover layer and table view",
+    ]) {
+      expect(s7.split("\n")).toContain(h);
+    }
+    expect(s7).toContain("One axis per chart");
+    expect(s7).toContain("Bars start at zero");
+    expect(s7).toContain("at most two marks");
+    expect(s7).toContain('"n ="');
   });
 });

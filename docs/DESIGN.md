@@ -4,7 +4,51 @@ This document governs how every screen of The Next Klopp looks, moves and behave
 
 ## 1. Principles and anti-slop rules
 
-This section covers brief section 9.1 (design principles, do and don't lists, banned patterns).
+This section covers brief section 9.1 (design principles, do and don't lists, banned patterns). The rules serve one learner: an adult who learns by seeing and doing and studies with ADHD. Every screen has to make one idea obvious and leave nothing competing with it.
+
+### Do
+
+- **One focal point per screen.** At every width the learner knows where to look first. When it is a pitch lesson, that is the pitch.
+- **Visual first.** The visual is the largest element and comes before the text that explains it; words sit next to the part of the visual they describe (multimedia research in `research/learning-science-adhd/findings.md`).
+- **At most 60 words a step.** One idea per screen; add one layer at a time and reuse the controls the learner already knows.
+- **Show, then touch, then practise.** Every concept follows the Lesson Loop: hook, see it, touch it, predict then reveal, do it, lock it in, connect it. Predict before the reveal, because a wrong guess still helps later recall.
+- **Let the learner act.** Dragging, scrubbing and setting a value beat watching; a manual stepper beats an animation that plays itself.
+- **Accent only on the reserved list** in section 3.1. Everything else is ink, muted ink or a surface tone.
+- **Team identity by shape as well as colour.** Filled against ring discs, filled against hollow arrowheads, a square goalkeeper, line styles per event (section 3.1, section 4).
+- **Real Premier League examples with sources.** Real clubs, seasons, matches and dates, each claim traceable to the source registry, contested topics labelled contested with both sides. No crests or logos.
+- **Calm motion that the learner starts.** Nothing moves before input; motion carries meaning (section 3.6); reduced motion is honoured everywhere.
+- **Quick feedback inside the lesson**, about competence and progress, never points, streaks or guilt.
+- **Keyboard and screen reader first-class.** Every interaction has a keyboard path and a non-visual equivalent (section 5).
+
+### Don't
+
+Each banned pattern names the `review:screens` check that catches it (section 8). Where no machine check exists, the independent reviewer catches it.
+
+| Banned pattern | Caught by |
+|----------------|-----------|
+| Gradients of any kind (linear, radial, conic), including the generic gradient hero | `banned-gradient` |
+| Glass panels and backdrop blur | `banned-glass` |
+| Emoji anywhere in the interface, including emoji bullets and emoji icons | `banned-emoji` |
+| Striped, textured or shadowed pitches (the stock "grass" look) | `banned-stripes` |
+| `transition: all` | `banned-transition-all` |
+| Uppercase, letter-spaced eyebrow labels above headings | `banned-eyebrow` |
+| Default card grids (three or more identical boxes in a row) | `card-grid` |
+| Buttons and links whose text ends in an arrow | `arrow-suffix` |
+| Colour literals outside the tokens (hex or `rgb(` in source) | `no-hex-in-source` |
+| Any computed colour that is not a token of the active theme | `token-colours` |
+| Default chart palettes from a library | `token-colours` and the palette gate (`npm run palette`) |
+| Violet or indigo accents, neon on near-black, one accented word in a headline, decorative blobs | the independent reviewer (rubric criterion 5, anti-slop and taste) |
+| Text crowded past the 70-character measure, or two elements competing for focus | the independent reviewer (rubric criteria 1 and 3) |
+| Autoplay, loops, parallax and scroll-triggered reveals | `reduced-motion` and the independent reviewer |
+
+### Voice
+
+- Plain words, second person or the imperative ("Flip the switch and watch who moves").
+- No exclamation marks, no "Oops", no blame, no hype.
+- An error names what happened and the next step ("The goal data didn't load. Run npm run data, then reload this page.").
+- Curly quotes, the ellipsis character, an en dash in scores ("5–0") and the minus sign (U+2212) for negative numbers.
+- No arrows, check marks or less-than-or-equal signs in copy (they are outside the font subset; section 3.2).
+- Copy is checked by `copy-lint` inside `review:screens` (check `taste-copy`).
 
 ## 2. Visual direction
 
@@ -817,7 +861,69 @@ The format is DTCG-style, not strict DTCG 2025.10, in two ways: a colour `$value
 
 ## 4. Pitch Standard
 
-This section covers brief section 9.4 (the canonical pitch renderer, coordinate systems, glyphs and the notation legend).
+This section covers brief section 9.4 (the canonical pitch renderer, coordinate systems, glyphs and the notation legend). It summarises the Phase 3 contract (`.planning/phases/03-pitch-standard-data-pipeline/03-UI-SPEC.md`) and [ADR 0009](decisions/0009-pitch-layer-api.md), which froze the layer API. When the two disagree, ADR 0009 and the code in `src/pitch/` win; change them only through a new decision record.
+
+### One pitch, one coordinate space
+
+- **Canonical metres.** Every visual draws on one `<Pitch>` component (`src/pitch/Pitch.tsx`). Its SVG user space is canonical metres: x from 0 to the pitch length along the touchline, y from 0 to the width, downward. The default pitch is 105 by 68 m; a scene with its own size (for example 100 by 65 m) draws that size.
+- **Markings** come from the pure `pitchGeometry(length, width)` with the IFAB Law 1 values (centre circle 9.15 m, penalty area 16.5 m deep and 40.32 m wide, goal area 5.5 m, penalty mark 11 m). Lines are 1.5 px `--pitch-line`, not to scale, centred on the exact coordinate.
+- **Provider converters.** StatsBomb (120 by 80), Opta and Wyscout (0 to 100), TRACAB, Metrica and centred tracking metres are converted to canonical metres in one tested module (`src/pitch/coords.ts`). Converted data never carries the provider's axes into a component.
+- **One view matrix.** Horizontal is the identity. Vertical, used below 480 px of stage width, is a single group matrix (`matrix(0 -1 1 0 0 L)`) so canonical x runs bottom to top. Data is never rotated; text inside glyphs is counter-rotated to read upright.
+- **Pointer input** goes through the inverse of the canonical-root group's screen matrix, so dragging is right in both orientations.
+- **Three layers** in one container: a bottom SVG (run-off and field), an optional Canvas layer for dense marks with the same matrix times the device pixel ratio, and a top SVG with the markings and every glyph. Only the top SVG takes pointer events.
+- **Scene/Frame format.** Every pitch view reads the same scene file (teams, entities, frames, events, source). Playback is `state = f(t)` on a clock kept outside React; Smooth interpolates, Stepped jumps keyframe to keyframe.
+- **Flat field.** One fill (`--pitch-surface`) on a run-off (`--pitch-runoff`): no stripes, gradient, texture or shadow (check `banned-stripes`).
+
+### Glyph registry
+
+The registry (`src/pitch/glyphs/registry.ts`) is the learner's notation vocabulary. Its order is the legend order. An id that is not registered is an error, never a silent draw, and every glyph renders `data-glyph="<id>"`.
+
+| Id | Legend label | Meaning and encoding |
+|----|--------------|----------------------|
+| `player-a` | Team A player | Filled disc in `--team-a` with the shirt number in `--team-a-ink`, and a 2 px surface-coloured outer ring that separates overlapping discs |
+| `player-b` | Team B player | Ring disc: `--team-b-fill` inside a 3 px `--team-b` ring, number in `--team-b-ink` |
+| `goalkeeper-a` | Goalkeeper (team A) | Rounded square instead of a disc, team A fill rules |
+| `goalkeeper-b` | Goalkeeper (team B) | Rounded square instead of a disc, team B ring rules |
+| `ball` | Ball | Small circle, `--ball-fill` with a 2 px `--ball-ring`, drawn above players and offset toward the attacking direction when a player has it |
+| `pass` | Pass | 2 px solid line in the acting team's colour; arrowhead filled for team A, hollow for team B |
+| `carry` | Carry | 2 px dashed line (`6 4`): the player runs with the ball; same arrowhead rule |
+| `run` | Run without the ball | 2 px dotted line (round caps): movement off the ball; same arrowhead rule |
+| `shot` | Shot | 3 px solid line ending in an 8 px circle at the target: filled for a goal, hollow for no goal |
+| `pressure` | Pressure | 60-degree wedge from the presser toward the player pressed, filled for team A, outline for team B |
+| `zone` | Zone | Shaded area in `--zone-fill` at `--zone-fill-opacity`, dashed `--zone-line` border, optional label chip |
+| `shape` | Shape line | 2 px line joining the players of one unit, drawn under the players |
+| `highlight` | Highlighted | Dashed `--highlight` ring at disc radius plus 4 px around a player or point to look at |
+| `annotation` | Note | Short label (at most 40 characters) on a `--label-bg` chip with a `--label-border` edge |
+| `point` | Point | A marked spot, such as a tapped answer: an ink cross on a small white circle |
+| `density` | Event location (Canvas) | One 3 px dot per event in `--density-mark`, drawn on the Canvas layer |
+| `sequence-badge` | Sequence order | The number of each action in a possession chain, 12 px on a 16 px circle with an ink ring |
+
+Event glyphs follow the clock: an event appears once `t` reaches its time, the current event is at full opacity and earlier ones at 0.4. Discs carry the shirt number, as the legend says; a screen that shows position codes instead (GK, CB, ST) must say so in its legend description.
+
+### Sizing
+
+Glyph sizes are screen pixels converted to metres with the live pixels-per-metre and clamped, so a glyph stays legible at 320 px and does not balloon at 1440 px. Positions stay exact metres. Lines use `vector-effect: non-scaling-stroke`.
+
+| Glyph | Rule |
+|-------|------|
+| Player disc diameter | `clamp(22px, 2.0 m, 28px)`; 22 px is the minimum that fits a 12 px number |
+| Ball diameter | `clamp(10px, 1.0 m, 14px)` |
+| Arrowhead | 8 px long, 8 px wide |
+| Glyph text | 12 px, weight 600, line height 1 (`pitch.glyphText`, `--pitch-glyph-text`) |
+| Hit target for a draggable player | at least 22 px on the pitch; controls outside the pitch keep the 44 px rule |
+
+### Legend
+
+- **Always visible.** Every pitch has its Notation legend on the same screen (check `legend-present`). It is never hidden behind hover, never off-screen, and focus mode keeps it.
+- **Generated from the scene.** It lists exactly the glyph ids present in the render, in registry order, with team names from the scene. Nobody types a legend by hand.
+- **Two states:** expanded (swatch, label and description) and collapsed (swatch and label, never a swatch alone). The empty state reads "No marks to explain yet."
+- **Placement:** beside the pitch from 1024 px (the Phase 3 default is a 288 px column; a lesson template may put it at the top of its reading column), and under the pitch or its playback bar below 1024 px.
+
+### Placement rules for badges and chips
+
+- **Sequence badges** (`sequence-badge`) sit the disc radius plus 8 px from their event's start point. The placer tries, in order, the left of the direction of travel, the right, behind the start and ahead of it, and takes the first side that is clear of every player disc and inside the pitch. If no side is clear, it steps further out (1.42 and then 2 times the distance) before falling back to the left side. Placement works in screen space, so the rule holds in both orientations (`src/pitch/glyphs/placement.ts`).
+- **Note chips** (`annotation`) are placed in screen pixels after the orientation transform. A chip that would cross an edge of the pitch moves to the other side of its anchor and is then clamped, so it always lies inside the SVG.
+- **Known gaps** from the ADR 0010 review, to close before Phase 5 lessons ship: at 375 px in a dense possession chain, badges can touch one another (the placer checks discs, not other badges), and at `t = 0` the ball can sit over a disc's number. The functional pitch-fixes spec (plan 04-17) asserts the badge-to-disc rule in a real browser.
 
 ## 5. Interaction component catalogue
 
@@ -1353,7 +1459,66 @@ This section covers brief section 9.6 (page layouts for the concept, simulation,
 
 ## 7. Data-viz standards
 
-This section covers brief section 9.7 (chart choice, axis and label rules, annotation style and uncertainty display).
+This section covers brief section 9.7 (chart choice, axis and label rules, annotation style and uncertainty display). Charts follow the same rules as the pitch: one idea, labels next to the marks, nothing that relies on colour alone.
+
+### Form choice
+
+Pick the form from the question, not from the data:
+
+| The question | The form |
+|--------------|----------|
+| How do a few values compare? | Bars (horizontal when the labels are long) |
+| How does a value change over time or over a sequence? | A line, or bars when the steps are discrete actions |
+| How are values spread? | A dot strip or a histogram, never a pie |
+| How do two measures relate? | A scatter with direct labels on the points that matter |
+| Where on the pitch? | The Pitch Standard (dots, zones, density), never a chart pretending to be a pitch |
+| Parts of a whole | A single stacked bar, at most five parts |
+| A player profile against a pool | A percentile radar or pizza with the pool named (section 5, Radar/Pizza Builder) |
+
+No 3D, no donut or pie for comparisons, no dual axes, no decorative chart junk.
+
+### Colour by job
+
+Colour comes only from the data scales in section 3.1, chosen by job: categorical for identity, sequential for magnitude, diverging for polarity around a meaningful middle. A series about a team wears that team's colour (categorical slots 1 and 2). More than three series fold into "Other" or become small multiples. Accent is never a chart mark. Grey (`--data-cat-other`) is for context, colour for the thing the learner should look at.
+
+### Axes and labels
+
+- **One axis per chart.** Never two y-axes on one chart; split it into two charts that share the x-axis.
+- **Bars start at zero.** A bar's length is its value, so a bar axis always includes zero; a negative value goes below the zero line. Lines and dots may use a tighter range, and the axis says so.
+- **Label the axis with its unit and direction** in words ("Metres toward Liverpool's goal"), in the label size, in ink-muted.
+- **Few gridlines**, in a quiet tone, at round steps (for example every 10 m). No border around the plot.
+- **Numbers** use the mono face with tabular numerals, one sensible precision for the whole chart, the minus sign U+2212 and a unit.
+- **Direct labels instead of legends** when there are three series or fewer. A single-series chart has no legend box; its title names the series.
+
+### Annotation
+
+Put the explanation on the chart, next to the mark it explains, not in a distant paragraph. Direct labels go on at most two marks per chart: the ones the step is about. An annotation is short (a value and what it means), uses the label size, and never covers another mark.
+
+### Uncertainty
+
+- Show an interval whenever one exists: an interval bar on a point, a band around a line. A point estimate is never shown alone when its interval is known.
+- Always show the sample size as "n =" next to the chart or in its caption.
+- Small samples say so in words ("Fewer than 30 players, so percentiles are unstable"), and the Metric Noise Lab (section 5) teaches why.
+- Model outputs (xG, xT, valuations) are labelled as estimates, with the model and its data source in the source line.
+
+### Hover layer and table view
+
+- **Hover and focus** show the same tooltip: a short title, the mark's label and its value with the unit. Every mark is reachable by keyboard; hovering or focusing never moves a clock or changes the lesson.
+- **Table view.** Every chart has a table with the same numbers, as a real `<table>` with a caption. At 375 px the table can replace the chart through a tab, and it never scrolls sideways.
+- **Linked views.** When a chart, a table and a pitch show the same events, selecting one highlights the same item in the other two.
+
+### Worked example: "Metres forward, per action"
+
+The data-lab reference screen (`/dev/directions/floodlit/data`) follows every rule above:
+
+- Vertical bars, one per action (1 to 10), so the steps are discrete.
+- One series in the team A colour, with no legend box because the title names the series.
+- A zero baseline with negative values below it, running from −20 to +35 m with gridlines every 10 m.
+- A y-axis label that names the unit and the direction: "Metres toward Liverpool's goal".
+- A direct label on one bar only: "+31.5 m, Mangala to De Bruyne".
+- A keyboard tooltip per bar ("Action 6", "Mangala to De Bruyne, pass", "+31.5 m at 9.7 s").
+- The ten-row event table as its table view, linked to the pitch: focusing a bar or row highlights the event on the pitch, and Enter seeks the clock to it.
+- Every number is computed from the published scene file and tested, never typed.
 
 ## 8. Quality bar
 
