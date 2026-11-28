@@ -29,6 +29,7 @@ from klopp_pipeline import standardise
 from klopp_pipeline.fetch import fetch_source
 from klopp_pipeline.recipes.wyscout_goal import RecipeError, kebab
 from klopp_pipeline.scene import Entity, Frame, Pitch, Point, Scene, ShotEvent, Source, Team
+from klopp_pipeline.sources import AllowListFile
 
 RECIPE_NAME = "statsbomb-shot"
 SOURCE_ID = "statsbomb"
@@ -194,9 +195,9 @@ def build_scene(
     )
 
 
-def build(raw_root: Path, offline: bool) -> Scene:
-    """Fetch (allow-listed, size-capped), standardise and build the pinned shot."""
-    paths = fetch_source(SOURCE_ID, raw_root=raw_root, offline=offline)
+def build(raw_root: Path, offline: bool, allow: AllowListFile | None = None) -> Scene:
+    """Fetch (allow-listed, hash-pinned), standardise and build the pinned shot."""
+    paths = fetch_source(SOURCE_ID, allow=allow, raw_root=raw_root, offline=offline)
     dataset = standardise.load_statsbomb_match(paths[EVENTS_FILE], paths[LINEUPS_FILE])
     matches = json.loads(Path(paths[MATCHES_FILE]).read_bytes())
     match = next((m for m in matches if m.get("match_id") == MATCH_ID), None)

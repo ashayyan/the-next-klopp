@@ -24,6 +24,7 @@ from typing import Any, Literal
 from kloppy.domain import EventDataset, EventType, Ground, Orientation, PassResult
 
 from klopp_pipeline import standardise
+from klopp_pipeline.sources import AllowListFile
 from klopp_pipeline.scene import (
     Annotation,
     Clock,
@@ -330,7 +331,9 @@ def build_scene(extract: dict[str, Any], config: WyscoutGoalConfig | None = None
     return chain_to_scene(dataset, extract, chain, config)
 
 
-def build(raw_root: Path, offline: bool) -> Scene:
+def build(raw_root: Path, offline: bool, allow: AllowListFile | None = None) -> Scene:
     """Fetch (allow-listed, hash-pinned), standardise and build the pinned goal."""
-    extract = standardise.wyscout_match_extract(MATCH_ID, raw_root=raw_root, offline=offline)
+    extract = standardise.wyscout_match_extract(
+        MATCH_ID, raw_root=raw_root, offline=offline, allow=allow
+    )
     return build_scene(extract)

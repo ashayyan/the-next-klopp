@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Annotated
 
 import typer
+from pydantic import ValidationError
 
 from klopp_pipeline import landmarks as landmarks_mod
 from klopp_pipeline import net, standardise
@@ -16,6 +17,7 @@ from klopp_pipeline.fetch import RAW_ROOT, fetch_source
 from klopp_pipeline.manifest import ManifestError, write_scene_version
 from klopp_pipeline.net import FetchError
 from klopp_pipeline.recipes import RECIPES
+from klopp_pipeline.recipes.wyscout_goal import RecipeError
 from klopp_pipeline.scene import dump_scene
 from klopp_pipeline.sources import get_source, load_allow_list
 
@@ -27,6 +29,9 @@ DEFAULT_OUT = REPO_ROOT / "research" / "pl-data-sources"
 DEFAULT_LANDMARKS = REPO_ROOT / "src" / "pitch" / "fixtures" / "landmarks.json"
 DEFAULT_DATA = REPO_ROOT / "data"
 DEFAULT_PUBLIC = REPO_ROOT / "public" / "data"
+
+# Everything a recipe run can raise on bad input or bad data: reported as one clean line, no traceback.
+RECIPE_ERRORS = (FetchError, standardise.StandardiseError, ManifestError, RecipeError, ValidationError)
 
 
 @app.callback()
@@ -135,7 +140,7 @@ def recipe(
     chosen = RECIPES[name]
     allow = load_allow_list()
     try:
-        scene = chosen.build(raw_dir, offline)
+        scene = chosen.build(raw_dir, offline, allow)
         result = write_scene_version(
             scene,
             source=get_source(allow, chosen.source_id),
@@ -144,7 +149,7 @@ def recipe(
             raw_root=raw_dir,
             data_root=data_dir,
         )
-    except (FetchError, standardise.StandardiseError, ManifestError) as exc:
+    except RECIPE_ERRORS as exc:
         typer.echo(f"recipe failed: {exc}")
         raise typer.Exit(code=1) from exc
     state = "wrote" if result.created else "already present"
@@ -193,7 +198,7 @@ def run_all(
                 paths = fetch_source(source.id, allow=allow, raw_root=raw_dir, offline=offline)
                 typer.echo(f"{source.id}: {len(paths)} file(s) verified")
         for chosen in RECIPES.values():
-            scene = chosen.build(raw_dir, offline)
+            scene = chosen.build(raw_dir, offline, allow)
             result = write_scene_version(
                 scene,
                 source=get_source(allow, chosen.source_id),
@@ -206,7 +211,7 @@ def run_all(
                 new_files += len(list(result.path.iterdir()))
             typer.echo(f"{chosen.name}: {'wrote' if result.created else 'already present'} {result.path.name}")
         outcome = publish_mod.publish(data_root=data_dir, public_root=public_dir, allow=allow)
-    except (FetchError, standardise.StandardiseError, ManifestError) as exc:
+    except RECIPE_ERRORS as exc:
         typer.echo(f"run-all failed: {exc}")
         raise typer.Exit(code=1) from exc
     for path in outcome.copied:

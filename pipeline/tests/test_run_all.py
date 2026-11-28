@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
@@ -13,7 +14,7 @@ from typer.testing import CliRunner
 
 from klopp_pipeline import cli, standardise
 from klopp_pipeline.recipes import Recipe
-from klopp_pipeline.recipes.wyscout_goal import WyscoutGoalConfig, build_scene
+from klopp_pipeline.recipes.wyscout_goal import RecipeError, WyscoutGoalConfig, build_scene
 from klopp_pipeline.sources import AllowListFile, load_allow_list
 
 BODIES = {
@@ -60,9 +61,9 @@ def seed_raw(raw: Path) -> None:
 @pytest.fixture
 def synthetic_recipe(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> Path:
     allow_path = write_allow(tmp_path)
-    allow = AllowListFile.model_validate_json(allow_path.read_bytes())
 
-    def build(raw_root: Path, offline: bool) -> Any:
+    def build(raw_root: Path, offline: bool, allow: AllowListFile | None = None) -> Any:
+        # Only the allow-list the CLI hands down is used, so a run that dropped --sources would fail.
         extract = standardise.wyscout_match_extract(
             syn.MATCH_ID, raw_root=raw_root, offline=offline, allow=allow
         )
@@ -178,3 +179,18 @@ def test_the_committed_allow_list_and_default_paths_resolve_from_the_repo_root()
     assert cli.DEFAULT_DATA == cli.REPO_ROOT / "data"
     assert cli.DEFAULT_PUBLIC == cli.REPO_ROOT / "public" / "data"
     assert load_allow_list().sources
+
+
+def test_a_recipe_error_is_one_clean_line_not_a_traceback(
+    tmp_path: Path, synthetic_recipe: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def broken(raw_root: Path, offline: bool, allow: AllowListFile | None = None) -> Any:
+        raise RecipeError("shot event 1 is not in match 2")
+
+    seed_raw(tmp_path / "raw")
+    recipe = cli.RECIPES["wyscout-goal"]
+    monkeypatch.setattr(cli, "RECIPES", {"wyscout-goal": replace(recipe, build=broken)})
+    result = CliRunner().invoke(cli.app, args(tmp_path, synthetic_recipe))
+    assert result.exit_code == 1
+    assert "run-all failed: shot event 1 is not in match 2" in result.output
+    assert not isinstance(result.exception, RecipeError)

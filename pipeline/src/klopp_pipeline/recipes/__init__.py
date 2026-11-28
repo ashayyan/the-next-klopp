@@ -2,11 +2,18 @@
 
 from __future__ import annotations
 
-from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Protocol
 
 from klopp_pipeline.scene import Scene
+from klopp_pipeline.sources import AllowListFile
+
+
+class Builder(Protocol):
+    """``allow`` is the allow-list the run was started with; None means the default file."""
+
+    def __call__(self, raw_root: Path, offline: bool, allow: AllowListFile | None = None) -> Scene: ...
 
 
 @dataclass(frozen=True)
@@ -16,7 +23,7 @@ class Recipe:
     name: str
     source_id: str  # an id in pipeline/sources.allow.json
     dataset: str  # output folder under data/<dataset>/ (used by the versioned writer)
-    build: Callable[[Path, bool], Scene]  # (raw_root, offline) -> Scene
+    build: Builder  # (raw_root, offline, allow) -> Scene
     extract_ids: tuple[int, ...] = ()  # matches the `standardise` command extracts for this recipe
 
 
