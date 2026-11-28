@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 5
 current_phase_name: Content Engine, App Shell & Deploy
 status: executing
-stopped_at: Completed 05-03-PLAN.md
-last_updated: "2026-11-28T16:19:53.999Z"
+stopped_at: Completed 05-04-PLAN.md
+last_updated: "2026-11-28T16:29:07.536Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 complete, transitioned to Phase 5
-state_head: eb7dced9e6b9a0ddf4cdc93283c121bdb34b825f
+state_head: 3f12d9bc90700b9e20dcebd5e1b4e9dd9690c957
 progress:
   total_phases: 8
   completed_phases: 4
   total_plans: 78
-  completed_plans: 61
+  completed_plans: 62
   percent: 50
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 5 (Content Engine, App Shell & Deploy) — EXECUTING
-Plan: 4 of 20
+Plan: 5 of 20
 Status: Ready to execute
 Last activity: 2026-11-28 — Completed 05-01 (MDX lessons through virtual:tnk-lessons, /learn/:lessonId, fixtures build)
 
@@ -109,6 +109,7 @@ Progress: [█████░░░░░] 50%
 | Phase 05 P01 | 15min | 2 tasks | 22 files |
 | Phase 05 P02 | 12min | 3 tasks | 22 files |
 | Phase 5 P03 | 22min | 2 tasks | 44 files |
+| Phase 5 P04 | 25min | 3 tasks | 17 files |
 
 ## Accumulated Context
 
@@ -195,6 +196,8 @@ Recent decisions affecting current work:
 - [Phase 5]: Validator adds rule mdx-parse: a missing lesson.mdx or MDX syntax error is a validator line, not a crash
 - [Phase 5]: content/lesson-manifest.json drift is checked by parsed-JSON equality so Biome formatting never stales it; steps carry screen (screen ?? id)
 - [Phase 5]: link-scheme allows only https: and root-relative paths; //host is rejected
+- [Phase 5]: 05-04: walker parks the pointer before axe; primary button hover contrast (4.2:1 light) deferred to design system (deferred-items.md)
+- [Phase 5]: 05-04: required build job runs in the Playwright v1.65.1-noble container with 20-minute timeout; review:screens --fixtures previews dist-walker on 4175
 
 ### Pending Todos
 
@@ -224,6 +227,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T16:19:53.420Z
-Stopped at: Completed 05-03-PLAN.md
+Last session: 2026-11-28T16:29:07.071Z
+Stopped at: Completed 05-04-PLAN.md
 Resume file: None
