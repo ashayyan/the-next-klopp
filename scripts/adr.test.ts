@@ -73,6 +73,7 @@ const required: Array<[string, string[]]> = [
       "picked by Claude under learner delegation",
     ],
   ],
+  ["0011", ["MDX", "lesson.json", "virtual:tnk-lessons"]],
 ];
 
 describe("ADR coverage", () => {

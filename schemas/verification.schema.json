@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-next-klopp.example/schemas/verification.schema.json",
+  "title": "Verification record",
+  "$comment": "Verification record v1 (QA-01): verification.json next to a lesson, written by a verifier that is not the author. claimId is <stepId>/<component>-<n> counted per step in document order, with .side-<n> for each <Contested> side (05-RESEARCH Pattern 7). contentSha256 hashes the MDX and the spec without status and shippedAt. Rules JSON Schema cannot express (verifier differs from author, hash is current, claim set equals the lesson's, excerpt at most 25 words, excerptId hash matches the registry, Opus for rules and stats) live in the content validator (05-13). Frozen: additive changes only. ADR 0011.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "lessonId",
+    "lessonVersion",
+    "contentSha256",
+    "author",
+    "verifier",
+    "verifierModel",
+    "verifiedAt",
+    "claims"
+  ],
+  "properties": {
+    "lessonId": { "$ref": "common.schema.json#/$defs/kebabId" },
+    "lessonVersion": { "type": "integer", "minimum": 1 },
+    "contentSha256": { "$ref": "common.schema.json#/$defs/sha256" },
+    "author": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "verifier": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "verifierModel": { "type": "string", "minLength": 1, "maxLength": 80 },
+    "verifiedAt": { "$ref": "common.schema.json#/$defs/utcDateTime" },
+    "claims": {
+      "type": "array",
+      "maxItems": 200,
+      "items": { "$ref": "#/$defs/claim" }
+    }
+  },
+  "$defs": {
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claimId",
+        "sourceId",
+        "url",
+        "fetchedAt",
+        "excerptSha256",
+        "excerpt",
+        "verdict"
+      ],
+      "properties": {
+        "claimId": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*/[a-z]+-\\d+(?:\\.side-\\d+)?$"
+        },
+        "sourceId": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "dataRef": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+/v\\d+-[a-z0-9]+/[A-Za-z0-9._-]+$"
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^(?:https?://[^\\s/$.?#][^\\s]*|/data/[A-Za-z0-9._/-]+)$"
+        },
+        "fetchedAt": { "$ref": "common.schema.json#/$defs/utcDateTime" },
+        "excerptSha256": { "$ref": "common.schema.json#/$defs/sha256" },
+        "excerpt": { "type": "string", "minLength": 1, "maxLength": 300 },
+        "excerptId": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "verdict": { "enum": ["supported", "unsupported", "contested"] }
+      }
+    }
+  }
+}

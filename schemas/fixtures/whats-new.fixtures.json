@@ -1,0 +1,121 @@
+{
+  "valid": [
+    {
+      "name": "seed-entry",
+      "doc": {
+        "schemaVersion": 1,
+        "entries": [
+          {
+            "date": "2026-11-28",
+            "title": "The app is ready for lessons",
+            "summary": "Tracks, What’s new and the lesson player are in place. Track 0, Start here, is the first track to ship.",
+            "lessonIds": []
+          }
+        ]
+      }
+    },
+    {
+      "name": "entry-with-lessons",
+      "doc": {
+        "schemaVersion": 1,
+        "entries": [
+          {
+            "date": "2026-12-05",
+            "title": "Track 0 is open",
+            "summary": "Three lessons.",
+            "lessonIds": ["role-map-intro", "how-to-study"]
+          },
+          {
+            "date": "2026-11-28",
+            "title": "The app is ready for lessons",
+            "summary": "Tracks, What’s new and the lesson player are in place. Track 0, Start here, is the first track to ship.",
+            "lessonIds": []
+          }
+        ]
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "bad-date",
+      "reason": "date is YYYY-MM-DD",
+      "expect_path": "/entries/0/date",
+      "doc": {
+        "schemaVersion": 1,
+        "entries": [
+          {
+            "date": "2026-13-40",
+            "title": "The app is ready for lessons",
+            "summary": "Tracks, What’s new and the lesson player are in place. Track 0, Start here, is the first track to ship.",
+            "lessonIds": []
+          }
+        ]
+      }
+    },
+    {
+      "name": "unknown-entry-key",
+      "reason": "additionalProperties is false",
+      "expect_path": "/entries/0/lessons",
+      "doc": {
+        "schemaVersion": 1,
+        "entries": [
+          {
+            "date": "2026-11-28",
+            "title": "The app is ready for lessons",
+            "summary": "Tracks, What’s new and the lesson player are in place. Track 0, Start here, is the first track to ship.",
+            "lessonIds": [],
+            "lessons": []
+          }
+        ]
+      }
+    },
+    {
+      "name": "title-over-60",
+      "reason": "entry titles are at most 60 characters",
+      "expect_path": "/entries/0/title",
+      "doc": {
+        "schemaVersion": 1,
+        "entries": [
+          {
+            "date": "2026-11-28",
+            "title": "A What’s new title that keeps going and going well past sixty characters",
+            "summary": "Tracks, What’s new and the lesson player are in place. Track 0, Start here, is the first track to ship.",
+            "lessonIds": []
+          }
+        ]
+      }
+    },
+    {
+      "name": "schema-version-2",
+      "reason": "v1 only",
+      "expect_path": "/schemaVersion",
+      "doc": {
+        "schemaVersion": 2,
+        "entries": [
+          {
+            "date": "2026-11-28",
+            "title": "The app is ready for lessons",
+            "summary": "Tracks, What’s new and the lesson player are in place. Track 0, Start here, is the first track to ship.",
+            "lessonIds": []
+          }
+        ]
+      }
+    },
+    {
+      "name": "lesson-id-not-kebab",
+      "reason": "lesson ids are kebab-case",
+      "expect_path": "/entries/0/lessonIds/0",
+      "doc": {
+        "schemaVersion": 1,
+        "entries": [
+          {
+            "date": "2026-11-28",
+            "title": "The app is ready for lessons",
+            "summary": "Tracks, What’s new and the lesson player are in place. Track 0, Start here, is the first track to ship.",
+            "lessonIds": ["Role Map"]
+          }
+        ]
+      }
+    }
+  ]
+}

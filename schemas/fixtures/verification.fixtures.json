@@ -1,0 +1,237 @@
+{
+  "valid": [
+    {
+      "name": "full-record",
+      "doc": {
+        "lessonId": "fx-a-goal-in-ten-actions",
+        "lessonVersion": 1,
+        "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "author": "gsd-executor/phase-05-fixture",
+        "verifier": "gsd-verifier/phase-05",
+        "verifierModel": "claude-opus-5-5",
+        "verifiedAt": "2026-11-28T12:00:00Z",
+        "claims": [
+          {
+            "claimId": "see-the-chain/fact-1",
+            "sourceId": "src-ifab-laws-of-the-game",
+            "url": "https://www.theifab.com/laws/latest/the-ball-in-and-out-of-play/",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "supported"
+          },
+          {
+            "claimId": "see-the-chain/stat-1",
+            "sourceId": "src-wyscout-open-events",
+            "url": "/data/wyscout/v1-809b8aff1fda/manifest.json",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "supported",
+            "dataRef": "wyscout/v1-809b8aff1fda/scene-wyscout-2499754-sane-goal.json",
+            "excerptId": "goal-scored"
+          },
+          {
+            "claimId": "connect-shapes/contested-1.side-2",
+            "sourceId": "src-ifab-laws-of-the-game",
+            "url": "https://www.theifab.com/laws/latest/the-ball-in-and-out-of-play/",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "contested"
+          }
+        ]
+      }
+    },
+    {
+      "name": "no-claims",
+      "doc": {
+        "lessonId": "fx-a-goal-in-ten-actions",
+        "lessonVersion": 1,
+        "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "author": "gsd-executor/phase-05-fixture",
+        "verifier": "gsd-verifier/phase-05",
+        "verifierModel": "claude-opus-5-5",
+        "verifiedAt": "2026-11-28T12:00:00Z",
+        "claims": []
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "verdict-outside-three",
+      "reason": "verdict is supported, unsupported or contested",
+      "expect_path": "/claims/0/verdict",
+      "doc": {
+        "lessonId": "fx-a-goal-in-ten-actions",
+        "lessonVersion": 1,
+        "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "author": "gsd-executor/phase-05-fixture",
+        "verifier": "gsd-verifier/phase-05",
+        "verifierModel": "claude-opus-5-5",
+        "verifiedAt": "2026-11-28T12:00:00Z",
+        "claims": [
+          {
+            "claimId": "see-the-chain/fact-1",
+            "sourceId": "src-ifab-laws-of-the-game",
+            "url": "https://www.theifab.com/laws/latest/the-ball-in-and-out-of-play/",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "probably"
+          }
+        ]
+      }
+    },
+    {
+      "name": "content-sha-not-64-hex",
+      "reason": "contentSha256 is 64 lowercase hex characters",
+      "expect_path": "/contentSha256",
+      "doc": {
+        "lessonId": "fx-a-goal-in-ten-actions",
+        "lessonVersion": 1,
+        "contentSha256": "abc123",
+        "author": "gsd-executor/phase-05-fixture",
+        "verifier": "gsd-verifier/phase-05",
+        "verifierModel": "claude-opus-5-5",
+        "verifiedAt": "2026-11-28T12:00:00Z",
+        "claims": [
+          {
+            "claimId": "see-the-chain/fact-1",
+            "sourceId": "src-ifab-laws-of-the-game",
+            "url": "https://www.theifab.com/laws/latest/the-ball-in-and-out-of-play/",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "supported"
+          }
+        ]
+      }
+    },
+    {
+      "name": "claim-url-neither-http-nor-data",
+      "reason": "a claim url is http(s) or a root-relative /data/ path",
+      "expect_path": "/claims/0/url",
+      "doc": {
+        "lessonId": "fx-a-goal-in-ten-actions",
+        "lessonVersion": 1,
+        "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "author": "gsd-executor/phase-05-fixture",
+        "verifier": "gsd-verifier/phase-05",
+        "verifierModel": "claude-opus-5-5",
+        "verifiedAt": "2026-11-28T12:00:00Z",
+        "claims": [
+          {
+            "claimId": "see-the-chain/fact-1",
+            "sourceId": "src-ifab-laws-of-the-game",
+            "url": "file:///C:/notes.txt",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "supported"
+          }
+        ]
+      }
+    },
+    {
+      "name": "unknown-key",
+      "reason": "additionalProperties is false",
+      "expect_path": "/status",
+      "doc": {
+        "lessonId": "fx-a-goal-in-ten-actions",
+        "lessonVersion": 1,
+        "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "author": "gsd-executor/phase-05-fixture",
+        "verifier": "gsd-verifier/phase-05",
+        "verifierModel": "claude-opus-5-5",
+        "verifiedAt": "2026-11-28T12:00:00Z",
+        "claims": [
+          {
+            "claimId": "see-the-chain/fact-1",
+            "sourceId": "src-ifab-laws-of-the-game",
+            "url": "https://www.theifab.com/laws/latest/the-ball-in-and-out-of-play/",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "supported"
+          }
+        ],
+        "status": "ok"
+      }
+    },
+    {
+      "name": "verified-at-not-utc",
+      "reason": "verifiedAt is a UTC date-time",
+      "expect_path": "/verifiedAt",
+      "doc": {
+        "lessonId": "fx-a-goal-in-ten-actions",
+        "lessonVersion": 1,
+        "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "author": "gsd-executor/phase-05-fixture",
+        "verifier": "gsd-verifier/phase-05",
+        "verifierModel": "claude-opus-5-5",
+        "verifiedAt": "2026-11-28 12:00",
+        "claims": [
+          {
+            "claimId": "see-the-chain/fact-1",
+            "sourceId": "src-ifab-laws-of-the-game",
+            "url": "https://www.theifab.com/laws/latest/the-ball-in-and-out-of-play/",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "supported"
+          }
+        ]
+      }
+    },
+    {
+      "name": "claim-missing-source-id",
+      "reason": "every claim names its registry source",
+      "expect_path": "/claims/0/sourceId",
+      "doc": {
+        "lessonId": "fx-a-goal-in-ten-actions",
+        "lessonVersion": 1,
+        "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "author": "gsd-executor/phase-05-fixture",
+        "verifier": "gsd-verifier/phase-05",
+        "verifierModel": "claude-opus-5-5",
+        "verifiedAt": "2026-11-28T12:00:00Z",
+        "claims": [
+          {
+            "claimId": "see-the-chain/fact-1",
+            "url": "https://www.theifab.com/laws/latest/the-ball-in-and-out-of-play/",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "supported"
+          }
+        ]
+      }
+    },
+    {
+      "name": "malformed-claim-id",
+      "reason": "claim ids are <stepId>/<component>-<n> (05-RESEARCH Pattern 7)",
+      "expect_path": "/claims/0/claimId",
+      "doc": {
+        "lessonId": "fx-a-goal-in-ten-actions",
+        "lessonVersion": 1,
+        "contentSha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "author": "gsd-executor/phase-05-fixture",
+        "verifier": "gsd-verifier/phase-05",
+        "verifierModel": "claude-opus-5-5",
+        "verifiedAt": "2026-11-28T12:00:00Z",
+        "claims": [
+          {
+            "claimId": "Fact 1",
+            "sourceId": "src-ifab-laws-of-the-game",
+            "url": "https://www.theifab.com/laws/latest/the-ball-in-and-out-of-play/",
+            "fetchedAt": "2026-11-28T10:00:00Z",
+            "excerptSha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "excerpt": "A goal needs the whole ball over the goal line between the posts.",
+            "verdict": "supported"
+          }
+        ]
+      }
+    }
+  ]
+}

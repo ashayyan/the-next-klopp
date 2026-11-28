@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-next-klopp.example/schemas/whats-new.schema.json",
+  "title": "What's new",
+  "$comment": "What's new v1 (PLAT-02): content/whats-new.json, newest entry first, rendered at /whats-new. Whether every lesson that flips to shipped has an entry, and whether lesson ids exist, is checked by the content validator (05-13). Frozen: additive changes only. ADR 0011.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "entries"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "entries": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/entry" }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["date", "title", "summary", "lessonIds"],
+      "properties": {
+        "date": { "$ref": "common.schema.json#/$defs/isoDate" },
+        "title": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "summary": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "lessonIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+        }
+      }
+    }
+  }
+}
