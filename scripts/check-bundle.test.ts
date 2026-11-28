@@ -2,7 +2,7 @@
 // Pure checkBundle cases build DistFile lists in memory; the CLI cases use real temp folders.
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
@@ -83,6 +83,10 @@ describe("checkBundle", () => {
     "foo/StatsBomb-export.json",
     "data/metrica/a.json",
     "data/SkillCorner/a.json",
+    "metrica/sample.csv",
+    "assets/SkillCorner-tracking.json",
+    ".cache/statsbomb.json",
+    "data/statsbomb/.hidden.json",
   ])("denies %s", (path) => {
     const { files, catalog } = cleanDist();
     const out = checkBundle([...files, file(path)], MANIFEST, catalog);
@@ -92,9 +96,18 @@ describe("checkBundle", () => {
 
   it("flags data outside the ship directories as unlisted-data", () => {
     const { files, catalog } = cleanDist();
-    const out = checkBundle([...files, file("data/metrica-extra/a.json")], MANIFEST, catalog);
+    const out = checkBundle([...files, file("data/other-extra/a.json")], MANIFEST, catalog);
     expect(rules(out)).toContain("unlisted-data");
   });
+
+  it.each(["assets/events.csv", "foo/x.parquet", "misc/archive.zip", "feed.xml"])(
+    "flags the data-like file %s outside data/ as unlisted-data",
+    (path) => {
+      const { files, catalog } = cleanDist();
+      const out = checkBundle([...files, file(path)], MANIFEST, catalog);
+      expect(out.some((v) => v.rule === "unlisted-data" && v.path === path)).toBe(true);
+    },
+  );
 
   it("flags a data file one byte over the limit", () => {
     const { files, catalog } = cleanDist();
@@ -204,6 +217,26 @@ describe("check-bundle CLI", () => {
     const r = run(makeDist({ ...cleanEntries(), "data/statsbomb/planted.json": "{}" }));
     expect(r.status).toBe(1);
     expect(`${r.stdout}${r.stderr}`).toContain("data/statsbomb/planted.json");
+  });
+
+  it("exits 1 on a content marker inside a source map", () => {
+    const r = run(
+      makeDist({ ...cleanEntries(), "assets/index-abc123.js.map": "data/statsbomb/x" }),
+    );
+    expect(r.status).toBe(1);
+    expect(`${r.stdout}${r.stderr}`).toContain("marker");
+  });
+
+  it("exits 1 on a symbolic link", () => {
+    const dist = makeDist(cleanEntries());
+    try {
+      symlinkSync(join(dist, "index.html"), join(dist, "linked.html"));
+    } catch {
+      return; // creating a symlink needs privileges on some Windows set-ups
+    }
+    const r = run(dist);
+    expect(r.status).toBe(1);
+    expect(`${r.stdout}${r.stderr}`).toContain("symlink");
   });
 
   it("exits 2 on a missing dist", () => {

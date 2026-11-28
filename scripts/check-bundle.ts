@@ -10,7 +10,24 @@ import { checkBundle, type DistFile } from "./lib/bundle.ts";
 import { loadDenyManifest } from "./lib/globs.ts";
 
 const USAGE = "usage: node scripts/check-bundle.ts [--dist dist] [--manifest <file>]";
-const TEXT_EXTENSIONS = [".js", ".html", ".css", ".json"];
+// Everything that can carry a path marker as text. Binary assets (wasm, images, fonts) are only
+// hashed, sized and checked by name.
+const TEXT_EXTENSIONS = [
+  ".js",
+  ".mjs",
+  ".html",
+  ".css",
+  ".json",
+  ".map",
+  ".svg",
+  ".txt",
+  ".csv",
+  ".tsv",
+  ".xml",
+  ".webmanifest",
+  ".ndjson",
+  ".jsonl",
+];
 
 function parseArgs(argv: string[]): { dist: string; manifest: string } | null {
   let dist = "dist";
@@ -26,13 +43,19 @@ function parseArgs(argv: string[]): { dist: string; manifest: string } | null {
   return { dist, manifest };
 }
 
-function walk(dir: string, out: string[] = []): string[] {
+/** Regular files go to `files`; symlinks are never followed or hashed, so they are reported. */
+function walk(
+  dir: string,
+  files: string[] = [],
+  links: string[] = [],
+): { files: string[]; links: string[] } {
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
-    if (entry.isDirectory()) walk(full, out);
-    else if (entry.isFile()) out.push(full);
+    if (entry.isSymbolicLink()) links.push(full);
+    else if (entry.isDirectory()) walk(full, files, links);
+    else if (entry.isFile()) files.push(full);
   }
-  return out;
+  return { files, links };
 }
 
 function toDistFile(root: string, full: string): DistFile {
@@ -58,7 +81,8 @@ function main(argv: string[]): number {
     return 2;
   }
   const manifest = loadDenyManifest(args.manifest);
-  const files = walk(args.dist).map((f) => toDistFile(args.dist, f));
+  const walked = walk(args.dist);
+  const files = walked.files.map((f) => toDistFile(args.dist, f));
   const catalogFile = files.find((f) => f.path === "data/catalog.json");
   let catalog: unknown = null;
   if (catalogFile?.text) {
@@ -69,6 +93,13 @@ function main(argv: string[]): number {
     }
   }
   const violations = checkBundle(files, manifest, catalog);
+  for (const link of walked.links) {
+    violations.push({
+      rule: "symlink",
+      path: relative(args.dist, link).replace(/\\/g, "/"),
+      detail: "symbolic links are never shipped",
+    });
+  }
   if (violations.length > 0) {
     for (const v of violations) console.error(`bundle: ${v.rule}: ${v.path} (${v.detail})`);
     return 1;

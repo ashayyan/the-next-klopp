@@ -90,6 +90,9 @@ describe("guard: local-only datasets (ADR 0008)", () => {
     "public/data/statsbomb/v1-abc/manifest.json",
     "public/data/other/a.json",
     "public/data/stray.json",
+    "public/metrica/sample.csv",
+    "public/.cache/statsbomb.json",
+    "public/clips/SkillCorner-a.json",
   ])("rejects %s", (p) => {
     expect(rules(p)).toContain("denied-path");
   });

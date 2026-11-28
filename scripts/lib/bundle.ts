@@ -9,12 +9,12 @@ export interface DistFile {
   path: string;
   bytes: number;
   sha256: string;
-  /** Text for js, html, css and json files only; null for everything else. */
+  /** Text for the text-like extensions listed in check-bundle.ts only; null for everything else. */
   text: string | null;
 }
 
 export interface BundleViolation {
-  rule: "denied" | "unlisted-data" | "oversize" | "catalog" | "marker";
+  rule: "denied" | "unlisted-data" | "oversize" | "catalog" | "marker" | "symlink";
   path: string;
   detail: string;
 }
@@ -41,6 +41,9 @@ function isDataPath(path: string): boolean {
   return path.toLowerCase().startsWith("data/");
 }
 
+/** Data-like files must live under data/ and a ship directory, wherever they sit in dist/. */
+const DATA_EXTENSIONS = /\.(?:parquet|csv|tsv|zip|ndjson|jsonl|xml|arrow|feather)$/i;
+
 function matchesAny(path: string, globs: readonly string[]): boolean {
   return globs.some((g) => matches(path, g));
 }
@@ -64,6 +67,14 @@ export function checkBundle(
     if (!isCodeAsset(path) && matchesInScope(path, manifest.denyGlobs)) {
       out.push({ rule: "denied", path, detail: "matches a deny-manifest glob" });
       denied.add(path);
+    }
+
+    if (!isDataPath(path) && DATA_EXTENSIONS.test(path) && !denied.has(path)) {
+      out.push({
+        rule: "unlisted-data",
+        path,
+        detail: "data file outside data/ and the ship directories",
+      });
     }
 
     if (f.bytes > manifest.limits.assetFileBytes) {

@@ -12,8 +12,25 @@ export function normaliseGlobPath(path: string): string {
   return p;
 }
 
+/**
+ * `path.matchesGlob` follows minimatch defaults (`dot: false`): a wildcard never matches a segment
+ * that starts with a dot, so `.cache/statsbomb.json` would slip past `**` + `/*statsbomb*`. Each
+ * path is therefore tested twice: as written, and with the leading dots stripped from every segment.
+ */
+function stripLeadingDots(path: string): string {
+  return path
+    .split("/")
+    .map((segment) => segment.replace(/^\.+(?=.)/, ""))
+    .join("/");
+}
+
 export function matches(path: string, glob: string): boolean {
-  return posix.matchesGlob(normaliseGlobPath(path).toLowerCase(), glob.toLowerCase());
+  const lowerPath = normaliseGlobPath(path).toLowerCase();
+  const lowerGlob = glob.toLowerCase();
+  return (
+    posix.matchesGlob(lowerPath, lowerGlob) ||
+    posix.matchesGlob(stripLeadingDots(lowerPath), lowerGlob)
+  );
 }
 
 const LimitsSchema = z.object({

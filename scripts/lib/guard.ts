@@ -97,6 +97,12 @@ export function isDeniedPath(path: string): string | null {
   );
   if (dataIndex !== -1)
     return `local-only dataset folder data/${segments[dataIndex + 1]}/ (ADR 0008)`;
+  if (
+    lowerPath.startsWith("public/") &&
+    LOCAL_ONLY_DATASETS.some((id) => segments.includes(id) || lower.includes(id))
+  ) {
+    return "local-only dataset name under public/ (ADR 0008)";
+  }
   if (lowerPath.startsWith("public/data/")) {
     const rest = segments.slice(2);
     if (rest.length === 1 && rest[0] !== "catalog.json") {
