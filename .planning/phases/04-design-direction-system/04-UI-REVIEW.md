@@ -74,3 +74,26 @@ Registry audit: skipped (no third-party registries in UI-SPEC).
 - test-results/review/dev-directions-floodlit-tactics/*, dev-directions-floodlit-data/*, dev-gallery*/* (screenshots + report.md)
 - src/pitch/glyphs/PlayerGlyph.tsx, registry.ts, placement.ts, MarkGlyphs.tsx
 - .planning/phases/04-design-direction-system/04-UI-SPEC.md, deferred-items.md
+
+---
+
+## UI fixes
+
+Applied 2026-11-28 on `gsd/phase-04-design-direction-system` (from HEAD `f757e7b`), one commit per item, normal hooks.
+
+| # | Item | Status | Commit |
+|---|------|--------|--------|
+| 1 | Position-code labels spill out of the player discs | Fixed. A label of two or more letters uses Mona Sans' condensed width (`font-stretch: 75%`); one too long even then is squeezed to the disc's inner chord (`textLength`). Shirt numbers keep the normal width. Functional test measures each label's ink box against the disc minus half its outline (tactics both shapes, data screen, glyph sheet; 375 and 1440); unit tests for `fitLabel` | `ee958e3` |
+| 2 | Legend says "shirt number" while discs show position codes | Fixed. Registry descriptions carry a `{disc-text}` slot filled from the scene data: "position code" (label + role) on the City shapes, "player initials" (label + name, no role) on the Wyscout goal, "shirt number" for numbers. Unit and functional tests | `22fdcd1` |
+| 3 | Sequence badges collide with each other; vacuous note-chip check | Fixed. `placeBadge` takes earlier badges as obstacles (2 px gap) and falls back to a disc-only clear side before giving up; SceneLayer places in sequence order. Unit test (both orientations) and Chrome test at 375/1440 assert no badge-badge overlap and require a frame with 3+ badges. Note-chip test now runs on glyph sheet, authored, quiz-answer and tactics-with-ball and requires at least one chip on each | `799f8e5` |
+| 4 | Ball covers the "EM" disc label at `t=0` | Fixed. An owned ball sits disc radius plus ball radius from its owner (toward the attack), touching the disc edge. Unit test plus Chrome test at 375/768/1440 (ball ring vs EM label ink and disc fill) | `f13c8d5` |
+| 5 | DESIGN.md section 2 contradicts section 4 | Fixed. Section 2 names the rules that keep the defects fixed; the section 4 "Known gaps" bullet is replaced by what the functional spec checks; deferred-items.md marks the 04-12 items resolved | `59b30ce` |
+| 6 | Gallery shows "1 states" | Fixed (singular for one state); functional and unit tests updated | `4d2dcbe`, `d6c3dfd` |
+| 7 | `/dev` index links have no visible focus ring | Fixed. Links carry the focus-token outline; `review:screens /dev` PASS (was 6 fail) | `b78dfff` |
+| 8 | Five unused losing-direction font packages | Removed with `npm uninstall` after `git grep` found no reference outside package.json (no source, script, token set or copy-fonts config); `npm run fonts -- --check` ok; remaining pins exact | `b40b6d9` |
+| opt | Dark-theme shape lines share the disc blue | Not done. DESIGN.md has no distinct shape-line token, and the palette is validated, so no colour was invented. Lines stay `teamColour` at 0.6 opacity | none |
+
+Checks before this commit: `npm test` 53 files, 1261 passed (6 skipped); `npx tsc --noEmit` ok; `npx biome ci .` exit 0 (1 pre-existing info in `src/ui/Dialog.tsx`); `npm run guard` ok; `npm run tokens:check` ok; `npm run palette` PASS both themes; `npm run build && npm run guard:bundle && npm run smoke` ok; functional Playwright (REVIEW_PORT=5184, reused dev server) 109 passed; `CHECK_PITCH_PORT=5183 npm run check:pitch` 49 ok, 0 failed; `npm run review:screens` PASS on `/dev` (0 warn), `/dev/directions/floodlit/tactics` (1 warn: taste-copy copy-contrast), `/dev/directions/floodlit/data` (1 warn: taste-copy), `/dev/gallery` (0 warn). Gates ran in the main checkout, not a worktree.
+
+Residual, not in scope: the player legend swatch still draws the number "7" when the description says position code or initials.
+
