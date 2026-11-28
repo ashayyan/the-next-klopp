@@ -92,6 +92,22 @@ describe("floodlit tracer: schema, generator, Tailwind", () => {
     expect(css).toContain("--font-mono:");
   });
 
+  it("declares the light set under [data-theme=light], so a light subtree wins under a dark root", () => {
+    const start = css.indexOf('[data-theme="light"] {');
+    expect(start).toBeGreaterThan(css.indexOf(":root {"));
+    const block = css.slice(start, css.indexOf("}", start));
+    expect(block).toContain("color-scheme: light;");
+    for (const n of REQUIRED_COLOR_KEYS) {
+      expect(block).toContain(`--${n}: ${doc.resolved.light.color[n]};`);
+    }
+    for (const n of REQUIRED_PITCH_KEYS) expect(block).toContain(`--${n}:`);
+    const scoped = generateScopedCss(doc, scopeFor("floodlit"), SYSTEM_INPUT);
+    const scopedStart = scoped.indexOf('[data-direction="floodlit"][data-theme="light"] {');
+    expect(scopedStart).toBeGreaterThan(-1);
+    const scopedBlock = scoped.slice(scopedStart, scoped.indexOf("}", scopedStart));
+    expect(scopedBlock).toContain(`--surface-page: ${doc.resolved.light.color["surface-page"]};`);
+  });
+
   it("redeclares the type, font and radius tokens under a direction scope", () => {
     const scoped = generateScopedCss(doc, scopeFor("floodlit"), SYSTEM_INPUT);
     expect(scoped).toContain('[data-direction="floodlit"] {');

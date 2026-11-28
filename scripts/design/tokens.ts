@@ -277,6 +277,16 @@ export function generateSystemCss(doc: TokenDocument, source: string): string {
       "}",
     ].join("\n"),
   );
+  // The light set again under the attribute: :root alone only reaches <html>, so a subtree marked
+  // data-theme="light" under a dark <html> (dark OS scheme, or a stored dark) would inherit dark.
+  blocks.push(
+    [
+      '[data-theme="light"] {',
+      colourScheme("light", "  "),
+      ...themedLines(doc, "light", "  "),
+      "}",
+    ].join("\n"),
+  );
   blocks.push(
     [
       '[data-theme="dark"] {',
@@ -317,6 +327,16 @@ export function generateScopedCss(doc: TokenDocument, scope: string, source: str
       ...themedLines(doc, "light", "  "),
       ...plainLines(doc, "  "),
       ...typeLines(doc, "  "),
+      "}",
+    ].join("\n"),
+  );
+  // The light set under the attribute too, so a light-scoped direction inside a dark ancestor does
+  // not inherit the ancestor's dark values.
+  blocks.push(
+    [
+      `${scope}[data-theme="light"] {`,
+      colourScheme("light", "  "),
+      ...themedLines(doc, "light", "  "),
       "}",
     ].join("\n"),
   );

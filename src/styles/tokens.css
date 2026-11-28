@@ -79,6 +79,51 @@
   --pitch-glyph-text--line-height: 1;
 }
 
+[data-theme="light"] {
+  color-scheme: light;
+  --surface-page: #F3F5F7;
+  --surface-panel: #D8E0E7;
+  --surface-raised: #FFFFFF;
+  --accent: #0A7558;
+  --accent-ink: #FFFFFF;
+  --ink: #111922;
+  --ink-muted: #4C5967;
+  --control-border: #6B7987;
+  --danger: #B3261E;
+  --focus-ring: #0A7558;
+  --surface-highlight: #FFFFFF;
+  --surface-highlight-ink: #111922;
+  --pitch-runoff: #DCE3E9;
+  --pitch-surface: #E9EEF2;
+  --pitch-line: #66778A;
+  --team-a: #0072B2;
+  --team-a-ink: #FFFFFF;
+  --team-b: #D55E00;
+  --team-b-fill: #FFFFFF;
+  --team-b-ink: #111922;
+  --ball-fill: #FFFFFF;
+  --ball-ring: #111922;
+  --zone-fill: #F0E442;
+  --zone-fill-opacity: 0.45;
+  --zone-line: #4C5967;
+  --highlight: #111922;
+  --density-mark: #1119224D;
+  --label-bg: #FFFFFF;
+  --label-border: #B8C3CC;
+  --data-cat-1: #0072B2;
+  --data-cat-2: #D55E00;
+  --data-cat-3: #009E73;
+  --data-cat-other: #6B7987;
+  --data-seq-1: #D3ECE6;
+  --data-seq-2: #62B5A3;
+  --data-seq-3: #3A9F8E;
+  --data-seq-4: #1B7A6C;
+  --data-seq-5: #0B4F47;
+  --data-div-neg: #8C510A;
+  --data-div-mid: #EEF0F1;
+  --data-div-pos: #0A8F7F;
+}
+
 [data-theme="dark"] {
   color-scheme: dark;
   --surface-page: #0E151D;

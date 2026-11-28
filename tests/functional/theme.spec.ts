@@ -81,6 +81,24 @@ test.describe("system scheme dark", () => {
     expect(await bodyBackground(page)).toBe(PAGE.dark);
   });
 
+  // CR-01 (04-REVIEW): the direction screen marks only its own subtree and <body> light; <html>
+  // stays dark from the OS scheme, so the light set must come from [data-theme="light"] itself.
+  test("a light subtree wins under a dark root: ?theme=light on a direction screen", async ({
+    page,
+  }) => {
+    await page.goto("/dev/directions/floodlit/tactics?theme=light");
+    const scope = page.locator('[data-direction="floodlit"][data-ready="1"]');
+    await expect(scope).toBeVisible();
+    expect(await scope.getAttribute("data-theme")).toBe("light");
+    const surface = await scope.evaluate((el) =>
+      getComputedStyle(el).getPropertyValue("--surface-page").trim(),
+    );
+    expect(surface.toUpperCase()).toBe(
+      (doc.resolved.light.color["surface-page"] as string).toUpperCase(),
+    );
+    expect(await bodyBackground(page)).toBe(PAGE.light);
+  });
+
   test("a throwing localStorage loads with no error and follows the system", async ({ page }) => {
     const errors = collectErrors(page);
     await page.addInitScript(() => {
