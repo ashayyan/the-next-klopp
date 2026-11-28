@@ -512,9 +512,12 @@ test.describe("lesson and data groups", () => {
     const wrong = page.locator('[data-gallery-state="quiz-option/incorrect"] [data-answer]');
     await expect(wrong).toContainText("Not quite — here is the answer");
     await expect(wrong.locator("svg")).toHaveCount(1);
-    await expect(
-      page.locator('[data-gallery-state="quiz-option/disabled"] [data-quiz-option]').first(),
-    ).toBeDisabled();
+    const disabled = page
+      .locator('[data-gallery-state="quiz-option/disabled"] [data-quiz-option]')
+      .first();
+    await expect(disabled).toBeDisabled();
+    // WR-07 (04-REVIEW): muted once by colour, not again by the control base's 50 % opacity.
+    await expect(disabled).toHaveCSS("opacity", "1");
     await page.goto("/dev/gallery/progress-ring?bare=1&theme=light");
     const ring = page.locator('[data-gallery-state="progress-ring/40-percent"] [role="meter"]');
     await expect(ring).toHaveAttribute("aria-valuenow", "4");

@@ -34,7 +34,8 @@ const BASE = `${CONTROL_BASE} w-full justify-start gap-3 rounded-md border bg-tr
  * answer shows the check icon and "Correct"; a wrong pick shows the cross icon and "Not quite — here
  * is the answer". There is no shake, bounce or confetti. A revealed option stays readable and
  * focusable (it is announced with its feedback) but does nothing; a disabled option is muted and
- * leaves the tab order.
+ * leaves the tab order. The learner still reads a disabled option to understand the answer, so it
+ * is muted once (ink-muted, at least 4.5:1) and the control base's 50 % disabled opacity is cancelled.
  */
 export function QuizOption({ label, state = "idle", onSelect, className }: QuizOptionProps) {
   const revealed = state === "correct" || state === "incorrect";
@@ -58,7 +59,7 @@ export function QuizOption({ label, state = "idle", onSelect, className }: QuizO
       aria-disabled={revealed ? true : undefined}
       disabled={state === "disabled"}
       onClick={revealed ? undefined : onSelect}
-      className={`${BASE} ${look}${state === "disabled" ? " text-ink-muted" : ""}${className ? ` ${className}` : ""}`}
+      className={`${BASE} ${look}${state === "disabled" ? " text-ink-muted disabled:opacity-100!" : ""}${className ? ` ${className}` : ""}`}
     >
       <span aria-hidden="true" className="inline-flex size-4 shrink-0 items-center justify-center">
         {state === "selected" ? <span className="size-3 rounded-sm bg-accent" /> : null}
