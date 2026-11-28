@@ -2,6 +2,7 @@ import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+import { CanvasLayer } from "./CanvasLayer.tsx";
 import { Pitch } from "./Pitch.tsx";
 
 const root = process.cwd();
@@ -65,6 +66,28 @@ describe("<Pitch> static markup", () => {
     const small = renderToStaticMarkup(<Pitch title="Fulham" length={100} width={65} />);
     expect(small).toContain("Pitch, 100 by 65 metres — Fulham");
     expect(small).toContain('viewBox="-3 -3 106 71"');
+  });
+});
+
+describe("<CanvasLayer> in the layer stack", () => {
+  const html = renderToStaticMarkup(
+    <Pitch title="Density" canvas={<CanvasLayer draw={() => {}} />} />,
+  );
+
+  it("orders bottom svg, then the canvas layer, then the titled top svg", () => {
+    const bottom = html.indexOf("<svg");
+    const canvas = html.indexOf('<canvas data-layer="canvas"');
+    const top = html.indexOf("<svg", bottom + 1);
+    expect(bottom).toBeGreaterThan(-1);
+    expect(canvas).toBeGreaterThan(bottom);
+    expect(top).toBeGreaterThan(canvas);
+    expect(html.indexOf("<title")).toBeGreaterThan(top);
+  });
+
+  it("hides the canvas from assistive tech and from pointer events", () => {
+    const tag = html.match(/<canvas[^>]*>/)?.[0] ?? "";
+    expect(tag).toContain('aria-hidden="true"');
+    expect(tag).toMatch(/pointer-events:\s*none/);
   });
 });
 
