@@ -1,19 +1,19 @@
 ---
 gsd_state_version: "1.0"
-current_phase: 1
-current_phase_name: Setup & Contracts
-status: verifying
-stopped_at: Phase 2 complete, ready to verify Phase 1
-last_updated: "2026-11-27T23:42:56.413Z"
+current_phase: 03
+current_phase_name: Pitch Standard & Data Pipeline
+status: planning
+stopped_at: Phase 1 complete, ready to plan Phase 03
+last_updated: "2026-11-28T00:13:59.418Z"
 last_activity: 2026-11-28
-last_activity_desc: Phase 2 complete, transitioned to Phase 1
-state_head: c4568d1a1314b919ce08834996bb045f18beef05
+last_activity_desc: Phase 1 complete, transitioned to Phase 03
+state_head: a6b6f8cbc635f230ac648f32e2975e236070f8c5
 progress:
   total_phases: 8
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 30
   completed_plans: 30
-  percent: 13
+  percent: 25
 ---
 
 # Project State
@@ -27,17 +27,17 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 
 ## Current Position
 
-Phase: 1 — Setup & Contracts
-Plan: 9
-Status: Phase complete — ready for verification
-Last activity: 2026-11-28 — Phase 2 complete, transitioned to Phase 1
+Phase: 03 — Pitch Standard & Data Pipeline
+Plan: Not started
+Status: Ready to plan
+Last activity: 2026-11-28 — Phase 1 complete, transitioned to Phase 03
 
-Progress: [█░░░░░░░░░] 13%
+Progress: [███░░░░░░░] 25%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 21
+- Total plans completed: 30
 - Average duration: - min
 - Total execution time: 0.0 hours
 
@@ -46,6 +46,7 @@ Progress: [█░░░░░░░░░] 13%
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 2 | 21 | - | - |
+| 1 | 9 | - | - |
 
 **Recent Trend:**
 - Last 5 plans: -
@@ -117,7 +118,6 @@ Recent decisions affecting current work:
 
 ### Blockers/Concerns
 
-- [Phase 1]: Learner must confirm study vs dev server split (D6) and whether to move the project to a path without spaces (D10)
 - [Phase 2]: Open-data Premier League coverage and per-source terms of service are unverified; Watch Gym supply depends on the coverage matrix
 - [Phase 5]: Vercel plan must support protection scope "All Deployments"; learner logs into Vercel and `gh` themselves
 - [Later]: Local big-5 and Wyscout data paths not given; ask at the data-pipeline checkpoint before Track 15/18 work
@@ -139,5 +139,5 @@ Items acknowledged and deferred at milestone close, most recent first:
 ## Session Continuity
 
 Last session: 2026-11-27T23:14:48.331Z
-Stopped at: Phase 2 complete, ready to verify Phase 1
+Stopped at: Phase 1 complete, ready to plan Phase 03
 Resume file: None

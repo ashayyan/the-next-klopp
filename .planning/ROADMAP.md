@@ -16,7 +16,7 @@ The quality gates (QA-01 to QA-05) are standing gates for every lesson. Each is 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Setup & Contracts** - Verified toolchain, guarded private repo with CI, running app skeleton, decision records and shared schemas
+- [x] **Phase 1: Setup & Contracts** - Verified toolchain, guarded private repo with CI, running app skeleton, decision records and shared schemas (completed 2026-11-28)
 - [x] **Phase 2: Research Wave 1** - Parallel research, data-coverage matrix, clip-supply decision, machine-readable registry and concept map, learner approval checkpoint (completed 2026-11-28)
 - [ ] **Phase 3: Pitch Standard & Data Pipeline** - Canonical pitch renderer, coordinate converters, glyphs and legend, Scene/Frame format, kloppy pipeline with licence gates
 - [ ] **Phase 4: Design Direction & System** - 2-3 rendered directions, learner pick, DESIGN.md, tokens, component gallery, screenshot-review gate
@@ -38,7 +38,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The private repo `the-next-klopp` exists with protected `main`, and a PR must pass lint, typecheck, unit tests, build and the Windows smoke job; a test commit containing a raw-data file, an oversized file or a fake secret is rejected by the repo guards (`.gitignore`, `.gitattributes` with `eol=lf`, size/path guard, secret scanning, `.env.example` present).
   4. Querying agentmemory returns the learner profile and the project rules, and no raw research dumps are stored in it.
   5. `docs/decisions/` holds a record for each of: Vite SPA vs Next.js, router, storage engine, Vercel scope, study/dev server split, path-with-spaces handling; `/schemas` holds source, concept, competency and role schemas that sample fixtures validate against, before any research agent is spawned.
-**Plans**: 8/9 plans executed in 5 waves
+**Plans**: 9/9 plans complete in 5 waves
 
 Plans:
 **Wave 1**
@@ -58,7 +58,7 @@ Plans:
 - [x] 01-08-PLAN.md — docs/SETUP.md toolchain record, learner profile and rules stored in agentmemory (wave 4)
 
 **Wave 5** *(blocked on Wave 4 completion)*
-- [ ] 01-09-PLAN.md — CI workflow, branch protection attempt + ADR 0007, Phase 1 PR with six green checks (wave 5)
+- [x] 01-09-PLAN.md — CI workflow, branch protection attempt + ADR 0007, Phase 1 PR with six green checks (wave 5)
 **Research flag**: none (standard patterns). Two decisions need the learner's confirmation at the next checkpoint: study vs dev server split (D6) and moving the project to a path without spaces (D10).
 
 ### Phase 2: Research Wave 1
@@ -215,7 +215,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Setup & Contracts | 8/9 | In Progress | - |
+| 1. Setup & Contracts | 9/9 | Complete    | 2026-11-28 |
 | 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
 | 3. Pitch Standard & Data Pipeline | 0/TBD | Not started | - |
 | 4. Design Direction & System | 0/TBD | Not started | - |
