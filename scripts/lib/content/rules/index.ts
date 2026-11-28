@@ -7,6 +7,7 @@ import type { LessonSpec } from "../../../../src/schemas/lesson.ts";
 import type { DenyManifest } from "../../globs.ts";
 import type { AliasesLike, ConceptMapLike, RegistryEntryLike } from "../curriculum.ts";
 import type { StepInfo } from "../steps.ts";
+import { safetyRules } from "./safety.ts";
 import { structureRules } from "./structure.ts";
 
 export interface Issue {
@@ -60,7 +61,7 @@ export interface RuleEntry {
   run: Rule;
 }
 
-export const RULES: readonly RuleEntry[] = [...structureRules];
+export const RULES: readonly RuleEntry[] = [...structureRules, ...safetyRules];
 
 export function compareIssues(a: Issue, b: Issue): number {
   if (a.file !== b.file) return a.file < b.file ? -1 : 1;
