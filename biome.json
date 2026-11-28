@@ -16,6 +16,8 @@
       "!!pipeline/tests/fixtures",
       "!!data",
       "!!public/data",
+      "!!src/styles/tokens.css",
+      "!!src/routes/dev-directions/tokens/*.css",
       "!!research/summary",
       "!!**/package-lock.json",
       "!!skills-lock.json",
