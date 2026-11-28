@@ -595,13 +595,13 @@ No third-party UI registry, block or kit. New runtime dependency for this phase'
 ---
 
 ## Checker Sign-Off
+
 - [x] Dimension 1 Copywriting: FLAG (non-blocking: bare "Continue"/"Back")
-- [x] Dimension 1 Copywriting: PASS
 - [x] Dimension 2 Visuals: PASS
 - [x] Dimension 3 Color: PASS
 - [x] Dimension 4 Typography: PASS
 - [x] Dimension 5 Spacing: PASS
 - [x] Dimension 6 Registry Safety: PASS
-- [ ] Dimension 7 Inventory Provenance: PASS
+- [x] Dimension 7 Inventory Provenance: PASS
+
 **Approval:** approved 2026-11-28 (gsd-ui-checker)
-**Approval:** pending
