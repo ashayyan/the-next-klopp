@@ -884,7 +884,7 @@ The registry (`src/pitch/glyphs/registry.ts`) is the learner's notation vocabula
 | `player-b` | Team B player | Ring disc: `--team-b-fill` inside a 3 px `--team-b` ring, text in `--team-b-ink` |
 | `goalkeeper-a` | Goalkeeper (team A) | Rounded square instead of a disc, team A fill rules |
 | `goalkeeper-b` | Goalkeeper (team B) | Rounded square instead of a disc, team B ring rules |
-| `ball` | Ball | Small circle, `--ball-fill` with a 2 px `--ball-ring`, drawn above players and offset toward the attacking direction when a player has it |
+| `ball` | Ball | Small circle, `--ball-fill` with a 2 px `--ball-ring`, drawn above players. When a player has it, it sits beside the disc toward the attacking direction, centre to centre the disc radius plus the ball radius, so it touches the disc edge and never covers the disc text |
 | `pass` | Pass | 2 px solid line in the acting team's colour; arrowhead filled for team A, hollow for team B |
 | `carry` | Carry | 2 px dashed line (`6 4`): the player runs with the ball; same arrowhead rule |
 | `run` | Run without the ball | 2 px dotted line (round caps): movement off the ball; same arrowhead rule |

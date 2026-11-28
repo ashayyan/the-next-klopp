@@ -240,6 +240,71 @@ for (const [width, height] of [
   });
 }
 
+/**
+ * The owned ball against its owner's disc: whether the ball circle (with its 2 px ring) reaches
+ * the owner's label ink box or the disc fill, measured in CSS pixels.
+ */
+async function ballOverDisc(page: Page, label: string) {
+  return page.evaluate((label) => {
+    const ctx = document.createElement("canvas").getContext("2d");
+    const glyph = [
+      ...document.querySelectorAll('[data-layer="players"] [data-glyph^="player-"]'),
+    ].find((g) => g.querySelector("text")?.textContent === label);
+    const ballEl = document.querySelector('[data-glyph="ball"] circle');
+    const text = glyph?.querySelector("text");
+    const disc = glyph?.querySelector("circle");
+    if (!ctx || !text || !disc || !ballEl) return null;
+    const style = getComputedStyle(text);
+    ctx.font = `${style.fontWeight} 100px ${style.fontFamily}`;
+    const m = ctx.measureText(label);
+    const t = text.getBoundingClientRect();
+    const fs = t.height / ((m.fontBoundingBoxAscent + m.fontBoundingBoxDescent) / 100);
+    const baseline = t.y + (m.fontBoundingBoxAscent / 100) * fs;
+    const ink = {
+      x0: t.x,
+      x1: t.x + t.width,
+      y0: baseline - (m.actualBoundingBoxAscent / 100) * fs,
+      y1: baseline + (m.actualBoundingBoxDescent / 100) * fs,
+    };
+    const b = ballEl.getBoundingClientRect();
+    const bx = b.x + b.width / 2;
+    const by = b.y + b.height / 2;
+    const br = b.width / 2 + 1; // the 2 px ring is centred on the edge
+    const nx = Math.min(Math.max(bx, ink.x0), ink.x1);
+    const ny = Math.min(Math.max(by, ink.y0), ink.y1);
+    const d = disc.getBoundingClientRect();
+    const centres = Math.hypot(bx - (d.x + d.width / 2), by - (d.y + d.height / 2));
+    return {
+      label: Math.hypot(bx - nx, by - ny) - br,
+      fill: centres - (b.width / 2 + d.width / 2),
+    };
+  }, label);
+}
+
+for (const [width, height] of [
+  [375, 812],
+  [768, 900],
+  [1440, 900],
+] as const) {
+  test(`${width} px: at 0.0 s the ball sits beside the EM disc, clear of its label`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height });
+    await page.goto("/dev/directions/floodlit/data");
+    await expect(page.locator('div[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+    await expect(page.locator('[role="toolbar"][aria-label="Playback"] output')).toContainText(
+      "0.0 s",
+    );
+    await page.evaluate(() => document.fonts.ready);
+    const gap = await ballOverDisc(page, "EM");
+    expect(gap, "the EM disc and the ball are drawn at 0.0 s").not.toBeNull();
+    expect(gap?.label ?? -1, "space between the ball ring and the EM label ink").toBeGreaterThan(1);
+    expect(gap?.fill ?? -1, "the ball does not cover the EM disc fill").toBeGreaterThanOrEqual(
+      -0.5,
+    );
+  });
+}
+
 for (const width of [768, 1440]) {
   test(`${width} px: the play button reads "Play sequence"`, async ({ page }) => {
     await openScene(page, width, 900);

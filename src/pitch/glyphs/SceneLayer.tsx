@@ -17,7 +17,7 @@ import { usePitch } from "../Pitch.tsx";
 import type { Pt, View } from "../view.ts";
 import { BallGlyph } from "./BallGlyph.tsx";
 import { EventGlyph, type Side } from "./EventGlyphs.tsx";
-import { discDiameter } from "./glyphSize.ts";
+import { ballDiameter, discDiameter } from "./glyphSize.ts";
 import {
   HighlightGlyph,
   NoteGlyph,
@@ -181,12 +181,15 @@ export function SceneLayer({
   const ballEntity = scene.entities.find((e) => e.type === "ball");
   const ballAt = ballEntity ? at.get(ballEntity.id) : undefined;
   let ball = ballAt ? { x: ballAt.x, y: ballAt.y } : null;
-  // An owned ball sits 0.6 x the disc diameter from the owner, toward the owner team attack.
+  // An owned ball sits beside its owner, toward the owner team attack: centre to centre the disc
+  // radius plus the ball radius, so the ball touches the disc edge and never covers the disc text
+  // (04-UI-REVIEW fix 4; the Phase 3 rule of 0.6 x the disc diameter put it over a two-letter label).
   // Between two frames the ball may be in flight (a pass), so the offset applies only while the
   // sampled ball is at a player: the owner of the latest frame or of the next one. It fades out
   // over two disc diameters, so the ball never jumps when it leaves or reaches a player (03-11).
   if (ball) {
     const d = discDiameter(view.pxPerMetre);
+    const offset = (d + ballDiameter(view.pxPerMetre)) / 2;
     const reach = 2 * d;
     let best: { dx: number; w: number } | null = null;
     for (const id of ballOwnerCandidates(scene, sampled.t, sampled.ballOwner)) {
@@ -196,7 +199,7 @@ export function SceneLayer({
       const w = Math.max(0, 1 - Math.hypot(ball.x - p.x, ball.y - p.y) / reach);
       if (w <= 0 || (best && best.w >= w)) continue;
       const team = scene.teams.find((candidate) => candidate.id === entity.team);
-      best = { dx: attackSign(scene, team) * 0.6 * d, w };
+      best = { dx: attackSign(scene, team) * offset, w };
     }
     // At a frame the sampled ball is on its owner, so w = 1 gives owner + offset (the 03-UI-SPEC
     // rule); in flight w falls to 0 and the ball keeps its sampled path, moving forward throughout.

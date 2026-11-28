@@ -320,17 +320,32 @@ describe("ball ownership offset (03-11)", () => {
       },
     ],
   });
-  // render() draws at the 960 px default width; home attacks left to right (+x).
+  // render() draws at the 960 px default width; home attacks left to right (+x). There the disc is
+  // the 22 px minimum and the ball the 10 px minimum, so the ball centre sits 16 px from the owner's:
+  // the ball touches the disc edge and never covers the disc text (04-UI-REVIEW fix 4).
   const offset =
-    0.6 *
-    (22 /
-      makeView({ length: 105, width: 68, runoff: 3, orientation: "horizontal", cssWidth: 960 })
-        .pxPerMetre);
+    (22 + 10) /
+    2 /
+    makeView({ length: 105, width: 68, runoff: 3, orientation: "horizontal", cssWidth: 960 })
+      .pxPerMetre;
   const ballX = (t: number) => Number(attr(tags(render(pass, t), "--ball-fill")[0] ?? "", "cx"));
 
   it("puts an owned ball at the owner plus the offset at a frame", () => {
     expect(ballX(0)).toBeCloseTo(20 + offset, 6);
     expect(ballX(2)).toBeCloseTo(60 + offset, 6);
+  });
+
+  it("keeps an owned ball off the owner's disc, so the disc text stays readable", () => {
+    const ppm = makeView({
+      length: 105,
+      width: 68,
+      runoff: 3,
+      orientation: "horizontal",
+      cssWidth: 960,
+    }).pxPerMetre;
+    const discR = 22 / 2 / ppm;
+    const ballR = 10 / 2 / ppm;
+    expect(ballX(0) - 20).toBeGreaterThanOrEqual(discR + ballR - 1e-9);
   });
 
   it("draws a ball in flight at its sampled position, not on the passer", () => {
