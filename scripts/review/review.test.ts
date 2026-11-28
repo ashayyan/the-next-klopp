@@ -93,6 +93,22 @@ describe("parseArgs", () => {
       theme: "both",
       port: null,
       states: [],
+      fixtures: false,
+    });
+  });
+
+  it("reads --fixtures as a boolean flag that takes no value", () => {
+    expect(parseArgs(["/learn/fx-a", "--fixtures", "--widths", "375"])).toEqual({
+      route: "/learn/fx-a",
+      widths: [375],
+      theme: "both",
+      port: null,
+      states: [],
+      fixtures: true,
+    });
+    expect(parseArgs(["--fixtures", "/learn/fx-a"])).toMatchObject({
+      route: "/learn/fx-a",
+      fixtures: true,
     });
   });
 
@@ -113,12 +129,13 @@ describe("parseArgs", () => {
       theme: "dark",
       port: 5184,
       states: ["state=with", "t=2"],
+      fixtures: false,
     });
   });
 
   it("names an unknown flag with the documented copy", () => {
     expect(parseArgs(["/x", "--nope"])).toEqual({
-      error: "Unknown option --nope. Use --widths, --theme, --port or --states.",
+      error: "Unknown option --nope. Use --widths, --theme, --port, --states or --fixtures.",
     });
   });
 
