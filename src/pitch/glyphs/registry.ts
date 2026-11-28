@@ -3,13 +3,22 @@
 // legend order.
 import type { ComponentType } from "react";
 import { BallSwatch } from "./BallGlyph.tsx";
+import { CarrySwatch, PassSwatch, PressureSwatch, RunSwatch, ShotSwatch } from "./EventGlyphs.tsx";
+import {
+  DensitySwatch,
+  HighlightSwatch,
+  NoteSwatch,
+  PointSwatch,
+  SequenceBadgeSwatch,
+  ShapeSwatch,
+  ZoneSwatch,
+} from "./MarkGlyphs.tsx";
 import {
   GoalkeeperASwatch,
   GoalkeeperBSwatch,
   PlayerASwatch,
   PlayerBSwatch,
 } from "./PlayerGlyph.tsx";
-import { PlaceholderSwatch } from "./Swatch.tsx";
 
 export type GlyphId =
   | "player-a"
@@ -74,73 +83,73 @@ export const GLYPHS: readonly GlyphEntry[] = [
     id: "pass",
     label: "Pass",
     description: "Solid line, arrowhead at the receiver.",
-    sample: PlaceholderSwatch,
+    sample: PassSwatch,
   },
   {
     id: "carry",
     label: "Carry",
     description: "Dashed line: the player runs with the ball.",
-    sample: PlaceholderSwatch,
+    sample: CarrySwatch,
   },
   {
     id: "run",
     label: "Run without the ball",
     description: "Dotted line: movement off the ball.",
-    sample: PlaceholderSwatch,
+    sample: RunSwatch,
   },
   {
     id: "shot",
     label: "Shot",
     description: "Heavier line ending in a circle at the target.",
-    sample: PlaceholderSwatch,
+    sample: ShotSwatch,
   },
   {
     id: "pressure",
     label: "Pressure",
     description: "Wedge from the presser toward the player pressed.",
-    sample: PlaceholderSwatch,
+    sample: PressureSwatch,
   },
   {
     id: "zone",
     label: "Zone",
     description: "Shaded area of the pitch.",
-    sample: PlaceholderSwatch,
+    sample: ZoneSwatch,
   },
   {
     id: "shape",
     label: "Shape line",
     description: "Line joining players in one unit.",
-    sample: PlaceholderSwatch,
+    sample: ShapeSwatch,
   },
   {
     id: "highlight",
     label: "Highlighted",
     description: "Dashed ring around a player or point to look at.",
-    sample: PlaceholderSwatch,
+    sample: HighlightSwatch,
   },
   {
     id: "annotation",
     label: "Note",
     description: "Short label pinned to the pitch.",
-    sample: PlaceholderSwatch,
+    sample: NoteSwatch,
   },
   {
     id: "point",
     label: "Point",
     description: "A marked spot, such as a tapped answer.",
-    sample: PlaceholderSwatch,
+    sample: PointSwatch,
   },
   {
     id: "density",
     label: "Event location (Canvas)",
     description: "One dot per event, drawn on the Canvas layer.",
-    sample: PlaceholderSwatch,
+    sample: DensitySwatch,
   },
   {
     id: "sequence-badge",
     label: "Sequence order",
     description: "Number of each action in the possession chain.",
-    sample: PlaceholderSwatch,
+    sample: SequenceBadgeSwatch,
   },
 ];
 

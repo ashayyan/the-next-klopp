@@ -15,22 +15,3 @@ export function SwatchFrame({ children }: { children: ReactNode }) {
     </svg>
   );
 }
-
-/** Stand-in swatch for an id whose glyph is drawn by a later task. */
-export function PlaceholderSwatch() {
-  return (
-    <SwatchFrame>
-      <rect
-        x={4}
-        y={4}
-        width={24}
-        height={12}
-        fill="none"
-        stroke="var(--pitch-line)"
-        strokeWidth={1.5}
-        strokeDasharray="4 3"
-        vectorEffect="non-scaling-stroke"
-      />
-    </SwatchFrame>
-  );
-}
