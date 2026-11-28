@@ -47,6 +47,13 @@ export const DEV_SCENES: readonly DevScene[] = [
     published: { dataset: "wyscout" },
   },
   {
+    // Local-only (ADR 0008): present only after `npm run data` on this machine, never in a build.
+    id: "statsbomb-local",
+    label: "Reconstruction · StatsBomb PL 2015/16 (local only)",
+    load: () => null,
+    local: { dataset: "statsbomb" },
+  },
+  {
     id: "stress",
     label: "Stress · 22 players",
     load: () => import("./stress.ts").then((m) => m.makeStressScene()),

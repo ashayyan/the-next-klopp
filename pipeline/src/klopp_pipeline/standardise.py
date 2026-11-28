@@ -18,7 +18,7 @@ import zipfile
 from pathlib import Path
 from typing import Any
 
-from kloppy import wyscout
+from kloppy import statsbomb, wyscout
 from kloppy.domain import Dimension, EventDataset, MetricPitchDimensions, Orientation
 
 from klopp_pipeline import net
@@ -166,16 +166,39 @@ def load_wyscout_match(
         data_version="V2",
         coordinates="wyscout",
     )
-    metric = MetricPitchDimensions(
+    metric = _metric_pitch()
+    if orientation is None:
+        return dataset.transform(to_pitch_dimensions=metric)
+    return dataset.transform(to_pitch_dimensions=metric, to_orientation=orientation)
+
+
+def _metric_pitch() -> MetricPitchDimensions:
+    """The canonical 105 x 68 m pitch every provider is warped to (origin top-left, y down)."""
+    return MetricPitchDimensions(
         x_dim=Dimension(0, PITCH_LENGTH),
         y_dim=Dimension(0, PITCH_WIDTH),
         pitch_length=PITCH_LENGTH,
         pitch_width=PITCH_WIDTH,
         standardized=False,
     )
-    if orientation is None:
-        return dataset.transform(to_pitch_dimensions=metric)
-    return dataset.transform(to_pitch_dimensions=metric, to_orientation=orientation)
+
+
+def load_statsbomb_match(events: bytes | Path, lineups: bytes | Path) -> EventDataset:
+    """Load one StatsBomb match with kloppy and convert it to 105 x 68 metres.
+
+    ``coordinates="statsbomb"`` keeps provider units, so the one ``to_pitch_dimensions`` transform
+    is the only warp. kloppy also warps each shot's freeze frame (``event.freeze_frame``) with that
+    transform, so the frozen positions and the shot end up in the same frame. No 360 file is read.
+
+    kloppy receives ``BytesIO`` only, never a URL (threat T-03-13). StatsBomb data is local-only
+    (ADR 0008): the caller keeps what it builds out of ``public/``.
+    """
+    dataset = statsbomb.load(
+        event_data=io.BytesIO(events if isinstance(events, bytes) else Path(events).read_bytes()),
+        lineup_data=io.BytesIO(lineups if isinstance(lineups, bytes) else Path(lineups).read_bytes()),
+        coordinates="statsbomb",
+    )
+    return dataset.transform(to_pitch_dimensions=_metric_pitch())
 
 
 def wyscout_match_extract(

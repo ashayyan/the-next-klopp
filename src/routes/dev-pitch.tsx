@@ -21,7 +21,12 @@ import { ConverterProbe, type ProbeInput } from "./dev-pitch/ConverterProbe.tsx"
 import { LandmarksLayer } from "./dev-pitch/LandmarksLayer.tsx";
 import { probeConvert } from "./dev-pitch/probe.ts";
 import { StatePanel } from "./dev-pitch/StatePanels.tsx";
-import { type LoadResult, loadDevScene } from "./dev-pitch/sceneSources.ts";
+import {
+  hasLocalStatsbomb,
+  type LoadResult,
+  loadDevScene,
+  sceneOptionLabel,
+} from "./dev-pitch/sceneSources.ts";
 
 // Dev-only page (registered inside the includeDev && import.meta.env.DEV branch of buildRoutes).
 // The subline text below is the marker scripts/smoke.ts looks for in the study build.
@@ -124,6 +129,7 @@ export default function DevPitchPage() {
   const [moved, setMoved] = useState<{ sceneId: string; positions: Record<string, Pt> } | null>(
     null,
   );
+  const localStatsbomb = hasLocalStatsbomb();
   const [landmarksOn, setLandmarksOn] = useState(false);
   const [probe, setProbe] = useState<ProbeInput>({ provider: "statsbomb", xText: "", yText: "" });
   const [announcement, setAnnouncement] = useState<{ sceneId: string; text: string } | null>(null);
@@ -259,7 +265,7 @@ export default function DevPitchPage() {
           >
             {DEV_SCENES.map((s) => (
               <option key={s.id} value={s.id}>
-                {s.label}
+                {sceneOptionLabel(s, localStatsbomb)}
               </option>
             ))}
           </select>

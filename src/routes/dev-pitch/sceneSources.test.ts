@@ -211,6 +211,15 @@ describe("loadDevScene: local-only StatsBomb scene", () => {
   });
 });
 
+describe("registry", () => {
+  it("lists the local-only StatsBomb option once, after the Wyscout reconstruction", () => {
+    const ids = DEV_SCENES.map((s) => s.id);
+    expect(ids.filter((id) => id === "statsbomb-local")).toHaveLength(1);
+    expect(ids.indexOf("statsbomb-local")).toBe(ids.indexOf("reconstruction") + 1);
+    expect(findDevScene("statsbomb-local")?.local).toEqual({ dataset: "statsbomb" });
+  });
+});
+
 describe("sceneOptionLabel", () => {
   it("adds the machine note to the local-only option when absent", () => {
     expect(sceneOptionLabel(LOCAL_ENTRY, false)).toMatch(/\(not on this machine\)$/);

@@ -170,3 +170,149 @@ def events_zip(**kwargs: bool) -> bytes:
 
 def matches_zip() -> bytes:
     return zip_of(MATCHES_MEMBER, matches())
+
+
+# --- StatsBomb-shaped data (fictional; no real match, player or event is copied) -------------------
+#
+# One fictional match (id 9001): Alpha City (home, id 501) against Beta United (away, id 502), one
+# period. Alpha's number 9 shoots from inside the box and scores; the shot carries a freeze frame of
+# three Alpha teammates and six Beta players, the goalkeeper among them. Both teams use jersey numbers
+# 1 to 11, so the entity ids have to carry the team prefix to stay unique.
+
+SB_MATCH_ID = 9001
+SB_SHOT_ID = "a1b2c3d4-0000-4000-8000-000000000001"
+SB_ALPHA_ID = 501
+SB_BETA_ID = 502
+
+# (position id, position name) for a 4-3-3 and a 4-4-2, goalkeeper first.
+_SB_ALPHA_XI = [
+    (1, "Goalkeeper"), (2, "Right Back"), (3, "Right Center Back"), (5, "Left Center Back"),
+    (6, "Left Back"), (10, "Center Defensive Midfield"), (13, "Right Center Midfield"),
+    (15, "Left Center Midfield"), (17, "Right Wing"), (23, "Center Forward"), (21, "Left Wing"),
+]
+_SB_BETA_XI = [
+    (1, "Goalkeeper"), (2, "Right Back"), (3, "Right Center Back"), (5, "Left Center Back"),
+    (6, "Left Back"), (12, "Right Midfield"), (13, "Right Center Midfield"),
+    (15, "Left Center Midfield"), (16, "Left Midfield"), (22, "Right Center Forward"),
+    (24, "Left Center Forward"),
+]
+_SB_NAMES = {
+    SB_ALPHA_ID: ["Ari Lindgren", "Bo Da Costa", "Cal De Vries", "Dev Okoro", "Eli Marsh",
+                  "Fox Quill", "Gil Ström", "Hal Moreau", "Zoë Møller", "Ian Rossi", "Kit Novak"],
+    SB_BETA_ID: ["Lou Andersen", "Max Baker", "Ned Cole", "Oz Dunn", "Pia Evans", "Quin Faro",
+                 "Rae Gray", "Sam Holt", "Tia Ivers", "Uli Jaeger", "Vic Kerr"],
+}
+
+
+def _sb_lineup(team: int) -> list[dict[str, Any]]:
+    xi = _SB_ALPHA_XI if team == SB_ALPHA_ID else _SB_BETA_XI
+    return [
+        {
+            "player": {"id": team * 100 + n, "name": _SB_NAMES[team][n - 1]},
+            "position": {"id": pos_id, "name": pos_name},
+            "jersey_number": n,
+        }
+        for n, (pos_id, pos_name) in enumerate(xi, start=1)
+    ]
+
+
+def statsbomb_lineups() -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for team, name in ((SB_ALPHA_ID, "Alpha City"), (SB_BETA_ID, "Beta United")):
+        out.append(
+            {
+                "team_id": team,
+                "team_name": name,
+                "lineup": [
+                    {
+                        "player_id": p["player"]["id"],
+                        "player_name": p["player"]["name"],
+                        "player_nickname": None,
+                        "jersey_number": p["jersey_number"],
+                        "country": {"id": 1, "name": "Testland"},
+                        "cards": [],
+                        "positions": [
+                            {
+                                "position_id": p["position"]["id"],
+                                "position": p["position"]["name"],
+                                "from": "00:00",
+                                "to": None,
+                                "from_period": 1,
+                                "to_period": None,
+                                "start_reason": "Starting XI",
+                                "end_reason": "Final Whistle",
+                            }
+                        ],
+                    }
+                    for p in _sb_lineup(team)
+                ],
+            }
+        )
+    return out
+
+
+def _sb_base(index: int, uid: str, type_id: int, type_name: str, team: int, team_name: str, ts: str) -> dict[str, Any]:
+    return {
+        "id": uid,
+        "index": index,
+        "period": 1,
+        "timestamp": ts,
+        "minute": int(ts[3:5]),
+        "second": int(ts[6:8]),
+        "type": {"id": type_id, "name": type_name},
+        "possession": 1,
+        "possession_team": {"id": SB_ALPHA_ID, "name": "Alpha City"},
+        "play_pattern": {"id": 1, "name": "Regular Play"},
+        "team": {"id": team, "name": team_name},
+        "duration": 0.0,
+    }
+
+
+def statsbomb_events(*, with_freeze_frame: bool = True) -> list[dict[str, Any]]:
+    """The match's events: two Starting XI, two Half Start, the shot, two Half End."""
+    teams = ((SB_ALPHA_ID, "Alpha City"), (SB_BETA_ID, "Beta United"))
+    events: list[dict[str, Any]] = []
+    for i, (team, name) in enumerate(teams):
+        e = _sb_base(i + 1, f"a1b2c3d4-0000-4000-8000-0000000001{i}0", 35, "Starting XI", team, name, "00:00:00.000")
+        e["tactics"] = {"formation": 433 if team == SB_ALPHA_ID else 442, "lineup": _sb_lineup(team)}
+        events.append(e)
+    for i, (team, name) in enumerate(teams):
+        events.append(_sb_base(i + 3, f"a1b2c3d4-0000-4000-8000-0000000002{i}0", 18, "Half Start", team, name, "00:00:00.000"))
+
+    shot = _sb_base(5, SB_SHOT_ID, 16, "Shot", SB_ALPHA_ID, "Alpha City", "00:07:19.689")
+    shot["player"] = {"id": SB_ALPHA_ID * 100 + 9, "name": _SB_NAMES[SB_ALPHA_ID][8]}
+    shot["position"] = {"id": 23, "name": "Center Forward"}
+    shot["location"] = [108.4, 36.4]
+    shot["shot"] = {
+        "statsbomb_xg": 0.31,
+        "end_location": [120.0, 40.0, 1.5],
+        "type": {"id": 87, "name": "Open Play"},
+        "body_part": {"id": 40, "name": "Right Foot"},
+        "technique": {"id": 93, "name": "Normal"},
+        "outcome": {"id": 97, "name": "Goal"},
+    }
+    if with_freeze_frame:
+        def ff(team: int, n: int, x: float, y: float, mate: bool) -> dict[str, Any]:
+            pos_id, pos_name = (_SB_ALPHA_XI if team == SB_ALPHA_ID else _SB_BETA_XI)[n - 1]
+            return {
+                "location": [x, y],
+                "player": {"id": team * 100 + n, "name": _SB_NAMES[team][n - 1]},
+                "position": {"id": pos_id, "name": pos_name},
+                "teammate": mate,
+            }
+
+        shot["shot"]["freeze_frame"] = [
+            ff(SB_ALPHA_ID, 7, 100.2, 30.2, True),
+            ff(SB_ALPHA_ID, 11, 104.2, 50.2, True),
+            ff(SB_ALPHA_ID, 8, 96.2, 40.2, True),
+            ff(SB_BETA_ID, 1, 118.2, 40.2, False),
+            ff(SB_BETA_ID, 3, 112.2, 36.2, False),
+            ff(SB_BETA_ID, 5, 111.2, 42.2, False),
+            ff(SB_BETA_ID, 2, 110.2, 28.2, False),
+            ff(SB_BETA_ID, 6, 109.2, 52.2, False),
+            ff(SB_BETA_ID, 9, 100.2, 44.2, False),
+        ]
+    events.append(shot)
+    for i, (team, name) in enumerate(teams):
+        events.append(_sb_base(i + 6, f"a1b2c3d4-0000-4000-8000-0000000003{i}0", 34, "Half End", team, name, "00:45:10.000"))
+    return events
