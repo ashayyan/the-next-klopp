@@ -1,6 +1,7 @@
 import { type ChildProcess, spawn, spawnSync } from "node:child_process";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { DEV_ONLY_MARKERS } from "./lib/bundle.ts";
 
 type Mode = "preview" | "dev";
 
@@ -97,15 +98,13 @@ try {
     // links resolve, not that the dev route is absent. Absence is checked in the built chunks.
     const deep = await fetch(`${base}/dev`, { signal: AbortSignal.timeout(5000) });
     if (!deep.ok) throw new Error(`deep link /dev returned HTTP ${deep.status}`);
-    // Text taken from src/routes/dev.tsx; update both together if that copy changes.
-    const devMarker = "left out of the study build";
-    // Text taken from the subline in src/routes/dev-pitch.tsx; update both together.
-    const devPitchMarker = "Dev view of the canonical pitch";
+    // The same dev-only markers check-bundle.ts uses (every /dev route and the raw DESIGN.md).
     const assetsDir = join(process.cwd(), "dist", "assets");
     for (const file of readdirSync(assetsDir).filter((f) => f.endsWith(".js"))) {
       const text = readFileSync(join(assetsDir, file), "utf8");
-      if (text.includes(devMarker) || text.includes(devPitchMarker)) {
-        throw new Error(`dev route code leaked into dist/assets/${file}`);
+      const leak = DEV_ONLY_MARKERS.find(({ marker }) => text.includes(marker));
+      if (leak) {
+        throw new Error(`dev route code from ${leak.source} leaked into dist/assets/${file}`);
       }
     }
     console.log(`smoke ok (preview): ${base}/, SPA fallback, no dev route code in dist/assets`);

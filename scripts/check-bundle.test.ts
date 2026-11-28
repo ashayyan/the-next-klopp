@@ -2,11 +2,16 @@
 // Pure checkBundle cases build DistFile lists in memory; the CLI cases use real temp folders.
 import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
-import { mkdirSync, mkdtempSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { type BundleViolation, checkBundle, type DistFile } from "./lib/bundle.ts";
+import {
+  type BundleViolation,
+  checkBundle,
+  DEV_ONLY_MARKERS,
+  type DistFile,
+} from "./lib/bundle.ts";
 import { loadDenyManifest, matches } from "./lib/globs.ts";
 
 const MANIFEST = loadDenyManifest("deploy/deny-manifest.json");
@@ -165,6 +170,25 @@ describe("checkBundle", () => {
     const swapped = files.map((f) => (f.path === leaky.path ? leaky : f));
     const out = checkBundle(swapped, MANIFEST, catalog);
     expect(rules(out)).toContain("marker");
+  });
+
+  it("flags every dev-only marker inside a code chunk as dev-leak (WR-06)", () => {
+    const { files, catalog } = cleanDist();
+    for (const { marker, source } of DEV_ONLY_MARKERS) {
+      const leaky = file("assets/dev-abc123.js", `const s = ${JSON.stringify(marker)};`);
+      const out = checkBundle([...files, leaky], MANIFEST, catalog);
+      expect(out).toContainEqual({
+        rule: "dev-leak",
+        path: "assets/dev-abc123.js",
+        detail: `contains dev-only text from ${source}`,
+      });
+    }
+  });
+
+  it("keeps each dev-only marker present in its source file, so the check stays armed", () => {
+    for (const { marker, source } of DEV_ONLY_MARKERS) {
+      expect(readFileSync(source, "utf8"), source).toContain(marker);
+    }
   });
 
   it("does not deny a hashed asset by file name alone", () => {
