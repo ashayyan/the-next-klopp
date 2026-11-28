@@ -206,7 +206,8 @@ describe("renderModule with curriculum data", () => {
     ]) {
       expect(code).toContain(`export const ${name} = `);
     }
-    expect(code).not.toMatch(/[A-Za-z]:[\\/]/);
+    // A Windows drive path (not the "s:/" inside "https://") or the repo folder itself.
+    expect(code).not.toMatch(/(?<![A-Za-z])[A-Za-z]:[\\/]/);
     expect(code).not.toContain(repo);
     expect(code).not.toContain("never shipped");
   });
