@@ -164,14 +164,61 @@ export function DraggableHandle({
   const u = unitsPerPx(view.pxPerMetre);
   const binding = useDraggableEntity({
     position: { x, y },
+    view,
     pitch: { length, width },
     runoff,
     onMove: (p) => onMove(entity.id, p),
     onEnd: (p) => onEnd?.(entity.id, p),
     onDragChange: (start) => onDragChange?.(entity.id, start),
   });
+  const d = discDiameter(view.pxPerMetre);
+  const ringInner = d / 2 + 2 * u;
+  const ringOuter = d / 2 + 4 * u;
+  const number = entity.number !== undefined ? `number ${entity.number}` : null;
+  const who = entity.name ?? entity.label ?? entity.role ?? null;
+  const name = [
+    team?.name ?? "Player",
+    number,
+    who,
+    `x ${x.toFixed(1)} metres`,
+    `y ${y.toFixed(1)} metres`,
+  ]
+    .filter((part): part is string => part !== null)
+    .join(", ");
   return (
-    <g data-draggable="" data-entity={entity.id} data-team={team?.side ?? "a"}>
+    // biome-ignore lint/a11y/useSemanticElements: SVG has no native button; the group is the focus target
+    <g
+      data-draggable=""
+      data-entity={entity.id}
+      data-team={team?.side ?? "a"}
+      tabIndex={0}
+      role="button"
+      aria-roledescription="draggable player"
+      aria-label={name}
+      onKeyDown={binding.onKeyDown}
+    >
+      <circle
+        data-focus-ring="inner"
+        cx={x}
+        cy={y}
+        r={ringInner}
+        fill="none"
+        stroke="var(--label-bg)"
+        strokeWidth={2}
+        vectorEffect="non-scaling-stroke"
+        pointerEvents="none"
+      />
+      <circle
+        data-focus-ring="outer"
+        cx={x}
+        cy={y}
+        r={ringOuter}
+        fill="none"
+        stroke="var(--ink)"
+        strokeWidth={2}
+        vectorEffect="non-scaling-stroke"
+        pointerEvents="none"
+      />
       <circle
         data-hit=""
         cx={x}

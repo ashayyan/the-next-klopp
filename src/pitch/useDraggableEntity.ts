@@ -5,22 +5,28 @@
 // matrix, so the same inverse is right in horizontal and vertical orientation. The position handed
 // to onMove is already clamped to the run-off and rounded to 0.1 m.
 import {
+  type KeyboardEvent as ReactKeyboardEvent,
   type PointerEvent as ReactPointerEvent,
   useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { dragPosition, type PitchSize } from "./drag.ts";
-import type { Pt } from "./view.ts";
+import { dragPosition, type NudgeKey, nudgePosition, type PitchSize } from "./drag.ts";
+import type { Pt, View } from "./view.ts";
 
 export interface UseDraggableEntityOptions {
   /** Current position in canonical metres. */
   position: Pt;
+  /** The live view, so an arrow key moves in screen directions in either orientation. */
+  view: View;
   pitch: PitchSize;
   runoff?: number;
   onMove: (p: Pt) => void;
-  /** A drag that moved the player ended (drop). Not called for Escape or a cancelled gesture. */
+  /**
+   * A drag that moved the player ended (drop), or 500 ms passed since the last arrow-key nudge.
+   * Not called for Escape or a cancelled gesture.
+   */
   onEnd?: (p: Pt) => void;
   /** The start position when a drag begins, null when it ends for any reason. */
   onDragChange?: (start: Pt | null) => void;
@@ -35,6 +41,8 @@ export interface DraggableBinding {
     onPointerCancel: (e: ReactPointerEvent<SVGElement>) => void;
     onLostPointerCapture: (e: ReactPointerEvent<SVGElement>) => void;
   };
+  /** Spread on the focusable group: arrows nudge, Escape cancels a pointer drag. */
+  onKeyDown: (e: ReactKeyboardEvent<SVGElement>) => void;
   dragging: boolean;
   /** Where the drag started, for the ghost; null when not dragging. */
   start: Pt | null;
@@ -66,14 +74,33 @@ function release(target: Element, pointerId: number): void {
   }
 }
 
+const NUDGE_KEYS: ReadonlySet<string> = new Set([
+  "ArrowUp",
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+]);
+
+/** Wait this long after the last nudge before announcing the new position. */
+export const NUDGE_ANNOUNCE_MS = 500;
+
 export function useDraggableEntity(options: UseDraggableEntityOptions): DraggableBinding {
-  const { position, pitch, runoff = 3, onMove, onEnd, onDragChange } = options;
+  const { position, view, pitch, runoff = 3, onMove, onEnd, onDragChange } = options;
   const active = useRef<ActiveDrag | null>(null);
   const [start, setStart] = useState<Pt | null>(null);
 
   // The handlers read the latest callbacks and position without being re-created per render.
-  const latest = useRef({ position, pitch, runoff, onMove, onEnd, onDragChange });
-  latest.current = { position, pitch, runoff, onMove, onEnd, onDragChange };
+  const latest = useRef({ position, view, pitch, runoff, onMove, onEnd, onDragChange });
+  latest.current = { position, view, pitch, runoff, onMove, onEnd, onDragChange };
+  // A run of arrow presses is announced once, 500 ms after the last one.
+  const nudged = useRef<Pt | null>(null);
+  const nudgeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(
+    () => () => {
+      if (nudgeTimer.current !== null) clearTimeout(nudgeTimer.current);
+    },
+    [],
+  );
 
   const finish = useCallback(() => {
     active.current = null;
@@ -162,8 +189,42 @@ export function useDraggableEntity(options: UseDraggableEntityOptions): Draggabl
     if (moved) latest.current.onEnd?.(end);
   }
 
+  function onKeyDown(e: ReactKeyboardEvent<SVGElement>): void {
+    if (e.key === "Escape") {
+      if (active.current) {
+        e.preventDefault();
+        cancel();
+      }
+      return;
+    }
+    if (!NUDGE_KEYS.has(e.key) || e.ctrlKey || e.metaKey || e.altKey || active.current) return;
+    // The player wins on arrows: playback keys on the stage must not also fire.
+    e.preventDefault();
+    const now = latest.current;
+    const next = nudgePosition(
+      nudged.current ?? now.position,
+      now.view,
+      e.key as NudgeKey,
+      e.shiftKey,
+      {
+        pitch: now.pitch,
+        runoff: now.runoff,
+      },
+    );
+    nudged.current = next;
+    now.onMove(next);
+    if (nudgeTimer.current !== null) clearTimeout(nudgeTimer.current);
+    nudgeTimer.current = setTimeout(() => {
+      const end = nudged.current;
+      nudged.current = null;
+      nudgeTimer.current = null;
+      if (end) latest.current.onEnd?.(end);
+    }, NUDGE_ANNOUNCE_MS);
+  }
+
   return {
     hit: { onPointerDown, onPointerMove, onPointerUp, onPointerCancel, onLostPointerCapture },
+    onKeyDown,
     dragging,
     start,
     cancel,

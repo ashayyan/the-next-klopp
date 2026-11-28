@@ -1,6 +1,7 @@
 // Pure drag helpers: run-off clamp, 0.1 m rounding and the pointer-to-position rule.
 import { describe, expect, it } from "vitest";
-import { clampToRunoff, dragPosition, roundTenth } from "./drag.ts";
+import { clampToRunoff, dragPosition, nudge, nudgePosition, roundTenth } from "./drag.ts";
+import { makeView } from "./view.ts";
 
 const PITCH = { length: 105, width: 68 };
 
@@ -64,5 +65,81 @@ describe("dragPosition", () => {
 
   it("clamps to the run-off", () => {
     expect(dragPosition({ x: 200, y: -20 }, { x: 0, y: 0 }, PITCH)).toEqual({ x: 108, y: -3 });
+  });
+});
+
+const horizontal = makeView({
+  length: 105,
+  width: 68,
+  runoff: 3,
+  orientation: "horizontal",
+  cssWidth: 960,
+});
+const vertical = makeView({
+  length: 105,
+  width: 68,
+  runoff: 3,
+  orientation: "vertical",
+  cssWidth: 343,
+});
+
+describe("nudge in screen directions", () => {
+  it("horizontal: right and down are +x and +y", () => {
+    expect(nudge(horizontal, "ArrowRight", false)).toEqual({ dx: 1, dy: 0 });
+    expect(nudge(horizontal, "ArrowDown", false)).toEqual({ dx: 0, dy: 1 });
+    expect(nudge(horizontal, "ArrowLeft", false)).toEqual({ dx: -1, dy: 0 });
+    expect(nudge(horizontal, "ArrowUp", false)).toEqual({ dx: 0, dy: -1 });
+  });
+
+  it("horizontal: Shift makes the step 5 m", () => {
+    expect(nudge(horizontal, "ArrowLeft", true)).toEqual({ dx: -5, dy: 0 });
+    expect(nudge(horizontal, "ArrowDown", true)).toEqual({ dx: 0, dy: 5 });
+  });
+
+  it("vertical: canonical x runs up the screen, so ArrowUp is +x", () => {
+    expect(nudge(vertical, "ArrowUp", false)).toEqual({ dx: 1, dy: 0 });
+    expect(nudge(vertical, "ArrowDown", false)).toEqual({ dx: -1, dy: 0 });
+  });
+
+  it("vertical: ArrowRight is +y and ArrowLeft is -y", () => {
+    expect(nudge(vertical, "ArrowRight", false)).toEqual({ dx: 0, dy: 1 });
+    expect(nudge(vertical, "ArrowLeft", true)).toEqual({ dx: 0, dy: -5 });
+  });
+
+  it("the step is in metres whatever the zoom", () => {
+    const small = makeView({
+      length: 105,
+      width: 68,
+      runoff: 3,
+      orientation: "vertical",
+      cssWidth: 200,
+    });
+    expect(nudge(small, "ArrowUp", true)).toEqual({ dx: 5, dy: 0 });
+  });
+});
+
+describe("nudgePosition", () => {
+  const args = { pitch: PITCH, runoff: 3 } as const;
+
+  it("moves, clamps and rounds like a drag", () => {
+    expect(nudgePosition({ x: 10.04, y: 20 }, horizontal, "ArrowRight", false, args)).toEqual({
+      x: 11,
+      y: 20,
+    });
+    expect(nudgePosition({ x: 107.5, y: 20 }, horizontal, "ArrowRight", false, args)).toEqual({
+      x: 108,
+      y: 20,
+    });
+    expect(nudgePosition({ x: 108, y: 20 }, horizontal, "ArrowRight", true, args)).toEqual({
+      x: 108,
+      y: 20,
+    });
+  });
+
+  it("clamps in the vertical orientation too", () => {
+    expect(nudgePosition({ x: 50, y: 70.5 }, vertical, "ArrowRight", false, args)).toEqual({
+      x: 50,
+      y: 71,
+    });
   });
 });

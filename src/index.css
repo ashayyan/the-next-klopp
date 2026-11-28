@@ -79,3 +79,14 @@
     animation-duration: 0ms !important;
   }
 }
+
+/* Draggable pitch players: the two-tone ring shows on keyboard focus only (03-UI-SPEC Drag Spike). */
+[data-draggable] {
+  outline: none;
+}
+[data-draggable] [data-focus-ring] {
+  visibility: hidden;
+}
+[data-draggable]:focus-visible [data-focus-ring] {
+  visibility: visible;
+}
