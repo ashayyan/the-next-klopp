@@ -255,3 +255,13 @@ describe("the published Wyscout goal", () => {
     expect(entry?.attribution).toContain("Pappalardo");
   });
 });
+
+describe("the reconstruction fixture", () => {
+  it("is the published Wyscout scene (same parsed value), not a hand-made copy", () => {
+    const catalog = readJson(join(publicRoot, "catalog.json")) as Catalog;
+    const entry = catalog.datasets.find((d) => d.dataset === "wyscout");
+    const published = readJson(join(publicRoot, entry?.scenes[0]?.path ?? "")) as Scene;
+    const fixture = readJson(join(root, "src", "scene", "fixtures", "reconstruction.json"));
+    expect(fixture).toEqual(published);
+  });
+});
