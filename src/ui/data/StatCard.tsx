@@ -3,6 +3,10 @@ export interface StatFigure {
   value: string;
   unit?: string;
   label: string;
+  /** loading shows "…"; missing shows "—" and the `reason` line. */
+  status?: "loading" | "missing";
+  /** Why the number is missing, for example "No tracking data for this match". */
+  reason?: string;
 }
 
 export interface StatCardProps {
@@ -35,15 +39,32 @@ export function StatCard({
       className={`flex ${layout === "row" ? "flex-row flex-wrap gap-x-8 gap-y-4" : "flex-col gap-4"} ${className ?? "bg-surface-panel p-4"}`}
     >
       {figures.map((f) => (
-        <div key={f.label} className="flex min-w-0 items-baseline gap-2">
+        <div
+          key={f.label}
+          className={`flex min-w-0 items-baseline gap-2${f.status === "missing" ? " flex-wrap gap-y-0" : ""}`}
+        >
           <dt className={`order-2 text-label ${labelClassName ?? "text-ink-muted"}`}>{f.label}</dt>
           <dd
             data-stat-figure
+            data-status={f.status}
+            aria-busy={f.status === "loading" ? true : undefined}
             className="order-1 shrink-0 whitespace-nowrap font-mono text-display tabular-nums"
           >
-            {f.value}
-            {f.unit ? <span className="text-heading">{` ${f.unit}`}</span> : null}
+            {f.status === "loading" ? "…" : f.status === "missing" ? "—" : f.value}
+            {f.status === undefined && f.unit ? (
+              <span className="text-heading">{` ${f.unit}`}</span>
+            ) : null}
+            {f.status === "loading" ? <span className="sr-only">Loading</span> : null}
+            {f.status === "missing" ? <span className="sr-only">Not available</span> : null}
           </dd>
+          {f.status === "missing" && f.reason ? (
+            <dd
+              data-stat-reason
+              className={`order-3 basis-full text-label ${labelClassName ?? "text-ink-muted"}`}
+            >
+              {f.reason}
+            </dd>
+          ) : null}
         </div>
       ))}
     </dl>

@@ -30,6 +30,8 @@ export interface DataTableProps<R> {
   rowClassName?: string;
   /** Forced look for the gallery, written to `data-state`. */
   state?: string;
+  /** Forced look of one row (the gallery's hover row), written to that row's `data-state`. */
+  rowState?: (row: R) => string | undefined;
 }
 
 /**
@@ -50,6 +52,7 @@ export function DataTable<R>({
   className,
   rowClassName,
   state,
+  rowState,
 }: DataTableProps<R>) {
   const interactive = onRowEnter !== undefined;
   const align = (c: DataColumn<R>) =>
@@ -92,6 +95,7 @@ export function DataTable<R>({
             <tr
               key={key}
               data-row={key}
+              data-state={rowState?.(row)}
               aria-selected={interactive ? active : undefined}
               aria-label={interactive ? rowLabel?.(row) : undefined}
               tabIndex={interactive ? 0 : undefined}

@@ -1,6 +1,7 @@
 // Chart primitives (04-UI-SPEC "Data-viz standards"): SVG marks with token colours, D3-free linear
 // maths, zero baselines for bars, direct labels on at most two marks, and a hover/focus tooltip.
 import type { ReactNode } from "react";
+import { Segmented } from "../Segmented.tsx";
 
 /** A linear scale from `domain` to `range`; values outside the domain extrapolate. */
 export function linear(
@@ -231,5 +232,132 @@ export function ChartTooltip({ x, y, lines, containerWidth }: ChartTooltipProps)
         </span>
       ))}
     </div>
+  );
+}
+
+/** The one number formatter for chart and table text (T-04-28): grouped digits, fixed decimals, a true minus sign. */
+export function formatNumber(value: number, digits = 1): string {
+  const text = new Intl.NumberFormat("en-GB", {
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  }).format(Math.abs(value));
+  return value < 0 && Number(text.replace(/,/g, "")) !== 0 ? `\u2212${text}` : text;
+}
+
+export interface LinePoint {
+  x: number;
+  y: number;
+}
+
+export interface LineProps {
+  points: readonly LinePoint[];
+  /** Stroke class: a series colour such as `stroke-data-cat-1`, never the accent. */
+  className?: string;
+}
+
+/** A 2 px polyline in SVG units (already scaled). Pair it with a Marker at each point and a direct label. */
+export function Line({ points, className = "stroke-data-cat-1" }: LineProps) {
+  const d = points.map((p, i) => `${i === 0 ? "M" : "L"}${p.x} ${p.y}`).join(" ");
+  return (
+    <path
+      data-chart="line"
+      d={d}
+      fill="none"
+      strokeWidth={2}
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      className={className}
+    />
+  );
+}
+
+export type MarkerShape = "circle" | "square" | "diamond";
+
+export interface MarkerProps {
+  x: number;
+  y: number;
+  shape?: MarkerShape;
+  /** Mark size in SVG units; never below 8 (04-UI-SPEC "Data-viz standards"). */
+  size?: number;
+  /** Fill class: a series colour such as `fill-data-cat-1`. */
+  className?: string;
+}
+
+/** A point mark of at least 8 px. The shape differs per series, so a series never relies on colour alone. */
+export function Marker({
+  x,
+  y,
+  shape = "circle",
+  size = 10,
+  className = "fill-data-cat-1",
+}: MarkerProps) {
+  const s = Math.max(8, size);
+  const half = s / 2;
+  const common = { "data-chart": "marker", "data-shape": shape, className } as const;
+  if (shape === "square") {
+    return <rect {...common} x={x - half} y={y - half} width={s} height={s} />;
+  }
+  if (shape === "diamond") {
+    return (
+      <polygon
+        {...common}
+        points={`${x},${y - half * 1.2} ${x + half * 1.2},${y} ${x},${y + half * 1.2} ${x - half * 1.2},${y}`}
+      />
+    );
+  }
+  return <circle {...common} cx={x} cy={y} r={half} />;
+}
+
+export interface LegendItem {
+  key: string;
+  label: string;
+  shape: MarkerShape;
+  /** Fill class of the series, the same one its Marker uses. */
+  className: string;
+}
+
+/**
+ * The key for a chart with two or more series: each entry is the series' mark and its name. One
+ * series needs no key (the chart title and the direct label say it), so this draws nothing then.
+ */
+export function ChartLegend({ items }: { items: readonly LegendItem[] }) {
+  if (items.length < 2) return null;
+  return (
+    <ul
+      data-chart="legend"
+      aria-label="Series"
+      className="flex flex-wrap gap-x-5 gap-y-1 text-label"
+    >
+      {items.map((item) => (
+        <li key={item.key} data-legend-item={item.key} className="flex items-center gap-2">
+          <svg width={14} height={14} viewBox="0 0 14 14" aria-hidden="true" focusable="false">
+            <Marker x={7} y={7} shape={item.shape} size={10} className={item.className} />
+          </svg>
+          <span>{item.label}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export type ChartView = "chart" | "table";
+
+export interface TableViewToggleProps {
+  view: ChartView;
+  onViewChange: (view: ChartView) => void;
+}
+
+/** "Chart | Table": swaps the chart for a table of the same numbers, a keyboard and screen reader path. */
+export function TableViewToggle({ view, onViewChange }: TableViewToggleProps) {
+  return (
+    <Segmented<ChartView>
+      label="View"
+      value={view}
+      onValueChange={onViewChange}
+      options={[
+        { value: "chart", label: "Chart" },
+        { value: "table", label: "Table" },
+      ]}
+    />
   );
 }

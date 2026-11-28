@@ -250,9 +250,6 @@ describe("registry after the Controls and Overlays groups", () => {
 });
 
 describe("inventory (the 04-UI-SPEC gallery table)", () => {
-  // The ids Task 3 of plan 04-16 still has to build.
-  const PENDING = new Set<string>(["stat-card", "chart-primitives", "data-table", "scales"]);
-
   it("holds the 37 primitives of the contract, each id once, in a known group", () => {
     expect(inventory.length).toBe(37);
     expect(new Set(inventory.map((e) => e.id)).size).toBe(37);
@@ -263,10 +260,6 @@ describe("inventory (the 04-UI-SPEC gallery table)", () => {
   });
 
   for (const entry of inventory) {
-    if (PENDING.has(entry.id)) {
-      it.todo(`${entry.id} is not registered yet (pending in this plan)`);
-      continue;
-    }
     it(`${entry.id}: registered in ${entry.group} with exactly its states`, () => {
       const primitive = findPrimitive(entry.id);
       expect(primitive, `${entry.id} missing from GALLERY`).toBeDefined();
@@ -282,7 +275,6 @@ describe("inventory (the 04-UI-SPEC gallery table)", () => {
 
   it("renders every state of every registered primitive with its data-gallery-state attribute", () => {
     for (const entry of inventory) {
-      if (PENDING.has(entry.id)) continue;
       const html = page(`/dev/gallery/${entry.id}?bare=1&theme=light`);
       for (const state of entry.states) {
         expect(html, `${entry.id}/${state}`).toContain(`data-gallery-state="${entry.id}/${state}"`);

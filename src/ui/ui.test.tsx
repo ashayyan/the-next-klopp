@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 import { loadTokens } from "../../scripts/design/build-tokens.ts";
 import { SYSTEM_INPUT } from "../../scripts/design/tokens.ts";
 import { Checkbox, RadioGroup } from "./Choice.tsx";
+import { ChartLegend, formatNumber, Line, Marker } from "./data/chart.tsx";
 import { DataTable } from "./data/DataTable.tsx";
 import { StatCard } from "./data/StatCard.tsx";
 import { NumberInput, TextInput } from "./Field.tsx";
@@ -494,5 +495,99 @@ describe("Surface", () => {
     expect(raised).toContain("bg-surface-raised");
     expect(raised).not.toContain("shadow-sheet");
     expect(renderToStaticMarkup(<Surface level="raised" sheet />)).toContain("shadow-sheet");
+  });
+});
+
+describe("StatCard states", () => {
+  it("shows an ellipsis while loading and a dash with its reason when missing", () => {
+    const loading = renderToStaticMarkup(
+      <StatCard figures={[{ value: "", label: "passes", status: "loading" }]} />,
+    );
+    expect(loading).toContain("…");
+    expect(loading).toContain('aria-busy="true"');
+    const missing = renderToStaticMarkup(
+      <StatCard
+        figures={[{ value: "", label: "distance", status: "missing", reason: "No tracking data." }]}
+      />,
+    );
+    expect(missing).toContain("—");
+    expect(missing).toContain("No tracking data.");
+    expect(missing).toContain("Not available");
+  });
+});
+
+describe("chart additions", () => {
+  const series = [
+    { key: "a", label: "Wide", shape: "circle" as const, className: "fill-data-cat-1" },
+    { key: "b", label: "Central", shape: "square" as const, className: "fill-data-cat-2" },
+  ];
+
+  it("draws a legend for two series and none for one", () => {
+    expect(renderToStaticMarkup(<ChartLegend items={series} />)).toContain('data-chart="legend"');
+    expect(renderToStaticMarkup(<ChartLegend items={series.slice(0, 1)} />)).toBe("");
+    expect(renderToStaticMarkup(<ChartLegend items={[]} />)).toBe("");
+  });
+
+  it("never draws a marker below 8 px and varies the shape per series", () => {
+    const small = renderToStaticMarkup(
+      <svg aria-hidden="true">
+        <Marker x={10} y={10} size={4} />
+      </svg>,
+    );
+    expect(small).toContain('r="4"');
+    expect(
+      renderToStaticMarkup(
+        <svg aria-hidden="true">
+          <Marker x={1} y={1} shape="square" />
+        </svg>,
+      ),
+    ).toContain('data-shape="square"');
+  });
+
+  it("builds a line path and formats numbers with a true minus", () => {
+    const html = renderToStaticMarkup(
+      <svg aria-hidden="true">
+        <Line
+          points={[
+            { x: 0, y: 5 },
+            { x: 10, y: 8 },
+          ]}
+        />
+      </svg>,
+    );
+    expect(html).toContain('d="M0 5 L10 8"');
+    expect(html).toContain("stroke-data-cat-1");
+    expect(formatNumber(-12.34)).toBe("−12.3");
+    expect(formatNumber(0)).toBe("0.0");
+    expect(formatNumber(1234.5, 0)).toBe("1,235");
+  });
+});
+
+describe("DataTable empty and forced row look", () => {
+  it("shows the empty copy instead of rows", () => {
+    const html = renderToStaticMarkup(
+      <DataTable
+        caption="Events"
+        columns={[{ id: "a", header: "A", cell: (r: { id: string }) => r.id }]}
+        rows={[]}
+        rowKey={(r) => r.id}
+        empty={{ heading: "No events in this window", body: "Widen the time window." }}
+      />,
+    );
+    expect(html).toContain("No events in this window");
+    expect(html).not.toContain("<table");
+  });
+
+  it("writes a forced row look to that row only", () => {
+    const html = renderToStaticMarkup(
+      <DataTable
+        caption="Events"
+        columns={[{ id: "a", header: "A", cell: (r: { id: string }) => r.id }]}
+        rows={[{ id: "x" }, { id: "y" }]}
+        rowKey={(r) => r.id}
+        rowState={(r) => (r.id === "y" ? "hover" : undefined)}
+      />,
+    );
+    expect(count(html, 'data-state="hover"')).toBe(1);
   });
 });

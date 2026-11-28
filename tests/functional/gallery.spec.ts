@@ -1,6 +1,7 @@
 // DSGN-04: the dev component gallery. Width frames are real same-origin iframes at exact CSS widths,
 // the theme switcher picks light, dark or both, and a deep link lands on one state
 // (04-UI-SPEC "/dev/gallery contract").
+import { readFileSync } from "node:fs";
 import { expect, type Frame, type Page, test } from "@playwright/test";
 
 const BUTTON_STATES = ["default", "hover", "focus-visible", "pressed", "disabled", "loading"];
@@ -435,4 +436,107 @@ test.describe("overlays", () => {
     // Base UI hides the Dismiss button from the accessibility tree until the toast has focus.
     await expect(toast.getByText("Dismiss", { exact: true })).toBeVisible();
   });
+});
+
+// 04-16: the Lesson and Data groups and the full inventory of the 04-UI-SPEC table.
+interface InventoryEntry {
+  id: string;
+  group: string;
+  states: string[];
+}
+const INVENTORY: InventoryEntry[] = JSON.parse(
+  readFileSync(new URL("../../src/routes/dev-gallery/inventory.json", import.meta.url), "utf8"),
+);
+
+test.describe("lesson and data groups", () => {
+  test("the chart legend shows for 2 and 3 series and not for a single series", async ({
+    page,
+  }) => {
+    await page.goto("/dev/gallery/chart-primitives?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    for (const state of ["legend-2-series", "legend-3-series"]) {
+      const cell = page.locator(`[data-gallery-state="chart-primitives/${state}"]`);
+      await expect(cell.locator('[data-chart="legend"]')).toBeVisible();
+      await expect(cell.locator('[data-chart="direct-label"]').first()).toBeVisible();
+    }
+    await expect(
+      page.locator('[data-gallery-state="chart-primitives/legend-3-series"] [data-legend-item]'),
+    ).toHaveCount(3);
+    for (const state of ["axis-gridlines", "bars", "line-marker", "label-tooltip"]) {
+      await expect(
+        page.locator(`[data-gallery-state="chart-primitives/${state}"] [data-chart="legend"]`),
+      ).toHaveCount(0);
+    }
+    // Every marker is at least 8 px across.
+    for (const marker of await page
+      .locator('[data-gallery-state="chart-primitives/line-marker"] [data-chart="marker"]')
+      .all()) {
+      const box = await marker.boundingBox();
+      expect(box?.width ?? 0).toBeGreaterThanOrEqual(8);
+    }
+  });
+
+  test("the table view swaps the chart for a table of the same numbers", async ({ page }) => {
+    await page.goto("/dev/gallery/chart-primitives?bare=1&theme=light");
+    const cell = page.locator('[data-gallery-state="chart-primitives/table-view"]');
+    await expect(cell.getByRole("table")).toBeVisible();
+    await cell.getByRole("button", { name: "Chart" }).click();
+    await expect(cell.getByRole("table")).toHaveCount(0);
+    await expect(cell.locator("svg[role='img']")).toBeVisible();
+  });
+
+  test("the empty data table shows the Copywriting Contract copy", async ({ page }) => {
+    await page.goto("/dev/gallery/data-table?bare=1&theme=light");
+    const cell = page.locator('[data-gallery-state="data-table/empty"]');
+    await expect(cell.getByText("No events in this window")).toBeVisible();
+    await expect(
+      cell.getByText("Widen the time window or pick another match to see events here."),
+    ).toBeVisible();
+  });
+
+  test("stat card loading and missing states", async ({ page }) => {
+    await page.goto("/dev/gallery/stat-card?bare=1&theme=light");
+    await expect(
+      page.locator('[data-gallery-state="stat-card/loading"] [data-stat-figure]'),
+    ).toHaveText(/…/);
+    const missing = page.locator('[data-gallery-state="stat-card/missing"]');
+    await expect(missing.locator("[data-stat-figure]")).toHaveText(/—/);
+    await expect(missing.locator("[data-stat-reason]")).toBeVisible();
+  });
+
+  test("quiz feedback carries an icon and words, and the ring is a meter", async ({ page }) => {
+    await page.goto("/dev/gallery/quiz-option?bare=1&theme=light");
+    const correct = page.locator('[data-gallery-state="quiz-option/correct"] [data-answer]');
+    await expect(correct).toContainText("Correct");
+    await expect(correct.locator("svg")).toHaveCount(1);
+    const wrong = page.locator('[data-gallery-state="quiz-option/incorrect"] [data-answer]');
+    await expect(wrong).toContainText("Not quite — here is the answer");
+    await expect(wrong.locator("svg")).toHaveCount(1);
+    await expect(
+      page.locator('[data-gallery-state="quiz-option/disabled"] [data-quiz-option]').first(),
+    ).toBeDisabled();
+    await page.goto("/dev/gallery/progress-ring?bare=1&theme=light");
+    const ring = page.locator('[data-gallery-state="progress-ring/40-percent"] [role="meter"]');
+    await expect(ring).toHaveAttribute("aria-valuenow", "4");
+    await expect(ring).toHaveAttribute("aria-valuemax", "10");
+    await expect(ring).toContainText("4 of 10 concepts");
+  });
+
+  test("the badge has neutral, done and new and no lost-streak state", async ({ page }) => {
+    await page.goto("/dev/gallery/badge?bare=1&theme=light");
+    for (const kind of ["neutral", "done", "new"]) {
+      await expect(page.locator(`[data-badge="${kind}"]`)).toHaveCount(1);
+    }
+    await expect(page.getByText(/streak|lost|missed/i)).toHaveCount(0);
+  });
+
+  for (const entry of INVENTORY) {
+    test(`every state of ${entry.id} is on its bare page`, async ({ page }) => {
+      await page.goto(`/dev/gallery/${entry.id}?bare=1&theme=light`);
+      await expect(page.locator('[data-ready="1"]')).toBeAttached();
+      for (const state of entry.states) {
+        await expect(page.locator(`[data-gallery-state="${entry.id}/${state}"]`)).toHaveCount(1);
+      }
+    });
+  }
 });
