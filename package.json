@@ -17,6 +17,8 @@
     "test": "vitest run",
     "guard": "node scripts/guard-files.ts --tracked",
     "validate:schemas": "vitest run schemas",
+    "data": "uv run --project pipeline klopp-pipeline run-all",
+    "data:fetch": "uv run --project pipeline klopp-pipeline fetch --all",
     "data:coverage": "uv run --project pipeline klopp-pipeline coverage",
     "pipeline:test": "uv run --project pipeline pytest pipeline/tests -q",
     "research:check": "vitest run scripts/research",

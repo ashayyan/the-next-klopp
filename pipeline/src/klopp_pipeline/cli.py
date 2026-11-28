@@ -171,3 +171,50 @@ def publish_cmd(
     for label in result.skipped:
         typer.echo(f"not shippable, kept local: {label}")
     typer.echo(f"catalog {'written' if result.catalog_written else 'unchanged'}: {result.catalog}")
+
+
+@app.command("run-all")
+def run_all(
+    sources: Annotated[
+        Path | None, typer.Option(help="Source allow-list file (default: pipeline/sources.allow.json).")
+    ] = None,
+    offline: Annotated[bool, typer.Option(help=OFFLINE_HELP)] = False,
+    raw_dir: Annotated[Path, typer.Option(help=RAW_DIR_HELP)] = RAW_ROOT,
+    data_dir: Annotated[Path, typer.Option(help=DATA_DIR_HELP)] = DEFAULT_DATA,
+    public_dir: Annotated[Path, typer.Option(help=PUBLIC_DIR_HELP)] = DEFAULT_PUBLIC,
+) -> None:
+    """Fetch the sources the recipes need, run every recipe, then publish. Safe to run twice."""
+    new_files = 0
+    try:
+        allow = load_allow_list(sources) if sources is not None else load_allow_list()
+        needed = sorted({r.source_id for r in RECIPES.values()})
+        for source in allow.sources:
+            if source.id in needed and source.files:
+                paths = fetch_source(source.id, allow=allow, raw_root=raw_dir, offline=offline)
+                typer.echo(f"{source.id}: {len(paths)} file(s) verified")
+        for chosen in RECIPES.values():
+            scene = chosen.build(raw_dir, offline)
+            result = write_scene_version(
+                scene,
+                source=get_source(allow, chosen.source_id),
+                recipe=chosen.name,
+                dataset=chosen.dataset,
+                raw_root=raw_dir,
+                data_root=data_dir,
+            )
+            if result.created:
+                new_files += len(list(result.path.iterdir()))
+            typer.echo(f"{chosen.name}: {'wrote' if result.created else 'already present'} {result.path.name}")
+        outcome = publish_mod.publish(data_root=data_dir, public_root=public_dir, allow=allow)
+    except (FetchError, standardise.StandardiseError, ManifestError) as exc:
+        typer.echo(f"run-all failed: {exc}")
+        raise typer.Exit(code=1) from exc
+    for path in outcome.copied:
+        new_files += len(list(path.iterdir()))
+        typer.echo(f"published {path.parent.name}/{path.name}")
+    for label in outcome.skipped:
+        typer.echo(f"not shippable, kept local: {label}")
+    if outcome.catalog_written:
+        new_files += 1
+        typer.echo(f"catalog written: {outcome.catalog.name}")
+    typer.echo(f"done: {new_files} new file(s)" if new_files else "done: no new files")
