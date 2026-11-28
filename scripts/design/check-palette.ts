@@ -417,9 +417,15 @@ function main(argv: string[]): number {
     inputs = [...new Set([all.system.input, ...all.directions.map((d) => d.input)])];
   }
   const results: PaletteResult[] = [];
+  const seen = new Set<string>();
   for (const input of inputs) {
     try {
-      results.push(...checkPalette(loadTokens(ROOT, input)));
+      const doc = loadTokens(ROOT, input);
+      // With no file given, a direction file that repeats the system set (DESIGN.md holds the
+      // picked direction verbatim) is reported once, under the system input.
+      if (files.length === 0 && seen.has(doc.meta.direction)) continue;
+      seen.add(doc.meta.direction);
+      results.push(...checkPalette(doc));
     } catch (err) {
       console.error((err as Error).message);
       return 1;

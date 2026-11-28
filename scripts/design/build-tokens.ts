@@ -9,6 +9,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  checkDesignHeadings,
   DIRECTION_DIR,
   extractTokensBlock,
   generateScopedCss,
@@ -48,8 +49,18 @@ export function listTokenInputs(root: string = ROOT): TokenInputs {
   };
 }
 
+/**
+ * Reads and validates one token input. A Markdown input must also have the DESIGN.md section
+ * structure; the error then lists every missing, duplicate or out-of-order heading.
+ */
 export function loadTokens(root: string, input: string): TokenDocument {
   const text = readFileSync(resolve(root, input), "utf8");
+  if (input.endsWith(".md")) {
+    const problems = checkDesignHeadings(text);
+    if (problems.length > 0) {
+      throw new Error(`${input}: DESIGN.md sections are wrong:\n  ${problems.join("\n  ")}`);
+    }
+  }
   let json: unknown;
   try {
     json = JSON.parse(input.endsWith(".md") ? extractTokensBlock(text) : text);
@@ -59,10 +70,15 @@ export function loadTokens(root: string, input: string): TokenDocument {
   return parseTokens(json, input);
 }
 
-/** Generated CSS for one pair. `scope` null means the system file. */
+/**
+ * Generated CSS for one pair. `scope` null means the system file when the output is
+ * src/styles/tokens.css or the input is Markdown (DESIGN.md is always the system document).
+ */
 export function renderPair(root: string, pair: TokenPair): string {
   const doc = loadTokens(root, pair.input);
-  if (pair.scope === null && pair.out === SYSTEM_OUT) return generateSystemCss(doc, pair.input);
+  if (pair.scope === null && (pair.out === SYSTEM_OUT || pair.input.endsWith(".md"))) {
+    return generateSystemCss(doc, pair.input);
+  }
   const scope = pair.scope ?? scopeFor(doc.meta.direction);
   if (pair.scope === null && pair.input.endsWith(".tokens.json")) {
     const id = pair.input

@@ -106,7 +106,7 @@ describe("floodlit tracer: schema, generator, Tailwind", () => {
 
 // biome-ignore lint/suspicious/noExplicitAny: test fixtures mutate a parsed JSON document
 type Json = Record<string, any>;
-const floodlitJson = (): Json => JSON.parse(read(SYSTEM_INPUT));
+const floodlitJson = (): Json => JSON.parse(extractTokensBlock(read(SYSTEM_INPUT)));
 const SCRIPT = join(root, "scripts", "design", "build-tokens.ts");
 const run = (args: string[]) =>
   spawnSync(process.execPath, [SCRIPT, ...args], { cwd: root, encoding: "utf8" });

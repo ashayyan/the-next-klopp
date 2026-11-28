@@ -8,7 +8,7 @@ import { describe, expect, it } from "vitest";
 import { listTokenInputs, loadTokens } from "./build-tokens.ts";
 import { checkPalette, checkTheme, renderMarkdown, worstDistances } from "./check-palette.ts";
 import { contrast } from "./lib/color.ts";
-import type { ResolvedTheme } from "./tokens.ts";
+import { extractTokensBlock, type ResolvedTheme } from "./tokens.ts";
 
 const root = join(import.meta.dirname, "..", "..");
 const SCRIPT = join(root, "scripts", "design", "check-palette.ts");
@@ -515,7 +515,9 @@ describe("the gate fails unsafe palettes", () => {
 
   it("the CLI exits 1 for a token file with team B #00A000 and names the check", () => {
     const dir = mkdtempSync(join(tmpdir(), "tnk-palette-"));
-    const json = JSON.parse(readFileSync(join(root, listTokenInputs(root).system.input), "utf8"));
+    const json = JSON.parse(
+      extractTokensBlock(readFileSync(join(root, listTokenInputs(root).system.input), "utf8")),
+    );
     json.pitch.light["team-b"] = { $type: "color", $value: "#00A000" };
     const file = join(dir, "bad.tokens.json");
     writeFileSync(file, JSON.stringify(json));

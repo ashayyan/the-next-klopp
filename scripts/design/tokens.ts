@@ -16,7 +16,8 @@ import {
   tokenDocumentSchema,
 } from "./tokens-schema.ts";
 
-export const SYSTEM_INPUT = "src/routes/dev-directions/tokens/floodlit.tokens.json";
+/** The design constitution: its single `tokens` block is the source of src/styles/tokens.css. */
+export const SYSTEM_INPUT = "docs/DESIGN.md";
 export const SYSTEM_OUT = "src/styles/tokens.css";
 export const DIRECTION_DIR = "src/routes/dev-directions/tokens";
 
@@ -43,6 +44,47 @@ export function extractTokensBlock(markdown: string): string {
     throw new Error(`DESIGN.md must hold exactly one tokens block, found ${blocks.length}`);
   }
   return blocks[0] as string;
+}
+
+/** The 8 `##` sections of DESIGN.md (04-UI-SPEC "DESIGN.md outline"), in this order. */
+export const DESIGN_HEADINGS = [
+  "## 1. Principles and anti-slop rules",
+  "## 2. Visual direction",
+  "## 3. Foundations",
+  "## 4. Pitch Standard",
+  "## 5. Interaction component catalogue",
+  "## 6. Lesson templates",
+  "## 7. Data-viz standards",
+  "## 8. Quality bar",
+] as const;
+
+/**
+ * Problems with the DESIGN.md section structure: "missing: <heading>", "duplicate: <heading>" or
+ * "out of order: <heading>". Headings inside fenced code blocks are ignored. Empty when it is right.
+ */
+export function checkDesignHeadings(markdown: string): string[] {
+  const expected: readonly string[] = DESIGN_HEADINGS;
+  const found: string[] = [];
+  let fenced = false;
+  for (const line of markdown.replaceAll("\r\n", "\n").split("\n")) {
+    if (line.startsWith("```")) fenced = !fenced;
+    else if (!fenced && line.startsWith("## ")) {
+      const heading = line.trimEnd();
+      if (expected.includes(heading)) found.push(heading);
+    }
+  }
+  const problems: string[] = [];
+  for (const h of expected) {
+    const n = found.filter((f) => f === h).length;
+    if (n === 0) problems.push(`missing: ${h}`);
+    else if (n > 1) problems.push(`duplicate: ${h}`);
+  }
+  const present = expected.filter((h) => found.includes(h));
+  const order = [...new Set(found)];
+  for (let i = 0; i < order.length; i += 1) {
+    if (order[i] !== present[i]) problems.push(`out of order: ${order[i]}`);
+  }
+  return problems;
 }
 
 function describePath(path: PropertyKey[]): string {

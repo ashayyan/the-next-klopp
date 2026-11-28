@@ -12,10 +12,10 @@ import {
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { collectReferences, FONT_BUDGET_BYTES } from "./copy-fonts.ts";
-import { DIRECTION_DIR } from "./tokens.ts";
+import { DIRECTION_DIR, SYSTEM_INPUT } from "./tokens.ts";
 
 const root = join(import.meta.dirname, "..", "..");
 const packages = join(root, "node_modules", "@fontsource-variable");
@@ -26,6 +26,8 @@ const run = (args: string[]) =>
 /** A temp root holding only the token sets; fonts come from the repo's node_modules. */
 function tempRoot(): string {
   const dir = mkdtempSync(join(tmpdir(), "tnk-fonts-"));
+  mkdirSync(join(dir, dirname(SYSTEM_INPUT)), { recursive: true });
+  cpSync(join(root, SYSTEM_INPUT), join(dir, SYSTEM_INPUT));
   mkdirSync(join(dir, DIRECTION_DIR), { recursive: true });
   for (const f of readdirSync(join(root, DIRECTION_DIR))) {
     if (f.endsWith(".tokens.json"))
