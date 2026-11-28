@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 4
 current_phase_name: Design Direction & System
 status: executing
-stopped_at: Completed 04-11-PLAN.md
-last_updated: "2026-11-28T08:09:05.114Z"
+stopped_at: Completed 04-12-PLAN.md
+last_updated: "2026-11-28T08:21:22.290Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 execution started
-state_head: 57f4e980d0b463f03b2ef7b7d7ff60efe057cd80
+state_head: a7c9453da405e1005d381461b93674b4e918ae22
 progress:
   total_phases: 8
   completed_phases: 3
   total_plans: 58
-  completed_plans: 52
+  completed_plans: 53
   percent: 38
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 4 (Design Direction & System) — EXECUTING
-Plan: 12 of 17
+Plan: 13 of 17
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 4 execution started
 
@@ -99,6 +99,7 @@ Progress: [████░░░░░░] 38%
 | Phase 4 P09 | 35min | 3 tasks | 13 files |
 | Phase 4 P10 | 25min | 3 tasks | 4 files |
 | Phase 4 P11 | 11 min | 3 tasks | 13 files |
+| Phase 4 P12 | 10 min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -169,6 +170,8 @@ Recent decisions affecting current work:
 - [Phase 4]: 04-11: DESIGN.md tokens block is the floodlit set verbatim; anti-slop answered with rules (pitch is the only lit object, scoreline titles, one accent fill at rest), palette unchanged
 - [Phase 4]: 04-11: SYSTEM_INPUT = docs/DESIGN.md; loadTokens refuses a Markdown input with missing or out-of-order sections, so every token tool enforces the outline
 - [Phase 4]: 04-11: Theme pre-paint script in index.html sets data-theme only for stored light/dark (tnk:theme, try/catch); applyDocumentTheme for the app toggle
+- [Phase 4]: 04-12: DESIGN.md complete (sections 1-8); section 8 is locked to CHECKS and TASTE_IGNORED, section 5 to the 50 brief 9.5 components, by design-md.test.ts
+- [Phase 4]: 04-12: Case study template reveals nothing on scroll alone (button or Next drives each step); Review template has a capped queue and no backlog count
 
 ### Pending Todos
 
@@ -197,6 +200,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T08:09:04.580Z
-Stopped at: Completed 04-11-PLAN.md
+Last session: 2026-11-28T08:21:21.599Z
+Stopped at: Completed 04-12-PLAN.md
 Resume file: None
