@@ -5,12 +5,15 @@
 // "REVIEW: FAIL ...". Exit 0 pass (warnings allowed), 1 any FAIL, 2 could not run (bad arguments,
 // no server, no browser, no taste skill folder).
 // Routes under /dev/ use the dev server (REVIEW_PORT, default 5173); other routes use vite preview
-// (default 4173). A server that already answers is reused and never stopped. Erasable TypeScript only.
+// (default 4173), built first so a stale dist/ is never reviewed. A server that already answers is
+// reused and never stopped; report.json records the commit and whether the served build was fresh.
+// Erasable TypeScript only.
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import {
   capture,
   ensureServer,
+  gitCommit,
   launchChrome,
   type RunningServer,
   tokensHash,
@@ -103,6 +106,7 @@ async function main(): Promise<number> {
       url: new URL(args.route, server.baseUrl).toString(),
       generatedAt: new Date().toISOString(),
       tokensSha256: tokensHash(root),
+      source: { commit: gitCommit(root), fresh: server.fresh },
       widths: args.widths,
       themes,
       checks: results,

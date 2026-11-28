@@ -64,6 +64,11 @@ export interface RunningServer {
   kind: "dev" | "preview";
   /** True when this command started the server (and so stops it). */
   started: boolean;
+  /**
+   * True when what the server shows is the source on disk: the dev server, or a preview of a
+   * build this command just made. False for a reused preview server (its dist may be older).
+   */
+  fresh: boolean;
   stop(): Promise<void>;
 }
 
@@ -91,7 +96,8 @@ export const isDevRoute = (route: string): boolean => route === "/dev" || route.
 
 /**
  * Reuses a server that already answers (and never stops it), else starts Vite: the dev server for
- * `/dev/` routes, `vite preview` (after a build when dist is missing) for the rest.
+ * `/dev/` routes, `vite preview` for the rest. Before starting a preview it always builds, so the
+ * review never judges a dist/ left over from an older commit (a build takes about a second).
  */
 export async function ensureServer(options: {
   route: string;
@@ -106,11 +112,16 @@ export async function ensureServer(options: {
   const timeout = Number(process.env.REVIEW_START_TIMEOUT_MS ?? 60_000);
 
   if (await answers(`${baseUrl}/`)) {
-    return { baseUrl, kind, started: false, stop: async () => {} };
+    if (kind === "preview") {
+      console.warn(
+        `review:screens: reusing the preview server on ${baseUrl}; its dist/ may be older than the source (report.json records fresh: false).`,
+      );
+    }
+    return { baseUrl, kind, started: false, fresh: kind === "dev", stop: async () => {} };
   }
 
   const vite = join(root, "node_modules", "vite", "bin", "vite.js");
-  if (kind === "preview" && !existsSync(join(root, "dist", "index.html"))) {
+  if (kind === "preview") {
     const build = spawnSync(process.execPath, [vite, "build"], { cwd: root, stdio: "inherit" });
     if (build.status !== 0) {
       throw new ReviewUnavailableError("review:screens could not build the app for vite preview.");
@@ -146,6 +157,7 @@ export async function ensureServer(options: {
     baseUrl,
     kind,
     started: true,
+    fresh: true,
     stop: async () => {
       stopTree(child);
     },
@@ -872,6 +884,17 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
     }
   }
   return { screenshots, results, copyText };
+}
+
+/** HEAD's commit hash, with "-dirty" when tracked files differ from it; null outside a git tree. */
+export function gitCommit(root: string): string | null {
+  const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" });
+  if (head.status !== 0) return null;
+  const dirty = spawnSync("git", ["status", "--porcelain", "--untracked-files=no"], {
+    cwd: root,
+    encoding: "utf8",
+  });
+  return `${head.stdout.trim()}${dirty.stdout.trim() === "" ? "" : "-dirty"}`;
 }
 
 export function tokensHash(root: string): string {

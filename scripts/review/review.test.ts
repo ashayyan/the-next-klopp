@@ -187,6 +187,16 @@ describe("tracer evaluators", () => {
 });
 
 describe("report and exit codes", () => {
+  it("records the reviewed commit and whether the served build was fresh (WR-05)", () => {
+    expect(reportWith([]).source).toBeNull();
+    const withSource = buildReport({
+      ...reportWith([]),
+      tokensSha256: "000000000000",
+      source: { commit: "abc1234-dirty", fresh: false },
+    });
+    expect(withSource.source).toEqual({ commit: "abc1234-dirty", fresh: false });
+  });
+
   it("a failing banned-gradient check renders REVIEW: FAIL and exits 1", () => {
     const failing = toResult(
       "banned-gradient",

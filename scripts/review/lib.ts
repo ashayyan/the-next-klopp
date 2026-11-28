@@ -1239,11 +1239,19 @@ export interface ReportInput {
   url: string;
   generatedAt: string;
   tokensSha256: string;
+  /** What was reviewed: HEAD (with "-dirty") and whether the server showed the source on disk. */
+  source?: ReviewSource;
   widths: number[];
   themes: Theme[];
   checks: CheckResult[];
   screenshots: ScreenshotRecord[];
   tasteSkill?: TasteSkillBlock | null;
+}
+
+export interface ReviewSource {
+  commit: string | null;
+  /** False when a reused preview server served a dist/ this run did not build. */
+  fresh: boolean;
 }
 
 export interface ReviewReport {
@@ -1253,6 +1261,7 @@ export interface ReviewReport {
   url: string;
   generatedAt: string;
   designRef: { file: string; tokensSha256: string };
+  source: ReviewSource | null;
   widths: number[];
   themes: Theme[];
   verdict: "pass" | "fail";
@@ -1288,6 +1297,7 @@ export function buildReport(input: ReportInput): ReviewReport {
     url: input.url,
     generatedAt: input.generatedAt,
     designRef: { file: "docs/DESIGN.md", tokensSha256: input.tokensSha256 },
+    source: input.source ?? null,
     widths: input.widths,
     themes: input.themes,
     verdict: counts.fail > 0 ? "fail" : "pass",
