@@ -57,7 +57,7 @@ export const IFAB_LANDMARKS: Landmarks = {
   penaltyArcRadius: 9.15,
 };
 
-export const PROVIDERS: Partial<Record<ProviderId, ProviderFrame>> = {
+export const PROVIDERS: Record<ProviderId, ProviderFrame> = {
   // kloppy StatsBombCoordinateSystem + ImperialPitchDimensions.
   statsbomb: {
     id: "statsbomb",
@@ -77,6 +77,78 @@ export const PROVIDERS: Partial<Record<ProviderId, ProviderFrame>> = {
       penaltySpotDistance: 12,
       penaltyArcRadius: 10,
     },
+  },
+  // kloppy OptaCoordinateSystem + OptaPitchDimensions (as implemented by kloppy 3.19.1).
+  opta: {
+    id: "opta",
+    label: "Opta (0–100)",
+    unit: "normed",
+    origin: "bottom-left",
+    yDown: false,
+    axis: "fixed",
+    fixedSize: { length: 100, width: 100 },
+    landmarks: {
+      sixYardLength: 5.8,
+      sixYardWidth: 26.4,
+      goalWidth: 9.6,
+      penaltyAreaLength: 17.0,
+      penaltyAreaWidth: 57.8,
+      circleRadius: 9.0,
+      penaltySpotDistance: 11.5,
+      penaltyArcRadius: 8.9,
+    },
+  },
+  // kloppy WyscoutCoordinateSystem + WyscoutPitchDimensions (v2 and v3 share one class).
+  // circleRadius 8.84 and penaltyArcRadius 7.74 are marked "# inferred" in kloppy 3.19.1.
+  wyscout: {
+    id: "wyscout",
+    label: "Wyscout (0–100)",
+    unit: "normed",
+    origin: "top-left",
+    yDown: true,
+    axis: "fixed",
+    fixedSize: { length: 100, width: 100 },
+    landmarks: {
+      sixYardLength: 6.0,
+      sixYardWidth: 26.0,
+      goalWidth: 12.0,
+      penaltyAreaLength: 16.0,
+      penaltyAreaWidth: 62.0,
+      circleRadius: 8.84,
+      penaltySpotDistance: 10.0,
+      penaltyArcRadius: 7.74,
+    },
+  },
+  // kloppy TracabCoordinateSystem: centre origin, y up, centimetres, real pitch size.
+  tracab: {
+    id: "tracab",
+    label: "Tracab (centimetres, centre origin)",
+    unit: "centimetres",
+    origin: "centre",
+    yDown: false,
+    axis: "pitch",
+    landmarks: "ifab",
+  },
+  // kloppy SportecTrackingDataCoordinateSystem (also SkillCorner, PFF, Second Spectrum):
+  // centre origin, y up, metres, real pitch size.
+  "tracking-metres": {
+    id: "tracking-metres",
+    label: "Tracking (metres, centre origin)",
+    unit: "metres",
+    origin: "centre",
+    yDown: false,
+    axis: "pitch",
+    landmarks: "ifab",
+  },
+  // kloppy MetricaCoordinateSystem: top-left, y down, 0..1 on the real pitch.
+  metrica: {
+    id: "metrica",
+    label: "Metrica (0–1)",
+    unit: "unit",
+    origin: "top-left",
+    yDown: true,
+    axis: "pitch",
+    landmarks: "ifab",
   },
 };
 
