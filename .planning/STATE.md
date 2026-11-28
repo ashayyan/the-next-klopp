@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 4
 current_phase_name: Design Direction & System
 status: executing
-stopped_at: Completed 04-10-PLAN.md
-last_updated: "2026-11-28T07:54:39.916Z"
+stopped_at: Completed 04-11-PLAN.md
+last_updated: "2026-11-28T08:09:05.114Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 execution started
-state_head: d2340896b21cee98e361be0a6be1f8807b321f99
+state_head: 57f4e980d0b463f03b2ef7b7d7ff60efe057cd80
 progress:
   total_phases: 8
   completed_phases: 3
   total_plans: 58
-  completed_plans: 51
+  completed_plans: 52
   percent: 38
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 4 (Design Direction & System) — EXECUTING
-Plan: 11 of 17
+Plan: 12 of 17
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 4 execution started
 
@@ -98,6 +98,7 @@ Progress: [████░░░░░░] 38%
 | Phase 4 P08 | 35min | 3 tasks | 18 files |
 | Phase 4 P09 | 35min | 3 tasks | 13 files |
 | Phase 4 P10 | 25min | 3 tasks | 4 files |
+| Phase 4 P11 | 11 min | 3 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -165,6 +166,9 @@ Recent decisions affecting current work:
 - [Phase 4]: 04-09: data-screen numbers come only from deriveGoal, tested against the published scene; the 1–5 note sums the rounded table values
 - [Phase 4]: 04-09: review collector measures a control through its label only for a wrapped checkbox or radio (fixes the 20 px select false positive)
 - [Phase 4]: 04-10: visual direction floodlit picked by an independent reviewer under learner delegation (ADR 0010)
+- [Phase 4]: 04-11: DESIGN.md tokens block is the floodlit set verbatim; anti-slop answered with rules (pitch is the only lit object, scoreline titles, one accent fill at rest), palette unchanged
+- [Phase 4]: 04-11: SYSTEM_INPUT = docs/DESIGN.md; loadTokens refuses a Markdown input with missing or out-of-order sections, so every token tool enforces the outline
+- [Phase 4]: 04-11: Theme pre-paint script in index.html sets data-theme only for stored light/dark (tnk:theme, try/catch); applyDocumentTheme for the app toggle
 
 ### Pending Todos
 
@@ -193,6 +197,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T07:54:39.349Z
-Stopped at: Completed 04-10-PLAN.md
+Last session: 2026-11-28T08:09:04.580Z
+Stopped at: Completed 04-11-PLAN.md
 Resume file: None
