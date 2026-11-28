@@ -92,6 +92,8 @@ test.describe("lesson chrome", () => {
     await page.getByRole("menuitemradio", { name: "Light" }).click();
     await expect(root).toHaveAttribute("data-theme", "light");
     expect(await page.evaluate(() => localStorage.getItem("tnk:theme"))).toBe("light");
+    // IN-02: the choice reaches <html> at once, not only after the reload's pre-paint script.
+    await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
     await page.reload();
     await expect(page.locator('div[data-direction="floodlit"]')).toHaveAttribute(
       "data-theme",

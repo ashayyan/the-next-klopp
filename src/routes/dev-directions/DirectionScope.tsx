@@ -13,11 +13,11 @@ import designMd from "../../../docs/DESIGN.md?raw";
 import { extractTokensBlock } from "../../../scripts/design/tokens.ts";
 import { ShellBar, type ShellBarProps } from "../../ui/lesson/ShellBar.tsx";
 import {
+  applyDocumentTheme,
   readStoredTheme,
   resolveTheme,
   type ThemeChoice,
   type ThemeName,
-  writeStoredTheme,
 } from "../../ui/theme.ts";
 
 export type { ThemeName };
@@ -114,7 +114,9 @@ export function DirectionScope({ direction, ready = true, children }: DirectionS
     primary: direction.primaryTheme,
   });
   const choose = (next: ThemeChoice) => {
-    writeStoredTheme(next);
+    // Stores the choice and sets <html> too, as the app-wide choice does, so the whole page (not
+    // only this screen's subtree and <body>) follows it without a reload.
+    applyDocumentTheme(next);
     setChoice(next);
     if (params.has("theme")) {
       const rest = new URLSearchParams(params);
