@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 4
 current_phase_name: Design Direction & System
 status: executing
-stopped_at: Completed 04-15-PLAN.md
-last_updated: "2026-11-28T09:38:46.586Z"
+stopped_at: Completed 04-16-PLAN.md
+last_updated: "2026-11-28T10:22:15.784Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 execution started
-state_head: 3694459ab930d22a780b3231e8ace9f7c615af78
+state_head: cc75d62f55aab42ffd77fcd6dac61323ea9203ea
 progress:
   total_phases: 8
   completed_phases: 3
   total_plans: 58
-  completed_plans: 56
+  completed_plans: 57
   percent: 38
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 4 (Design Direction & System) — EXECUTING
-Plan: 16 of 17
+Plan: 17 of 17
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 4 execution started
 
@@ -103,6 +103,7 @@ Progress: [████░░░░░░] 38%
 | Phase 04 P13 | 20min | 2 tasks | 24 files |
 | Phase 04 P14 | 75min | 3 tasks | 15 files |
 | Phase 4 P15 | 95 min | 3 tasks | 21 files |
+| Phase 04 P16 | 150min | 3 tasks | 20 files |
 
 ## Accumulated Context
 
@@ -178,6 +179,7 @@ Recent decisions affecting current work:
 - [Phase 04]: 04-13: keep the floodlit tactics and data screens as reference routes; remove the other two directions' token files, layouts and fonts
 - [Phase 04]: 04-14: gallery frames are real same-origin iframes; glyph sheet has a team B state so ring discs and hollow arrowheads are reviewed in both themes; wide primitives use fewer columns; drag uses a six-player board
 - [Phase 4]: 04-15: Base UI controls and overlays shown in the gallery; the open AlertDialog state is a non-modal Dialog with role alertdialog so a screenshot is not made inert; the safe action Keep board takes focus on open
+- [Phase 04]: 04-16: inventory.json is the single list of the 37 gallery ids and states; revealed quiz answers stay focusable with aria-disabled and feedback is icon plus words
 
 ### Pending Todos
 
@@ -206,6 +208,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T09:38:45.979Z
-Stopped at: Completed 04-15-PLAN.md
+Last session: 2026-11-28T10:22:14.620Z
+Stopped at: Completed 04-16-PLAN.md
 Resume file: None
