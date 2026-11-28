@@ -77,6 +77,18 @@ describe("guard: denied paths", () => {
   it("allows parquet under public/data/", () => {
     expect(rules("public/data/wyscout/v1-abc/shots.parquet")).toEqual([]);
   });
+
+  // The fixtures build output and the Vercel link folder (account-specific ids) never enter git.
+  it.each([
+    "dist-walker/index.html",
+    "dist-walker/.vite/manifest.json",
+    "Dist-Walker/assets/a.js",
+    ".vercel/project.json",
+    ".VERCEL/README.txt",
+    "sub/.vercel/project.json",
+  ])("rejects fixtures build or Vercel link path %s", (p) => {
+    expect(rules(p)).toContain("denied-path");
+  });
 });
 
 describe("guard: local-only datasets (ADR 0008)", () => {
