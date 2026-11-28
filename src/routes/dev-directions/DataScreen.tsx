@@ -20,6 +20,15 @@ import {
 } from "../../scene/playback/store.ts";
 import type { Scene } from "../../scene/schema.ts";
 import { Button } from "../../ui/Button.tsx";
+import {
+  Axis,
+  Bars,
+  ChartTooltip,
+  DirectLabel,
+  Gridlines,
+  linear,
+  ticks,
+} from "../../ui/data/chart.tsx";
 import { type DataColumn, DataTable } from "../../ui/data/DataTable.tsx";
 import { StatCard } from "../../ui/data/StatCard.tsx";
 import { ConfusionButton } from "../../ui/lesson/ConfusionButton.tsx";
@@ -108,6 +117,172 @@ const COLUMNS: readonly DataColumn<GoalRow>[] = [
     ),
   },
 ];
+
+const CHART_TITLE = "Metres forward, per action";
+const Y_DOMAIN = [-20, 35] as const;
+const DIRECT_LABEL_ACTION = 6;
+
+function tooltipLines(r: GoalRow): [string, string, string] {
+  const who = r.receiver ? `${r.who} to ${r.receiver}` : r.who;
+  return [
+    `Action ${r.n}`,
+    `${who}, ${r.action.toLowerCase()}`,
+    `${formatMetres(r.metres)} m at ${formatSeconds(r.t)} s`,
+  ];
+}
+
+interface MetresChartProps {
+  rows: readonly GoalRow[];
+  activeId: string | null;
+  previewId: string | null;
+  onPreview: (row: GoalRow | null) => void;
+  onEnter: (row: GoalRow) => void;
+  /** Chart height in CSS pixels (240 at 1440). */
+  height?: number;
+}
+
+/**
+ * "Metres forward, per action": one series of bars around a zero baseline (−20 to +35 m,
+ * gridlines every 10 m) in the team colour, a direct label on action 6, and a tooltip on hover or
+ * focus. From 768 px each bar has a focusable hit area at least 44 px tall and 8 px from its
+ * neighbours (Enter seeks the clock); below 768 px the chart is a labelled image and the table
+ * rows are the interactive path.
+ */
+function MetresChart({
+  rows,
+  activeId,
+  previewId,
+  onPreview,
+  onEnter,
+  height = 240,
+}: MetresChartProps) {
+  const [ref, width] = useMeasuredWidth(720);
+  const [radius, setRadius] = useState(0);
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    setRadius(Number.parseFloat(getComputedStyle(el).getPropertyValue("--radius-sm")) || 0);
+  });
+  const interactive = width >= 600;
+  const margin = { top: 28, right: 8, bottom: 44, left: 56 };
+  const plotW = Math.max(10, width - margin.left - margin.right);
+  const plotH = Math.max(10, height - margin.top - margin.bottom);
+  const y = linear(Y_DOMAIN, [margin.top + plotH, margin.top]);
+  const band = plotW / Math.max(1, rows.length);
+  const bandX = (i: number) => margin.left + i * band;
+  const active = rows.find((r) => r.eventId === activeId)?.eventId ?? null;
+  const shown = rows.find((r) => r.eventId === previewId);
+  const shownIndex = shown ? rows.indexOf(shown) : -1;
+  const labelled = rows.find((r) => r.n === DIRECT_LABEL_ACTION);
+  const labelledIndex = labelled ? rows.indexOf(labelled) : -1;
+  const description = `Bar chart. ${rows
+    .map((r) => `Action ${r.n}: ${formatMetres(r.metres)} m`)
+    .join(", ")}. The table below lists every action.`;
+
+  return (
+    <figure data-chart-figure className="flex min-w-0 flex-col gap-2">
+      <figcaption className="font-semibold text-label">{CHART_TITLE}</figcaption>
+      <div ref={ref} className="relative w-full" style={{ height }}>
+        <svg
+          width={width}
+          height={height}
+          viewBox={`0 0 ${width} ${height}`}
+          role={interactive ? "group" : "img"}
+          aria-label={interactive ? CHART_TITLE : `${CHART_TITLE}. ${description}`}
+          className="block overflow-visible"
+        >
+          <Gridlines values={ticks(-20, 30, 10)} y={y} x0={margin.left} x1={margin.left + plotW} />
+          <Axis
+            orientation="left"
+            values={ticks(-20, 30, 10)}
+            at={(v) => y(Number(v))}
+            offset={margin.left - 8}
+            format={(v) => formatMetres(Number(v)).replace(".0", "")}
+            label="Metres toward Liverpool's goal"
+            labelOffset={0}
+            labelAt={margin.top + plotH / 2}
+          />
+          <Axis
+            orientation="bottom"
+            values={rows.map((r) => r.n)}
+            at={(v) => bandX(Number(v) - 1) + band / 2}
+            offset={margin.top + plotH + 8}
+            label="Action"
+            labelOffset={height - 2}
+            labelAt={margin.left + plotW / 2}
+          />
+          <Bars
+            data={rows.map((r) => ({ key: r.eventId, value: r.metres }))}
+            bandX={bandX}
+            bandWidth={band}
+            y={y}
+            radius={radius}
+            active={active}
+          />
+          {labelled ? (
+            <DirectLabel
+              x={Math.min(
+                Math.max(bandX(labelledIndex) + band / 2, margin.left + 110),
+                margin.left + plotW - 110,
+              )}
+              y={y(labelled.metres) - 8}
+            >
+              {`${formatMetres(labelled.metres)} m, ${labelled.who} to ${labelled.receiver ?? ""}`}
+            </DirectLabel>
+          ) : null}
+          {interactive
+            ? rows.map((r, i) => {
+                const hitW = Math.max(1, band - 8);
+                const hx = bandX(i) + 4;
+                return (
+                  // biome-ignore lint/a11y/useSemanticElements: an SVG mark has no <button>; the group is the focus target
+                  <g
+                    key={r.eventId}
+                    role="button"
+                    tabIndex={0}
+                    data-bar-hit={r.n}
+                    aria-label={tooltipLines(r).join(", ")}
+                    className="group cursor-pointer outline-none"
+                    onMouseEnter={() => onPreview(r)}
+                    onMouseLeave={() => onPreview(null)}
+                    onFocus={() => onPreview(r)}
+                    onBlur={() => onPreview(null)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        onEnter(r);
+                      }
+                    }}
+                    onClick={() => onEnter(r)}
+                  >
+                    <rect x={hx} y={margin.top} width={hitW} height={plotH} fill="transparent" />
+                    <rect
+                      data-focus-ring
+                      x={hx}
+                      y={margin.top}
+                      width={hitW}
+                      height={plotH}
+                      fill="none"
+                      strokeWidth={2}
+                      className="invisible stroke-focus-ring group-focus-visible:visible"
+                    />
+                  </g>
+                );
+              })
+            : null}
+        </svg>
+        {interactive && shown ? (
+          <ChartTooltip
+            x={bandX(shownIndex) + band / 2}
+            y={Math.min(y(shown.metres), y(0)) - 8}
+            lines={tooltipLines(shown)}
+            containerWidth={width}
+          />
+        ) : null}
+      </div>
+    </figure>
+  );
+}
 
 interface Blocks {
   shell: (className: string) => ReactNode;
@@ -312,7 +487,15 @@ export function DataScreen({ direction }: { direction: Direction }) {
           ]}
         />
       ) : null,
-    chart: null,
+    chart: goal ? (
+      <MetresChart
+        rows={goal.rows}
+        activeId={activeId}
+        previewId={preview}
+        onPreview={(r) => setPreview(r?.eventId ?? null)}
+        onEnter={seekTo}
+      />
+    ) : null,
     table: (className, rowClassName) =>
       goal ? (
         <DataTable

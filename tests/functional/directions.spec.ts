@@ -155,6 +155,43 @@ test.describe("lesson chrome", () => {
   });
 });
 
+test.describe("data screen", () => {
+  test.use({ viewport: { width: 1440, height: 900 } });
+
+  test("opens paused at 0.0 s and links the table, the pitch and the clock", async ({ page }) => {
+    await page.goto("/dev/directions/floodlit/data");
+    await expect(page.locator('div[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+    const readout = page.locator('[role="toolbar"][aria-label="Playback"] output');
+    await expect(readout).toContainText("0.0 s");
+    await expect(page.getByRole("button", { name: "Play sequence" })).toBeVisible();
+
+    const row6 = page.locator('tr[data-row="ev-185704179"]');
+    await row6.focus();
+    const ring = page.locator('[data-pitch] [data-glyph="highlight"] circle');
+    await expect(ring).toHaveCount(1);
+    expect(Number(await ring.getAttribute("cx"))).toBeCloseTo(38.24, 2);
+    expect(Number(await ring.getAttribute("cy"))).toBeCloseTo(20.56, 2);
+
+    await page.keyboard.press("Enter");
+    await expect(readout).toContainText("9.7 s");
+    await expect(page.getByRole("button", { name: "Play sequence" })).toBeVisible();
+    await expect(row6).toHaveAttribute("aria-selected", "true");
+  });
+
+  test("bar 6 carries the direct label and its tooltip", async ({ page }) => {
+    await page.goto("/dev/directions/floodlit/data");
+    await expect(page.locator('div[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+    await expect(page.locator('[data-chart="direct-label"]')).toHaveText(
+      "+31.5 m, Mangala to De Bruyne",
+    );
+    await page.locator('[data-bar-hit="6"]').focus();
+    const tip = page.locator('[data-chart="tooltip"]');
+    await expect(tip).toContainText("Action 6");
+    await expect(tip).toContainText("Mangala to De Bruyne, pass");
+    await expect(tip).toContainText("+31.5 m at 9.7 s");
+  });
+});
+
 test("an unknown direction shows the fallback with links to the three directions", async ({
   page,
 }) => {

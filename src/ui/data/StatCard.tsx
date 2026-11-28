@@ -37,7 +37,10 @@ export function StatCard({
       {figures.map((f) => (
         <div key={f.label} className="flex min-w-0 items-baseline gap-2">
           <dt className={`order-2 text-label ${labelClassName ?? "text-ink-muted"}`}>{f.label}</dt>
-          <dd data-stat-figure className="order-1 font-mono text-display tabular-nums">
+          <dd
+            data-stat-figure
+            className="order-1 shrink-0 whitespace-nowrap font-mono text-display tabular-nums"
+          >
             {f.value}
             {f.unit ? <span className="text-heading">{` ${f.unit}`}</span> : null}
           </dd>
