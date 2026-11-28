@@ -6,7 +6,9 @@ import board from "../../scene/fixtures/board.json";
 import glyphSheet from "../../scene/fixtures/glyph-sheet.json";
 import quizAnswer from "../../scene/fixtures/quiz-answer.json";
 import reconstruction from "../../scene/fixtures/reconstruction.json";
+import { PlaybackBar } from "../../scene/playback/PlaybackBar.tsx";
 import { keyframeTimes, sceneDuration } from "../../scene/playback/sample.ts";
+import { createPlaybackStore } from "../../scene/playback/store.ts";
 import type { Scene, SceneEvent } from "../../scene/schema.ts";
 import { parseScene } from "../../scene/validate.ts";
 import { describeScene, glyphIdsForScene } from "../legend/glyphIds.ts";
@@ -275,7 +277,7 @@ describe("ball ownership offset (03-11)", () => {
   // render() draws at the 960 px default width; home attacks left to right (+x).
   const offset =
     0.6 *
-    (20 /
+    (22 /
       makeView({ length: 105, width: 68, runoff: 3, orientation: "horizontal", cssWidth: 960 })
         .pxPerMetre);
   const ballX = (t: number) => Number(attr(tags(render(pass, t), "--ball-fill")[0] ?? "", "cx"));
@@ -318,5 +320,14 @@ describe("draggable player semantics (WR-13)", () => {
     expect(describedBy).not.toBe("");
     expect(markup).toContain(`id="${describedBy}"`);
     expect(markup).toMatch(/Arrow keys move this player 1 metre, or 5 metres with Shift/);
+  });
+});
+
+describe("visible Play label (04-UI-SPEC Phase 3 observation 5)", () => {
+  it('reads "Play sequence" from 768 px up and keeps the aria-label at every width', () => {
+    const store = createPlaybackStore(load(reconstruction), { motion: "smooth" });
+    const markup = renderToStaticMarkup(<PlaybackBar store={store} />);
+    expect(markup).toContain('aria-label="Play sequence"');
+    expect(markup).toContain('<span class="hidden md:inline">Play sequence</span>');
   });
 });

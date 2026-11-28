@@ -3,9 +3,9 @@
 // rule"). Positions stay exact canonical metres.
 import { sizeInMetres } from "../view.ts";
 
-/** Player disc diameter in metres: clamp(20 px, 2.0 m, 28 px). */
+/** Player disc diameter in metres: clamp(22 px, 2.0 m, 28 px). 22 px fits the 12 px numbers. */
 export function discDiameter(pxPerMetre: number): number {
-  return sizeInMetres(20, 2.0, 28, pxPerMetre);
+  return sizeInMetres(22, 2.0, 28, pxPerMetre);
 }
 
 /** Ball diameter in metres: clamp(10 px, 1.0 m, 14 px). */

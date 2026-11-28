@@ -1,9 +1,10 @@
 import type { ReactNode } from "react";
 import type { ScenePoint } from "../../scene/schema.ts";
 import { usePitch } from "../Pitch.tsx";
-import { type Orientation, screenToCanonical } from "../view.ts";
+import { canonicalToScreen, type Orientation, screenToCanonical } from "../view.ts";
 import { type Side, teamColour } from "./EventGlyphs.tsx";
 import { discDiameter, GLYPH_TEXT_PX, unitsPerPx } from "./glyphSize.ts";
+import { chipSizePx, placeChip } from "./placement.ts";
 import { SwatchFrame } from "./Swatch.tsx";
 
 /** Notes are truncated on the pitch; the full text goes in the SVG <desc>. */
@@ -13,11 +14,6 @@ export const NOTE_MAX_CHARS = 40;
 export function truncateNote(text: string): string {
   return text.length > NOTE_MAX_CHARS ? `${text.slice(0, NOTE_MAX_CHARS - 1)}…` : text;
 }
-
-// Average advance of 12 px semibold sans text. Chips are sized from it, so a label never needs a
-// text measurement (which the server render cannot do).
-const CHAR_PX = 7.2;
-const CHIP_PAD_PX = 4;
 
 /**
  * A text chip (12 px ink on a white chip, 1 px border, 4 px padding, radius 2 px). The chip is drawn
@@ -41,8 +37,9 @@ export function Chip({
   anchor: "top-left" | "centre";
   part?: string;
 }) {
-  const w = (text.length * CHAR_PX + 2 * CHIP_PAD_PX) * u;
-  const h = (GLYPH_TEXT_PX + 2 * CHIP_PAD_PX) * u;
+  const size = chipSizePx(text);
+  const w = size.width * u;
+  const h = size.height * u;
   const ox = anchor === "centre" ? -w / 2 : 0;
   const oy = anchor === "centre" ? -h / 2 : 0;
   const rotate = orientation === "vertical" ? " rotate(90)" : "";
@@ -191,12 +188,17 @@ export function NoteGlyph({
 }) {
   const { view, orientation } = usePitch();
   const u = unitsPerPx(view.pxPerMetre);
+  const label = truncateNote(text);
+  // The chip is placed in screen space after the orientation transform, so it never crosses the
+  // SVG edge in either orientation (04-UI-SPEC Phase 3 observation 2).
+  const centre = placeChip({ anchor: canonicalToScreen(view, at), ...chipSizePx(label), view });
+  const c = screenToCanonical(view, centre.x, centre.y);
   return (
     <g data-glyph="annotation">
       {anchor ? (
         <line
-          x1={at.x}
-          y1={at.y}
+          x1={c.x}
+          y1={c.y}
           x2={anchor.x}
           y2={anchor.y}
           stroke="var(--ink)"
@@ -205,9 +207,9 @@ export function NoteGlyph({
         />
       ) : null}
       <Chip
-        x={at.x}
-        y={at.y}
-        text={truncateNote(text)}
+        x={c.x}
+        y={c.y}
+        text={label}
         u={u}
         orientation={orientation}
         anchor="centre"
@@ -246,23 +248,24 @@ export function PointShape({ x, y, u }: { x: number; y: number; u: number }) {
 export function PointGlyph({ at, label }: { at: ScenePoint; label?: string }) {
   const { view, orientation } = usePitch();
   const u = unitsPerPx(view.pxPerMetre);
+  let chip: ReactNode = null;
+  if (label) {
+    // Right of the spot by default; mirrored to its left, then clamped, when it would cross the edge.
+    const { width, height } = chipSizePx(label);
+    const centre = placeChip({
+      anchor: canonicalToScreen(view, at),
+      width,
+      height,
+      view,
+      offset: { x: 12 + width / 2, y: 0 },
+    });
+    const c = screenToCanonical(view, centre.x, centre.y);
+    chip = <Chip x={c.x} y={c.y} text={label} u={u} orientation={orientation} anchor="centre" />;
+  }
   return (
     <g>
       <PointShape x={at.x} y={at.y} u={u} />
-      {label ? (
-        <g
-          transform={`translate(${at.x} ${at.y})${orientation === "vertical" ? " rotate(90)" : ""}`}
-        >
-          <Chip
-            x={(12 + (label.length * CHAR_PX + 2 * CHIP_PAD_PX) / 2) * u}
-            y={0}
-            text={label}
-            u={u}
-            orientation="horizontal"
-            anchor="centre"
-          />
-        </g>
-      ) : null}
+      {chip}
     </g>
   );
 }

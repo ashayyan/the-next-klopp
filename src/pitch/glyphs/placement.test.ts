@@ -7,13 +7,14 @@ import { join } from "node:path";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+import glyphSheet from "../../scene/fixtures/glyph-sheet.json";
 import { createSampler, eventState } from "../../scene/playback/sample.ts";
 import type { Scene } from "../../scene/schema.ts";
 import { parseScene } from "../../scene/validate.ts";
 import { Pitch } from "../Pitch.tsx";
 import { canonicalToScreen, makeView, type Orientation } from "../view.ts";
 import { discDiameter } from "./glyphSize.ts";
-import { type Box, boxesIntersect, placeBadge } from "./placement.ts";
+import { type Box, boxesIntersect, chipSizePx, placeBadge, placeChip } from "./placement.ts";
 import { SceneLayer } from "./SceneLayer.tsx";
 
 const root = join(import.meta.dirname, "..", "..", "..");
@@ -125,5 +126,101 @@ describe("sequence badges clear the player discs (Wyscout scene)", () => {
     const b = canonicalToScreen(view, c);
     expect(b.x).toBeLessThan(a.x);
     expect(b.y).toBeCloseTo(a.y, 6);
+  });
+});
+
+describe("placeChip", () => {
+  const horizontal = viewFor("horizontal", 840);
+  const vertical = viewFor("vertical", 343);
+  const { width, height } = chipSizePx("Stones steps into midfield");
+  const inside = (c: { x: number; y: number }, v: typeof horizontal) => {
+    expect(c.x - width / 2).toBeGreaterThanOrEqual(-1e-9);
+    expect(c.x + width / 2).toBeLessThanOrEqual(v.cssWidth + 1e-9);
+    expect(c.y - height / 2).toBeGreaterThanOrEqual(-1e-9);
+    expect(c.y + height / 2).toBeLessThanOrEqual(v.cssHeight + 1e-9);
+  };
+
+  it("puts a chip anchored 2 px from the right edge fully inside, left of its anchor", () => {
+    const anchor = { x: horizontal.cssWidth - 2, y: 100 };
+    const c = placeChip({ anchor, width, height, view: horizontal });
+    inside(c, horizontal);
+    expect(c.x).toBeLessThan(anchor.x);
+  });
+
+  it("keeps a chip inside the vertical view as well", () => {
+    for (const anchor of [
+      { x: vertical.cssWidth - 2, y: 40 },
+      { x: 2, y: vertical.cssHeight - 3 },
+      { x: 171, y: 1 },
+    ]) {
+      inside(placeChip({ anchor, width, height, view: vertical }), vertical);
+    }
+  });
+
+  it("does not move a chip that fits", () => {
+    const anchor = { x: 400, y: 200 };
+    expect(placeChip({ anchor, width, height, view: horizontal })).toEqual(anchor);
+  });
+
+  it("mirrors an offset chip to the other side of its anchor", () => {
+    const anchor = { x: horizontal.cssWidth - 10, y: 200 };
+    const offset = { x: 12 + width / 2, y: 0 };
+    const c = placeChip({ anchor, width, height, view: horizontal, offset });
+    inside(c, horizontal);
+    expect(c.x).toBeLessThan(anchor.x);
+  });
+});
+
+describe("rendered note chips lie inside the SVG", () => {
+  const sheet = load(glyphSheet);
+  const edge = {
+    ...structuredClone(sheet),
+    annotations: [
+      { id: "n-right", type: "note", at: { x: 104, y: 34 }, text: "Right edge note" },
+      { id: "n-left", type: "note", at: { x: 1, y: 60 }, text: "Left edge note here" },
+      { id: "n-top", type: "note", at: { x: 52, y: 1 }, text: "Top edge note" },
+      { id: "n-point", type: "point", at: { x: 103, y: 66 }, label: "Edge spot" },
+    ],
+  } as Scene;
+
+  const cases: [string, Orientation, number][] = [
+    ["vertical 343", "vertical", 343],
+    ["horizontal 840", "horizontal", 840],
+  ];
+  for (const [name, orientation, cssWidth] of cases) {
+    for (const [label, scene] of [
+      ["glyph sheet", sheet],
+      ["edge notes", edge],
+    ] as const) {
+      it(`${label}: every chip box is inside the SVG at ${name}`, () => {
+        const view = viewFor(orientation, cssWidth);
+        const markup = render(scene, 0, orientation, cssWidth);
+        const chips = [
+          ...markup.matchAll(
+            /<g transform="translate\(([-\d.e]+) ([-\d.e]+)\)(?: rotate\(90\))?"><rect x="[-\d.e]+" y="[-\d.e]+" width="([\d.e]+)" height="([\d.e]+)"/g,
+          ),
+        ];
+        expect(chips.length).toBeGreaterThan(0);
+        for (const m of chips) {
+          const c = canonicalToScreen(view, { x: Number(m[1]), y: Number(m[2]) });
+          const w = Number(m[3]) * view.pxPerMetre;
+          const h = Number(m[4]) * view.pxPerMetre;
+          expect(c.x - w / 2).toBeGreaterThanOrEqual(-0.01);
+          expect(c.x + w / 2).toBeLessThanOrEqual(view.cssWidth + 0.01);
+          expect(c.y - h / 2).toBeGreaterThanOrEqual(-0.01);
+          expect(c.y + h / 2).toBeLessThanOrEqual(view.cssHeight + 0.01);
+        }
+      });
+    }
+  }
+});
+
+describe("player disc size", () => {
+  it("is 22 px when 2.0 m is smaller and 28 px when larger", () => {
+    const px = (pxPerMetre: number) => discDiameter(pxPerMetre) * pxPerMetre;
+    expect(px(4)).toBeCloseTo(22, 9); // 2.0 m = 8 px, raised to the 22 px minimum
+    expect(px(10)).toBeCloseTo(22, 9); // 2.0 m = 20 px, still under 22
+    expect(px(12)).toBeCloseTo(24, 9); // 2.0 m = 24 px, inside the band
+    expect(px(20)).toBeCloseTo(28, 9); // 2.0 m = 40 px, capped
   });
 });
