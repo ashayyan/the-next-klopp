@@ -1,0 +1,1241 @@
+[
+  {
+    "id": "src-ifab-laws-2026-27",
+    "title": "Laws of the Game 2026/27 (IFAB, single pages PDF)",
+    "url": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+    "type": "regulation",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright, no reproduction without permission",
+      "read": {
+        "value": "yes",
+        "note": "Freely downloadable PDF from the IFAB site"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Direct PDF download, read during research on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "booklet p.4: may not be reproduced or translated without IFAB permission"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "paraphrase with short attributed quotes"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-07-01",
+    "as_of": "2026-11-27",
+    "best_for": ["current Laws edition and effective date", "Law 1 pitch dimensions and markings"],
+    "notes": "Edition effective from 1 July 2026 (PDF p.4). Excerpt hashes come from the 02-RESEARCH.md live read; the time of day was not recorded, so fetched_at carries midnight UTC.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "effective-date",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.4",
+        "fetched_at": "2026-11-27T00:00:00Z",
+        "sha256": "b93f6f59e7458b59d2a9abe37762bc2b6557ba0ffbcdf6df5796a0dfd88c0ee0",
+        "paraphrase": "The 2026/27 edition of the Laws of the Game applies from 1 July 2026."
+      },
+      {
+        "id": "law1-touchline-length",
+        "locator": "IFAB Laws 2026/27 PDF p.47, Law 1",
+        "fetched_at": "2026-11-27T00:00:00Z",
+        "sha256": "a5e8cee54bd909f003367c6d6b5f19925cc44623e63ee085b8dc3ff9c79c39da",
+        "paraphrase": "Law 1 sets the touchline length between a minimum of 90 m and a maximum of 120 m."
+      },
+      {
+        "id": "min-seven-players",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.59",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "a280c42a2a4ad64988b38f92cfe8f1f0872e2a6a8fc5774eb1b1d6b17181cfab",
+        "paraphrase": "Law 3: a match cannot start or continue if either team has fewer than seven players."
+      },
+      {
+        "id": "subs-five-three",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.59",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "dd165fdabf91a241e51b72bdf8466f6dbf7949a50ab107a1f5e9da59d7b28e3c",
+        "paraphrase": "Law 3: official competitions may use up to five substitutes, a number set by FIFA, the confederation or the national association."
+      },
+      {
+        "id": "sub-opportunities",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.59",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "60dc868379ea2fd7d745665e6492f94b4f6080dc72dc4b3edf462674c71df371",
+        "paraphrase": "Law 3: where five substitutes are allowed, each team gets at most three substitution opportunities."
+      },
+      {
+        "id": "sub-ten-seconds",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.61",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "bf470d88a77ac0d5da1ab1a30b40cf22315d5a6c5073c48e4ac977c39f264e61",
+        "paraphrase": "Law 3 procedure: the player being replaced must be off the field within ten seconds of the substitution board, barring safety or injury."
+      },
+      {
+        "id": "kickoff-distance",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.97",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "b278c5b9b17290f1a0210daaf9b1eab4cc7f743165ffca844e518b4c111e1c11",
+        "paraphrase": "Law 8: at a kick-off the opponents of the kicking team stay at least 9.15 m (10 yds) from the ball until it is in play."
+      },
+      {
+        "id": "dropped-ball-distance",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.98",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "3b8c31d1bfc595a8cc93b91da69201a03bf879298d6ce21dda2c447a69d0d04c",
+        "paraphrase": "Law 8: at a dropped ball all other players of both teams stay at least 4 m (4.5 yds) from the ball until it is in play."
+      },
+      {
+        "id": "dropped-ball-possession",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.98",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "4b4b979bedd721461309d25c5c058239191f1ea2f0c5fede3241698e4ef55c36",
+        "paraphrase": "Law 8: outside the penalty area the ball is dropped for the team that would have kept or gained possession, including from a restart, if the referee can tell."
+      },
+      {
+        "id": "ball-out-of-play",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.101",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "68303cac32da4032fc23519888bccd82c8f977f4fee1dbc4d6e05351d15ac166",
+        "paraphrase": "Law 9: the ball is out of play when it has wholly passed over the goal line or touchline, on the ground or in the air."
+      },
+      {
+        "id": "goal-scored",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.103",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "f413f12fdee3cf7bfa872dde7026c0efa9502a12d099c9fd267f26063b7b6ac3",
+        "paraphrase": "Law 10: a goal needs the whole ball over the goal line between the posts and under the crossbar, with no offence by the scoring team."
+      },
+      {
+        "id": "direct-free-kick-contact",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.115",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "ce7646e8009ac2189ffbc6b4535e342efc92bfe0912b6711ad1aa18838788ac6",
+        "paraphrase": "Law 12: an offence that involves contact is penalised by a direct free kick."
+      },
+      {
+        "id": "careless-reckless-force",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.115",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "049ffc8901b0b0747814bcdbef023c065e632816ccc88269ced10215c92a773c",
+        "paraphrase": "Law 12: excessive force (more than needed, or endangering safety) means a sending-off; reckless means a caution; careless needs no card."
+      },
+      {
+        "id": "handball-not-every-touch",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.116",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "0c633e0896df2cdd17c265afca5e1c928fec6c0909e725651e960afeb2861f33",
+        "paraphrase": "Law 12: not every touch of the ball by a hand or arm is an offence."
+      },
+      {
+        "id": "handball-bigger",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.116",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "9cc74dfa59a8d5da8cd846ca7c511fcc600f78dfbd0e2d2c42ed525d6f502cba",
+        "paraphrase": "Law 12: it is a handball offence if the hand or arm touches the ball after making the body unnaturally bigger."
+      },
+      {
+        "id": "free-kick-distance",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.132",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "efa5221281577b5430d70e30b2395a474883cf318162c93851541eee7249b443",
+        "paraphrase": "Law 13: until the free kick is in play opponents must be at least 9.15 m (10 yds) from the ball, with a goal-line exception."
+      },
+      {
+        "id": "free-kick-wall",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.132",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "84bba0ac6ed01403bc1cc21815484c1a602fcd585669aaa4cad044f6919c5643",
+        "paraphrase": "Law 13: against a wall of three or more defenders, attackers must stay at least 1 m (1 yd) away until the ball is in play."
+      },
+      {
+        "id": "penalty-distance",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.135",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "e264d8f44dea762a14adc1e29c47bc2405c45809c2af9c89a5b582a2b95353df",
+        "paraphrase": "Law 14: other players must be at least 9.15 m (10 yds) from the penalty mark, behind it and outside the area."
+      },
+      {
+        "id": "penalty-keeper-line",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.135",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "5783a53575aec0ccac760588bd0b5b28b894a412cd2da180aa65ac81f191ae4c",
+        "paraphrase": "Law 14: when the ball is kicked the goalkeeper needs part of one foot on, level with or behind the goal line."
+      },
+      {
+        "id": "penalty-double-touch",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.136",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "0f79045b256a6d6965dab2309a6d1691a78204fb862570252d5d711ced137274",
+        "paraphrase": "Law 14: if the kicker accidentally touches the ball twice and it does not enter the goal, an indirect free kick is awarded."
+      },
+      {
+        "id": "throw-in-distance",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.141",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "c561fa3490c77c40cff9c07c3391e490200b1276f7dd676fad91bdc65cd94916",
+        "paraphrase": "Law 15: opponents stand at least 2 m (2 yds) from the point on the touchline where the throw-in is taken."
+      },
+      {
+        "id": "throw-in-no-direct-goal",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.141",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "592dfbd32e0173961227826d15bb0aa4de516a4e371386c52f21272fa24491aa",
+        "paraphrase": "Law 15: no goal can be scored directly from a throw-in; into the opponents' goal means a goal kick."
+      },
+      {
+        "id": "throw-in-countdown",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.142",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "bbd35d3c3987f0a91e33f818544b642e733af85a862a01a403a4cee80176160a",
+        "paraphrase": "Law 15: after a visual five-second countdown for delay, a throw-in not taken is awarded to the opposing team."
+      },
+      {
+        "id": "goal-kick-countdown",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.145",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "69e4a2d4d4276b0caf3c5310a9e31594aaa6ccd4e36200eabfe5168a5a7e5059",
+        "paraphrase": "Law 16: after a visual five-second countdown for delay, a goal kick not taken gives the opposing team a corner."
+      },
+      {
+        "id": "goal-kick-opponents-outside",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.145",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "d8223dba06503afcf4af3f2ce93ee161934339453c030f5c6d2d892b7fa3d83e",
+        "paraphrase": "Law 16: opponents must be outside the penalty area until the goal kick is in play."
+      },
+      {
+        "id": "gk-eight-seconds",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.149",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "b6302a8e53f67e48ce8abee148be2815bb81622a67a712e3e17514664d263692",
+        "paraphrase": "Law 17: a corner is awarded when the referee penalises a goalkeeper for controlling the ball with hands or arms for more than eight seconds."
+      },
+      {
+        "id": "corner-distance",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.149",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "01b6e0aabd2a29830225e78abeb94748d4dcbb87364c81b7089d0c8a4df6a725",
+        "paraphrase": "Law 17: opponents must stay at least 9.15 m (10 yds) from the corner arc until the ball is in play."
+      },
+      {
+        "id": "var-categories",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.77",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "2183f2a839ecfacb529d267095f1f80ccc3b9ea82c185082b1bec0f7036cf2af",
+        "paraphrase": "Law 5.4: a VAR may help only after a clear and obvious error or serious missed incident, within a short list of decision types."
+      },
+      {
+        "id": "var-five-categories",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.154",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "ca19e00e550699373da06d9d9c0fe7765f16770ff2f47ad8c764d0962a892ac0",
+        "paraphrase": "VAR protocol: the referee may receive VAR assistance in five categories of decision or incident."
+      },
+      {
+        "id": "var-corner-option",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.77",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "20957971f8324c99ba0a1ee47ded7fb1d6c8297352d105924a574b5131038fbe",
+        "paraphrase": "Law 5.4: a clearly incorrect corner-kick award can be reviewed if it can be fixed at once without delaying the restart; a competition option."
+      },
+      {
+        "id": "saot-law5",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.73",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "3bfb581ddaeebb051041671f18ee645131a57acd280e0893619ea6c89e2b2096",
+        "paraphrase": "Law 5.2: competitions may use technology for offside, including semi-automated offside technology (SAOT)."
+      },
+      {
+        "id": "referee-final",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.73",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "365b1b4b6af32283e7346648f6b71fed74488a28e79a312e189cbec919f8fff9",
+        "paraphrase": "Law 5.2: the referee's decisions on facts connected with play, including whether a goal is scored, are final."
+      },
+      {
+        "id": "countdown-protocol",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.26",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "8ab9c62a73bd142fd7c4789b7211eb72392fcff9fc349c25e5ef4ef485d6d77a",
+        "paraphrase": "Throw-in and goal-kick countdown protocol: the referee visually counts down from five seconds with a raised hand."
+      },
+      {
+        "id": "sub-protocol-one-minute",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.22",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "7701c7303a5063c02ae5a792857629f615e7b20ec78148ffe0e3df28ba21adba",
+        "paraphrase": "Time-limited substitution protocol: after a late exit the substitute enters only at the first stoppage after one minute of running clock has passed since the restart."
+      },
+      {
+        "id": "assistant-referee-offside",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.86",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "1246991fe35af623bc55f808d87908c2dd11d4f853a11bb3636aeee9851a60aa",
+        "paraphrase": "Law 6.1: assistant referees indicate when a player in an offside position may be penalised."
+      },
+      {
+        "id": "officials-list",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.85",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "7405187689bc3e146e36c4f47a75646e52daeb3951bfc17164599330437b1727",
+        "paraphrase": "Law 6: other match officials (assistant referees, fourth official, VAR, assistant VAR and others) assist; the referee takes the final decision."
+      }
+    ]
+  },
+  {
+    "id": "src-ifab-law-changes-2026-27",
+    "title": "IFAB Law changes 2026/27",
+    "url": "https://theifab.com/law-changes/latest/",
+    "type": "official-document",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright, no reproduction without permission"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with short attributed quotes"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-03-01",
+    "as_of": "2026-11-27",
+    "best_for": ["what changed in the 2026/27 Laws", "VAR scope changes"],
+    "notes": "The page states no general effective date; use the Laws PDF p.4 for that. Recency is approximate (IFAB AGM news item dated 2026-02-28).",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "five-second-throw-in",
+        "locator": "IFAB law-changes page, Law 15 summary",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "684852fe0b465b5ff4839ea658c7bb1814d79bb3fadea0e0da63f12b4f408bf3",
+        "paraphrase": "2026/27 change: a five-second visual countdown for delayed throw-ins; if exceeded, the throw-in goes to the opposing team."
+      },
+      {
+        "id": "five-second-goal-kick",
+        "locator": "IFAB law-changes page, Law 16 summary",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "7ed2a56f93e168bd836d1d7c64283fc17904979f3932801c9308486d091397e9",
+        "paraphrase": "2026/27 change: a five-second visual countdown for delayed goal kicks; if exceeded, a corner goes to the opposing team."
+      },
+      {
+        "id": "one-minute-off",
+        "locator": "IFAB law-changes page, Law 5 summary",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "314801db4930bb52ced4af832afe16b27d035a197a587455c1def48c50bf4a0a",
+        "paraphrase": "2026/27 change: a player treated on the field or causing an injury stoppage must leave for one minute after the restart, barring exceptions."
+      },
+      {
+        "id": "dogso-advantage",
+        "locator": "IFAB law-changes page, Law 12 summary",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "d5fcf89a6c02c1a4f860c213043291c92c97f97f8f01316a91b8433cb9d6128b",
+        "paraphrase": "2026/27 change: no caution for a DOGSO offence if advantage is played and a goal is scored."
+      }
+    ]
+  },
+  {
+    "id": "src-ifab-laws-documents",
+    "title": "IFAB Laws of the Game documents hub",
+    "url": "https://www.theifab.com/laws-of-the-game-documents/",
+    "type": "website",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase and link"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["entry point to the current Laws edition", "finding editions by year"],
+    "notes": "Use this as the entry point: https://theifab.com/laws/latest/ itself returned 404 on 2026-11-27. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-ifab-news-140th-agm",
+    "title": "The IFAB introduces further measures to improve match flow and player behaviour",
+    "url": "https://www.theifab.com/news/the-ifab-introduces-further-measures-to-improve-match-flow-and-player-behaviour",
+    "type": "news",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news item"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-02-28",
+    "as_of": "2026-11-27",
+    "best_for": ["140th AGM decisions", "1 July 2026 effective date confirmation"],
+    "notes": "Confirms approval at the 140th AGM and the 1 July 2026 effective date; competitions starting earlier may adopt sooner.",
+    "status": "active"
+  },
+  {
+    "id": "src-pl-laws-2026-27",
+    "title": "What's new in the 2026/27 Laws of the Game (Premier League)",
+    "url": "https://www.premierleague.com/en/news/4688755/whats-new-in-202627-laws-of-the-game",
+    "type": "news",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once during research on 2026-11-27; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Premier League copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-08-23",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "which 2026/27 changes the Premier League adopts",
+      "where the PL differs from IFAB options"
+    ],
+    "notes": "Article dated 23 August 2026. PL adopts a subset and declines several IFAB options; show the PL variant wherever it differs.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "pl-one-minute",
+        "locator": "PL article 23 Aug 2026, injured players",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "a90ccda9d414e15697e957c2f4c6110ae6abf4e824418861753dc8835c33aea6",
+        "paraphrase": "PL 2026/27: injured players leave for at least one minute, up from the 30 seconds the League used."
+      },
+      {
+        "id": "pl-five-second",
+        "locator": "PL article 23 Aug 2026, delays",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "ebd01dcd2057f3e50779c044c6c49a1b6c903592857662b7aeaf58ac894afd0f",
+        "paraphrase": "PL 2026/27: five-second countdown for delayed throw-ins and goal kicks; throw-in to opponents or corner to opponents."
+      },
+      {
+        "id": "pl-ten-second",
+        "locator": "PL article 23 Aug 2026, substitutions",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "c0dda16da8f736a5378486b1773b89f83566fe8d1ccc7aa788b9009d625f8980",
+        "paraphrase": "PL 2026/27: substituted players have 10 seconds to leave, else the substitute waits until the first stoppage after one minute."
+      },
+      {
+        "id": "pl-second-yellow",
+        "locator": "PL article 23 Aug 2026, VAR second yellows",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "2190bd116f72978b5e8342a90de14d108550f9dafbcd319b7e3fff7d684d6ac0",
+        "paraphrase": "PL 2026/27: VAR reviews a second yellow only when it is clearly wrong, not a missed potential second yellow."
+      },
+      {
+        "id": "pl-gk-trial",
+        "locator": "PL article 23 Aug 2026, goalkeeper trial",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "686091c68e1bd06453966176675cd68c3f7583505ecd836a111b17ded76baef0",
+        "paraphrase": "PL 2026/27 trial: after a goalkeeper injury stoppage a nominated outfield player stays off for at least one minute after the restart."
+      },
+      {
+        "id": "pl-no-corner-review",
+        "locator": "PL article 23 Aug 2026, not adopted",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "53ff66e3a4e006fa93f7e8be7b0e5c1c9b912ef47a06ae7057d15ccb5d47797f",
+        "paraphrase": "PL 2026/27: the League does not adopt VAR review of incorrectly awarded corners and is not widening VAR's scope."
+      },
+      {
+        "id": "pl-hydration",
+        "locator": "PL article 23 Aug 2026, not adopted",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "1e3d2ae18eae119c27c9f359daf01b3fe1004064c4b7e60007b2fc18d04429aa",
+        "paraphrase": "PL 2026/27: no hydration break rule; its existing drinks-break protocol applies when kick-off temperature exceeds 30 degrees Celsius."
+      },
+      {
+        "id": "pl-mouth",
+        "locator": "PL article 23 Aug 2026, not adopted",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "6a4a39f5bede50dc52ce9daf855909fa00c983b149658c2e86408e11d193c11a",
+        "paraphrase": "PL 2026/27: no mouth-covering red card; the League runs a three-step discrimination protocol for player-reported abuse."
+      },
+      {
+        "id": "pl-mistaken-identity",
+        "locator": "PL article 23 Aug 2026, not adopted",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "fbe520fd359a48789afc52a341248000f98eeb3c5ea2b70f2e19343ecc39f3ce",
+        "paraphrase": "PL 2026/27: mistaken identity and yellows reversed for diving are not adopted."
+      },
+      {
+        "id": "pl-var-threshold",
+        "locator": "PL article 23 Aug 2026, Football Principles",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "ff0fc80ff17f62965450a94d0c26d55bff6d0b2c26e1899ba0652338fa713dd4",
+        "paraphrase": "PL Football Principles 2026/27: a high threshold for VAR intervention."
+      },
+      {
+        "id": "pl-saot-principle",
+        "locator": "PL article 23 Aug 2026, Football Principles",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "ebeb8d7c9470b83f8b73c02f6536531356245132f40dbaa8af76c06d06a9f0a2",
+        "paraphrase": "PL Football Principles 2026/27: more efficient VAR including improved use of semi-automated offside technology to cut delays."
+      },
+      {
+        "id": "pl-high-threshold-fouls",
+        "locator": "PL article 23 Aug 2026, Football Principles",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "3228363eb450b0f5bb12f62aec035de909c64c966864f297c9653d51b53bbbb0",
+        "paraphrase": "PL Football Principles 2026/27: a high threshold for penalising challenges, since not every contact is a foul, while protecting players."
+      }
+    ]
+  },
+  {
+    "id": "src-ifab-offside",
+    "title": "IFAB Law 11: Offside (Laws of the Game 2026/27)",
+    "url": "https://theifab.com/laws/latest/offside/",
+    "type": "regulation",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright, no reproduction without permission",
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl on 2026-11-27, HTTP 200; terms of use not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution and short quotes only"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["offside position and offence", "offside exceptions and sanction"],
+    "notes": "Current-edition web text of Law 11, matched against the PDF pp.109-112 on 2026-11-27. No publication date on the page, so recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "not-an-offence",
+        "locator": "Law 11 section 11.1",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "c3cb90943e50049906f78a40280d59da646bc93eb01c8f9cde3f6a15e7c275de",
+        "paraphrase": "Being in an offside position is not itself an offence."
+      },
+      {
+        "id": "position-definition",
+        "locator": "Law 11 section 11.1",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "d5361013d49a3bf5c3dacd6e957ea29176f622083f9cb7743616c9e6b7cb24a3",
+        "paraphrase": "A player is in an offside position if any part of head, body or feet is in the opponents' half and nearer their goal line than both the ball and the second-last opponent."
+      },
+      {
+        "id": "level-is-onside",
+        "locator": "Law 11 section 11.1",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "b879898f6d72f455bb12b7e10793c77bd787fd74593616720e4dfc1c49c5221e",
+        "paraphrase": "Being level with the second-last opponent, or with the last two opponents, is not an offside position."
+      },
+      {
+        "id": "hands-arms-ignored",
+        "locator": "Law 11 section 11.1",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "23b8279e0616db5e9dc8e817c43ff8e1255fe8a703b8cb3969d46e618cf78639",
+        "paraphrase": "Hands and arms of all players, goalkeepers included, are not considered; the arm's upper boundary is the bottom of the armpit."
+      },
+      {
+        "id": "active-play",
+        "locator": "Law 11 section 11.2",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "c02770787501cf62c68b672001e82848387ecfcfe2180757ebeef734d10487e7",
+        "paraphrase": "A player in an offside position when a team-mate plays or touches the ball is penalised only on becoming involved in active play."
+      },
+      {
+        "id": "first-contact",
+        "locator": "Law 11 section 11.2 footnote",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "0998bbdfb75e36af283ba5a74fc8db678f9a8633a3e8d90670db9152820dc46c",
+        "paraphrase": "The first point of contact of the play or touch is used, except when the goalkeeper throws the ball, where the last point of contact is used."
+      },
+      {
+        "id": "gaining-advantage",
+        "locator": "Law 11 section 11.2",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "e95253978e9698d0aa52e9c52dc5f4e50898ffeae656bf0a4e312b47a9bedcda",
+        "paraphrase": "Gaining an advantage includes playing the ball after a rebound or deflection off a post, crossbar, match official or opponent, or after a deliberate save by an opponent."
+      },
+      {
+        "id": "deliberate-play",
+        "locator": "Law 11 section 11.2",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "a1493686d0a4cfa0984793bfcb913d2360df5bf466797c5b1c77a186a24fb173",
+        "paraphrase": "A ball received from an opponent who deliberately played it, even by handball, gives no advantage unless it was a deliberate save."
+      },
+      {
+        "id": "no-offence-restarts",
+        "locator": "Law 11 section 11.3",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "603a711beca694f6c5d4b63fd93a406cd7785437149edd157cea47706c61e331",
+        "paraphrase": "No offside offence arises when a player receives the ball directly from a goal kick, throw-in or corner kick."
+      },
+      {
+        "id": "indirect-free-kick",
+        "locator": "Law 11 section 11.4",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "10daf97163e3431893690a893dd5051605c8899bd006931cab019570b9066976",
+        "paraphrase": "An offside offence is punished by an indirect free kick where it occurred, even in the player's own half."
+      }
+    ]
+  },
+  {
+    "id": "src-ifab-var-protocol",
+    "title": "IFAB Video Assistant Referee (VAR) protocol (2026/27)",
+    "url": "https://theifab.com/laws/latest/video-assistant-referee-var-protocol/",
+    "type": "regulation",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright, no reproduction without permission",
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl on 2026-11-27, HTTP 200; terms of use not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution and short quotes only"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["VAR principles and procedure", "on-field review versus VAR-only review"],
+    "notes": "Web page shows tracked 2026/27 changes (old and new wording together), so lessons should quote the clean PDF text (pp.153-158) for category counts. No publication date, so recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "clear-obvious-standard",
+        "locator": "VAR protocol section 1, principle 3",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "d348e3f9acc8f05cbfb126bff37590deb607991f0ac8763ac6029c011a1eab87",
+        "paraphrase": "The referee's original decision changes only if the review clearly shows a clear and obvious error."
+      },
+      {
+        "id": "referee-initiates",
+        "locator": "VAR protocol section 1, principle 4",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "b077e2130efcb7cb9085b218f0a277d3ed15c6627f5c59611656e7d7b01f66e9",
+        "paraphrase": "Only the referee starts a review; the VAR and other officials can only recommend one."
+      },
+      {
+        "id": "no-time-limit",
+        "locator": "VAR protocol section 1, principle 6",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "7ec4d5b991693a73b9c2fe444b6d66b5cdc5969cdb3ccb970dbd2dfb733b4846",
+        "paraphrase": "Reviews have no time limit because accuracy matters more than speed."
+      },
+      {
+        "id": "no-no-decision",
+        "locator": "VAR protocol section 1, principle 2",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "09679e13040e025a9dfded7db5d24f910a7f06874f7e3188d787552637c4ac20",
+        "paraphrase": "The referee must always make a decision first; allowing play to continue can later be reviewed."
+      },
+      {
+        "id": "ofr-subjective",
+        "locator": "VAR protocol section 4, Review",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "ff78cd0f1c74efb02a62dd47302e6c1eda912686ce71c58ddf36d0d96170f5e9",
+        "paraphrase": "For subjective decisions such as foul intensity, offside interference or handball an on-field review is appropriate."
+      },
+      {
+        "id": "var-only-factual",
+        "locator": "VAR protocol section 4, Review",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "231bcaf913ebb419c6c90b6715a91e888709bc1110141e43905ccdfc740b2aef",
+        "paraphrase": "For factual decisions such as offside position, point of contact, location or ball out of play a VAR-only review is usually appropriate."
+      },
+      {
+        "id": "after-restart",
+        "locator": "VAR protocol section 1, principle 10",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "763bcf1b3eb1bee0a68c01b2c033d099072f76a8a9f9aa8ffeef9bc4be6d716b",
+        "paraphrase": "Once play has restarted, review is allowed only for mistaken identity or for violent conduct, spitting, biting or extremely offensive acts."
+      },
+      {
+        "id": "second-yellow-faq",
+        "locator": "VAR protocol FAQs",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "6d449263244b9dfa89e51e4adaf96a6b20d7e00f1cd972cbff707a9520b1a4f4",
+        "paraphrase": "FAQ: VAR can step in on a clearly incorrect second yellow that leads to a red, not on a missed potential second yellow."
+      },
+      {
+        "id": "players-no-request",
+        "locator": "VAR protocol section 1, principle 12",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "b70face644cbc4c4c06b40ac6ede1f5268b3093b80aa492cf36c349ea7f9e933",
+        "paraphrase": "The VAR checks every situation automatically, so players and coaches need not and cannot request a review."
+      }
+    ]
+  },
+  {
+    "id": "src-ifab-circular-33",
+    "title": "IFAB Circular no. 33: additional changes to the Laws of the Game 2026/27",
+    "url": "https://downloads.theifab.com/downloads/circular-33?l=en",
+    "type": "official-document",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright, no reproduction without permission",
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl on 2026-11-27, HTTP 200; terms of use not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution and short quotes only"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-05-19",
+    "as_of": "2026-11-27",
+    "best_for": ["mouth-covering and walk-off options", "forfeit below seven players"],
+    "notes": "Approved 28 April 2026, circular dated 19 May 2026. Not in the printed booklet.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "mouth-option",
+        "locator": "Circular 33, item 1",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "74eb55499252206812d02f4953e0d4c67f388b65939f2e86ebcc6de634d857f7",
+        "paraphrase": "Circular 33: a sending-off for covering the mouth to hide abuse is optional for competitions, aimed at racism and discrimination."
+      },
+      {
+        "id": "forfeit-seven",
+        "locator": "Circular 33, Law 3 item",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "78c897d1afce4e6a4b26b342630a8e24dd4f54ad90e0a355ed41e4adca61298e",
+        "paraphrase": "Circular 33: a team responsible for a match ending below seven players will in principle forfeit, subject to competition rules."
+      },
+      {
+        "id": "effective",
+        "locator": "Circular 33, final page",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "076f905626fdbc024bfc0218eb1d98c4d373c08413549da9e3f600db3c941462",
+        "paraphrase": "Circular 33: the Law 3 and Law 7 changes apply to competitions starting on or after 1 July 2026."
+      }
+    ]
+  },
+  {
+    "id": "src-ifab-circular-34",
+    "title": "IFAB Circular no. 34: clarifications to the Laws of the Game 2026/27 and trials",
+    "url": "https://downloads.theifab.com/downloads/circular-34?l=en",
+    "type": "official-document",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright, no reproduction without permission",
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl on 2026-11-27, HTTP 200; terms of use not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution and short quotes only"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-07-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "VAR mistaken-identity clarification",
+      "goalkeeper injury trial and VAR set-piece trial"
+    ],
+    "notes": "Dated 27 July 2026. Read from the PDF text on 2026-11-27.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "mistaken-identity-limit",
+        "locator": "Circular 34, section I.3",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "8821cb23844d7a4128924f654935504236a06d67f4cc77a2ea62ce9e39347a55",
+        "paraphrase": "Circular 34: a yellow card that is not a second yellow can be reviewed only to identify the player, not to change the offence."
+      },
+      {
+        "id": "mistaken-identity-world-cup",
+        "locator": "Circular 34, section I.3",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "081f475300b32f9b6a461e9fc41c7750f742562c224a88fbcade02e77f8b5831",
+        "paraphrase": "Circular 34: the World Cup 2026 use of mistaken identity for simulation was well received but may not be used until the VAR protocol review ends."
+      },
+      {
+        "id": "gk-injury-trial",
+        "locator": "Circular 34, section II.1",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "f1afe8097ae1d88a5510efd0603a5a3aee96bf0b0f2b83500c6611bcf964c2fe",
+        "paraphrase": "Circular 34 trial: when a goalkeeper needs treatment or play stops for a goalkeeper injury, an outfield player leaves for one minute, with exceptions."
+      },
+      {
+        "id": "var-trial-set-piece",
+        "locator": "Circular 34, section II.2",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "952fc75e4957ff8cf37d594ab47e507f5bda2a4868f20e2d97d96c4712ec84fc",
+        "paraphrase": "Circular 34 trial: VAR may help with an attacking-team offence before the ball is in play at a corner or attacking free kick."
+      }
+    ]
+  },
+  {
+    "id": "src-pl-saot-explainer",
+    "title": "Semi-automated offside technology: what you need to know (Premier League)",
+    "url": "https://www.premierleague.com/en/news/4256036",
+    "type": "news",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once on 2026-11-27, HTTP 200; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Premier League copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["how SAOT works in the Premier League", "SAOT start date"],
+    "notes": "Undated page written before the 12 April 2025 start; recency is the as_of date. Nothing found yet that is specific to 2026/27.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "saot-start",
+        "locator": "PL SAOT explainer, introduction",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "e2ee7b1d07f352c3f317e04887c64c985277c4d7686ea31b4dde1f2fe1c2e4a0",
+        "paraphrase": "The Premier League introduced semi-automated offside technology on Saturday 12 April (2025)."
+      },
+      {
+        "id": "saot-how",
+        "locator": "PL SAOT explainer, how it works",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "64cf9ca89b6ac6b827984fa2d96e1f9ed828edf929ed1b1d67ff615759f432e3",
+        "paraphrase": "SAOT suggests a kick point and automatically draws offside lines on the second rear-most defender and the relevant attacker."
+      },
+      {
+        "id": "saot-cameras",
+        "locator": "PL SAOT explainer, cameras",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "a722ebbf9c641abd5b8be49d9fcafd5144be7f029752f00a450d26e609dcb8f0",
+        "paraphrase": "The system uses up to 30 new cameras, several recording at 100 frames per second."
+      },
+      {
+        "id": "saot-time-saving",
+        "locator": "PL SAOT explainer, FAQ",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "eb71fb50725d3ebe61c86bc8f92fb769a7ad967f4f9df622eddf46988e7363ca",
+        "paraphrase": "Expected average saving on close offside calls is about 30 seconds."
+      }
+    ]
+  },
+  {
+    "id": "src-pl-var-accuracy-2024",
+    "title": "VAR getting us more right decisions but fan experience can improve (Premier League)",
+    "url": "https://www.premierleague.com/en/news/3886013",
+    "type": "news",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once on 2026-11-27, HTTP 200; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Premier League copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2024-02-10",
+    "as_of": "2026-11-27",
+    "best_for": ["League-reported VAR accuracy", "review speed and fan experience"],
+    "notes": "League-reported Key Match Incident panel figures; a different method from academic studies, so not directly comparable.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "accuracy-82-96",
+        "locator": "PL news 10 Feb 2024, Scholes quote",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "ed51538c9ef3fa829b43b6a0170e4903125a68e021d88121d94fd55cb576efab",
+        "paraphrase": "League chief Tony Scholes: 82 per cent of key decisions were correct before VAR and 96 per cent in the 2023/24 season so far."
+      },
+      {
+        "id": "too-slow",
+        "locator": "PL news 10 Feb 2024, Scholes quote",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "7db7b5af98872004a3aca8b9fc001e7178897f15472fd506e15e7102ae600073",
+        "paraphrase": "Scholes: VAR checks are too slow and hurt the flow of the game; speed must improve while keeping accuracy."
+      }
+    ]
+  },
+  {
+    "id": "src-pl-var-faqs",
+    "title": "Video Assistant Referees Explained (Premier League FAQs)",
+    "url": "https://www.premierleague.com/en/VAR/FAQs",
+    "type": "website",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once on 2026-11-27, HTTP 200; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Premier League copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["Premier League VAR practice", "assistant referee delayed flag"],
+    "notes": "Page still describes a 2020/21-era protocol (four situations); treat as dated and verify against the 2026/27 handbook. Undated, so recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "delayed-flag",
+        "locator": "PL VAR FAQs, offside question",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "02fe0502614557102c0ffbf6dce4979e0a1ac13cd5c1ed0b248991ba2aa14eb7",
+        "paraphrase": "PL VAR FAQ: in tight offside calls with a goalscoring chance the assistant may keep the flag down until the phase ends."
+      }
+    ]
+  },
+  {
+    "id": "src-walker-var-review-plos-2026",
+    "title": "Psychology at the screen: investigating the current VAR protocol (Walker et al., PLOS ONE)",
+    "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0345704",
+    "type": "paper",
+    "publisher": "PLOS ONE",
+    "free": true,
+    "license": {
+      "name": "CC BY 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "Open access, CC BY 4.0"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl on 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      },
+      "derivative": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-04-15",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "Premier League pitch-side review overturn rate",
+      "possible monitor-position bias"
+    ],
+    "notes": "Retrospective data from Sky Sports match reports; only 12 maintained decisions limit the statistics.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "overturn-rate",
+        "locator": "Walker et al. 2026, Results",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "4b751e4bb050997792d6f02f497ec293dc872e13d6851d4caf5822fce17e9144",
+        "paraphrase": "Study of 1520 Premier League matches (2021/22 to 2024/25): referees were sent to the pitch-side monitor 250 times across 230 matches."
+      },
+      {
+        "id": "overturned-share",
+        "locator": "Walker et al. 2026, Results",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "a0ebe6c6ba79d53cfd94cef3a05a8256e96f9e2c427a54a138e109dbcf6e7188",
+        "paraphrase": "After removing five unseen incidents, 95.1 percent of monitor reviews were overturned and 4.9 percent maintained."
+      }
+    ]
+  },
+  {
+    "id": "src-rogerson-var-meta-analysis",
+    "title": "Meta-analysis of the effects of VAR on goals scored and home advantage in football (Rogerson et al.)",
+    "url": "https://doi.org/10.1177/17543371241242914",
+    "type": "paper",
+    "publisher": "Proc IMechE Part P (SAGE)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Free copy at the University of Essex repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched on 2026-11-27, HTTP 200; terms not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Licence of the repository copy not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with citation"
+      }
+    },
+    "quality": 4,
+    "recency": "2024-04-08",
+    "as_of": "2026-11-27",
+    "best_for": ["VAR effect on goals and home advantage", "20-competition meta-analysis"],
+    "notes": "Recency is the CrossMark version date; accepted 9 March 2024.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "no-goal-effect",
+        "locator": "Rogerson et al. 2024, Abstract",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "7f09944ac548bae919d1910455859fb6b1effd80f75a9b7dba9f86997ef55101",
+        "paraphrase": "Meta-analysis found no overall significant or meaningful difference in goals per match before and after VAR."
+      },
+      {
+        "id": "sample",
+        "locator": "Rogerson et al. 2024, Abstract",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "886e54e7f7c6c3145fa5f53ad8b7bae1ca8a8e215026693d6fe8f0540246c30d",
+        "paraphrase": "The analysis covered 20 competitions and 9,076 matches across men's leagues and international tournaments."
+      }
+    ]
+  },
+  {
+    "id": "src-insideworldfootball-wenger-offside-trial",
+    "title": "IFAB go cold on Wenger's offside proposal after Canadian Premier League test (Inside World Football)",
+    "url": "https://www.insideworldfootball.com/2026/10/28/ifab-go-cold-on-wengers-offside-proposal-after-canadian-premier-league-test/",
+    "type": "news",
+    "publisher": "Inside World Football",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched on 2026-11-27; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-10-28",
+    "as_of": "2026-11-27",
+    "best_for": ["daylight offside trial results", "goalkeeper-injury trial count"],
+    "notes": "Single trade-press report; the trial numbers are not confirmed by an IFAB or FIFA statement in the sources read.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "trial-results",
+        "locator": "Inside World Football 28 Oct 2026",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "1aad40900b59f2908f9064fa7ac9608a06237b213fe9d185352d85abcd1a7cda",
+        "paraphrase": "Reported trial results: offside decisions down 54 percent and an estimated 13 extra goals across 112 matches."
+      },
+      {
+        "id": "defensive-line",
+        "locator": "Inside World Football 28 Oct 2026",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "e6fa830ead89f5c94654ad4a731856c64cef1913c856b088a2c516d5995010fa",
+        "paraphrase": "Reported side effect: defensive lines dropped by an average of three metres."
+      },
+      {
+        "id": "ifab-cool",
+        "locator": "Inside World Football 28 Oct 2026",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "2983791f28b4a4f6dd73e48db22b5b07c42c8f18016f5698775a3a3555ff2cf4",
+        "paraphrase": "IFAB advisory panels gave little backing, making a trial extension very unlikely ahead of possible 2027/28 law changes."
+      }
+    ]
+  },
+  {
+    "id": "src-fifa-cpl-daylight-offside-trial",
+    "title": "Canadian Premier League to conduct daylight offside trial in cooperation with FIFA",
+    "url": "https://inside.fifa.com/refereeing/news/canadian-premier-league-daylight-offside-trial-cooperation-fifa",
+    "type": "news",
+    "publisher": "FIFA",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news page"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched on 2026-11-27, HTTP 200; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "FIFA copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-03-31",
+    "as_of": "2026-11-27",
+    "best_for": ["definition of the daylight offside trial"],
+    "notes": "Trial led by FIFA, approved by IFAB, started in the Canadian Premier League on 4 April 2026.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "daylight-rule",
+        "locator": "FIFA news 31 Mar 2026",
+        "fetched_at": "2026-11-27T21:40:00Z",
+        "sha256": "3336db8a1e5a7e9ab2b269df3fc9e605dcb121e160d3ebe0187356ff7a1c8508",
+        "paraphrase": "Daylight trial: an attacker is onside if any scoring body part (not hands or arms) is level with or behind the second-to-last defender."
+      }
+    ]
+  },
+  {
+    "id": "src-fa-laws-and-rules",
+    "title": "The FA: Laws of the Game and Rules of the Association",
+    "url": "https://www.thefa.com/football-rules-governance/lawsandrules",
+    "type": "website",
+    "publisher": "The Football Association",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched on 2026-11-27, HTTP 200; terms of use not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "All rights reserved"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Link and paraphrase only"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["learner-facing pointers to Laws 1 to 17", "FA Handbook link"],
+    "notes": "Hub page with law summaries and the FA Handbook; no publication date, so recency is the as_of date.",
+    "status": "active"
+  }
+]

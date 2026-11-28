@@ -1,0 +1,620 @@
+[
+  {
+    "id": "src-asa-day-in-life-analyst",
+    "title": "A Day in the Life of a Performance Analyst (Carl Carpenter, American Soccer Analysis)",
+    "url": "https://www.americansocceranalysis.com/home/2020/3/18/a-day-in-the-life-of-a-performance-analyst",
+    "type": "article",
+    "publisher": "American Soccer Analysis",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2020-03-18",
+    "as_of": "2026-11-27",
+    "best_for": ["live and post-match coding routine", "tactical feed versus coaches' zoomed view"],
+    "notes": "First-person account by a US college men's soccer analyst, not a Premier League club. Single practitioner: an example of practice, not a standard. Gives no clip or block durations.",
+    "status": "active"
+  },
+  {
+    "id": "src-uefa-performance-analysis",
+    "title": "UEFA performance analysis: about",
+    "url": "https://www.uefa.com/development/performance-analysis/about-performance-analysis",
+    "type": "website",
+    "publisher": "UEFA",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2025-09-30",
+    "as_of": "2026-11-27",
+    "best_for": ["live, post-match and technical-observer stages of analysis"],
+    "notes": "Page lists reports dated 2025-09-15 and 2025-09-30, so recency uses the latest. Short overview; says nothing on clip length.",
+    "status": "active"
+  },
+  {
+    "id": "src-worldrugby-postmatch-analysis",
+    "title": "Post-match analysis (World Rugby Passport, performance analysis course)",
+    "url": "https://passport.world.rugby/coaching/developing-your-performance-analysis-skills/match-day-analysis/post-match/",
+    "type": "course",
+    "publisher": "World Rugby",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["hot debrief after a match", "link between analysis and the game model"],
+    "notes": "Rugby, not football, but the match-day workflow is sport-neutral. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-worldrugby-halftime-analysis",
+    "title": "First half and half-time (World Rugby Passport, performance analysis course)",
+    "url": "https://passport.world.rugby/coaching/developing-your-performance-analysis-skills/match-day-analysis/first-half-and-half-time/",
+    "type": "course",
+    "publisher": "World Rugby",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["live coding then half-time clips", "fallback tally of key events"],
+    "notes": "Rugby, sport-neutral workflow. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-fourfourtwo-watch-like-analyst",
+    "title": "How to watch football like an analyst (John Robertson, FourFourTwo)",
+    "url": "https://www.fourfourtwo.com/features/how-watch-football-analyst",
+    "type": "article",
+    "publisher": "FourFourTwo",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2015-09-15",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "four phases of play",
+      "watch twice: story then tactics",
+      "wide view limits of broadcast"
+    ],
+    "notes": "Popular-press explainer from 2015 with examples of that era; ideas hold but it is not research. The broadcast limitation is the author's view.",
+    "status": "active"
+  },
+  {
+    "id": "src-mastermindsite-how-i-watch",
+    "title": "How I watch football matches for tactical analyses (Rhys Desmond, TheMastermindSite)",
+    "url": "https://themastermindsite.com/2022/02/19/how-i-watch-football-matches-for-tactical-analyses/",
+    "type": "blog",
+    "publisher": "TheMastermindSite",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 2,
+    "recency": "2022-02-19",
+    "as_of": "2026-11-27",
+    "best_for": ["plan a focus before kickoff", "one team at a time", "note columns by phase"],
+    "notes": "Single blogger's method; page also shows a later update stamp. Weak evidence, good for a concrete workflow example.",
+    "status": "active"
+  },
+  {
+    "id": "src-breakingthelines-watch-space",
+    "title": "Why football fans are learning to watch space, not just the ball (Breaking The Lines)",
+    "url": "https://breakingthelines.com/@btl/why-football-fans-are-learning-to-watch-space-not-just-the-ball",
+    "type": "article",
+    "publisher": "Breaking The Lines",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 2,
+    "recency": "2026-09-30",
+    "as_of": "2026-11-27",
+    "best_for": ["watch-one-player exercises", "off-ball focus prompts"],
+    "notes": "Popular piece, no named author on the page. Concrete spotlight exercises; no evidence base.",
+    "status": "active"
+  },
+  {
+    "id": "src-frontiers-visual-search-meta",
+    "title": "Differences in visual search behavior between expert and novice team sports athletes: a systematic review with meta-analysis (Silva et al.)",
+    "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2022.1001066/full",
+    "type": "paper",
+    "publisher": "Frontiers in Psychology",
+    "free": true,
+    "license": {
+      "name": "Open access (licence not read)",
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Open access article; licence text not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2022-09-22",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "expert versus novice eye-tracking evidence",
+      "how unclear expertise definitions blur results"
+    ],
+    "notes": "DOI 10.3389/fpsyg.2022.1001066 validated via Crossref. Evidence strength: pre-registered systematic review with meta-analysis, 22 studies (soccer 8), mostly laboratory, mostly men; very high heterogeneity and notable bias risk. Found no clear expert-novice difference in fixation count, fixation duration or quiet eye.",
+    "status": "active"
+  },
+  {
+    "id": "src-frontiers-vbt-football-review",
+    "title": "Effects of video-based training on anticipation and decision-making in football players: a systematic review (Zhao et al.)",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9686440",
+    "type": "paper",
+    "publisher": "Frontiers in Human Neuroscience",
+    "free": true,
+    "license": {
+      "name": "Open access (licence not read)",
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Open access article; licence text not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2022-11-10",
+    "as_of": "2026-11-27",
+    "best_for": ["video training evidence in football", "transfer and retention gaps"],
+    "notes": "DOI 10.3389/fnhum.2022.945067 validated. Evidence strength: PRISMA systematic review, no meta-analysis, 10 studies, 300 players aged 14 to 25, moderate quality; only one study had a transfer test.",
+    "status": "active"
+  },
+  {
+    "id": "src-frontiers-cognition-elite-soccer",
+    "title": "Cognition in elite soccer players: a general model (Habekost, Ovesen, Madsen)",
+    "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2024.1477262/full",
+    "type": "paper",
+    "publisher": "Frontiers in Psychology",
+    "free": true,
+    "license": {
+      "name": "Open access (licence not read)",
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Open access article; licence text not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2024-12-11",
+    "as_of": "2026-11-27",
+    "best_for": ["scanning, pattern recognition, anticipation in soccer", "what is still unproven"],
+    "notes": "DOI 10.3389/fpsyg.2024.1477262 validated. Evidence strength: hypothesis and theory article with a narrative review of 52 empirical studies; authors rate anticipation evidence strong and pattern recognition and scanning evidence weak or mixed; lab-heavy; off-ball play barely studied.",
+    "status": "active"
+  },
+  {
+    "id": "src-mdpi-pct-team-sports-meta",
+    "title": "Effects of perceptual-cognitive training on anticipation and decision-making skills in team sports: a systematic review and meta-analysis (Zhu et al.)",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11505547/",
+    "type": "paper",
+    "publisher": "Behavioral Sciences (MDPI)",
+    "free": true,
+    "license": {
+      "name": "Open access (licence not read)",
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Open access article; licence text not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2024-10-01",
+    "as_of": "2026-11-27",
+    "best_for": ["does perceptual-cognitive training transfer", "lab versus on-court effect sizes"],
+    "notes": "DOI 10.3390/bs14100919 validated. Recency is the issue month; day not read. Evidence strength: PROSPERO-registered meta-analysis, 22 studies (14 randomised), mostly elite athletes, soccer 7; weak study quality, high heterogeneity, small samples; moderator differences mostly non-significant.",
+    "status": "active"
+  },
+  {
+    "id": "src-springer-temporal-occlusion-meta",
+    "title": "Accelerating visual anticipation in sport through temporal occlusion training: a meta-analysis (Muller et al.)",
+    "url": "https://link.springer.com/article/10.1007/s40279-024-02073-6",
+    "type": "paper",
+    "publisher": "Sports Medicine (Springer)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Licence not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2024-08-05",
+    "as_of": "2026-11-27",
+    "best_for": ["occlusion clips train anticipation", "field-test transfer"],
+    "notes": "DOI 10.1007/s40279-024-02073-6 validated. Read via the PubMed Central copy (PMC11467115) with the fetch tool, not the publisher page. Evidence strength: PRISMA meta-analysis, 12 intervention studies, 248 participants, novice to elite; large pooled effect, inconsistent publication-bias tests, training-length moderators not tested.",
+    "status": "active"
+  },
+  {
+    "id": "src-acm-guo-mooc-video-engagement",
+    "title": "How video production affects student engagement: an empirical study of MOOC videos (Guo, Kim, Rubin)",
+    "url": "https://www.cs.rochester.edu/hci/pubs/pdfs/edX-MOOC-video-production-and-engagement_LAS-2014.pdf",
+    "type": "paper",
+    "publisher": "ACM Learning at Scale 2014",
+    "free": true,
+    "license": {
+      "name": "ACM author copy",
+      "read": {
+        "value": "yes",
+        "note": "Public author-hosted PDF on a university site"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Direct PDF read with pypdf on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "ACM copyright; the PDF grants personal or classroom copying only"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2014-03-01",
+    "as_of": "2026-11-27",
+    "best_for": ["video length versus engagement", "chunk video into short segments"],
+    "notes": "DOI 10.1145/2556325.2566239 validated. Month approximate (conference March 2014). Evidence strength: observational log study, 6.9 million sessions on edX lecture videos in four university courses; about online lectures, not football clips, and engagement time is not learning.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "median-engagement-6min",
+        "locator": "PDF p.4, 'Shorter Videos Are More Engaging'",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "9d1d53dcb49b8dad6ba8b7c9f490b30ca9a0671dca284af8fc50860f13fdc526",
+        "paraphrase": "Median engagement time stayed at or below six minutes whatever the total video length."
+      },
+      {
+        "id": "segment-under-6min",
+        "locator": "PDF p.5, recommendation after the length finding",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "8a33a85f885a09bbd6f879acc032541111c256c3f37bf9dfea060eccabe43120",
+        "paraphrase": "The authors advise cutting instructional video into short chunks, ideally under six minutes."
+      }
+    ]
+  },
+  {
+    "id": "src-jarmac-pan-pretesting-video",
+    "title": "Pretesting reduces mind wandering and enhances learning during online lectures (Pan et al.)",
+    "url": "https://sc-pan.github.io/pdf/PSSB_2020.pdf",
+    "type": "paper",
+    "publisher": "Journal of Applied Research in Memory and Cognition",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Direct PDF read with pypdf on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Author-hosted PDF of an Elsevier article; licence not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2020-09-01",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "questions before video reduce mind wandering",
+      "pretest timing: before or between segments"
+    ],
+    "notes": "DOI 10.1016/j.jarmac.2020.07.004 validated. Recency is the month, approximate. Evidence strength: two lab experiments on undergraduates (about 105 and 143 analysed) with one 26-minute lecture; football clips not tested.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "pretest-26min-lecture",
+        "locator": "PDF p.1, abstract",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "10afd327f68fdb8da758bf38ab52267062f5961ca0e567726460d25b00110c3a",
+        "paraphrase": "Experiments used a 26-minute recorded lecture paired with a pretest or control activity."
+      },
+      {
+        "id": "pretest-reduced-mw",
+        "locator": "PDF p.1, abstract",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "f04a78f890d2ab67fb38c57b9e1816352616461186ab1c50000a037cbf6b1b47",
+        "paraphrase": "Taking pretests lowered mind wandering and raised final-test performance versus the control task."
+      }
+    ]
+  },
+  {
+    "id": "src-aps-bradbury-attention-span",
+    "title": "Attention span during lectures: 8 seconds, 10 minutes, or more? (Bradbury)",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/28145268/",
+    "type": "paper",
+    "publisher": "Advances in Physiology Education",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2016-12-01",
+    "as_of": "2026-11-27",
+    "best_for": ["the 10 to 15 minute attention claim has thin evidence"],
+    "notes": "DOI 10.1152/advan.00109.2016 validated. Personal-view article, not a study; read through a Europe PMC abstract record because the full text returned 403. Argues the claim rests on repeated citation and flawed measures.",
+    "status": "active"
+  },
+  {
+    "id": "src-arxiv-crang-broadcast-tracking",
+    "title": "Concurrent validity of computer-vision AI player tracking software using broadcast footage (Crang et al.)",
+    "url": "https://arxiv.org/abs/2508.19477",
+    "type": "paper",
+    "publisher": "arXiv",
+    "free": true,
+    "license": {
+      "name": "CC BY 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public arXiv PDF downloaded with curl on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "yes",
+        "note": "CC BY 4.0 per the arXiv page, attribution required"
+      },
+      "derivative": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      }
+    },
+    "quality": 4,
+    "recency": "2025-08-26",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "tactical feed versus programme feed",
+      "tactical camera keeps 20 outfield players in shot"
+    ],
+    "notes": "Preprint on one 2022 World Cup match about tracking-software validity, not a viewing study; used only for how the tactical feed is defined.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "tactical-feed-20-outfield",
+        "locator": "PDF p.4, data collection",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "e28fbe1ead9e9d7f637a4c3a2503da6ebe6ff015f372f1e6521b0e0a9b391282",
+        "paraphrase": "The tactical feed is a fixed wide view from the top grandstand tier, built to keep the twenty outfield players in shot."
+      }
+    ]
+  },
+  {
+    "id": "src-jssm-linke-effective-playing-time",
+    "title": "Decline in match running performance in football is affected by an increase in game interruptions (Linke et al.)",
+    "url": "https://www.jssm.org/jssm-17-662.xml-Fulltext",
+    "type": "paper",
+    "publisher": "Journal of Sports Science and Medicine",
+    "free": true,
+    "license": {
+      "name": "Open access (licence not read)",
+      "read": {
+        "value": "yes",
+        "note": "Public page, read on 2026-11-27"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Open access article; licence text not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2018-11-20",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "ball-in-play share falls late in matches",
+      "why condensed viewing skips dead time"
+    ],
+    "notes": "No DOI on the page read, so none validated. Evidence strength: 51 Bundesliga matches with tracking data, only matches decided by at most one goal. Used for ball-in-play share, not for attention.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "effective-time-decline",
+        "locator": "Abstract",
+        "fetched_at": "2026-11-27T21:50:00Z",
+        "sha256": "b12399792684abaabe930761a2ef3b633df196fa6ca6cb5b3bc60ab16ff51ef0",
+        "paraphrase": "Effective playing time fell from about two thirds of total time in the first quarter-hour to just over half in the last."
+      }
+    ]
+  }
+]

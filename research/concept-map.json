@@ -1,0 +1,4080 @@
+{
+  "schema_version": 1,
+  "concepts": [
+    {
+      "id": "academy-roles",
+      "title": "The academy roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The academy director runs coaching, education and welfare, and plans each young player's pathway to the first team.",
+      "prerequisites": ["role-map"],
+      "roles": ["academy-director", "sporting-director"],
+      "competencies": ["academy-programme-management", "player-pathway-planning"],
+      "sources": [
+        "src-newcastle-women-academy-manager",
+        "src-liverpool-head-academy-medical-performance"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "analysis-roles",
+      "title": "The analysis roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The head of performance analysis and first-team analysts: opposition reports, live feedback and post-match reviews.",
+      "prerequisites": ["role-map"],
+      "roles": ["first-team-analyst", "head-of-performance-analysis", "set-piece-coach"],
+      "competencies": ["opposition-analysis", "live-match-analysis", "post-match-review"],
+      "sources": [
+        "src-brentford-head-of-analysis-2021",
+        "src-liverpool-first-team-performance-analyst",
+        "src-newcastle-first-team-analyst-post-match"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "club-leadership-roles",
+      "title": "The club leadership roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The sporting director owns the football strategy and the CEO runs the business; both answer to the owners and board.",
+      "prerequisites": ["role-map"],
+      "roles": ["club-ceo", "head-coach", "head-of-recruitment", "sporting-director"],
+      "competencies": ["sporting-strategy", "club-budgeting", "board-and-owner-relations"],
+      "sources": [
+        "src-pl-sporting-directors-explained",
+        "src-slemen-effective-sporting-director",
+        "src-footballbenchmark-ceo-profiles",
+        "src-jobsinfootball-sporting-director-role"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "coaching-roles",
+      "title": "The coaching roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "Head coach, assistant coach and set-piece coach: who plans matches and training, and why England often says manager.",
+      "prerequisites": ["role-map"],
+      "roles": ["assistant-coach", "head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["game-planning", "training-session-design", "set-piece-design"],
+      "sources": [
+        "src-espn-head-coach-vs-manager",
+        "src-pl-assistant-manager-insights",
+        "src-liverpool-set-piece-coach",
+        "src-uefa-coaching-licences"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "data-roles",
+      "title": "The data roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The head of data science, data engineers and recruitment analysts: who builds the club's models, pipelines and dashboards.",
+      "prerequisites": ["role-map"],
+      "roles": [
+        "data-engineer",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["statistical-modelling", "data-pipeline-ownership", "dashboard-building"],
+      "sources": [
+        "src-liverpool-lead-data-scientist",
+        "src-liverpool-data-engineer",
+        "src-newcastle-lead-recruitment-data-analyst"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "how-the-app-works",
+      "title": "How the app works",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "Short visual lessons in the order the concept map sets, with your progress kept on this computer and an export.",
+      "prerequisites": [],
+      "roles": [],
+      "competencies": [],
+      "sources": ["src-noetel-multimedia-design-2021", "src-weinstein-six-strategies-2018"],
+      "status": "approved"
+    },
+    {
+      "id": "performance-roles",
+      "title": "The performance roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The head of performance leads sports science, medicine and conditioning to keep players fit and available.",
+      "prerequisites": ["role-map"],
+      "roles": ["head-of-performance"],
+      "competencies": [
+        "workload-management",
+        "injury-prevention-and-return-to-play",
+        "performance-science-literacy"
+      ],
+      "sources": [
+        "src-slemen-director-high-performance",
+        "src-liverpool-head-academy-medical-performance"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "personal-goals-page",
+      "title": "Your goals page",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "Name your target role and write an if-then plan for when and where you study. Plans like this help people follow through.",
+      "prerequisites": ["how-the-app-works"],
+      "roles": [],
+      "competencies": [],
+      "sources": [
+        "src-gollwitzer-implementation-intentions-2006",
+        "src-gawrilow-adhd-if-then-2011"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "placement-diagnostic",
+      "title": "The placement diagnostic",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "A short quiz at the start marks what you already know so you can skip it. Even a wrong first guess helps you learn.",
+      "prerequisites": ["how-the-app-works"],
+      "roles": [],
+      "competencies": [],
+      "sources": ["src-richland-pretesting-2009", "src-knouse-adhd-self-testing-2011"],
+      "status": "approved"
+    },
+    {
+      "id": "recruitment-roles",
+      "title": "The recruitment roles",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The head of recruitment, chief scout and loan manager: who finds players, writes the reports and places the loans.",
+      "prerequisites": ["role-map"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "loan-manager"
+      ],
+      "competencies": ["player-identification", "scouting-reports", "loan-placement"],
+      "sources": [
+        "src-liverpool-women-head-of-recruitment",
+        "src-hudl-marshall-head-of-recruitment",
+        "src-liverpool-head-of-loan-management",
+        "src-sky-hammond-loans-manager"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "role-map",
+      "title": "The Role Map",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "The senior jobs in a club, who reports to whom, and the competencies each one needs, drawn as paths through this map.",
+      "prerequisites": ["how-the-app-works"],
+      "roles": ["club-ceo", "sporting-director"],
+      "competencies": ["football-department-design"],
+      "sources": [
+        "src-pl-sporting-directors-explained",
+        "src-football365-who-controls-transfers",
+        "src-jobsinfootball-sporting-director-structure"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "the-lesson-loop",
+      "title": "The Lesson Loop",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "Every lesson runs hook, see, touch, predict, do, lock in and connect: each idea is shown, touched, then practised.",
+      "prerequisites": ["how-the-app-works"],
+      "roles": [],
+      "competencies": [],
+      "sources": [
+        "src-freeman-active-learning-2014",
+        "src-agarwal-retrieval-classroom-2021",
+        "src-noetel-multimedia-design-2021"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "attacking-and-defending-shapes",
+      "title": "Attacking and defending shapes",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Teams often attack in one shape and defend in another, like Man City's 3-2-4-1 with the ball and 4-4-2 without it.",
+      "prerequisites": ["formation-vs-structure"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": [
+        "src-theanalyst-stones-hybrid-role",
+        "src-skysports-arteta-tactics-2023",
+        "src-pl-slot-liverpool-shape-2024"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "back-four-formations",
+      "title": "Back-four formations",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "4-4-2, 4-3-3, 4-2-3-1 and 4-1-4-1: what each shape gives in the middle and out wide, and where it leaves space.",
+      "prerequisites": ["formation-notation"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": [
+        "src-pl-442-explained",
+        "src-coachesvoice-formations-explained",
+        "src-pl-451-explained",
+        "src-pl-formation-trends-2024-25"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "back-three-formations",
+      "title": "Back-three formations",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "3-5-2, 3-4-3 and 5-3-2: a back three with wing-backs for width, which drops into a back five without the ball.",
+      "prerequisites": ["formation-notation"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": [
+        "src-pl-352-explained",
+        "src-coachesvoice-formations-explained",
+        "src-jobsinfootball-532",
+        "src-skysports-conte-343-2017"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "ball-in-and-out-of-play",
+      "title": "Ball in and out",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The ball is out only when the whole ball has crossed a touchline or goal line, on the ground or in the air.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "cards-and-misconduct",
+      "title": "Cards and misconduct",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A reckless foul earns a yellow card, excessive force a red; two yellows send a player off and change the match.",
+      "prerequisites": ["fouls-and-free-kicks"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "in-game-adjustment"],
+      "sources": ["src-ifab-laws-2026-27", "src-ifab-law-changes-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "catenaccio",
+      "title": "Catenaccio and the sweeper",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A spare defender behind the line, from Rappan's verrou of the 1930s to Italy's catenaccio. Its inventor is contested.",
+      "prerequisites": ["pyramid-to-wm"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": ["src-wikipedia-catenaccio", "src-90min-nereo-rocco"],
+      "status": "approved"
+    },
+    {
+      "id": "first-laws-and-passing-game",
+      "title": "First laws, first passes",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The FA wrote the first Laws in 1863, and passing and combination play soon replaced the lone dribble.",
+      "prerequisites": [],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-ifab-history-origins-modern-game",
+        "src-whiterose-evolution-football-passing"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "formation-notation",
+      "title": "Formation notation",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A formation counts outfield players per line from the back, so 4-2-3-1 never includes the goalkeeper.",
+      "prerequisites": ["positions-overview"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": [
+        "src-frontiers-formation-id-survey",
+        "src-fourfourtwo-formations-in-football",
+        "src-coachesvoice-formations-explained"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "formation-vs-structure",
+      "title": "Formation versus structure",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The formation is the base label; the structure is how the team really stands in a moment, rotations included.",
+      "prerequisites": ["back-four-formations", "back-three-formations"],
+      "roles": [
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "set-piece-coach"
+      ],
+      "competencies": ["match-reading", "opposition-analysis"],
+      "sources": [
+        "src-planetfootball-formations-whiteboard",
+        "src-theanalyst-shape-analysis",
+        "src-yahoo-keble-formations-2016"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "fouls-and-free-kicks",
+      "title": "Fouls and free kicks",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Careless, reckless or excessive contact fouls give a direct free kick; some other offences give an indirect one.",
+      "prerequisites": ["referee-team"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27", "src-pl-laws-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "goal-kick-and-corner-kick",
+      "title": "Goal and corner kicks",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Ball over the goal line: a goal kick if the attackers touched it last, a corner if the defenders did.",
+      "prerequisites": ["ball-in-and-out-of-play", "pitch-areas"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-ifab-laws-2026-27", "src-ifab-law-changes-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "hungary-and-the-4-2-4",
+      "title": "Hungary and the 4-2-4",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Hungary won 6-3 at Wembley in 1953 with a deep-lying centre-forward; Brazil's 4-2-4 won the 1958 World Cup.",
+      "prerequisites": ["pyramid-to-wm"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": ["src-uefa-hungary-1950-56", "src-wikipedia-formation-association-football"],
+      "status": "approved"
+    },
+    {
+      "id": "kick-off-and-dropped-ball",
+      "title": "Kick-off and dropped ball",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Opponents stand 9.15 m away at kick-off; at a dropped ball other players stand at least 4 m away.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-ifab-laws-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "offside-offence",
+      "title": "Offside offence",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A player in an offside position is penalised only when active: interfering with play or an opponent, or gaining an advantage.",
+      "prerequisites": ["offside-position"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-offside", "src-ifab-laws-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "offside-position",
+      "title": "Offside position",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Nearer the goal line than both the ball and the second-last opponent, in their half. Level is onside.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-offside", "src-ifab-laws-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "penalty-kick",
+      "title": "The penalty kick",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A direct free-kick foul by a defender inside their own penalty area gives a penalty from the mark, 11 m out.",
+      "prerequisites": ["fouls-and-free-kicks", "pitch-areas"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-ifab-laws-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "pitch-areas",
+      "title": "Boxes and areas",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The 5.5 m goal area, the 16.5 m penalty area, the penalty arc and the technical area, and what each one changes.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27", "src-kloppy-coordinates-docs"],
+      "status": "approved"
+    },
+    {
+      "id": "pitch-dimensions",
+      "title": "Pitch dimensions",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Law 1 gives ranges (touchlines 90-120 m), not one size. PL Rule K.17 sets 105 x 68 m unless the stadium cannot fit it.",
+      "prerequisites": [],
+      "roles": [
+        "academy-director",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "regulatory-compliance"],
+      "sources": [
+        "src-ifab-laws-2026-27",
+        "src-pl-handbook-2026-27",
+        "src-fourfourtwo-pl-pitch-sizes",
+        "src-fifa-stadium-guidelines-pitch"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "pitch-markings",
+      "title": "Pitch markings",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The lines, circles and arcs of Law 1. A line belongs to the area it bounds, so a ball on the line is still in.",
+      "prerequisites": ["pitch-dimensions"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27", "src-fifa-stadium-guidelines-pitch"],
+      "status": "approved"
+    },
+    {
+      "id": "players-and-substitutions",
+      "title": "Players and substitutions",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Eleven players a side, at least seven to play on, and up to five substitutes in three windows in official competitions.",
+      "prerequisites": [],
+      "roles": ["assistant-coach", "head-coach", "head-of-performance"],
+      "competencies": ["team-selection", "in-game-adjustment"],
+      "sources": ["src-ifab-laws-2026-27", "src-pl-laws-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "position-vs-role",
+      "title": "Position versus role",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A position is where a player starts; a role is the job inside it, like an inverted full-back moving into midfield.",
+      "prerequisites": ["positions-overview"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "head-of-recruitment"
+      ],
+      "competencies": ["match-reading", "player-identification"],
+      "sources": [
+        "src-fourfourtwo-inverted-full-back",
+        "src-premierleague-coachesvoice-no6-explained",
+        "src-fourfourtwo-no10"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "positions-overview",
+      "title": "The positions",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Goalkeeper, defenders, midfielders and forwards: the pitch zone each player starts in and mainly works from.",
+      "prerequisites": ["pitch-markings"],
+      "roles": [
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["match-reading", "squad-planning"],
+      "sources": [
+        "src-wikipedia-association-football-positions",
+        "src-bundesliga-positions-explained"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "possession-and-gegenpressing",
+      "title": "Possession and gegenpressing",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Guardiola's possession and Klopp's gegenpress, from Barcelona and Dortmund to City's 100 points and Liverpool's 2019/20 title.",
+      "prerequisites": ["total-football-to-sacchi", "premier-league-era-tactics"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-uefa-barcelona-2008-12",
+        "src-bundesliga-klopp-dortmund-years",
+        "src-premier-league-man-city-evolution",
+        "src-premier-league-klopp-liverpool-2019-20"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "premier-league-era-tactics",
+      "title": "The Premier League era",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "From 1992: the back-pass ban, Wenger's Arsenal and Mourinho's 2004/05 Chelsea, who conceded only 15 league goals.",
+      "prerequisites": ["pyramid-to-wm"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-premier-league-history",
+        "src-ifab-history-back-pass-law",
+        "src-premier-league-hall-of-fame-wenger",
+        "src-premier-league-chelsea-2004-05"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "pyramid-to-wm",
+      "title": "From Pyramid to WM",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The 2-3-5 Pyramid ruled early on; after the 1925 offside change Chapman's Arsenal made the WM. Who invented it is contested.",
+      "prerequisites": ["first-laws-and-passing-game", "formation-notation", "offside-position"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-ifab-history-offside-law",
+        "src-arsenal-newcastle-7-0-golden-era",
+        "src-aisa-chapman-new-formation-1925",
+        "src-wikipedia-formation-association-football"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "referee-team",
+      "title": "The referee team",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Referee, assistant referees, fourth official and VAR. The others assist, but the referee's decisions on facts are final.",
+      "prerequisites": [],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27", "src-fa-laws-and-rules"],
+      "status": "approved"
+    },
+    {
+      "id": "scoring-a-goal",
+      "title": "Scoring a goal",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "A goal needs the whole ball over the goal line, between the posts and under the bar, with no offence before it.",
+      "prerequisites": ["ball-in-and-out-of-play"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-ifab-laws-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "semi-automated-offside",
+      "title": "Semi-automated offside",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Since April 2025 the PL uses cameras to suggest the kick point and draw offside lines; the VAR still checks the call.",
+      "prerequisites": ["offside-position", "var-basics"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-pl-saot-explainer", "src-ifab-var-protocol"],
+      "status": "approved"
+    },
+    {
+      "id": "squad-numbers",
+      "title": "Squad numbers",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "The old 1 to 11 by position, and the fixed squad numbers the Premier League brought in for 1993/94.",
+      "prerequisites": ["positions-overview"],
+      "roles": ["head-of-recruitment", "sporting-director"],
+      "competencies": ["squad-planning"],
+      "sources": [
+        "src-lcfc-squad-numbers-history",
+        "src-wikipedia-squad-number-association-football",
+        "src-squadnumbers-1-11-premier-league-era",
+        "src-goal-squad-numbers-explained"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "throw-in",
+      "title": "The throw-in",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Opponents stand 2 m away, no goal can come straight from it, and from 2026/27 a slow throw-in gets a five-second count.",
+      "prerequisites": ["ball-in-and-out-of-play"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-ifab-laws-2026-27", "src-ifab-law-changes-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "total-football-to-sacchi",
+      "title": "Total Football to Sacchi",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Ajax's 1970s Total Football pressed and swapped positions; Sacchi's Milan added a compact zonal 4-4-2 and a high line.",
+      "prerequisites": ["hungary-and-the-4-2-4"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": [
+        "src-uefa-ajax-1971-73",
+        "src-uefa-ac-milan-1988-90",
+        "src-fourfourtwo-who-invented-pressing"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "var-basics",
+      "title": "VAR basics",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "VAR steps in only for a clear and obvious error in a few match-changing categories, such as goals, penalties and red cards.",
+      "prerequisites": ["referee-team"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "in-game-adjustment"],
+      "sources": [
+        "src-ifab-var-protocol",
+        "src-ifab-laws-2026-27",
+        "src-pl-var-faqs",
+        "src-pl-var-accuracy-2024"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "eighteen-zone-grid",
+      "title": "The 18-zone grid",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Six bands up the pitch by three across give 18 numbered zones, a shared map for naming where things happen.",
+      "prerequisites": ["pitch-thirds-and-zones"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-coaches-voice", "src-spielverlagerung"],
+      "status": "draft"
+    },
+    {
+      "id": "five-vertical-lanes",
+      "title": "The five lanes",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Five lanes run the length of the pitch: two wide, two half-spaces and the centre. Teams try to keep each lane filled.",
+      "prerequisites": ["pitch-thirds-and-zones"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-spielverlagerung", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "four-superiorities",
+      "title": "The four superiorities",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Beyond numbers: positional (better placed), qualitative (better player) and socio-affective (players who understand each other).",
+      "prerequisites": ["numerical-superiority", "half-spaces"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-spielverlagerung", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "half-spaces",
+      "title": "Half-spaces",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "The lanes between the wing and the centre, where a receiver can see the goal and both sides of the pitch at once.",
+      "prerequisites": ["five-vertical-lanes"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-spielverlagerung", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "lines-and-between-the-lines",
+      "title": "Between the lines",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "One pass can bypass a whole defensive line, and a player who receives in the gap between two lines is hard to mark.",
+      "prerequisites": ["formation-notation", "pitch-thirds-and-zones"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-pl-442-explained", "src-coaches-voice"],
+      "status": "approved"
+    },
+    {
+      "id": "numerical-superiority",
+      "title": "Numerical superiority",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "More players than the opponent in one area, like a back three against two strikers in build-up: a 3 v 2 overload.",
+      "prerequisites": ["pitch-thirds-and-zones", "formation-notation"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-coachesvoice-formations-explained", "src-pl-352-explained"],
+      "status": "approved"
+    },
+    {
+      "id": "pitch-thirds-and-zones",
+      "title": "Thirds and zones",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Split the pitch into defensive, middle and attacking thirds, then smaller zones, to say exactly where play happens.",
+      "prerequisites": ["pitch-areas"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-karun-expected-threat"],
+      "status": "approved"
+    },
+    {
+      "id": "width-and-depth",
+      "title": "Width and depth",
+      "track": "t02-language-of-space",
+      "part": "A",
+      "summary": "Wide players stretch a defence across the pitch and runs in behind stretch it in depth, opening gaps in between.",
+      "prerequisites": ["five-vertical-lanes", "lines-and-between-the-lines"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-coachesvoice-formations-explained", "src-coaches-voice"],
+      "status": "approved"
+    },
+    {
+      "id": "attacking-transition",
+      "title": "Attacking transition",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "The seconds after winning the ball, while the opponent is out of shape. Leicester's 2015/16 title was built on them.",
+      "prerequisites": ["four-phases-of-play"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-fourfourtwo-watch-like-analyst", "src-premier-league-leicester-2015-16"],
+      "status": "approved"
+    },
+    {
+      "id": "defensive-transition",
+      "title": "Defensive transition",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "The seconds after losing the ball: press at once to win it back, as Klopp's teams did, or drop back into shape.",
+      "prerequisites": ["four-phases-of-play"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": [
+        "src-premier-league-counter-pressing-explained",
+        "src-fourfourtwo-watch-like-analyst",
+        "src-bundesliga-klopp-dortmund-years"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "four-phases-of-play",
+      "title": "The four phases",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "Open play has four phases: in possession, out of possession and the two transitions. Name the phase before the shape.",
+      "prerequisites": ["formation-notation"],
+      "roles": [
+        "academy-director",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["match-reading", "playing-style-definition"],
+      "sources": ["src-fourfourtwo-watch-like-analyst", "src-frontiers-formation-id-survey"],
+      "status": "approved"
+    },
+    {
+      "id": "how-phases-connect",
+      "title": "How phases connect",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "Shape in one phase sets up the next: where players stand with the ball decides how well they defend when it is lost.",
+      "prerequisites": [
+        "in-possession-phase",
+        "out-of-possession-phase",
+        "attacking-transition",
+        "defensive-transition"
+      ],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition", "game-planning"],
+      "sources": [
+        "src-frontiers-formation-id-survey",
+        "src-theanalyst-shape-analysis",
+        "src-premier-league-counter-pressing-explained"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "in-possession-phase",
+      "title": "In possession",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "With the ball a team builds up, progresses and creates chances, often in a different shape from the one it defends in.",
+      "prerequisites": ["four-phases-of-play"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-theanalyst-stones-hybrid-role"],
+      "status": "approved"
+    },
+    {
+      "id": "out-of-possession-phase",
+      "title": "Out of possession",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "Without the ball a team defends in a low, mid or high block, choosing where to press and where to wait.",
+      "prerequisites": ["four-phases-of-play"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "game-planning"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-skysports-conte-343-2017"],
+      "status": "approved"
+    },
+    {
+      "id": "set-piece-phase",
+      "title": "The set-piece phase",
+      "track": "t03-phases-of-play",
+      "part": "A",
+      "summary": "Corners, free kicks and throw-ins restart a stopped game, so clubs plan them as their own phase, with a specialist coach.",
+      "prerequisites": ["four-phases-of-play", "goal-kick-and-corner-kick"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-liverpool-set-piece-coach", "src-ifab-laws-2026-27"],
+      "status": "approved"
+    },
+    {
+      "id": "answer-on-the-pitch-panel",
+      "title": "Answer on the pitch",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Answer by tapping the pitch panel, for example where the space is, instead of choosing from a list of words.",
+      "prerequisites": ["one-question-clips", "pitch-markings"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-mdpi-pct-team-sports-meta"],
+      "status": "approved"
+    },
+    {
+      "id": "one-question-clips",
+      "title": "One-question clips",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Watch Gym Level 1: a short reconstruction or local clip, with one question asked before it plays.",
+      "prerequisites": ["the-lesson-loop"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": [
+        "src-jarmac-pan-pretesting-video",
+        "src-mastermindsite-how-i-watch",
+        "src-acm-guo-mooc-video-engagement"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "reading-a-reconstruction",
+      "title": "Reading a reconstruction",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Clips are animated from open event or tracking data. Each names its dataset and league, so a non-PL clip never says PL.",
+      "prerequisites": ["one-question-clips"],
+      "roles": [
+        "data-engineer",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["match-reading", "tracking-data-handling"],
+      "sources": [
+        "src-wyscout-public-dataset",
+        "src-dfl-idsse-open-data",
+        "src-statsbomb-open-data"
+      ],
+      "status": "approved"
+    },
+    {
+      "id": "short-sessions-first",
+      "title": "Short sessions first",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Sessions stay short and end before attention drops. You choose when to watch longer; the evidence sets no fixed limit.",
+      "prerequisites": ["one-question-clips"],
+      "roles": [],
+      "competencies": [],
+      "sources": ["src-acm-guo-mooc-video-engagement", "src-aps-bradbury-attention-span"],
+      "status": "approved"
+    },
+    {
+      "id": "story-then-structure",
+      "title": "Story, then structure",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Watch first for the story of the match, then rewatch with pauses to study the tactics, with the commentary muted.",
+      "prerequisites": ["watch-one-phase"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading", "post-match-review"],
+      "sources": ["src-fourfourtwo-watch-like-analyst", "src-mastermindsite-how-i-watch"],
+      "status": "approved"
+    },
+    {
+      "id": "watch-in-blocks",
+      "title": "Watch in blocks",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Split a match into blocks with a different focus each. Quarter-hour blocks are a research habit, not an analyst rule.",
+      "prerequisites": ["watch-one-phase"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading", "live-match-analysis"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-jssm-linke-effective-playing-time"],
+      "status": "approved"
+    },
+    {
+      "id": "watch-one-phase",
+      "title": "Watch one phase",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Pick one phase, such as one team's build-up, and watch only that, one team at a time, to see its pattern.",
+      "prerequisites": ["watch-one-unit", "four-phases-of-play"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-fourfourtwo-watch-like-analyst"],
+      "status": "approved"
+    },
+    {
+      "id": "watch-one-player",
+      "title": "Watch one player",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Follow one player for a spell, such as a full-back who steps into midfield, instead of following the ball.",
+      "prerequisites": ["one-question-clips", "positions-overview"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "head-of-recruitment"
+      ],
+      "competencies": ["match-reading", "player-identification"],
+      "sources": ["src-breakingthelines-watch-space", "src-fourfourtwo-watch-like-analyst"],
+      "status": "approved"
+    },
+    {
+      "id": "watch-one-unit",
+      "title": "Watch one unit",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Follow a group, such as the centre-backs right after a turnover, or the striker while the ball is on the far wing.",
+      "prerequisites": ["watch-one-player", "formation-notation"],
+      "roles": ["first-team-analyst", "head-coach", "head-of-performance-analysis"],
+      "competencies": ["match-reading"],
+      "sources": ["src-breakingthelines-watch-space"],
+      "status": "approved"
+    },
+    {
+      "id": "build-up-structures",
+      "title": "Build-up structures",
+      "track": "t05-attacking-play",
+      "part": "B",
+      "summary": "How a team lines up to play out from the back: 2-3, 3-2, 3-1 or a box, like Arsenal's 2-3-5 and City's 3-2-4-1.",
+      "prerequisites": ["in-possession-phase", "numerical-superiority"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["game-planning", "playing-style-definition"],
+      "sources": [
+        "src-skysports-arteta-tactics-2023",
+        "src-theanalyst-stones-hybrid-role",
+        "src-pl-box-midfield-explained",
+        "src-spielverlagerung"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "chance-creation",
+      "title": "Chance creation and finishing",
+      "track": "t05-attacking-play",
+      "part": "B",
+      "summary": "Turning territory into good shots: crosses, cut-backs and through balls, judged by the chance quality they produce.",
+      "prerequisites": ["progression-and-overloads"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "set-piece-coach"
+      ],
+      "competencies": ["game-planning", "opposition-analysis"],
+      "sources": ["src-theanalyst-what-is-xg", "src-karun-expected-threat", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "positional-and-relational-play",
+      "title": "Positional and relational play",
+      "track": "t05-attacking-play",
+      "part": "B",
+      "summary": "Two attacking models: hold set zones across the pitch, or let players move close to the ball and combine. The labels are contested.",
+      "prerequisites": ["build-up-structures", "half-spaces"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition"],
+      "sources": ["src-uefa-barcelona-2008-12", "src-spielverlagerung", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "progression-and-overloads",
+      "title": "Progression and overloads",
+      "track": "t05-attacking-play",
+      "part": "B",
+      "summary": "Moving the ball up the pitch: breaking lines, overloading one side to isolate the other, third-man runs and rotations.",
+      "prerequisites": ["build-up-structures", "lines-and-between-the-lines"],
+      "roles": ["assistant-coach", "head-coach"],
+      "competencies": ["game-planning"],
+      "sources": [
+        "src-coachesvoice-formations-explained",
+        "src-spielverlagerung",
+        "src-coaches-voice"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "defending-the-box",
+      "title": "Defending the box",
+      "track": "t06-defending",
+      "part": "B",
+      "summary": "Protecting the penalty area: centre-back positioning, blocking crosses and covering the cut-back zone.",
+      "prerequisites": ["defensive-blocks", "pitch-areas"],
+      "roles": ["assistant-coach", "head-coach", "set-piece-coach"],
+      "competencies": ["game-planning", "training-session-design"],
+      "sources": ["src-thefa-central-defenders-bootroom", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "defensive-blocks",
+      "title": "Defensive blocks",
+      "track": "t06-defending",
+      "part": "B",
+      "summary": "Low, mid and high blocks: how high the line sits, how compact the team stays, and which spaces it gives away.",
+      "prerequisites": ["out-of-possession-phase", "lines-and-between-the-lines"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "set-piece-coach"
+      ],
+      "competencies": ["game-planning", "opposition-analysis"],
+      "sources": [
+        "src-mastermindsite-how-i-watch",
+        "src-premier-league-leicester-2015-16",
+        "src-coaches-voice"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "pressing-schemes",
+      "title": "Pressing schemes",
+      "track": "t06-defending",
+      "part": "B",
+      "summary": "Man-oriented, zonal and hybrid pressing: who each player presses, and how the team covers the space behind the press.",
+      "prerequisites": ["defensive-blocks"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["game-planning", "playing-style-definition"],
+      "sources": [
+        "src-fourfourtwo-who-invented-pressing",
+        "src-uefa-ac-milan-1988-90",
+        "src-spielverlagerung"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "pressing-traps-and-triggers",
+      "title": "Pressing traps and triggers",
+      "track": "t06-defending",
+      "part": "B",
+      "summary": "Cues that start a press, like a back pass or a heavy touch, and traps that steer the ball towards the touchline.",
+      "prerequisites": ["pressing-schemes"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "set-piece-coach"
+      ],
+      "competencies": ["game-planning", "opposition-analysis"],
+      "sources": ["src-premier-league-counter-pressing-explained", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "counter-attacks",
+      "title": "Counter-attacks",
+      "track": "t07-transitions",
+      "part": "B",
+      "summary": "Attacking fast into space after winning the ball, as Leicester did on their way to the 2015/16 title.",
+      "prerequisites": ["attacking-transition"],
+      "roles": ["assistant-coach", "head-coach"],
+      "competencies": ["game-planning"],
+      "sources": ["src-premier-league-leicester-2015-16", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "counter-pressing",
+      "title": "Counter-pressing",
+      "track": "t07-transitions",
+      "part": "B",
+      "summary": "Pressing straight after losing the ball to win it back high, the gegenpress of Klopp's Dortmund and Liverpool.",
+      "prerequisites": ["defensive-transition"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["game-planning", "playing-style-definition"],
+      "sources": [
+        "src-premier-league-counter-pressing-explained",
+        "src-bundesliga-klopp-dortmund-years"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "rest-defence",
+      "title": "Rest defence",
+      "track": "t07-transitions",
+      "part": "B",
+      "summary": "The players a team keeps behind the ball while it attacks, placed to stop the counter before it starts.",
+      "prerequisites": ["how-phases-connect", "build-up-structures"],
+      "roles": ["assistant-coach", "head-coach"],
+      "competencies": ["game-planning"],
+      "sources": ["src-spielverlagerung", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "set-piece-coach-role",
+      "title": "The set-piece coach",
+      "track": "t08-set-pieces",
+      "part": "B",
+      "summary": "The specialist who designs, trains and analyses routines with the first-team staff, using video and data.",
+      "prerequisites": ["set-piece-routines", "coaching-roles"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "set-piece-coach",
+        "sporting-director"
+      ],
+      "competencies": ["set-piece-design", "training-session-design", "opposition-analysis"],
+      "sources": ["src-liverpool-set-piece-coach"],
+      "status": "draft"
+    },
+    {
+      "id": "set-piece-marking",
+      "title": "Set-piece marking systems",
+      "track": "t08-set-pieces",
+      "part": "B",
+      "summary": "Zonal, man-to-man and mixed marking at corners and free kicks, and the spaces each system leaves open.",
+      "prerequisites": ["set-piece-phase"],
+      "roles": [
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis",
+        "set-piece-coach",
+        "sporting-director"
+      ],
+      "competencies": ["set-piece-design", "opposition-analysis"],
+      "sources": ["src-coaches-voice", "src-liverpool-set-piece-coach"],
+      "status": "draft"
+    },
+    {
+      "id": "set-piece-routines",
+      "title": "Corners and free kicks",
+      "track": "t08-set-pieces",
+      "part": "B",
+      "summary": "Designing routines for corners, free kicks and long throws: blocks, decoys, delivery zones and second balls.",
+      "prerequisites": ["set-piece-phase"],
+      "roles": ["head-coach", "set-piece-coach", "sporting-director"],
+      "competencies": ["set-piece-design"],
+      "sources": ["src-liverpool-set-piece-coach", "src-ifab-laws-2026-27", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "attacking-roles",
+      "title": "Attacking player roles",
+      "track": "t09-roles-and-profiles",
+      "part": "B",
+      "summary": "Roles up front: the inside forward, the classic winger, the target striker and the false 9 who drops deep.",
+      "prerequisites": ["position-vs-role"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-recruitment"
+      ],
+      "competencies": ["player-identification", "team-selection"],
+      "sources": [
+        "src-wikipedia-association-football-positions",
+        "src-bundesliga-positions-explained",
+        "src-coaches-voice"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "defensive-roles",
+      "title": "Defensive player roles",
+      "track": "t09-roles-and-profiles",
+      "part": "B",
+      "summary": "Roles in the back line: sweeper keeper, ball-playing centre-back, inverted full-back and wing-back.",
+      "prerequisites": ["position-vs-role", "back-three-formations"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-recruitment"
+      ],
+      "competencies": ["player-identification", "team-selection"],
+      "sources": [
+        "src-fourfourtwo-inverted-full-back",
+        "src-thefa-central-defenders-bootroom",
+        "src-coaches-voice"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "midfield-roles",
+      "title": "Midfield player roles",
+      "track": "t09-roles-and-profiles",
+      "part": "B",
+      "summary": "Roles in midfield: the No 6, the box-to-box 8, the regista, the mezzala and the No 10 playmaker.",
+      "prerequisites": ["position-vs-role"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-recruitment"
+      ],
+      "competencies": ["player-identification", "team-selection"],
+      "sources": [
+        "src-premierleague-coachesvoice-no6-explained",
+        "src-fourfourtwo-no10",
+        "src-coaches-voice"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "role-signatures-in-data",
+      "title": "Role signatures in data",
+      "track": "t09-roles-and-profiles",
+      "part": "B",
+      "summary": "Each role leaves a pattern of touches and actions in event data. Every chart names its dataset and league.",
+      "prerequisites": ["midfield-roles", "reading-a-reconstruction"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "recruitment-analyst"
+      ],
+      "competencies": ["player-identification", "data-led-target-ranking"],
+      "sources": [
+        "src-statsbomb-open-data",
+        "src-theanalyst-shape-analysis",
+        "src-frontiers-formation-id-survey"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "coach-education-pathways",
+      "title": "Coach education pathways",
+      "track": "t10-coaching-and-game-models",
+      "part": "B",
+      "summary": "The FA and UEFA licence ladder, from grassroots badges up to the UEFA Pro Licence, the highest coaching award.",
+      "prerequisites": ["coaching-roles"],
+      "roles": ["academy-director", "club-ceo", "sporting-director"],
+      "competencies": ["staff-appointment"],
+      "sources": ["src-uefa-coaching-licences", "src-fa-coaching-courses"],
+      "status": "draft"
+    },
+    {
+      "id": "game-model",
+      "title": "The game model",
+      "track": "t10-coaching-and-game-models",
+      "part": "B",
+      "summary": "A club's principles for every phase of play. Analysts code matches and review them against it.",
+      "prerequisites": ["how-phases-connect"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition", "game-planning"],
+      "sources": [
+        "src-asa-day-in-life-analyst",
+        "src-worldrugby-postmatch-analysis",
+        "src-coaches-voice"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "session-design-and-methods",
+      "title": "Session design and methods",
+      "track": "t10-coaching-and-game-models",
+      "part": "B",
+      "summary": "Whole-part-whole, constraints-led games, guided discovery and feedback styles: how a coach builds a training session.",
+      "prerequisites": ["game-model"],
+      "roles": ["assistant-coach", "head-coach", "set-piece-coach"],
+      "competencies": ["training-session-design", "player-communication"],
+      "sources": ["src-fa-coaching-courses", "src-fifa-training-centre"],
+      "status": "draft"
+    },
+    {
+      "id": "tactical-periodization",
+      "title": "Tactical periodization",
+      "track": "t10-coaching-and-game-models",
+      "part": "B",
+      "summary": "Planning the training week around the game model, so physical, tactical and mental work happen together.",
+      "prerequisites": ["game-model"],
+      "roles": ["assistant-coach", "head-coach", "head-of-performance", "set-piece-coach"],
+      "competencies": ["training-session-design", "seasonal-planning"],
+      "sources": ["src-fifa-training-centre", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "first-team-player-development",
+      "title": "Developing first-team players",
+      "track": "t11-head-coach",
+      "part": "B",
+      "summary": "Individual development plans, retraining a player for a new position, and bringing academy players into the first team.",
+      "prerequisites": ["head-coach-job", "position-vs-role"],
+      "roles": ["academy-director", "first-team-analyst", "head-coach", "sporting-director"],
+      "competencies": ["player-development-planning", "player-pathway-planning"],
+      "sources": [
+        "src-liverpool-first-team-performance-analyst",
+        "src-newcastle-first-team-analyst-post-match"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "head-coach-job",
+      "title": "The head coach's job",
+      "track": "t11-head-coach",
+      "part": "B",
+      "summary": "Head coach or manager: the staff they lead, and how they work with the sporting director and the board.",
+      "prerequisites": ["coaching-roles", "club-leadership-roles"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "sporting-director"
+      ],
+      "competencies": ["department-leadership", "board-and-owner-relations"],
+      "sources": [
+        "src-espn-head-coach-vs-manager",
+        "src-pl-assistant-manager-insights",
+        "src-pl-sporting-directors-explained"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "in-game-management",
+      "title": "In-game management",
+      "track": "t11-head-coach",
+      "part": "B",
+      "summary": "Reading the game live, changing shape, timing substitutions and the half-time talk, with analyst feedback from the stands.",
+      "prerequisites": ["opponent-game-plan", "players-and-substitutions"],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["in-game-adjustment", "team-selection", "live-match-analysis"],
+      "sources": ["src-worldrugby-halftime-analysis", "src-ifab-laws-2026-27", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "leadership-media-and-pressure",
+      "title": "Leadership, media and pressure",
+      "track": "t11-head-coach",
+      "part": "B",
+      "summary": "Managing a squad of egos, building culture and trust, and handling the press, the board and a losing run.",
+      "prerequisites": ["head-coach-job"],
+      "roles": ["assistant-coach", "head-coach"],
+      "competencies": ["high-performance-culture", "player-communication"],
+      "sources": ["src-slemen-director-high-performance", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "opponent-game-plan",
+      "title": "The opponent game plan",
+      "track": "t11-head-coach",
+      "part": "B",
+      "summary": "Turning the game model into a plan for one opponent, with a Plan B and C, and presenting it to the players.",
+      "prerequisites": ["game-model", "head-coach-job"],
+      "roles": ["assistant-coach", "head-coach"],
+      "competencies": ["game-planning", "player-communication"],
+      "sources": ["src-asa-day-in-life-analyst", "src-coaches-voice"],
+      "status": "draft"
+    },
+    {
+      "id": "weekly-microcycle",
+      "title": "The weekly microcycle",
+      "track": "t11-head-coach",
+      "part": "B",
+      "summary": "The week from post-match review to the day before the next game, for one and two matches a week.",
+      "prerequisites": ["head-coach-job", "game-model"],
+      "roles": ["assistant-coach", "head-coach", "head-of-performance", "set-piece-coach"],
+      "competencies": ["seasonal-planning", "training-session-design"],
+      "sources": ["src-asa-day-in-life-analyst", "src-fifa-training-centre"],
+      "status": "draft"
+    },
+    {
+      "id": "fixture-congestion-and-rotation",
+      "title": "Congestion and rotation",
+      "track": "t12-training-sports-science",
+      "part": "B",
+      "summary": "Two matches a week in a PL season with cups and Europe, and how clubs rotate the squad to keep players fresh.",
+      "prerequisites": ["load-monitoring", "players-and-substitutions"],
+      "roles": ["head-coach", "head-of-performance"],
+      "competencies": ["seasonal-planning", "team-selection", "workload-management"],
+      "sources": ["src-pl-handbook-2026-27", "src-slemen-director-high-performance"],
+      "status": "draft"
+    },
+    {
+      "id": "injury-risk-and-return",
+      "title": "Injury risk and return",
+      "track": "t12-training-sports-science",
+      "part": "B",
+      "summary": "Lowering injury risk, rehabilitation and the return-to-play decision that medical, performance and coaching staff share.",
+      "prerequisites": ["load-monitoring"],
+      "roles": ["head-of-data-science", "head-of-performance"],
+      "competencies": ["injury-prevention-and-return-to-play", "cross-discipline-translation"],
+      "sources": [
+        "src-liverpool-head-academy-medical-performance",
+        "src-slemen-director-high-performance"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "load-monitoring",
+      "title": "Load and GPS monitoring",
+      "track": "t12-training-sports-science",
+      "part": "B",
+      "summary": "Tracking training and match load with GPS and wellness data, and the arguments over what those numbers really show.",
+      "prerequisites": ["physical-demands-by-position"],
+      "roles": ["head-of-performance"],
+      "competencies": ["workload-management", "performance-science-literacy"],
+      "sources": [
+        "src-liverpool-head-academy-medical-performance",
+        "src-slemen-director-high-performance"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "physical-demands-by-position",
+      "title": "Physical demands by position",
+      "track": "t12-training-sports-science",
+      "part": "B",
+      "summary": "How much each position runs and sprints, and why ball-in-play time falls as a match goes on.",
+      "prerequisites": ["positions-overview", "performance-roles"],
+      "roles": ["head-of-performance"],
+      "competencies": ["performance-science-literacy"],
+      "sources": ["src-jssm-linke-effective-playing-time", "src-slemen-director-high-performance"],
+      "status": "draft"
+    },
+    {
+      "id": "analysis-cycle",
+      "title": "The analysis cycle",
+      "track": "t13-performance-analysis",
+      "part": "C",
+      "summary": "Pre-match, live, post-match and long-term analysis, and who receives each output and when.",
+      "prerequisites": ["analysis-roles", "watch-one-phase"],
+      "roles": [
+        "club-ceo",
+        "first-team-analyst",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst",
+        "set-piece-coach"
+      ],
+      "competencies": ["opposition-analysis", "post-match-review", "stakeholder-presentation"],
+      "sources": ["src-uefa-performance-analysis", "src-asa-day-in-life-analyst"],
+      "status": "draft"
+    },
+    {
+      "id": "analysis-tools",
+      "title": "Analysis tools",
+      "track": "t13-performance-analysis",
+      "part": "C",
+      "summary": "What coding and video tools do, how clubs use tactical cameras, and which free tools you can practise with.",
+      "prerequisites": ["analysis-cycle"],
+      "roles": ["first-team-analyst", "head-of-performance-analysis"],
+      "competencies": ["video-analysis-tooling"],
+      "sources": ["src-asa-day-in-life-analyst", "src-liverpool-first-team-performance-analyst"],
+      "status": "draft"
+    },
+    {
+      "id": "live-analysis",
+      "title": "Live analysis",
+      "track": "t13-performance-analysis",
+      "part": "C",
+      "summary": "Coding the match live, sending short messages to the bench and building the half-time clip package.",
+      "prerequisites": ["analysis-cycle", "watch-in-blocks"],
+      "roles": ["first-team-analyst", "head-of-performance-analysis"],
+      "competencies": ["live-match-analysis", "video-analysis-tooling"],
+      "sources": [
+        "src-worldrugby-halftime-analysis",
+        "src-asa-day-in-life-analyst",
+        "src-liverpool-first-team-performance-analyst"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "opposition-dossier",
+      "title": "The opposition dossier",
+      "track": "t13-performance-analysis",
+      "part": "C",
+      "summary": "Build-up, pressing, transitions, set pieces, key players and weak spots, turned into a plan the coach can use.",
+      "prerequisites": ["analysis-cycle", "how-phases-connect"],
+      "roles": ["first-team-analyst", "head-of-performance-analysis", "set-piece-coach"],
+      "competencies": ["opposition-analysis"],
+      "sources": ["src-asa-day-in-life-analyst", "src-brentford-head-of-analysis-2021"],
+      "status": "draft"
+    },
+    {
+      "id": "post-match-analysis",
+      "title": "Post-match analysis",
+      "track": "t13-performance-analysis",
+      "part": "C",
+      "summary": "Team and unit reviews, individual clips for players, and KPIs that combine data with video.",
+      "prerequisites": ["analysis-cycle", "story-then-structure"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-performance-analysis"
+      ],
+      "competencies": ["post-match-review", "player-development-planning", "player-communication"],
+      "sources": [
+        "src-worldrugby-postmatch-analysis",
+        "src-newcastle-first-team-analyst-post-match"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "running-the-analysis-department",
+      "title": "Running the analysis department",
+      "track": "t13-performance-analysis",
+      "part": "C",
+      "summary": "Team structure, weekly deadlines, earning the coaches' trust and hiring analysts: the head of analysis job.",
+      "prerequisites": ["analysis-cycle", "analysis-tools"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "sporting-director"
+      ],
+      "competencies": [
+        "department-leadership",
+        "cross-discipline-translation",
+        "staff-appointment"
+      ],
+      "sources": ["src-brentford-head-of-analysis-2021", "src-uefa-performance-analysis"],
+      "status": "draft"
+    },
+    {
+      "id": "match-note-basics",
+      "title": "The match note",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "Turn what you watched into three short lines: what happened, why it happened, and the evidence you saw.",
+      "prerequisites": ["the-lesson-loop"],
+      "roles": [
+        "club-ceo",
+        "first-team-analyst",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["post-match-review", "stakeholder-presentation"],
+      "sources": ["src-mastermindsite-how-i-watch", "src-barbieri-worked-examples-2023"],
+      "status": "draft"
+    },
+    {
+      "id": "output-rubrics",
+      "title": "Rubrics and model answers",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "Each output is scored for clarity, evidence, structure and actionability, then compared with a model answer.",
+      "prerequisites": ["report-templates", "spoken-briefings"],
+      "roles": [
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["stakeholder-presentation"],
+      "sources": ["src-barbieri-worked-examples-2023", "src-agarwal-retrieval-classroom-2021"],
+      "status": "draft"
+    },
+    {
+      "id": "report-templates",
+      "title": "Report templates",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "Tactical, opposition, post-match, scouting and board reports each get a template, and the scaffolding fades over time.",
+      "prerequisites": ["match-note-basics"],
+      "roles": [
+        "chief-scout",
+        "first-team-analyst",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "set-piece-coach"
+      ],
+      "competencies": ["opposition-analysis", "post-match-review", "scouting-reports"],
+      "sources": [
+        "src-barbieri-worked-examples-2023",
+        "src-brentford-head-of-analysis-2021",
+        "src-newcastle-first-team-analyst-post-match"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "spoken-briefings",
+      "title": "Spoken briefings",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "The 60-second match summary, the three-point half-time talk and the coach or board presentation, recorded on this computer.",
+      "prerequisites": ["match-note-basics"],
+      "roles": [
+        "assistant-coach",
+        "club-ceo",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["player-communication", "stakeholder-presentation"],
+      "sources": ["src-worldrugby-halftime-analysis", "src-pl-assistant-manager-insights"],
+      "status": "draft"
+    },
+    {
+      "id": "visual-evidence",
+      "title": "Clips, stills and annotations",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "Pick the clip or still that proves the point, annotate the frame, and build a one-page report graphic.",
+      "prerequisites": ["report-templates"],
+      "roles": [
+        "club-ceo",
+        "first-team-analyst",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["video-analysis-tooling", "stakeholder-presentation"],
+      "sources": [
+        "src-asa-day-in-life-analyst",
+        "src-flourish-pl-visualisation",
+        "src-okabe-ito-cud"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "data-quality-traps",
+      "title": "Data quality traps",
+      "track": "t15-football-data",
+      "part": "D",
+      "summary": "Provider definitions that differ, fixed-size frames that bend real distances, and sources that vanish: check before you trust.",
+      "prerequisites": ["pitch-coordinates-and-kloppy"],
+      "roles": ["data-engineer", "head-of-data-science"],
+      "competencies": ["data-pipeline-ownership", "uncertainty-quantification"],
+      "sources": [
+        "src-mplsoccer-standardize-docs",
+        "src-fot-last-row",
+        "src-awfulannouncing-fbref-removal"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "event-vs-tracking-data",
+      "title": "Event and tracking data",
+      "track": "t15-football-data",
+      "part": "D",
+      "summary": "Event data logs each on-ball action; tracking logs every player many times a second. Open PL tracking is almost absent.",
+      "prerequisites": ["reading-a-reconstruction", "data-roles"],
+      "roles": ["data-engineer", "head-of-data-science"],
+      "competencies": ["tracking-data-handling", "data-pipeline-ownership"],
+      "sources": [
+        "src-statsbomb-open-events-spec-v4",
+        "src-statsbomb-open-data",
+        "src-skillcorner-opendata",
+        "src-fot-last-row"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "open-data-and-licences",
+      "title": "Open data and licences",
+      "track": "t15-football-data",
+      "part": "D",
+      "summary": "StatsBomb, Wyscout, DFL, SkillCorner, Metrica: what each holds for the PL, and what its licence lets you share.",
+      "prerequisites": ["event-vs-tracking-data"],
+      "roles": ["academy-director", "data-engineer"],
+      "competencies": ["data-pipeline-ownership", "regulatory-compliance"],
+      "sources": [
+        "src-statsbomb-open-data",
+        "src-wyscout-public-dataset",
+        "src-dfl-idsse-open-data",
+        "src-creativecommons-by-4-0"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "pitch-coordinates-and-kloppy",
+      "title": "Coordinates and kloppy",
+      "track": "t15-football-data",
+      "part": "D",
+      "summary": "Providers draw the pitch differently (StatsBomb 120 x 80, Wyscout 0-100); kloppy converts them to one standard.",
+      "prerequisites": ["event-vs-tracking-data", "pitch-dimensions"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["football-data-programming", "tracking-data-handling"],
+      "sources": [
+        "src-kloppy-coordinates-docs",
+        "src-statsbomb-open-data-spec",
+        "src-wyscout-data-glossary-pitch-coordinates",
+        "src-mplsoccer-standardize-docs"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "expected-goals",
+      "title": "Expected goals (xG)",
+      "track": "t16-metrics-and-models",
+      "part": "D",
+      "summary": "The chance a shot becomes a goal, from where and how it was taken. Built here on open StatsBomb PL 2015/16 events.",
+      "prerequisites": ["scoring-a-goal", "event-vs-tracking-data"],
+      "roles": ["head-of-data-science", "recruitment-analyst"],
+      "competencies": ["statistical-modelling"],
+      "sources": [
+        "src-theanalyst-what-is-xg",
+        "src-thesefootballtimes-roots-of-xg",
+        "src-statsbomb-open-data"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "per-90-and-possession-adjustment",
+      "title": "Per 90 and possession",
+      "track": "t16-metrics-and-models",
+      "part": "D",
+      "summary": "Scale counts to 90 minutes and adjust defending for how much the ball the team had, so players compare fairly.",
+      "prerequisites": ["event-vs-tracking-data"],
+      "roles": ["head-of-data-science", "head-of-performance-analysis", "recruitment-analyst"],
+      "competencies": ["statistical-modelling", "dashboard-building"],
+      "sources": ["src-statsbomb-blog-archive", "src-book-the-numbers-game"],
+      "status": "draft"
+    },
+    {
+      "id": "pitch-control",
+      "title": "Pitch control",
+      "track": "t16-metrics-and-models",
+      "part": "D",
+      "summary": "Which team would reach each point of the pitch first. It needs tracking data, so lessons use labelled non-PL open tracking.",
+      "prerequisites": ["event-vs-tracking-data", "numerical-superiority"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["tracking-data-handling", "statistical-modelling"],
+      "sources": [
+        "src-soccermatics-pitch-control",
+        "src-dfl-idsse-open-data",
+        "src-friends-of-tracking"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "possession-value-models",
+      "title": "Possession value models",
+      "track": "t16-metrics-and-models",
+      "part": "D",
+      "summary": "xT, VAEP, OBV and EPV value every action by how much it raises the chance of scoring soon after.",
+      "prerequisites": ["expected-goals", "pitch-thirds-and-zones"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["statistical-modelling", "model-deployment"],
+      "sources": ["src-karun-expected-threat", "src-socceraction-docs"],
+      "status": "draft"
+    },
+    {
+      "id": "kpis-by-position",
+      "title": "KPIs by position",
+      "track": "t17-numbers-by-role",
+      "part": "D",
+      "summary": "The numbers that matter for each role, from a ball-playing centre-back to a pressing No 9, and good, elite and worrying values.",
+      "prerequisites": ["per-90-and-possession-adjustment", "defensive-roles"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "recruitment-analyst"
+      ],
+      "competencies": ["data-led-target-ranking", "player-identification"],
+      "sources": ["src-statsbomb-blog-archive", "src-asa-home"],
+      "status": "draft"
+    },
+    {
+      "id": "misleading-stats",
+      "title": "Misleading stats",
+      "track": "t17-numbers-by-role",
+      "part": "D",
+      "summary": "Tackles inflated by low possession, safe-pass completion, assists without xA, distance-covered myths and cherry-picked radars.",
+      "prerequisites": ["kpis-by-position", "expected-goals"],
+      "roles": ["head-of-data-science", "head-of-recruitment", "recruitment-analyst"],
+      "competencies": ["uncertainty-quantification", "data-led-target-ranking"],
+      "sources": [
+        "src-breakingthelines-watch-space",
+        "src-theanalyst-what-is-xg",
+        "src-book-the-numbers-game"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "stat-stability-and-comparison",
+      "title": "Stability and fair comparison",
+      "track": "t17-numbers-by-role",
+      "part": "D",
+      "summary": "Which stats repeat season to season, how many minutes you need, and comparing two players in the same role and context.",
+      "prerequisites": ["misleading-stats"],
+      "roles": ["head-of-data-science", "recruitment-analyst"],
+      "competencies": ["uncertainty-quantification", "statistical-modelling"],
+      "sources": ["src-seeing-theory", "src-book-the-numbers-game"],
+      "status": "draft"
+    },
+    {
+      "id": "python-lab-first-plots",
+      "title": "Shot maps and networks",
+      "track": "t18-python-lab",
+      "part": "D",
+      "summary": "In-browser Python on open StatsBomb events: load a match, draw a shot map, a pass network and a radar.",
+      "prerequisites": ["pitch-coordinates-and-kloppy"],
+      "roles": [
+        "data-engineer",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["football-data-programming", "dashboard-building"],
+      "sources": ["src-statsbomb-open-data", "src-mplsoccer-docs", "src-statsbombpy"],
+      "status": "draft"
+    },
+    {
+      "id": "python-lab-models",
+      "title": "Build xG and xT",
+      "track": "t18-python-lab",
+      "part": "D",
+      "summary": "Fit a simple xG model and compute expected threat step by step, then compare your numbers with the published ones.",
+      "prerequisites": ["python-lab-first-plots", "possession-value-models"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["football-data-programming", "statistical-modelling", "model-deployment"],
+      "sources": ["src-karun-expected-threat", "src-soccermatics", "src-socceraction-docs"],
+      "status": "draft"
+    },
+    {
+      "id": "python-lab-tracking",
+      "title": "Tracking data in Python",
+      "track": "t18-python-lab",
+      "part": "D",
+      "summary": "Load open DFL Bundesliga tracking with kloppy, labelled as Bundesliga, and compute pitch control frame by frame.",
+      "prerequisites": ["python-lab-first-plots", "pitch-control"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": [
+        "tracking-data-handling",
+        "football-data-programming",
+        "data-pipeline-ownership"
+      ],
+      "sources": ["src-dfl-idsse-open-data", "src-kloppy-docs", "src-databallpy"],
+      "status": "draft"
+    },
+    {
+      "id": "club-models",
+      "title": "Models clubs use",
+      "track": "t19-football-ai-ml",
+      "part": "D",
+      "summary": "Player projection and ageing curves, league-strength translation, valuation, similarity search and match-outcome models.",
+      "prerequisites": ["ml-toolkit-for-football"],
+      "roles": [
+        "data-engineer",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "recruitment-analyst"
+      ],
+      "competencies": ["statistical-modelling", "data-led-target-ranking", "model-deployment"],
+      "sources": [
+        "src-liverpool-lead-data-scientist",
+        "src-cies-football-observatory",
+        "src-mit-sloan-research-papers"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "honest-model-evaluation",
+      "title": "Evaluating models honestly",
+      "track": "t19-football-ai-ml",
+      "part": "D",
+      "summary": "Validation, leakage, calibration and uncertainty, the risks of LLM-drafted reports, and whether a coach can use the model.",
+      "prerequisites": ["club-models"],
+      "roles": ["data-engineer", "head-of-data-science"],
+      "competencies": ["uncertainty-quantification", "model-deployment"],
+      "sources": ["src-seeing-theory", "src-liverpool-lead-data-scientist"],
+      "status": "draft"
+    },
+    {
+      "id": "ml-toolkit-for-football",
+      "title": "The ML toolkit",
+      "track": "t19-football-ai-ml",
+      "part": "D",
+      "summary": "Classification, regression and clustering taught with football: predicting a shot's xG, grouping players into roles.",
+      "prerequisites": ["expected-goals"],
+      "roles": ["head-of-data-science", "recruitment-analyst"],
+      "competencies": ["statistical-modelling"],
+      "sources": ["src-soccermatics", "src-friends-of-tracking"],
+      "status": "draft"
+    },
+    {
+      "id": "tracking-ai-and-vision",
+      "title": "Tracking AI and vision",
+      "track": "t19-football-ai-ml",
+      "part": "D",
+      "summary": "How broadcast tracking finds players and maps them to the pitch, and deep learning on tracking data, explained visually.",
+      "prerequisites": ["ml-toolkit-for-football", "pitch-control"],
+      "roles": ["data-engineer", "head-of-data-science", "recruitment-analyst"],
+      "competencies": ["tracking-data-handling", "statistical-modelling"],
+      "sources": [
+        "src-arxiv-crang-broadcast-tracking",
+        "src-skillcorner-opendata",
+        "src-unravelsports"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "building-the-data-team",
+      "title": "Building the data team",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "Hiring data scientists, engineers and analysts, the team structure, and balancing research with weekly operations.",
+      "prerequisites": ["head-of-data-science-job"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "sporting-director"
+      ],
+      "competencies": ["staff-appointment", "department-leadership"],
+      "sources": ["src-liverpool-lead-data-scientist", "src-liverpool-data-engineer"],
+      "status": "draft"
+    },
+    {
+      "id": "data-infrastructure",
+      "title": "Data infrastructure",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "Buying data, building the warehouse, pipelines and internal dashboards, and the build-versus-buy choice.",
+      "prerequisites": ["head-of-data-science-job", "data-quality-traps"],
+      "roles": [
+        "data-engineer",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["data-pipeline-ownership", "model-deployment", "dashboard-building"],
+      "sources": ["src-liverpool-data-engineer", "src-statsbomb-open-data"],
+      "status": "draft"
+    },
+    {
+      "id": "data-research-agenda",
+      "title": "The research agenda",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "Choosing problems that matter, quick wins versus long projects, and measuring what the data department adds.",
+      "prerequisites": ["building-the-data-team"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["statistical-modelling", "department-leadership"],
+      "sources": ["src-liverpool-lead-data-scientist", "src-mit-sloan-research-papers"],
+      "status": "draft"
+    },
+    {
+      "id": "head-of-data-science-job",
+      "title": "Head of data science",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "What the head of data science does, who they report to, and how the job differs at a giant, a mid-table and a selling club.",
+      "prerequisites": ["data-roles", "open-data-and-licences"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": ["department-leadership", "stakeholder-presentation"],
+      "sources": [
+        "src-liverpool-lead-data-scientist",
+        "src-newcastle-lead-recruitment-data-analyst"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "stakeholders-and-adoption",
+      "title": "Stakeholders and adoption",
+      "track": "t20-head-of-data-science",
+      "part": "D",
+      "summary": "Turning models into decisions the coach, sporting director and recruiters trust, and presenting uncertainty plainly.",
+      "prerequisites": ["head-of-data-science-job", "honest-model-evaluation"],
+      "roles": [
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "recruitment-analyst"
+      ],
+      "competencies": [
+        "cross-discipline-translation",
+        "stakeholder-presentation",
+        "uncertainty-quantification"
+      ],
+      "sources": [
+        "src-newcastle-lead-recruitment-data-analyst",
+        "src-liverpool-lead-data-scientist"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "grading-and-scouting-reports",
+      "title": "Grading and scouting reports",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "Grade a player on a fixed scale and write a report a head of recruitment can act on, with footage behind each claim.",
+      "prerequisites": ["one-player-ninety-minutes", "report-templates"],
+      "roles": ["chief-scout", "head-of-recruitment"],
+      "competencies": ["scouting-reports", "character-and-fit-assessment"],
+      "sources": [
+        "src-hudl-marshall-head-of-recruitment",
+        "src-liverpool-women-head-of-recruitment"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "live-vs-video-scouting",
+      "title": "Live versus video scouting",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "Live viewing shows off-ball work and attitude; video covers more players. Broadcast footage often misses off-ball play.",
+      "prerequisites": ["the-scouts-eye"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["player-identification", "scouting-network-management"],
+      "sources": ["src-hudl-marshall-head-of-recruitment", "src-arxiv-crang-broadcast-tracking"],
+      "status": "draft"
+    },
+    {
+      "id": "one-player-ninety-minutes",
+      "title": "One player, ninety minutes",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "Track one player for a whole match: decisions, body shape, scanning, off-ball work and reactions to mistakes.",
+      "prerequisites": ["the-scouts-eye", "watch-in-blocks"],
+      "roles": ["academy-director", "chief-scout", "head-of-data-science", "head-of-recruitment"],
+      "competencies": ["player-identification", "scouting-reports"],
+      "sources": [
+        "src-breakingthelines-watch-space",
+        "src-frontiers-cognition-elite-soccer",
+        "src-frontiers-visual-search-meta"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "relative-age-effect",
+      "title": "The relative age effect",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "In youth football, players born early in the selection year are often picked more, so scouts must allow for maturity.",
+      "prerequisites": ["the-scouts-eye"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["player-identification", "player-pathway-planning"],
+      "sources": ["src-fifa-training-centre", "src-uefa-technical-reports"],
+      "status": "draft"
+    },
+    {
+      "id": "the-scouts-eye",
+      "title": "The scout's eye",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "What a scout looks for in one player by position and age: technique, tactics, physique and character, on and off the ball.",
+      "prerequisites": ["watch-one-player", "position-vs-role"],
+      "roles": ["academy-director", "chief-scout", "head-of-data-science", "head-of-recruitment"],
+      "competencies": ["player-identification", "character-and-fit-assessment"],
+      "sources": [
+        "src-hudl-marshall-head-of-recruitment",
+        "src-liverpool-women-head-of-recruitment"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "data-led-shortlists",
+      "title": "Data-led shortlists",
+      "track": "t22-scouting-2",
+      "part": "E",
+      "summary": "Narrowing the market with data: similarity search, league-strength adjustment and age curves. Whether data leads is contested.",
+      "prerequisites": ["squad-mapping-and-profiles", "kpis-by-position"],
+      "roles": [
+        "academy-director",
+        "chief-scout",
+        "head-of-data-science",
+        "head-of-recruitment",
+        "recruitment-analyst"
+      ],
+      "competencies": ["data-led-target-ranking", "player-identification"],
+      "sources": [
+        "src-newcastle-lead-recruitment-data-analyst",
+        "src-hudl-marshall-head-of-recruitment",
+        "src-cies-football-observatory"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "leading-recruitment",
+      "title": "Leading the recruitment department",
+      "track": "t22-scouting-2",
+      "part": "E",
+      "summary": "Running a scout network by market, scout KPIs and report quality, the budget, the window calendar and succession plans.",
+      "prerequisites": ["recruitment-workflow", "recruitment-roles"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "chief-scout",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": [
+        "scouting-network-management",
+        "department-leadership",
+        "agent-and-club-relationships"
+      ],
+      "sources": [
+        "src-liverpool-women-head-of-recruitment",
+        "src-hudl-marshall-head-of-recruitment"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "recruitment-workflow",
+      "title": "The recruitment workflow",
+      "track": "t22-scouting-2",
+      "part": "E",
+      "summary": "Data filter, video, live scouting, references and character, medical, then negotiation, and defending a target in the meeting.",
+      "prerequisites": [
+        "data-led-shortlists",
+        "grading-and-scouting-reports",
+        "live-vs-video-scouting"
+      ],
+      "roles": [
+        "chief-scout",
+        "club-ceo",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "recruitment-analyst"
+      ],
+      "competencies": [
+        "character-and-fit-assessment",
+        "scouting-reports",
+        "stakeholder-presentation"
+      ],
+      "sources": [
+        "src-hudl-marshall-head-of-recruitment",
+        "src-football365-who-controls-transfers"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "squad-mapping-and-profiles",
+      "title": "Squad mapping and profiles",
+      "track": "t22-scouting-2",
+      "part": "E",
+      "summary": "Map the squad by position, age and contract, and write role profiles that match the club's playing style.",
+      "prerequisites": ["the-scouts-eye", "midfield-roles"],
+      "roles": [
+        "academy-director",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["squad-planning", "playing-style-definition"],
+      "sources": [
+        "src-liverpool-women-head-of-recruitment",
+        "src-hudl-marshall-head-of-recruitment"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "contracts-wages-and-agents",
+      "title": "Contracts, wages and agents",
+      "track": "t23-transfers-and-valuation",
+      "part": "E",
+      "summary": "Wage structures, bonuses and clauses, renewals and expiry risk, and agents under the FIFA Football Agent Regulations.",
+      "prerequisites": ["how-a-transfer-happens"],
+      "roles": ["head-of-recruitment", "loan-manager", "sporting-director"],
+      "competencies": ["contract-structuring", "agent-and-club-relationships"],
+      "sources": ["src-fifa-football-agents", "src-fifa-rules-and-reports", "src-capology"],
+      "status": "draft"
+    },
+    {
+      "id": "how-a-transfer-happens",
+      "title": "How a transfer happens",
+      "track": "t23-transfers-and-valuation",
+      "part": "E",
+      "summary": "Target, approach, bid, negotiation, medical and registration, inside the transfer windows, and who does each step.",
+      "prerequisites": ["recruitment-roles", "club-leadership-roles"],
+      "roles": ["head-of-recruitment", "loan-manager", "sporting-director"],
+      "competencies": ["transfer-negotiation", "agent-and-club-relationships"],
+      "sources": [
+        "src-football365-who-controls-transfers",
+        "src-fifa-rules-and-reports",
+        "src-fifa-transfer-reports"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "player-valuation",
+      "title": "Player valuation",
+      "track": "t23-transfers-and-valuation",
+      "part": "E",
+      "summary": "Pricing a player from age, contract length, league and comparable deals, and the gap between asking and walk-away prices.",
+      "prerequisites": ["how-a-transfer-happens"],
+      "roles": [
+        "head-of-data-science",
+        "head-of-recruitment",
+        "loan-manager",
+        "recruitment-analyst",
+        "sporting-director"
+      ],
+      "competencies": ["transfer-negotiation", "data-led-target-ranking"],
+      "sources": ["src-cies-football-observatory", "src-transfermarkt-datasets"],
+      "status": "draft"
+    },
+    {
+      "id": "transfer-accounting",
+      "title": "Amortisation and squad cost",
+      "track": "t23-transfers-and-valuation",
+      "part": "E",
+      "summary": "A fee is spread over the contract as amortisation; profit on sale beats book value; the PL caps squad cost against revenue.",
+      "prerequisites": ["player-valuation", "contracts-wages-and-agents"],
+      "roles": [
+        "academy-director",
+        "club-ceo",
+        "head-of-recruitment",
+        "loan-manager",
+        "sporting-director"
+      ],
+      "competencies": ["club-budgeting", "regulatory-compliance", "transfer-negotiation"],
+      "sources": [
+        "src-pl-handbook-2026-27",
+        "src-uefa-documents-portal",
+        "src-companies-house-search"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "academy-pathway-and-value",
+      "title": "Pathway, loans and sales",
+      "track": "t24-academy",
+      "part": "F",
+      "summary": "From academy to first team through loans and the under-21s, homegrown rules, and why selling a graduate is near pure profit.",
+      "prerequisites": ["long-term-player-development", "transfer-accounting"],
+      "roles": ["academy-director", "head-of-recruitment", "loan-manager", "sporting-director"],
+      "competencies": ["player-pathway-planning", "loan-placement", "loan-player-monitoring"],
+      "sources": [
+        "src-liverpool-head-of-loan-management",
+        "src-sky-hammond-loans-manager",
+        "src-pl-handbook-2026-27"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "eppp-and-academy-structure",
+      "title": "EPPP and academy structure",
+      "track": "t24-academy",
+      "part": "F",
+      "summary": "Academy categories under the Elite Player Performance Plan and the foundation, youth and professional phases.",
+      "prerequisites": ["academy-roles"],
+      "roles": ["academy-director"],
+      "competencies": ["academy-programme-management", "regulatory-compliance"],
+      "sources": ["src-pl-handbook-2026-27", "src-newcastle-women-academy-manager"],
+      "status": "draft"
+    },
+    {
+      "id": "long-term-player-development",
+      "title": "Long-term player development",
+      "track": "t24-academy",
+      "part": "F",
+      "summary": "Maturation and relative age, individual development plans, the coaching curriculum by age, and education and welfare.",
+      "prerequisites": ["eppp-and-academy-structure", "relative-age-effect"],
+      "roles": ["academy-director", "first-team-analyst", "head-coach", "loan-manager"],
+      "competencies": ["player-development-planning", "player-welfare-and-safeguarding"],
+      "sources": [
+        "src-liverpool-head-academy-medical-performance",
+        "src-newcastle-women-academy-manager",
+        "src-fifa-training-centre"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "club-football-philosophy",
+      "title": "Club football philosophy",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "The playing identity, player profile and coach profile that every football department follows.",
+      "prerequisites": ["sporting-director-job", "game-model"],
+      "roles": [
+        "academy-director",
+        "club-ceo",
+        "head-coach",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "sporting-director"
+      ],
+      "competencies": ["playing-style-definition", "sporting-strategy"],
+      "sources": ["src-slemen-effective-sporting-director", "src-pl-sporting-directors-explained"],
+      "status": "draft"
+    },
+    {
+      "id": "decisions-and-stakeholders",
+      "title": "Decisions and stakeholders",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "Decision frameworks, biases like sunk cost and star power, pre-mortems, and explaining hard calls to owners and fans.",
+      "prerequisites": ["sporting-director-job"],
+      "roles": [
+        "club-ceo",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "head-of-recruitment",
+        "recruitment-analyst",
+        "sporting-director"
+      ],
+      "competencies": [
+        "board-and-owner-relations",
+        "sporting-strategy",
+        "stakeholder-presentation"
+      ],
+      "sources": ["src-slemen-effective-sporting-director", "src-pl-sporting-directors-explained"],
+      "status": "draft"
+    },
+    {
+      "id": "hiring-the-head-coach",
+      "title": "Hiring the head coach",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "Profiling coaches with data and video, the shortlist and interviews, the contract, and when and how to make a change.",
+      "prerequisites": ["club-football-philosophy", "head-coach-job"],
+      "roles": [
+        "academy-director",
+        "club-ceo",
+        "head-of-recruitment",
+        "loan-manager",
+        "sporting-director"
+      ],
+      "competencies": ["staff-appointment", "contract-structuring"],
+      "sources": ["src-slemen-effective-sporting-director", "src-espn-head-coach-vs-manager"],
+      "status": "draft"
+    },
+    {
+      "id": "multi-club-ownership",
+      "title": "Multi-club ownership",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "How club groups share players, data and staff, and the competition rules that limit it.",
+      "prerequisites": ["sporting-director-job"],
+      "roles": ["academy-director", "club-ceo", "head-of-recruitment", "sporting-director"],
+      "competencies": ["regulatory-compliance", "sporting-strategy"],
+      "sources": ["src-uefa-documents-portal", "src-commons-library"],
+      "status": "draft"
+    },
+    {
+      "id": "multi-year-squad-plan",
+      "title": "The multi-year squad plan",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "A three-year squad map, succession for every position, renewals, the sell, keep or loan cycle and the window strategy.",
+      "prerequisites": [
+        "sporting-director-job",
+        "leading-recruitment",
+        "academy-pathway-and-value",
+        "transfer-accounting"
+      ],
+      "roles": ["head-of-recruitment", "loan-manager", "sporting-director"],
+      "competencies": ["squad-planning", "contract-structuring", "transfer-negotiation"],
+      "sources": [
+        "src-slemen-effective-sporting-director",
+        "src-football365-who-controls-transfers",
+        "src-jobsinfootball-sporting-director-role"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "sporting-director-job",
+      "title": "The sporting director's job",
+      "track": "t25-sporting-director",
+      "part": "F",
+      "summary": "Sporting director, director of football or technical director: the remit, the reporting lines and how clubs differ.",
+      "prerequisites": ["club-leadership-roles"],
+      "roles": ["club-ceo", "head-of-recruitment", "sporting-director"],
+      "competencies": ["sporting-strategy", "football-department-design"],
+      "sources": [
+        "src-pl-sporting-directors-explained",
+        "src-jobsinfootball-sporting-director-role",
+        "src-jobsinfootball-sporting-director-structure",
+        "src-parnell-sporting-director-emergence"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "club-governance-and-leadership",
+      "title": "Governance and club leadership",
+      "track": "t26-club-ceo",
+      "part": "F",
+      "summary": "The board, the owners' and directors' test, the football regulator, fan engagement, and balancing football with business.",
+      "prerequisites": ["club-revenue-streams"],
+      "roles": [
+        "academy-director",
+        "assistant-coach",
+        "club-ceo",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance",
+        "head-of-performance-analysis",
+        "sporting-director"
+      ],
+      "competencies": [
+        "board-and-owner-relations",
+        "regulatory-compliance",
+        "department-leadership"
+      ],
+      "sources": [
+        "src-independent-football-regulator",
+        "src-commons-library",
+        "src-pl-handbook-2026-27"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "club-revenue-streams",
+      "title": "Club revenue streams",
+      "track": "t26-club-ceo",
+      "part": "F",
+      "summary": "Broadcasting, commercial, matchday and player trading, plus sponsorship, fan engagement and how the PL shares TV money.",
+      "prerequisites": ["club-leadership-roles"],
+      "roles": ["club-ceo"],
+      "competencies": ["commercial-strategy", "club-budgeting"],
+      "sources": ["src-deloitte-football-money-league", "src-pl-handbook-2026-27"],
+      "status": "draft"
+    },
+    {
+      "id": "reading-club-accounts",
+      "title": "Reading club accounts",
+      "track": "t26-club-ceo",
+      "part": "F",
+      "summary": "Budgets, cash flow, debt and ownership models, read from a real club's annual report and accounts.",
+      "prerequisites": ["club-revenue-streams", "transfer-accounting"],
+      "roles": ["club-ceo", "head-coach", "sporting-director"],
+      "competencies": ["club-budgeting", "board-and-owner-relations"],
+      "sources": ["src-companies-house-search", "src-deloitte-football-money-league"],
+      "status": "draft"
+    },
+    {
+      "id": "premier-league-money",
+      "title": "Premier League money",
+      "track": "t27-premier-league-system",
+      "part": "F",
+      "summary": "Central broadcasting and commercial distribution, squad-cost rules, ownership models and the regulator, dated as of reading.",
+      "prerequisites": ["premier-league-rules", "reading-club-accounts"],
+      "roles": ["academy-director", "club-ceo"],
+      "competencies": ["commercial-strategy", "club-budgeting", "regulatory-compliance"],
+      "sources": [
+        "src-pl-handbook-2026-27",
+        "src-deloitte-football-money-league",
+        "src-independent-football-regulator"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "premier-league-rules",
+      "title": "Premier League rules",
+      "track": "t27-premier-league-system",
+      "part": "F",
+      "summary": "The Handbook's squad, homegrown, registration and pitch rules, read with the edition and rule number each time.",
+      "prerequisites": ["players-and-substitutions", "club-revenue-streams"],
+      "roles": ["academy-director", "head-of-recruitment", "sporting-director"],
+      "competencies": ["regulatory-compliance", "squad-planning"],
+      "sources": ["src-pl-handbook-2026-27", "src-pl-handbook-2025-26"],
+      "status": "draft"
+    },
+    {
+      "id": "saudi-pro-league-context",
+      "title": "Saudi Pro League context",
+      "track": "t27-premier-league-system",
+      "part": "F",
+      "summary": "Applying the PL lessons to the Saudi Pro League: structure, foreign-player rules and career paths, checked and dated.",
+      "prerequisites": ["premier-league-rules"],
+      "roles": ["academy-director", "club-ceo", "head-of-recruitment", "sporting-director"],
+      "competencies": ["regulatory-compliance", "sporting-strategy"],
+      "sources": ["src-cies-football-observatory", "src-fifa-rules-and-reports"],
+      "status": "draft"
+    },
+    {
+      "id": "simulator-club-seats",
+      "title": "The club leadership seats",
+      "track": "t28-capstone",
+      "part": "G",
+      "summary": "Then the sporting director, recruitment, academy and CEO seats, each ending with a portfolio piece you can show.",
+      "prerequisites": [
+        "simulator-football-seats",
+        "recruitment-workflow",
+        "multi-year-squad-plan",
+        "reading-club-accounts"
+      ],
+      "roles": ["academy-director", "club-ceo", "head-of-recruitment", "sporting-director"],
+      "competencies": [
+        "sporting-strategy",
+        "squad-planning",
+        "player-pathway-planning",
+        "club-budgeting"
+      ],
+      "sources": [
+        "src-chernikova-simulation-learning-2020",
+        "src-slemen-effective-sporting-director"
+      ],
+      "status": "draft"
+    },
+    {
+      "id": "simulator-football-seats",
+      "title": "The football department seats",
+      "track": "t28-capstone",
+      "part": "G",
+      "summary": "In the Club Simulator you take the head coach, analysis and data seats: game plan, match day, dossier and a model.",
+      "prerequisites": [
+        "how-phases-connect",
+        "in-game-management",
+        "running-the-analysis-department",
+        "stakeholders-and-adoption"
+      ],
+      "roles": [
+        "assistant-coach",
+        "first-team-analyst",
+        "head-coach",
+        "head-of-data-science",
+        "head-of-performance-analysis",
+        "recruitment-analyst",
+        "set-piece-coach"
+      ],
+      "competencies": [
+        "game-planning",
+        "in-game-adjustment",
+        "opposition-analysis",
+        "statistical-modelling"
+      ],
+      "sources": ["src-chernikova-simulation-learning-2020", "src-pl-sporting-directors-explained"],
+      "status": "draft"
+    }
+  ],
+  "edges": [
+    {
+      "from": "attacking-and-defending-shapes",
+      "to": "how-phases-connect",
+      "kind": "related"
+    },
+    {
+      "from": "attacking-transition",
+      "to": "defensive-transition",
+      "kind": "contrasts"
+    },
+    {
+      "from": "counter-pressing",
+      "to": "rest-defence",
+      "kind": "related"
+    },
+    {
+      "from": "data-led-shortlists",
+      "to": "the-scouts-eye",
+      "kind": "contrasts"
+    },
+    {
+      "from": "game-model",
+      "to": "opposition-dossier",
+      "kind": "related"
+    },
+    {
+      "from": "grading-and-scouting-reports",
+      "to": "output-rubrics",
+      "kind": "related"
+    },
+    {
+      "from": "half-spaces",
+      "to": "lines-and-between-the-lines",
+      "kind": "related"
+    },
+    {
+      "from": "in-possession-phase",
+      "to": "out-of-possession-phase",
+      "kind": "contrasts"
+    },
+    {
+      "from": "misleading-stats",
+      "to": "kpis-by-position",
+      "kind": "contrasts"
+    },
+    {
+      "from": "offside-position",
+      "to": "offside-offence",
+      "kind": "contrasts"
+    },
+    {
+      "from": "pitch-dimensions",
+      "to": "reading-a-reconstruction",
+      "kind": "related"
+    },
+    {
+      "from": "position-vs-role",
+      "to": "watch-one-player",
+      "kind": "related"
+    },
+    {
+      "from": "possession-value-models",
+      "to": "chance-creation",
+      "kind": "related"
+    },
+    {
+      "from": "pressing-schemes",
+      "to": "counter-pressing",
+      "kind": "related"
+    },
+    {
+      "from": "transfer-accounting",
+      "to": "premier-league-money",
+      "kind": "related"
+    },
+    {
+      "from": "watch-one-player",
+      "to": "one-player-ninety-minutes",
+      "kind": "related"
+    },
+    {
+      "from": "academy-pathway-and-value",
+      "to": "multi-year-squad-plan",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "academy-roles",
+      "to": "eppp-and-academy-structure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "analysis-cycle",
+      "to": "analysis-tools",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "analysis-cycle",
+      "to": "live-analysis",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "analysis-cycle",
+      "to": "opposition-dossier",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "analysis-cycle",
+      "to": "post-match-analysis",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "analysis-cycle",
+      "to": "running-the-analysis-department",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "analysis-roles",
+      "to": "analysis-cycle",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "analysis-tools",
+      "to": "running-the-analysis-department",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "attacking-transition",
+      "to": "counter-attacks",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "attacking-transition",
+      "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "back-four-formations",
+      "to": "formation-vs-structure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "back-three-formations",
+      "to": "defensive-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "back-three-formations",
+      "to": "formation-vs-structure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ball-in-and-out-of-play",
+      "to": "goal-kick-and-corner-kick",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ball-in-and-out-of-play",
+      "to": "scoring-a-goal",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ball-in-and-out-of-play",
+      "to": "throw-in",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "build-up-structures",
+      "to": "positional-and-relational-play",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "build-up-structures",
+      "to": "progression-and-overloads",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "build-up-structures",
+      "to": "rest-defence",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "building-the-data-team",
+      "to": "data-research-agenda",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-football-philosophy",
+      "to": "hiring-the-head-coach",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-leadership-roles",
+      "to": "club-revenue-streams",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-leadership-roles",
+      "to": "head-coach-job",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-leadership-roles",
+      "to": "how-a-transfer-happens",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-leadership-roles",
+      "to": "sporting-director-job",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-models",
+      "to": "honest-model-evaluation",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-revenue-streams",
+      "to": "club-governance-and-leadership",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-revenue-streams",
+      "to": "premier-league-rules",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "club-revenue-streams",
+      "to": "reading-club-accounts",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "coaching-roles",
+      "to": "coach-education-pathways",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "coaching-roles",
+      "to": "head-coach-job",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "coaching-roles",
+      "to": "set-piece-coach-role",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "contracts-wages-and-agents",
+      "to": "transfer-accounting",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "data-led-shortlists",
+      "to": "recruitment-workflow",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "data-quality-traps",
+      "to": "data-infrastructure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "data-roles",
+      "to": "event-vs-tracking-data",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "data-roles",
+      "to": "head-of-data-science-job",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "defensive-blocks",
+      "to": "defending-the-box",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "defensive-blocks",
+      "to": "pressing-schemes",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "defensive-roles",
+      "to": "kpis-by-position",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "defensive-transition",
+      "to": "counter-pressing",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "defensive-transition",
+      "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "eppp-and-academy-structure",
+      "to": "long-term-player-development",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "expected-goals",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "open-data-and-licences",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "per-90-and-possession-adjustment",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "pitch-control",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "event-vs-tracking-data",
+      "to": "pitch-coordinates-and-kloppy",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "expected-goals",
+      "to": "misleading-stats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "expected-goals",
+      "to": "ml-toolkit-for-football",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "expected-goals",
+      "to": "possession-value-models",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "first-laws-and-passing-game",
+      "to": "pyramid-to-wm",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "five-vertical-lanes",
+      "to": "half-spaces",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "five-vertical-lanes",
+      "to": "width-and-depth",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "back-four-formations",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "back-three-formations",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "four-phases-of-play",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "lines-and-between-the-lines",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "numerical-superiority",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "pyramid-to-wm",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-notation",
+      "to": "watch-one-unit",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "formation-vs-structure",
+      "to": "attacking-and-defending-shapes",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "fouls-and-free-kicks",
+      "to": "cards-and-misconduct",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "fouls-and-free-kicks",
+      "to": "penalty-kick",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "attacking-transition",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "defensive-transition",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "in-possession-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "out-of-possession-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "set-piece-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "four-phases-of-play",
+      "to": "watch-one-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "game-model",
+      "to": "club-football-philosophy",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "game-model",
+      "to": "opponent-game-plan",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "game-model",
+      "to": "session-design-and-methods",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "game-model",
+      "to": "tactical-periodization",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "game-model",
+      "to": "weekly-microcycle",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "goal-kick-and-corner-kick",
+      "to": "set-piece-phase",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "grading-and-scouting-reports",
+      "to": "recruitment-workflow",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "half-spaces",
+      "to": "four-superiorities",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "half-spaces",
+      "to": "positional-and-relational-play",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-coach-job",
+      "to": "first-team-player-development",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-coach-job",
+      "to": "hiring-the-head-coach",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-coach-job",
+      "to": "leadership-media-and-pressure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-coach-job",
+      "to": "opponent-game-plan",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-coach-job",
+      "to": "weekly-microcycle",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-of-data-science-job",
+      "to": "building-the-data-team",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-of-data-science-job",
+      "to": "data-infrastructure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "head-of-data-science-job",
+      "to": "stakeholders-and-adoption",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "honest-model-evaluation",
+      "to": "stakeholders-and-adoption",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-a-transfer-happens",
+      "to": "contracts-wages-and-agents",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-a-transfer-happens",
+      "to": "player-valuation",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-phases-connect",
+      "to": "game-model",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-phases-connect",
+      "to": "opposition-dossier",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-phases-connect",
+      "to": "rest-defence",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-phases-connect",
+      "to": "simulator-football-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-the-app-works",
+      "to": "personal-goals-page",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-the-app-works",
+      "to": "placement-diagnostic",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-the-app-works",
+      "to": "role-map",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "how-the-app-works",
+      "to": "the-lesson-loop",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "hungary-and-the-4-2-4",
+      "to": "total-football-to-sacchi",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "in-game-management",
+      "to": "simulator-football-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "in-possession-phase",
+      "to": "build-up-structures",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "in-possession-phase",
+      "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "kpis-by-position",
+      "to": "data-led-shortlists",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "kpis-by-position",
+      "to": "misleading-stats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "leading-recruitment",
+      "to": "multi-year-squad-plan",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "lines-and-between-the-lines",
+      "to": "defensive-blocks",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "lines-and-between-the-lines",
+      "to": "progression-and-overloads",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "lines-and-between-the-lines",
+      "to": "width-and-depth",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "live-vs-video-scouting",
+      "to": "recruitment-workflow",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "load-monitoring",
+      "to": "fixture-congestion-and-rotation",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "load-monitoring",
+      "to": "injury-risk-and-return",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "long-term-player-development",
+      "to": "academy-pathway-and-value",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "match-note-basics",
+      "to": "report-templates",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "match-note-basics",
+      "to": "spoken-briefings",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "midfield-roles",
+      "to": "role-signatures-in-data",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "midfield-roles",
+      "to": "squad-mapping-and-profiles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "misleading-stats",
+      "to": "stat-stability-and-comparison",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ml-toolkit-for-football",
+      "to": "club-models",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "ml-toolkit-for-football",
+      "to": "tracking-ai-and-vision",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "multi-year-squad-plan",
+      "to": "simulator-club-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "numerical-superiority",
+      "to": "build-up-structures",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "numerical-superiority",
+      "to": "four-superiorities",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "numerical-superiority",
+      "to": "pitch-control",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "offside-position",
+      "to": "offside-offence",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "offside-position",
+      "to": "pyramid-to-wm",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "offside-position",
+      "to": "semi-automated-offside",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "one-player-ninety-minutes",
+      "to": "grading-and-scouting-reports",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "one-question-clips",
+      "to": "answer-on-the-pitch-panel",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "one-question-clips",
+      "to": "reading-a-reconstruction",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "one-question-clips",
+      "to": "short-sessions-first",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "one-question-clips",
+      "to": "watch-one-player",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "open-data-and-licences",
+      "to": "head-of-data-science-job",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "opponent-game-plan",
+      "to": "in-game-management",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "out-of-possession-phase",
+      "to": "defensive-blocks",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "out-of-possession-phase",
+      "to": "how-phases-connect",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "per-90-and-possession-adjustment",
+      "to": "kpis-by-position",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "performance-roles",
+      "to": "physical-demands-by-position",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "physical-demands-by-position",
+      "to": "load-monitoring",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-areas",
+      "to": "defending-the-box",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-areas",
+      "to": "goal-kick-and-corner-kick",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-areas",
+      "to": "penalty-kick",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-areas",
+      "to": "pitch-thirds-and-zones",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-control",
+      "to": "python-lab-tracking",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-control",
+      "to": "tracking-ai-and-vision",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-coordinates-and-kloppy",
+      "to": "data-quality-traps",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-coordinates-and-kloppy",
+      "to": "python-lab-first-plots",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-dimensions",
+      "to": "pitch-coordinates-and-kloppy",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-dimensions",
+      "to": "pitch-markings",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "answer-on-the-pitch-panel",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "ball-in-and-out-of-play",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "kick-off-and-dropped-ball",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "offside-position",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "pitch-areas",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-markings",
+      "to": "positions-overview",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-thirds-and-zones",
+      "to": "eighteen-zone-grid",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-thirds-and-zones",
+      "to": "five-vertical-lanes",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-thirds-and-zones",
+      "to": "lines-and-between-the-lines",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-thirds-and-zones",
+      "to": "numerical-superiority",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pitch-thirds-and-zones",
+      "to": "possession-value-models",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "player-valuation",
+      "to": "transfer-accounting",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "players-and-substitutions",
+      "to": "fixture-congestion-and-rotation",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "players-and-substitutions",
+      "to": "in-game-management",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "players-and-substitutions",
+      "to": "premier-league-rules",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "position-vs-role",
+      "to": "attacking-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "position-vs-role",
+      "to": "defensive-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "position-vs-role",
+      "to": "first-team-player-development",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "position-vs-role",
+      "to": "midfield-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "position-vs-role",
+      "to": "the-scouts-eye",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "positions-overview",
+      "to": "formation-notation",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "positions-overview",
+      "to": "physical-demands-by-position",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "positions-overview",
+      "to": "position-vs-role",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "positions-overview",
+      "to": "squad-numbers",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "positions-overview",
+      "to": "watch-one-player",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "possession-value-models",
+      "to": "python-lab-models",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "premier-league-era-tactics",
+      "to": "possession-and-gegenpressing",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "premier-league-rules",
+      "to": "premier-league-money",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "premier-league-rules",
+      "to": "saudi-pro-league-context",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pressing-schemes",
+      "to": "pressing-traps-and-triggers",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "progression-and-overloads",
+      "to": "chance-creation",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pyramid-to-wm",
+      "to": "catenaccio",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pyramid-to-wm",
+      "to": "hungary-and-the-4-2-4",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "pyramid-to-wm",
+      "to": "premier-league-era-tactics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "python-lab-first-plots",
+      "to": "python-lab-models",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "python-lab-first-plots",
+      "to": "python-lab-tracking",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "reading-a-reconstruction",
+      "to": "event-vs-tracking-data",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "reading-a-reconstruction",
+      "to": "role-signatures-in-data",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "reading-club-accounts",
+      "to": "premier-league-money",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "reading-club-accounts",
+      "to": "simulator-club-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "recruitment-roles",
+      "to": "how-a-transfer-happens",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "recruitment-roles",
+      "to": "leading-recruitment",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "recruitment-workflow",
+      "to": "leading-recruitment",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "recruitment-workflow",
+      "to": "simulator-club-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "referee-team",
+      "to": "fouls-and-free-kicks",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "referee-team",
+      "to": "var-basics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "relative-age-effect",
+      "to": "long-term-player-development",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "report-templates",
+      "to": "grading-and-scouting-reports",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "report-templates",
+      "to": "output-rubrics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "report-templates",
+      "to": "visual-evidence",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "academy-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "analysis-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "club-leadership-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "coaching-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "data-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "performance-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "role-map",
+      "to": "recruitment-roles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "running-the-analysis-department",
+      "to": "simulator-football-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "scoring-a-goal",
+      "to": "expected-goals",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "set-piece-phase",
+      "to": "set-piece-marking",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "set-piece-phase",
+      "to": "set-piece-routines",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "set-piece-routines",
+      "to": "set-piece-coach-role",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "simulator-football-seats",
+      "to": "simulator-club-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "spoken-briefings",
+      "to": "output-rubrics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "sporting-director-job",
+      "to": "club-football-philosophy",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "sporting-director-job",
+      "to": "decisions-and-stakeholders",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "sporting-director-job",
+      "to": "multi-club-ownership",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "sporting-director-job",
+      "to": "multi-year-squad-plan",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "squad-mapping-and-profiles",
+      "to": "data-led-shortlists",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "stakeholders-and-adoption",
+      "to": "simulator-football-seats",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "story-then-structure",
+      "to": "post-match-analysis",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-lesson-loop",
+      "to": "match-note-basics",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-lesson-loop",
+      "to": "one-question-clips",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-scouts-eye",
+      "to": "live-vs-video-scouting",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-scouts-eye",
+      "to": "one-player-ninety-minutes",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-scouts-eye",
+      "to": "relative-age-effect",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "the-scouts-eye",
+      "to": "squad-mapping-and-profiles",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "total-football-to-sacchi",
+      "to": "possession-and-gegenpressing",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "transfer-accounting",
+      "to": "academy-pathway-and-value",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "transfer-accounting",
+      "to": "multi-year-squad-plan",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "transfer-accounting",
+      "to": "reading-club-accounts",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "var-basics",
+      "to": "semi-automated-offside",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-in-blocks",
+      "to": "live-analysis",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-in-blocks",
+      "to": "one-player-ninety-minutes",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-phase",
+      "to": "analysis-cycle",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-phase",
+      "to": "story-then-structure",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-phase",
+      "to": "watch-in-blocks",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-player",
+      "to": "the-scouts-eye",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-player",
+      "to": "watch-one-unit",
+      "kind": "prerequisite"
+    },
+    {
+      "from": "watch-one-unit",
+      "to": "watch-one-phase",
+      "kind": "prerequisite"
+    }
+  ]
+}

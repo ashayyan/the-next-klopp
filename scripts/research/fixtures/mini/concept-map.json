@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "concepts": [
+    {
+      "id": "role-map-intro",
+      "title": "The role map",
+      "track": "t00-start-here",
+      "part": "A",
+      "summary": "Which football jobs exist and how they connect, so every lesson has a destination.",
+      "prerequisites": [],
+      "roles": [],
+      "competencies": [],
+      "sources": ["src-fixture-shape"],
+      "status": "draft"
+    },
+    {
+      "id": "back-four-shape",
+      "title": "Back four shape",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Four defenders in a line, how they cover width, and why the line stays connected.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["head-coach", "sporting-director"],
+      "competencies": ["reading-the-game"],
+      "sources": ["src-fixture-shape"],
+      "status": "draft"
+    },
+    {
+      "id": "offside-line",
+      "title": "The offside line",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Where the offside line sits, who sets it and what counts as being ahead of it.",
+      "prerequisites": ["pitch-markings"],
+      "roles": ["head-coach", "sporting-director"],
+      "competencies": ["reading-the-game"],
+      "sources": ["src-fixture-laws"],
+      "status": "draft"
+    },
+    {
+      "id": "pitch-markings",
+      "title": "Pitch markings",
+      "track": "t01-the-game",
+      "part": "A",
+      "summary": "Lines, boxes and circles on the pitch and what each one changes in the game.",
+      "prerequisites": [],
+      "roles": ["head-coach", "sporting-director"],
+      "competencies": ["reading-the-game"],
+      "sources": ["src-fixture-laws"],
+      "status": "draft"
+    },
+    {
+      "id": "read-the-shape",
+      "title": "Read the shape",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Spot a team's shape in and out of possession from a single freeze frame.",
+      "prerequisites": ["back-four-shape", "watch-one-player"],
+      "roles": ["head-coach", "sporting-director"],
+      "competencies": ["reading-the-game"],
+      "sources": ["src-fixture-shape"],
+      "status": "draft"
+    },
+    {
+      "id": "watch-one-player",
+      "title": "Watch one player",
+      "track": "t04-watch-gym",
+      "part": "A",
+      "summary": "Follow a single player for five minutes and note what they do without the ball.",
+      "prerequisites": [],
+      "roles": ["head-coach", "sporting-director"],
+      "competencies": ["player-observation", "reading-the-game"],
+      "sources": ["src-fixture-scouting", "src-fixture-shape"],
+      "status": "draft"
+    },
+    {
+      "id": "build-up-play",
+      "title": "Build-up play",
+      "track": "t05-attacking-play",
+      "part": "B",
+      "summary": "How a team moves the ball from its own goal into the opposition half under pressure.",
+      "prerequisites": ["back-four-shape", "offside-line"],
+      "roles": ["head-coach", "sporting-director"],
+      "competencies": ["reading-the-game"],
+      "sources": ["src-fixture-shape"],
+      "status": "draft"
+    },
+    {
+      "id": "pressing-trigger",
+      "title": "Pressing trigger",
+      "track": "t05-attacking-play",
+      "part": "B",
+      "summary": "The cue that sends a team forward together to win the ball back high up the pitch.",
+      "prerequisites": ["build-up-play", "read-the-shape"],
+      "roles": ["head-coach", "sporting-director"],
+      "competencies": ["reading-the-game"],
+      "sources": ["src-fixture-shape"],
+      "status": "draft"
+    },
+    {
+      "id": "one-line-match-note",
+      "title": "One-line match note",
+      "track": "t14-write-and-speak",
+      "part": "C",
+      "summary": "Write one clear sentence that says what you saw, why it matters and what to do next.",
+      "prerequisites": [],
+      "roles": ["head-coach"],
+      "competencies": ["match-writing"],
+      "sources": ["src-fixture-writing"],
+      "status": "draft"
+    },
+    {
+      "id": "scout-report-shape",
+      "title": "Scout report shape",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "The fixed parts of a short scouting report: role, strengths, risks and a verdict.",
+      "prerequisites": ["one-line-match-note", "scouting-eye-basics"],
+      "roles": ["head-coach", "sporting-director"],
+      "competencies": ["match-writing", "player-observation"],
+      "sources": ["src-fixture-scouting", "src-fixture-writing"],
+      "status": "draft"
+    },
+    {
+      "id": "scouting-eye-basics",
+      "title": "Scouting eye basics",
+      "track": "t21-scouting-1",
+      "part": "E",
+      "summary": "What a scout looks for first in a player live, and what to ignore on a first visit.",
+      "prerequisites": ["watch-one-player"],
+      "roles": ["sporting-director"],
+      "competencies": ["player-observation"],
+      "sources": ["src-fixture-scouting"],
+      "status": "draft"
+    }
+  ],
+  "edges": [
+    { "from": "back-four-shape", "to": "build-up-play", "kind": "prerequisite" },
+    { "from": "back-four-shape", "to": "read-the-shape", "kind": "prerequisite" },
+    { "from": "build-up-play", "to": "pressing-trigger", "kind": "prerequisite" },
+    { "from": "offside-line", "to": "build-up-play", "kind": "prerequisite" },
+    { "from": "offside-line", "to": "read-the-shape", "kind": "related" },
+    { "from": "one-line-match-note", "to": "scout-report-shape", "kind": "prerequisite" },
+    { "from": "pitch-markings", "to": "back-four-shape", "kind": "prerequisite" },
+    { "from": "pitch-markings", "to": "offside-line", "kind": "prerequisite" },
+    { "from": "read-the-shape", "to": "pressing-trigger", "kind": "prerequisite" },
+    { "from": "scouting-eye-basics", "to": "scout-report-shape", "kind": "prerequisite" },
+    { "from": "watch-one-player", "to": "read-the-shape", "kind": "prerequisite" },
+    { "from": "watch-one-player", "to": "scouting-eye-basics", "kind": "prerequisite" }
+  ]
+}

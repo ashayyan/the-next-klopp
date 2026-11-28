@@ -1,0 +1,1014 @@
+[
+  {
+    "id": "src-ifab-laws-2026-27",
+    "title": "Laws of the Game 2026/27 (IFAB, single pages PDF)",
+    "url": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+    "type": "regulation",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright, no reproduction without permission",
+      "read": {
+        "value": "yes",
+        "note": "Freely downloadable PDF from the IFAB site"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Direct PDF download, read during research on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "booklet p.4: may not be reproduced or translated without IFAB permission"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "paraphrase with short attributed quotes"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-07-01",
+    "as_of": "2026-11-27",
+    "best_for": ["current Laws edition and effective date", "Law 1 pitch dimensions and markings"],
+    "notes": "Edition effective from 1 July 2026 (PDF p.4). Law 1 pages 45-50 read with pypdf on 2026-11-27; PDF page numbers equal printed page numbers. Excerpt hashes re-derived from that read.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "effective-date",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.4",
+        "fetched_at": "2026-11-27T00:00:00Z",
+        "sha256": "b93f6f59e7458b59d2a9abe37762bc2b6557ba0ffbcdf6df5796a0dfd88c0ee0",
+        "paraphrase": "The 2026/27 edition of the Laws of the Game applies from 1 July 2026."
+      },
+      {
+        "id": "law1-touchline-length",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.47, Law 1 s.3",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "a5e8cee54bd909f003367c6d6b5f19925cc44623e63ee085b8dc3ff9c79c39da",
+        "paraphrase": "Law 1 sets the touchline length between a minimum of 90 m and a maximum of 120 m."
+      },
+      {
+        "id": "law1-goal-line-length",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.47, Law 1 s.3",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "260dee15e3adb8e6a3948c393e15b6227a4eac12c92250ea541bd5dd5cabe321",
+        "paraphrase": "Law 1 sets the goal-line length between a minimum of 45 m and a maximum of 90 m."
+      },
+      {
+        "id": "law1-touchline-longer",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.47, Law 1 s.3",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "b59086b9861af6317f401893b5f38046dc9a247afe2fe98e12649ea32380bd4b",
+        "paraphrase": "Whatever size is chosen, the touchline must be longer than the goal line, so a Law 1 pitch is never square."
+      },
+      {
+        "id": "law1-competitions-choose",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.47, Law 1 s.3",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "1ab19b813ebf556aa60b7b5cf1105164597454b9487223da0b8f647279a46cb1",
+        "paraphrase": "Competitions choose the exact length and width inside the Law range; the Law itself fixes no single size."
+      },
+      {
+        "id": "law1-intl-touchline",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.47, Law 1 s.4",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "3f90d59f40941a8a6e6346b020d7768c972480b933b237e33474301584186fb9",
+        "paraphrase": "For international matches the touchline must be between 100 m and 110 m."
+      },
+      {
+        "id": "law1-intl-goal-line",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.47, Law 1 s.4",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "48f6bad374562b4019fbb909f4b107f6490e86feac2e7a34e8fe57daf52f1d10",
+        "paraphrase": "For international matches the goal line must be between 64 m and 75 m."
+      },
+      {
+        "id": "law1-line-width",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.47, Law 1 s.2",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "b63ecafa624242b527eb94898691c3a75c82f644bfcc7e54ce31f1209e1cdc87",
+        "paraphrase": "All pitch lines share one width, and it may not exceed 12 cm."
+      },
+      {
+        "id": "law1-lines-belong",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.45, Law 1 s.2",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "1060fe43c4b7ecd9c8059eb269cee56bf5b5eee55650e5f86d78cd4ec77e5509",
+        "paraphrase": "A line belongs to the area it bounds, so a ball touching the line is inside that area."
+      },
+      {
+        "id": "law1-only-law-lines",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.45, Law 1 s.2",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "e87b3eaae80de7a7d26d0952b9e867278d5ba8578e5e6c59605193a201b3e7a6",
+        "paraphrase": "Only Law 1 lines may be marked; on artificial surfaces other lines must be a clearly different colour."
+      },
+      {
+        "id": "law1-halfway-line",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.45, Law 1 s.2",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "7eaebbb5fb073913514445c846968ba05c2bb737df30c96915abdeb42ad90627",
+        "paraphrase": "The halfway line joins the midpoints of the two touchlines and splits the pitch into halves."
+      },
+      {
+        "id": "law1-centre-circle",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.45, Law 1 s.2",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "5a93e19251f0dee32a0699ec30f3a7120deea6e13db7a010f73a07550ddf8a3e",
+        "paraphrase": "A circle of radius 9.15 m is marked around the centre mark at the midpoint of the halfway line."
+      },
+      {
+        "id": "law1-goal-area",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.48, Law 1 s.5",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "c5dde836be2bfa350d8a0311c00570f02f193afd8ccf315f3832a85352c033eb",
+        "paraphrase": "The goal area is drawn 5.5 m out from the inside of each goalpost and extends 5.5 m into the field."
+      },
+      {
+        "id": "law1-penalty-area",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.48, Law 1 s.6",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "950e4611ccb1aee971fd92af56f14d1d5c8fcfe87b01a07c3fa9c16735dbe81a",
+        "paraphrase": "The penalty area is drawn 16.5 m out from the inside of each goalpost and extends 16.5 m into the field."
+      },
+      {
+        "id": "law1-penalty-mark",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.48, Law 1 s.6",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "d4d915033636ac29adcc73067f519a3fca9fd3c3f5f5342979de20e3255958e8",
+        "paraphrase": "The penalty mark sits 11 m from the midpoint between the goalposts."
+      },
+      {
+        "id": "law1-penalty-arc",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.48, Law 1 s.6",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "009139a070420e899c2efce2256790f94ea17d59434d4e0949d6168ae11f83d5",
+        "paraphrase": "An arc of radius 9.15 m around each penalty mark is drawn outside the penalty area."
+      },
+      {
+        "id": "law1-corner-area",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.48, Law 1 s.7",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "ef5b05e2c4d42f632bee03795957920d44f5ec6165fc532a6278582e5be0bffc",
+        "paraphrase": "The corner area is a quarter circle of radius 1 m around each corner flagpost, inside the field."
+      },
+      {
+        "id": "law1-flagposts",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.49, Law 1 s.8",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "03a6714cc80e47c01fea74de748af2656bba26163a4f4d1f3c9521df8891c9dc",
+        "paraphrase": "Each corner needs a flagpost at least 1.5 m high with a non-pointed top and a flag."
+      },
+      {
+        "id": "law1-offfield-marks",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.47, Law 1 s.2",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "cd127276afd2550234d12f5d235d93ce10dd83a497b2d558eab67d4b4345a38e",
+        "paraphrase": "Optional marks may be made off the field 9.15 m from the corner arc, at right angles to the goal lines and touchlines."
+      },
+      {
+        "id": "law1-technical-area",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.49, Law 1 s.9",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "f3ad72ccd13fda8612f22ae4a6018edad99184841bde94d14e0a39774f1b58c1",
+        "paraphrase": "Where a seated area exists, the technical area extends 1 m either side of it and up to 1 m from the touchline."
+      },
+      {
+        "id": "law1-goal-size",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.50, Law 1 s.10",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "4383c676275ef743092ead2b1c94c5fb0859f8558ee4cbbdd255729518cc44e5",
+        "paraphrase": "The goal is 7.32 m wide inside the posts and 2.44 m high from the ground to the crossbar's lower edge."
+      },
+      {
+        "id": "law1-post-width",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.50, Law 1 s.10",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "7d1b3a9a97fc1f7801945b7bafee92e5b3a8876e843aadfe160e4dd64b2621d0",
+        "paraphrase": "Goalposts and crossbar are white, share one width and depth, and may not exceed 12 cm."
+      },
+      {
+        "id": "law1-measure-outside",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.46, Law 1 diagram notes",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "02bcb29f33fc231270188578713c3d1b9d328f37c6cca0e8fdafc384fd6ae8b2",
+        "paraphrase": "Law 1 measurements run from the outside edge of the lines, because lines belong to the areas they enclose."
+      },
+      {
+        "id": "law1-penalty-mark-measure",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.46, Law 1 diagram notes",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "8b4414a2d8c5abde83c1b35cedd912ae1dba87f005d3bac6571d2287ca667b9e",
+        "paraphrase": "The 11 m to the penalty mark is measured from the centre of the mark to the back edge of the goal line."
+      }
+    ]
+  },
+  {
+    "id": "src-pl-handbook-2026-27",
+    "title": "Premier League Handbook 2026/27",
+    "url": "https://resources.premierleague.pulselive.com/premierleague/document/2026/10/22/24902579-d9e8-44b3-a9e4-777c7b3d7134/TM2040_PL-Handbook-and-Collateral-2026-27_Digital_21.10.pdf",
+    "type": "official-document",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Premier League copyright (copyright line in the Handbook; no reuse licence stated)",
+      "read": {
+        "value": "yes",
+        "note": "Freely downloadable PDF listed on the Premier League publications page"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "PDF downloaded with curl on 2026-11-27; the site terms were not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Copyright line: The Football Association Premier League Limited 2026"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution; no copied passages"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-10-21",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "Premier League pitch rule (K.17) for 2026/27",
+      "each club's registered pitch length and width"
+    ],
+    "notes": "Publications page shows 21 October 2026. Each club directory page lists Pitch Dimensions; clubs were matched to pages by directory order and cross-checked against the ground capacity printed on the same page. Dimensions are the registered figures for 2026/27, not surveyed measurements.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "rule-k17-pitch-size",
+        "locator": "Premier League Handbook 2026/27 PDF p.93, Rule K.17",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "e36b17d98e9fc8c828898b97f0f8d92aabc2d2038689c83a36d37c53bf388b75",
+        "paraphrase": "League matches use a 105 m by 68 m pitch unless the Board permits otherwise."
+      },
+      {
+        "id": "rule-k18-exception",
+        "locator": "Premier League Handbook 2026/27 PDF p.93, Rule K.18",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "a75a93b6102dc2bcbe3c8af15bae4764bd1b5dd3afe2a9f8ff540fc54ccdc9fa",
+        "paraphrase": "The Board allows another size only when the stadium's construction makes 105 by 68 impossible."
+      },
+      {
+        "id": "rule-k19-register",
+        "locator": "Premier League Handbook 2026/27 PDF p.93, Rule K.19",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "dabb969ca15e4d2f324a287bd6a0872d89dc3f751b7f1a4bef2bb9fc53d8570e",
+        "paraphrase": "Each club registers its pitch dimensions with the Board before every season on Form 8."
+      },
+      {
+        "id": "rule-k21-no-alter",
+        "locator": "Premier League Handbook 2026/27 PDF p.93, Rule K.21",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "76db8d467235f0a0fa79c67822c6a2b14d7e436bab6977313366c484ff44f424",
+        "paraphrase": "A club may not change its pitch dimensions mid-season without the Board's written consent."
+      },
+      {
+        "id": "rule-k22-mowing",
+        "locator": "Premier League Handbook 2026/27 PDF p.93, Rule K.22",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "b774b8d85adc4c3c4630e7894b7a72ce0e694ea4f38c49221be0d52cefa4392c",
+        "paraphrase": "Grass stripes must run straight and parallel across the pitch width, perpendicular to the touchlines; no circular or diagonal patterns."
+      },
+      {
+        "id": "club-chelsea-pitch",
+        "locator": "Premier League Handbook 2026/27 PDF p.11, Club Directory: Chelsea, Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "e6df211446738da7974e9c53379d4ae291b0185bb57fc0604f51d9b5a8142767",
+        "paraphrase": "Chelsea's registered 2026/27 pitch is 103 m long and 67.5 m wide."
+      },
+      {
+        "id": "club-crystal-palace-pitch",
+        "locator": "Premier League Handbook 2026/27 PDF p.13, Club Directory: Crystal Palace, Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "a0432b9335a1d7c60d5402740855f7811869beda579bf537661e05b9d596c2a7",
+        "paraphrase": "Crystal Palace's registered 2026/27 pitch is 101.5 m long and 68 m wide."
+      },
+      {
+        "id": "club-fulham-pitch",
+        "locator": "Premier League Handbook 2026/27 PDF p.15, Club Directory: Fulham, Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "9ae9bf6fc06022a2d6dd37ea2bb1185dcd841734357ecd11d44cc64e555f6888",
+        "paraphrase": "Fulham's registered 2026/27 pitch is 100 m long and 65 m wide."
+      },
+      {
+        "id": "club-hull-pitch",
+        "locator": "Premier League Handbook 2026/27 PDF p.16, Club Directory: Hull City, Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "adbdd9c8f16886342123b8ce0c1b6534f909e181f26e1e78122389b66eaa3640",
+        "paraphrase": "Hull City's registered 2026/27 pitch is 104.8 m long and 67.2 m wide."
+      },
+      {
+        "id": "club-ipswich-pitch",
+        "locator": "Premier League Handbook 2026/27 PDF p.17, Club Directory: Ipswich Town, Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "5001bffdb2d5e51b33902a14e6e5e266b9aa87b2788c6d3a10dc5e74f5aadc45",
+        "paraphrase": "Ipswich Town's registered 2026/27 pitch is 105 m long and 66 m wide."
+      },
+      {
+        "id": "club-liverpool-pitch",
+        "locator": "Premier League Handbook 2026/27 PDF p.19, Club Directory: Liverpool, Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "4a4d3963427fdf267ca7a8cc66c3e375ddb640be5b0307177bfa19183f240f0e",
+        "paraphrase": "Liverpool's registered 2026/27 pitch is 101 m long and 68 m wide."
+      },
+      {
+        "id": "club-nottingham-forest-pitch",
+        "locator": "Premier League Handbook 2026/27 PDF, Club Directory: Nottingham Forest (page 23), Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "ca16c705ded1e7372e41db90eb580f9983e184722ff28b5dc71c5428a24493f5",
+        "paraphrase": "Nottingham Forest's registered 2026/27 pitch is 105 m long and 68 m wide."
+      },
+      {
+        "id": "clubs-standard-105x68",
+        "locator": "Premier League Handbook 2026/27 PDF, club directory pages for Bournemouth, Arsenal, Aston Villa, Brentford, Brighton, Coventry City, Everton, Leeds, Man City, Man United, Newcastle, Nottingham Forest, Sunderland, Tottenham (pp.6-10, 12, 14, 18, 20-25), Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "ca16c705ded1e7372e41db90eb580f9983e184722ff28b5dc71c5428a24493f5",
+        "paraphrase": "Fourteen of the twenty 2026/27 clubs register exactly 105 m by 68 m; six register something different."
+      }
+    ]
+  },
+  {
+    "id": "src-pl-handbook-2025-26",
+    "title": "Premier League Handbook 2025/26",
+    "url": "https://resources.premierleague.pulselive.com/premierleague/document/2025/07/28/379e2f04-d81f-4768-ab68-e45de43b9d4d/PL_Handbook_25-26_Digital_28.07.pdf",
+    "type": "official-document",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "name": "Premier League copyright (copyright line in the Handbook; no reuse licence stated)",
+      "read": {
+        "value": "yes",
+        "note": "Freely downloadable PDF"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "PDF downloaded with curl on 2026-11-27; the site terms were not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Copyright line: The Football Association Premier League Limited 2025"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution; no copied passages"
+      }
+    },
+    "quality": 5,
+    "recency": "2025-07-28",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "previous-season pitch rule (K.18) and club pitch sizes",
+      "showing the rule number moves between editions"
+    ],
+    "notes": "Superseded by the 2026/27 Handbook. Date is the upload date in the file path; the Handbook states Board of Directors as at July 2025. Used to show the 105 by 68 rule and the same exceptions in the previous season.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "rule-k18-pitch-size",
+        "locator": "Premier League Handbook 2025/26 PDF p.89, Rule K.18",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "e36b17d98e9fc8c828898b97f0f8d92aabc2d2038689c83a36d37c53bf388b75",
+        "paraphrase": "In 2025/26 the same 105 m by 68 m rule was numbered K.18."
+      },
+      {
+        "id": "club-chelsea-pitch",
+        "locator": "Premier League Handbook 2025/26 PDF p.11, Club Directory: Chelsea, Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "e6df211446738da7974e9c53379d4ae291b0185bb57fc0604f51d9b5a8142767",
+        "paraphrase": "Chelsea registered 103 m by 67.5 m in 2025/26, the same as in 2026/27."
+      },
+      {
+        "id": "club-crystal-palace-pitch",
+        "locator": "Premier League Handbook 2025/26 PDF p.12, Club Directory: Crystal Palace, Pitch Dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "a0432b9335a1d7c60d5402740855f7811869beda579bf537661e05b9d596c2a7",
+        "paraphrase": "Crystal Palace registered 101.5 m by 68 m in 2025/26, the same as in 2026/27."
+      }
+    ]
+  },
+  {
+    "id": "src-pl-pitch-standards-framework-2025",
+    "title": "Premier League Pitch Standards Framework 2025 Edition",
+    "url": "https://resources.premierleague.pulselive.com/premierleague/document/2025/06/06/6b9e7b0e-e3ac-4510-a055-7217321a819f/Premier-League-Pitch-Standards-Framework-2025-Edition.pdf",
+    "type": "official-document",
+    "publisher": "Premier League and STRI Group",
+    "free": true,
+    "license": {
+      "name": "Premier League copyright (no reuse licence stated)",
+      "read": {
+        "value": "yes",
+        "note": "Freely downloadable PDF listed on the Premier League publications page"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "PDF downloaded with curl on 2026-11-27; the site terms were not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Premier League and STRI Group publication; no redistribution grant seen"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution; no copied passages"
+      }
+    },
+    "quality": 5,
+    "recency": "2025-06-06",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "official statement that PL pitches are 105 m by 68 m",
+      "pitch rule numbering caveat"
+    ],
+    "notes": "Published 6 June 2025 per the Premier League publications page. Its rule table refers to Handbook season 2024/25 numbering. No 2026 edition found on 2026-11-27.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "pitch-size-rule",
+        "locator": "Premier League Pitch Standards Framework 2025 PDF p.15, section 3.2 Pitch dimensions",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "c2f038ccb547f8ee8a0ee93575a1a40c653b9f3aff05098168ed2b0419431455",
+        "paraphrase": "The Framework restates the Premier League rule that a pitch is 105 m long and 68 m wide unless the Board permits otherwise."
+      },
+      {
+        "id": "rule-numbers-change",
+        "locator": "Premier League Pitch Standards Framework 2025 PDF p.8, Premier League Rules footnote",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "68d2905bb01e95739065b2d08702c35a80e99d014afd98099dff3930819c5877",
+        "paraphrase": "Rule numbers quoted in the Framework are tied to the 2024/25 Handbook and may change in later seasons."
+      }
+    ]
+  },
+  {
+    "id": "src-fifa-stadium-guidelines-pitch",
+    "title": "FIFA Football Stadiums Guidelines, 5.3 Pitch dimensions and surrounding areas",
+    "url": "https://publications.fifa.com/de/football-stadiums-guidelines/technical-guideline/stadium-guidelines/pitch-dimensions-and-surrounding-areas",
+    "type": "official-document",
+    "publisher": "FIFA",
+    "free": true,
+    "license": {
+      "name": "FIFA copyright (page footer)",
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched with curl on 2026-11-27; the site terms were not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "FIFA copyright footer"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution; no copied passages"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["FIFA's recommended field of play size", "run-off area guidance"],
+    "notes": "No publication date shown; recency is the as_of date. Page footer reads copyright 1994-2021 and an image name suggests the 2021 guidelines edition, so a newer edition may exist. It is a recommendation, not a Law.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "recommended-size",
+        "locator": "FIFA Football Stadiums Guidelines, section 5.3.1 Field of play",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "c1da4d78db2cb19c0b817774f85851e58621426904e8f326f5a142df0c951816",
+        "paraphrase": "FIFA recommends a 105 m by 68 m field of play for stadium design."
+      }
+    ]
+  },
+  {
+    "id": "src-uefa-stadium-infrastructure-2025",
+    "title": "UEFA Stadium Infrastructure Regulations, Edition 2025",
+    "url": "https://d1zqj8o9na6wgl.cloudfront.net/faw/20250815214154/20250601_Stadium-Infrastructure-regulations_2025_EN.pdf",
+    "type": "regulation",
+    "publisher": "UEFA",
+    "free": true,
+    "license": {
+      "name": "UEFA copyright (no reuse licence stated)",
+      "read": {
+        "value": "yes",
+        "note": "Public regulations; official web copy at documents.uefa.com"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "PDF fetched with curl from a national-association CDN copy on 2026-11-27; the official site is script-rendered and its terms were not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "UEFA publication; no redistribution grant seen"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution; no copied passages"
+      }
+    },
+    "quality": 5,
+    "recency": "2025-06-01",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "UEFA pitch size by stadium category",
+      "where 105 m by 68 m is required versus a range"
+    ],
+    "notes": "In force from 1 June 2025. The hashed copy is the PDF hosted on a national association CDN; the official article-by-article version is at documents.uefa.com and gave the same table when read. Applies only where a UEFA competition's rules refer to it.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "cat-1-2-field",
+        "locator": "UEFA Stadium Infrastructure Regulations 2025 PDF p.10, Article 5 Field of play",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "9e6964eb13f1a6eeeb0ddd1146355dea29737ce883267862dd9f132aa08cf66d",
+        "paraphrase": "Category 1 and 2 stadiums may have a pitch 100 to 105 m long and 64 to 68 m wide."
+      },
+      {
+        "id": "cat-3-4-field",
+        "locator": "UEFA Stadium Infrastructure Regulations 2025 PDF p.10, Article 5 Field of play",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "051149cc00182fd42872eea8152bfbe145a6a910722cb1b9bbb33ebb5f271e77",
+        "paraphrase": "Category 3 and 4 stadiums must have a pitch exactly 105 m long and 68 m wide."
+      },
+      {
+        "id": "in-force-date",
+        "locator": "UEFA Stadium Infrastructure Regulations 2025 PDF p.31, Article 43",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "20efb4f25e4c8fb14354438758589a9400c4a5406aeeda3a649625923b969276",
+        "paraphrase": "The 2025 edition came into force on 1 June 2025, replacing the 2018 edition."
+      }
+    ]
+  },
+  {
+    "id": "src-fourfourtwo-pl-pitch-sizes",
+    "title": "What are the pitch sizes for every Premier League stadium? (FourFourTwo)",
+    "url": "https://www.fourfourtwo.com/features/premier-league-pitch-sizes",
+    "type": "article",
+    "publisher": "FourFourTwo (Future plc)",
+    "free": true,
+    "license": {
+      "name": "Publisher copyright",
+      "read": {
+        "value": "yes",
+        "note": "Public article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched with curl on 2026-11-27; the site terms were not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution; no copied passages"
+      }
+    },
+    "quality": 2,
+    "recency": "2025-05-19",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "secondary check on club pitch sizes",
+      "showing where secondary sources disagree with the Handbook"
+    ],
+    "notes": "Published 19 May 2025 for the 2025/26 season. The article names no source for its figures. Secondary source only; the Premier League Handbook outranks it. It covers the 2025/26 club list (includes West Ham, Wolves, Burnley; omits Hull and Ipswich).",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "chelsea-size",
+        "locator": "FourFourTwo article, Chelsea entry",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "0b8ff5ebcdfd6aa63d88fca49b199247a0384b93a0afade72444fa6837a0a444",
+        "paraphrase": "The article gives Chelsea as 103.3 m by 67.7 m."
+      },
+      {
+        "id": "palace-size",
+        "locator": "FourFourTwo article, Crystal Palace entry",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "28cd6f7f5df9afa2da90f3788a7096581e7780a70410c1abc4a12ad73a95a8ed",
+        "paraphrase": "The article gives Crystal Palace as 101 m by 68 m."
+      },
+      {
+        "id": "forest-size",
+        "locator": "FourFourTwo article, Nottingham Forest entry",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "fa22f3f2e459070d686cdc042c9e26843dcc79375a415bbd585bff4fd7252a9f",
+        "paraphrase": "The article gives Nottingham Forest as 105 m by 71 m."
+      },
+      {
+        "id": "fulham-size",
+        "locator": "FourFourTwo article, Fulham entry",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "dbbf623ecab6b2be20b037cf380842f56a27f47f367cf475578d0aac207c131d",
+        "paraphrase": "The article gives Fulham as 100 m by 65 m."
+      }
+    ]
+  },
+  {
+    "id": "src-statsbomb-open-data-spec",
+    "title": "StatsBomb Open Data Specification v1.1",
+    "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/doc/StatsBomb%20Open%20Data%20Specification%20v1.1.pdf",
+    "type": "official-document",
+    "publisher": "StatsBomb",
+    "free": true,
+    "license": {
+      "name": "StatsBomb Public Data User Agreement",
+      "terms_url": "https://raw.githubusercontent.com/statsbomb/open-data/master/LICENSE.pdf",
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub raw file, fetched with curl"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Agreement bars providing the data to external parties; documentation licence not separately stated"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Agreement and README require StatsBomb credit on published analysis"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["StatsBomb event coordinate frame", "goal and pitch coordinate appendices"],
+    "notes": "No publication date shown; recency is the as_of date. The Appendix 2 pitch figure and the Appendix 3 goal figure are images, read by eye (pypdf extracts only the headings), so the excerpts hash the printed figure heading, not the figure labels.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "location-centre",
+        "locator": "StatsBomb Open Data Specification v1.1 PDF p.11, event location field",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "c23539b42b862bb6442ef5438551d9d2ca71c993c3582fcf7c54fef414d0209b",
+        "paraphrase": "The spec states that event locations are (x, y) and gives the field centre as (60, 40)."
+      },
+      {
+        "id": "appendix-2-pitch-figure",
+        "locator": "StatsBomb Open Data Specification v1.1 PDF p.34, Appendix 2 figure",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "f1b1e8047d5b7f613bffb30cdb7ebaaa5912478e333b7c6e36a14cd6185d29cf",
+        "paraphrase": "Appendix 2 draws the pitch with corners (0,0) top left, (120,0) top right, (0,80) bottom left, (120,80) bottom right; box and goal corners are labelled in the same grid."
+      }
+    ]
+  },
+  {
+    "id": "src-statsbomb-open-data-360-frames",
+    "title": "StatsBomb Open Data 360 Frames v1.0.0",
+    "url": "https://raw.githubusercontent.com/statsbomb/open-data/master/doc/Open%20Data%20360%20Frames%20v1.0.0%20(1).pdf",
+    "type": "official-document",
+    "publisher": "StatsBomb",
+    "free": true,
+    "license": {
+      "name": "StatsBomb Public Data User Agreement",
+      "terms_url": "https://raw.githubusercontent.com/statsbomb/open-data/master/LICENSE.pdf",
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub raw file, fetched with curl"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Agreement bars providing the data to external parties; documentation licence not separately stated"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Agreement and README require StatsBomb credit on published analysis"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "attack direction in StatsBomb coordinates",
+      "360 freeze-frame location convention"
+    ],
+    "notes": "No publication date shown; recency is the as_of date. The line is quoted from a table cell whose extracted text has dropped spaces; the hash is of the passage as printed.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "attacking-direction",
+        "locator": "StatsBomb Open Data 360 Frames v1.0.0 PDF p.2, freeze-frame location field",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "3e31adb4d0d6d72e8857100250564ce3d46d58ff2ae0d2c0c0fec0c2025628a7",
+        "paraphrase": "In 360 frames, player coordinates follow the linked event: the acting team attacks from 0 to 120 on the X axis."
+      }
+    ]
+  },
+  {
+    "id": "src-kloppy-coordinates-docs",
+    "title": "kloppy user guide: Coordinates",
+    "url": "https://kloppy.pysport.org/user-guide/concepts/coordinates/",
+    "type": "tool",
+    "publisher": "PySport",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public documentation"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl on 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Documentation licence not read"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Documentation licence not read; paraphrase and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "coordinate system components and standardised pitches",
+      "Opta and Wyscout marking positions"
+    ],
+    "notes": "Docs for kloppy 3.19.1 (the version pinned in STACK.md). No publication date shown; recency is the as_of date. The built-in coordinate systems overview is an image and was not read.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "kloppy-default-pitch",
+        "locator": "kloppy 3.19.1 docs, Coordinates, Intro to spatial reference systems",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "37565d5e5e6cadb74c7a0707fefdd725d69d3f8e1a241b697b0326569dd8d397",
+        "paraphrase": "kloppy's default pitch is a 1-by-1 unit square, so values read as percentages of length and width."
+      },
+      {
+        "id": "standardised-distorts-distance",
+        "locator": "kloppy 3.19.1 docs, Coordinates, Intro to spatial reference systems",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "2f814865016cd94e9c01ad9600170382dcedd3348445829f5a23a5d7da30a483",
+        "paraphrase": "On standardised pitches metric information is distorted, so distance calculations must map back to the real pitch size."
+      },
+      {
+        "id": "markings-table-penalty-area",
+        "locator": "kloppy 3.19.1 docs, Coordinates, PitchDimensions table",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "48e7ffde134883558679df8d4eb2ae2e2f6d5228520318c0f629cdc4b9c7f70a",
+        "paraphrase": "kloppy's table lists the IFAB penalty area as 40.32 m wide (44.1 yd), 16.5 m deep, with matching values for the Opta and Wyscout standardised pitches."
+      },
+      {
+        "id": "opta-wyscout-penalty-width",
+        "locator": "kloppy 3.19.1 docs, Coordinates, PitchDimensions table (Penalty Area Width row)",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "1b0f35f0ee84f8eef9968ae97e4006b40dd823e8f48a075e94baf77e8bd6ec90",
+        "paraphrase": "kloppy's table puts the penalty area width at 57.8 units on the Opta pitch and 62.0 units on the Wyscout pitch, both on a 100-unit-wide field."
+      }
+    ]
+  },
+  {
+    "id": "src-kloppy-coordinate-systems-source",
+    "title": "kloppy source: kloppy/domain/models/common.py (coordinate system classes)",
+    "url": "https://raw.githubusercontent.com/PySport/kloppy/master/kloppy/domain/models/common.py",
+    "type": "tool",
+    "publisher": "PySport",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Raw file fetched with curl on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Licence file not read in this pass"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Licence file not read; paraphrase and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "machine-readable origin, axis direction and range per provider",
+      "kloppy default pitch 105 by 68"
+    ],
+    "notes": "Master branch read on 2026-11-27; STACK.md pins kloppy 3.19.1, so re-check the docstrings against that tag before the Pitch Standard is frozen. Docstrings are kloppy's description of each provider, not the provider's own spec.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "statsbomb-system",
+        "locator": "kloppy common.py, StatsBombCoordinateSystem docstring",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "60731e7351b534a549274ff014a70868e8914a1e61f9cd8f35f2b9c363e2b51b",
+        "paraphrase": "kloppy describes StatsBomb as top-left origin, y down, x from 0 to 120, y from 0 to 80."
+      },
+      {
+        "id": "opta-system",
+        "locator": "kloppy common.py, OptaCoordinateSystem docstring",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "2ecb4fff5d42647451e5d700381b5616a9a2b34fe612dc6d0717e1779bae80a0",
+        "paraphrase": "kloppy describes Opta as bottom-left origin, y up, both axes from 0 to 100."
+      },
+      {
+        "id": "wyscout-system",
+        "locator": "kloppy common.py, WyscoutCoordinateSystem docstring",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "cd51e4dab62ef01c087578f43905b20f92303a792ad51498722b07910151849b",
+        "paraphrase": "kloppy describes Wyscout as top-left origin, y down, both axes from 0 to 100."
+      },
+      {
+        "id": "tracab-system",
+        "locator": "kloppy common.py, TracabCoordinateSystem docstring",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "89a9c9d469b3bc54e16f378df33d8f1c494e87ac8b03fe6ccc7cb85a6a9785f0",
+        "paraphrase": "kloppy describes Tracab tracking as centre origin, y up, in centimetres."
+      },
+      {
+        "id": "sportec-tracking-system",
+        "locator": "kloppy common.py, SportecTrackingDataCoordinateSystem docstring",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "f5fb097ccd9dad9456f23e780ae62bc562c1421a7571a580997b019115326d47",
+        "paraphrase": "kloppy describes Sportec tracking as centre origin, y up, in metres."
+      },
+      {
+        "id": "kloppy-default-system",
+        "locator": "kloppy common.py, KloppyCoordinateSystem docstring",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "a713baf1a8d579bbfea8a764c010b837b3fc58cd51eb29a67d0ccab4ed76aacf",
+        "paraphrase": "With no pitch size given, kloppy assumes a 105 m by 68 m pitch for its 0-to-1 default system."
+      }
+    ]
+  },
+  {
+    "id": "src-nature-pappalardo-wyscout-events",
+    "title": "A public data set of spatio-temporal match events in soccer competitions (Pappalardo et al., Scientific Data)",
+    "url": "https://www.nature.com/articles/s41597-019-0247-7",
+    "type": "paper",
+    "publisher": "Scientific Data (Nature Portfolio)",
+    "free": true,
+    "license": {
+      "name": "CC BY 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "Open access article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Nature served a cookie redirect on first request; fetched with a cookie jar; terms not read"
+      },
+      "redistribute": {
+        "value": "yes",
+        "note": "Article states it is licensed under CC BY 4.0, attribution required"
+      },
+      "derivative": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      }
+    },
+    "quality": 5,
+    "recency": "2019-10-28",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "how the public Wyscout events encode x and y",
+      "attacking-team perspective of the coordinates"
+    ],
+    "notes": "Data descriptor for the public Wyscout soccer-logs dataset (seed id src-wyscout-public-dataset). Published 28 October 2019.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "coords-range",
+        "locator": "Scientific Data 6, article 236 (2019), Data Records, events",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "adaf7aab86d4dd37cc00aefc11ba40b14cbea8f7f5de8f4b7a14d14381389195",
+        "paraphrase": "Public Wyscout event positions use x and y from 0 to 100 as percentages of the field from the attacking team's perspective."
+      },
+      {
+        "id": "coords-axes",
+        "locator": "Scientific Data 6, article 236 (2019), Data Records, events",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "6e8839c895c06aca6e81341732bd1e73c6263cd27a7dd3f3f881b07634f08a1f",
+        "paraphrase": "x measures nearness to the opponent's goal and y nearness to the right side of the field, both in percent."
+      }
+    ]
+  },
+  {
+    "id": "src-wyscout-data-glossary-pitch-coordinates",
+    "title": "Wyscout data glossary: Pitch coordinates",
+    "url": "https://dataglossary.wyscout.com/pitch_coordinates",
+    "type": "website",
+    "publisher": "Wyscout (Hudl)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public glossary page"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched with curl on 2026-11-27; the site terms were not read"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Terms not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "Wyscout's own statement of the x direction",
+      "percent coordinates relative to the acting player"
+    ],
+    "notes": "No date shown; recency is the as_of date. The page does not state where (0,0) sits or the y direction; its pitch diagram is an image that was not read.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "x-attack-100",
+        "locator": "Wyscout data glossary, Pitch coordinates",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "94816db5b9d25bd91059d3089a0f13856a8427b6895e268cfca060f7aee57478",
+        "paraphrase": "Wyscout puts the acting side's own goal at x = 0 percent and the attacking goal at x = 100 percent."
+      },
+      {
+        "id": "values-percent",
+        "locator": "Wyscout data glossary, Pitch coordinates",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "29c7b5647b0271b30e97a064dbeed113849ee366e36e94d1a7ba3a3c8dbe2d90",
+        "paraphrase": "All Wyscout pitch coordinates are percentages written as (x, y)."
+      }
+    ]
+  },
+  {
+    "id": "src-mplsoccer-standardize-docs",
+    "title": "mplsoccer: Standardize data (gallery page)",
+    "url": "https://mplsoccer.readthedocs.io/en/latest/gallery/pitch_plots/plot_standardize.html",
+    "type": "tool",
+    "publisher": "Andrew Rowlinson (mplsoccer)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public documentation"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl on 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Documentation licence not read"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Documentation licence not read; paraphrase and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "why event-data coordinates fix the penalty area regardless of real pitch size",
+      "worked Anfield versus Craven Cottage width example"
+    ],
+    "notes": "No date shown; recency is the as_of date. Text was extracted from rendered HTML; code tokens in the passage are separated by spaces there but read normally on the page.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "fixed-penalty-area",
+        "locator": "mplsoccer docs, Standardize data",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "3b7793ef4d7a8a811d2e9ac4da789f00953eb28fef788d688f4906b88f3777f3",
+        "paraphrase": "Opta, Wyscout and StatsBomb fix coordinates inside the penalty area regardless of pitch size; the rest of the pitch stretches to the touchlines."
+      },
+      {
+        "id": "anfield-width",
+        "locator": "mplsoccer docs, Standardize data",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "2091e44e9533824f9fe97fa4b2727c8cd9d21dce9d7f18b7f81df02746df6943",
+        "paraphrase": "The page uses Anfield as an example of a ground 68 m wide."
+      },
+      {
+        "id": "craven-cottage-width",
+        "locator": "mplsoccer docs, Standardize data",
+        "fetched_at": "2026-11-27T21:42:03Z",
+        "sha256": "2fa0f22e86f3f1f1668230f0a7c3a4c48e31dfb17bd1758c60214bd3787be98c",
+        "paraphrase": "The page uses Craven Cottage as an example of a ground 65 m wide."
+      }
+    ]
+  }
+]

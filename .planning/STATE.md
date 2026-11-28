@@ -2,18 +2,18 @@
 gsd_state_version: "1.0"
 current_phase: 1
 current_phase_name: Setup & Contracts
-status: executing
-stopped_at: "01-09 tasks 1-2 done; task 3 blocked by GitHub billing (PR #1 open)"
-last_updated: "2026-11-27T19:18:04.455Z"
-last_activity: 2026-11-27
-last_activity_desc: Phase 1 execution started
-state_head: ef5ee905d00f9bdf476deb0dbb8c3cf8d70abffd
+status: verifying
+stopped_at: Phase 2 complete, ready to verify Phase 1
+last_updated: "2026-11-27T23:42:56.413Z"
+last_activity: 2026-11-28
+last_activity_desc: Phase 2 complete, transitioned to Phase 1
+state_head: c4568d1a1314b919ce08834996bb045f18beef05
 progress:
   total_phases: 8
-  completed_phases: 0
-  total_plans: 9
-  completed_plans: 9
-  percent: 0
+  completed_phases: 1
+  total_plans: 30
+  completed_plans: 30
+  percent: 13
 ---
 
 # Project State
@@ -23,21 +23,21 @@ progress:
 See: .planning/PROJECT.md (updated 2026-11-27)
 
 **Core value:** Every concept is shown, then touched, then practised in a short visual lesson grounded in real Premier League examples and traceable free sources, so a visual, ADHD learner builds professional-level football understanding.
-**Current focus:** Phase 1 — Setup & Contracts
+**Current focus:** Phase 2 — Research Wave 1
 
 ## Current Position
 
-Phase: 1 (Setup & Contracts) — EXECUTING
-Plan: 9 of 9
-Status: Ready to execute
-Last activity: 2026-11-27 — Phase 1 execution started
+Phase: 1 — Setup & Contracts
+Plan: 9
+Status: Phase complete — ready for verification
+Last activity: 2026-11-28 — Phase 2 complete, transitioned to Phase 1
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [█░░░░░░░░░] 13%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 0
+- Total plans completed: 21
 - Average duration: - min
 - Total execution time: 0.0 hours
 
@@ -45,7 +45,7 @@ Progress: [░░░░░░░░░░] 0%
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 2 | 21 | - | - |
 
 **Recent Trend:**
 - Last 5 plans: -
@@ -64,6 +64,17 @@ Progress: [░░░░░░░░░░] 0%
 | Phase 1 P05 | 10min | 3 tasks | 11 files |
 | Phase 1 P06 | 6min | 2 tasks | 7 files |
 | Phase 1 P08 | 25min | 2 tasks | 3 files |
+| Phase 2 P01 | 10 min | 3 tasks | 12 files |
+| Phase 2 P02 | 10 min | 3 tasks | 15 files |
+| Phase 2 P03 | 14 min | 2 tasks | 14 files |
+| Phase 2 P04 | 45 min | 2 tasks | 10 files |
+| Phase 2 P15 | 20 min | 3 tasks | 8 files |
+| Phase 02 P16 | 9 min | 2 tasks | 3 files |
+| Phase 02 P17 | 6 min | 2 tasks | 3 files |
+| Phase 02 P18 | 8 min | 3 tasks | 7 files |
+| Phase 02 P19 | 6 min | 3 tasks | 4 files |
+| Phase 02 P20 | 25min | 3 tasks | 7 files |
+| Phase 02 P21 | 45 min | 3 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -82,10 +93,25 @@ Recent decisions affecting current work:
 - [Phase 1]: No allowScripts block: npm install-scripts ls reported no unreviewed install scripts (Vite 8 uses rolldown)
 - [Phase 1]: 01-07: K-Dense curated 14-skill subset plus 3 design skills installed project-local (copy mode); offer-k-dense-web absent upstream v2.72.0; Opus overrides for research-synthesizer, ui-researcher, roadmapper; Fable manual only
 - [Phase 1]: 01-08: agentmemory written via REST (MCP tools only appear in a new session); verify memory matches search hits by id against full memory content
+- [Phase 2]: 02-15: SOURCE_REGISTRY.json frozen at 218 entries (5 id aliases); later phases only add sources
+- [Phase 2]: 02-15: same_as overrides only for same work and edition (Bradbury PubMed=DOI, Pappalardo nature=PMC); jit seeds are unverified, licence unknown, type official-document not regulation
+- [Phase 02]: ADR 0008: Watch Gym L1 supply is open-data reconstructions first, local files second, YouTube link-out only; every clip spec declares a reconstruction fallback
+- [Phase 02]: ADR 0008: strict reading of StatsBomb 1.2.1, no StatsBomb-derived artifact ships; deny-manifest covers statsbomb, last-row, metrica, skillcorner; only Wyscout and DFL (CC BY) ship
+- [Phase 02]: 02-17: roles.json frozen at the 15 canonical roles; competencies.json frozen at 49 role-neutral competencies over all 12 domains (scale 1 Aware to 4 Leads and teaches); concepts empty until 02-18 derive
+- [Phase 02]: 02-18: Band 1 concept map holds 68 concepts (t00 12, t01 32, t02 8, t03 7, t04 9); Track 0 adds seven role-family concepts under role-map
+- [Phase 02]: 02-18: prerequisites[] is the single source of truth; derive-links.ts fills prerequisite edges, concept.roles and competency.concepts and writes only on a parsed-value change
+- [Phase 02]: 02-18: Thread starters role-map (layer 1) and one-question-clips (layer 2); max_starter_layer 5
+- [Phase 02]: 02-19: Concept map covers all 29 tracks with 164 concepts (Band 2 at 3-6, Band 3 at 2-6 chapter umbrellas); longest chain 13 layers; no orphan competencies
+- [Phase 02]: 02-19: Thread starters match-note-basics (t14, layer 2) and the-scouts-eye (t21, layer 4) complete the four early threads
+- [Phase 02]: 02-19: Capstone split into football-department and club-leadership seat concepts so it follows every Part within 4 prerequisites
+- [Phase 02]: 02-20: gaps.json splits domain 14 (a-c t21, d-f t22) and domain 20 (PL ecosystem, SPL pack); SPL row uses spl.com.sa and saff.com.sa URLs until a registry source exists
+- [Phase 02]: 02-20: unknown_licence_sources lists all 82 unknown-licence sources cited by Tracks 0-4 or ADR 0008 plus 5 flagged later-track sources; gaps.test.ts derives the expected set
+- [Phase 02]: 02-21: RSCH-06 approved under delegation, scoped to 64 Tracks 0-4 concepts; 4 seed-only Track 2 concepts (eighteen-zone-grid, five-vertical-lanes, half-spaces, four-superiorities) stay draft until domain 2 research
+- [Phase 02]: 02-21: approval rule derived in approval.test.ts: approved iff APPROVAL.md approved, track t00-t04 and at least one verified cited source
 
 ### Pending Todos
 
-None yet.
+- [Phase 2] Learner: open research/summary/index.html and confirm or re-open the research approval (non-blocking; approved by Claude under delegation 2026-11-27)
 
 ### Blockers/Concerns
 
@@ -111,6 +137,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-27T19:18:04.429Z
-Stopped at: 01-09 tasks 1-2 done; task 3 blocked by GitHub billing (PR #1 open)
+Last session: 2026-11-27T23:14:48.331Z
+Stopped at: Phase 2 complete, ready to verify Phase 1
 Resume file: None

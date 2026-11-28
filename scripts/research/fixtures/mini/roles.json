@@ -1,0 +1,22 @@
+[
+  {
+    "id": "head-coach",
+    "title": "Head Coach",
+    "summary": "Owns the game model, picks the team and runs the training week.",
+    "competencies": [
+      { "id": "match-writing", "target_level": 2 },
+      { "id": "reading-the-game", "target_level": 4 }
+    ],
+    "sources": ["src-fixture-shape"]
+  },
+  {
+    "id": "sporting-director",
+    "title": "Sporting Director",
+    "summary": "Connects the coach, the recruitment team and the owner around one football plan.",
+    "competencies": [
+      { "id": "player-observation", "target_level": 3 },
+      { "id": "reading-the-game", "target_level": 2 }
+    ],
+    "sources": ["src-fixture-scouting", "src-fixture-shape"]
+  }
+]

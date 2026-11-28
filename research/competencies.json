@@ -1,0 +1,1474 @@
+[
+  {
+    "id": "playing-style-definition",
+    "title": "Defining a playing style",
+    "domain": "game-knowledge",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Describes a club's playing style in a few words, for example how it presses and builds up."
+      },
+      {
+        "level": 2,
+        "descriptor": "Breaks a playing style into principles for each phase of play and spots them in a match."
+      },
+      {
+        "level": 3,
+        "descriptor": "Writes a club playing-style document that coaches, analysts and recruiters can apply."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets one playing style from academy to first team and checks that every department follows it."
+      }
+    ],
+    "concepts": [
+      "build-up-structures",
+      "catenaccio",
+      "club-football-philosophy",
+      "counter-pressing",
+      "first-laws-and-passing-game",
+      "four-phases-of-play",
+      "game-model",
+      "how-phases-connect",
+      "hungary-and-the-4-2-4",
+      "positional-and-relational-play",
+      "possession-and-gegenpressing",
+      "premier-league-era-tactics",
+      "pressing-schemes",
+      "pyramid-to-wm",
+      "squad-mapping-and-profiles",
+      "total-football-to-sacchi"
+    ]
+  },
+  {
+    "id": "match-reading",
+    "title": "Reading a match",
+    "domain": "game-knowledge",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Names the phase of play and each team's basic shape while watching a match."
+      },
+      {
+        "level": 2,
+        "descriptor": "Tracks off-ball players and explains why space opens or closes in a passage of play."
+      },
+      {
+        "level": 3,
+        "descriptor": "Explains in real time why one team is on top and what is causing it."
+      },
+      {
+        "level": 4,
+        "descriptor": "Teaches others what to watch for and checks their match reading against the footage."
+      }
+    ],
+    "concepts": [
+      "answer-on-the-pitch-panel",
+      "attacking-and-defending-shapes",
+      "attacking-transition",
+      "back-four-formations",
+      "back-three-formations",
+      "ball-in-and-out-of-play",
+      "cards-and-misconduct",
+      "defensive-transition",
+      "eighteen-zone-grid",
+      "five-vertical-lanes",
+      "formation-notation",
+      "formation-vs-structure",
+      "fouls-and-free-kicks",
+      "four-phases-of-play",
+      "four-superiorities",
+      "half-spaces",
+      "in-possession-phase",
+      "lines-and-between-the-lines",
+      "numerical-superiority",
+      "offside-offence",
+      "offside-position",
+      "one-question-clips",
+      "out-of-possession-phase",
+      "pitch-areas",
+      "pitch-dimensions",
+      "pitch-markings",
+      "pitch-thirds-and-zones",
+      "position-vs-role",
+      "positions-overview",
+      "reading-a-reconstruction",
+      "referee-team",
+      "scoring-a-goal",
+      "semi-automated-offside",
+      "story-then-structure",
+      "var-basics",
+      "watch-in-blocks",
+      "watch-one-phase",
+      "watch-one-player",
+      "watch-one-unit",
+      "width-and-depth"
+    ]
+  },
+  {
+    "id": "game-planning",
+    "title": "Building a game plan",
+    "domain": "tactics",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what a game plan is and which parts it covers: shape, pressing, build-up and set pieces."
+      },
+      {
+        "level": 2,
+        "descriptor": "Builds a simple plan for one opponent from a given opposition report."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds a full match plan against an opponent and turns it into a training week."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns the game plan for every match and adapts the method to the squad and the opponent."
+      }
+    ],
+    "concepts": [
+      "attacking-and-defending-shapes",
+      "attacking-transition",
+      "back-four-formations",
+      "back-three-formations",
+      "build-up-structures",
+      "chance-creation",
+      "coaching-roles",
+      "counter-attacks",
+      "counter-pressing",
+      "defending-the-box",
+      "defensive-blocks",
+      "defensive-transition",
+      "four-superiorities",
+      "game-model",
+      "how-phases-connect",
+      "in-possession-phase",
+      "lines-and-between-the-lines",
+      "numerical-superiority",
+      "opponent-game-plan",
+      "out-of-possession-phase",
+      "pressing-schemes",
+      "pressing-traps-and-triggers",
+      "progression-and-overloads",
+      "rest-defence",
+      "simulator-football-seats",
+      "width-and-depth"
+    ]
+  },
+  {
+    "id": "in-game-adjustment",
+    "title": "In-game tactical adjustment",
+    "domain": "tactics",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Recognises when a match changes, for example after a goal, a red card or an opponent's switch of shape."
+      },
+      {
+        "level": 2,
+        "descriptor": "Suggests a substitution or a shape change and states the reason for it."
+      },
+      {
+        "level": 3,
+        "descriptor": "Makes in-game changes from live information and explains the effect afterwards."
+      },
+      {
+        "level": 4,
+        "descriptor": "Leads matchday decisions with the staff and sets how live input reaches the bench."
+      }
+    ],
+    "concepts": [
+      "cards-and-misconduct",
+      "in-game-management",
+      "players-and-substitutions",
+      "simulator-football-seats",
+      "var-basics"
+    ]
+  },
+  {
+    "id": "set-piece-design",
+    "title": "Set-piece design",
+    "domain": "tactics",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Names the main set-piece types and the roles players take in them."
+      },
+      {
+        "level": 2,
+        "descriptor": "Reads an opponent's set-piece routine from footage and points out its weak spot."
+      },
+      {
+        "level": 3,
+        "descriptor": "Designs attacking and defensive set-piece routines and coaches them in a session."
+      },
+      {
+        "level": 4,
+        "descriptor": "Runs the club's set-piece programme and agrees its training time with the head coach."
+      }
+    ],
+    "concepts": [
+      "coaching-roles",
+      "goal-kick-and-corner-kick",
+      "kick-off-and-dropped-ball",
+      "penalty-kick",
+      "set-piece-coach-role",
+      "set-piece-marking",
+      "set-piece-phase",
+      "set-piece-routines",
+      "throw-in"
+    ]
+  },
+  {
+    "id": "team-selection",
+    "title": "Team selection",
+    "domain": "tactics",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Lists what goes into picking a team: form, fitness, the opponent and the game plan."
+      },
+      {
+        "level": 2,
+        "descriptor": "Proposes a starting eleven with a reason for each choice."
+      },
+      {
+        "level": 3,
+        "descriptor": "Picks the team using medical, analysis and coaching input and explains each choice to the staff."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns selection and sets how fitness and medical advice feed into it."
+      }
+    ],
+    "concepts": [
+      "attacking-roles",
+      "defensive-roles",
+      "fixture-congestion-and-rotation",
+      "in-game-management",
+      "midfield-roles",
+      "players-and-substitutions"
+    ]
+  },
+  {
+    "id": "training-session-design",
+    "title": "Training session design",
+    "domain": "coaching",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Describes the parts of a training session and what each part is for."
+      },
+      {
+        "level": 2,
+        "descriptor": "Plans one session that trains one game-plan principle."
+      },
+      {
+        "level": 3,
+        "descriptor": "Plans and runs the week's sessions, adjusting them to match load and the opponent."
+      },
+      {
+        "level": 4,
+        "descriptor": "Leads the coaching staff's day-to-day training and checks the quality of their sessions."
+      }
+    ],
+    "concepts": [
+      "coaching-roles",
+      "defending-the-box",
+      "session-design-and-methods",
+      "set-piece-coach-role",
+      "tactical-periodization",
+      "weekly-microcycle"
+    ]
+  },
+  {
+    "id": "player-development-planning",
+    "title": "Player development planning",
+    "domain": "coaching",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what an individual development plan holds: goals, clips and a review date."
+      },
+      {
+        "level": 2,
+        "descriptor": "Writes a development plan for one player from given analysis and coach notes."
+      },
+      {
+        "level": 3,
+        "descriptor": "Writes and reviews development plans for a group and links each goal to training and footage."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the development-plan method for a squad or an academy and coaches staff in using it."
+      }
+    ],
+    "concepts": [
+      "first-team-player-development",
+      "long-term-player-development",
+      "post-match-analysis"
+    ]
+  },
+  {
+    "id": "seasonal-planning",
+    "title": "Seasonal planning",
+    "domain": "coaching",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Describes how a season splits into pre-season, in-season blocks and congested periods."
+      },
+      {
+        "level": 2,
+        "descriptor": "Builds a block plan for a few weeks that balances matches, training and recovery."
+      },
+      {
+        "level": 3,
+        "descriptor": "Plans the whole season with the performance staff and adjusts it to the fixture list."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns the seasonal plan and aligns the coaching, performance and medical staff behind it."
+      }
+    ],
+    "concepts": ["fixture-congestion-and-rotation", "tactical-periodization", "weekly-microcycle"]
+  },
+  {
+    "id": "opposition-analysis",
+    "title": "Opposition analysis",
+    "domain": "analysis",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what an opposition report covers: shape, key players, strengths and weaknesses."
+      },
+      {
+        "level": 2,
+        "descriptor": "Builds a short opposition report from footage and data, with clips."
+      },
+      {
+        "level": 3,
+        "descriptor": "Produces the full opposition pack for each match and presents it to the coaches."
+      },
+      {
+        "level": 4,
+        "descriptor": "Leads the opposition-analysis process and sets the format and quality bar for the department."
+      }
+    ],
+    "concepts": [
+      "analysis-cycle",
+      "analysis-roles",
+      "chance-creation",
+      "defensive-blocks",
+      "formation-vs-structure",
+      "opposition-dossier",
+      "pressing-traps-and-triggers",
+      "report-templates",
+      "set-piece-coach-role",
+      "set-piece-marking",
+      "simulator-football-seats"
+    ]
+  },
+  {
+    "id": "live-match-analysis",
+    "title": "Live match analysis",
+    "domain": "analysis",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how analysts feed live information to the bench during a match."
+      },
+      {
+        "level": 2,
+        "descriptor": "Codes key moments live and flags them to a lead analyst."
+      },
+      {
+        "level": 3,
+        "descriptor": "Gives the coaches clear live and half-time input that they can act on."
+      },
+      {
+        "level": 4,
+        "descriptor": "Designs the live-analysis workflow and trains analysts to deliver it."
+      }
+    ],
+    "concepts": ["analysis-roles", "in-game-management", "live-analysis", "watch-in-blocks"]
+  },
+  {
+    "id": "post-match-review",
+    "title": "Post-match review",
+    "domain": "analysis",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what a post-match review checks against the game plan."
+      },
+      {
+        "level": 2,
+        "descriptor": "Builds a post-match clip set on agreed themes."
+      },
+      {
+        "level": 3,
+        "descriptor": "Delivers the post-match review of team and individual performance against the playing style."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns the review cycle and turns its findings into actions for coaching and recruitment."
+      }
+    ],
+    "concepts": [
+      "analysis-cycle",
+      "analysis-roles",
+      "match-note-basics",
+      "post-match-analysis",
+      "report-templates",
+      "story-then-structure"
+    ]
+  },
+  {
+    "id": "video-analysis-tooling",
+    "title": "Video analysis tools",
+    "domain": "analysis",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Names the tools analysts use to code and clip video, such as Sportscode."
+      },
+      {
+        "level": 2,
+        "descriptor": "Codes a match with a given code window and exports clips."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds code windows from the game model and manages match and training footage."
+      },
+      {
+        "level": 4,
+        "descriptor": "Chooses the department's video tools and trains staff to use them."
+      }
+    ],
+    "concepts": ["analysis-tools", "live-analysis", "visual-evidence"]
+  },
+  {
+    "id": "loan-player-monitoring",
+    "title": "Loan player monitoring",
+    "domain": "analysis",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains why a club follows its loaned players and what it watches for."
+      },
+      {
+        "level": 2,
+        "descriptor": "Logs a loanee's minutes, matches and footage over a few weeks."
+      },
+      {
+        "level": 3,
+        "descriptor": "Reviews each loanee's matches and footage and reports progress to the club."
+      },
+      {
+        "level": 4,
+        "descriptor": "Runs the monitoring programme for all loanees and sets the reporting standard."
+      }
+    ],
+    "concepts": ["academy-pathway-and-value"]
+  },
+  {
+    "id": "statistical-modelling",
+    "title": "Statistical modelling for football",
+    "domain": "data-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what a football model is for, for example estimating chance quality."
+      },
+      {
+        "level": 2,
+        "descriptor": "Fits and checks a simple model on event data with guidance."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds and tests models on event and tracking data that answer a club question."
+      },
+      {
+        "level": 4,
+        "descriptor": "Leads the club's modelling work and decides which approach fits each question."
+      }
+    ],
+    "concepts": [
+      "club-models",
+      "data-research-agenda",
+      "data-roles",
+      "expected-goals",
+      "ml-toolkit-for-football",
+      "per-90-and-possession-adjustment",
+      "pitch-control",
+      "possession-value-models",
+      "python-lab-models",
+      "simulator-football-seats",
+      "stat-stability-and-comparison",
+      "tracking-ai-and-vision"
+    ]
+  },
+  {
+    "id": "model-deployment",
+    "title": "Model deployment and monitoring",
+    "domain": "data-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains the difference between a model in a notebook and one that staff use every week."
+      },
+      {
+        "level": 2,
+        "descriptor": "Packages a model so that it runs on new data with given tooling."
+      },
+      {
+        "level": 3,
+        "descriptor": "Deploys a model, monitors its accuracy and fixes it when the data changes."
+      },
+      {
+        "level": 4,
+        "descriptor": "Decides which models reach production and sets how their accuracy is judged."
+      }
+    ],
+    "concepts": [
+      "club-models",
+      "data-infrastructure",
+      "honest-model-evaluation",
+      "possession-value-models",
+      "python-lab-models"
+    ]
+  },
+  {
+    "id": "uncertainty-quantification",
+    "title": "Quantifying uncertainty",
+    "domain": "data-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains why a model output is an estimate, not a fact."
+      },
+      {
+        "level": 2,
+        "descriptor": "Adds intervals or ranges to a model output with guidance."
+      },
+      {
+        "level": 3,
+        "descriptor": "Reports every model result with its uncertainty and explains it to non-specialists."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets how the department states uncertainty and coaches staff to communicate it."
+      }
+    ],
+    "concepts": [
+      "data-quality-traps",
+      "honest-model-evaluation",
+      "misleading-stats",
+      "stakeholders-and-adoption",
+      "stat-stability-and-comparison"
+    ]
+  },
+  {
+    "id": "data-pipeline-ownership",
+    "title": "Data pipeline ownership",
+    "domain": "data-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how match data moves from a provider into club tools."
+      },
+      {
+        "level": 2,
+        "descriptor": "Runs and repairs an existing data pipeline with a guide."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds pipelines and a warehouse that load event and tracking data reliably."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns the club data platform, its design and its quality standards."
+      }
+    ],
+    "concepts": [
+      "data-infrastructure",
+      "data-quality-traps",
+      "data-roles",
+      "event-vs-tracking-data",
+      "open-data-and-licences",
+      "python-lab-tracking"
+    ]
+  },
+  {
+    "id": "tracking-data-handling",
+    "title": "Working with tracking data",
+    "domain": "data-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what tracking data records and how it differs from event data."
+      },
+      {
+        "level": 2,
+        "descriptor": "Loads a tracking sample and plots player positions for one moment."
+      },
+      {
+        "level": 3,
+        "descriptor": "Processes full-match tracking data at scale and joins it to events."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the club's methods for storing and using tracking data."
+      }
+    ],
+    "concepts": [
+      "event-vs-tracking-data",
+      "pitch-control",
+      "pitch-coordinates-and-kloppy",
+      "python-lab-tracking",
+      "reading-a-reconstruction",
+      "tracking-ai-and-vision"
+    ]
+  },
+  {
+    "id": "dashboard-building",
+    "title": "Dashboards and self-service tools",
+    "domain": "data-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Reads a football dashboard and explains what each chart shows."
+      },
+      {
+        "level": 2,
+        "descriptor": "Builds a simple dashboard from a prepared table."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds dashboards and self-service tools that staff use without help."
+      },
+      {
+        "level": 4,
+        "descriptor": "Designs the club's self-service platform and its standards for clear charts."
+      }
+    ],
+    "concepts": [
+      "data-infrastructure",
+      "data-roles",
+      "per-90-and-possession-adjustment",
+      "python-lab-first-plots"
+    ]
+  },
+  {
+    "id": "football-data-programming",
+    "title": "Programming with football data",
+    "domain": "data-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Reads a short Python or SQL script and says what it does."
+      },
+      {
+        "level": 2,
+        "descriptor": "Writes Python or SQL to filter and aggregate match data."
+      },
+      {
+        "level": 3,
+        "descriptor": "Writes tested, reusable Python and SQL code for analysis and pipelines."
+      },
+      {
+        "level": 4,
+        "descriptor": "Reviews others' code and sets the team's coding standards."
+      }
+    ],
+    "concepts": [
+      "pitch-coordinates-and-kloppy",
+      "python-lab-first-plots",
+      "python-lab-models",
+      "python-lab-tracking"
+    ]
+  },
+  {
+    "id": "player-identification",
+    "title": "Player identification",
+    "domain": "recruitment",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how clubs find players: scouting, data and networks."
+      },
+      {
+        "level": 2,
+        "descriptor": "Watches a player and lists strengths and weaknesses against a role profile."
+      },
+      {
+        "level": 3,
+        "descriptor": "Identifies players who fit the role, the style and the budget, and builds a shortlist."
+      },
+      {
+        "level": 4,
+        "descriptor": "Has a record of identifying talent and sets how the club searches for players."
+      }
+    ],
+    "concepts": [
+      "attacking-roles",
+      "data-led-shortlists",
+      "defensive-roles",
+      "kpis-by-position",
+      "live-vs-video-scouting",
+      "midfield-roles",
+      "one-player-ninety-minutes",
+      "position-vs-role",
+      "recruitment-roles",
+      "relative-age-effect",
+      "role-signatures-in-data",
+      "the-scouts-eye",
+      "watch-one-player"
+    ]
+  },
+  {
+    "id": "scouting-reports",
+    "title": "Scouting reports",
+    "domain": "recruitment",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what a scouting report holds and who reads it."
+      },
+      {
+        "level": 2,
+        "descriptor": "Writes a scouting report from live or video viewing in a given template."
+      },
+      {
+        "level": 3,
+        "descriptor": "Writes recommendations backed by data, reports and footage that coaches trust."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the report template and grading scale and checks scouts' reports."
+      }
+    ],
+    "concepts": [
+      "grading-and-scouting-reports",
+      "one-player-ninety-minutes",
+      "recruitment-roles",
+      "recruitment-workflow",
+      "report-templates"
+    ]
+  },
+  {
+    "id": "data-led-target-ranking",
+    "title": "Data-led target ranking",
+    "domain": "recruitment",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how data can narrow a long list of players."
+      },
+      {
+        "level": 2,
+        "descriptor": "Filters and ranks players on given metrics for a role."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds a model that ranks targets for a role and presents the shortlist."
+      },
+      {
+        "level": 4,
+        "descriptor": "Decides how data and scouting combine in the club's recruitment process."
+      }
+    ],
+    "concepts": [
+      "club-models",
+      "data-led-shortlists",
+      "kpis-by-position",
+      "misleading-stats",
+      "player-valuation",
+      "role-signatures-in-data"
+    ]
+  },
+  {
+    "id": "squad-planning",
+    "title": "Squad planning",
+    "domain": "recruitment",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Reads a squad list by position, age and contract end date."
+      },
+      {
+        "level": 2,
+        "descriptor": "Maps the squad's gaps for the next season."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds a multi-year squad plan with succession for every position."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns squad renewal and aligns recruitment, academy and the head coach with the plan."
+      }
+    ],
+    "concepts": [
+      "multi-year-squad-plan",
+      "positions-overview",
+      "premier-league-rules",
+      "simulator-club-seats",
+      "squad-mapping-and-profiles",
+      "squad-numbers"
+    ]
+  },
+  {
+    "id": "scouting-network-management",
+    "title": "Scouting network management",
+    "domain": "recruitment",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how a scouting network is organised by region and level."
+      },
+      {
+        "level": 2,
+        "descriptor": "Assigns matches to scouts and tracks their coverage."
+      },
+      {
+        "level": 3,
+        "descriptor": "Runs a scouting network and moves its coverage to where the club needs players."
+      },
+      {
+        "level": 4,
+        "descriptor": "Builds the scouting, analytics and video structure that recruitment depends on."
+      }
+    ],
+    "concepts": ["leading-recruitment", "live-vs-video-scouting"]
+  },
+  {
+    "id": "character-and-fit-assessment",
+    "title": "Character and fit assessment",
+    "domain": "recruitment",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains why character and style fit matter in a signing."
+      },
+      {
+        "level": 2,
+        "descriptor": "Gathers background information on a target from given contacts."
+      },
+      {
+        "level": 3,
+        "descriptor": "Assesses a target's character and style fit and records the evidence."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets how the club judges character and fit and makes it part of every recommendation."
+      }
+    ],
+    "concepts": ["grading-and-scouting-reports", "recruitment-workflow", "the-scouts-eye"]
+  },
+  {
+    "id": "transfer-negotiation",
+    "title": "Transfer and loan negotiation",
+    "domain": "transfers-and-finance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains the parties in a transfer: clubs, player, agent."
+      },
+      {
+        "level": 2,
+        "descriptor": "Prepares a negotiation brief with fee and wage limits."
+      },
+      {
+        "level": 3,
+        "descriptor": "Negotiates transfers, loans or contracts inside agreed limits."
+      },
+      {
+        "level": 4,
+        "descriptor": "Leads the club's major negotiations and coaches staff in negotiating."
+      }
+    ],
+    "concepts": [
+      "how-a-transfer-happens",
+      "multi-year-squad-plan",
+      "player-valuation",
+      "transfer-accounting"
+    ]
+  },
+  {
+    "id": "contract-structuring",
+    "title": "Contract structures",
+    "domain": "transfers-and-finance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Names the parts of a player contract: length, wage, bonuses and clauses."
+      },
+      {
+        "level": 2,
+        "descriptor": "Compares two contract offers and their cost over time."
+      },
+      {
+        "level": 3,
+        "descriptor": "Designs contract structures that fit the squad plan and the budget."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the club's contract policy and approves the structures used."
+      }
+    ],
+    "concepts": ["contracts-wages-and-agents", "hiring-the-head-coach", "multi-year-squad-plan"]
+  },
+  {
+    "id": "loan-placement",
+    "title": "Loan placement",
+    "domain": "transfers-and-finance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains why clubs loan players out and what a good host club offers."
+      },
+      {
+        "level": 2,
+        "descriptor": "Compares host clubs for a player on minutes, level and coaching."
+      },
+      {
+        "level": 3,
+        "descriptor": "Vets host clubs and places players on loans that fit their development."
+      },
+      {
+        "level": 4,
+        "descriptor": "Leads the club's loan strategy, placements and loan contracts."
+      }
+    ],
+    "concepts": ["academy-pathway-and-value", "recruitment-roles"]
+  },
+  {
+    "id": "agent-and-club-relationships",
+    "title": "Agent and club relationships",
+    "domain": "transfers-and-finance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains the roles of agents and other clubs in the transfer market."
+      },
+      {
+        "level": 2,
+        "descriptor": "Keeps a contact log of agents and clubs and their players."
+      },
+      {
+        "level": 3,
+        "descriptor": "Maintains working relationships with agents and clubs that open deals."
+      },
+      {
+        "level": 4,
+        "descriptor": "Builds the club's network of agents, clubs and loan partners."
+      }
+    ],
+    "concepts": ["contracts-wages-and-agents", "how-a-transfer-happens", "leading-recruitment"]
+  },
+  {
+    "id": "club-budgeting",
+    "title": "Club budgeting",
+    "domain": "transfers-and-finance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Reads a club budget and names its main income and cost lines."
+      },
+      {
+        "level": 2,
+        "descriptor": "Builds a department budget and tracks spending against it."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds the club budget across football and business departments."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns the club's finances and decides budget priorities with the owners."
+      }
+    ],
+    "concepts": [
+      "club-leadership-roles",
+      "club-revenue-streams",
+      "premier-league-money",
+      "reading-club-accounts",
+      "simulator-club-seats",
+      "transfer-accounting"
+    ]
+  },
+  {
+    "id": "commercial-strategy",
+    "title": "Commercial strategy",
+    "domain": "transfers-and-finance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Names a club's revenue streams: broadcasting, commercial, matchday and player trading."
+      },
+      {
+        "level": 2,
+        "descriptor": "Analyses one revenue stream and suggests a way to grow it."
+      },
+      {
+        "level": 3,
+        "descriptor": "Plans commercial growth across sponsorship, brand and matchday."
+      },
+      {
+        "level": 4,
+        "descriptor": "Leads the club's commercial strategy and balances it with sporting ambition."
+      }
+    ],
+    "concepts": ["club-revenue-streams", "premier-league-money"]
+  },
+  {
+    "id": "sporting-strategy",
+    "title": "Sporting strategy",
+    "domain": "leadership",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what a club's sporting strategy covers: style, squad, academy and staff."
+      },
+      {
+        "level": 2,
+        "descriptor": "Writes how one department supports the sporting strategy."
+      },
+      {
+        "level": 3,
+        "descriptor": "Writes a multi-year sporting strategy and links it to recruitment and the academy."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the club's sporting strategy and keeps it stable through changes of coach."
+      }
+    ],
+    "concepts": [
+      "club-football-philosophy",
+      "club-leadership-roles",
+      "decisions-and-stakeholders",
+      "multi-club-ownership",
+      "saudi-pro-league-context",
+      "simulator-club-seats",
+      "sporting-director-job"
+    ]
+  },
+  {
+    "id": "staff-appointment",
+    "title": "Appointing staff",
+    "domain": "leadership",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how clubs hire coaches and specialist staff."
+      },
+      {
+        "level": 2,
+        "descriptor": "Writes a role profile and interview questions for one post."
+      },
+      {
+        "level": 3,
+        "descriptor": "Runs a hiring process and recommends a candidate with evidence."
+      },
+      {
+        "level": 4,
+        "descriptor": "Appoints the head coach and senior staff and plans their succession."
+      }
+    ],
+    "concepts": [
+      "building-the-data-team",
+      "coach-education-pathways",
+      "hiring-the-head-coach",
+      "running-the-analysis-department"
+    ]
+  },
+  {
+    "id": "department-leadership",
+    "title": "Leading a department",
+    "domain": "leadership",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what a department head does: people, process and standards."
+      },
+      {
+        "level": 2,
+        "descriptor": "Leads a small team on a defined task."
+      },
+      {
+        "level": 3,
+        "descriptor": "Manages a department's people and processes to a set standard."
+      },
+      {
+        "level": 4,
+        "descriptor": "Builds and leads a department and develops its staff into leaders."
+      }
+    ],
+    "concepts": [
+      "building-the-data-team",
+      "club-governance-and-leadership",
+      "data-research-agenda",
+      "head-coach-job",
+      "head-of-data-science-job",
+      "leading-recruitment",
+      "running-the-analysis-department"
+    ]
+  },
+  {
+    "id": "football-department-design",
+    "title": "Football department design",
+    "domain": "leadership",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Draws a club's football structure and its reporting lines."
+      },
+      {
+        "level": 2,
+        "descriptor": "Compares two club structures and their trade-offs."
+      },
+      {
+        "level": 3,
+        "descriptor": "Designs a department structure with clear roles and decision rights."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the club structure and who owns each decision across football and business."
+      }
+    ],
+    "concepts": ["role-map", "sporting-director-job"]
+  },
+  {
+    "id": "high-performance-culture",
+    "title": "High-performance culture",
+    "domain": "leadership",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Describes what a high-performance environment looks like day to day."
+      },
+      {
+        "level": 2,
+        "descriptor": "Spots behaviours in a squad or staff that help or hurt performance."
+      },
+      {
+        "level": 3,
+        "descriptor": "Builds team routines and standards that keep performance high."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets and protects the club's performance culture across staff and players."
+      }
+    ],
+    "concepts": ["leadership-media-and-pressure"]
+  },
+  {
+    "id": "stakeholder-presentation",
+    "title": "Presenting insight to stakeholders",
+    "domain": "communication",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains who the stakeholders are: coaches, directors, owners."
+      },
+      {
+        "level": 2,
+        "descriptor": "Presents one finding with a clear message and a chart."
+      },
+      {
+        "level": 3,
+        "descriptor": "Presents analysis or recommendations quickly and clearly to mixed audiences."
+      },
+      {
+        "level": 4,
+        "descriptor": "Coaches staff in presenting and sets how insight reaches decision makers."
+      }
+    ],
+    "concepts": [
+      "analysis-cycle",
+      "decisions-and-stakeholders",
+      "head-of-data-science-job",
+      "match-note-basics",
+      "output-rubrics",
+      "recruitment-workflow",
+      "spoken-briefings",
+      "stakeholders-and-adoption",
+      "visual-evidence"
+    ]
+  },
+  {
+    "id": "cross-discipline-translation",
+    "title": "Translating between coach and specialists",
+    "domain": "communication",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains why coaches and specialists often talk past each other."
+      },
+      {
+        "level": 2,
+        "descriptor": "Rewrites a specialist finding in coaching language."
+      },
+      {
+        "level": 3,
+        "descriptor": "Turns specialist work into actions that the head coach accepts."
+      },
+      {
+        "level": 4,
+        "descriptor": "Acts as the link between the head coach and all specialist departments."
+      }
+    ],
+    "concepts": [
+      "injury-risk-and-return",
+      "running-the-analysis-department",
+      "stakeholders-and-adoption"
+    ]
+  },
+  {
+    "id": "board-and-owner-relations",
+    "title": "Board and owner relations",
+    "domain": "communication",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how owners, the board and the chief executive govern a club."
+      },
+      {
+        "level": 2,
+        "descriptor": "Prepares a short board update on one football topic."
+      },
+      {
+        "level": 3,
+        "descriptor": "Presents football plans to the board and wins support for them."
+      },
+      {
+        "level": 4,
+        "descriptor": "Represents football at board level and keeps owner support through difficult periods."
+      }
+    ],
+    "concepts": [
+      "club-governance-and-leadership",
+      "club-leadership-roles",
+      "decisions-and-stakeholders",
+      "head-coach-job",
+      "reading-club-accounts"
+    ]
+  },
+  {
+    "id": "player-communication",
+    "title": "Communicating with players",
+    "domain": "communication",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains how a coaching message reaches players: meetings, clips and one-to-ones."
+      },
+      {
+        "level": 2,
+        "descriptor": "Delivers one clear message to a player with a clip."
+      },
+      {
+        "level": 3,
+        "descriptor": "Delivers the coaching message to the squad on training days and matchdays."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets how the staff talk to players and filters issues before they reach the manager."
+      }
+    ],
+    "concepts": [
+      "leadership-media-and-pressure",
+      "opponent-game-plan",
+      "post-match-analysis",
+      "session-design-and-methods",
+      "spoken-briefings"
+    ]
+  },
+  {
+    "id": "injury-prevention-and-return-to-play",
+    "title": "Injury prevention and return to play",
+    "domain": "sports-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains the main injury risks in football and why availability matters."
+      },
+      {
+        "level": 2,
+        "descriptor": "Reads an injury report and a return-to-play plan."
+      },
+      {
+        "level": 3,
+        "descriptor": "Plans prevention and return-to-play steps with the medical staff."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns injury prevention and return-to-play decisions for the squad."
+      }
+    ],
+    "concepts": ["injury-risk-and-return", "performance-roles"]
+  },
+  {
+    "id": "workload-management",
+    "title": "Workload management",
+    "domain": "sports-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what training and match load mean."
+      },
+      {
+        "level": 2,
+        "descriptor": "Reads load data and spots players at risk."
+      },
+      {
+        "level": 3,
+        "descriptor": "Adjusts training load across the week from load data."
+      },
+      {
+        "level": 4,
+        "descriptor": "Sets the club's load-management policy and its link to selection."
+      }
+    ],
+    "concepts": ["fixture-congestion-and-rotation", "load-monitoring", "performance-roles"]
+  },
+  {
+    "id": "performance-science-literacy",
+    "title": "Performance science literacy",
+    "domain": "sports-science",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Names the performance disciplines: sports science, medicine, conditioning, nutrition and analytics."
+      },
+      {
+        "level": 2,
+        "descriptor": "Explains what each performance discipline measures and why."
+      },
+      {
+        "level": 3,
+        "descriptor": "Works with each discipline's lead and uses their evidence in decisions."
+      },
+      {
+        "level": 4,
+        "descriptor": "Leads the performance disciplines as one department focused on availability."
+      }
+    ],
+    "concepts": ["load-monitoring", "performance-roles", "physical-demands-by-position"]
+  },
+  {
+    "id": "regulatory-compliance",
+    "title": "Regulatory compliance",
+    "domain": "governance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains which governing-body rules apply to the club's area of work."
+      },
+      {
+        "level": 2,
+        "descriptor": "Checks one process against the governing-body rules."
+      },
+      {
+        "level": 3,
+        "descriptor": "Runs a programme that meets governing-body rules and audits."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns compliance for a programme and sets the controls that keep it."
+      }
+    ],
+    "concepts": [
+      "club-governance-and-leadership",
+      "eppp-and-academy-structure",
+      "multi-club-ownership",
+      "open-data-and-licences",
+      "pitch-dimensions",
+      "premier-league-money",
+      "premier-league-rules",
+      "saudi-pro-league-context",
+      "transfer-accounting"
+    ]
+  },
+  {
+    "id": "player-welfare-and-safeguarding",
+    "title": "Player welfare and safeguarding",
+    "domain": "governance",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains welfare and safeguarding duties towards players, especially young players."
+      },
+      {
+        "level": 2,
+        "descriptor": "Follows the club's welfare and safeguarding procedures."
+      },
+      {
+        "level": 3,
+        "descriptor": "Supports players' welfare on and off the pitch and records concerns."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns welfare and safeguarding standards for a programme."
+      }
+    ],
+    "concepts": ["long-term-player-development"]
+  },
+  {
+    "id": "player-pathway-planning",
+    "title": "Player pathway planning",
+    "domain": "academy-development",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains the pathway from academy to first team."
+      },
+      {
+        "level": 2,
+        "descriptor": "Maps one player's next steps on the pathway."
+      },
+      {
+        "level": 3,
+        "descriptor": "Plans pathways for a group of players with coaches and recruitment."
+      },
+      {
+        "level": 4,
+        "descriptor": "Owns the club's pathway and aligns academy and first team in one style."
+      }
+    ],
+    "concepts": [
+      "academy-pathway-and-value",
+      "academy-roles",
+      "first-team-player-development",
+      "relative-age-effect",
+      "simulator-club-seats"
+    ]
+  },
+  {
+    "id": "academy-programme-management",
+    "title": "Academy programme management",
+    "domain": "academy-development",
+    "levels": [
+      {
+        "level": 1,
+        "descriptor": "Explains what an academy runs: coaching, education, logistics and recruitment."
+      },
+      {
+        "level": 2,
+        "descriptor": "Organises one part of an academy programme."
+      },
+      {
+        "level": 3,
+        "descriptor": "Manages an academy programme's staff, logistics and education."
+      },
+      {
+        "level": 4,
+        "descriptor": "Runs a sustainable academy focused on developing young talent."
+      }
+    ],
+    "concepts": ["academy-roles", "eppp-and-academy-structure"]
+  }
+]

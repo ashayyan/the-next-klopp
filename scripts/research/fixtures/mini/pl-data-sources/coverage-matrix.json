@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-11-27T12:00:00Z",
+  "script_version": "fixture",
+  "rows": [
+    {
+      "provider": "StatsBomb",
+      "dataset": "StatsBomb open data",
+      "competition": "Premier League",
+      "competition_id": "2",
+      "season": "2015/2016",
+      "data_type": "event",
+      "matches_total": 380,
+      "pl_matches": 380,
+      "unit": "match",
+      "status": "ok",
+      "method": "index",
+      "licence_id": "statsbomb-public-data-user-agreement",
+      "licence_url": "https://example.org/fixture/licence",
+      "source_url": "https://example.org/fixture/matches.json",
+      "fetched_at": "2026-11-27T12:00:00Z",
+      "notes": "Fixture row."
+    },
+    {
+      "provider": "SkillCorner",
+      "dataset": "SkillCorner open data",
+      "competition": "A-League Men",
+      "competition_id": null,
+      "season": "2024/2025",
+      "data_type": "broadcast-tracking",
+      "matches_total": 10,
+      "pl_matches": 0,
+      "unit": "match",
+      "status": "ok",
+      "method": "index",
+      "licence_id": "MIT",
+      "licence_url": "https://example.org/fixture/mit",
+      "source_url": "https://example.org/fixture/skillcorner.json",
+      "fetched_at": "2026-11-27T12:00:00Z",
+      "notes": "Fixture row."
+    },
+    {
+      "provider": "PFF",
+      "dataset": "PFF FC World Cup 2022",
+      "competition": "FIFA World Cup",
+      "competition_id": null,
+      "season": "2022",
+      "data_type": "tracking",
+      "matches_total": 64,
+      "pl_matches": 0,
+      "unit": "match",
+      "status": "request-only",
+      "method": "documented",
+      "licence_id": "request-form-no-terms-stated",
+      "licence_url": null,
+      "source_url": "https://example.org/fixture/pff",
+      "fetched_at": "2026-11-27T12:00:00Z",
+      "notes": "Fixture row."
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "match-writing",
+    "title": "Match writing",
+    "domain": "communication",
+    "levels": [
+      { "level": 1, "descriptor": "Writes down what happened in a match in plain sentences." },
+      {
+        "level": 2,
+        "descriptor": "Writes a one-line note with what, why it matters and what next."
+      },
+      { "level": 3, "descriptor": "Writes a full match report that a coach can act on." },
+      { "level": 4, "descriptor": "Sets the writing standard for a department and edits others." }
+    ],
+    "concepts": ["one-line-match-note", "scout-report-shape"]
+  },
+  {
+    "id": "player-observation",
+    "title": "Player observation",
+    "domain": "recruitment",
+    "levels": [
+      { "level": 1, "descriptor": "Follows one player for a few minutes and lists what they do." },
+      { "level": 2, "descriptor": "Separates what a player does on the ball from off the ball." },
+      { "level": 3, "descriptor": "Judges a player's role fit across several live matches." },
+      { "level": 4, "descriptor": "Trains scouts to observe consistently and defend the verdict." }
+    ],
+    "concepts": ["scout-report-shape", "scouting-eye-basics", "watch-one-player"]
+  },
+  {
+    "id": "reading-the-game",
+    "title": "Reading the game",
+    "domain": "game-knowledge",
+    "levels": [
+      { "level": 1, "descriptor": "Knows the pitch, the lines and the basic shapes of a team." },
+      { "level": 2, "descriptor": "Names a team's shape in and out of possession." },
+      {
+        "level": 3,
+        "descriptor": "Explains why a team presses, builds up or defends the way it does."
+      },
+      { "level": 4, "descriptor": "Reads the game live and adjusts the plan within minutes." }
+    ],
+    "concepts": [
+      "back-four-shape",
+      "build-up-play",
+      "offside-line",
+      "pitch-markings",
+      "pressing-trigger",
+      "read-the-shape",
+      "watch-one-player"
+    ]
+  }
+]

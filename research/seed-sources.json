@@ -1,0 +1,675 @@
+[
+  {
+    "id": "src-ifab-laws-2026-27",
+    "title": "Laws of the Game 2026/27 (IFAB, single pages PDF)",
+    "url": "https://downloads.theifab.com/downloads/laws-of-the-game-202627-single-pages?l=en",
+    "type": "regulation",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "name": "IFAB copyright, no reproduction without permission",
+      "read": {
+        "value": "yes",
+        "note": "Freely downloadable PDF from the IFAB site"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Direct PDF download, read during research on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "booklet p.4: may not be reproduced or translated without IFAB permission"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "paraphrase with short attributed quotes"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-07-01",
+    "as_of": "2026-11-27",
+    "best_for": ["current Laws edition and effective date", "Law 1 pitch dimensions and markings"],
+    "notes": "Edition effective from 1 July 2026 (PDF p.4). Excerpt hashes come from the 02-RESEARCH.md live read; the time of day was not recorded, so fetched_at carries midnight UTC.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "effective-date",
+        "locator": "IFAB Laws of the Game 2026/27 PDF p.4",
+        "fetched_at": "2026-11-27T00:00:00Z",
+        "sha256": "b93f6f59e7458b59d2a9abe37762bc2b6557ba0ffbcdf6df5796a0dfd88c0ee0",
+        "paraphrase": "The 2026/27 edition of the Laws of the Game applies from 1 July 2026."
+      },
+      {
+        "id": "law1-touchline-length",
+        "locator": "IFAB Laws 2026/27 PDF p.47, Law 1",
+        "fetched_at": "2026-11-27T00:00:00Z",
+        "sha256": "a5e8cee54bd909f003367c6d6b5f19925cc44623e63ee085b8dc3ff9c79c39da",
+        "paraphrase": "Law 1 sets the touchline length between a minimum of 90 m and a maximum of 120 m."
+      }
+    ]
+  },
+  {
+    "id": "src-ifab-law-changes-2026-27",
+    "title": "IFAB Law changes 2026/27",
+    "url": "https://theifab.com/law-changes/latest/",
+    "type": "official-document",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright, no reproduction without permission"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with short attributed quotes"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-03-01",
+    "as_of": "2026-11-27",
+    "best_for": ["what changed in the 2026/27 Laws", "VAR scope changes"],
+    "notes": "The page states no general effective date; use the Laws PDF p.4 for that. Recency is approximate (IFAB AGM news item dated 2026-02-28).",
+    "status": "active"
+  },
+  {
+    "id": "src-ifab-laws-documents",
+    "title": "IFAB Laws of the Game documents hub",
+    "url": "https://www.theifab.com/laws-of-the-game-documents/",
+    "type": "website",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public web page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase and link"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["entry point to the current Laws edition", "finding editions by year"],
+    "notes": "Use this as the entry point: https://theifab.com/laws/latest/ itself returned 404 on 2026-11-27. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-ifab-news-140th-agm",
+    "title": "The IFAB introduces further measures to improve match flow and player behaviour",
+    "url": "https://www.theifab.com/news/the-ifab-introduces-further-measures-to-improve-match-flow-and-player-behaviour",
+    "type": "news",
+    "publisher": "The IFAB",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news item"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "IFAB copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-02-28",
+    "as_of": "2026-11-27",
+    "best_for": ["140th AGM decisions", "1 July 2026 effective date confirmation"],
+    "notes": "Confirms approval at the 140th AGM and the 1 July 2026 effective date; competitions starting earlier may adopt sooner.",
+    "status": "active"
+  },
+  {
+    "id": "src-pl-laws-2026-27",
+    "title": "What's new in the 2026/27 Laws of the Game (Premier League)",
+    "url": "https://www.premierleague.com/en/news/4688755/whats-new-in-202627-laws-of-the-game",
+    "type": "news",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once during research on 2026-11-27; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Premier League copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-08-23",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "which 2026/27 changes the Premier League adopts",
+      "where the PL differs from IFAB options"
+    ],
+    "notes": "Article dated 23 August 2026. PL adopts a subset and declines several IFAB options; show the PL variant wherever it differs.",
+    "status": "active"
+  },
+  {
+    "id": "src-statsbomb-open-data",
+    "title": "StatsBomb open data",
+    "url": "https://github.com/statsbomb/open-data",
+    "type": "dataset",
+    "publisher": "StatsBomb",
+    "free": true,
+    "license": {
+      "name": "StatsBomb Public Data User Agreement",
+      "terms_url": "https://raw.githubusercontent.com/statsbomb/open-data/master/LICENSE.pdf",
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, README invites research use"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Agreement 1.2.1 bars providing the data to any external or third party"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Agreement 1.4 and README require the StatsBomb logo credit on any published analysis"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["Premier League 2015/16 event data (380 matches)", "shot freeze frames"],
+    "notes": "418 Premier League matches (2015/16 all 380, 2003/04 Arsenal 38), zero with 360 data. Local-use only: derived artefacts must stay out of the deployed bundle. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-wyscout-public-dataset",
+    "title": "Wyscout public soccer-logs dataset (Pappalardo et al.)",
+    "url": "https://api.figshare.com/v2/collections/4415000",
+    "type": "dataset",
+    "publisher": "Pappalardo et al. via figshare",
+    "free": true,
+    "license": {
+      "name": "CC BY 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "CC BY 4.0"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public figshare API"
+      },
+      "redistribute": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      },
+      "derivative": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["Premier League 2017/18 event data (380 matches)", "shippable open PL events"],
+    "notes": "Seven competitions; England league wyId 364 labelled \"English first division\", 380 matches, events only, coordinates 0-100. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-dfl-idsse-open-data",
+    "title": "DFL / Sportec IDSSE open event and tracking data",
+    "url": "https://api.figshare.com/v2/articles/28196177",
+    "type": "dataset",
+    "publisher": "DFL / Sportec (Bassek et al.) via figshare",
+    "free": true,
+    "license": {
+      "name": "CC BY 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "CC BY 4.0"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public figshare API"
+      },
+      "redistribute": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      },
+      "derivative": {
+        "value": "yes",
+        "note": "CC BY 4.0, attribution required"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["official tracking and event data", "Bundesliga 2022/23, 7 matches"],
+    "notes": "Zero Premier League matches. Position XML files are 350-420 MB each. kloppy loads a Hugging Face mirror. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-skillcorner-opendata",
+    "title": "SkillCorner open data",
+    "url": "https://github.com/SkillCorner/opendata",
+    "type": "dataset",
+    "publisher": "SkillCorner",
+    "free": true,
+    "license": {
+      "name": "MIT",
+      "terms_url": "https://raw.githubusercontent.com/SkillCorner/opendata/master/LICENSE",
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, raw files"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "MIT text names software and documentation files; data is not named"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "MIT text names software; README asks to credit SkillCorner"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["broadcast tracking worked examples", "A-League 2024/25 dynamic events"],
+    "notes": "Zero Premier League matches. matches.json lists 20 matches (one not_started) while the README says 10: trust the index. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-metrica-sample-data",
+    "title": "Metrica Sports sample data",
+    "url": "https://github.com/metrica-sports/sample-data",
+    "type": "dataset",
+    "publisher": "Metrica Sports",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, raw files"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "No licence file (GitHub licence API 404)"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "README asks to acknowledge the source and be responsible"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["tutorial tracking and event data", "EPTS FIFA format example"],
+    "notes": "Three anonymised games, no teams or competitions named, so zero identifiable Premier League matches. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-fot-last-row",
+    "title": "Last Row: Liverpool 2019 positional data",
+    "url": "https://github.com/Friends-of-Tracking-Data-FoTD/Last-Row",
+    "type": "dataset",
+    "publisher": "Friends of Tracking",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, raw CSV"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "No licence file; README: feel free to use for whatever purpose, credit the source"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Informal credit request; README says it lacks the accuracy needed for research"
+      }
+    },
+    "quality": 2,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "feel for off-ball runs on 13 Liverpool Premier League goals",
+      "20 fps tracking sample"
+    ],
+    "notes": "13 of 19 goals are Premier League, tracking only, no events. Self-described as too inaccurate for research. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-pff-fc-wc2022",
+    "title": "PFF FC World Cup 2022 data release",
+    "url": "https://www.blog.fc.pff.com/blog/pff-fc-release-2022-world-cup-data",
+    "type": "dataset",
+    "publisher": "PFF FC",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "conditional",
+        "note": "Access through a request form"
+      },
+      "automated_access": {
+        "value": "no",
+        "note": "Request form, no machine-indexable access"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "No terms stated on the pages read"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "No terms stated on the pages read"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["64 World Cup matches with broadcast tracking", "kloppy pff provider"],
+    "notes": "Zero Premier League matches. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-transfermarkt-datasets",
+    "title": "transfermarkt-datasets",
+    "url": "https://github.com/dcaribou/transfermarkt-datasets",
+    "type": "dataset",
+    "publisher": "dcaribou",
+    "free": true,
+    "license": {
+      "name": "CC0-1.0",
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public GitHub, CC0 repository licence"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "Repo is CC0 but the underlying data is Transfermarkt's and its terms are not stated here"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Same: underlying Transfermarkt terms not stated"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-07-06",
+    "as_of": "2026-11-27",
+    "best_for": ["dated snapshot of transfers and valuations"],
+    "notes": "Updates paused: current to 2026-07-06 (2026/27 squads absent). Treat as a dated snapshot.",
+    "status": "active"
+  },
+  {
+    "id": "src-fbref-advanced-stats",
+    "title": "FBref advanced (Opta) statistics",
+    "url": "https://fbref.com/en/",
+    "type": "website",
+    "publisher": "Sports Reference (FBref)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Basic stats remain readable"
+      },
+      "automated_access": {
+        "value": "no",
+        "note": "Cloudflare 403 challenge on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Not permitted"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Not permitted"
+      }
+    },
+    "quality": 1,
+    "recency": "2026-01-20",
+    "as_of": "2026-11-27",
+    "best_for": ["historical reference only"],
+    "notes": "Registry keeps this as removed so lessons never cite it as a live free xG source. Basic stats are a separate matter.",
+    "status": "removed",
+    "removed_reason": "Opta advanced data removed from FBref on 2026-01-20 after the provider ended the data feed"
+  },
+  {
+    "id": "src-awfulannouncing-fbref-removal",
+    "title": "Sports Reference pulls advanced data in agreement dispute",
+    "url": "https://awfulannouncing.com/soccer/sports-reference-pulls-advanced-data-agreement-violation-dispute.html",
+    "type": "news",
+    "publisher": "Awful Announcing",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once during research; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-01-23",
+    "as_of": "2026-11-27",
+    "best_for": ["evidence for the FBref advanced stats removal"],
+    "notes": "Secondary evidence: the official Sports Reference post returned 403 to the fetch tool.",
+    "status": "active"
+  },
+  {
+    "id": "src-kloppy-docs",
+    "title": "kloppy documentation",
+    "url": "https://kloppy.pysport.org",
+    "type": "tool",
+    "publisher": "PySport",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public documentation"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Documentation licence not read in Wave 1"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Documentation licence not read; paraphrase and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["standardising provider data", "loader names and data models"],
+    "notes": "No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-soccermatics",
+    "title": "Soccermatics course (David Sumpter)",
+    "url": "https://soccermatics.readthedocs.io/",
+    "type": "course",
+    "publisher": "David Sumpter",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public course site"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Course licence not read in Wave 1"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Course licence not read; paraphrase and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["worked football data science examples"],
+    "notes": "No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-friends-of-tracking",
+    "title": "Friends of Tracking (GitHub organisation)",
+    "url": "https://github.com/Friends-of-Tracking-Data-FoTD",
+    "type": "website",
+    "publisher": "Friends of Tracking",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public GitHub organisation"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched 2026-11-27, HTTP 200"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Per-repository licences not read in Wave 1"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Per-repository licences not read; paraphrase and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["tracking data tutorials", "Last Row repository"],
+    "notes": "No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  },
+  {
+    "id": "src-youtube-terms",
+    "title": "YouTube Terms of Service",
+    "url": "https://www.youtube.com/t/terms",
+    "type": "official-document",
+    "publisher": "YouTube",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public terms page"
+      },
+      "automated_access": {
+        "value": "no",
+        "note": "Terms forbid accessing the Service by automated means such as robots or scrapers"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Terms forbid downloading, reproducing or distributing content except as the Service permits"
+      },
+      "derivative": {
+        "value": "no",
+        "note": "Not permitted outside the Service"
+      }
+    },
+    "quality": 5,
+    "recency": "2022-01-05",
+    "as_of": "2026-11-27",
+    "best_for": ["why Watch Gym never downloads or embeds YouTube footage"],
+    "notes": "Page shows \"Last updated: January 5, 2022\". Read during research on 2026-11-27.",
+    "status": "active"
+  },
+  {
+    "id": "src-youtube-api-rmf",
+    "title": "YouTube API Services required minimum functionality",
+    "url": "https://developers.google.com/youtube/terms/required-minimum-functionality",
+    "type": "official-document",
+    "publisher": "Google",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public developer documentation"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Public documentation page"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Google copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["embedded player rules: no overlays or frames in front of the player"],
+    "notes": "The embedded player policy forbids visual elements in front of any part of the player. No publication date stated, so recency is the as_of date.",
+    "status": "active"
+  }
+]

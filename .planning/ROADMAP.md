@@ -17,7 +17,7 @@ The quality gates (QA-01 to QA-05) are standing gates for every lesson. Each is 
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Setup & Contracts** - Verified toolchain, guarded private repo with CI, running app skeleton, decision records and shared schemas
-- [ ] **Phase 2: Research Wave 1** - Parallel research, data-coverage matrix, clip-supply decision, machine-readable registry and concept map, learner approval checkpoint
+- [x] **Phase 2: Research Wave 1** - Parallel research, data-coverage matrix, clip-supply decision, machine-readable registry and concept map, learner approval checkpoint (completed 2026-11-28)
 - [ ] **Phase 3: Pitch Standard & Data Pipeline** - Canonical pitch renderer, coordinate converters, glyphs and legend, Scene/Frame format, kloppy pipeline with licence gates
 - [ ] **Phase 4: Design Direction & System** - 2-3 rendered directions, learner pick, DESIGN.md, tokens, component gallery, screenshot-review gate
 - [ ] **Phase 5: Content Engine, App Shell & Deploy** - Lesson-as-data engine, validator, claim components, Playwright walker, quality gates, shell, protected Vercel deploy
@@ -72,7 +72,48 @@ Plans:
   3. `research/SOURCE_REGISTRY.json` (with read / automated_access / redistribute / derivative licence fields and a defined fetched-excerpt format the verifier can check), `concept-map.json`, `roles.json` and `competencies.json` validate against the schemas; `CONCEPT_MAP.md`, `CURRICULUM_DRAFT.md` and `ROLE_COMPETENCIES.md` regenerate from them; FBref advanced stats are recorded as a removed source.
   4. `research/GAPS.md` lists every domain deferred to just-in-time research together with the track it must precede.
   5. Learner reads a short visual summary of the concept map and curriculum draft and approves it (or sends feedback) before any DESIGN.md work begins.
-**Plans**: TBD
+**Plans**: 21/21 plans complete in 9 waves
+
+Plans:
+**Wave 1**
+- [x] 02-01-PLAN.md — Research gate, seed source ids, excerpt hash CLI, research contract README (wave 1)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [x] 02-02-PLAN.md — Coverage-matrix script (`klopp-pipeline coverage`), fixtures, committed PL matrix (wave 2)
+- [x] 02-05-PLAN.md — Research: laws-of-the-game (wave 2)
+- [x] 02-06-PLAN.md — Research: pitch-geometry (wave 2)
+- [x] 02-07-PLAN.md — Research: positions-and-numbering (wave 2)
+- [x] 02-08-PLAN.md — Research: formations (wave 2)
+- [x] 02-09-PLAN.md — Research: tactics-history (wave 2)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [x] 02-03-PLAN.md — Graph library and Markdown view generator on fixtures (wave 3)
+- [x] 02-10-PLAN.md — Research: how-analysts-watch (wave 3)
+- [x] 02-11-PLAN.md — Research: learning-science-adhd (K-Dense skills) (wave 3)
+- [x] 02-12-PLAN.md — Research: role-definitions (wave 3)
+- [x] 02-13-PLAN.md — Research: pl-data-sources (licences, terms, coverage summary) (wave 3)
+- [x] 02-14-PLAN.md — Research: interactive-explainers (inspiration audit, Okabe-Ito source) (wave 3)
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [x] 02-04-PLAN.md — Self-contained summary page generator (dagre layout, CSP, five screens) (wave 4)
+- [x] 02-15-PLAN.md — SOURCE_REGISTRY.json merge, aliases, just-in-time seeds (wave 4)
+
+**Wave 5** *(blocked on Wave 4 completion)*
+- [x] 02-16-PLAN.md — ADR 0008 Watch Gym L1 clip supply with licence evidence (wave 5)
+- [x] 02-17-PLAN.md — roles.json and competencies.json (wave 5)
+
+**Wave 6** *(blocked on Wave 5 completion)*
+- [x] 02-18-PLAN.md — Concept map Band 1 (Tracks 0-4) and derive-links (wave 6)
+
+**Wave 7** *(blocked on Wave 6 completion)*
+- [x] 02-19-PLAN.md — Concept map Bands 2-3 (Tracks 5-28) and thread starters (wave 7)
+
+**Wave 8** *(blocked on Wave 7 completion)*
+- [x] 02-20-PLAN.md — gaps.json and GAPS.md, generated views, real summary page, full gate (wave 8)
+
+**Wave 9** *(blocked on Wave 8 completion)*
+- [x] 02-21-PLAN.md — Independent Opus review, APPROVAL.md, Tracks 0-4 approved, memory verdicts (wave 9)
+
 **Checkpoint**: learner approval (RSCH-06) gates Phase 4.
 **Research flag**: needs deeper research on Watch Gym footage supply, Premier League coverage in open data, and per-source terms of service (Transfermarkt, Understat, Capology, Wyscout, StatsBomb LICENSE, YouTube embeds). Each domain gets a time/size cap and a stop rule so the sprint converges.
 
@@ -175,7 +216,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Setup & Contracts | 8/9 | In Progress | - |
-| 2. Research Wave 1 | 0/TBD | Not started | - |
+| 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
 | 3. Pitch Standard & Data Pipeline | 0/TBD | Not started | - |
 | 4. Design Direction & System | 0/TBD | Not started | - |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |

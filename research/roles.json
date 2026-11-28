@@ -1,0 +1,592 @@
+[
+  {
+    "id": "sporting-director",
+    "title": "Sporting Director / Director of Football",
+    "summary": "Holds overall responsibility for football operations: sets the sporting strategy, appoints the head coach, runs squad renewal and aligns academy and first team behind one playing style.",
+    "competencies": [
+      {
+        "id": "sporting-strategy",
+        "target_level": 4
+      },
+      {
+        "id": "staff-appointment",
+        "target_level": 4
+      },
+      {
+        "id": "squad-planning",
+        "target_level": 4
+      },
+      {
+        "id": "football-department-design",
+        "target_level": 4
+      },
+      {
+        "id": "playing-style-definition",
+        "target_level": 4
+      },
+      {
+        "id": "board-and-owner-relations",
+        "target_level": 4
+      },
+      {
+        "id": "contract-structuring",
+        "target_level": 3
+      },
+      {
+        "id": "transfer-negotiation",
+        "target_level": 3
+      },
+      {
+        "id": "scouting-network-management",
+        "target_level": 3
+      },
+      {
+        "id": "player-pathway-planning",
+        "target_level": 3
+      },
+      {
+        "id": "set-piece-design",
+        "target_level": 2
+      }
+    ],
+    "sources": [
+      "src-pl-sporting-directors-explained",
+      "src-jobsinfootball-sporting-director-role",
+      "src-slemen-effective-sporting-director",
+      "src-jobsinfootball-sporting-director-structure"
+    ]
+  },
+  {
+    "id": "head-coach",
+    "title": "Head Coach / Manager",
+    "summary": "Leads first-team performance, owning selection, tactics and training inside a club structure that shares recruitment, medical and data with others.",
+    "competencies": [
+      {
+        "id": "playing-style-definition",
+        "target_level": 4
+      },
+      {
+        "id": "game-planning",
+        "target_level": 4
+      },
+      {
+        "id": "in-game-adjustment",
+        "target_level": 4
+      },
+      {
+        "id": "team-selection",
+        "target_level": 4
+      },
+      {
+        "id": "match-reading",
+        "target_level": 4
+      },
+      {
+        "id": "seasonal-planning",
+        "target_level": 4
+      },
+      {
+        "id": "high-performance-culture",
+        "target_level": 4
+      },
+      {
+        "id": "player-communication",
+        "target_level": 4
+      },
+      {
+        "id": "training-session-design",
+        "target_level": 3
+      },
+      {
+        "id": "player-development-planning",
+        "target_level": 3
+      },
+      {
+        "id": "set-piece-design",
+        "target_level": 3
+      },
+      {
+        "id": "board-and-owner-relations",
+        "target_level": 3
+      }
+    ],
+    "sources": [
+      "src-espn-head-coach-vs-manager",
+      "src-uefa-coaching-licences",
+      "src-pl-sporting-directors-explained"
+    ]
+  },
+  {
+    "id": "head-of-performance-analysis",
+    "title": "Head of Performance Analysis",
+    "summary": "Leads the analysis department so the coaches get opposition work, live in-game input and reviews of team and individual performance against the playing style.",
+    "competencies": [
+      {
+        "id": "department-leadership",
+        "target_level": 4
+      },
+      {
+        "id": "opposition-analysis",
+        "target_level": 4
+      },
+      {
+        "id": "live-match-analysis",
+        "target_level": 4
+      },
+      {
+        "id": "post-match-review",
+        "target_level": 4
+      },
+      {
+        "id": "stakeholder-presentation",
+        "target_level": 4
+      },
+      {
+        "id": "match-reading",
+        "target_level": 4
+      },
+      {
+        "id": "video-analysis-tooling",
+        "target_level": 3
+      },
+      {
+        "id": "playing-style-definition",
+        "target_level": 3
+      },
+      {
+        "id": "dashboard-building",
+        "target_level": 2
+      }
+    ],
+    "sources": [
+      "src-brentford-head-of-analysis-2021",
+      "src-newcastle-head-recruitment-analysis-women",
+      "src-newcastle-first-team-analyst-post-match"
+    ]
+  },
+  {
+    "id": "head-of-data-science",
+    "title": "Head of Data Science / Head of Analytics",
+    "summary": "Advances the club's understanding through statistical modelling of match analysis, player performance, youth development and talent identification, and puts the models into daily use.",
+    "competencies": [
+      {
+        "id": "statistical-modelling",
+        "target_level": 4
+      },
+      {
+        "id": "model-deployment",
+        "target_level": 4
+      },
+      {
+        "id": "uncertainty-quantification",
+        "target_level": 4
+      },
+      {
+        "id": "tracking-data-handling",
+        "target_level": 4
+      },
+      {
+        "id": "football-data-programming",
+        "target_level": 4
+      },
+      {
+        "id": "stakeholder-presentation",
+        "target_level": 4
+      },
+      {
+        "id": "dashboard-building",
+        "target_level": 3
+      },
+      {
+        "id": "cross-discipline-translation",
+        "target_level": 3
+      },
+      {
+        "id": "data-led-target-ranking",
+        "target_level": 3
+      },
+      {
+        "id": "department-leadership",
+        "target_level": 3
+      },
+      {
+        "id": "player-identification",
+        "target_level": 2
+      }
+    ],
+    "sources": ["src-liverpool-lead-data-scientist", "src-newcastle-lead-recruitment-data-analyst"]
+  },
+  {
+    "id": "head-of-recruitment",
+    "title": "Head of Recruitment / Head of Scouting",
+    "summary": "Leads player identification and signing, combining scouting with analytics that fit the playing style, and owns shortlists, squad planning and agent relationships.",
+    "competencies": [
+      {
+        "id": "squad-planning",
+        "target_level": 4
+      },
+      {
+        "id": "player-identification",
+        "target_level": 4
+      },
+      {
+        "id": "scouting-reports",
+        "target_level": 4
+      },
+      {
+        "id": "scouting-network-management",
+        "target_level": 4
+      },
+      {
+        "id": "character-and-fit-assessment",
+        "target_level": 4
+      },
+      {
+        "id": "agent-and-club-relationships",
+        "target_level": 4
+      },
+      {
+        "id": "data-led-target-ranking",
+        "target_level": 3
+      },
+      {
+        "id": "contract-structuring",
+        "target_level": 3
+      },
+      {
+        "id": "transfer-negotiation",
+        "target_level": 3
+      },
+      {
+        "id": "playing-style-definition",
+        "target_level": 3
+      },
+      {
+        "id": "sporting-strategy",
+        "target_level": 3
+      },
+      {
+        "id": "loan-placement",
+        "target_level": 2
+      }
+    ],
+    "sources": [
+      "src-liverpool-women-head-of-recruitment",
+      "src-hudl-marshall-head-of-recruitment",
+      "src-football365-who-controls-transfers"
+    ]
+  },
+  {
+    "id": "academy-director",
+    "title": "Academy Director",
+    "summary": "Runs a successful, sustainable academy focused on developing young talent, owning player pathways, staff, education, safeguarding and compliance with governing-body rules.",
+    "competencies": [
+      {
+        "id": "academy-programme-management",
+        "target_level": 4
+      },
+      {
+        "id": "player-pathway-planning",
+        "target_level": 4
+      },
+      {
+        "id": "regulatory-compliance",
+        "target_level": 4
+      },
+      {
+        "id": "player-welfare-and-safeguarding",
+        "target_level": 4
+      },
+      {
+        "id": "department-leadership",
+        "target_level": 4
+      },
+      {
+        "id": "staff-appointment",
+        "target_level": 3
+      },
+      {
+        "id": "player-identification",
+        "target_level": 3
+      },
+      {
+        "id": "player-development-planning",
+        "target_level": 3
+      },
+      {
+        "id": "playing-style-definition",
+        "target_level": 3
+      }
+    ],
+    "sources": ["src-newcastle-women-academy-manager", "src-pl-sporting-directors-explained"]
+  },
+  {
+    "id": "club-ceo",
+    "title": "Club CEO / General Manager",
+    "summary": "Manages the club's finances, commercial growth and sporting ambition, turning the owners' vision into daily operations and owning budgets and club structure.",
+    "competencies": [
+      {
+        "id": "sporting-strategy",
+        "target_level": 4
+      },
+      {
+        "id": "club-budgeting",
+        "target_level": 4
+      },
+      {
+        "id": "commercial-strategy",
+        "target_level": 4
+      },
+      {
+        "id": "football-department-design",
+        "target_level": 4
+      },
+      {
+        "id": "board-and-owner-relations",
+        "target_level": 4
+      },
+      {
+        "id": "department-leadership",
+        "target_level": 4
+      },
+      {
+        "id": "staff-appointment",
+        "target_level": 3
+      },
+      {
+        "id": "stakeholder-presentation",
+        "target_level": 3
+      }
+    ],
+    "sources": [
+      "src-footballbenchmark-ceo-profiles",
+      "src-jobsinfootball-sporting-director-structure"
+    ]
+  },
+  {
+    "id": "head-of-performance",
+    "title": "Head of Performance / Sports Science",
+    "summary": "Oversees sports science, medicine, conditioning, nutrition and analytics so that as many players as possible are fit, and translates between the head coach and the specialists.",
+    "competencies": [
+      {
+        "id": "injury-prevention-and-return-to-play",
+        "target_level": 4
+      },
+      {
+        "id": "workload-management",
+        "target_level": 4
+      },
+      {
+        "id": "performance-science-literacy",
+        "target_level": 4
+      },
+      {
+        "id": "cross-discipline-translation",
+        "target_level": 4
+      },
+      {
+        "id": "department-leadership",
+        "target_level": 4
+      },
+      {
+        "id": "seasonal-planning",
+        "target_level": 3
+      },
+      {
+        "id": "team-selection",
+        "target_level": 2
+      }
+    ],
+    "sources": [
+      "src-slemen-director-high-performance",
+      "src-liverpool-head-academy-medical-performance"
+    ]
+  },
+  {
+    "id": "assistant-coach",
+    "title": "Assistant Coach",
+    "summary": "Runs training day to day, leads the other coaches, filters issues for the manager and backs the manager's message on matchday.",
+    "competencies": [
+      {
+        "id": "training-session-design",
+        "target_level": 4
+      },
+      {
+        "id": "player-communication",
+        "target_level": 3
+      },
+      {
+        "id": "game-planning",
+        "target_level": 3
+      },
+      {
+        "id": "department-leadership",
+        "target_level": 2
+      },
+      {
+        "id": "in-game-adjustment",
+        "target_level": 2
+      }
+    ],
+    "sources": ["src-pl-assistant-manager-insights"]
+  },
+  {
+    "id": "set-piece-coach",
+    "title": "Set-Piece Coach",
+    "summary": "Analyses opponents' set pieces, designs the plans, coaches the routines and agrees training time for them with the head coach.",
+    "competencies": [
+      {
+        "id": "set-piece-design",
+        "target_level": 4
+      },
+      {
+        "id": "opposition-analysis",
+        "target_level": 3
+      },
+      {
+        "id": "training-session-design",
+        "target_level": 3
+      }
+    ],
+    "sources": ["src-liverpool-set-piece-coach"]
+  },
+  {
+    "id": "loan-manager",
+    "title": "Loan Manager",
+    "summary": "Places players on loan, tracks loanees through matches and footage, vets host clubs and supports players' welfare off the pitch.",
+    "competencies": [
+      {
+        "id": "loan-placement",
+        "target_level": 4
+      },
+      {
+        "id": "loan-player-monitoring",
+        "target_level": 4
+      },
+      {
+        "id": "player-welfare-and-safeguarding",
+        "target_level": 3
+      },
+      {
+        "id": "contract-structuring",
+        "target_level": 3
+      },
+      {
+        "id": "transfer-negotiation",
+        "target_level": 3
+      }
+    ],
+    "sources": ["src-sky-hammond-loans-manager", "src-liverpool-head-of-loan-management"]
+  },
+  {
+    "id": "chief-scout",
+    "title": "Chief Scout",
+    "summary": "Finds and reports on players inside the scouting network that the recruitment department leads; no chief scout job ad was read, so this remit is inferred.",
+    "competencies": [
+      {
+        "id": "player-identification",
+        "target_level": 4
+      },
+      {
+        "id": "scouting-reports",
+        "target_level": 4
+      },
+      {
+        "id": "scouting-network-management",
+        "target_level": 3
+      },
+      {
+        "id": "character-and-fit-assessment",
+        "target_level": 3
+      }
+    ],
+    "sources": ["src-hudl-marshall-head-of-recruitment", "src-football365-who-controls-transfers"]
+  },
+  {
+    "id": "first-team-analyst",
+    "title": "First-Team Analyst",
+    "summary": "Covers pre-match, live and post-match analysis for the first team, codes match and training footage and supports individual development plans.",
+    "competencies": [
+      {
+        "id": "video-analysis-tooling",
+        "target_level": 4
+      },
+      {
+        "id": "opposition-analysis",
+        "target_level": 3
+      },
+      {
+        "id": "live-match-analysis",
+        "target_level": 3
+      },
+      {
+        "id": "post-match-review",
+        "target_level": 3
+      },
+      {
+        "id": "match-reading",
+        "target_level": 3
+      },
+      {
+        "id": "player-development-planning",
+        "target_level": 2
+      }
+    ],
+    "sources": [
+      "src-liverpool-first-team-performance-analyst",
+      "src-newcastle-first-team-analyst-post-match"
+    ]
+  },
+  {
+    "id": "recruitment-analyst",
+    "title": "Recruitment Analyst",
+    "summary": "Ranks transfer targets with data models, builds recruitment dashboards and presents recommendations to stakeholders.",
+    "competencies": [
+      {
+        "id": "data-led-target-ranking",
+        "target_level": 4
+      },
+      {
+        "id": "dashboard-building",
+        "target_level": 3
+      },
+      {
+        "id": "stakeholder-presentation",
+        "target_level": 3
+      },
+      {
+        "id": "football-data-programming",
+        "target_level": 3
+      },
+      {
+        "id": "statistical-modelling",
+        "target_level": 2
+      }
+    ],
+    "sources": ["src-newcastle-lead-recruitment-data-analyst"]
+  },
+  {
+    "id": "data-engineer",
+    "title": "Data Engineer",
+    "summary": "Builds the club's data pipelines and warehouse, handles large tracking data and supports model deployment, in Python and SQL.",
+    "competencies": [
+      {
+        "id": "data-pipeline-ownership",
+        "target_level": 4
+      },
+      {
+        "id": "football-data-programming",
+        "target_level": 4
+      },
+      {
+        "id": "tracking-data-handling",
+        "target_level": 3
+      },
+      {
+        "id": "model-deployment",
+        "target_level": 3
+      }
+    ],
+    "sources": ["src-liverpool-data-engineer"]
+  }
+]

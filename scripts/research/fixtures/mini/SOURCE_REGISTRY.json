@@ -1,0 +1,83 @@
+[
+  {
+    "id": "src-fixture-laws",
+    "title": "Fixture: pitch and offside primer",
+    "url": "https://example.org/fixture/laws",
+    "type": "website",
+    "publisher": "Example Publisher",
+    "free": true,
+    "license": {
+      "name": "Fixture licence",
+      "read": { "value": "yes", "note": "Synthetic fixture entry" },
+      "automated_access": { "value": "yes", "note": "Synthetic fixture entry" },
+      "redistribute": { "value": "no", "note": "Synthetic fixture entry" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit" }
+    },
+    "quality": 4,
+    "recency": "2026-07-01",
+    "as_of": "2026-11-27",
+    "best_for": ["pitch markings", "offside"],
+    "notes": "Synthetic source used only by the view generator tests.",
+    "status": "active"
+  },
+  {
+    "id": "src-fixture-shape",
+    "title": "Fixture: team shape and build-up",
+    "url": "https://example.org/fixture/shape",
+    "type": "article",
+    "publisher": "Example Publisher",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Synthetic fixture entry" },
+      "automated_access": { "value": "unknown", "note": "Not checked" },
+      "redistribute": { "value": "no", "note": "Synthetic fixture entry" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit" }
+    },
+    "quality": 3,
+    "recency": "2026-05-01",
+    "as_of": "2026-11-27",
+    "best_for": ["back four", "build-up play", "pressing"],
+    "notes": "Synthetic source used only by the view generator tests.",
+    "status": "active"
+  },
+  {
+    "id": "src-fixture-writing",
+    "title": "Fixture: writing a match note",
+    "url": "https://example.org/fixture/writing",
+    "type": "blog",
+    "publisher": "Example Publisher",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Synthetic fixture entry" },
+      "automated_access": { "value": "unknown", "note": "Not checked" },
+      "redistribute": { "value": "no", "note": "Synthetic fixture entry" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with credit" }
+    },
+    "quality": 3,
+    "recency": "2026-03-01",
+    "as_of": "2026-11-27",
+    "best_for": ["match notes"],
+    "notes": "Synthetic source used only by the view generator tests.",
+    "status": "active"
+  },
+  {
+    "id": "src-fixture-scouting",
+    "title": "Fixture: the scout's eye",
+    "url": "https://example.org/fixture/scouting",
+    "type": "article",
+    "publisher": "Example Publisher",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Synthetic fixture entry" },
+      "automated_access": { "value": "unknown", "note": "Not checked" },
+      "redistribute": { "value": "no", "note": "Synthetic fixture entry" },
+      "derivative": { "value": "unknown", "note": "Terms not read" }
+    },
+    "quality": 2,
+    "recency": "2026-02-01",
+    "as_of": "2026-11-27",
+    "best_for": ["scouting reports", "player observation"],
+    "notes": "Synthetic source used only by the view generator tests.",
+    "status": "unverified"
+  }
+]

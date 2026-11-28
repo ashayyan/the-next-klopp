@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-27",
+  "deferred_domains": [
+    {
+      "brief_domain": "2",
+      "name": "Formations and shapes",
+      "why_deferred": "Not needed before Milestone 1; the shapes lesson can use the Watch Gym research.",
+      "must_precede": ["t02-language-of-space"],
+      "research_trigger": "start of t02-language-of-space",
+      "starting_sources": ["src-fixture-shape", "https://example.org/fixture/formations"]
+    }
+  ],
+  "unknown_licence_sources": [
+    {
+      "source_id": "src-fixture-scouting",
+      "needed_by": ["t21-scouting-1", "scout-report-shape"],
+      "note": "Derivative terms not read yet."
+    }
+  ],
+  "pl_coverage_gaps": [
+    {
+      "id": "no-open-pl-tracking",
+      "gap": "No open Premier League tracking data exists.",
+      "impact": "Watch Gym cannot show Premier League tracking clips.",
+      "mitigation": "Use Premier League event data and label tracking from another league.",
+      "evidence": ["src-fixture-shape"]
+    }
+  ],
+  "orphan_competencies": [
+    {
+      "competency_id": "match-writing",
+      "note": "Thin coverage: two concepts and no practice task yet."
+    }
+  ]
+}

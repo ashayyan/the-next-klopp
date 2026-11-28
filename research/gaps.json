@@ -1,0 +1,888 @@
+{
+  "schema_version": 1,
+  "as_of": "2026-11-28",
+  "deferred_domains": [
+    {
+      "brief_domain": "2",
+      "name": "Principles of play, phases of play, the language of space",
+      "why_deferred": "Not needed for Milestones 0 and 1; Track 2 concepts (zones, lanes, half-spaces, superiorities) cite only just-in-time seeds and stay draft until this research lands",
+      "must_precede": ["t02-language-of-space", "t03-phases-of-play"],
+      "research_trigger": "start of t02-language-of-space",
+      "starting_sources": [
+        "src-spielverlagerung",
+        "src-coaches-voice",
+        "src-karun-expected-threat",
+        "src-premier-league-counter-pressing-explained"
+      ]
+    },
+    {
+      "brief_domain": "3",
+      "name": "Positional play, relationism and modern attacking models",
+      "why_deferred": "Not needed for Milestones 0 and 1; attacking models build on Tracks 2 and 3",
+      "must_precede": ["t05-attacking-play"],
+      "research_trigger": "start of t05-attacking-play",
+      "starting_sources": [
+        "src-spielverlagerung",
+        "src-coaches-voice",
+        "src-theanalyst-stones-hybrid-role",
+        "src-pl-box-midfield-explained"
+      ]
+    },
+    {
+      "brief_domain": "4",
+      "name": "Defending: blocks, pressing schemes, triggers, rest-defence",
+      "why_deferred": "Not needed for Milestones 0 and 1; defending builds on the shared language of space and phases",
+      "must_precede": ["t06-defending"],
+      "research_trigger": "start of t06-defending",
+      "starting_sources": [
+        "src-uefa-technical-reports",
+        "src-premier-league-counter-pressing-explained",
+        "src-fourfourtwo-who-invented-pressing",
+        "src-spielverlagerung"
+      ]
+    },
+    {
+      "brief_domain": "5",
+      "name": "Transitions",
+      "why_deferred": "Not needed for Milestones 0 and 1; the rest-defence concept cites only unverified seeds and stays draft until this research lands",
+      "must_precede": ["t07-transitions"],
+      "research_trigger": "start of t07-transitions",
+      "starting_sources": [
+        "src-premier-league-counter-pressing-explained",
+        "src-spielverlagerung",
+        "src-coaches-voice",
+        "src-uefa-technical-reports"
+      ]
+    },
+    {
+      "brief_domain": "6",
+      "name": "Set pieces",
+      "why_deferred": "Not needed for Milestones 0 and 1; set-piece lessons sit in Part B and need event data on corners and free kicks",
+      "must_precede": ["t08-set-pieces"],
+      "research_trigger": "start of t08-set-pieces",
+      "starting_sources": [
+        "src-liverpool-set-piece-coach",
+        "src-statsbomb-open-data-spec",
+        "src-statsbomb-blog-archive",
+        "src-uefa-technical-reports"
+      ]
+    },
+    {
+      "brief_domain": "7",
+      "name": "Player roles and profiles (role catalogue)",
+      "why_deferred": "Not needed for Milestones 0 and 1; the role catalogue extends the Wave 1 positions and numbering research",
+      "must_precede": ["t09-roles-and-profiles"],
+      "research_trigger": "start of t09-roles-and-profiles",
+      "starting_sources": [
+        "src-premierleague-coachesvoice-no6-explained",
+        "src-fourfourtwo-inverted-full-back",
+        "src-theanalyst-stones-hybrid-role",
+        "src-coaches-voice"
+      ]
+    },
+    {
+      "brief_domain": "8",
+      "name": "Coaching methodology",
+      "why_deferred": "Not needed for Milestones 0 and 1; tactical periodization and session design cite only unverified seeds and stay draft",
+      "must_precede": ["t10-coaching-and-game-models"],
+      "research_trigger": "start of t10-coaching-and-game-models",
+      "starting_sources": [
+        "src-fa-coaching-courses",
+        "src-fifa-training-centre",
+        "src-uefa-coaching-licences",
+        "src-coaches-voice"
+      ]
+    },
+    {
+      "brief_domain": "9",
+      "name": "Training and sports science",
+      "why_deferred": "Not needed for Milestones 0 and 1; load, recovery and medical topics need peer-reviewed sources graded for evidence",
+      "must_precede": ["t12-training-sports-science"],
+      "research_trigger": "start of t12-training-sports-science",
+      "starting_sources": [
+        "src-slemen-director-high-performance",
+        "src-liverpool-head-academy-medical-performance",
+        "src-jssm-linke-effective-playing-time",
+        "src-fifa-training-centre"
+      ]
+    },
+    {
+      "brief_domain": "10",
+      "name": "Match and video analysis workflow",
+      "why_deferred": "Not needed for Milestones 0 and 1; the analyst workflow builds on the Wave 1 how-analysts-watch research",
+      "must_precede": ["t13-performance-analysis"],
+      "research_trigger": "start of t13-performance-analysis",
+      "starting_sources": [
+        "src-uefa-performance-analysis",
+        "src-asa-day-in-life-analyst",
+        "src-newcastle-first-team-analyst-post-match",
+        "src-worldrugby-postmatch-analysis"
+      ]
+    },
+    {
+      "brief_domain": "11",
+      "name": "Football data types and providers (beyond the open PL sources)",
+      "why_deferred": "Not needed for Milestones 0 and 1; Wave 1 covered only the open PL providers and their licences; paid providers, data contracts and tracking vendors remain",
+      "must_precede": ["t15-football-data"],
+      "research_trigger": "start of t15-football-data",
+      "starting_sources": [
+        "src-soccerdata",
+        "src-kloppy-docs",
+        "src-statsbomb-open-data-spec",
+        "src-wyscout-public-dataset"
+      ]
+    },
+    {
+      "brief_domain": "12",
+      "name": "Football metrics and models",
+      "why_deferred": "Not needed for Milestones 0 and 1; xG, xT, VAEP and possession models need method papers and tested reference values",
+      "must_precede": ["t16-metrics-and-models"],
+      "research_trigger": "start of t16-metrics-and-models",
+      "starting_sources": [
+        "src-socceraction-docs",
+        "src-theanalyst-what-is-xg",
+        "src-karun-expected-threat",
+        "src-mit-sloan-research-papers"
+      ]
+    },
+    {
+      "brief_domain": "12b",
+      "name": "Stats by position and role",
+      "why_deferred": "Not needed for Milestones 0 and 1; needs several sub-agents, one per position group, after the metrics research",
+      "must_precede": ["t17-numbers-by-role"],
+      "research_trigger": "start of t17-numbers-by-role",
+      "starting_sources": [
+        "src-theanalyst-what-is-xg",
+        "src-theanalyst-stones-hybrid-role",
+        "src-book-the-numbers-game",
+        "src-asa-home"
+      ]
+    },
+    {
+      "brief_domain": "13",
+      "name": "The Python football ecosystem",
+      "why_deferred": "Not needed for Milestones 0 and 1; library APIs change fast; check them at the start of the Python lab, tested in Pyodide",
+      "must_precede": ["t18-python-lab"],
+      "research_trigger": "start of t18-python-lab",
+      "starting_sources": [
+        "src-mplsoccer-docs",
+        "src-statsbombpy",
+        "src-pysport",
+        "src-mckay-johns-youtube"
+      ]
+    },
+    {
+      "brief_domain": "14",
+      "name": "Recruitment and scouting (a talent ID, b technical and video scouting, c reports and grades)",
+      "why_deferred": "Not needed for Milestones 0 and 1; the Scouting I thread starts early on Wave 1 watching skills; the scout's methods need their own research",
+      "must_precede": ["t21-scouting-1"],
+      "research_trigger": "start of t21-scouting-1",
+      "starting_sources": [
+        "src-hudl-marshall-head-of-recruitment",
+        "src-liverpool-women-head-of-recruitment",
+        "src-fifa-training-centre",
+        "src-uefa-technical-reports"
+      ]
+    },
+    {
+      "brief_domain": "14",
+      "name": "Recruitment and scouting (d data-led, e structure and workflow, f networks)",
+      "why_deferred": "Not needed for Milestones 0 and 1; the recruitment system builds on Scouting I and the metrics tracks",
+      "must_precede": ["t22-scouting-2"],
+      "research_trigger": "start of t22-scouting-2",
+      "starting_sources": [
+        "src-newcastle-lead-recruitment-data-analyst",
+        "src-newcastle-head-recruitment-analysis-women",
+        "src-football365-who-controls-transfers",
+        "src-soccermatics"
+      ]
+    },
+    {
+      "brief_domain": "14c",
+      "name": "Writing and speaking analysis",
+      "why_deferred": "Not needed for Milestones 0 and 1; the Write and Speak thread starts on Wave 1 learning-science evidence; report and presentation craft need their own research",
+      "must_precede": ["t14-write-and-speak"],
+      "research_trigger": "start of t14-write-and-speak",
+      "starting_sources": [
+        "src-worldrugby-halftime-analysis",
+        "src-worldrugby-postmatch-analysis",
+        "src-mastermindsite-how-i-watch",
+        "src-asa-day-in-life-analyst"
+      ]
+    },
+    {
+      "brief_domain": "15",
+      "name": "The transfer market, player valuation and salaries (a to f)",
+      "why_deferred": "Not needed for Milestones 0 and 1; valuation and wage sources have unknown or restrictive terms; figures are typed by hand with a link",
+      "must_precede": ["t23-transfers-and-valuation"],
+      "research_trigger": "start of t23-transfers-and-valuation",
+      "starting_sources": [
+        "src-fifa-transfer-reports",
+        "src-cies-football-observatory",
+        "src-transfermarkt-site",
+        "src-capology"
+      ]
+    },
+    {
+      "brief_domain": "16",
+      "name": "Contracts, agents and regulations",
+      "why_deferred": "Not needed for Milestones 0 and 1; regulation texts (FIFA RSTP, agent rules) must be read at their current edition",
+      "must_precede": ["t23-transfers-and-valuation"],
+      "research_trigger": "start of t23-transfers-and-valuation",
+      "starting_sources": [
+        "src-fifa-rules-and-reports",
+        "src-fifa-football-agents",
+        "src-pl-handbook-2026-27",
+        "https://inside.fifa.com/en/legal"
+      ]
+    },
+    {
+      "brief_domain": "17",
+      "name": "Club finance",
+      "why_deferred": "Not needed for Milestones 0 and 1; accounts, amortisation and revenue need dated filings and reports",
+      "must_precede": ["t26-club-ceo", "t23-transfers-and-valuation"],
+      "research_trigger": "start of t26-club-ceo",
+      "starting_sources": [
+        "src-deloitte-football-money-league",
+        "src-companies-house-search",
+        "src-uefa-documents-portal",
+        "src-pl-handbook-2026-27"
+      ]
+    },
+    {
+      "brief_domain": "18",
+      "name": "Club strategy and the sporting director role",
+      "why_deferred": "Not needed for Milestones 0 and 1; the role definition is in Wave 1; strategy, multi-club ownership and structures need their own research",
+      "must_precede": ["t25-sporting-director"],
+      "research_trigger": "start of t25-sporting-director",
+      "starting_sources": [
+        "src-parnell-sporting-director-emergence",
+        "src-slemen-effective-sporting-director",
+        "src-jobsinfootball-sporting-director-structure",
+        "src-uefa-documents-portal"
+      ]
+    },
+    {
+      "brief_domain": "19",
+      "name": "Youth development and talent ID",
+      "why_deferred": "Not needed for Milestones 0 and 1; relative age effect cites only unverified seeds; EPPP and academy research waits for the academy track",
+      "must_precede": ["t24-academy"],
+      "research_trigger": "start of t24-academy",
+      "starting_sources": [
+        "src-fifa-training-centre",
+        "src-uefa-technical-reports",
+        "src-thefa-central-defenders-bootroom",
+        "src-newcastle-women-academy-manager"
+      ]
+    },
+    {
+      "brief_domain": "20",
+      "name": "The Premier League ecosystem (governance, SCR/SSR, accounts, homegrown rules and work permits, EPPP, broadcasting, data departments)",
+      "why_deferred": "Not needed for Milestones 0 and 1; only the free PL data part was Wave 1 research; governance and rules need the current Handbook edition",
+      "must_precede": ["t27-premier-league-system"],
+      "research_trigger": "start of t27-premier-league-system",
+      "starting_sources": [
+        "src-pl-handbook-2026-27",
+        "src-independent-football-regulator",
+        "src-commons-library",
+        "src-premierleague-stats-terms"
+      ]
+    },
+    {
+      "brief_domain": "20",
+      "name": "Saudi Pro League context pack",
+      "why_deferred": "Not needed for Milestones 0 and 1; the saudi-pro-league-context concept cites only general sources; the registry has no Saudi Pro League source yet, so research must add one before that chapter is written",
+      "must_precede": ["t27-premier-league-system"],
+      "research_trigger": "start of t27-premier-league-system",
+      "starting_sources": [
+        "https://www.spl.com.sa/en",
+        "https://www.saff.com.sa/en/",
+        "src-cies-football-observatory",
+        "src-fifa-rules-and-reports"
+      ]
+    },
+    {
+      "brief_domain": "20b",
+      "name": "The head coach / manager",
+      "why_deferred": "Not needed for Milestones 0 and 1; the role is defined in Wave 1; the job itself needs its own research",
+      "must_precede": ["t11-head-coach"],
+      "research_trigger": "start of t11-head-coach",
+      "starting_sources": [
+        "src-espn-head-coach-vs-manager",
+        "src-pl-assistant-manager-insights",
+        "src-uefa-coaching-licences",
+        "src-coaches-voice"
+      ]
+    },
+    {
+      "brief_domain": "20c",
+      "name": "Performance analysis departments",
+      "why_deferred": "Not needed for Milestones 0 and 1; department structure builds on the analyst workflow research",
+      "must_precede": ["t13-performance-analysis"],
+      "research_trigger": "start of t13-performance-analysis",
+      "starting_sources": [
+        "src-brentford-head-of-analysis-2021",
+        "src-uefa-performance-analysis",
+        "src-liverpool-first-team-performance-analyst",
+        "src-newcastle-first-team-analyst-post-match"
+      ]
+    },
+    {
+      "brief_domain": "20d",
+      "name": "Football AI and ML",
+      "why_deferred": "Not needed for Milestones 0 and 1; fast-moving field; check models and tools at the start of the track",
+      "must_precede": ["t19-football-ai-ml"],
+      "research_trigger": "start of t19-football-ai-ml",
+      "starting_sources": [
+        "src-unravelsports",
+        "src-friends-of-tracking",
+        "src-ieee-bialkowski-team-structures",
+        "src-mit-sloan-research-papers"
+      ]
+    },
+    {
+      "brief_domain": "20e",
+      "name": "Club data departments",
+      "why_deferred": "Not needed for Milestones 0 and 1; the role is defined in Wave 1; department structure and stack need their own research",
+      "must_precede": ["t20-head-of-data-science"],
+      "research_trigger": "start of t20-head-of-data-science",
+      "starting_sources": [
+        "src-liverpool-lead-data-scientist",
+        "src-liverpool-data-engineer",
+        "src-newcastle-lead-recruitment-data-analyst",
+        "src-friends-of-tracking"
+      ]
+    },
+    {
+      "brief_domain": "20f",
+      "name": "Academy and player development",
+      "why_deferred": "Not needed for Milestones 0 and 1; academy structure and the loan pathway need their own research",
+      "must_precede": ["t24-academy"],
+      "research_trigger": "start of t24-academy",
+      "starting_sources": [
+        "src-newcastle-women-academy-manager",
+        "src-liverpool-head-academy-medical-performance",
+        "src-liverpool-head-of-loan-management",
+        "src-sky-hammond-loans-manager"
+      ]
+    },
+    {
+      "brief_domain": "20g",
+      "name": "The club CEO/GM and the business of football",
+      "why_deferred": "Not needed for Milestones 0 and 1; business and commercial topics need dated reports and accounts",
+      "must_precede": ["t26-club-ceo"],
+      "research_trigger": "start of t26-club-ceo",
+      "starting_sources": [
+        "src-footballbenchmark-ceo-profiles",
+        "src-deloitte-football-money-league",
+        "src-companies-house-search",
+        "src-uefa-documents-portal"
+      ]
+    }
+  ],
+  "unknown_licence_sources": [
+    {
+      "source_id": "src-90min-nereo-rocco",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-aisa-chapman-new-formation-1925",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-aps-bradbury-attention-span",
+      "needed_by": ["t04-watch-gym"],
+      "note": "Paper; automated access unknown (the domain recorded unknown where the merge saw yes, the conservative value). Cite and paraphrase only"
+    },
+    {
+      "source_id": "src-arsenal-newcastle-7-0-golden-era",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-breakingthelines-watch-space",
+      "needed_by": ["t04-watch-gym"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-brentford-head-of-analysis-2021",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-bundesliga-klopp-dortmund-years",
+      "needed_by": ["t01-the-game", "t03-phases-of-play"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-bundesliga-positions-explained",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-capology",
+      "needed_by": ["t23-transfers-and-valuation"],
+      "note": "Read, redistribution and derivative unknown; the terms page returned 403. Wage figures are typed by hand with a link"
+    },
+    {
+      "source_id": "src-cies-football-observatory",
+      "needed_by": [
+        "t19-football-ai-ml",
+        "t22-scouting-2",
+        "t23-transfers-and-valuation",
+        "t27-premier-league-system"
+      ],
+      "note": "Automated access and redistribution unknown; read by hand and paraphrase report findings with a link"
+    },
+    {
+      "source_id": "src-coaches-voice",
+      "needed_by": ["t02-language-of-space"],
+      "note": "Just-in-time seed, all four fields unknown; check the terms before Track 2 lessons paraphrase it"
+    },
+    {
+      "source_id": "src-coachesvoice-formations-explained",
+      "needed_by": ["t01-the-game", "t02-language-of-space"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-espn-head-coach-vs-manager",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-fa-laws-and-rules",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-fifa-stadium-guidelines-pitch",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-football365-who-controls-transfers",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-footballbenchmark-ceo-profiles",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-fourfourtwo-formations-in-football",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-fourfourtwo-inverted-full-back",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-fourfourtwo-no10",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-fourfourtwo-pl-pitch-sizes",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-fourfourtwo-watch-like-analyst",
+      "needed_by": ["t03-phases-of-play", "t04-watch-gym"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-fourfourtwo-who-invented-pressing",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-goal-squad-numbers-explained",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-hudl-marshall-head-of-recruitment",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-ifab-history-back-pass-law",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-ifab-history-offside-law",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-ifab-history-origins-modern-game",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-jarmac-pan-pretesting-video",
+      "needed_by": ["t04-watch-gym", "ADR 0008"],
+      "note": "Paper; redistribution unknown. Cite and paraphrase only, never copy figures"
+    },
+    {
+      "source_id": "src-jobsinfootball-532",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-jobsinfootball-sporting-director-role",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-jobsinfootball-sporting-director-structure",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-jssm-linke-effective-playing-time",
+      "needed_by": ["t04-watch-gym"],
+      "note": "Paper; automated access and redistribution unknown. Cite and paraphrase only"
+    },
+    {
+      "source_id": "src-karun-expected-threat",
+      "needed_by": ["t02-language-of-space"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-kloppy-coordinates-docs",
+      "needed_by": ["t01-the-game"],
+      "note": "Docs page; redistribution and derivative unknown. Link to it and describe the coordinate systems in our own words"
+    },
+    {
+      "source_id": "src-lcfc-squad-numbers-history",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-liverpool-data-engineer",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-liverpool-first-team-performance-analyst",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-liverpool-head-academy-medical-performance",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-liverpool-head-of-loan-management",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-liverpool-lead-data-scientist",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-liverpool-set-piece-coach",
+      "needed_by": ["t00-start-here", "t03-phases-of-play"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-liverpool-women-head-of-recruitment",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-mastermindsite-how-i-watch",
+      "needed_by": ["t02-language-of-space", "t03-phases-of-play", "t04-watch-gym"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-mdpi-pct-team-sports-meta",
+      "needed_by": ["t04-watch-gym", "ADR 0008"],
+      "note": "Paper; automated access and redistribution unknown. Cite and paraphrase only"
+    },
+    {
+      "source_id": "src-metrica-sample-data",
+      "needed_by": ["ADR 0008"],
+      "note": "Redistribution unknown; ADR 0008 keeps Metrica data local only with credit"
+    },
+    {
+      "source_id": "src-newcastle-first-team-analyst-post-match",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-newcastle-lead-recruitment-data-analyst",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-newcastle-women-academy-manager",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-okabe-ito-cud",
+      "needed_by": ["research summary page footer"],
+      "note": "Automated access unknown; the palette hex values are quoted from a verified excerpt and credited in the summary footer"
+    },
+    {
+      "source_id": "src-pff-fc-wc2022",
+      "needed_by": ["ADR 0008"],
+      "note": "Redistribution and derivative unknown behind a request form; ADR 0008 rejects waiting for it and it holds 0 PL matches"
+    },
+    {
+      "source_id": "src-pl-352-explained",
+      "needed_by": ["t01-the-game", "t02-language-of-space"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-442-explained",
+      "needed_by": ["t01-the-game", "t02-language-of-space"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-451-explained",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-assistant-manager-insights",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-formation-trends-2024-25",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-handbook-2026-27",
+      "needed_by": ["t01-the-game"],
+      "note": "Automated access unknown; read by hand. The registry types it official-document, while positions-and-numbering typed it regulation; decide in one place if lessons treat the PL Rules as regulations"
+    },
+    {
+      "source_id": "src-pl-laws-2026-27",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-saot-explainer",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-slot-liverpool-shape-2024",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-sporting-directors-explained",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-var-accuracy-2024",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-pl-var-faqs",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-planetfootball-formations-whiteboard",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-premier-league-chelsea-2004-05",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-premier-league-counter-pressing-explained",
+      "needed_by": ["t03-phases-of-play"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-premier-league-hall-of-fame-wenger",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-premier-league-history",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-premier-league-klopp-liverpool-2019-20",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-premier-league-leicester-2015-16",
+      "needed_by": ["t03-phases-of-play"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-premier-league-man-city-evolution",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-premierleague-coachesvoice-no6-explained",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-sky-hammond-loans-manager",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-skysports-arteta-tactics-2023",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-skysports-conte-343-2017",
+      "needed_by": ["t01-the-game", "t03-phases-of-play"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-slemen-director-high-performance",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-slemen-effective-sporting-director",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-spielverlagerung",
+      "needed_by": ["t02-language-of-space"],
+      "note": "Just-in-time seed, all four fields unknown; check the terms before Track 2 lessons paraphrase it"
+    },
+    {
+      "source_id": "src-squadnumbers-1-11-premier-league-era",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-transfermarkt-site",
+      "needed_by": ["t23-transfers-and-valuation"],
+      "note": "Read, redistribution and derivative unknown; the terms page was blocked to tools and licence.xml prohibits AI use. Values are typed by hand with a link"
+    },
+    {
+      "source_id": "src-uefa-ac-milan-1988-90",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-uefa-ajax-1971-73",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-uefa-barcelona-2008-12",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-uefa-coaching-licences",
+      "needed_by": ["t00-start-here"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-uefa-hungary-1950-56",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    },
+    {
+      "source_id": "src-understat",
+      "needed_by": ["t16-metrics-and-models"],
+      "note": "Unverified: only a returning-soon notice on 2026-11-27 and no terms found. Re-check before any Track 16 lesson cites it"
+    },
+    {
+      "source_id": "src-yahoo-keble-formations-2016",
+      "needed_by": ["t01-the-game"],
+      "note": "Only automated access is unknown; read by hand, paraphrase with credit and a link, never scrape"
+    }
+  ],
+  "pl_coverage_gaps": [
+    {
+      "id": "no-pl-360",
+      "gap": "No open Premier League 360 data: StatsBomb has 0 PL matches with 360 frames, only shot freeze frames",
+      "impact": "PL lessons cannot show where every player stood at each event",
+      "mitigation": "Use shot freeze frames for PL examples; teach 360 ideas on labelled non-PL StatsBomb 360 matches",
+      "evidence": ["src-statsbomb-open-data", "src-statsbomb-open-data-360-frames"]
+    },
+    {
+      "id": "pl-tracking-last-row-only",
+      "gap": "PL tracking and off-ball movement only from Last Row: 13 Liverpool goals, informal licence, self-described as too inaccurate for research",
+      "impact": "No continuous PL off-ball footage for Watch Gym, pitch control or pressing lessons",
+      "mitigation": "PL off-ball reconstructions use labelled non-PL tracking (DFL Bundesliga); Last Row stays local with credit",
+      "evidence": ["src-fot-last-row", "src-dfl-idsse-open-data"]
+    },
+    {
+      "id": "no-pl-physical",
+      "gap": "No open provider in the coverage matrix offers Premier League physical data",
+      "impact": "Sports-science lessons cannot use PL distance, sprint or load numbers from open data",
+      "mitigation": "Use published study figures with citation and labelled non-PL tracking; never invent PL physical numbers",
+      "evidence": ["src-skillcorner-opendata", "src-jssm-linke-effective-playing-time"]
+    },
+    {
+      "id": "statsbomb-redistribution",
+      "gap": "StatsBomb terms bar giving the data to third parties and commercial use of derived analysis",
+      "impact": "StatsBomb-derived PL clips and tables cannot ship in the Vercel bundle",
+      "mitigation": "StatsBomb artifacts stay in the local study build on the deploy deny-manifest; the deployed PL supply is Wyscout 2017/18 events (CC BY)",
+      "evidence": [
+        "src-statsbomb-open-data",
+        "src-wyscout-public-dataset",
+        "src-creativecommons-by-4-0"
+      ]
+    },
+    {
+      "id": "data-credit-logo",
+      "gap": "The reusable data-credit element with a logo slot does not exist yet",
+      "impact": "No lesson may show StatsBomb-derived visuals until the credit and logo render",
+      "mitigation": "Phase 4/5 builds the credit element; Phase 3 manifests carry the credit text",
+      "evidence": ["src-statsbomb-open-data", "src-fot-last-row"]
+    },
+    {
+      "id": "fbref-advanced-removed",
+      "gap": "FBref advanced (Opta) statistics were removed on 2026-01-20",
+      "impact": "No live free source of PL xG and advanced player stats on FBref",
+      "mitigation": "Compute metrics from open event data in the pipeline; FBref is recorded as removed and never cited as live",
+      "evidence": ["src-fbref-advanced-stats", "src-awfulannouncing-fbref-removal"]
+    },
+    {
+      "id": "transfermarkt-datasets-paused",
+      "gap": "transfermarkt-datasets updates are paused and the data stops in July 2026; the CC0 licence does not clear the Transfermarkt terms",
+      "impact": "No current open market-value or transfer data for Track 23",
+      "mitigation": "Keep transfermarkt-datasets local only; type valuations by hand with a link and an as-of date",
+      "evidence": ["src-transfermarkt-datasets", "src-transfermarkt-site"]
+    },
+    {
+      "id": "understat-capology-terms-unknown",
+      "gap": "Understat shows only a returning-soon notice and Capology terms returned 403, so neither has known terms",
+      "impact": "No open xG fallback from Understat and no licensed wage data",
+      "mitigation": "Read by hand, never scrape; wage figures typed by hand with a link; re-check both at the start of Tracks 16 and 23",
+      "evidence": ["src-understat", "src-capology"]
+    }
+  ],
+  "orphan_competencies": []
+}

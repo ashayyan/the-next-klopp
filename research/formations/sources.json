@@ -1,0 +1,533 @@
+[
+  {
+    "id": "src-statsbomb-events-spec-v4",
+    "title": "StatsBomb Open Data Events specification v4.0.0",
+    "url": "https://github.com/statsbomb/open-data/blob/master/doc/Open%20Data%20Events%20v4.0.0.pdf",
+    "type": "official-document",
+    "publisher": "StatsBomb",
+    "free": true,
+    "license": {
+      "name": "StatsBomb Public Data User Agreement",
+      "terms_url": "https://raw.githubusercontent.com/statsbomb/open-data/master/LICENSE.pdf",
+      "read": { "value": "yes", "note": "Public PDF in the open-data repository" },
+      "automated_access": {
+        "value": "yes",
+        "note": "Raw GitHub download, read with pypdf on 2026-11-27"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Same agreement as the open data: no redistribution to third parties"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase and credit StatsBomb; logo credit on published analysis"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["Starting XI and Tactical Shift event fields", "tactical position numbers"],
+    "notes": "The PDF carries no publication date, so recency is the as_of date. Text extracted with pypdf (words sometimes run together). Documents the tactics object (formation text plus lineup) on Starting XI and Tactical Shift events.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "tactics-formation-field",
+        "locator": "Events v4.0.0 PDF p.8, tactics object (pypdf extraction)",
+        "fetched_at": "2026-11-27T21:36:49Z",
+        "sha256": "c8fd9841e4ae0b06c57ab5e57ddd105367714f47ba497e36c58a165e2bab4d56",
+        "paraphrase": "The formation field of the tactics object holds the team's formation as text, for example 343 for three defenders, four midfielders and three strikers."
+      },
+      {
+        "id": "lineups-at-kickoff",
+        "locator": "Events v4.0.0 PDF p.26, Appendix 4",
+        "fetched_at": "2026-11-27T21:36:49Z",
+        "sha256": "f0c1b766e9dfce89a3ffbe925071c15459525eabd2422cd1ec989029025f4ce6",
+        "paraphrase": "At the start of each match an event records the tactics and lineups for each team."
+      }
+    ]
+  },
+  {
+    "id": "src-coachesvoice-formations-explained",
+    "title": "Formations: football tactics explained (Coaches' Voice, Ali Tweedale)",
+    "url": "https://learning.coachesvoice.com/cv/formations-football-tactics-explained-best-most-used/",
+    "type": "article",
+    "publisher": "Coaches' Voice",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public page, no paywall on 2026-11-27" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 4,
+    "recency": "2021-12-02",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "strengths, weaknesses and space for 4-3-3, 4-4-2, 4-2-3-1, 3-5-2, 3-4-3",
+      "Guardiola phone-numbers quote"
+    ],
+    "notes": "Does not cover 5-3-2 or 4-1-4-1 and does not formally define notation.",
+    "status": "active"
+  },
+  {
+    "id": "src-fourfourtwo-formations-in-football",
+    "title": "Formations in football: Every modern formation and system (FourFourTwo)",
+    "url": "https://www.fourfourtwo.com/features/formations-in-football",
+    "type": "article",
+    "publisher": "FourFourTwo",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public page" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 3,
+    "recency": "2025-02-19",
+    "as_of": "2026-11-27",
+    "best_for": ["notation as lines back to front", "4-2-3-1 and 4-1-4-1 overview"],
+    "notes": "Page text was truncated mid-article during the read, so only the notation, 4-3-3, 4-2-3-1 and 4-1-4-1 sections were used.",
+    "status": "active"
+  },
+  {
+    "id": "src-pl-442-explained",
+    "title": "The 4-4-2: football tactics explained (Premier League)",
+    "url": "https://www.premierleague.com/en/news/4243787",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public news article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Premier League copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 4,
+    "recency": "2025-06-20",
+    "as_of": "2026-11-27",
+    "best_for": ["4-4-2 in and out of possession", "Ferguson, Hasenhuttl and Dyche examples"],
+    "notes": "Coaches' Voice series republished on premierleague.com; the page date may be a republication date.",
+    "status": "active"
+  },
+  {
+    "id": "src-pl-352-explained",
+    "title": "The 3-5-2: football tactics explained (Premier League)",
+    "url": "https://www.premierleague.com/en/news/4244123",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public news article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Premier League copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 4,
+    "recency": "2022-02-11",
+    "as_of": "2026-11-27",
+    "best_for": ["3-5-2 build-up overload", "wing-backs dropping into a back five"],
+    "notes": "Coaches' Voice series republished on premierleague.com; recency is the original article date given on the page.",
+    "status": "active"
+  },
+  {
+    "id": "src-pl-451-explained",
+    "title": "The 4-5-1 formation: football tactics explained (Premier League)",
+    "url": "https://www.premierleague.com/news/4244158",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public news article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Premier League copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 4,
+    "recency": "2025-06-20",
+    "as_of": "2026-11-27",
+    "best_for": ["4-5-1 and 4-1-4-1 block", "Klopp and Howe examples"],
+    "notes": "Coaches' Voice series republished on premierleague.com; page date may be a republication date.",
+    "status": "active"
+  },
+  {
+    "id": "src-pl-box-midfield-explained",
+    "title": "The box midfield: football tactics explained (Premier League)",
+    "url": "https://www.premierleague.com/news/4244274",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public news article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Premier League copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 4,
+    "recency": "2025-06-22",
+    "as_of": "2026-11-27",
+    "best_for": ["box midfield roles", "Tuchel, Conte, Klopp and Guardiola examples"],
+    "notes": "Coaches' Voice series republished on premierleague.com; page date may be a republication date.",
+    "status": "active"
+  },
+  {
+    "id": "src-pl-formation-trends-2024-25",
+    "title": "Season trends: What were the most-popular formations in 2024/25? (Adrian Clarke)",
+    "url": "https://www.premierleague.com/news/4323030",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public news article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Premier League copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 3,
+    "recency": "2025-06-05",
+    "as_of": "2026-11-27",
+    "best_for": ["which formations Premier League teams used in 2024/25"],
+    "notes": "Counts are given without a stated data source or classification method, so use for direction of travel only.",
+    "status": "active"
+  },
+  {
+    "id": "src-skysports-arteta-tactics-2023",
+    "title": "How Arteta's tactics brought Arsenal into the title race (Sky Sports)",
+    "url": "https://www.skysports.com/football/news/11095/12863408/how-artetas-tactics-brought-arsenal-into-the-title-race",
+    "type": "article",
+    "publisher": "Sky Sports",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 3,
+    "recency": "2023-04-26",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "Arsenal 2-3-5 in possession with inverted full-backs",
+      "Premier League structure example"
+    ],
+    "notes": "Describes the 2022/23 season. Other writers label the same build-up 3-2-5 or 3-2-2-3.",
+    "status": "active"
+  },
+  {
+    "id": "src-pl-slot-liverpool-shape-2024",
+    "title": "Slot's Liverpool compared with Klopp's (Adrian Clarke, Premier League)",
+    "url": "https://www.premierleague.com/news/4170952",
+    "type": "article",
+    "publisher": "Premier League",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public news article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Premier League copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 4,
+    "recency": "2024-11-21",
+    "as_of": "2026-11-27",
+    "best_for": ["Liverpool 4-3-3 to 4-2-3-1 change", "mid-block versus high press"],
+    "notes": "The article does not state a 4-4-2 press shape; do not attribute one to it.",
+    "status": "active"
+  },
+  {
+    "id": "src-theanalyst-stones-hybrid-role",
+    "title": "John Stones' centre-midfield and centre-back hybrid role (The Analyst, Stats Perform)",
+    "url": "https://theanalyst.com/eu/2023/06/john-stones-centre-midfield-centre-back-hybrid-role/",
+    "type": "article",
+    "publisher": "The Analyst (Stats Perform)",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public article" },
+      "automated_access": {
+        "value": "conditional",
+        "note": "Fetch tool worked; a scripted Python client received HTTP 403 on a sibling Analyst page"
+      },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 4,
+    "recency": "2023-06-09",
+    "as_of": "2026-11-27",
+    "best_for": ["Manchester City 3-2-4-1 with the ball, 4-4-2 without it"],
+    "notes": "The article's quoted 41% fall in goals conceded does not match its own 0.9 to 0.5 figures, so no numbers from it are used.",
+    "status": "active"
+  },
+  {
+    "id": "src-theanalyst-shape-analysis",
+    "title": "Shape Analysis: automatically detecting formations (The Analyst, Stats Perform)",
+    "url": "https://theanalyst.com/articles/shape-analysis-automatically-detecting-formations/",
+    "type": "article",
+    "publisher": "The Analyst (Stats Perform)",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public article" },
+      "automated_access": {
+        "value": "conditional",
+        "note": "Fetch tool worked; a scripted Python client received HTTP 403"
+      },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 4,
+    "recency": "2021-03-24",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "how a provider detects shapes per possession interval",
+      "Chelsea v Wolves rotation example"
+    ],
+    "notes": "Last modified 2022-08-31. Method described is Opta's; tracking data is used where available, touch locations otherwise.",
+    "status": "active"
+  },
+  {
+    "id": "src-frontiers-formation-id-survey",
+    "title": "The principles of tactical formation identification in association football (soccer): a survey (Sotudeh)",
+    "url": "https://www.frontiersin.org/articles/10.3389/fspor.2024.1512386/full",
+    "type": "paper",
+    "publisher": "Frontiers in Sports and Active Living",
+    "free": true,
+    "license": {
+      "name": "CC BY",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": { "value": "yes", "note": "Open access" },
+      "automated_access": { "value": "yes", "note": "Open-access full text, also on PMC" },
+      "redistribute": {
+        "value": "yes",
+        "note": "CC BY (Creative Commons Attribution Licence) per the PMC copy; credit the author"
+      },
+      "derivative": { "value": "yes", "note": "CC BY, credit the author" }
+    },
+    "quality": 5,
+    "recency": "2025-02-05",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "why formation labels are subjective",
+      "average positions and their limits",
+      "phase segmentation"
+    ],
+    "notes": "DOI 10.3389/fspor.2024.1512386, checked with validate_citations.py. Review article, not a systematic review. Excerpt taken from the PMC copy PMC11836022.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "provider-agreement-65",
+        "locator": "PMC11836022 section on formation labels, paragraph citing the 2022 World Cup comparison",
+        "fetched_at": "2026-11-27T21:36:49Z",
+        "sha256": "cbe086da022f54ee9522d7ec9a8c88194ea2d5cb494bab58bdad7c198f4c9880",
+        "paraphrase": "Comparing starting formations from two industry providers for the 2022 Men's World Cup gives only 65% agreement, showing the lack of ground-truth formation labels."
+      }
+    ]
+  },
+  {
+    "id": "src-ieee-bialkowski-team-structures",
+    "title": "Discovering Team Structures in Soccer from Spatiotemporal Data (Bialkowski et al.)",
+    "url": "https://doi.org/10.1109/tkde.2016.2581158",
+    "type": "paper",
+    "publisher": "IEEE Transactions on Knowledge and Data Engineering",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "conditional",
+        "note": "OpenAlex marks it open access; only the abstract metadata was read"
+      },
+      "automated_access": { "value": "yes", "note": "Metadata read through the OpenAlex API" },
+      "redistribute": { "value": "unknown", "note": "Publisher terms not read" },
+      "derivative": {
+        "value": "unknown",
+        "note": "Publisher terms not read; paraphrase and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2016-10-01",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "learning a formation template from tracking data",
+      "role alignment frame by frame"
+    ],
+    "notes": "DOI 10.1109/tkde.2016.2581158, checked with validate_citations.py. Vol 28 issue 10 (the day in recency is a placeholder). Only the abstract was read, so no method detail is claimed.",
+    "status": "active"
+  },
+  {
+    "id": "src-nature-wyscout-soccer-logs-paper",
+    "title": "A public data set of spatio-temporal match events in soccer competitions (Pappalardo et al.)",
+    "url": "https://www.nature.com/articles/s41597-019-0247-7",
+    "type": "paper",
+    "publisher": "Scientific Data (Nature)",
+    "free": true,
+    "license": {
+      "name": "CC BY 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by/4.0/",
+      "read": { "value": "yes", "note": "Open access article" },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl on 2026-11-27 after a cookie redirect"
+      },
+      "redistribute": { "value": "yes", "note": "CC BY 4.0, credit required" },
+      "derivative": { "value": "yes", "note": "CC BY 4.0, credit required" }
+    },
+    "quality": 5,
+    "recency": "2019-10-28",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "what the public Wyscout matches file holds about lineups",
+      "dataset description for the PL 2017/18 season"
+    ],
+    "notes": "DOI 10.1038/s41597-019-0247-7, checked with validate_citations.py. Recency day is approximate (published October 2019).",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "cc-by-licence",
+        "locator": "Rights and permissions section",
+        "fetched_at": "2026-11-27T21:36:49Z",
+        "sha256": "380441ee6e904d3cdad601b3393a8286b14db1662a0cc80263f007dc4caacebe",
+        "paraphrase": "The article is open access under a Creative Commons Attribution 4.0 International License."
+      }
+    ]
+  },
+  {
+    "id": "src-mplsoccer-plot-formations",
+    "title": "mplsoccer gallery: plot formations from StatsBomb data",
+    "url": "https://mplsoccer.readthedocs.io/en/latest/gallery/pitch_plots/plot_formations.html",
+    "type": "tool",
+    "publisher": "mplsoccer (Andrew Rowlinson)",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public documentation" },
+      "automated_access": { "value": "yes", "note": "Fetched 2026-11-27" },
+      "redistribute": { "value": "unknown", "note": "Documentation licence not read" },
+      "derivative": {
+        "value": "unknown",
+        "note": "Documentation licence not read; paraphrase and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["drawing a StatsBomb starting XI from formation string and position ids"],
+    "notes": "No publication date stated, so recency is the as_of date. Notes that the lineup shows starting positions, not where players actually played.",
+    "status": "active"
+  },
+  {
+    "id": "src-planetfootball-formations-whiteboard",
+    "title": "Are formations worth the whiteboard they're written on? (Planet Football)",
+    "url": "https://www.planetfootball.com/in-depth/formations-worth-whiteboard-theyre-written",
+    "type": "article",
+    "publisher": "Planet Football",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 3,
+    "recency": "2017-01-30",
+    "as_of": "2026-11-27",
+    "best_for": ["both sides of the formations debate (Cox, Klopp, Hunter)"],
+    "notes": "Quotes Michael Cox, Jurgen Klopp and Graham Hunter; opinion piece by Mark Holmes.",
+    "status": "active"
+  },
+  {
+    "id": "src-yahoo-keble-formations-2016",
+    "title": "How Klopp and Guardiola are teaching us that formations are overrated (Alex Keble, Yahoo Sports)",
+    "url": "https://uk.sports.yahoo.com/news/how-klopp-guardiola-are-teaching-us-that-104343038.html",
+    "type": "article",
+    "publisher": "Yahoo Sports UK",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 3,
+    "recency": "2016-09-30",
+    "as_of": "2026-11-27",
+    "best_for": [
+      "the formations-are-telephone-numbers argument",
+      "Premier League in-possession shape shifts in 2016"
+    ],
+    "notes": "Opinion piece. The page title is paraphrased from the article's argument; check the exact headline before quoting.",
+    "status": "active"
+  },
+  {
+    "id": "src-skysports-conte-343-2017",
+    "title": "Premier League managers must learn how to play against 3-4-3 (Sky Sports, Nick Wright)",
+    "url": "https://www.skysports.com/football/news/11095/10969725/premier-league-managers-must-learn-how-to-play-against-3-4-3",
+    "type": "article",
+    "publisher": "Sky Sports",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public article" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 3,
+    "recency": "2017-08-03",
+    "as_of": "2026-11-27",
+    "best_for": ["Chelsea 2016/17 back three and wing-backs", "how opponents countered the 3-4-3"],
+    "notes": "Does not give explicit in-possession or out-of-possession numbers; it says Chelsea dropped into a back five.",
+    "status": "active"
+  },
+  {
+    "id": "src-jobsinfootball-532",
+    "title": "5-3-2 formation guide (Jobs in Football)",
+    "url": "https://jobsinfootball.com/blog/tactics/5-3-2-formation/",
+    "type": "blog",
+    "publisher": "Jobs in Football",
+    "free": true,
+    "license": {
+      "read": { "value": "yes", "note": "Public blog page" },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with the fetch tool; terms not read"
+      },
+      "redistribute": { "value": "no", "note": "Publisher copyright" },
+      "derivative": { "value": "conditional", "note": "Paraphrase with attribution" }
+    },
+    "quality": 2,
+    "recency": "2024-02-11",
+    "as_of": "2026-11-27",
+    "best_for": ["5-3-2 structure and its link to 3-5-2"],
+    "notes": "Commercial blog with no named author and no Premier League examples. Replace with a stronger 5-3-2 source before a lesson ships.",
+    "status": "active"
+  }
+]

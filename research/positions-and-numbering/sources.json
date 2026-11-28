@@ -1,0 +1,691 @@
+[
+  {
+    "id": "src-premierleague-handbook-2026-27",
+    "title": "Premier League Handbook 2026/27 (Section M: Players Identification and Strip)",
+    "url": "https://resources.premierleague.pulselive.com/premierleague/document/2026/10/22/24902579-d9e8-44b3-a9e4-777c7b3d7134/TM2040_PL-Handbook-and-Collateral-2026-27_Digital_21.10.pdf",
+    "type": "regulation",
+    "publisher": "Premier League (The Football Association Premier League Limited)",
+    "free": true,
+    "license": {
+      "name": "Premier League copyright",
+      "read": {
+        "value": "yes",
+        "note": "Public PDF linked from the official Publications page"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Downloaded once with curl; site terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "PDF p.2 states copyright of The Football Association Premier League Limited 2026"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution and rule number"
+      }
+    },
+    "quality": 5,
+    "recency": "2026-10-21",
+    "as_of": "2026-11-27",
+    "best_for": ["Premier League squad-number rules", "goalkeeper kit rule"],
+    "notes": "Official location found on https://www.premierleague.com/en/media/publications (Handbooks section, published 21 October 2026). The older https://www.premierleague.com/en/handbook address is gone. Squad-number rules are Section M (PDF p.125). The 2026/27 edition names no reserved goalkeeper number in Section M.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "m1-different-number-each",
+        "locator": "Handbook 2026/27 PDF p.125 (printed pp.241-242), Rule M.1",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "b016ca22f18fd380585f9202b85fe36b5650e155f6e711f1df21d962d5621d22",
+        "paraphrase": "Before each season a club gives every first-team squad member a different shirt number."
+      },
+      {
+        "id": "m2-in-season-joiners",
+        "locator": "Rule M.2",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "6a13c19b7a8d5d97dd41f5dde88f19bb62048538b436b4505ed12057cbc588bd",
+        "paraphrase": "A player joining the first-team squad mid-season is also given a shirt number."
+      },
+      {
+        "id": "m3-start-at-one-consecutive",
+        "locator": "Rule M.3",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "50a0f5eb496da6dd1973c1a3f0f25a387742c388e9b10f899b0309910394ffe3",
+        "paraphrase": "Unless the Board consents in writing, numbers begin at one and run consecutively."
+      },
+      {
+        "id": "m4-keep-number-all-season",
+        "locator": "Rule M.4",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "217e9eef65f16914e3a366e3f3e3d21e5b691318ba0ce4a3e54e6fecce6c6535",
+        "paraphrase": "A player keeps his allocated number for the whole season while he stays with the club."
+      },
+      {
+        "id": "m5-number-reallocation",
+        "locator": "Rule M.5",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "4591efc553eb28dd926be4cc95f44f757f33d71d25657038fe670f6fd2f54136",
+        "paraphrase": "When a player leaves, his number may be given to someone else."
+      },
+      {
+        "id": "m7-number-on-back",
+        "locator": "Rule M.7 to M.7.1",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "0b4fbf781ff2ede90d773bdc13d0b5fa39ad10308aaf67ef1e77a5c6a7e02394",
+        "paraphrase": "In league matches the shirt back shows the player number clearly, with his surname above it."
+      },
+      {
+        "id": "m8-number-on-shorts",
+        "locator": "Rule M.8",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "d77f4d3031e913fb6d4feed05d1e779a75629314938e64d68e805dadff234191",
+        "paraphrase": "The number also appears on the front of one leg of the shorts."
+      },
+      {
+        "id": "m10-goalkeeper-kit",
+        "locator": "Rule M.10",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "5da003c9997f158a725aacbf1c6155e410009f925bfa09a88defc11fd2efae06",
+        "paraphrase": "The goalkeeper shirt and socks must differ from outfield players and match officials; the rule concerns kit, not a number."
+      }
+    ]
+  },
+  {
+    "id": "src-wikipedia-squad-number-association-football",
+    "title": "Squad number (association football) - Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Squad_number_(association_football)",
+    "type": "article",
+    "publisher": "Wikipedia",
+    "free": true,
+    "license": {
+      "name": "CC BY-SA 4.0 (page footer)",
+      "terms_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "Public encyclopedia page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Raw wikitext fetched with a descriptive user agent"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "Wikipedia text is CC BY-SA 4.0 (licence line seen on the page); share-alike applies"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution; share-alike if text is reused"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["numbering history", "numbering by country", "goalkeeper numbers"],
+    "notes": "Secondary tertiary source; the country section carries a more-citations-needed tag. Used to organise the number history, then cross-checked against the Coaches Voice and LCFC articles. No stable publication date, recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "first-english-numbers-1928",
+        "locator": "Wikipedia Squad number, History, First use of numbers",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "896da8c63b472639552bc093f53b04c93638f22efde51c96fec6efbf16399ade",
+        "paraphrase": "English league clubs wore numbers by field position on 25 August 1928; earlier uses existed in Australia and Argentina."
+      },
+      {
+        "id": "football-league-compulsory-1939",
+        "locator": "Wikipedia Squad number, History",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "2cfe6100f03075b816b7755cd23655bb38d13cb95b6af6669d79b817a3415d64",
+        "paraphrase": "The Football League made numbered shirts compulsory from the 1939-40 season."
+      },
+      {
+        "id": "fa-persistent-numbers-1993",
+        "locator": "Wikipedia Squad number, Evolution",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "1b97f90ae35401309014aa60429db21eef7d839f79532463bdf52c56d03a0694",
+        "paraphrase": "In 1993 the FA moved to persistent squad numbers instead of 1-11 for the starting line-up."
+      },
+      {
+        "id": "england-442-numbering",
+        "locator": "Wikipedia Squad number, England",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "ebb360f50f7826254fb927c6f36dbf59a6a09f01a0acc2c7e01cb6a3b3015d35",
+        "paraphrase": "England traditional 4-4-2: 2 and 3 full-backs, 5 and 6 centre-backs, 4 defensive midfielder."
+      },
+      {
+        "id": "argentina-five-holding-mid",
+        "locator": "Wikipedia Squad number, Argentina list",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "671d597cb1ea60508b044b9c0c501bb66ddad10e52e49418f749e79ef3f19c3f",
+        "paraphrase": "Argentina 4-3-3 list: number 5 is the central defensive midfielder."
+      },
+      {
+        "id": "argentina-six-stopper",
+        "locator": "Wikipedia Squad number, Argentina list",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "3289a35b3d9794d4fb6a3f337696c2a89546c34ce09c900796d1000be438d1a6",
+        "paraphrase": "Argentina 4-3-3 list: number 6 is the second centre-back or stopper."
+      },
+      {
+        "id": "brazil-five-volante",
+        "locator": "Wikipedia Squad number, Brazil list",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "9b9e595d929c0c7de2ceb2f5d3e7d85deefbc755581766866759b32f6504b260",
+        "paraphrase": "Brazil list: number 5 is the first volante, a defensive midfielder."
+      },
+      {
+        "id": "pele-1958-random-ten",
+        "locator": "Wikipedia Squad number, Unusual or notable numbers",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "95a8c551138b15020336f4a9806894aecaad187d29335e1d06b837f55987d1ab",
+        "paraphrase": "At the 1958 World Cup numbers were handed out at random after Brazil omitted its list; Pele was given the 10."
+      }
+    ]
+  },
+  {
+    "id": "src-wikipedia-association-football-positions",
+    "title": "Association football positions - Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Association_football_positions",
+    "type": "article",
+    "publisher": "Wikipedia",
+    "free": true,
+    "license": {
+      "name": "CC BY-SA 4.0",
+      "terms_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "read": {
+        "value": "yes",
+        "note": "Public encyclopedia page"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Raw wikitext fetched with a descriptive user agent"
+      },
+      "redistribute": {
+        "value": "conditional",
+        "note": "CC BY-SA 4.0, share-alike"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["position names and zones", "history of position names"],
+    "notes": "Overview source for position definitions. No stable publication date, recency is the as_of date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "positions-not-rigid",
+        "locator": "Wikipedia Association football positions, Introduction",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "4c85f71917cb501708ad95b870b8b7a4ee8b08d4e5d90893a5f4bde48647aab9",
+        "paraphrase": "Football positions are less rigidly defined than in rugby or American football."
+      }
+    ]
+  },
+  {
+    "id": "src-bundesliga-positions-explained",
+    "title": "Soccer positions explained: names, numbers and what they do (Bundesliga)",
+    "url": "https://www.bundesliga.com/en/faq/all-you-need-to-know-about-soccer/soccer-positions-explained-names-numbers-and-what-they-do-10569",
+    "type": "article",
+    "publisher": "Bundesliga (DFL)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public FAQ page"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched with WebFetch only; curl returned HTTP 403; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; terms page not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["beginner position definitions"],
+    "notes": "League explainer. No publication date shown; footer and text refer to 2026, so recency is the as_of date. Its shirt numbers describe the old 1-11 system only.",
+    "status": "active"
+  },
+  {
+    "id": "src-premierleague-coachesvoice-no6-explained",
+    "title": "The No 6 position in football explained (Coaches Voice, hosted on premierleague.com)",
+    "url": "https://www.premierleague.com/en/news/4244293",
+    "type": "article",
+    "publisher": "Premier League / Coaches Voice",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public news article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once with curl and WebFetch; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Premier League and Coaches Voice copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2025-06-20",
+    "as_of": "2026-11-27",
+    "best_for": ["origin of the No 6 label", "2-3-5 numbering", "No 6 duties"],
+    "notes": "Article dated 20 June 2025.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "numbers-trialled-1928-in-2-3-5",
+        "locator": "Premier League site, Coaches Voice, No 6 explained",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "6fe0b42052fb08343c2ac27d3739c89af1688b1ed6ee5a0199f095bb82279f7c",
+        "paraphrase": "On 25 August 1928 numbers were trialled in two league games; in the 2-3-5 the half-backs were numbered 4, 5 and 6."
+      },
+      {
+        "id": "some-use-four-for-deepest-mid",
+        "locator": "Same article",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "71619bf8b68dffbff0b0f850bf422e6aa3ee45d760ec6f3a883f19fd4123b42a",
+        "paraphrase": "Some countries and coaches call the deepest central midfielder number 4, which makes the centre-backs 5 and 6."
+      }
+    ]
+  },
+  {
+    "id": "src-goal-squad-numbers-explained",
+    "title": "Football squad numbers explained: how positions are traditionally numbered (Goal)",
+    "url": "https://www.goal.com/en/news/football-squad-numbers-explained-how-positions-are-traditionally-/1rrwwpkupqgbczd542hkjiwl2",
+    "type": "article",
+    "publisher": "Goal",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; terms page not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2021-03-04",
+    "as_of": "2026-11-27",
+    "best_for": ["traditional 1-11 meanings", "numbers as tradition not rules"],
+    "notes": "Article dated 4 March 2021. Popular-media explainer.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "six-centre-back-moore",
+        "locator": "Goal, Football squad numbers explained, Number 6 section",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "7aafa769aa8b2d4ebe7e126a942ff3d6e5ca8b1ebe34cec99ee54d14b97aac43",
+        "paraphrase": "The 6 is also commonly worn by a centre-back, for example Bobby Moore, and recently by defensive midfielders too."
+      }
+    ]
+  },
+  {
+    "id": "src-fourfourtwo-inverted-full-back",
+    "title": "The inverted full-back: football tactics explained (FourFourTwo)",
+    "url": "https://www.fourfourtwo.com/features/the-inverted-full-back-football-tactics-explained",
+    "type": "article",
+    "publisher": "FourFourTwo (Future plc)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; terms page not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2025-02-13",
+    "as_of": "2026-11-27",
+    "best_for": ["example of a role inside a position"],
+    "notes": "Page shows last updated 13 February 2025; no original date.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "inverted-full-back-definition",
+        "locator": "FourFourTwo, The inverted full-back, intro",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "1ec062debce43c929d2cd0eea078c24fcb0816011d02a4b0d6014bbb195720f8",
+        "paraphrase": "An inverted full-back moves into central space when his team has the ball, ahead of the centre-backs."
+      }
+    ]
+  },
+  {
+    "id": "src-fourfourtwo-no10",
+    "title": "The No.10: football tactics explained (FourFourTwo)",
+    "url": "https://www.fourfourtwo.com/features/football-tactics-no10",
+    "type": "article",
+    "publisher": "FourFourTwo (Future plc)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Publisher copyright; terms page not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2025-02-13",
+    "as_of": "2026-11-27",
+    "best_for": ["No 10 as number, position and role"],
+    "notes": "Page shows last updated 13 February 2025.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "ten-traditionally-attacking-mid",
+        "locator": "FourFourTwo, The No.10: football tactics explained, intro",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "78ee26899659f1722a523f9eff461e36960f32928b2b03551a1b591f2f0039d2",
+        "paraphrase": "Traditionally the 10 went to the most attacking midfielder, though squad numbers now often differ from position."
+      }
+    ]
+  },
+  {
+    "id": "src-thefa-central-defenders-bootroom",
+    "title": "Top tips for developing central defenders of the future (The FA Bootroom)",
+    "url": "https://www.thefa.com/bootroom/resources/coaching/top-tips-for-developing-central-defenders-of-the-future",
+    "type": "article",
+    "publisher": "The Football Association",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public coaching resource"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "The FA copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 4,
+    "recency": "2021-01-27",
+    "as_of": "2026-11-27",
+    "best_for": ["centre-back duties from coach education"],
+    "notes": "Dated 27 January 2021. Mostly out-of-possession duties; says little about in-possession centre-back play.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "centre-back-read-the-game",
+        "locator": "The FA Bootroom, developing central defenders",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "fd83a8c4cd3ae113ea90d18e61c962ee0e18c00a28082bfe7ea82db31ff063c2",
+        "paraphrase": "A quoted coach says reading the game and getting into position early is essential for centre-backs."
+      }
+    ]
+  },
+  {
+    "id": "src-statsbomb-open-events-spec-v4",
+    "title": "StatsBomb Open Events Structure and Data Specification v4.0.0",
+    "url": "https://github.com/statsbomb/open-data/blob/master/doc/Open%20Data%20Events%20v4.0.0.pdf",
+    "type": "official-document",
+    "publisher": "StatsBomb",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public document in the open-data repository"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Raw file downloaded from the public GitHub repository"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Covered by the StatsBomb Public Data User Agreement (see seed source)"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase; credit StatsBomb per the Agreement"
+      }
+    },
+    "quality": 4,
+    "recency": "2019-05-08",
+    "as_of": "2026-11-27",
+    "best_for": ["StatsBomb position names and codes", "event position field"],
+    "notes": "Spec footer says last updated 8 May 2019; a newer spec may exist in the repository, so re-check before shipping a position table. Event objects carry the position the player held when the event happened.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "tactical-positions-guide",
+        "locator": "StatsBomb Open Events spec v4.0.0, Appendix 1 Tactical Positions Guide, PDF p.22",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "c01715e0bb990b04f5cb8305c67f67f467b9bc112aac7115cfc53c0eaae63108",
+        "paraphrase": "StatsBomb lists numbered position codes: goalkeeper, right back, centre backs, left back, wing backs and more up to striker."
+      }
+    ]
+  },
+  {
+    "id": "src-kloppy-positions-docs",
+    "title": "kloppy user guide: Positions",
+    "url": "https://kloppy.pysport.org/user-guide/concepts/positions/",
+    "type": "tool",
+    "publisher": "PySport",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public documentation"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl and WebFetch, HTTP 200"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Documentation licence not read"
+      },
+      "derivative": {
+        "value": "unknown",
+        "note": "Documentation licence not read; paraphrase and link only"
+      }
+    },
+    "quality": 4,
+    "recency": "2026-11-27",
+    "as_of": "2026-11-27",
+    "best_for": ["standard position hierarchy across providers"],
+    "notes": "No publication date stated, recency is the as_of date. Page does not say how each provider position maps to a kloppy type.",
+    "status": "active"
+  },
+  {
+    "id": "src-pappalardo-wyscout-dataset-paper",
+    "title": "A public data set of spatio-temporal match events in soccer competitions (Scientific Data)",
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6817871/",
+    "type": "paper",
+    "publisher": "Pappalardo et al., Scientific Data (Nature Portfolio)",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Open access article on PubMed Central"
+      },
+      "automated_access": {
+        "value": "yes",
+        "note": "Fetched with curl and a descriptive user agent"
+      },
+      "redistribute": {
+        "value": "unknown",
+        "note": "Article licence line not read"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 5,
+    "recency": "2019-10-28",
+    "as_of": "2026-11-27",
+    "best_for": ["what the Wyscout public players table holds"],
+    "notes": "DOI 10.1038/s41597-019-0247-7. Documents the players role field; the role is one coarse label per player.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "wyscout-player-role-field",
+        "locator": "Scientific Data 2019, Methods, players data set",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "3f652b8bf1aba009d300b3cec7f44847bee39d979cfbc1848df50030aae3df2d",
+        "paraphrase": "The Wyscout players table holds one main role per player, stored as a name plus two abbreviations."
+      }
+    ]
+  },
+  {
+    "id": "src-lcfc-squad-numbers-history",
+    "title": "How Squad Numbers Became The Norm at LCFC (Leicester City)",
+    "url": "https://www.lcfc.com/media-article/How-Squad-Numbers-Became-The-Norm-at-LCFC",
+    "type": "article",
+    "publisher": "Leicester City FC",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public club article"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Club copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2017-07-19",
+    "as_of": "2026-11-27",
+    "best_for": ["Premier League squad numbers began 1993/94"],
+    "notes": "Club history piece by John Hutchinson, 19 July 2017.",
+    "status": "active",
+    "excerpts": [
+      {
+        "id": "premier-league-1993-94",
+        "locator": "LCFC article, Premier League paragraph",
+        "fetched_at": "2026-11-27T22:05:00Z",
+        "sha256": "64483396c4ea84763cfb0de36351b670ce4247670b26b9ac9a8d49775b147763",
+        "paraphrase": "Squad numbers began in the Premier League in 1993/94, its second season, after use in the 1992/93 cup finals."
+      }
+    ]
+  },
+  {
+    "id": "src-museumofjerseys-birth-of-squad-numbers-part-2",
+    "title": "The birth of squad numbers in England, part 2 (Museum of Jerseys)",
+    "url": "https://museumofjerseys.com/2023/04/18/the-birth-of-squad-numbers-in-england-part-2/",
+    "type": "blog",
+    "publisher": "Museum of Jerseys",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public blog post"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "Fetched once; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Blog copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2023-04-18",
+    "as_of": "2026-11-27",
+    "best_for": ["1993 cup finals numbering examples"],
+    "notes": "Dated 18 April 2023. Hobbyist history site; used only for the cup final examples.",
+    "status": "active"
+  },
+  {
+    "id": "src-squadnumbers-1-11-premier-league-era",
+    "title": "1-11 in the Premier League era (SquadNumbers.com)",
+    "url": "https://www.squadnumbers.com/2014/10/14/1-11-in-the-premier-league-era/",
+    "type": "blog",
+    "publisher": "SquadNumbers.com",
+    "free": true,
+    "license": {
+      "read": {
+        "value": "yes",
+        "note": "Public blog post"
+      },
+      "automated_access": {
+        "value": "unknown",
+        "note": "curl returned HTTP 403; WebFetch worked; terms not read"
+      },
+      "redistribute": {
+        "value": "no",
+        "note": "Blog copyright"
+      },
+      "derivative": {
+        "value": "conditional",
+        "note": "Paraphrase with attribution"
+      }
+    },
+    "quality": 3,
+    "recency": "2014-10-14",
+    "as_of": "2026-11-27",
+    "best_for": ["1-11 lineups still seen in 1993/94"],
+    "notes": "Dated 14 October 2014. Hobbyist history site.",
+    "status": "active"
+  }
+]
