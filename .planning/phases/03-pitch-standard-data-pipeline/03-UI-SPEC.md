@@ -311,7 +311,7 @@ Provider `<select>`: "StatsBomb (120 × 80)", "Opta (0–100)", "Wyscout (0–10
 | **768** | 24 px | One column: header; toolbar wraps into 2 rows; stage with horizontal pitch about 720 × 480 px; playback bar in one row; Notation (2-column entries); Inspector. 24 px between regions. |
 | **375** | 16 px | One column: header; toolbar stacks (Scene select full width; radio groups and checkboxes wrap); pitch **vertical** (Auto) about 343 × 514 px; playback bar in two rows — row 1: Previous, Play (icon-only, `aria-label`), Next, time readout; row 2: scrubber full width, Speed select; Notation (1 column); Inspector. 16 px between regions. No horizontal scroll at 320 px. |
 
-Button labels: at 768 px and up Play shows icon + text ("Play", "Pause", "Replay"); below 768 px icon-only with the same text as `aria-label`. Previous / Next frame are icon-only at all widths with `aria-label` and a `title` tooltip.
+Button labels: at 768 px and up Play shows icon + text ("Play sequence", "Pause sequence", "Replay sequence"); below 768 px icon-only with the same text as `aria-label`. Previous / Next frame are icon-only at all widths with `aria-label` and a `title` tooltip.
 
 Anti-slop rules applied: no gradient, no card grid, no emoji, no decorative illustration, no shadow stack; panels are flat `--surface-panel` blocks with no border radius above 4 px; one button style (accent Play) plus one quiet style (transparent, 1 px `--control-border`, ink text) for every other button; hover = background `--surface-page`/`--surface-panel` swap plus ink underline on links; no element fades in on scroll.
 
@@ -323,7 +323,7 @@ Anti-slop rules applied: no gradient, no card grid, no emoji, no decorative illu
 |---------|------|
 | Page title (`h1`) | Pitch Standard |
 | Page subline | Dev view of the canonical pitch, glyphs, notation and scene playback. Not part of the study build. |
-| Primary CTA | Play sequence (button text "Play"; `aria-label` "Play sequence"; while playing "Pause" / "Pause sequence"; at the end "Replay" / "Replay sequence") |
+| Primary CTA | Play sequence (visible text and `aria-label` both "Play sequence" at 768 px and up, icon-only with the `aria-label` below; while playing "Pause sequence"; at the end "Replay sequence") |
 | Step buttons | `aria-label` "Previous frame" / "Next frame" |
 | Loading status | Loading scene… |
 | Still scene status | Still scene — 1 frame |

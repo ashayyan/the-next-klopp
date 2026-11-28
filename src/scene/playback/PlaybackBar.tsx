@@ -30,7 +30,7 @@ function TransportButton({ store }: PlaybackBarProps) {
       className={`order-2 inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-1 rounded-sm bg-accent px-3 text-sm font-semibold text-accent-ink ${focusRing}`}
     >
       <Icon />
-      <span className="hidden md:inline">{label}</span>
+      <span className="hidden md:inline">{`${label} sequence`}</span>
     </button>
   );
 }
