@@ -9,7 +9,7 @@ export default function HomePage() {
       </p>
       {import.meta.env.DEV ? (
         <p className="mt-4">
-          <Link to="/dev" className="underline">
+          <Link to="/dev" className="inline-flex min-h-11 items-center underline">
             Dev routes
           </Link>
         </p>

@@ -3,7 +3,7 @@ import type { SceneEntity, SceneTeam } from "../../scene/schema.ts";
 import { usePitch } from "../Pitch.tsx";
 import { useDraggableEntity } from "../useDraggableEntity.ts";
 import type { Pt } from "../view.ts";
-import { discDiameter, GLYPH_TEXT_PX, unitsPerPx } from "./glyphSize.ts";
+import { discDiameter, fitLabel, GLYPH_TEXT_PX, unitsPerPx } from "./glyphSize.ts";
 import { SwatchFrame } from "./Swatch.tsx";
 
 export type PlayerGlyphId = "player-a" | "player-b" | "goalkeeper-a" | "goalkeeper-b";
@@ -33,6 +33,8 @@ export function PlayerShape({ id, x, y, d, u, text, textTransform, title }: Play
   const stroke = side === "a" ? "var(--pitch-surface)" : "var(--team-b)";
   const strokeWidth = side === "a" ? 2 : 3;
   const ink = side === "a" ? "var(--team-a-ink)" : "var(--team-b-ink)";
+  // Two-letter position codes and initials are wider than two digits: fit them inside the disc.
+  const fit = text ? fitLabel(text, d / u, strokeWidth) : {};
   return (
     <g data-glyph={id}>
       {title ? <title>{title}</title> : null}
@@ -71,7 +73,10 @@ export function PlayerShape({ id, x, y, d, u, text, textTransform, title }: Play
             fontSize={GLYPH_TEXT_PX * u}
             fontWeight={600}
             fill={ink}
-            style={{ fontFamily: "var(--font-sans)", userSelect: "none" }}
+            textLength={fit.lengthPx === undefined ? undefined : fit.lengthPx * u}
+            lengthAdjust={fit.lengthPx === undefined ? undefined : "spacingAndGlyphs"}
+            data-fit={fit.stretch ? "condensed" : undefined}
+            style={{ fontFamily: "var(--font-sans)", fontStretch: fit.stretch, userSelect: "none" }}
           >
             {text}
           </text>

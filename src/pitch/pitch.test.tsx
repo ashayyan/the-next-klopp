@@ -105,7 +105,7 @@ function walk(dir: string): string[] {
   return out;
 }
 
-describe("palette lives only in src/index.css", () => {
+describe("palette lives only in generated token CSS", () => {
   it("finds no hex colour literal in pitch, scene or dev-pitch TypeScript", () => {
     const files = ["src/pitch", "src/scene", "src/routes"]
       .flatMap((d) => walk(join(root, d)))
@@ -115,8 +115,8 @@ describe("palette lives only in src/index.css", () => {
     expect(offenders.map((f) => relative(root, f))).toEqual([]);
   });
 
-  it("declares every 03-UI-SPEC token in src/index.css", () => {
-    const css = readFileSync(join(root, "src/index.css"), "utf8");
+  it("declares every 03-UI-SPEC token in src/styles/tokens.css", () => {
+    const css = readFileSync(join(root, "src/styles/tokens.css"), "utf8");
     const tokens = [
       "--surface-page",
       "--surface-panel",

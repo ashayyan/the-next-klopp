@@ -43,6 +43,10 @@ export interface GlyphEntry {
   id: GlyphId;
   /** Legend label. `{team}` is replaced by the team name from the scene's teams[]. */
   label: string;
+  /**
+   * Legend description. `{disc-text}` is replaced by what the scene's discs carry (shirt number,
+   * position code, player initials), so the legend names what is shown (DESIGN.md section 4).
+   */
   description: string;
   /** Draws the glyph in a 32 x 20 px legend swatch. */
   sample: ComponentType;
@@ -52,13 +56,13 @@ export const GLYPHS: readonly GlyphEntry[] = [
   {
     id: "player-a",
     label: "Team A player — {team}",
-    description: "Filled disc with shirt number.",
+    description: "Filled disc with {disc-text}.",
     sample: PlayerASwatch,
   },
   {
     id: "player-b",
     label: "Team B player — {team}",
-    description: "White disc with a coloured ring and shirt number.",
+    description: "White disc with a coloured ring and {disc-text}.",
     sample: PlayerBSwatch,
   },
   {

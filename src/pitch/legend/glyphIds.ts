@@ -39,6 +39,50 @@ export function glyphIdsForScene(scene: Scene, options: { density: boolean }): G
   return GLYPH_IDS.filter((id) => present.has(id));
 }
 
+/** What a disc shows, as the legend names it. */
+export type DiscText = "shirt number" | "position code" | "player initials" | "short label";
+
+const DISC_TEXT_ORDER: readonly DiscText[] = [
+  "shirt number",
+  "position code",
+  "player initials",
+  "short label",
+];
+
+/**
+ * What the outfield discs of one team side carry, read from the scene data the disc text comes
+ * from (playerText: the number, else the label): a number is a shirt number; a label on an entity
+ * with a role is a position code (CB for Centre-back); a label on a named entity without a role is
+ * the player's initials (the Wyscout recipe writes EM for Eliaquim Mangala); any other label is a
+ * short label. Kinds come back in a fixed order, without repeats; empty when no disc has text.
+ */
+export function discTextKinds(scene: Scene, side: "a" | "b"): DiscText[] {
+  const sideOf = new Map(scene.teams.map((t) => [t.id, t.side]));
+  const kinds = new Set<DiscText>();
+  for (const entity of scene.entities) {
+    if (entity.type !== "player") continue;
+    if (((entity.team ? sideOf.get(entity.team) : undefined) ?? "a") !== side) continue;
+    if (entity.number !== undefined) kinds.add("shirt number");
+    else if (entity.label === undefined) continue;
+    else if (entity.role !== undefined) kinds.add("position code");
+    else if (entity.name !== undefined) kinds.add("player initials");
+    else kinds.add("short label");
+  }
+  return DISC_TEXT_ORDER.filter((k) => kinds.has(k));
+}
+
+/**
+ * Fills the `{disc-text}` slot of a registry description from the scene: "Filled disc with
+ * {disc-text}." reads "Filled disc with position code." on the City shapes and "Filled disc with
+ * shirt number." when no scene is given. A side whose discs carry no text drops the clause.
+ */
+export function describeDiscText(description: string, scene: Scene | null, side: "a" | "b") {
+  if (!description.includes("{disc-text}")) return description;
+  const kinds = scene ? discTextKinds(scene, side) : ["shirt number"];
+  if (kinds.length === 0) return description.replace(/ and \{disc-text\}| with \{disc-text\}/, "");
+  return description.replace("{disc-text}", kinds.join(" or "));
+}
+
 function count(n: number, one: string, many: string): string | null {
   if (n === 0) return null;
   return `${n} ${n === 1 ? one : many}`;

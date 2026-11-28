@@ -1,17 +1,23 @@
 import { useMemo, useState } from "react";
-import { createSampler, eventState, type MotionMode } from "../../scene/playback/sample.ts";
+import {
+  createSampler,
+  eventState,
+  type MotionMode,
+  type SampledScene,
+} from "../../scene/playback/sample.ts";
 import type {
   Scene,
   SceneAnnotation,
   SceneEntity,
   SceneEvent,
+  ScenePoint,
   SceneTeam,
 } from "../../scene/schema.ts";
 import { usePitch } from "../Pitch.tsx";
 import type { Pt, View } from "../view.ts";
 import { BallGlyph } from "./BallGlyph.tsx";
 import { EventGlyph, type Side } from "./EventGlyphs.tsx";
-import { discDiameter } from "./glyphSize.ts";
+import { ballDiameter, discDiameter } from "./glyphSize.ts";
 import {
   HighlightGlyph,
   NoteGlyph,
@@ -21,6 +27,7 @@ import {
   ZoneGlyph,
 } from "./MarkGlyphs.tsx";
 import { DraggableHandle, PlayerGlyph } from "./PlayerGlyph.tsx";
+import { placeBadge } from "./placement.ts";
 
 export interface SceneLayerProps {
   scene: Scene;
@@ -63,6 +70,16 @@ export function ballOwnerCandidates(scene: Scene, t: number, latest: string | nu
   return ids;
 }
 
+/** Sampled entities with any learner-moved positions applied. */
+function atMap(sampled: SampledScene, positions?: Readonly<Record<string, Pt>>) {
+  return new Map(
+    sampled.entities.map((e) => {
+      const moved = positions?.[e.id];
+      return [e.id, moved ? { ...e, x: moved.x, y: moved.y } : e] as const;
+    }),
+  );
+}
+
 /** An annotation with a from/to range shows only inside that range. */
 function inRange(annotation: SceneAnnotation, t: number): boolean {
   if (annotation.type === "sequence") return true;
@@ -94,12 +111,40 @@ export function SceneLayer({
   const sideOfTeam = (id: string | undefined): Side =>
     scene.teams.find((team) => team.id === id)?.side ?? "a";
   const entityById = new Map(scene.entities.map((entity) => [entity.id, entity]));
-  const at = new Map(
-    sampled.entities.map((e) => {
-      const moved = positions?.[e.id];
-      return [e.id, moved ? { ...e, x: moved.x, y: moved.y } : e] as const;
-    }),
-  );
+  const at = atMap(sampled, positions);
+  // Sequence badges sit beside the passer, clear of every disc (04-UI-SPEC Phase 3 observation 1)
+  // and of each other.
+  // Placement is memoised per sampled t, so paused frames cost nothing.
+  const badgeAt = useMemo(() => {
+    const s = sample(t, mode);
+    const pos = atMap(s, positions);
+    const discs = scene.entities.flatMap((e) => {
+      const p = pos.get(e.id);
+      return e.type === "ball" || !p ? [] : [{ x: p.x, y: p.y }];
+    });
+    // Badges are placed in sequence order, each clear of the ones placed before it, so an earlier
+    // badge never moves when a later one appears (04-UI-REVIEW fix 3).
+    const out = new Map<string, ScenePoint>();
+    const placed: ScenePoint[] = [];
+    const events = new Map(scene.events.map((event) => [event.id, event]));
+    for (const annotation of scene.annotations) {
+      if (annotation.type !== "sequence") continue;
+      for (const id of annotation.events) {
+        const event = events.get(id);
+        if (!event || out.has(id) || eventState(scene, event, s.t) === "hidden") continue;
+        const at = placeBadge({
+          start: event.start,
+          end: event.end ?? event.start,
+          discs,
+          badges: placed,
+          view,
+        });
+        out.set(id, at);
+        placed.push(at);
+      }
+    }
+    return out;
+  }, [scene, sample, t, mode, positions, view]);
 
   const visibleEvents = scene.events.flatMap((event) => {
     const state = eventState(scene, event, sampled.t);
@@ -136,12 +181,15 @@ export function SceneLayer({
   const ballEntity = scene.entities.find((e) => e.type === "ball");
   const ballAt = ballEntity ? at.get(ballEntity.id) : undefined;
   let ball = ballAt ? { x: ballAt.x, y: ballAt.y } : null;
-  // An owned ball sits 0.6 x the disc diameter from the owner, toward the owner team attack.
+  // An owned ball sits beside its owner, toward the owner team attack: centre to centre the disc
+  // radius plus the ball radius, so the ball touches the disc edge and never covers the disc text
+  // (04-UI-REVIEW fix 4; the Phase 3 rule of 0.6 x the disc diameter put it over a two-letter label).
   // Between two frames the ball may be in flight (a pass), so the offset applies only while the
   // sampled ball is at a player: the owner of the latest frame or of the next one. It fades out
   // over two disc diameters, so the ball never jumps when it leaves or reaches a player (03-11).
   if (ball) {
     const d = discDiameter(view.pxPerMetre);
+    const offset = (d + ballDiameter(view.pxPerMetre)) / 2;
     const reach = 2 * d;
     let best: { dx: number; w: number } | null = null;
     for (const id of ballOwnerCandidates(scene, sampled.t, sampled.ballOwner)) {
@@ -151,7 +199,7 @@ export function SceneLayer({
       const w = Math.max(0, 1 - Math.hypot(ball.x - p.x, ball.y - p.y) / reach);
       if (w <= 0 || (best && best.w >= w)) continue;
       const team = scene.teams.find((candidate) => candidate.id === entity.team);
-      best = { dx: attackSign(scene, team) * 0.6 * d, w };
+      best = { dx: attackSign(scene, team) * offset, w };
     }
     // At a frame the sampled ball is on its owner, so w = 1 gives owner + offset (the 03-UI-SPEC
     // rule); in flight w falls to 0 and the ball keeps its sampled path, moving forward throughout.
@@ -224,14 +272,9 @@ export function SceneLayer({
               <g key={a.id}>
                 {a.events.map((id, index) => {
                   const event = eventById.get(id);
-                  return event ? (
-                    <SequenceBadgeGlyph
-                      key={id}
-                      x={event.start.x}
-                      y={event.start.y}
-                      n={index + 1}
-                    />
-                  ) : null;
+                  if (!event) return null;
+                  const where = badgeAt.get(id) ?? event.start;
+                  return <SequenceBadgeGlyph key={id} x={where.x} y={where.y} n={index + 1} />;
                 })}
               </g>
             );

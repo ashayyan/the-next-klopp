@@ -14,12 +14,37 @@ export interface DistFile {
 }
 
 export interface BundleViolation {
-  rule: "denied" | "unlisted-data" | "oversize" | "catalog" | "marker" | "symlink";
+  rule: "denied" | "unlisted-data" | "oversize" | "catalog" | "marker" | "dev-leak" | "symlink";
   path: string;
   detail: string;
 }
 
 const OPEN_LICENCES: readonly string[] = ["CC-BY-4.0"];
+
+/**
+ * Text that exists only in a dev-only module (routes under /dev, gated by import.meta.env.DEV).
+ * Any of it in a built code chunk means a dev route, or the raw DESIGN.md it imports, shipped in the
+ * study build. Each marker is copied from its source; check-bundle.test.ts asserts it is still there,
+ * so a copy edit fails a test instead of silently disarming the check.
+ */
+export const DEV_ONLY_MARKERS: readonly { marker: string; source: string }[] = [
+  { marker: "left out of the study build", source: "src/routes/dev.tsx" },
+  { marker: "Dev view of the canonical pitch", source: "src/routes/dev-pitch.tsx" },
+  {
+    marker: "Every primitive and interaction, with its states",
+    source: "src/routes/dev-gallery.tsx",
+  },
+  {
+    marker: "The picked direction renders the two sample lesson screens",
+    source: "src/routes/dev-directions.tsx",
+  },
+  {
+    marker: "This page exists so the review command can be tested",
+    source: "src/routes/dev-review-fixture.tsx",
+  },
+  // DirectionScope imports docs/DESIGN.md?raw; its first section heading marks the whole file.
+  { marker: "## 1. Principles and anti-slop rules", source: "docs/DESIGN.md" },
+];
 
 const CatalogSchema = z.object({
   datasets: z.array(
@@ -90,6 +115,13 @@ export function checkBundle(
       for (const marker of manifest.contentMarkers) {
         if (lower.includes(marker.toLowerCase())) {
           out.push({ rule: "marker", path, detail: `contains "${marker}"` });
+        }
+      }
+      if (isCodeAsset(path)) {
+        for (const { marker, source } of DEV_ONLY_MARKERS) {
+          if (f.text.includes(marker)) {
+            out.push({ rule: "dev-leak", path, detail: `contains dev-only text from ${source}` });
+          }
         }
       }
     }

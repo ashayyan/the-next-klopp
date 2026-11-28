@@ -1,19 +1,19 @@
 ---
 gsd_state_version: "1.0"
-current_phase: 4
-current_phase_name: Design Direction & System
+current_phase: 5
+current_phase_name: Content Engine, App Shell & Deploy
 status: planning
-stopped_at: Phase 3 complete, ready to plan Phase 4
-last_updated: "2026-11-28T04:04:33.070Z"
+stopped_at: Phase 4 complete, ready to plan Phase 5
+last_updated: "2026-11-28T12:05:06.822Z"
 last_activity: 2026-11-28
-last_activity_desc: Phase 3 complete, transitioned to Phase 4
-state_head: a92c6545fa5d9a28f9d45b6fa334aee0b633b59a
+last_activity_desc: Phase 4 complete, transitioned to Phase 5
+state_head: d909d6d51211609b7d2b14db7a481b7e6ec4d04c
 progress:
   total_phases: 8
-  completed_phases: 3
-  total_plans: 41
-  completed_plans: 41
-  percent: 38
+  completed_phases: 4
+  total_plans: 58
+  completed_plans: 58
+  percent: 50
 ---
 
 # Project State
@@ -23,21 +23,21 @@ progress:
 See: .planning/PROJECT.md (updated 2026-11-27)
 
 **Core value:** Every concept is shown, then touched, then practised in a short visual lesson grounded in real Premier League examples and traceable free sources, so a visual, ADHD learner builds professional-level football understanding.
-**Current focus:** Phase 3 — Pitch Standard & Data Pipeline
+**Current focus:** Phase 4 — Design Direction & System
 
 ## Current Position
 
-Phase: 4 — Design Direction & System
+Phase: 5 — Content Engine, App Shell & Deploy
 Plan: Not started
 Status: Ready to plan
-Last activity: 2026-11-28 — Phase 3 complete, transitioned to Phase 4
+Last activity: 2026-11-28 — Phase 4 complete, transitioned to Phase 5
 
-Progress: [████░░░░░░] 38%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 41
+- Total plans completed: 58
 - Average duration: - min
 - Total execution time: 0.0 hours
 
@@ -48,6 +48,7 @@ Progress: [████░░░░░░] 38%
 | 2 | 21 | - | - |
 | 1 | 9 | - | - |
 | 3 | 11 | - | - |
+| 4 | 17 | - | - |
 
 **Recent Trend:**
 - Last 5 plans: -
@@ -88,6 +89,23 @@ Progress: [████░░░░░░] 38%
 | Phase 03 P09 | 40min | 3 tasks | 13 files |
 | Phase 03 P10 | 55min | 3 tasks | 13 files |
 | Phase 3 P11 | 25min | 3 tasks | 7 files |
+| Phase 4 P01 | 25 min | 2 tasks | 14 files |
+| Phase 4 P02 | 15 min | 2 tasks | 6 files |
+| Phase 4 P03 | 14 min | 2 tasks | 7 files |
+| Phase 4 P04 | 22min | 2 tasks | 13 files |
+| Phase 4 P05 | 38min | 3 tasks | 12 files |
+| Phase 4 P06 | 52min | 3 tasks | 7 files |
+| Phase 4 P07 | 30min | 3 tasks | 16 files |
+| Phase 4 P08 | 35min | 3 tasks | 18 files |
+| Phase 4 P09 | 35min | 3 tasks | 13 files |
+| Phase 4 P10 | 25min | 3 tasks | 4 files |
+| Phase 4 P11 | 11 min | 3 tasks | 13 files |
+| Phase 4 P12 | 10 min | 3 tasks | 3 files |
+| Phase 04 P13 | 20min | 2 tasks | 24 files |
+| Phase 04 P14 | 75min | 3 tasks | 15 files |
+| Phase 4 P15 | 95 min | 3 tasks | 21 files |
+| Phase 04 P16 | 150min | 3 tasks | 20 files |
+| Phase 04 P17 | 70min | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -141,10 +159,35 @@ Recent decisions affecting current work:
 - [Phase 3]: 03-11: playback keeps the React selector render path (3.7-4.2 ms mean work, p95 16.8 ms in headless Edge on a Ryzen 9 7900X); imperative transforms are the escape hatch (ADR 0009)
 - [Phase 3]: 03-11: ball owner offset fades over two disc diameters around the latest or next owner, so a ball in flight keeps its sampled path
 - [Phase 3]: 03-11: npm run check:pitch is the real-browser gate for /dev/pitch until Playwright (Phase 5); CHECK_PITCH_PORT runs it beside a dev server holding 5173
+- [Phase 4]: 04-01: duration.stagger-line emits --stagger-line; theme blocks reject unexpected keys; SYSTEM_INPUT is floodlit.tokens.json until 04-11
+- [Phase 4]: 04-02: badge placement retries at 1.42x and 2x distance because a sloping travel puts the badge box on the start disc box corner at disc radius + 8 px; chip size constants live in placement.ts
+- [Phase 4]: 04-03: palette gate adds highlight-ink and team-b-ink rows; notebook dark control-border is #6B7871 (3.04:1 on panel, was 2.99)
+- [Phase 4]: Phase packages pinned only after an automated npm identity gate; fonts self-hosted byte for byte with generated OFL licence record
+- [Phase 4]: review:screens judges thresholds in Node from plain page data; text on pitch glyphs is left to the palette gate; Git Bash route rewriting is undone via EXEPATH
+- [Phase 4]: review:screens runs the taste skill with app-screen severities and all 22 rule checks; check.mjs gets a per-run Chrome profile closed through its DevTools port
+- [Phase 4]: 04-07: floodlit 200/1fr/320 sits on the 12-column 32 px grid (2/7/3 columns) so the layout checker measures real column lines
+- [Phase 4]: 04-07: DirectionScope mirrors data-direction and data-theme onto body so the page background and Base UI portals read the direction tokens
+- [Phase 4]: 04-07: the formation morph is state = f(elapsed) in one rAF loop; readout, title and live region change at its end
+- [Phase 4]: 04-08: ShellBar builds both theme menus from theme/onThemeChange; choosing a theme drops ?theme= so the choice shows
+- [Phase 4]: 04-08: data-fill-edge plus one directions.css rule draws programme-light yellow fills with an ink edge, including portalled popups
+- [Phase 4]: 04-09: data-screen numbers come only from deriveGoal, tested against the published scene; the 1–5 note sums the rounded table values
+- [Phase 4]: 04-09: review collector measures a control through its label only for a wrapped checkbox or radio (fixes the 20 px select false positive)
+- [Phase 4]: 04-10: visual direction floodlit picked by an independent reviewer under learner delegation (ADR 0010)
+- [Phase 4]: 04-11: DESIGN.md tokens block is the floodlit set verbatim; anti-slop answered with rules (pitch is the only lit object, scoreline titles, one accent fill at rest), palette unchanged
+- [Phase 4]: 04-11: SYSTEM_INPUT = docs/DESIGN.md; loadTokens refuses a Markdown input with missing or out-of-order sections, so every token tool enforces the outline
+- [Phase 4]: 04-11: Theme pre-paint script in index.html sets data-theme only for stored light/dark (tnk:theme, try/catch); applyDocumentTheme for the app toggle
+- [Phase 4]: 04-12: DESIGN.md complete (sections 1-8); section 8 is locked to CHECKS and TASTE_IGNORED, section 5 to the 50 brief 9.5 components, by design-md.test.ts
+- [Phase 4]: 04-12: Case study template reveals nothing on scroll alone (button or Next drives each step); Review template has a capped queue and no backlog count
+- [Phase 04]: 04-13: keep the floodlit tactics and data screens as reference routes; remove the other two directions' token files, layouts and fonts
+- [Phase 04]: 04-14: gallery frames are real same-origin iframes; glyph sheet has a team B state so ring discs and hollow arrowheads are reviewed in both themes; wide primitives use fewer columns; drag uses a six-player board
+- [Phase 4]: 04-15: Base UI controls and overlays shown in the gallery; the open AlertDialog state is a non-modal Dialog with role alertdialog so a screenshot is not made inert; the safe action Keep board takes focus on open
+- [Phase 04]: 04-16: inventory.json is the single list of the 37 gallery ids and states; revealed quiz answers stay focusable with aria-disabled and feedback is icon plus words
+- [Phase 04]: 04-17: visual baselines are CI-only Linux; update-snapshots is a two-job workflow (generate in the Playwright image, commit on the hosted runner); first baseline dispatch deferred until the workflow is on main
 
 ### Pending Todos
 
 - [Phase 2] Learner: open research/summary/index.html and confirm or re-open the research approval (non-blocking; approved by Claude under delegation 2026-11-27)
+- [Phase 4] Learner: look at the three directions and override the pick if wanted (non-blocking). ADR 0010 lists the screenshots; to see them live run `git switch --detach f6e513df6cbf0c72bfdef89d036bbf59a7b6cd9a`, `npm run dev`, open /dev/directions, then `git switch gsd/phase-04-design-direction-system`.
 
 ### Blockers/Concerns
 
@@ -157,6 +200,7 @@ Recent decisions affecting current work:
 
 | Phase | State | Resume |
 |-------|-------|--------|
+| Phase 4 | visual baselines not generated | after Phase 4 merges to main, run `gh workflow run update-snapshots.yml --ref <next branch>` (GitHub only dispatches a workflow file that exists on the default branch; the first attempt on the phase branch answered HTTP 404) and confirm the `visual` job of the dispatched `ci` run is green |
 
 ## Deferred Items
 
@@ -168,6 +212,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T03:13:32.121Z
-Stopped at: Phase 3 complete, ready to plan Phase 4
+Last session: 2026-11-28T10:39:37.668Z
+Stopped at: Phase 4 complete, ready to plan Phase 5
 Resume file: None

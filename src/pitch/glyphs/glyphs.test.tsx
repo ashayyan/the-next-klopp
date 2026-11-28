@@ -6,12 +6,15 @@ import board from "../../scene/fixtures/board.json";
 import glyphSheet from "../../scene/fixtures/glyph-sheet.json";
 import quizAnswer from "../../scene/fixtures/quiz-answer.json";
 import reconstruction from "../../scene/fixtures/reconstruction.json";
+import { PlaybackBar } from "../../scene/playback/PlaybackBar.tsx";
 import { keyframeTimes, sceneDuration } from "../../scene/playback/sample.ts";
+import { createPlaybackStore } from "../../scene/playback/store.ts";
 import type { Scene, SceneEvent } from "../../scene/schema.ts";
 import { parseScene } from "../../scene/validate.ts";
 import { describeScene, glyphIdsForScene } from "../legend/glyphIds.ts";
 import { Pitch } from "../Pitch.tsx";
 import { makeView } from "../view.ts";
+import { CONDENSED_CHAR_PX, fitLabel, labelMaxWidthPx } from "./glyphSize.ts";
 import { GLYPH_IDS, GLYPHS } from "./registry.ts";
 import { drawDensity, SceneLayer } from "./SceneLayer.tsx";
 
@@ -240,6 +243,51 @@ describe("Canvas density layer", () => {
   });
 });
 
+describe("disc labels fit inside the disc (04-UI-REVIEW fix 1)", () => {
+  it("keeps the 22 px disc chord at half the cap height above two condensed capitals", () => {
+    // Team B has the wider ring (3 px), so it gives the narrowest chord.
+    const chord = labelMaxWidthPx(22, 3);
+    expect(chord).toBeGreaterThan(2 * CONDENSED_CHAR_PX);
+    expect(chord).toBeLessThan(22 - 3);
+  });
+
+  it("leaves shirt numbers and single letters at the normal width", () => {
+    expect(fitLabel("7", 22, 2)).toEqual({});
+    expect(fitLabel("10", 22, 2)).toEqual({});
+    expect(fitLabel("W", 22, 2)).toEqual({});
+  });
+
+  it("condenses a two-letter code and squeezes a longer label to the chord", () => {
+    expect(fitLabel("RW", 22, 2)).toEqual({ stretch: "75%" });
+    expect(fitLabel("CDM", 22, 3)).toEqual({ stretch: "75%", lengthPx: labelMaxWidthPx(22, 3) });
+  });
+
+  it("draws a position code condensed and a shirt number unchanged", () => {
+    const labelled = load({
+      ...structuredClone(board),
+      id: "label-fit",
+      kind: "authored",
+      entities: [
+        { id: "home-2", type: "player", team: "home", label: "RW" },
+        { id: "home-3", type: "player", team: "home", number: 10 },
+      ],
+      frames: [
+        {
+          t: 0,
+          positions: { "home-2": { x: 20, y: 30 }, "home-3": { x: 60, y: 30 } },
+        },
+      ],
+    });
+    const texts = tags(render(labelled), "--team-a-ink");
+    expect(texts).toHaveLength(2);
+    const [rw, ten] = texts;
+    expect(rw).toContain("font-stretch:75%");
+    expect(attr(rw ?? "", "data-fit")).toBe("condensed");
+    expect(ten).not.toContain("font-stretch");
+    expect(attr(ten ?? "", "textLength")).toBeUndefined();
+  });
+});
+
 describe("ball ownership offset (03-11)", () => {
   // A passes to B along y = 30: the ball is owned at both frames and in flight between them.
   const pass = load({
@@ -272,17 +320,32 @@ describe("ball ownership offset (03-11)", () => {
       },
     ],
   });
-  // render() draws at the 960 px default width; home attacks left to right (+x).
+  // render() draws at the 960 px default width; home attacks left to right (+x). There the disc is
+  // the 22 px minimum and the ball the 10 px minimum, so the ball centre sits 16 px from the owner's:
+  // the ball touches the disc edge and never covers the disc text (04-UI-REVIEW fix 4).
   const offset =
-    0.6 *
-    (20 /
-      makeView({ length: 105, width: 68, runoff: 3, orientation: "horizontal", cssWidth: 960 })
-        .pxPerMetre);
+    (22 + 10) /
+    2 /
+    makeView({ length: 105, width: 68, runoff: 3, orientation: "horizontal", cssWidth: 960 })
+      .pxPerMetre;
   const ballX = (t: number) => Number(attr(tags(render(pass, t), "--ball-fill")[0] ?? "", "cx"));
 
   it("puts an owned ball at the owner plus the offset at a frame", () => {
     expect(ballX(0)).toBeCloseTo(20 + offset, 6);
     expect(ballX(2)).toBeCloseTo(60 + offset, 6);
+  });
+
+  it("keeps an owned ball off the owner's disc, so the disc text stays readable", () => {
+    const ppm = makeView({
+      length: 105,
+      width: 68,
+      runoff: 3,
+      orientation: "horizontal",
+      cssWidth: 960,
+    }).pxPerMetre;
+    const discR = 22 / 2 / ppm;
+    const ballR = 10 / 2 / ppm;
+    expect(ballX(0) - 20).toBeGreaterThanOrEqual(discR + ballR - 1e-9);
   });
 
   it("draws a ball in flight at its sampled position, not on the passer", () => {
@@ -318,5 +381,14 @@ describe("draggable player semantics (WR-13)", () => {
     expect(describedBy).not.toBe("");
     expect(markup).toContain(`id="${describedBy}"`);
     expect(markup).toMatch(/Arrow keys move this player 1 metre, or 5 metres with Shift/);
+  });
+});
+
+describe("visible Play label (04-UI-SPEC Phase 3 observation 5)", () => {
+  it('reads "Play sequence" from 768 px up and keeps the aria-label at every width', () => {
+    const store = createPlaybackStore(load(reconstruction), { motion: "smooth" });
+    const markup = renderToStaticMarkup(<PlaybackBar store={store} />);
+    expect(markup).toContain('aria-label="Play sequence"');
+    expect(markup).toContain('<span class="hidden md:inline">Play sequence</span>');
   });
 });

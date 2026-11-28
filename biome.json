@@ -16,6 +16,7 @@
       "!!pipeline/tests/fixtures",
       "!!data",
       "!!public/data",
+      "!!src/styles/tokens.css",
       "!!research/summary",
       "!!**/package-lock.json",
       "!!skills-lock.json",

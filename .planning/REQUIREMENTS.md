@@ -28,10 +28,10 @@
 
 ### Design System
 
-- [ ] **DSGN-01**: 2–3 distinct visual directions are rendered as real screens (one tactics lesson, one data lesson) and screenshotted at 3 widths; the learner picks one
-- [ ] **DSGN-02**: `docs/DESIGN.md` covers anti-slop rules, colour system (dark/light, team A/B, ball, zones, data scales) validated for colour-blind safety, typography, spacing, motion language, lesson templates, data-viz standards and the quality bar
-- [ ] **DSGN-03**: Design tokens generated from DESIGN.md drive the app's Tailwind theme
-- [ ] **DSGN-04**: A dev component gallery shows every primitive and interaction at 3 widths, with visual baselines generated in CI only
+- [x] **DSGN-01**: 2–3 distinct visual directions are rendered as real screens (one tactics lesson, one data lesson) and screenshotted at 3 widths; the learner picks one
+- [x] **DSGN-02**: `docs/DESIGN.md` covers anti-slop rules, colour system (dark/light, team A/B, ball, zones, data scales) validated for colour-blind safety, typography, spacing, motion language, lesson templates, data-viz standards and the quality bar
+- [x] **DSGN-03**: Design tokens generated from DESIGN.md drive the app's Tailwind theme
+- [x] **DSGN-04**: A dev component gallery shows every primitive and interaction at 3 widths, with visual baselines generated in CI only
 
 ### Pitch Standard
 
@@ -114,7 +114,7 @@
 ### Quality Gates
 
 - [ ] **QA-01**: A separate verifier sub-agent, which did not write the lesson, checks every factual claim against fetched source text (Opus for metrics, regulations, finance)
-- [ ] **QA-02**: Every lesson passes a taste-skill screenshot review at 3 widths and follows DESIGN.md
+- [x] **QA-02**: Every lesson passes a taste-skill screenshot review at 3 widths and follows DESIGN.md
 - [ ] **QA-03**: Every lesson passes accessibility checks (axe, keyboard, reduced motion, contrast) and the performance budget
 - [ ] **QA-04**: Every lesson is tagged with the roles and competencies it serves; role coverage is reported at each milestone
 - [ ] **QA-05**: E2E tests for every shipped lesson pass before merging; shipped chapters never break
@@ -185,11 +185,11 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 | PIPE-02 | Phase 3 | Complete |
 | PIPE-03 | Phase 3 | Complete |
 | PIPE-04 | Phase 3 | Complete |
-| DSGN-01 | Phase 4 | Pending |
-| DSGN-02 | Phase 4 | Pending |
-| DSGN-03 | Phase 4 | Pending |
-| DSGN-04 | Phase 4 | Pending |
-| QA-02 | Phase 4 | Pending |
+| DSGN-01 | Phase 4 | Complete |
+| DSGN-02 | Phase 4 | Complete |
+| DSGN-03 | Phase 4 | Complete |
+| DSGN-04 | Phase 4 | Complete |
+| QA-02 | Phase 4 | Complete |
 | CONT-01 | Phase 5 | Pending |
 | CONT-02 | Phase 5 | Pending |
 | CONT-03 | Phase 5 | Pending |

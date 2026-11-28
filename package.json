@@ -31,7 +31,12 @@
     "smoke:dev": "node scripts/smoke.ts dev",
     "check:pitch": "node scripts/check-pitch-browser.ts",
     "verify:setup": "node scripts/verify-setup.ts all",
-    "prepare": "husky"
+    "prepare": "husky",
+    "tokens": "node scripts/design/build-tokens.ts",
+    "tokens:check": "node scripts/design/build-tokens.ts --check",
+    "palette": "node scripts/design/check-palette.ts",
+    "fonts": "node scripts/design/copy-fonts.ts",
+    "review:screens": "node scripts/review-screens.ts"
   },
   "lint-staged": {
     "*.{ts,tsx,js,mjs,cjs,json,jsonc,css}": [
@@ -41,6 +46,9 @@
   "devDependencies": {
     "@biomejs/biome": "2.6.9",
     "@dagrejs/dagre": "3.1.4",
+    "@fontsource-variable/geist-mono": "5.3.0",
+    "@fontsource-variable/mona-sans": "5.3.0",
+    "@playwright/test": "1.65.1",
     "@tailwindcss/vite": "4.3.5",
     "@types/d3-ease": "3.0.2",
     "@types/d3-interpolate": "3.0.4",
@@ -58,8 +66,10 @@
     "vitest": "5.1.2"
   },
   "dependencies": {
+    "@base-ui/react": "1.9.0",
     "d3-ease": "3.0.2",
     "d3-interpolate": "3.0.2",
+    "motion": "14.14.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "react-router": "8.5.3",

@@ -1,0 +1,160 @@
+{
+  "id": "city-2022-23-shapes",
+  "schemaVersion": 1,
+  "kind": "authored",
+  "label": "Manchester City 2022/23: a 4-4-2 without the ball, a 3-2-4-1 with it",
+  "pitch": { "length": 105, "width": 68 },
+  "teams": [
+    {
+      "id": "city",
+      "name": "Manchester City",
+      "side": "a",
+      "venue": "home",
+      "attack": { "1": "ltr" }
+    }
+  ],
+  "entities": [
+    { "id": "city-gk", "type": "goalkeeper", "team": "city", "label": "GK", "role": "Goalkeeper" },
+    { "id": "city-rb", "type": "player", "team": "city", "label": "RB", "role": "Right back" },
+    {
+      "id": "city-stones",
+      "type": "player",
+      "team": "city",
+      "label": "CB",
+      "name": "John Stones",
+      "role": "Centre-back"
+    },
+    { "id": "city-cb", "type": "player", "team": "city", "label": "CB", "role": "Centre-back" },
+    { "id": "city-lb", "type": "player", "team": "city", "label": "LB", "role": "Left back" },
+    {
+      "id": "city-dm",
+      "type": "player",
+      "team": "city",
+      "label": "DM",
+      "role": "Defensive midfielder"
+    },
+    {
+      "id": "city-cm-left",
+      "type": "player",
+      "team": "city",
+      "label": "CM",
+      "role": "Left central midfielder"
+    },
+    {
+      "id": "city-cm-right",
+      "type": "player",
+      "team": "city",
+      "label": "CM",
+      "role": "Right central midfielder"
+    },
+    { "id": "city-rw", "type": "player", "team": "city", "label": "RW", "role": "Right winger" },
+    { "id": "city-lw", "type": "player", "team": "city", "label": "LW", "role": "Left winger" },
+    { "id": "city-st", "type": "player", "team": "city", "label": "ST", "role": "Striker" }
+  ],
+  "frames": [
+    {
+      "t": 0,
+      "positions": {
+        "city-gk": { "x": 5, "y": 34 },
+        "city-rb": { "x": 30, "y": 55 },
+        "city-stones": { "x": 27, "y": 41 },
+        "city-cb": { "x": 27, "y": 27 },
+        "city-lb": { "x": 30, "y": 13 },
+        "city-rw": { "x": 45, "y": 57 },
+        "city-dm": { "x": 43, "y": 40 },
+        "city-cm-left": { "x": 43, "y": 28 },
+        "city-lw": { "x": 45, "y": 11 },
+        "city-cm-right": { "x": 60, "y": 40 },
+        "city-st": { "x": 61, "y": 27 }
+      }
+    },
+    {
+      "t": 1,
+      "positions": {
+        "city-gk": { "x": 9, "y": 34 },
+        "city-rb": { "x": 36, "y": 52 },
+        "city-stones": { "x": 50, "y": 41 },
+        "city-cb": { "x": 33, "y": 34 },
+        "city-lb": { "x": 36, "y": 16 },
+        "city-dm": { "x": 50, "y": 28 },
+        "city-rw": { "x": 73, "y": 61 },
+        "city-cm-right": { "x": 71, "y": 44 },
+        "city-cm-left": { "x": 71, "y": 24 },
+        "city-lw": { "x": 73, "y": 7 },
+        "city-st": { "x": 86, "y": 34 }
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "stones-steps-up",
+      "type": "run",
+      "t": 1,
+      "tEnd": 1,
+      "team": "city",
+      "player": "city-stones",
+      "start": { "x": 27, "y": 41 },
+      "end": { "x": 50, "y": 41 }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "out-back-four",
+      "type": "shape",
+      "team": "city",
+      "members": ["city-lb", "city-cb", "city-stones", "city-rb"],
+      "to": 0
+    },
+    {
+      "id": "out-midfield-four",
+      "type": "shape",
+      "team": "city",
+      "members": ["city-lw", "city-cm-left", "city-dm", "city-rw"],
+      "to": 0
+    },
+    {
+      "id": "out-front-two",
+      "type": "shape",
+      "team": "city",
+      "members": ["city-st", "city-cm-right"],
+      "to": 0
+    },
+    {
+      "id": "in-back-three",
+      "type": "shape",
+      "team": "city",
+      "members": ["city-lb", "city-cb", "city-rb"],
+      "from": 1
+    },
+    {
+      "id": "in-double-pivot",
+      "type": "shape",
+      "team": "city",
+      "members": ["city-dm", "city-stones"],
+      "from": 1
+    },
+    {
+      "id": "in-front-four",
+      "type": "shape",
+      "team": "city",
+      "members": ["city-lw", "city-cm-left", "city-cm-right", "city-rw"],
+      "from": 1
+    },
+    { "id": "stones-highlight", "type": "highlight", "target": "city-stones" },
+    {
+      "id": "stones-note",
+      "type": "note",
+      "text": "Stones steps into midfield",
+      "at": { "x": 20, "y": 60 },
+      "anchor": { "x": 34, "y": 41 },
+      "from": 1
+    }
+  ],
+  "source": {
+    "type": "authored",
+    "sourceIds": ["src-theanalyst-stones-hybrid-role"],
+    "licence": "project-authored",
+    "attribution": "Positions are illustrative, drawn from The Analyst (Stats Perform), “John Stones’ centre-midfield and centre-back hybrid role”, 2023.",
+    "shippable": true
+  }
+}

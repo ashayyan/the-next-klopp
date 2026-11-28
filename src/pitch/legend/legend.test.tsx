@@ -1,13 +1,15 @@
 // @vitest-environment node
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+import wyscout from "../../../public/data/wyscout/v1-809b8aff1fda/scene-wyscout-2499754-sane-goal.json";
+import city from "../../routes/dev-directions/scenes/city-2022-23-shapes.json";
 import board from "../../scene/fixtures/board.json";
 import type { Scene } from "../../scene/schema.ts";
 import { parseScene } from "../../scene/validate.ts";
 import { GLYPH_IDS, glyph } from "../glyphs/registry.ts";
 import { SceneLayer } from "../glyphs/SceneLayer.tsx";
 import { Pitch } from "../Pitch.tsx";
-import { glyphIdsForScene } from "./glyphIds.ts";
+import { describeDiscText, discTextKinds, glyphIdsForScene } from "./glyphIds.ts";
 import { Legend } from "./Legend.tsx";
 
 function load(raw: unknown): Scene {
@@ -75,5 +77,58 @@ describe("legend equals what the pitch draws", () => {
   it("treats an id outside the registry as an error, not a silent draw", () => {
     expect(() => glyph("nope")).toThrow(/unknown glyph id/);
     expect(glyph("pass").id).toBe("pass");
+  });
+});
+
+describe("the legend names what the discs show (DESIGN.md section 4)", () => {
+  const cityScene = load(city);
+  const wyscoutScene = load(wyscout);
+  const legend = (scene: Scene) => renderToStaticMarkup(<Legend scene={scene} density={false} />);
+
+  it("says shirt number for numbered discs", () => {
+    expect(discTextKinds(boardScene, "a")).toEqual(["shirt number"]);
+    expect(legend(boardScene)).toContain("Filled disc with shirt number.");
+    expect(legend(boardScene)).toContain("White disc with a coloured ring and shirt number.");
+  });
+
+  it("says position code for the City shapes, which label discs GK, CB, ST", () => {
+    expect(discTextKinds(cityScene, "a")).toEqual(["position code"]);
+    expect(legend(cityScene)).toContain("Filled disc with position code.");
+    expect(legend(cityScene)).not.toContain("shirt number");
+  });
+
+  it("says player initials for the Wyscout goal, which labels discs EM, KD, LS", () => {
+    expect(discTextKinds(wyscoutScene, "a")).toEqual(["player initials"]);
+    expect(legend(wyscoutScene)).toContain("Filled disc with player initials.");
+    expect(legend(wyscoutScene)).not.toContain("shirt number");
+  });
+
+  it("names both kinds when a side mixes them, and drops the clause when discs carry no text", () => {
+    const mixed = load({
+      ...structuredClone(board),
+      entities: [
+        { id: "home-2", type: "player", team: "home", number: 2 },
+        { id: "home-3", type: "player", team: "home", label: "CB", role: "Centre-back" },
+        { id: "away-9", type: "player", team: "away" },
+      ],
+      frames: [
+        {
+          t: 0,
+          positions: {
+            "home-2": { x: 20, y: 30 },
+            "home-3": { x: 30, y: 30 },
+            "away-9": { x: 60, y: 30 },
+          },
+        },
+      ],
+      events: [],
+      annotations: [],
+    });
+    expect(legend(mixed)).toContain("Filled disc with shirt number or position code.");
+    expect(legend(mixed)).toContain("White disc with a coloured ring.");
+    expect(describeDiscText("Filled disc with {disc-text}.", null, "a")).toBe(
+      "Filled disc with shirt number.",
+    );
+    expect(legend(mixed)).not.toContain("{disc-text}");
   });
 });

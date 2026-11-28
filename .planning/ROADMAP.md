@@ -19,7 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Setup & Contracts** - Verified toolchain, guarded private repo with CI, running app skeleton, decision records and shared schemas (completed 2026-11-28)
 - [x] **Phase 2: Research Wave 1** - Parallel research, data-coverage matrix, clip-supply decision, machine-readable registry and concept map, learner approval checkpoint (completed 2026-11-28)
 - [x] **Phase 3: Pitch Standard & Data Pipeline** - Canonical pitch renderer, coordinate converters, glyphs and legend, Scene/Frame format, kloppy pipeline with licence gates (completed 2026-11-28)
-- [ ] **Phase 4: Design Direction & System** - 2-3 rendered directions, learner pick, DESIGN.md, tokens, component gallery, screenshot-review gate
+- [x] **Phase 4: Design Direction & System** - 2-3 rendered directions, learner pick, DESIGN.md, tokens, component gallery, screenshot-review gate (completed 2026-11-28)
 - [ ] **Phase 5: Content Engine, App Shell & Deploy** - Lesson-as-data engine, validator, claim components, Playwright walker, quality gates, shell, protected Vercel deploy
 - [ ] **Phase 6: Learner Experience & Progress** - Lesson Loop runtime, glossary, focus mode, confusion button, accessibility, local progress, capped FSRS queue, low-energy and welcome-back
 - [ ] **Phase 7: Golden Lesson & Track 0** - Tracer lesson through every layer, polished golden lesson, app tour, placement diagnostic, goals page, Role Map
@@ -166,9 +166,57 @@ Plans:
   3. Design tokens are generated from DESIGN.md and drive the Tailwind theme: changing a token and regenerating visibly changes the app and the pitch.
   4. A dev gallery (`/dev/gallery`) shows every primitive and interaction at 3 widths, and visual baselines are generated only by CI on Linux, never overwritten by a local run.
   5. A screenshot-review command captures any screen at 3 widths and runs the taste-skill review against DESIGN.md, producing a pass/fail report.
-**Plans**: TBD
+**Plans**: 17/17 plans complete in 15 waves
+
+Plans:
+**Wave 1**
+- [x] 04-01-PLAN.md — Token generator, three direction token sets, src/index.css on generated tokens (wave 1)
+- [x] 04-02-PLAN.md — Pitch legibility fixes: badge and chip placement, 22 px discs (wave 1)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [x] 04-03-PLAN.md — Palette gate: colour maths, CVD and contrast checks in CI (wave 2)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [x] 04-04-PLAN.md — Phase dependencies behind an automated legitimacy gate, self-hosted OFL fonts (wave 3)
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [x] 04-05-PLAN.md — review:screens CLI part 1 (capture, DOM checks, report, exit codes), Playwright config, token spec (wave 4)
+
+**Wave 5** *(blocked on Wave 4 completion)*
+- [x] 04-06-PLAN.md — review:screens part 2 (taste skill, style and token checks, reduced motion, fonts, CVD captures) (wave 5)
+
+**Wave 6** *(blocked on Wave 5 completion)*
+- [x] 04-07-PLAN.md — Tactics screen in three directions, City scene, morph, Button and Segmented (wave 6)
+
+**Wave 7** *(blocked on Wave 6 completion)*
+- [x] 04-08-PLAN.md — Lesson chrome: shell bar, step rail, focus mode, theme menu, confusion and glossary popovers (wave 7)
+
+**Wave 8** *(blocked on Wave 7 completion)*
+- [x] 04-09-PLAN.md — Data screen in three directions, derived values, linked chart and table, six clean reviews (wave 8)
+
+**Wave 9** *(blocked on Wave 8 completion)*
+- [x] 04-10-PLAN.md — Independent pick by a fresh Opus reviewer, ADR 0010, learner follow-up (wave 9)
+
+**Wave 10** *(blocked on Wave 9 completion)*
+- [x] 04-11-PLAN.md — DESIGN.md as token source, sections 2-3, app theme script (wave 10)
+
+**Wave 11** *(blocked on Wave 10 completion)*
+- [x] 04-12-PLAN.md — DESIGN.md sections 1, 4-8 and lock tests (wave 11)
+
+**Wave 12** *(blocked on Wave 11 completion)*
+- [x] 04-13-PLAN.md — Collapse to the chosen system: delete direction tokens, prune losing compositions and fonts (wave 12)
+- [x] 04-14-PLAN.md — /dev/gallery: frames, themes, deep links, Foundations, Pitch, Interactions (wave 12)
+
+**Wave 13** *(blocked on Wave 12 completion)*
+- [x] 04-15-PLAN.md — Gallery Controls and Overlays primitives on Base UI (wave 13)
+
+**Wave 14** *(blocked on Wave 13 completion)*
+- [x] 04-16-PLAN.md — Gallery Lesson and Data primitives, full 37-id inventory (wave 14)
+
+**Wave 15** *(blocked on Wave 14 completion)*
+- [x] 04-17-PLAN.md — CI-only Linux visual baselines, update-snapshots workflow, pitch-fixes spec, phase gate (wave 15)
 **UI hint**: yes
-**Checkpoint**: learner picks the direction (DSGN-01) before DESIGN.md is written.
+**Checkpoint**: learner picks the direction (DSGN-01) before DESIGN.md is written; delegated to an independent reviewer for this autonomous run (04-10), learner may override.
 **Research flag**: none (standard patterns).
 
 ### Phase 5: Content Engine, App Shell & Deploy
@@ -242,7 +290,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 | 1. Setup & Contracts | 9/9 | Complete    | 2026-11-28 |
 | 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
 | 3. Pitch Standard & Data Pipeline | 11/11 | Complete    | 2026-11-28 |
-| 4. Design Direction & System | 0/TBD | Not started | - |
+| 4. Design Direction & System | 17/17 | Complete    | 2026-11-28 |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |
 | 6. Learner Experience & Progress | 0/TBD | Not started | - |
 | 7. Golden Lesson & Track 0 | 0/TBD | Not started | - |

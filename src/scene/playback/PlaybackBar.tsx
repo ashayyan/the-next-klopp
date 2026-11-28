@@ -5,7 +5,7 @@ import { NextFrameIcon, PauseIcon, PlayIcon, PreviousFrameIcon, ReplayIcon } fro
 import { type PlaybackState, SPEEDS } from "./store.ts";
 
 const focusRing =
-  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+  "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus-ring";
 const quietButton = `inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-sm border border-control-border bg-transparent text-ink hover:bg-surface-panel ${focusRing}`;
 
 export interface PlaybackBarProps {
@@ -27,7 +27,9 @@ function TransportButton({ store }: PlaybackBarProps) {
       type="button"
       aria-label={`${label} sequence`}
       onClick={toggle}
-      className={`order-2 inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-1 rounded-sm bg-accent px-3 text-sm font-semibold text-accent-ink ${focusRing}`}
+      // A direction whose accent is too light for its page draws this fill's edge (data-fill-edge).
+      data-fill-edge="always"
+      className={`order-2 inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center gap-1 rounded-sm border-2 border-transparent bg-accent px-3 text-sm font-semibold text-accent-ink ${focusRing}`}
     >
       <Icon />
       <span className="hidden md:inline">{`${label} sequence`}</span>
@@ -98,7 +100,7 @@ export function PlaybackBar({ store }: PlaybackBarProps) {
           step={0.04}
           value={t}
           onChange={(e) => seek(Number(e.target.value))}
-          className="order-5 min-h-11 min-w-0 basis-[calc(100%-9rem)] accent-accent md:order-4 md:basis-0 md:flex-1"
+          className={`order-5 min-h-11 min-w-11 basis-[calc(100%-9rem)] accent-accent md:order-4 md:basis-0 md:flex-1 ${focusRing}`}
         />
         <output className="order-4 font-mono text-sm tabular-nums md:order-5">
           {`${seconds(t)} s / ${seconds(duration)} s`}
@@ -111,7 +113,7 @@ export function PlaybackBar({ store }: PlaybackBarProps) {
             id={speedId}
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
-            className={`min-h-11 rounded-sm border border-control-border bg-surface-page px-2 text-sm text-ink ${focusRing}`}
+            className={`h-11 min-h-11 rounded-sm border border-control-border bg-surface-page px-2 text-sm text-ink ${focusRing}`}
           >
             {SPEEDS.map((s) => (
               <option key={s} value={s}>

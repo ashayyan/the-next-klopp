@@ -1,0 +1,189 @@
+// copy-fonts tests: byte-identical copies, licence record, budget, and the --check and --prune
+// modes. Check and prune cases run on a temporary root; the repo tree is only read.
+import { spawnSync } from "node:child_process";
+import {
+  cpSync,
+  existsSync,
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
+import { describe, expect, it } from "vitest";
+import { collectReferences, FONT_BUDGET_BYTES } from "./copy-fonts.ts";
+import { SYSTEM_INPUT } from "./tokens.ts";
+
+const root = join(import.meta.dirname, "..", "..");
+const packages = join(root, "node_modules", "@fontsource-variable");
+const SCRIPT = join(root, "scripts", "design", "copy-fonts.ts");
+const run = (args: string[]) =>
+  spawnSync(process.execPath, [SCRIPT, ...args], { cwd: root, encoding: "utf8" });
+
+/** A temp root holding only the token sets; fonts come from the repo's node_modules. */
+function tempRoot(): string {
+  const dir = mkdtempSync(join(tmpdir(), "tnk-fonts-"));
+  mkdirSync(join(dir, dirname(SYSTEM_INPUT)), { recursive: true });
+  cpSync(join(root, SYSTEM_INPUT), join(dir, SYSTEM_INPUT));
+  return dir;
+}
+
+const args = (dir: string, ...more: string[]) => ["--root", dir, "--packages", packages, ...more];
+const MONA = "mona-sans/mona-sans-latin-wdth-normal.woff2";
+
+describe("tracer: Mona Sans is copied byte for byte with its licence", () => {
+  const dir = tempRoot();
+  const r = run(args(dir));
+
+  it("exits 0", () => {
+    expect(r.stderr).toBe("");
+    expect(r.status).toBe(0);
+  });
+
+  it("copies the Mona Sans file unmodified", () => {
+    const copied = readFileSync(join(dir, "public", "fonts", MONA));
+    const source = readFileSync(
+      join(packages, "mona-sans", "files", "mona-sans-latin-wdth-normal.woff2"),
+    );
+    expect(Buffer.compare(copied, source)).toBe(0);
+  });
+
+  it("writes a Mona Sans section with package, version, OFL-1.1 and the copyright line", () => {
+    const md = readFileSync(join(dir, "public", "fonts", "LICENSES.md"), "utf8");
+    expect(md).toContain("## Mona Sans");
+    expect(md).toContain("@fontsource-variable/mona-sans 5.3.0");
+    expect(md).toContain("OFL-1.1");
+    expect(md).toContain("Copyright 2022 The Mona Sans Project Authors");
+    expect(md).toContain("SIL Open Font License");
+  });
+});
+
+describe("the system families", () => {
+  const refs = collectReferences(root);
+  const files = [...new Set(refs.flatMap((i) => i.refs.map((x) => x.src)))];
+
+  it("references the two DESIGN.md families (Mona Sans, Geist Mono) and nothing else", () => {
+    expect(refs.map((i) => i.input)).toEqual([SYSTEM_INPUT]);
+    expect(new Set(refs.flatMap((i) => i.refs.map((x) => x.family)))).toEqual(
+      new Set(["mona-sans", "geist-mono"]),
+    );
+    expect(files).toHaveLength(2);
+  });
+
+  it("holds exactly one folder per referenced family under public/fonts", () => {
+    const families = new Set(refs.flatMap((i) => i.refs.map((x) => x.family)));
+    const folders = readdirSync(join(root, "public", "fonts"), { withFileTypes: true })
+      .filter((d) => d.isDirectory())
+      .map((d) => d.name);
+    expect(new Set(folders)).toEqual(families);
+  });
+
+  it("serves every referenced file from public/fonts, byte for byte", () => {
+    for (const i of refs) {
+      for (const f of i.refs) {
+        const shipped = readFileSync(join(root, "public", f.src));
+        const source = readFileSync(join(packages, f.family, "files", f.file));
+        expect(Buffer.compare(shipped, source), f.src).toBe(0);
+      }
+    }
+  });
+
+  it("keeps each token input within 200 KB of fonts", () => {
+    for (const i of refs) {
+      const total = i.refs.reduce((n, f) => n + statSync(join(root, "public", f.src)).size, 0);
+      expect(total, i.input).toBeLessThanOrEqual(FONT_BUDGET_BYTES);
+    }
+  });
+
+  it("lists one OFL-1.1 section per shipped family with version 5.3.0 and the licence text", () => {
+    const md = readFileSync(join(root, "public", "fonts", "LICENSES.md"), "utf8");
+    expect(md.match(/^## /gm)).toHaveLength(2);
+    expect(md.match(/- Licence: OFL-1\.1/g)).toHaveLength(2);
+    expect(md.match(/ 5\.3\.0$/gm)).toHaveLength(2);
+    expect(md.match(/SIL Open Font License, Version 1\.1/g)?.length).toBeGreaterThanOrEqual(2);
+  });
+
+  it("--check exits 0 on the repo tree", () => {
+    const check = run(["--check"]);
+    expect(check.stderr).toBe("");
+    expect(check.status).toBe(0);
+  });
+});
+
+describe("--check and --prune", () => {
+  it("--check exits 0 on a freshly copied tree", () => {
+    const dir = tempRoot();
+    expect(run(args(dir)).status).toBe(0);
+    const check = run(args(dir, "--check"));
+    expect(check.status).toBe(0);
+    expect(check.stdout).toContain("fonts ok");
+  });
+
+  it("--check exits 1 and names the file after one byte of a font changes", () => {
+    const dir = tempRoot();
+    run(args(dir));
+    const file = join(dir, "public", "fonts", MONA);
+    const bytes = readFileSync(file);
+    bytes[bytes.length - 1] = (bytes[bytes.length - 1] ?? 0) ^ 0xff;
+    writeFileSync(file, bytes);
+    const check = run(args(dir, "--check"));
+    expect(check.status).toBe(1);
+    expect(check.stderr).toContain(`differs from package: /fonts/${MONA}`);
+  });
+
+  it("--check exits 1 for a missing file, a stale licence file and an unreferenced font", () => {
+    const dir = tempRoot();
+    run(args(dir));
+    mkdirSync(join(dir, "public", "fonts", "extra-face"), { recursive: true });
+    writeFileSync(
+      join(dir, "public", "fonts", "extra-face", "extra-face-latin-wght-normal.woff2"),
+      "x",
+    );
+    writeFileSync(join(dir, "public", "fonts", "LICENSES.md"), "old\n");
+    const check = run(args(dir, "--check"));
+    expect(check.status).toBe(1);
+    expect(check.stderr).toContain(
+      "unreferenced: /fonts/extra-face/extra-face-latin-wght-normal.woff2",
+    );
+    expect(check.stderr).toContain("stale: public/fonts/LICENSES.md");
+    const missingDir = tempRoot();
+    expect(run(args(missingDir, "--check")).stderr).toContain(`missing: /fonts/${MONA}`);
+  });
+
+  it("--prune removes an unreferenced family folder and keeps referenced ones", () => {
+    const dir = tempRoot();
+    run(args(dir));
+    const extra = join(dir, "public", "fonts", "extra-face");
+    mkdirSync(extra, { recursive: true });
+    writeFileSync(join(extra, "extra-face-latin-wght-normal.woff2"), "x");
+    const pruned = run(args(dir, "--prune"));
+    expect(pruned.status).toBe(0);
+    expect(existsSync(extra)).toBe(false);
+    expect(existsSync(join(dir, "public", "fonts", MONA))).toBe(true);
+    expect(run(args(dir, "--check")).status).toBe(0);
+  });
+
+  it("--family copies one family but keeps every family's licence section (WR-04)", () => {
+    const dir = tempRoot();
+    run(args(dir));
+    const before = readFileSync(join(dir, "public", "fonts", "LICENSES.md"), "utf8");
+    const other = collectReferences(root)
+      .flatMap((i) => i.refs.map((x) => x.family))
+      .find((f) => f !== "mona-sans");
+    expect(other).toBeDefined();
+    const one = run(args(dir, "--family", other as string));
+    expect(one.status).toBe(0);
+    const after = readFileSync(join(dir, "public", "fonts", "LICENSES.md"), "utf8");
+    expect(after).toBe(before);
+    expect(after).toContain("## Mona Sans");
+    expect(run(args(dir, "--check")).status).toBe(0);
+  });
+
+  it("exits 2 on an unknown option and when --family meets --check", () => {
+    expect(run(["--nope"]).status).toBe(2);
+    expect(run(["--family", "mona-sans", "--check"]).status).toBe(2);
+  });
+});

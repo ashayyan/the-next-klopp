@@ -16,5 +16,13 @@
     "erasableSyntaxOnly": true,
     "types": ["vite/client", "node"]
   },
-  "include": ["src", "scripts", "schemas", "vite.config.ts", "vitest.config.ts"]
+  "include": [
+    "src",
+    "scripts",
+    "schemas",
+    "tests",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "playwright.config.ts"
+  ]
 }
