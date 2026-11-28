@@ -300,3 +300,23 @@ describe("ball ownership offset (03-11)", () => {
     }
   });
 });
+
+describe("draggable player semantics (WR-13)", () => {
+  const boardScene = load(board);
+  const markup = renderToStaticMarkup(
+    <Pitch title={boardScene.label} length={105} width={68}>
+      <SceneLayer scene={boardScene} t={0} mode="smooth" draggable={(e) => e.type === "player"} />
+    </Pitch>,
+  );
+  const handle = tags(markup, "data-draggable")[0] ?? "";
+
+  it("is a labelled group, not a button, and names its instructions", () => {
+    expect(handle).not.toBe("");
+    expect(attr(handle, "role")).toBe("group");
+    expect(attr(handle, "aria-roledescription")).toBe("draggable player");
+    const describedBy = attr(handle, "aria-describedby") ?? "";
+    expect(describedBy).not.toBe("");
+    expect(markup).toContain(`id="${describedBy}"`);
+    expect(markup).toMatch(/Arrow keys move this player 1 metre, or 5 metres with Shift/);
+  });
+});

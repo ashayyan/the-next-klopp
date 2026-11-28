@@ -207,7 +207,13 @@ export function useDraggableEntity(options: UseDraggableEntityOptions): Draggabl
       }
       return;
     }
-    if (!NUDGE_KEYS.has(e.key) || e.ctrlKey || e.metaKey || e.altKey || active.current) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    // Space and the arrows would scroll the page; while a pointer drag runs they do nothing else.
+    if (e.key === " " || (active.current && NUDGE_KEYS.has(e.key))) {
+      e.preventDefault();
+      return;
+    }
+    if (!NUDGE_KEYS.has(e.key) || active.current) return;
     // The player wins on arrows: playback keys on the stage must not also fire.
     e.preventDefault();
     const now = latest.current;

@@ -1,3 +1,4 @@
+import { useId } from "react";
 import type { SceneEntity, SceneTeam } from "../../scene/schema.ts";
 import { usePitch } from "../Pitch.tsx";
 import { useDraggableEntity } from "../useDraggableEntity.ts";
@@ -135,6 +136,10 @@ export function PlayerGlyph({ entity, team, x, y, decorative, ghost }: PlayerGly
   );
 }
 
+/** Read after the player's name, so the keyboard contract is announced, not guessed. */
+export const DRAG_INSTRUCTIONS =
+  "Arrow keys move this player 1 metre, or 5 metres with Shift. You can also drag with a pointer. Escape cancels a drag.";
+
 export interface DraggableHandleProps {
   entity: SceneEntity;
   team: SceneTeam | undefined;
@@ -161,6 +166,7 @@ export function DraggableHandle({
   onDragChange,
 }: DraggableHandleProps) {
   const { view, length, width, runoff } = usePitch();
+  const instructionsId = useId();
   const u = unitsPerPx(view.pxPerMetre);
   const binding = useDraggableEntity({
     position: { x, y },
@@ -186,17 +192,21 @@ export function DraggableHandle({
     .filter((part): part is string => part !== null)
     .join(", ");
   return (
-    // biome-ignore lint/a11y/useSemanticElements: SVG has no native button; the group is the focus target
+    // A group, not a button: Enter and Space do nothing here, only arrows and Escape do.
+    // biome-ignore lint/a11y/noInteractiveElementToNoninteractiveRole: a focus target that names itself and carries instructions, in an SVG
+    // biome-ignore lint/a11y/useSemanticElements: SVG has no fieldset; the group is the focus target
     <g
       data-draggable=""
       data-entity={entity.id}
       data-team={team?.side ?? "a"}
       tabIndex={0}
-      role="button"
+      role="group"
       aria-roledescription="draggable player"
       aria-label={name}
+      aria-describedby={instructionsId}
       onKeyDown={binding.onKeyDown}
     >
+      <desc id={instructionsId}>{DRAG_INSTRUCTIONS}</desc>
       <circle
         data-focus-ring="inner"
         cx={x}
