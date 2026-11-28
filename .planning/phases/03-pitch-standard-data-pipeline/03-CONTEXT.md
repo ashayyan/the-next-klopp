@@ -109,3 +109,13 @@ The learner delegated every grey area to Claude for this autonomous run ("choose
 - Learner's local big-5/Wyscout data — data-path checkpoint before Track 15/18.
 
 </deferred>
+
+## Post-research decisions (2026-11-28, after 03-RESEARCH.md)
+
+- Frame sampling (A7): entities are hidden outside their first/last sample; reconstructions use `presence: "sampled"`; authored scenes default to `presence: "always"`. Reversibility: one-way (stored scenes) — frozen in the first plan.
+- Wyscout glyph text (A6): 2-letter surname initialism (e.g. "LS"), full name in the accessible label and legend tooltip; shirt number used when a provider supplies it.
+- Browser checks: zero-dependency CDP script with headless Edge (Playwright arrives in Phase 5); assert work time and dropped frames, not mean rAF interval.
+- Package legitimacy (zustand 5.1.0, d3-interpolate 3.0.2, d3-ease 3.0.2, kloppy 3.19.1 flagged too-new/unknown-downloads only): no human checkpoint in this autonomous run; record the audit in the plan SUMMARY and SECURITY.md accepted risks.
+- ADR 0008 deny-manifest statsbomb globs are scoped to `public/**` and `dist/**` (not repo-wide).
+- Opta/Wyscout fixed landmarks are documented as "as implemented by kloppy 3.19.1".
+- CI gains a `pipeline` job (uv, setup-uv pinned by SHA) running pytest and the immutability check.
