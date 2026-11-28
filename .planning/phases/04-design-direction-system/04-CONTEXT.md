@@ -97,3 +97,15 @@ The learner delegated every grey area and every checkpoint to Claude for this au
 - Learner's own visual review of the pick — non-blocking follow-up.
 
 </deferred>
+
+## Post-research decisions (2026-11-28, after 04-RESEARCH.md)
+
+- taste-skill layout check (`check.mjs`) is WARN for app screens; only `overflow-x` and `spill` are FAIL; marketing-only ids (`edge-left`, `hero-fold`, `screen-short`, `container`) are ignored with a recorded reason; pages get a `.wrap` root. Logged in DESIGN.md quality bar. Run on the primary theme only (≈50 s per run).
+- QA-02 review runs locally only (`.claude/skills/` is git-denied); the review CLI exits 2 when the skill folder is absent. CI covers the non-skill checks.
+- `visual` CI job (Playwright, ubuntu Docker image v1.65.1-noble) is NOT a required check; branch protection's six required checks stay unchanged (ADR 0007).
+- `update-snapshots.yml` (manual) commits Linux baselines with `updateSnapshots: "changed"` and then dispatches `ci` (`actions: write`) because GITHUB_TOKEN pushes do not trigger workflows.
+- Token schema is a Zod schema in `scripts/design/tokens-schema.ts` (not in `schemas/`); tokens are "DTCG-style" with hex strings, no `$schema` (deviation noted in DESIGN.md).
+- ADR 0010 follows the `scripts/adr.test.ts` format incl. a `Reversibility:` line.
+- Generated `src/styles/tokens.css` is excluded from Biome.
+- Keep `motion` 14.14.0 (CLAUDE.md stack; later phases need it).
+- Local Playwright uses `channel: "chrome"`; CI uses bundled Chromium in the Docker image. Use `REVIEW_PORT` + `--bypass-lock` because port 5173 may be held by a learner-owned dev server.
