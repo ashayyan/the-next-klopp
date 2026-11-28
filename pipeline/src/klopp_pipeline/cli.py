@@ -8,6 +8,7 @@ from typing import Annotated
 
 import typer
 
+from klopp_pipeline import landmarks as landmarks_mod
 from klopp_pipeline import net
 from klopp_pipeline.coverage import PROVIDERS, run_coverage, write_outputs
 
@@ -16,11 +17,12 @@ app = typer.Typer(help="Open-data pipeline for The Next Klopp.", no_args_is_help
 # pipeline/src/klopp_pipeline/cli.py -> parents[3] is the repository root
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_OUT = REPO_ROOT / "research" / "pl-data-sources"
+DEFAULT_LANDMARKS = REPO_ROOT / "src" / "pitch" / "fixtures" / "landmarks.json"
 
 
 @app.callback()
 def main() -> None:
-    """Keep ``coverage`` a real subcommand even while it is the only one."""
+    """Keep every command a real subcommand."""
 
 
 @app.command()
@@ -44,3 +46,20 @@ def coverage(
     typer.echo(f"wrote {json_path} and {md_path} ({len(matrix.rows)} rows)")
     if unreachable:
         typer.echo(f"unreachable providers: {', '.join(sorted(set(unreachable)))}")
+
+
+@app.command()
+def landmarks(
+    out: Annotated[Path, typer.Option(help="Landmark parity fixture to write or check.")] = DEFAULT_LANDMARKS,
+    check: Annotated[bool, typer.Option(help="Exit 1 when the committed file differs from kloppy.")] = False,
+) -> None:
+    """Write (or check) the kloppy-generated landmark fixture used by Vitest and pytest."""
+    if check:
+        problem = landmarks_mod.diff_summary(out)
+        if problem is not None:
+            typer.echo(f"landmarks fixture is stale: {problem}; run klopp-pipeline landmarks")
+            raise typer.Exit(code=1)
+        typer.echo(f"landmarks fixture matches kloppy {landmarks_mod.KLOPPY_VERSION}: {out}")
+        return
+    landmarks_mod.write(out)
+    typer.echo(f"wrote {out}")

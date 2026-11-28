@@ -1,0 +1,176 @@
+{
+  "kloppyVersion": "3.19.1",
+  "generatedBy": "klopp-pipeline landmarks",
+  "cases": [
+    {
+      "provider": "statsbomb",
+      "name": "centre spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [60.0, 40.0],
+      "expected": [52.5, 34.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "left penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [12.0, 40.0],
+      "expected": [11.0, 34.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "right penalty spot",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [108.0, 40.0],
+      "expected": [94.0, 34.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "left penalty-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [18.0, 18.0],
+      "expected": [16.5, 13.84]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "left penalty-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [18.0, 62.0],
+      "expected": [16.5, 54.16]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "right penalty-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [102.0, 18.0],
+      "expected": [88.5, 13.84]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "right penalty-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [102.0, 62.0],
+      "expected": [88.5, 54.16]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "left goal-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [6.0, 30.0],
+      "expected": [5.5, 24.84]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "left goal-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [6.0, 50.0],
+      "expected": [5.5, 43.16]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "right goal-area corner, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [114.0, 30.0],
+      "expected": [99.5, 24.84]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "right goal-area corner, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [114.0, 50.0],
+      "expected": [99.5, 43.16]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "corner flag, top-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 0.0],
+      "expected": [0.0, 0.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "corner flag, bottom-left",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 80.0],
+      "expected": [0.0, 68.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "corner flag, top-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [120.0, 0.0],
+      "expected": [105.0, 0.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "corner flag, bottom-right",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [120.0, 80.0],
+      "expected": [105.0, 68.0]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "left goalpost, top",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 36.0],
+      "expected": [0.0, 30.34]
+    },
+    {
+      "provider": "statsbomb",
+      "name": "left goalpost, bottom",
+      "targetPitch": {
+        "length": 105.0,
+        "width": 68.0
+      },
+      "input": [0.0, 44.0],
+      "expected": [0.0, 37.66]
+    }
+  ]
+}

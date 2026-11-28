@@ -4,6 +4,7 @@ version = "0.0.0"
 description = "Open-data pipeline for The Next Klopp"
 requires-python = ">=3.11,<3.13"
 dependencies = [
+    "kloppy==3.19.1",
     "pydantic==2.14.4",
     "typer==0.29.3",
 ]
