@@ -127,7 +127,7 @@ Plans:
   2. StatsBomb, Opta, Wyscout and tracking coordinate converters pass landmark and round-trip tests built from the provider specs, including a left/right asymmetry test, so the same landmark lands on the same spot of the pitch whichever provider it came from.
   3. `npm run data` runs the pipeline on Windows with no `make`: it downloads only allow-listed open sources, standardises them with kloppy and writes small immutable versioned artifacts with a manifest; raw data stays git-ignored, and CI fails when raw or licensed data, or an oversized file, is staged or would enter the bundle.
   4. At least one open-data sequence recipe produces a Scene/Frame sequence that plays back on the canonical pitch, and the same Scene/Frame format also holds a hand-authored board, a quiz answer and a reconstruction (one fixture of each renders).
-**Plans**: 6/11 plans executed in 6 waves
+**Plans**: 7/11 plans executed in 6 waves
 
 Plans:
 **Wave 1**
@@ -141,7 +141,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 - [x] 03-06-PLAN.md — Immutable versioned artifacts with manifests, publish + catalog, `npm run data`, committed Wyscout scene (wave 3)
-- [ ] 03-07-PLAN.md — Playback: Zustand clock, rAF loop, playback bar, keyboard, motion modes, 22-player stress scene (wave 3)
+- [x] 03-07-PLAN.md — Playback: Zustand clock, rAF loop, playback bar, keyboard, motion modes, 22-player stress scene (wave 3)
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 03-08-PLAN.md — Licence and size gates: deny-manifest, check-bundle, check-immutable, guard + .gitignore, CI wiring and pipeline job (wave 4)
@@ -241,7 +241,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 |-------|----------------|--------|-----------|
 | 1. Setup & Contracts | 9/9 | Complete    | 2026-11-28 |
 | 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
-| 3. Pitch Standard & Data Pipeline | 6/11 | In Progress | - |
+| 3. Pitch Standard & Data Pipeline | 7/11 | In Progress | - |
 | 4. Design Direction & System | 0/TBD | Not started | - |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |
 | 6. Learner Experience & Progress | 0/TBD | Not started | - |
