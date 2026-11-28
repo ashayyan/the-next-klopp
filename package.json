@@ -46,13 +46,8 @@
   "devDependencies": {
     "@biomejs/biome": "2.6.9",
     "@dagrejs/dagre": "3.1.4",
-    "@fontsource-variable/archivo": "5.3.0",
-    "@fontsource-variable/atkinson-hyperlegible-mono": "5.3.0",
-    "@fontsource-variable/atkinson-hyperlegible-next": "5.3.0",
     "@fontsource-variable/geist-mono": "5.3.0",
-    "@fontsource-variable/martian-mono": "5.3.0",
     "@fontsource-variable/mona-sans": "5.3.0",
-    "@fontsource-variable/newsreader": "5.3.0",
     "@playwright/test": "1.65.1",
     "@tailwindcss/vite": "4.3.5",
     "@types/d3-ease": "3.0.2",
