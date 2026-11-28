@@ -111,6 +111,11 @@ describe("guard: local-only datasets (ADR 0008)", () => {
   it("names the local-only reason", () => {
     expect(isDeniedPath("data/statsbomb/a.json")).toMatch(/local-only/);
   });
+
+  it("denies the learner brief even when force-added", () => {
+    expect(isDeniedPath("NEW_PROJECT_INPUT.md")).toBe("learner brief");
+    expect(isDeniedPath("docs/new_project_input.md")).toBe("learner brief");
+  });
 });
 
 describe("guard: file size", () => {

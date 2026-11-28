@@ -125,6 +125,8 @@ export function isDeniedPath(path: string): string | null {
   }
   if (lowerPath === ".claude/settings.local.json") return "local settings";
   if (lower.startsWith("the_next_klopp_master_prompt")) return "learner brief copy";
+  // The brief holds the learner profile and the repo is public: never re-add it.
+  if (lower === "new_project_input.md") return "learner brief";
   for (const ext of DENIED_EXTENSIONS) {
     if (lower.endsWith(ext)) return `forbidden extension ${ext}`;
   }
