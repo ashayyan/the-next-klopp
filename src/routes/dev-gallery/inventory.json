@@ -1,0 +1,211 @@
+[
+  {
+    "id": "colour",
+    "group": "Foundations",
+    "states": ["color", "pitch", "data"]
+  },
+  {
+    "id": "type",
+    "group": "Foundations",
+    "states": ["roles", "numerals", "glyph-sample"]
+  },
+  {
+    "id": "space-radius",
+    "group": "Foundations",
+    "states": ["space", "radius", "elevation"]
+  },
+  {
+    "id": "icons",
+    "group": "Foundations",
+    "states": ["ink", "muted", "on-accent"]
+  },
+  {
+    "id": "motion",
+    "group": "Foundations",
+    "states": ["ui", "draw", "morph", "reduced-motion"]
+  },
+  {
+    "id": "button",
+    "group": "Controls",
+    "states": ["default", "hover", "focus-visible", "pressed", "disabled", "loading"]
+  },
+  {
+    "id": "input",
+    "group": "Controls",
+    "states": ["empty", "filled", "focus", "invalid", "disabled", "long-value"]
+  },
+  {
+    "id": "link",
+    "group": "Controls",
+    "states": [
+      "inline-default",
+      "inline-hover",
+      "inline-focus-visible",
+      "standalone-default",
+      "standalone-hover",
+      "standalone-focus-visible"
+    ]
+  },
+  {
+    "id": "select",
+    "group": "Controls",
+    "states": ["closed", "open", "focus", "disabled"]
+  },
+  {
+    "id": "checkbox-radio-switch",
+    "group": "Controls",
+    "states": ["off", "on", "focus", "disabled"]
+  },
+  {
+    "id": "segmented",
+    "group": "Controls",
+    "states": ["two-option", "three-first", "three-second", "three-third", "focus", "wrap"]
+  },
+  {
+    "id": "slider",
+    "group": "Controls",
+    "states": ["min", "mid", "max", "focus", "disabled"]
+  },
+  {
+    "id": "tabs",
+    "group": "Controls",
+    "states": ["first", "second", "focus", "many"]
+  },
+  {
+    "id": "dialog",
+    "group": "Overlays",
+    "states": ["open", "interactive"]
+  },
+  {
+    "id": "alert-dialog",
+    "group": "Overlays",
+    "states": ["open", "interactive"]
+  },
+  {
+    "id": "popover",
+    "group": "Overlays",
+    "states": ["short", "long-text"]
+  },
+  {
+    "id": "tooltip",
+    "group": "Overlays",
+    "states": ["open"]
+  },
+  {
+    "id": "toast",
+    "group": "Overlays",
+    "states": ["saved"]
+  },
+  {
+    "id": "shell-bar",
+    "group": "Lesson",
+    "states": ["default", "focus-mode-on", "overflow-menu-open"]
+  },
+  {
+    "id": "step-rail",
+    "group": "Lesson",
+    "states": [
+      "hook",
+      "see-it",
+      "touch-it",
+      "predict",
+      "do-it",
+      "lock-it-in",
+      "connect-it",
+      "compact"
+    ]
+  },
+  {
+    "id": "focus-toggle",
+    "group": "Lesson",
+    "states": ["off", "on"]
+  },
+  {
+    "id": "confusion-button",
+    "group": "Lesson",
+    "states": ["idle", "note-open", "note-typed"]
+  },
+  {
+    "id": "glossary-card",
+    "group": "Lesson",
+    "states": ["short-term", "long-definition", "mini-pitch"]
+  },
+  {
+    "id": "quiz-option",
+    "group": "Lesson",
+    "states": ["idle", "hover", "focus", "selected", "correct", "incorrect", "disabled"]
+  },
+  {
+    "id": "progress-ring",
+    "group": "Lesson",
+    "states": ["0-percent", "40-percent", "100-percent", "labelled"]
+  },
+  {
+    "id": "badge",
+    "group": "Lesson",
+    "states": ["neutral", "done", "new"]
+  },
+  {
+    "id": "surface",
+    "group": "Lesson",
+    "states": ["page", "panel", "raised", "sheet", "stat-card"]
+  },
+  {
+    "id": "stat-card",
+    "group": "Data",
+    "states": ["one-figure", "three-figures", "loading", "missing"]
+  },
+  {
+    "id": "chart-primitives",
+    "group": "Data",
+    "states": [
+      "axis-gridlines",
+      "bars",
+      "line-marker",
+      "label-tooltip",
+      "legend-2-series",
+      "legend-3-series",
+      "table-view"
+    ]
+  },
+  {
+    "id": "data-table",
+    "group": "Data",
+    "states": ["default", "active-row", "hover-row", "empty", "three-column"]
+  },
+  {
+    "id": "scales",
+    "group": "Data",
+    "states": ["categorical", "sequential", "diverging"]
+  },
+  {
+    "id": "pitch",
+    "group": "Pitch",
+    "states": ["horizontal", "vertical", "100x65", "density"]
+  },
+  {
+    "id": "glyphs",
+    "group": "Pitch",
+    "states": ["team-a", "team-b"]
+  },
+  {
+    "id": "legend",
+    "group": "Pitch",
+    "states": ["expanded", "collapsed", "empty"]
+  },
+  {
+    "id": "playback",
+    "group": "Interactions",
+    "states": ["paused", "playing", "at-end", "still"]
+  },
+  {
+    "id": "drag",
+    "group": "Interactions",
+    "states": ["board", "focused", "dragging"]
+  },
+  {
+    "id": "converter-probe",
+    "group": "Interactions",
+    "states": ["idle", "valid", "range-error"]
+  }
+]

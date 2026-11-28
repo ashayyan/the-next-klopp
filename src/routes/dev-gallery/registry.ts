@@ -16,6 +16,7 @@ import {
   SpaceRadiusDemo,
   TypeDemo,
 } from "./demos/foundations.tsx";
+import { QuizOptionDemo } from "./demos/lesson.tsx";
 import {
   AlertDialogDemo,
   DialogDemo,
@@ -196,6 +197,13 @@ export const GALLERY: readonly Primitive[] = [
     label: "Toast",
     states: ["saved"],
     Demo: ToastDemo,
+  },
+  {
+    id: "quiz-option",
+    group: "Lesson",
+    label: "Quiz option",
+    states: ["idle", "hover", "focus", "selected", "correct", "incorrect", "disabled"],
+    Demo: QuizOptionDemo,
   },
   {
     id: "pitch",

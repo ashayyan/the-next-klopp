@@ -7,10 +7,17 @@ import { GalleryIndex, GalleryPrimitive, parseTheme, parseWidth } from "../dev-g
 import { ColourDemo, contrastOnPage, TOKENS } from "./demos/foundations.tsx";
 import { glyphSheet } from "./demos/pitch.tsx";
 import { frameSrc } from "./Frames.tsx";
+import inventoryJson from "./inventory.json";
 import { findPrimitive, GALLERY, GROUPS, groupedPrimitives, stateFromHash } from "./registry.ts";
 import { GalleryThemeProvider } from "./StateCell.tsx";
 
 const KEBAB = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+interface InventoryEntry {
+  id: string;
+  group: string;
+  states: string[];
+}
+const inventory: InventoryEntry[] = inventoryJson;
 const count = (html: string, needle: string) => html.split(needle).length - 1;
 
 function page(path: string): string {
@@ -239,5 +246,60 @@ describe("registry after the Controls and Overlays groups", () => {
     expect(html).toContain('data-gallery-state="alert-dialog/open"');
     expect(html).toContain('data-gallery-state="alert-dialog/interactive"');
     expect(html).toContain("Clear board");
+  });
+});
+
+describe("inventory (the 04-UI-SPEC gallery table)", () => {
+  // The ids Tasks 2 and 3 of plan 04-16 still have to build; emptied when the inventory is complete.
+  const PENDING = new Set<string>([
+    "shell-bar",
+    "step-rail",
+    "focus-toggle",
+    "confusion-button",
+    "glossary-card",
+    "progress-ring",
+    "badge",
+    "surface",
+    "stat-card",
+    "chart-primitives",
+    "data-table",
+    "scales",
+  ]);
+
+  it("holds the 37 primitives of the contract, each id once, in a known group", () => {
+    expect(inventory.length).toBe(37);
+    expect(new Set(inventory.map((e) => e.id)).size).toBe(37);
+    for (const e of inventory) {
+      expect(GROUPS, e.id).toContain(e.group);
+      for (const s of e.states) expect(s, `${e.id}/${s}`).toMatch(KEBAB);
+    }
+  });
+
+  for (const entry of inventory) {
+    if (PENDING.has(entry.id)) {
+      it.todo(`${entry.id} is not registered yet (pending in this plan)`);
+      continue;
+    }
+    it(`${entry.id}: registered in ${entry.group} with exactly its states`, () => {
+      const primitive = findPrimitive(entry.id);
+      expect(primitive, `${entry.id} missing from GALLERY`).toBeDefined();
+      expect(primitive?.group).toBe(entry.group);
+      expect(primitive?.states).toEqual(entry.states);
+    });
+  }
+
+  it("registers nothing outside the contract", () => {
+    const ids = new Set(inventory.map((e) => e.id));
+    for (const p of GALLERY) expect(ids.has(p.id), `${p.id} is not in the inventory`).toBe(true);
+  });
+
+  it("renders every state of every registered primitive with its data-gallery-state attribute", () => {
+    for (const entry of inventory) {
+      if (PENDING.has(entry.id)) continue;
+      const html = page(`/dev/gallery/${entry.id}?bare=1&theme=light`);
+      for (const state of entry.states) {
+        expect(html, `${entry.id}/${state}`).toContain(`data-gallery-state="${entry.id}/${state}"`);
+      }
+    }
   });
 });

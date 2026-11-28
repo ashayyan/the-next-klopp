@@ -8,6 +8,7 @@ import { Checkbox, RadioGroup } from "./Choice.tsx";
 import { DataTable } from "./data/DataTable.tsx";
 import { StatCard } from "./data/StatCard.tsx";
 import { NumberInput, TextInput } from "./Field.tsx";
+import { QuizOption, type QuizOptionState } from "./lesson/QuizOption.tsx";
 import { ShellBar } from "./lesson/ShellBar.tsx";
 import { LESSON_LOOP_STEPS, StepRail } from "./lesson/StepRail.tsx";
 import { Slider } from "./Slider.tsx";
@@ -397,5 +398,41 @@ describe("Choice, Tabs and Slider", () => {
     );
     expect(html).toContain("Sample size");
     expect(html).toContain("100");
+  });
+});
+
+describe("QuizOption", () => {
+  const render = (state: QuizOptionState) =>
+    renderToStaticMarkup(<QuizOption label="A back pass" state={state} />);
+
+  it("shows the check icon and the word Correct for the right answer", () => {
+    const html = render("correct");
+    expect(html).toContain("M4.5 10.5 L8.5 14.5 L15.5 5.5");
+    expect(html).toContain(">Correct<");
+    expect(html).toContain('data-answer="correct"');
+  });
+
+  it("shows the cross icon and the full sentence for a wrong pick", () => {
+    const html = render("incorrect");
+    expect(html).toContain("M5.5 5.5 L14.5 14.5 M14.5 5.5 L5.5 14.5");
+    expect(html).toContain(">Not quite — here is the answer<");
+  });
+
+  it("marks a selected option with the accent marker and aria-pressed", () => {
+    const html = render("selected");
+    expect(html).toContain("bg-accent");
+    expect(html).toContain('aria-pressed="true"');
+  });
+
+  it("leaves the tab order only when disabled, and keeps a revealed option readable", () => {
+    expect(render("disabled")).toMatch(/<button[^>]* disabled=""/);
+    expect(render("correct")).not.toMatch(/<button[^>]* disabled=""/);
+    expect(render("idle")).not.toContain("Correct");
+    expect(render("idle")).not.toContain("<svg");
+  });
+
+  it("writes the forced hover and focus looks to data-state", () => {
+    expect(render("hover")).toContain('data-state="hover"');
+    expect(render("focus")).toContain('data-state="focus-visible"');
   });
 });
