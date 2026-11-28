@@ -12,6 +12,8 @@ const lock = port === 5173 ? "" : " --bypass-lock";
 
 export default defineConfig({
   testDir: "tests",
+  // The lesson walker has its own config (playwright.walker.config.ts) and a fixtures build.
+  testIgnore: ["walker/**"],
   // Playwright empties its output folder at the start of every run; keep it apart from the review
   // artefacts that `npm run review:screens` writes under test-results/review/.
   outputDir: "test-results/playwright",
