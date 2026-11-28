@@ -1,0 +1,473 @@
+{
+  "id": "wyscout-2499754-sane-goal",
+  "schemaVersion": 1,
+  "kind": "reconstruction",
+  "label": "Manchester City 5-0 Liverpool, 9 Sep 2017: Sané goal, second half",
+  "pitch": {
+    "length": 105,
+    "width": 68
+  },
+  "teams": [
+    {
+      "id": "manchester-city",
+      "name": "Manchester City",
+      "side": "a",
+      "venue": "home",
+      "attack": {
+        "2": "ltr"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "id": "mangala",
+      "type": "player",
+      "team": "manchester-city",
+      "label": "EM",
+      "name": "Eliaquim Mangala"
+    },
+    {
+      "id": "da-silva",
+      "type": "player",
+      "team": "manchester-city",
+      "label": "DS",
+      "name": "Danilo Luiz da Silva"
+    },
+    {
+      "id": "stones",
+      "type": "player",
+      "team": "manchester-city",
+      "label": "JS",
+      "name": "John Stones"
+    },
+    {
+      "id": "walker",
+      "type": "player",
+      "team": "manchester-city",
+      "label": "KW",
+      "name": "Kyle Walker"
+    },
+    {
+      "id": "de-bruyne",
+      "type": "player",
+      "team": "manchester-city",
+      "label": "KD",
+      "name": "Kevin De Bruyne"
+    },
+    {
+      "id": "sane",
+      "type": "player",
+      "team": "manchester-city",
+      "label": "LS",
+      "name": "Leroy Sané"
+    },
+    {
+      "id": "mendy",
+      "type": "player",
+      "team": "manchester-city",
+      "label": "BM",
+      "name": "Benjamin Mendy"
+    },
+    {
+      "id": "ball",
+      "type": "ball"
+    }
+  ],
+  "frames": [
+    {
+      "t": 0.0,
+      "positions": {
+        "mangala": {
+          "x": 40.22,
+          "y": 19.34
+        },
+        "ball": {
+          "x": 40.22,
+          "y": 19.34
+        }
+      },
+      "ballOwner": "mangala"
+    },
+    {
+      "t": 1.33,
+      "positions": {
+        "da-silva": {
+          "x": 54.57,
+          "y": 21.78
+        },
+        "ball": {
+          "x": 54.57,
+          "y": 21.78
+        },
+        "mangala": {
+          "x": 40.22,
+          "y": 19.34
+        }
+      },
+      "ballOwner": "da-silva"
+    },
+    {
+      "t": 3.69,
+      "positions": {
+        "mangala": {
+          "x": 39.23,
+          "y": 19.34
+        },
+        "ball": {
+          "x": 39.23,
+          "y": 19.34
+        },
+        "da-silva": {
+          "x": 54.57,
+          "y": 21.78
+        }
+      },
+      "ballOwner": "mangala"
+    },
+    {
+      "t": 5.28,
+      "positions": {
+        "stones": {
+          "x": 34.28,
+          "y": 32.17
+        },
+        "ball": {
+          "x": 34.28,
+          "y": 32.17
+        },
+        "mangala": {
+          "x": 39.23,
+          "y": 19.34
+        }
+      },
+      "ballOwner": "stones"
+    },
+    {
+      "t": 7.66,
+      "positions": {
+        "walker": {
+          "x": 39.23,
+          "y": 44.99
+        },
+        "ball": {
+          "x": 39.23,
+          "y": 44.99
+        },
+        "stones": {
+          "x": 34.28,
+          "y": 32.17
+        }
+      },
+      "ballOwner": "walker"
+    },
+    {
+      "t": 9.74,
+      "positions": {
+        "mangala": {
+          "x": 38.24,
+          "y": 20.56
+        },
+        "ball": {
+          "x": 38.24,
+          "y": 20.56
+        },
+        "walker": {
+          "x": 39.23,
+          "y": 44.99
+        }
+      },
+      "ballOwner": "mangala"
+    },
+    {
+      "t": 11.48,
+      "positions": {
+        "de-bruyne": {
+          "x": 69.73,
+          "y": 23.62
+        },
+        "ball": {
+          "x": 69.73,
+          "y": 23.62
+        },
+        "mangala": {
+          "x": 38.24,
+          "y": 20.56
+        }
+      },
+      "ballOwner": "de-bruyne"
+    },
+    {
+      "t": 14.44,
+      "positions": {
+        "sane": {
+          "x": 82.61,
+          "y": 19.95
+        },
+        "ball": {
+          "x": 82.61,
+          "y": 19.95
+        },
+        "de-bruyne": {
+          "x": 69.73,
+          "y": 23.62
+        }
+      },
+      "ballOwner": "sane"
+    },
+    {
+      "t": 15.98,
+      "positions": {
+        "mendy": {
+          "x": 95.38,
+          "y": 13.84
+        },
+        "ball": {
+          "x": 95.38,
+          "y": 13.84
+        },
+        "sane": {
+          "x": 82.61,
+          "y": 19.95
+        }
+      },
+      "ballOwner": "mendy"
+    },
+    {
+      "t": 18.37,
+      "positions": {
+        "sane": {
+          "x": 99.5,
+          "y": 24.84
+        },
+        "ball": {
+          "x": 99.5,
+          "y": 24.84
+        },
+        "mendy": {
+          "x": 95.38,
+          "y": 13.84
+        }
+      },
+      "ballOwner": "sane"
+    },
+    {
+      "t": 18.97,
+      "positions": {
+        "sane": {
+          "x": 99.5,
+          "y": 24.84
+        },
+        "ball": {
+          "x": 105.0,
+          "y": 30.95
+        }
+      }
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-185704173",
+      "type": "pass",
+      "t": 0.0,
+      "team": "manchester-city",
+      "player": "mangala",
+      "receiver": "da-silva",
+      "start": {
+        "x": 40.22,
+        "y": 19.34
+      },
+      "end": {
+        "x": 54.57,
+        "y": 21.78
+      },
+      "ref": "185704173"
+    },
+    {
+      "id": "ev-185704174",
+      "type": "pass",
+      "t": 1.33,
+      "team": "manchester-city",
+      "player": "da-silva",
+      "receiver": "mangala",
+      "start": {
+        "x": 54.57,
+        "y": 21.78
+      },
+      "end": {
+        "x": 39.23,
+        "y": 19.34
+      },
+      "ref": "185704174"
+    },
+    {
+      "id": "ev-185704175",
+      "type": "pass",
+      "t": 3.69,
+      "team": "manchester-city",
+      "player": "mangala",
+      "receiver": "stones",
+      "start": {
+        "x": 39.23,
+        "y": 19.34
+      },
+      "end": {
+        "x": 34.28,
+        "y": 32.17
+      },
+      "ref": "185704175"
+    },
+    {
+      "id": "ev-185704176",
+      "type": "pass",
+      "t": 5.28,
+      "team": "manchester-city",
+      "player": "stones",
+      "receiver": "walker",
+      "start": {
+        "x": 34.28,
+        "y": 32.17
+      },
+      "end": {
+        "x": 39.23,
+        "y": 44.99
+      },
+      "ref": "185704176"
+    },
+    {
+      "id": "ev-185704177",
+      "type": "pass",
+      "t": 7.66,
+      "team": "manchester-city",
+      "player": "walker",
+      "receiver": "mangala",
+      "start": {
+        "x": 39.23,
+        "y": 44.99
+      },
+      "end": {
+        "x": 38.24,
+        "y": 20.56
+      },
+      "ref": "185704177"
+    },
+    {
+      "id": "ev-185704179",
+      "type": "pass",
+      "t": 9.74,
+      "team": "manchester-city",
+      "player": "mangala",
+      "receiver": "de-bruyne",
+      "start": {
+        "x": 38.24,
+        "y": 20.56
+      },
+      "end": {
+        "x": 69.73,
+        "y": 23.62
+      },
+      "ref": "185704179"
+    },
+    {
+      "id": "ev-185704180",
+      "type": "pass",
+      "t": 11.48,
+      "team": "manchester-city",
+      "player": "de-bruyne",
+      "receiver": "sane",
+      "start": {
+        "x": 69.73,
+        "y": 23.62
+      },
+      "end": {
+        "x": 82.61,
+        "y": 19.95
+      },
+      "ref": "185704180"
+    },
+    {
+      "id": "ev-185704187",
+      "type": "pass",
+      "t": 14.44,
+      "team": "manchester-city",
+      "player": "sane",
+      "receiver": "mendy",
+      "start": {
+        "x": 82.61,
+        "y": 19.95
+      },
+      "end": {
+        "x": 95.38,
+        "y": 13.84
+      },
+      "ref": "185704187"
+    },
+    {
+      "id": "ev-185704192",
+      "type": "pass",
+      "t": 15.98,
+      "team": "manchester-city",
+      "player": "mendy",
+      "receiver": "sane",
+      "start": {
+        "x": 95.38,
+        "y": 13.84
+      },
+      "end": {
+        "x": 99.5,
+        "y": 24.84
+      },
+      "ref": "185704192"
+    },
+    {
+      "id": "ev-185704194",
+      "type": "shot",
+      "t": 18.37,
+      "team": "manchester-city",
+      "player": "sane",
+      "start": {
+        "x": 99.5,
+        "y": 24.84
+      },
+      "end": {
+        "x": 105.0,
+        "y": 30.95
+      },
+      "goal": true,
+      "endApprox": true,
+      "ref": "185704194"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "sequence-chain",
+      "type": "sequence",
+      "events": [
+        "ev-185704173",
+        "ev-185704174",
+        "ev-185704175",
+        "ev-185704176",
+        "ev-185704177",
+        "ev-185704179",
+        "ev-185704180",
+        "ev-185704187",
+        "ev-185704192",
+        "ev-185704194"
+      ]
+    }
+  ],
+  "source": {
+    "type": "open-data",
+    "provider": "wyscout",
+    "sourceIds": ["src-wyscout-public-dataset", "src-nature-pappalardo-wyscout-events"],
+    "licence": "CC-BY-4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "attribution": "Pappalardo, L. et al. A public data set of spatio-temporal match events in soccer competitions. Sci Data 6, 236 (2019). doi:10.1038/s41597-019-0247-7",
+    "shippable": true,
+    "matchId": "2499754",
+    "clock": {
+      "period": 2,
+      "offsetSec": 1852.91
+    },
+    "recipe": "wyscout-goal"
+  }
+}
