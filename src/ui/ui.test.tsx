@@ -291,6 +291,33 @@ describe("DataTable", () => {
     expect(html).toMatch(/data-row="a" aria-selected="false"/);
   });
 
+  it("gives the grid one tab stop: the active row, the others -1 (roving tabindex)", () => {
+    const html = renderToStaticMarkup(
+      <DataTable
+        caption="All ten actions"
+        columns={columns}
+        rows={rows}
+        rowKey={(r) => r.id}
+        activeRow="b"
+        onRowEnter={() => {}}
+      />,
+    );
+    expect(html).toContain('role="grid"');
+    expect(html).toMatch(/<tr data-row="a"[^>]*tabindex="-1"/);
+    expect(html).toMatch(/<tr data-row="b"[^>]*tabindex="0"/);
+    const first = renderToStaticMarkup(
+      <DataTable
+        caption="All ten actions"
+        columns={columns}
+        rows={rows}
+        rowKey={(r) => r.id}
+        onRowEnter={() => {}}
+      />,
+    );
+    expect(first).toMatch(/<tr data-row="a"[^>]*tabindex="0"/);
+    expect(first).toMatch(/<tr data-row="b"[^>]*tabindex="-1"/);
+  });
+
   it("shows the empty copy when there are no rows", () => {
     const html = renderToStaticMarkup(
       <DataTable

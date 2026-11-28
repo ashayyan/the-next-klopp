@@ -1,4 +1,4 @@
-import type { KeyboardEvent, ReactNode } from "react";
+import { type KeyboardEvent, type ReactNode, useRef, useState } from "react";
 
 export interface DataColumn<R> {
   id: string;
@@ -21,7 +21,7 @@ export interface DataTableProps<R> {
   rowLabel?: (row: R) => string;
   /** Hover or focus moved onto a row (null when it leaves). */
   onRowPreview?: (row: R | null) => void;
-  /** Enter on a focused row. */
+  /** A click, or Enter or Space on a focused row. */
   onRowEnter?: (row: R) => void;
   /** Shown instead of rows when there are none: heading and body. */
   empty?: { heading: string; body: string };
@@ -35,9 +35,11 @@ export interface DataTableProps<R> {
 }
 
 /**
- * A captioned table with right-aligned mono numerals. With `onRowEnter` the rows are focusable
- * (a grid of selectable rows): each is at least 44 px tall and 8 px from the next, shows the focus
- * ring, and the row that matches the clock carries `aria-selected="true"`.
+ * A captioned table with right-aligned mono numerals. With `onRowEnter` it is a grid of selectable
+ * rows: one tab stop (roving tabindex: the last focused row, else the active row, else the first),
+ * ArrowUp, ArrowDown, Home and End move between rows, and a click, Enter or Space selects one. Each
+ * row is at least 44 px tall and 8 px from the next, shows the focus ring, and the row that matches
+ * the clock carries `aria-selected="true"`.
  */
 export function DataTable<R>({
   caption,
@@ -55,6 +57,37 @@ export function DataTable<R>({
   rowState,
 }: DataTableProps<R>) {
   const interactive = onRowEnter !== undefined;
+  const body = useRef<HTMLTableSectionElement>(null);
+  const [focusKey, setFocusKey] = useState<string | null>(null);
+  const keys = rows.map(rowKey);
+  const tabKey =
+    focusKey !== null && keys.includes(focusKey)
+      ? focusKey
+      : activeRow != null && keys.includes(activeRow)
+        ? activeRow
+        : keys[0];
+  const focusRow = (index: number) => {
+    const clamped = Math.min(Math.max(index, 0), keys.length - 1);
+    body.current?.rows[clamped]?.focus();
+  };
+  const onKey = (e: KeyboardEvent<HTMLTableRowElement>, row: R, index: number) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onRowEnter?.(row);
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      focusRow(index + 1);
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      focusRow(index - 1);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      focusRow(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      focusRow(keys.length - 1);
+    }
+  };
   const align = (c: DataColumn<R>) =>
     c.numeric ? "whitespace-nowrap text-right font-mono tabular-nums" : "text-left";
 
@@ -87,9 +120,9 @@ export function DataTable<R>({
           ))}
         </tr>
       </thead>
-      <tbody>
-        {rows.map((row) => {
-          const key = rowKey(row);
+      <tbody ref={body}>
+        {rows.map((row, index) => {
+          const key = keys[index] as string;
           const active = activeRow === key;
           return (
             <tr
@@ -98,21 +131,20 @@ export function DataTable<R>({
               data-state={rowState?.(row)}
               aria-selected={interactive ? active : undefined}
               aria-label={interactive ? rowLabel?.(row) : undefined}
-              tabIndex={interactive ? 0 : undefined}
+              tabIndex={interactive ? (key === tabKey ? 0 : -1) : undefined}
               onMouseEnter={onRowPreview ? () => onRowPreview(row) : undefined}
               onMouseLeave={onRowPreview ? () => onRowPreview(null) : undefined}
-              onFocus={onRowPreview ? () => onRowPreview(row) : undefined}
-              onBlur={onRowPreview ? () => onRowPreview(null) : undefined}
-              onKeyDown={
-                interactive
-                  ? (e: KeyboardEvent<HTMLTableRowElement>) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        onRowEnter?.(row);
-                      }
+              onFocus={
+                interactive || onRowPreview
+                  ? () => {
+                      if (interactive) setFocusKey(key);
+                      onRowPreview?.(row);
                     }
                   : undefined
               }
+              onBlur={onRowPreview ? () => onRowPreview(null) : undefined}
+              onClick={interactive ? () => onRowEnter?.(row) : undefined}
+              onKeyDown={interactive ? (e) => onKey(e, row, index) : undefined}
               className={`h-11 ${interactive ? "cursor-pointer outline-offset-[-2px] hov:bg-surface-panel fv:outline-2 fv:outline-focus-ring" : ""} ${active ? "bg-surface-panel font-semibold" : ""} ${rowClassName ?? ""}`}
             >
               {columns.map((c) => (

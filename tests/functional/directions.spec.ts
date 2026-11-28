@@ -178,6 +178,30 @@ test.describe("data screen", () => {
     await expect(row6).toHaveAttribute("aria-selected", "true");
   });
 
+  // WR-03 (04-REVIEW): a click seeks like Enter, Space selects too, and the grid is one tab stop
+  // with ArrowUp and ArrowDown moving between rows.
+  test("a row click seeks, arrows move between rows, Space selects", async ({ page }) => {
+    await page.goto("/dev/directions/floodlit/data");
+    await expect(page.locator('div[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+    const readout = page.locator('[role="toolbar"][aria-label="Playback"] output');
+    await expect(readout).toContainText("0.0 s");
+    const grid = page.getByRole("grid");
+    await expect(grid.locator('tbody tr[tabindex="0"]')).toHaveCount(1);
+
+    const row6 = page.locator('tr[data-row="ev-185704179"]');
+    await row6.click();
+    await expect(readout).toContainText("9.7 s");
+    await expect(row6).toHaveAttribute("aria-selected", "true");
+
+    await page.keyboard.press("ArrowUp");
+    const previous = grid.locator("tbody tr").nth(4);
+    await expect(previous).toBeFocused();
+    await expect(grid.locator('tbody tr[tabindex="0"]')).toHaveCount(1);
+    await page.keyboard.press(" ");
+    await expect(previous).toHaveAttribute("aria-selected", "true");
+    await expect(readout).not.toContainText("9.7 s");
+  });
+
   test("shows the pitch markings and the loading line while the scene loads", async ({ page }) => {
     let release: () => void = () => {};
     const held = new Promise<void>((resolve) => {
