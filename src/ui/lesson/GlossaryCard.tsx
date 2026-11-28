@@ -8,10 +8,10 @@ export interface GlossaryCardProps {
   visual?: ReactNode;
 }
 
-/** The card's body: definition first, then the visual. The term is the popover title. */
-export function GlossaryCard({ definition, visual }: GlossaryCardProps) {
+/** The card's body: definition, then the visual. The term is the popover title and the card's name. */
+export function GlossaryCard({ term, definition, visual }: GlossaryCardProps) {
   return (
-    <div data-glossary-card className="flex flex-col gap-3">
+    <div data-glossary-card={term} className="flex flex-col gap-3">
       <p className="text-body">{definition}</p>
       {visual ? <div className="w-60 max-w-full">{visual}</div> : null}
     </div>

@@ -10,6 +10,7 @@ import { DataTable } from "./data/DataTable.tsx";
 import { StatCard } from "./data/StatCard.tsx";
 import { NumberInput, TextInput } from "./Field.tsx";
 import { Badge } from "./lesson/Badge.tsx";
+import { GlossaryCard } from "./lesson/GlossaryCard.tsx";
 import { ProgressRing } from "./lesson/ProgressRing.tsx";
 import { QuizOption, type QuizOptionState } from "./lesson/QuizOption.tsx";
 import { ShellBar } from "./lesson/ShellBar.tsx";
@@ -429,6 +430,15 @@ describe("Choice, Tabs and Slider", () => {
     );
     expect(html).toContain("Sample size");
     expect(html).toContain("100");
+  });
+});
+
+describe("GlossaryCard", () => {
+  it("names the card with its term", () => {
+    const html = renderToStaticMarkup(
+      <GlossaryCard term="Half-space" definition="The channel between the wing and the centre." />,
+    );
+    expect(html).toContain('data-glossary-card="Half-space"');
   });
 });
 
