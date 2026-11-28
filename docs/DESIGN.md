@@ -1589,9 +1589,10 @@ This section covers brief section 9.8 (how every screen is reviewed: screenshots
 
 ### The review command
 
-`npm run review:screens -- <route> [--widths 375,768,1440] [--theme light|dark|both] [--port <n>] [--states <query,query>]`
+`npm run review:screens -- <route> [--widths 375,768,1440] [--theme light|dark|both] [--port <n>] [--states <query,query>] [--fixtures]`
 
 - **Server.** Routes under `/dev/` are reviewed on the Vite dev server (they are compiled out of the study build); every other route on `vite preview`. If no server answers, the command starts one and stops it afterwards.
+- **`--fixtures`** reviews the fixtures build (`dist-walker`, port 4175), the only build that holds the test lessons. The step word count skips `[data-claim-meta]`, `pre` and `code`.
 - **Capture.** Chromium (installed Chrome, then Edge, then the bundled Chromium), full page, at each width (heights 812, 1024 and 900), each theme and each `--states` query. At 375 px it also captures deuteranopia and achromatopsia emulations.
 - **Output.** `test-results/review/<route-slug>/` holds `report.json`, `report.md` (its first line is `REVIEW: PASS …` or `REVIEW: FAIL …`) and the screenshots. Nothing in it is committed.
 - **Exit codes.** `0` pass (warnings allowed), `1` at least one FAIL, `2` the review could not run (no server, no browser, or the taste skill missing).

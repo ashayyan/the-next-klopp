@@ -56,6 +56,10 @@ import {
 
 export const DEV_PORT = 5173;
 export const PREVIEW_PORT = 4173;
+/** Default port of a `--fixtures` review; never 5173 (dev) or 4173 (study preview) or 4174 (walker). */
+export const FIXTURES_PORT = 4175;
+/** Output folder of `node scripts/content/build-fixtures.ts`, the fixtures build. */
+export const FIXTURES_OUT_DIR = "dist-walker";
 
 // ---------------------------------------------------------------- server
 
@@ -103,10 +107,13 @@ export async function ensureServer(options: {
   route: string;
   port: number | null;
   root?: string;
+  /** Build and preview the fixtures build (`dist-walker`) instead of `dist`. */
+  fixtures?: boolean;
 }): Promise<RunningServer> {
   const root = options.root ?? process.cwd();
-  const kind = isDevRoute(options.route) ? "dev" : "preview";
-  const defaultPort = kind === "dev" ? DEV_PORT : PREVIEW_PORT;
+  const fixtures = options.fixtures === true;
+  const kind = !fixtures && isDevRoute(options.route) ? "dev" : "preview";
+  const defaultPort = fixtures ? FIXTURES_PORT : kind === "dev" ? DEV_PORT : PREVIEW_PORT;
   const port = options.port ?? Number(process.env.REVIEW_PORT ?? defaultPort);
   const baseUrl = `http://localhost:${port}`;
   const timeout = Number(process.env.REVIEW_START_TIMEOUT_MS ?? 60_000);
@@ -114,7 +121,7 @@ export async function ensureServer(options: {
   if (await answers(`${baseUrl}/`)) {
     if (kind === "preview") {
       console.warn(
-        `review:screens: reusing the preview server on ${baseUrl}; its dist/ may be older than the source (report.json records fresh: false).`,
+        `review:screens: reusing the preview server on ${baseUrl}; its ${fixtures ? FIXTURES_OUT_DIR : "dist"}/ may be older than the source (report.json records fresh: false).`,
       );
     }
     return { baseUrl, kind, started: false, fresh: kind === "dev", stop: async () => {} };
@@ -122,19 +129,27 @@ export async function ensureServer(options: {
 
   const vite = join(root, "node_modules", "vite", "bin", "vite.js");
   if (kind === "preview") {
-    const build = spawnSync(process.execPath, [vite, "build"], { cwd: root, stdio: "inherit" });
+    // The fixtures build is made by its own script (it sets VITE_INCLUDE_FIXTURES); no shell.
+    const buildArgs = fixtures
+      ? [join(root, "scripts", "content", "build-fixtures.ts")]
+      : [vite, "build"];
+    const build = spawnSync(process.execPath, buildArgs, { cwd: root, stdio: "inherit" });
     if (build.status !== 0) {
-      throw new ReviewUnavailableError("review:screens could not build the app for vite preview.");
+      throw new ReviewUnavailableError(
+        `review:screens could not build the ${fixtures ? "fixtures build" : "app"} for vite preview.`,
+      );
     }
   }
   // Vite 8 refuses a second server per project unless the lock is bypassed. A port other than the
   // default means another server (often the learner's) is running, so bypass it and leave it alone.
-  const lock = port === defaultPort ? [] : ["--bypass-lock"];
+  // The fixtures preview is never the learner's server, so it always bypasses the lock.
+  const lock = port === defaultPort && !fixtures ? [] : ["--bypass-lock"];
   const child = spawn(
     process.execPath,
     [
       vite,
       ...(kind === "preview" ? ["preview"] : []),
+      ...(fixtures ? ["--outDir", FIXTURES_OUT_DIR] : []),
       "--port",
       String(port),
       "--strictPort",
@@ -393,10 +408,23 @@ function collectPage(): PageData {
     }));
 
   const legendVisible = [...document.querySelectorAll("[data-legend]")].some(shown);
+  // Step words count what the learner reads as prose: claim chrome and code are not prose. innerText
+  // needs layout, so the excluded nodes are hidden in place, read, then restored (a detached clone
+  // would give a different answer).
+  const stepText = (el: Element): string => {
+    const skipped = [...el.querySelectorAll<HTMLElement>("[data-claim-meta], pre, code")];
+    const before = skipped.map((node) => node.style.display);
+    for (const node of skipped) node.style.display = "none";
+    const text = textOf(el);
+    skipped.forEach((node, i) => {
+      node.style.display = before[i] ?? "";
+    });
+    return text;
+  };
   const steps: PageData["steps"] = [...document.querySelectorAll("[data-lesson-step]")].map(
     (el) => ({
       selector: selectorOf(el),
-      text: textOf(el),
+      text: stepText(el),
       box: boxOf(el),
     }),
   );

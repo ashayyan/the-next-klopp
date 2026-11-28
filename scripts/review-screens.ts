@@ -1,4 +1,4 @@
-// CLI: npm run review:screens -- <route> [--widths 375,768,1440] [--theme light|dark|both] [--port <n>] [--states <query,query>]
+// CLI: npm run review:screens -- <route> [--widths 375,768,1440] [--theme light|dark|both] [--port <n>] [--states <query,query>] [--fixtures]
 // Captures a route at each width and theme in Chrome, runs the DOM rule checks and the taste-skill
 // review, and writes test-results/review/<route-slug>/report.json, report.md and the screenshots
 // (git-ignored artefacts, not baselines). The first line of report.md is "REVIEW: PASS ..." or
@@ -7,6 +7,8 @@
 // Routes under /dev/ use the dev server (REVIEW_PORT, default 5173); other routes use vite preview
 // (default 4173), built first so a stale dist/ is never reviewed. A server that already answers is
 // reused and never stopped; report.json records the commit and whether the served build was fresh.
+// --fixtures reviews the fixtures build instead: it runs scripts/content/build-fixtures.ts and previews
+// dist-walker on port 4175 (REVIEW_PORT or --port override), the only build that holds the test lessons.
 // Erasable TypeScript only.
 import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -69,7 +71,12 @@ async function main(): Promise<number> {
     const primary: Theme = tokens.meta.primaryTheme;
     const themes: Theme[] = args.theme === "both" ? ["dark", "light"] : [args.theme];
 
-    server = await ensureServer({ route: args.route, port: args.port, root });
+    server = await ensureServer({
+      route: args.route,
+      port: args.port,
+      root,
+      fixtures: args.fixtures,
+    });
     browser = await launchChrome();
     rmSync(outDir, { recursive: true, force: true });
     mkdirSync(outDir, { recursive: true });

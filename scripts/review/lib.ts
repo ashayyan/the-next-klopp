@@ -41,10 +41,12 @@ export interface ReviewArgs {
   theme: Theme | "both";
   port: number | null;
   states: string[];
+  /** Review the fixtures build (`dist-walker`), the only build that holds the test lessons. */
+  fixtures: boolean;
 }
 
 const UNKNOWN_OPTION = (flag: string) =>
-  `Unknown option ${flag}. Use --widths, --theme, --port or --states.`;
+  `Unknown option ${flag}. Use --widths, --theme, --port, --states or --fixtures.`;
 export const ROUTE_ERROR =
   'Route must start with "/" and contain no "..", spaces, backslash or scheme.';
 
@@ -94,12 +96,17 @@ export function parseArgs(argv: readonly string[]): ReviewArgs | { error: string
     theme: "both",
     port: null,
     states: [],
+    fixtures: false,
   };
   const positional: string[] = [];
   for (let i = 0; i < argv.length; i += 1) {
     const a = argv[i] as string;
     if (!a.startsWith("--")) {
       positional.push(a);
+      continue;
+    }
+    if (a === "--fixtures") {
+      out.fixtures = true;
       continue;
     }
     const [flag, inline] = a.includes("=")
