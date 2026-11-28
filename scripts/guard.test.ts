@@ -4,7 +4,13 @@
 import { spawnSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { checkFile, decodeForScan, findSecrets, MAX_FILE_BYTES } from "./lib/guard.ts";
+import {
+  checkFile,
+  decodeForScan,
+  findSecrets,
+  isDeniedPath,
+  MAX_FILE_BYTES,
+} from "./lib/guard.ts";
 
 function rules(path: string, size = 10, content: string | null = null): string[] {
   return checkFile({ path, size, content }).map((v) => v.rule);
@@ -69,7 +75,38 @@ describe("guard: denied paths", () => {
   });
 
   it("allows parquet under public/data/", () => {
-    expect(rules("public/data/pl-2024/shots.parquet")).toEqual([]);
+    expect(rules("public/data/wyscout/v1-abc/shots.parquet")).toEqual([]);
+  });
+});
+
+describe("guard: local-only datasets (ADR 0008)", () => {
+  it.each([
+    "data/statsbomb/v1-abc/scene-x.json",
+    "DATA/StatsBomb/a.json",
+    "sub/data/metrica/a.json",
+    "data/last-row/clip.json",
+    "data\\skillcorner\\a.json",
+    "public/data/skillcorner/a.json",
+    "public/data/statsbomb/v1-abc/manifest.json",
+    "public/data/other/a.json",
+    "public/data/stray.json",
+  ])("rejects %s", (p) => {
+    expect(rules(p)).toContain("denied-path");
+  });
+
+  it.each([
+    "data/wyscout/v1-abc/scene-x.json",
+    "public/data/wyscout/v1-abc/manifest.json",
+    "public/data/dfl/v1-abc/scene-y.json",
+    "public/data/catalog.json",
+    "pipeline/src/klopp_pipeline/recipes/statsbomb_shot.py",
+    "docs/decisions/0008-watch-gym-l1-clip-supply.md",
+  ])("allows %s", (p) => {
+    expect(rules(p)).toEqual([]);
+  });
+
+  it("names the local-only reason", () => {
+    expect(isDeniedPath("data/statsbomb/a.json")).toMatch(/local-only/);
   });
 });
 

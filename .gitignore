@@ -20,6 +20,16 @@ data/raw/
 *.parquet
 !public/data/**/*.parquet
 
+# Local-only datasets (ADR 0008): never committed
+data/statsbomb/
+data/last-row/
+data/metrica/
+data/skillcorner/
+public/data/statsbomb/
+public/data/last-row/
+public/data/metrica/
+public/data/skillcorner/
+
 # Local-only runtime output
 feedback/
 public/pyodide/

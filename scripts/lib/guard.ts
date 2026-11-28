@@ -51,6 +51,19 @@ const DENIED_EXTENSIONS: readonly string[] = [
   ".db-shm",
 ];
 
+/**
+ * Dataset ids from pipeline/sources.allow.json: `shippable: false` is local-only, `shippable: true`
+ * may ship (ADR 0008). scripts/deny-manifest.test.ts asserts both lists equal the manifest and the
+ * allow-list, so adding a source cannot skip the gate.
+ */
+export const LOCAL_ONLY_DATASETS: readonly string[] = [
+  "last-row",
+  "metrica",
+  "skillcorner",
+  "statsbomb",
+];
+export const SHIP_DATASETS: readonly string[] = ["dfl", "wyscout"];
+
 const DENIED_BASENAMES: readonly string[] = ["credentials.json"];
 
 function normalise(path: string): string {
@@ -76,6 +89,23 @@ export function isDeniedPath(path: string): string | null {
   const lower = basename(lowerPath);
 
   if (segments.includes("raw")) return "raw data folder";
+  const dataIndex = segments.findIndex(
+    (seg, i) =>
+      seg === "data" &&
+      i + 2 < segments.length &&
+      LOCAL_ONLY_DATASETS.includes(segments[i + 1] ?? ""),
+  );
+  if (dataIndex !== -1)
+    return `local-only dataset folder data/${segments[dataIndex + 1]}/ (ADR 0008)`;
+  if (lowerPath.startsWith("public/data/")) {
+    const rest = segments.slice(2);
+    if (rest.length === 1 && rest[0] !== "catalog.json") {
+      return "public/data/ holds only catalog.json at its top level (ADR 0008)";
+    }
+    if (rest.length > 1 && !SHIP_DATASETS.includes(rest[0] ?? "")) {
+      return `public/data/${rest[0]}/ is not a ship dataset (ADR 0008)`;
+    }
+  }
   if (lower === ".env" || (lower.startsWith(".env.") && lower !== ".env.example")) {
     return "env file";
   }
