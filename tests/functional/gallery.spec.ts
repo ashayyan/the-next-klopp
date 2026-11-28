@@ -259,3 +259,58 @@ test.describe("pitch and interactions", () => {
     await expect(error).toBeVisible();
   });
 });
+
+test.describe("controls: input", () => {
+  const STATES = ["empty", "filled", "focus", "invalid", "disabled", "long-value"];
+
+  for (const theme of ["light", "dark"] as const) {
+    test(`input shows every state in the ${theme} theme, and the error is in the danger colour`, async ({
+      page,
+    }) => {
+      await page.goto(`/dev/gallery/input?bare=1&theme=${theme}`);
+      await expect(page.locator('[data-ready="1"]')).toBeAttached();
+      for (const state of STATES) {
+        await expect(page.locator(`[data-gallery-state="input/${state}"]`)).toHaveCount(1);
+      }
+      const invalid = page.locator('[data-gallery-state="input/invalid"]');
+      const message = invalid.getByText("Enter a number from 0 to 100.");
+      await expect(message).toBeVisible();
+      const [messageColour, danger] = await Promise.all([
+        message.evaluate((el) => getComputedStyle(el.parentElement as HTMLElement).color),
+        page.evaluate(() => {
+          const probe = document.createElement("span");
+          probe.style.color = "var(--danger)";
+          document.body.append(probe);
+          const c = getComputedStyle(probe).color;
+          probe.remove();
+          return c;
+        }),
+      ]);
+      expect(messageColour).toBe(danger);
+      const input = invalid.getByRole("textbox", { name: /Pressing intensity/ });
+      await expect(input).toHaveAttribute("aria-invalid", "true");
+      const describedBy = await input.getAttribute("aria-describedby");
+      expect(describedBy).toBeTruthy();
+      await expect(page.locator(`[id="${describedBy}"]`).first()).toContainText(
+        "Enter a number from 0 to 100.",
+      );
+      await expect(
+        page.locator('[data-gallery-state="input/disabled"]').getByRole("textbox").first(),
+      ).toBeDisabled();
+    });
+  }
+
+  test("a very long value never makes the page wider at 375 px", async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto("/dev/gallery/input?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    const long = page.locator('[data-gallery-state="input/long-value"]');
+    await expect(long.getByRole("textbox").first()).toHaveValue(/Pressing_trigger/);
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    );
+    expect(overflow).toBeLessThanOrEqual(0);
+    const box = await long.getByRole("textbox").first().boundingBox();
+    expect(box?.width ?? 0).toBeLessThanOrEqual(375);
+  });
+});

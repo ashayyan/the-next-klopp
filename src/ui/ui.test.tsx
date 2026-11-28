@@ -6,6 +6,7 @@ import { loadTokens } from "../../scripts/design/build-tokens.ts";
 import { SYSTEM_INPUT } from "../../scripts/design/tokens.ts";
 import { DataTable } from "./data/DataTable.tsx";
 import { StatCard } from "./data/StatCard.tsx";
+import { NumberInput, TextInput } from "./Field.tsx";
 import { ShellBar } from "./lesson/ShellBar.tsx";
 import { LESSON_LOOP_STEPS, StepRail } from "./lesson/StepRail.tsx";
 import {
@@ -297,5 +298,48 @@ describe("DataTable", () => {
     );
     expect(html).toContain("No events in this window");
     expect(html).not.toContain("<table");
+  });
+});
+
+describe("Field", () => {
+  const ERROR = "Enter a number from 0 to 100.";
+
+  it("links the error text to the input with aria-describedby and marks it invalid", () => {
+    const html = renderToStaticMarkup(
+      <TextInput label="Minutes" defaultValue="abc" error={ERROR} />,
+    );
+    const input = /<input[^>]*>/.exec(html)?.[0] ?? "";
+    expect(input).toContain('aria-invalid="true"');
+    const describedBy = /aria-describedby="([^"]+)"/.exec(input)?.[1] ?? "";
+    expect(describedBy).not.toBe("");
+    const ids = describedBy.split(" ");
+    const errorId = ids.find((id) => html.includes(`id="${id}"`) && html.includes(ERROR));
+    expect(errorId).toBeDefined();
+    const errorText = html.split(`id="${errorId}"`)[1]?.replace(/<[^>]+>/g, "") ?? "";
+    expect(errorText).toContain(ERROR);
+    expect(html).toContain("text-danger");
+  });
+
+  it("renders no error text and no invalid flag when there is no error", () => {
+    const html = renderToStaticMarkup(<TextInput label="Minutes" defaultValue="42" />);
+    expect(html).not.toContain("aria-invalid");
+    expect(html).not.toContain('text-danger"');
+  });
+
+  it("names the input with its visible label", () => {
+    const html = renderToStaticMarkup(<TextInput label="Minutes" defaultValue="42" />);
+    const label = /<label[^>]*for="([^"]+)"/.exec(html)?.[1];
+    expect(label).toBeDefined();
+    expect(html).toContain(`id="${label}"`);
+  });
+
+  it("number input keeps the same error link and a text input mode", () => {
+    const html = renderToStaticMarkup(
+      <NumberInput label="Minutes" defaultValue={140} min={0} max={100} error={ERROR} />,
+    );
+    const input = /<input[^>]*>/.exec(html)?.[0] ?? "";
+    expect(input).toContain('aria-invalid="true"');
+    expect(input).toContain("aria-describedby=");
+    expect(html).toContain(ERROR);
   });
 });

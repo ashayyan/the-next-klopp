@@ -25,6 +25,7 @@ export default defineConfig({
       "@base-ui/react/radio",
       "@base-ui/react/field",
       "@base-ui/react/input",
+      "@base-ui/react/number-field",
       "@base-ui/react/meter",
       "@base-ui/react/toast",
       "@base-ui/react/scroll-area",

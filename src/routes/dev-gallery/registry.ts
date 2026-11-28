@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { ButtonDemo } from "./demos/controls.tsx";
+import { ButtonDemo, InputDemo } from "./demos/controls.tsx";
 import {
   ColourDemo,
   IconsDemo,
@@ -89,6 +89,13 @@ export const GALLERY: readonly Primitive[] = [
     label: "Button",
     states: ["default", "hover", "focus-visible", "pressed", "disabled", "loading"],
     Demo: ButtonDemo,
+  },
+  {
+    id: "input",
+    group: "Controls",
+    label: "Input",
+    states: ["empty", "filled", "focus", "invalid", "disabled", "long-value"],
+    Demo: InputDemo,
   },
   {
     id: "pitch",
