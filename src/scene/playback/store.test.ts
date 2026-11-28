@@ -1,7 +1,9 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { makeStressScene } from "../fixtures/stress.ts";
 import { type Scene, sceneSchema } from "../schema.ts";
+import { parseScene } from "../validate.ts";
 import { createSampler } from "./sample.ts";
 import { createPlaybackStore, defaultMotion } from "./store.ts";
 
@@ -228,5 +230,38 @@ describe("default motion", () => {
   it("is stepped for reduced motion and smooth otherwise", () => {
     expect(defaultMotion(true)).toBe("stepped");
     expect(defaultMotion(false)).toBe("smooth");
+  });
+});
+
+describe("stress scene", () => {
+  const stress = makeStressScene();
+
+  it("passes parseScene with 22 players, a ball and 300 keyframes", () => {
+    const parsed = parseScene(stress);
+    expect(parsed.ok, JSON.stringify(parsed.ok ? [] : parsed.issues.slice(0, 3))).toBe(true);
+    expect(stress.entities.filter((e) => e.type !== "ball")).toHaveLength(22);
+    expect(stress.entities.filter((e) => e.type === "goalkeeper")).toHaveLength(2);
+    expect(stress.frames).toHaveLength(300);
+    expect(stress.events).toHaveLength(0);
+  });
+
+  it("is deterministic", () => {
+    expect(JSON.stringify(makeStressScene())).toBe(JSON.stringify(stress));
+  });
+
+  it("samples 1000 random times in well under 200 ms", () => {
+    const sample = createSampler(stress);
+    let seed = 12345;
+    const random = () => {
+      seed = (seed * 1664525 + 1013904223) % 4294967296;
+      return seed / 4294967296;
+    };
+    const start = performance.now();
+    let visible = 0;
+    for (let i = 0; i < 1000; i += 1) {
+      visible += sample(random() * 29.9, i % 2 === 0 ? "smooth" : "stepped").entities.length;
+    }
+    expect(visible).toBe(23_000);
+    expect(performance.now() - start).toBeLessThan(200);
   });
 });

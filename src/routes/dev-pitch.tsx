@@ -9,6 +9,7 @@ import { Legend } from "../pitch/legend/Legend.tsx";
 import { Pitch } from "../pitch/Pitch.tsx";
 import { autoOrientation, type Orientation } from "../pitch/view.ts";
 import { DEV_SCENES, FALLBACK_SCENE_ID, findDevScene } from "../scene/fixtures/index.ts";
+import { FrameReadout } from "../scene/playback/FrameReadout.tsx";
 import { handleTransportKey } from "../scene/playback/keys.ts";
 import { markCommitted, startPlaybackLoop } from "../scene/playback/loop.ts";
 import { PlaybackBar } from "../scene/playback/PlaybackBar.tsx";
@@ -365,6 +366,7 @@ export default function DevPitchPage() {
             ) : null}
           </div>
           {store ? <PlaybackBar store={store} /> : null}
+          {store && activeId === "stress" ? <FrameReadout /> : null}
         </section>
 
         <aside className="flex min-w-0 flex-col gap-4 md:gap-6">

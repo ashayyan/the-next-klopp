@@ -33,10 +33,15 @@ export const DEV_SCENES: readonly DevScene[] = [
     load: () => import("./quiz-answer.json").then((m) => m.default),
   },
   {
-    // Until 03-10 publishes the recipe artifact, this loads the 03-02 fixture.
+    // The fixture file is the pipeline's published scene (03-06); 03-10 may load it from the catalog.
     id: "reconstruction",
     label: "Reconstruction · Wyscout PL 2017/18",
     load: () => import("./reconstruction.json").then((m) => m.default),
+  },
+  {
+    id: "stress",
+    label: "Stress · 22 players",
+    load: () => import("./stress.ts").then((m) => m.makeStressScene()),
   },
 ];
 
