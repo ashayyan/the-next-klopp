@@ -166,6 +166,22 @@ describe("--check and --prune", () => {
     expect(run(args(dir, "--check")).status).toBe(0);
   });
 
+  it("--family copies one family but keeps every family's licence section (WR-04)", () => {
+    const dir = tempRoot();
+    run(args(dir));
+    const before = readFileSync(join(dir, "public", "fonts", "LICENSES.md"), "utf8");
+    const other = collectReferences(root)
+      .flatMap((i) => i.refs.map((x) => x.family))
+      .find((f) => f !== "mona-sans");
+    expect(other).toBeDefined();
+    const one = run(args(dir, "--family", other as string));
+    expect(one.status).toBe(0);
+    const after = readFileSync(join(dir, "public", "fonts", "LICENSES.md"), "utf8");
+    expect(after).toBe(before);
+    expect(after).toContain("## Mona Sans");
+    expect(run(args(dir, "--check")).status).toBe(0);
+  });
+
   it("exits 2 on an unknown option and when --family meets --check", () => {
     expect(run(["--nope"]).status).toBe(2);
     expect(run(["--family", "mona-sans", "--check"]).status).toBe(2);

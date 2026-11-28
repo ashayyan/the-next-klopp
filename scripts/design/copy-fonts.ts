@@ -213,7 +213,9 @@ export function run(options: {
 
   // Licences.
   const licencePath = join(fontsDir, "LICENSES.md");
-  const wanted = renderLicences(packagesDir, refs);
+  // Always every referenced family: --family narrows the copy loop only, never the licence record
+  // (OFL-1.1 requires the licence to travel with each shipped font).
+  const wanted = renderLicences(packagesDir, allRefs);
   const current = existsSync(licencePath) ? readFileSync(licencePath, "utf8") : null;
   if (current !== wanted) {
     if (check) plan.problems.push("stale: public/fonts/LICENSES.md");
