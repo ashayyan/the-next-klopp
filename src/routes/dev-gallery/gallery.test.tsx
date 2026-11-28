@@ -96,9 +96,11 @@ describe("index", () => {
       expect(html).toContain(group);
       for (const p of primitives) {
         expect(html).toContain(`href="/dev/gallery/${p.id}"`);
-        expect(html).toContain(`${p.states.length} states`);
+        const n = p.states.length;
+        expect(html).toContain(`${n} ${n === 1 ? "state" : "states"}`);
       }
     }
+    expect(html).not.toContain(">1 states<");
   });
 
   it("is a plain list: one list item per primitive and no grid of cards", () => {
