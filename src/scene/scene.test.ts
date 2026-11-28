@@ -313,6 +313,23 @@ describe("checkSceneIntegrity: source licence rules", () => {
     ).toContain("/source/licenceUrl");
   });
 
+  it.each(["metrica", "skillcorner", "last-row"] as const)(
+    "never lets a %s scene be shippable (ADR 0008)",
+    (provider) => {
+      const paths = issuePaths("reconstruction", (s) => {
+        s.source.provider = provider;
+        s.source.shippable = true;
+      });
+      expect(paths).toContain("/source/shippable");
+      const ok = issuePaths("reconstruction", (s) => {
+        s.source.provider = provider;
+        s.source.shippable = false;
+        s.source.localOnly = true;
+      });
+      expect(ok).toEqual([]);
+    },
+  );
+
   it("keeps StatsBomb scenes local and logo-credited (ADR 0008)", () => {
     const paths = issuePaths("reconstruction", (s) => {
       s.source.provider = "statsbomb";

@@ -20,6 +20,14 @@ function pointer(...segments: (string | number)[]): string {
   return segments.map((s) => `/${escapePointer(s)}`).join("");
 }
 
+/** Providers whose data is local-only and never shippable (ADR 0008, pipeline/sources.allow.json). */
+const LOCAL_ONLY_PROVIDERS: ReadonlySet<string> = new Set([
+  "statsbomb",
+  "metrica",
+  "skillcorner",
+  "last-row",
+]);
+
 export function checkSceneIntegrity(scene: Scene): SceneIssue[] {
   const issues: SceneIssue[] = [];
   const add = (message: string, ...path: (string | number)[]) => {
@@ -175,7 +183,8 @@ export function checkSceneIntegrity(scene: Scene): SceneIssue[] {
 
   // Source licence rules (ADR 0008).
   const src = scene.source;
-  if (src.localOnly === true && src.shippable) {
+  const localOnlyProvider = src.provider !== undefined && LOCAL_ONLY_PROVIDERS.has(src.provider);
+  if (src.localOnly === true && src.shippable && !localOnlyProvider) {
     add("A local-only scene can never be shippable.", "source", "shippable");
   }
   if (src.type === "open-data") {
@@ -185,10 +194,10 @@ export function checkSceneIntegrity(scene: Scene): SceneIssue[] {
       add("Open-data scenes link their licence.", "source", "licenceUrl");
     }
   }
+  if (localOnlyProvider && src.shippable) {
+    add("This provider is local-only and never shippable (ADR 0008).", "source", "shippable");
+  }
   if (src.provider === "statsbomb") {
-    if (src.shippable && src.localOnly !== true) {
-      add("StatsBomb scenes are local-only and never shippable (ADR 0008).", "source", "shippable");
-    }
     if (src.logoRequired !== true) {
       add("StatsBomb scenes must credit StatsBomb with its logo.", "source", "logoRequired");
     }
