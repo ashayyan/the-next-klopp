@@ -1,0 +1,129 @@
+// @vitest-environment node
+// Phase 4 pitch legibility fixes (04-UI-SPEC "Phase 3 open observations"): sequence badges clear
+// the player discs and stay inside the SVG, note chips never cross the SVG edge, in both
+// orientations, on the published Wyscout scene and on the glyph sheet.
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import { describe, expect, it } from "vitest";
+import { createSampler, eventState } from "../../scene/playback/sample.ts";
+import type { Scene } from "../../scene/schema.ts";
+import { parseScene } from "../../scene/validate.ts";
+import { Pitch } from "../Pitch.tsx";
+import { canonicalToScreen, makeView, type Orientation } from "../view.ts";
+import { discDiameter } from "./glyphSize.ts";
+import { type Box, boxesIntersect, placeBadge } from "./placement.ts";
+import { SceneLayer } from "./SceneLayer.tsx";
+
+const root = join(import.meta.dirname, "..", "..", "..");
+
+function load(raw: unknown): Scene {
+  const parsed = parseScene(raw);
+  if (!parsed.ok) throw new Error(JSON.stringify(parsed.issues));
+  return parsed.scene;
+}
+
+function wyscoutScene(): Scene {
+  const catalog = JSON.parse(readFileSync(join(root, "public", "data", "catalog.json"), "utf8"));
+  const path = catalog.datasets
+    .flatMap((d: { scenes?: { path: string }[] }) => d.scenes ?? [])
+    .find((s: { path: string }) => s.path.includes("wyscout"))?.path as string;
+  return load(JSON.parse(readFileSync(join(root, "public", "data", path), "utf8")));
+}
+
+function viewFor(orientation: Orientation, cssWidth: number) {
+  return makeView({ length: 105, width: 68, runoff: 3, orientation, cssWidth });
+}
+
+function render(scene: Scene, t: number, orientation: Orientation, cssWidth: number): string {
+  return renderToStaticMarkup(
+    createElement(
+      Pitch,
+      { title: scene.label, orientation, initialCssWidth: cssWidth },
+      createElement(SceneLayer, { scene, t, mode: "smooth" }),
+    ),
+  );
+}
+
+function badgeCentres(markup: string): { x: number; y: number }[] {
+  return [
+    ...markup.matchAll(/<g data-glyph="sequence-badge"><circle cx="([^"]+)" cy="([^"]+)"/g),
+  ].map((m) => ({ x: Number(m[1]), y: Number(m[2]) }));
+}
+
+const centred = (c: { x: number; y: number }, size: number): Box => ({
+  x: c.x - size / 2,
+  y: c.y - size / 2,
+  w: size,
+  h: size,
+});
+
+describe("sequence badges clear the player discs (Wyscout scene)", () => {
+  const scene = wyscoutScene();
+  const cases: [string, Orientation, number][] = [
+    ["375 (vertical, 343 px stage)", "vertical", 343],
+    ["1440 (horizontal, 840 px stage)", "horizontal", 840],
+  ];
+
+  for (const [name, orientation, cssWidth] of cases) {
+    it(`no badge box meets a disc box and every badge is inside the SVG at ${name}`, () => {
+      const view = viewFor(orientation, cssWidth);
+      const sample = createSampler(scene);
+      const times = [0, ...scene.events.map((e) => e.t)];
+      let badgesChecked = 0;
+      for (const t of times) {
+        const markup = render(scene, t, orientation, cssWidth);
+        const badges = badgeCentres(markup);
+        expect(badges.length).toBe(
+          scene.events.filter((e) => eventState(scene, e, t) !== "hidden").length,
+        );
+        const discPx = discDiameter(view.pxPerMetre) * view.pxPerMetre;
+        const discs = sample(t, "smooth").entities.map((e) =>
+          centred(canonicalToScreen(view, e), discPx),
+        );
+        for (const c of badges) {
+          const box = centred(canonicalToScreen(view, c), 16);
+          badgesChecked += 1;
+          for (const d of discs) expect(boxesIntersect(box, d), `t=${t}`).toBe(false);
+          expect(box.x).toBeGreaterThanOrEqual(0);
+          expect(box.y).toBeGreaterThanOrEqual(0);
+          expect(box.x + box.w).toBeLessThanOrEqual(view.cssWidth);
+          expect(box.y + box.h).toBeLessThanOrEqual(view.cssHeight);
+        }
+      }
+      expect(badgesChecked).toBeGreaterThan(10);
+    });
+  }
+
+  it("places the badge disc radius + 8 px from the start when the left of travel is free", () => {
+    const view = viewFor("horizontal", 840);
+    const start = { x: 50, y: 34 };
+    const c = placeBadge({ start, end: { x: 60, y: 34 }, discs: [], view });
+    const a = canonicalToScreen(view, start);
+    const b = canonicalToScreen(view, c);
+    const radius = (discDiameter(view.pxPerMetre) * view.pxPerMetre) / 2;
+    expect(Math.hypot(b.x - a.x, b.y - a.y)).toBeCloseTo(radius + 8, 6);
+    expect(b.y).toBeLessThan(a.y); // left of an eastward run is up the screen
+    expect(b.x).toBeCloseTo(a.x, 6);
+  });
+
+  it("moves to the next side when the left of travel is taken by another disc", () => {
+    const view = viewFor("horizontal", 840);
+    const start = { x: 50, y: 34 };
+    const free = placeBadge({ start, end: { x: 60, y: 34 }, discs: [], view });
+    const blocked = placeBadge({ start, end: { x: 60, y: 34 }, discs: [free], view });
+    const a = canonicalToScreen(view, start);
+    expect(canonicalToScreen(view, blocked).y).toBeGreaterThan(a.y); // right of travel
+  });
+
+  it("treats a zero-length event as travelling up the screen (badge on its left)", () => {
+    const view = viewFor("vertical", 343);
+    const start = { x: 50, y: 34 };
+    const c = placeBadge({ start, end: start, discs: [], view });
+    const a = canonicalToScreen(view, start);
+    const b = canonicalToScreen(view, c);
+    expect(b.x).toBeLessThan(a.x);
+    expect(b.y).toBeCloseTo(a.y, 6);
+  });
+});

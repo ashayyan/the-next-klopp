@@ -1,10 +1,16 @@
 import { useMemo, useState } from "react";
-import { createSampler, eventState, type MotionMode } from "../../scene/playback/sample.ts";
+import {
+  createSampler,
+  eventState,
+  type MotionMode,
+  type SampledScene,
+} from "../../scene/playback/sample.ts";
 import type {
   Scene,
   SceneAnnotation,
   SceneEntity,
   SceneEvent,
+  ScenePoint,
   SceneTeam,
 } from "../../scene/schema.ts";
 import { usePitch } from "../Pitch.tsx";
@@ -21,6 +27,7 @@ import {
   ZoneGlyph,
 } from "./MarkGlyphs.tsx";
 import { DraggableHandle, PlayerGlyph } from "./PlayerGlyph.tsx";
+import { placeBadge } from "./placement.ts";
 
 export interface SceneLayerProps {
   scene: Scene;
@@ -63,6 +70,16 @@ export function ballOwnerCandidates(scene: Scene, t: number, latest: string | nu
   return ids;
 }
 
+/** Sampled entities with any learner-moved positions applied. */
+function atMap(sampled: SampledScene, positions?: Readonly<Record<string, Pt>>) {
+  return new Map(
+    sampled.entities.map((e) => {
+      const moved = positions?.[e.id];
+      return [e.id, moved ? { ...e, x: moved.x, y: moved.y } : e] as const;
+    }),
+  );
+}
+
 /** An annotation with a from/to range shows only inside that range. */
 function inRange(annotation: SceneAnnotation, t: number): boolean {
   if (annotation.type === "sequence") return true;
@@ -94,12 +111,26 @@ export function SceneLayer({
   const sideOfTeam = (id: string | undefined): Side =>
     scene.teams.find((team) => team.id === id)?.side ?? "a";
   const entityById = new Map(scene.entities.map((entity) => [entity.id, entity]));
-  const at = new Map(
-    sampled.entities.map((e) => {
-      const moved = positions?.[e.id];
-      return [e.id, moved ? { ...e, x: moved.x, y: moved.y } : e] as const;
-    }),
-  );
+  const at = atMap(sampled, positions);
+  // Sequence badges sit beside the passer, clear of every disc (04-UI-SPEC Phase 3 observation 1).
+  // Placement is memoised per sampled t, so paused frames cost nothing.
+  const badgeAt = useMemo(() => {
+    const s = sample(t, mode);
+    const pos = atMap(s, positions);
+    const discs = scene.entities.flatMap((e) => {
+      const p = pos.get(e.id);
+      return e.type === "ball" || !p ? [] : [{ x: p.x, y: p.y }];
+    });
+    const out = new Map<string, ScenePoint>();
+    for (const event of scene.events) {
+      if (eventState(scene, event, s.t) === "hidden") continue;
+      out.set(
+        event.id,
+        placeBadge({ start: event.start, end: event.end ?? event.start, discs, view }),
+      );
+    }
+    return out;
+  }, [scene, sample, t, mode, positions, view]);
 
   const visibleEvents = scene.events.flatMap((event) => {
     const state = eventState(scene, event, sampled.t);
@@ -224,14 +255,9 @@ export function SceneLayer({
               <g key={a.id}>
                 {a.events.map((id, index) => {
                   const event = eventById.get(id);
-                  return event ? (
-                    <SequenceBadgeGlyph
-                      key={id}
-                      x={event.start.x}
-                      y={event.start.y}
-                      n={index + 1}
-                    />
-                  ) : null;
+                  if (!event) return null;
+                  const where = badgeAt.get(id) ?? event.start;
+                  return <SequenceBadgeGlyph key={id} x={where.x} y={where.y} n={index + 1} />;
                 })}
               </g>
             );
