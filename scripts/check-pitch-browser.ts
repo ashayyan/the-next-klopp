@@ -675,7 +675,9 @@ async function main(): Promise<number> {
   for (const signal of ["SIGINT", "SIGTERM"] as const) {
     process.on(signal, () => {
       stopAll();
-      process.exit(130);
+      // The `finally` below never runs after process.exit, so close the browser here: it kills
+      // the msedge process tree and removes the temp profile. Bounded, so Ctrl-C cannot hang.
+      void Promise.race([browser?.close(), sleep(10_000)]).finally(() => process.exit(130));
     });
   }
   try {
