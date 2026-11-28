@@ -976,6 +976,135 @@ export function evalArrowSuffix(
   };
 }
 
+// ---------------------------------------------------------------- motion, fonts and capture names
+
+export interface MotionProbe {
+  /** Running or pending animations: `document.getAnimations()`. */
+  animations: { selector: string; name: string; durationMs: number }[];
+  /** Elements whose computed transition-duration is above zero. */
+  transitions: { selector: string; property: string; durationMs: number }[];
+  /** `[data-glyph]` boxes read twice, 500 ms apart, with no input between. */
+  glyphsBefore: Box[];
+  glyphsAfter: Box[];
+}
+
+export const GLYPH_MOVE_TOLERANCE_PX = 0.5;
+
+/** With reduce emulated: nothing animates, nothing transitions, nothing moves before input. */
+export function evalReducedMotion(input: MotionProbe): Outcome {
+  const offenders: Offender[] = [];
+  for (const a of input.animations) {
+    if (a.durationMs > 0) {
+      offenders.push({
+        selector: a.selector,
+        text: "",
+        box: ZERO_BOX,
+        value: `animation ${a.name || "(unnamed)"} runs ${a.durationMs} ms`,
+      });
+    }
+  }
+  for (const t of input.transitions) {
+    if (t.durationMs > 0) {
+      offenders.push({
+        selector: t.selector,
+        text: "",
+        box: ZERO_BOX,
+        value: `transition of ${t.property} takes ${t.durationMs} ms`,
+      });
+    }
+  }
+  const count = Math.min(input.glyphsBefore.length, input.glyphsAfter.length);
+  for (let i = 0; i < count; i += 1) {
+    const a = input.glyphsBefore[i] as Box;
+    const b = input.glyphsAfter[i] as Box;
+    const moved = Math.max(...a.map((v, k) => Math.abs(v - (b[k] as number))));
+    if (moved > GLYPH_MOVE_TOLERANCE_PX) {
+      offenders.push({
+        selector: `[data-glyph] #${i + 1}`,
+        text: "",
+        box: b,
+        value: `moved ${round1(moved)} px within 500 ms without input`,
+      });
+    }
+  }
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? "no animation, transition or glyph movement under reduced motion"
+        : `${offenders.length} motion problem(s) under reduced motion`,
+    offenders,
+  };
+}
+
+const LOCAL_HOSTS: ReadonlySet<string> = new Set(["localhost", "127.0.0.1", "[::1]", "::1"]);
+
+export interface FontLocalProbe {
+  /** Every request URL the page made. */
+  requests: string[];
+  /** Each family of the active token set and whether its faces finished loading. */
+  families: { family: string; loaded: boolean }[];
+}
+
+/** No request leaves localhost, and every family of the active token set is loaded. */
+export function evalFontLocal(input: FontLocalProbe): Outcome {
+  const offenders: Offender[] = [];
+  for (const url of input.requests) {
+    let host = "";
+    try {
+      const u = new URL(url);
+      if (u.protocol === "data:" || u.protocol === "blob:" || u.protocol === "about:") continue;
+      host = u.hostname;
+    } catch {
+      host = url;
+    }
+    if (!LOCAL_HOSTS.has(host)) {
+      offenders.push({
+        selector: "network",
+        text: "",
+        box: ZERO_BOX,
+        value: `request to ${clip(url, 100)}`,
+      });
+    }
+  }
+  for (const f of input.families) {
+    if (!f.loaded) {
+      offenders.push({
+        selector: "document.fonts",
+        text: f.family,
+        box: ZERO_BOX,
+        value: `font family "${f.family}" is not loaded`,
+      });
+    }
+  }
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? `${input.requests.length} request(s) all local; ${input.families.length} font family(ies) loaded`
+        : `${offenders.length} remote request(s) or unloaded font(s)`,
+    offenders,
+  };
+}
+
+export type Vision = "normal" | "deuteranopia" | "achromatopsia";
+
+/** `<width>-<theme>[-<state>][-<vision>].png`, the file a capture is saved under. */
+export function screenshotName(
+  width: number,
+  theme: Theme,
+  state: string | null,
+  vision: Vision = "normal",
+): string {
+  const slug = state
+    ? state
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+    : "";
+  return `${width}-${theme}${slug ? `-${slug}` : ""}${vision === "normal" ? "" : `-${vision}`}.png`;
+}
+
 // ---------------------------------------------------------------- results and report
 
 export interface CheckResult {
@@ -1012,7 +1141,7 @@ export interface ScreenshotRecord {
   width: number;
   theme: Theme;
   state: string | null;
-  vision: "normal";
+  vision: Vision;
   path: string;
   sha256: string;
 }
@@ -1117,7 +1246,7 @@ export interface ReviewReport {
   reviewer: { status: "pending"; by: null; notes: null };
 }
 
-export const SKIPPED_DETAIL = "not implemented in this run (arrives with plan 04-06)";
+export const SKIPPED_DETAIL = "check did not run in this review";
 
 export function buildReport(input: ReportInput): ReviewReport {
   const seen = new Set(input.checks.map((c) => c.id));

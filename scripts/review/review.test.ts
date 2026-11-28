@@ -24,10 +24,12 @@ import {
   evalCardGrid,
   evalControlNames,
   evalFocusVisible,
+  evalFontLocal,
   evalHeadingOrder,
   evalHexInSource,
   evalLegendPresent,
   evalNoOverflow,
+  evalReducedMotion,
   evalStepWords,
   evalTapSize,
   evalTextContrast,
@@ -41,6 +43,7 @@ import {
   ReviewUnavailableError,
   renderReportMd,
   resolveBackground,
+  screenshotName,
   shadowRings,
   slugRoute,
   type TextProbe,
@@ -810,5 +813,106 @@ describe("warn checks", () => {
     const out = evalArrowSuffix([c("Read more →"), c("Continue")]);
     expect(out.offenders).toHaveLength(1);
     expect(toResult("arrow-suffix", ctx, out).status).toBe("warn");
+  });
+});
+
+describe("reduced-motion", () => {
+  const calm = {
+    animations: [],
+    transitions: [],
+    glyphsBefore: [[10, 10, 20, 20]] as [number, number, number, number][],
+    glyphsAfter: [[10, 10, 20, 20]] as [number, number, number, number][],
+  };
+
+  it("fails an animation of 300 ms and passes 0 ms", () => {
+    const out = evalReducedMotion({
+      ...calm,
+      animations: [{ selector: ".pulse", name: "pulse", durationMs: 300 }],
+    });
+    expect(out.violated).toBe(true);
+    expect(out.offenders[0]?.value).toBe("animation pulse runs 300 ms");
+    expect(
+      evalReducedMotion({
+        ...calm,
+        animations: [{ selector: ".pulse", name: "pulse", durationMs: 0 }],
+      }).violated,
+    ).toBe(false);
+  });
+
+  it("fails a transition above 0 ms", () => {
+    const out = evalReducedMotion({
+      ...calm,
+      transitions: [{ selector: "button", property: "opacity", durationMs: 200 }],
+    });
+    expect(out.violated).toBe(true);
+  });
+
+  it("fails glyph boxes that move more than 0.5 px between two reads and passes a 0.4 px jitter", () => {
+    const moved = evalReducedMotion({ ...calm, glyphsAfter: [[12, 10, 20, 20]] });
+    expect(moved.violated).toBe(true);
+    expect(moved.offenders[0]?.value).toBe("moved 2 px within 500 ms without input");
+    expect(evalReducedMotion({ ...calm, glyphsAfter: [[10.4, 10, 20, 20]] }).violated).toBe(false);
+    expect(evalReducedMotion(calm).violated).toBe(false);
+  });
+});
+
+describe("font-local", () => {
+  const loaded = [{ family: "Mona Sans", loaded: true }];
+
+  it("fails a request to fonts.example.com and passes localhost, 127.0.0.1 and data URLs", () => {
+    const bad = evalFontLocal({
+      requests: ["https://fonts.example.com/a.woff2"],
+      families: loaded,
+    });
+    expect(bad.violated).toBe(true);
+    expect(bad.offenders[0]?.value).toContain("fonts.example.com");
+    const good = evalFontLocal({
+      requests: [
+        "http://localhost:5173/fonts/a.woff2",
+        "http://127.0.0.1:4173/",
+        "data:font/woff2;base64,AAAA",
+        "blob:http://localhost:5173/x",
+      ],
+      families: loaded,
+    });
+    expect(good.violated).toBe(false);
+  });
+
+  it("fails a family that is not loaded and names it", () => {
+    const out = evalFontLocal({
+      requests: [],
+      families: [
+        { family: "Mona Sans", loaded: true },
+        { family: "Geist Mono", loaded: false },
+      ],
+    });
+    expect(out.violated).toBe(true);
+    expect(out.offenders[0]?.value).toBe('font family "Geist Mono" is not loaded');
+  });
+});
+
+describe("capture names", () => {
+  it("names state captures from their query and colour-vision captures from their mode", () => {
+    expect(screenshotName(375, "dark", null)).toBe("375-dark.png");
+    expect(screenshotName(375, "dark", "state=with")).toBe("375-dark-state-with.png");
+    expect(screenshotName(1440, "light", "t=11.48")).toBe("1440-light-t-11-48.png");
+    expect(screenshotName(375, "light", null, "deuteranopia")).toBe("375-light-deuteranopia.png");
+    expect(screenshotName(375, "dark", null, "achromatopsia")).toBe("375-dark-achromatopsia.png");
+  });
+
+  it("parses --states into one entry per query", () => {
+    const parsed = parseArgs(["/dev/x", "--states", "state=with,t=11.48"]);
+    expect("error" in parsed ? [] : parsed.states).toEqual(["state=with", "t=11.48"]);
+  });
+});
+
+describe("registry coverage", () => {
+  it("a report that runs every check has nothing skipped", () => {
+    const all = CHECKS.map((c) =>
+      toResult(c.id, ctx, { violated: false, detail: "ok", offenders: [] }),
+    );
+    const report = reportWith(all);
+    expect(report.counts.skipped).toBe(0);
+    expect(report.counts.pass).toBe(22);
   });
 });

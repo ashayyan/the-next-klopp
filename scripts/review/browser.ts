@@ -8,6 +8,7 @@ import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { type Browser, chromium, type Page } from "@playwright/test";
 import type { TokenDocument } from "../design/tokens.ts";
+import { FONT_KEYS } from "../design/tokens-schema.ts";
 import {
   allowedColours,
   type Box,
@@ -25,26 +26,32 @@ import {
   evalCardGrid,
   evalControlNames,
   evalFocusVisible,
+  evalFontLocal,
   evalHeadingOrder,
   evalLegendPresent,
   evalNoOverflow,
+  evalReducedMotion,
   evalStepWords,
   evalTapSize,
   evalTextContrast,
   evalTokenColours,
   evalTransitionAll,
   type FocusStop,
+  type FontLocalProbe,
   type HeadingProbe,
   heightFor,
+  type MotionProbe,
   type PropertyProbe,
   ReviewUnavailableError,
   type ScreenshotRecord,
   type StepProbe,
   type StripeProbe,
+  screenshotName,
   type TapTarget,
   type TextProbe,
   type Theme,
   toResult,
+  type Vision,
 } from "./lib.ts";
 
 export const DEV_PORT = 5173;
@@ -573,12 +580,6 @@ export interface CaptureOutput {
   copyText: string;
 }
 
-const stateSlug = (state: string): string =>
-  state
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-
 export function urlFor(base: string, route: string, theme: Theme, state: string | null): string {
   const url = new URL(route, base);
   url.searchParams.set("theme", theme);
@@ -604,16 +605,93 @@ async function collectFocusStops(page: Page): Promise<FocusStop[]> {
   return stops;
 }
 
+/** Runs inside the page: animations, transitions and glyph boxes for the reduced-motion check. */
+function collectMotion(): {
+  animations: MotionProbe["animations"];
+  transitions: MotionProbe["transitions"];
+  glyphs: Box[];
+} {
+  const sel = (el: Element | null): string =>
+    el
+      ? el.tagName.toLowerCase() +
+        (el.id ? `#${el.id}` : "") +
+        (el.classList.length > 0 ? `.${[...el.classList].slice(0, 2).join(".")}` : "")
+      : "document";
+  const animations = document
+    .getAnimations()
+    .filter((a) => a.playState === "running" || a.pending)
+    .map((a) => {
+      const duration = a.effect?.getComputedTiming().duration;
+      const target = (a.effect as KeyframeEffect | null)?.target ?? null;
+      return {
+        selector: sel(target),
+        name: (a as CSSAnimation).animationName ?? (a as CSSTransition).transitionProperty ?? "",
+        durationMs: typeof duration === "number" ? duration : 0,
+      };
+    });
+  const transitions: MotionProbe["transitions"] = [];
+  for (const el of document.querySelectorAll("body, body *")) {
+    const s = getComputedStyle(el);
+    if (s.transitionProperty === "none") continue;
+    const ms = s.transitionDuration.split(",").map((v) => {
+      const n = Number.parseFloat(v);
+      return v.trim().endsWith("ms") ? n : n * 1000;
+    });
+    const longest = Math.max(0, ...ms);
+    if (longest > 0 && transitions.length < 20) {
+      transitions.push({ selector: sel(el), property: s.transitionProperty, durationMs: longest });
+    }
+  }
+  const glyphs = [...document.querySelectorAll("[data-glyph]")].map((g): Box => {
+    const r = g.getBoundingClientRect();
+    return [r.x + scrollX, r.y + scrollY, r.width, r.height];
+  });
+  return { animations, transitions, glyphs };
+}
+
+/** Runs inside the page: loads each family and reports whether a face of it is loaded. */
+async function collectFonts(names: string[]): Promise<FontLocalProbe["families"]> {
+  const out: FontLocalProbe["families"] = [];
+  for (const family of names) {
+    await document.fonts.load(`16px "${family}"`).catch(() => []);
+    const faces = [...document.fonts].filter((f) => f.family.replaceAll('"', "") === family);
+    out.push({ family, loaded: faces.some((f) => f.status === "loaded") });
+  }
+  return out;
+}
+
+const VISIONS = ["deuteranopia", "achromatopsia"] as const;
+
 export async function capture(browser: Browser, input: CaptureInput): Promise<CaptureOutput> {
   mkdirSync(input.outDir, { recursive: true });
   const screenshots: ScreenshotRecord[] = [];
   const results: CheckResult[] = [];
   const states: (string | null)[] = [null, ...input.states];
+  const families = [...new Set(FONT_KEYS.map((k) => input.tokens.font[k].$value[0] as string))];
   let copyText = "";
   const copyTheme = input.themes.includes(input.primaryTheme)
     ? input.primaryTheme
     : input.themes[0];
   const copyWidth = input.widths.includes(1440) ? 1440 : Math.max(...input.widths);
+  const shoot = async (
+    page: Page,
+    width: number,
+    theme: Theme,
+    state: string | null,
+    vision: Vision,
+  ) => {
+    const file = screenshotName(width, theme, state, vision);
+    const bytes = await page.screenshot({ path: join(input.outDir, file), fullPage: true });
+    screenshots.push({
+      width,
+      theme,
+      state,
+      vision,
+      path: file,
+      sha256: createHash("sha256").update(bytes).digest("hex"),
+    });
+  };
+
   for (const theme of input.themes) {
     for (const width of input.widths) {
       for (const state of states) {
@@ -624,16 +702,17 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
           deviceScaleFactor: 1,
         });
         try {
+          const ctx = { width, theme, state };
           const page = await context.newPage();
+          const requests: string[] = [];
+          page.on("request", (r) => requests.push(r.url()));
           await page.goto(urlFor(input.baseUrl, input.route, theme, state), {
             waitUntil: "load",
           });
           await page.waitForFunction(
             () => (document.querySelector("#root")?.childElementCount ?? 0) > 0,
             null,
-            {
-              timeout: 15_000,
-            },
+            { timeout: 15_000 },
           );
           // Pages that set data-ready say when their scene is drawn; others are ready at load.
           if ((await page.locator("[data-ready]").count()) > 0) {
@@ -642,16 +721,37 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
           await page.evaluate(() => document.fonts.ready);
           await sleep(100);
 
-          const file = `${width}-${theme}${state ? `-${stateSlug(state)}` : ""}.png`;
-          const bytes = await page.screenshot({ path: join(input.outDir, file), fullPage: true });
-          screenshots.push({
-            width,
-            theme,
-            state,
-            vision: "normal",
-            path: file,
-            sha256: createHash("sha256").update(bytes).digest("hex"),
-          });
+          // Reduced motion first, before any input: two reads of the glyph boxes 500 ms apart.
+          const motion = await page.evaluate(collectMotion);
+          await sleep(500);
+          const after = await page.evaluate(collectMotion);
+          results.push(
+            toResult(
+              "reduced-motion",
+              ctx,
+              evalReducedMotion({
+                animations: motion.animations,
+                transitions: motion.transitions,
+                glyphsBefore: motion.glyphs,
+                glyphsAfter: after.glyphs,
+              }),
+            ),
+          );
+          const fontFamilies = await page.evaluate(collectFonts, families);
+          results.push(
+            toResult("font-local", ctx, evalFontLocal({ requests, families: fontFamilies })),
+          );
+
+          await shoot(page, width, theme, state, "normal");
+          // Colour-vision captures: the emulation is Chrome's own, 375 and the plain route only.
+          if (width === 375 && state === null) {
+            const cdp = await context.newCDPSession(page);
+            for (const vision of VISIONS) {
+              await cdp.send("Emulation.setEmulatedVisionDeficiency", { type: vision });
+              await shoot(page, width, theme, state, vision);
+            }
+            await cdp.send("Emulation.setEmulatedVisionDeficiency", { type: "none" });
+          }
 
           if (theme === copyTheme && width === copyWidth && state === null) {
             copyText = await page.evaluate(
@@ -660,7 +760,6 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
             );
           }
           const data = await page.evaluate(collectPage);
-          const ctx = { width, theme, state };
           results.push(
             toResult("no-overflow", ctx, evalNoOverflow(data)),
             toResult("banned-gradient", ctx, evalBannedGradient(data.gradients)),
