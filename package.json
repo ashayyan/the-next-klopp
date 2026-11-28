@@ -31,7 +31,10 @@
     "smoke:dev": "node scripts/smoke.ts dev",
     "check:pitch": "node scripts/check-pitch-browser.ts",
     "verify:setup": "node scripts/verify-setup.ts all",
-    "prepare": "husky"
+    "prepare": "husky",
+    "tokens": "node scripts/design/build-tokens.ts",
+    "tokens:check": "node scripts/design/build-tokens.ts --check",
+    "palette": "node scripts/design/check-palette.ts"
   },
   "lint-staged": {
     "*.{ts,tsx,js,mjs,cjs,json,jsonc,css}": [

@@ -86,7 +86,7 @@
       },
       "control-border": {
         "$type": "color",
-        "$value": "#6A7770"
+        "$value": "#6B7871"
       },
       "danger": {
         "$type": "color",
