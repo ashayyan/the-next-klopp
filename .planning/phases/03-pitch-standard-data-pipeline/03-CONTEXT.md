@@ -119,3 +119,7 @@ The learner delegated every grey area to Claude for this autonomous run ("choose
 - ADR 0008 deny-manifest statsbomb globs are scoped to `public/**` and `dist/**` (not repo-wide).
 - Opta/Wyscout fixed landmarks are documented as "as implemented by kloppy 3.19.1".
 - CI gains a `pipeline` job (uv, setup-uv pinned by SHA) running pytest and the immutability check.
+
+## Post-verification decisions (2026-11-28, after 03-VERIFICATION.md)
+
+- WR-11 accepted: an artifact version whose bytes are unchanged but whose licence/attribution/shippable metadata changed is refused; publish a new version deliberately instead (immutability over convenience).
