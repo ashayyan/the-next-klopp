@@ -69,8 +69,8 @@ interface Blocks {
   heading: ReactNode;
   body: ReactNode;
   pitch: ReactNode;
-  toggle: (className: string) => ReactNode;
-  readout: ReactNode;
+  toggle: (className: string, optionClassName?: string) => ReactNode;
+  readout: (className: string) => ReactNode;
   legend: (columnsClassName: string) => ReactNode;
   source: ReactNode;
   cta: (className: string) => ReactNode;
@@ -100,7 +100,7 @@ function FloodlitLayout({ b }: { b: Blocks }) {
             <div className="order-4 md:order-3 xl:order-none">{b.pitch}</div>
             <div className="order-5 flex flex-col gap-4 md:order-4 md:flex-row md:items-center md:justify-between xl:order-none xl:flex-col xl:justify-start">
               {b.toggle("w-full md:w-auto")}
-              {b.readout}
+              {b.readout("")}
             </div>
           </div>
           <div className="contents xl:col-span-3 xl:flex xl:min-w-0 xl:flex-col xl:gap-6">
@@ -122,6 +122,122 @@ function FloodlitLayout({ b }: { b: Blocks }) {
     </>
   );
 }
+
+/** A yellow fill in `programme` carries a 2 px ink border in light, so its edge never relies on 1.4:1. */
+const INK_EDGE_LIGHT = "border-2 border-transparent in-data-[theme=light]:border-ink";
+const RULE = "border-ink [border-width:var(--border-rule)]";
+
+/**
+ * programme: a matchday programme spread. A 3 px ink rule under the top bar and under the
+ * masthead, then a 12-column 4/8 split: the "team sheet" block (step, toggle, readout in the yellow
+ * block, source, CTA) and the pitch printed in a 3 px ink frame with the legend in 3 columns.
+ * At 768 a 2-column grid puts the team sheet beside the readout block under the pitch; at 375 the
+ * readout block leads the pitch (04-UI-SPEC per-direction table).
+ */
+function ProgrammeLayout({ b }: { b: Blocks }) {
+  return (
+    <>
+      <header className="flex h-14 items-center border-ink border-b-[length:var(--border-rule)] px-4 md:px-6 xl:px-8">
+        {b.wordmark}
+      </header>
+      <main>
+        <div className="wrap flex flex-col gap-6 px-4 pt-4 pb-16 md:grid md:grid-cols-2 md:gap-x-6 md:px-6 md:pt-6 xl:grid-cols-12 xl:gap-x-8 xl:gap-y-8 xl:px-8">
+          <div className="order-1 flex flex-col gap-1 border-ink border-b-[length:var(--border-rule)] pb-4 md:col-span-2 xl:order-none xl:col-span-12">
+            {b.title}
+            {b.context}
+          </div>
+          <div className="contents xl:col-span-4 xl:flex xl:min-w-0 xl:flex-col xl:gap-6">
+            <div className="contents md:order-4 md:flex md:min-w-0 md:flex-col md:gap-4 xl:order-none">
+              <div
+                data-lesson-step
+                className="contents md:flex md:flex-col md:gap-2 [&>h2]:order-6 [&>p]:order-7 md:[&>*]:order-none"
+              >
+                {b.heading}
+                {b.body}
+              </div>
+              <div className="order-5 md:order-none">
+                {b.toggle(
+                  "w-full",
+                  "border-2 border-transparent in-data-[theme=light]:data-pressed:border-ink",
+                )}
+              </div>
+            </div>
+            <div className="order-3 md:order-5 md:self-start xl:order-none">
+              {b.readout(
+                `bg-surface-highlight px-4 py-3 text-surface-highlight-ink ${INK_EDGE_LIGHT}`,
+              )}
+            </div>
+            <div className="order-9 md:order-7 md:col-span-2 xl:order-none">{b.source}</div>
+            <div className="order-10 md:order-8 md:col-span-2 xl:order-none">
+              {b.cta(`w-full xl:w-auto ${INK_EDGE_LIGHT}`)}
+            </div>
+          </div>
+          <div className="contents xl:col-span-8 xl:flex xl:min-w-0 xl:flex-col xl:gap-6">
+            <div className={`order-4 md:order-3 md:col-span-2 xl:order-none ${RULE}`}>
+              {b.pitch}
+            </div>
+            <div className="order-8 md:order-6 md:col-span-2 xl:order-none">
+              {b.legend("grid-cols-1 md:grid-cols-2 xl:grid-cols-3")}
+            </div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}
+
+/**
+ * notebook: one raised sheet on a sage page. At 1440 the sheet holds the head, then a 720 px main
+ * column (step, pitch, toggle and readout) beside a 280 px margin (legend, source) with a quiet
+ * rule, and the CTA at the sheet's bottom right. At 768 the sheet fills the width; at 375 it is
+ * flush and the 35-word body leads the pitch: a "read, then see" direction.
+ */
+function NotebookLayout({ b }: { b: Blocks }) {
+  return (
+    <>
+      <header className="flex h-14 items-center px-4 md:px-6 xl:mx-auto xl:max-w-[1144px] xl:px-0">
+        {b.wordmark}
+      </header>
+      <main>
+        <div className="wrap md:px-6 md:pb-16 xl:px-8">
+          <div className="flex flex-col gap-6 bg-surface-raised px-4 pt-4 pb-8 md:rounded-lg md:p-8 md:[box-shadow:var(--shadow-sheet)] xl:mx-auto xl:max-w-[1144px] xl:p-12">
+            <div className="flex flex-col gap-1">
+              {b.title}
+              {b.context}
+            </div>
+            <div className="flex flex-col gap-6 xl:grid xl:grid-cols-[720px_280px] xl:gap-12">
+              <div className="flex min-w-0 flex-col gap-6">
+                <div data-lesson-step className="flex flex-col gap-2">
+                  {b.heading}
+                  {b.body}
+                </div>
+                {b.pitch}
+                <div className="flex flex-col gap-4 md:flex-row md:flex-wrap md:items-center md:justify-between">
+                  {b.toggle("w-full md:w-auto")}
+                  {b.readout("")}
+                </div>
+              </div>
+              <aside
+                aria-label="Margin"
+                className="flex min-w-0 flex-col gap-6 xl:border-control-border xl:border-l xl:pl-6"
+              >
+                {b.legend("grid-cols-1 md:grid-cols-2 xl:grid-cols-1")}
+                {b.source}
+              </aside>
+            </div>
+            <div className="flex xl:justify-end">{b.cta("w-full xl:w-auto")}</div>
+          </div>
+        </div>
+      </main>
+    </>
+  );
+}
+
+const LAYOUTS = {
+  floodlit: FloodlitLayout,
+  programme: ProgrammeLayout,
+  notebook: NotebookLayout,
+} as const;
 
 export function TacticsScreen({ direction }: { direction: Direction }) {
   const [params] = useSearchParams();
@@ -151,17 +267,18 @@ export function TacticsScreen({ direction }: { direction: Direction }) {
         </Pitch>
       </div>
     ),
-    toggle: (className) => (
+    toggle: (className, optionClassName) => (
       <Segmented
         label="Possession"
         options={POSSESSION_OPTIONS}
         value={shape}
         onValueChange={setShape}
         className={className}
+        optionClassName={optionClassName}
       />
     ),
-    readout: (
-      <p data-readout="shape" className={`${DISPLAY} text-heading`}>
+    readout: (className) => (
+      <p data-readout="shape" className={`${DISPLAY} text-heading ${className}`}>
         Shape now: <span className="font-mono font-semibold tabular-nums">{current.formation}</span>
       </p>
     ),
@@ -176,9 +293,11 @@ export function TacticsScreen({ direction }: { direction: Direction }) {
     ),
   };
 
+  const Layout = LAYOUTS[direction.id];
+
   return (
     <DirectionScope direction={direction}>
-      <FloodlitLayout b={blocks} />
+      <Layout b={blocks} />
     </DirectionScope>
   );
 }
