@@ -76,7 +76,7 @@ function PrimitiveList({ current, counts }: { current?: string; counts: boolean 
                   {p.label}
                 </Link>
                 {counts ? (
-                  <span className="text-label text-ink-muted">{`${p.states.length} states`}</span>
+                  <span className="text-label text-ink-muted">{`${p.states.length} ${p.states.length === 1 ? "state" : "states"}`}</span>
                 ) : null}
               </li>
             ))}

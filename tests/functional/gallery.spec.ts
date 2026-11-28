@@ -133,6 +133,12 @@ test.describe("index, fallbacks and foundations", () => {
       await expect(page.getByRole("heading", { name: group })).toBeVisible();
     }
     await expect(page.getByRole("link", { name: "Colour" })).toBeVisible();
+    // A primitive with one state says "1 state", never "1 states".
+    const tooltip = page.getByRole("listitem").filter({
+      has: page.getByRole("link", { name: "Tooltip", exact: true }),
+    });
+    await expect(tooltip).toContainText("1 state");
+    await expect(page.getByText(/^1 states$/)).toHaveCount(0);
   });
 
   test("an unknown primitive and an unknown state explain themselves", async ({ page }) => {
