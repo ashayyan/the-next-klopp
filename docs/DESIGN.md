@@ -880,8 +880,8 @@ The registry (`src/pitch/glyphs/registry.ts`) is the learner's notation vocabula
 
 | Id | Legend label | Meaning and encoding |
 |----|--------------|----------------------|
-| `player-a` | Team A player | Filled disc in `--team-a` with the shirt number in `--team-a-ink`, and a 2 px surface-coloured outer ring that separates overlapping discs |
-| `player-b` | Team B player | Ring disc: `--team-b-fill` inside a 3 px `--team-b` ring, number in `--team-b-ink` |
+| `player-a` | Team A player | Filled disc in `--team-a` with its text (shirt number, position code or initials) in `--team-a-ink`, and a 2 px surface-coloured outer ring that separates overlapping discs |
+| `player-b` | Team B player | Ring disc: `--team-b-fill` inside a 3 px `--team-b` ring, text in `--team-b-ink` |
 | `goalkeeper-a` | Goalkeeper (team A) | Rounded square instead of a disc, team A fill rules |
 | `goalkeeper-b` | Goalkeeper (team B) | Rounded square instead of a disc, team B ring rules |
 | `ball` | Ball | Small circle, `--ball-fill` with a 2 px `--ball-ring`, drawn above players and offset toward the attacking direction when a player has it |
@@ -898,7 +898,7 @@ The registry (`src/pitch/glyphs/registry.ts`) is the learner's notation vocabula
 | `density` | Event location (Canvas) | One 3 px dot per event in `--density-mark`, drawn on the Canvas layer |
 | `sequence-badge` | Sequence order | The number of each action in a possession chain, 12 px on a 16 px circle with an ink ring |
 
-Event glyphs follow the clock: an event appears once `t` reaches its time, the current event is at full opacity and earlier ones at 0.4. Discs carry the shirt number, as the legend says; a screen that shows position codes instead (GK, CB, ST) must say so in its legend description.
+Event glyphs follow the clock: an event appears once `t` reaches its time, the current event is at full opacity and earlier ones at 0.4. A disc carries the shirt number, else the entity's label. The legend description names which one the scene shows, read from the scene data, never typed by hand (`discTextKinds` in `src/pitch/legend/glyphIds.ts`): a number is a "shirt number", a label on an entity with a `role` is a "position code" (GK, CB, ST on the City shapes), a label on a named entity without a role is "player initials" (EM, KD, LS on the Wyscout goal), and any other label is a "short label". A side that mixes kinds lists them joined by "or".
 
 ### Sizing
 

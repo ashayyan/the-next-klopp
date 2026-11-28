@@ -1,7 +1,7 @@
 import { useId, useState } from "react";
 import type { Scene } from "../../scene/schema.ts";
 import { GLYPHS, type GlyphEntry, type GlyphId } from "../glyphs/registry.ts";
-import { glyphIdsForScene } from "./glyphIds.ts";
+import { describeDiscText, glyphIdsForScene } from "./glyphIds.ts";
 
 export interface LegendProps {
   /** The scene on the pitch, or null for a pitch with no scene. */
@@ -26,6 +26,11 @@ function labelFor(entry: GlyphEntry, scene: Scene | null): string {
   const team = scene?.teams.find((t) => t.side === side);
   // Without a team name the dash and the placeholder go, so no brace ever reaches the screen.
   return team ? entry.label.replace("{team}", team.name) : entry.label.replace(" — {team}", "");
+}
+
+/** The registry description with the disc text the scene actually shows (DESIGN.md section 4). */
+function descriptionFor(entry: GlyphEntry, scene: Scene | null): string {
+  return describeDiscText(entry.description, scene, entry.id.endsWith("-b") ? "b" : "a");
 }
 
 /**
@@ -95,7 +100,7 @@ export function Legend({
                 <span className="min-w-0">
                   <span className="text-ink">{labelFor(entry, scene)}</span>
                   {expanded ? (
-                    <span className="block text-ink-muted">{entry.description}</span>
+                    <span className="block text-ink-muted">{descriptionFor(entry, scene)}</span>
                   ) : null}
                 </span>
               </li>

@@ -157,6 +157,22 @@ test.describe("lesson chrome", () => {
   });
 });
 
+// 04-UI-REVIEW fix 2: the legend description names what the discs show, from the scene data.
+test("the legend says position code on the tactics screen and player initials on the data screen", async ({
+  page,
+}) => {
+  await page.goto("/dev/directions/floodlit/tactics");
+  await expect(page.locator('[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+  const legend = page.locator("[data-legend]");
+  await expect(legend).toContainText("Filled disc with position code.");
+  await expect(legend).not.toContainText("shirt number");
+
+  await page.goto("/dev/directions/floodlit/data");
+  await expect(page.locator('div[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+  await expect(legend).toContainText("Filled disc with player initials.");
+  await expect(legend).not.toContainText("shirt number");
+});
+
 test.describe("data screen", () => {
   test.use({ viewport: { width: 1440, height: 900 } });
 
