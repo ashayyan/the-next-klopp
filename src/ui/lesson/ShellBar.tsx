@@ -20,16 +20,19 @@ export interface FocusToggleProps {
 export function FocusToggle({ checked, onCheckedChange, state }: FocusToggleProps) {
   return (
     <Switch
-      // Narrow screens show "Focus" and keep "mode" for assistive tech, so the bar fits at 320 px
-      // and the visible text stays inside the accessible name "Focus mode".
+      // Below 768 px the switch shows "Focus" and keeps "mode" for assistive tech (the visible text
+      // stays inside the accessible name "Focus mode"); below 375 px only the track shows, so the
+      // bar fits at 320 px.
       label={
         <>
-          Focus<span className="max-md:sr-only"> mode</span>
+          <span className="max-[374px]:sr-only">Focus</span>
+          <span className="max-md:sr-only"> mode</span>
         </>
       }
       checked={checked}
       onCheckedChange={onCheckedChange}
       state={state}
+      className="shrink-0 max-md:px-1"
     />
   );
 }
@@ -73,10 +76,12 @@ export function ShellBar({
       data-state={state}
       className={`flex h-14 items-center justify-between gap-2${className ? ` ${className}` : ""}`}
     >
-      <span className={`whitespace-nowrap text-label md:text-heading ${wordmarkClassName ?? ""}`}>
+      <span
+        className={`whitespace-nowrap text-label max-[374px]:whitespace-normal max-[374px]:leading-tight md:text-heading ${wordmarkClassName ?? ""}`}
+      >
         The Next Klopp
       </span>
-      <div className="flex min-w-0 items-center gap-2">
+      <div className="flex shrink-0 items-center gap-3 [&>*]:shrink-0">
         {focus ? null : (
           <span
             data-lesson-time

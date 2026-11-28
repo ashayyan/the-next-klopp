@@ -9,6 +9,8 @@ import { autoOrientation } from "../../pitch/view.ts";
 import type { Scene, ScenePoint } from "../../scene/schema.ts";
 import { parseScene } from "../../scene/validate.ts";
 import { Button } from "../../ui/Button.tsx";
+import { ConfusionButton } from "../../ui/lesson/ConfusionButton.tsx";
+import { GlossaryTerm } from "../../ui/lesson/GlossaryCard.tsx";
 import { StepRail, type StepRailForms } from "../../ui/lesson/StepRail.tsx";
 import { Segmented } from "../../ui/Segmented.tsx";
 import { type Direction, DirectionScope, DirectionShellBar } from "./DirectionScope.tsx";
@@ -71,6 +73,30 @@ const LINES: Readonly<Record<string, Line>> = Object.fromEntries(
 
 function framePositions(state: ShapeState): Readonly<Record<string, ScenePoint>> {
   return CITY.frames[SHAPES[state].frame]?.positions ?? {};
+}
+
+/** Copywriting Contract glossary definitions. */
+const GLOSSARY = {
+  "4-4-2":
+    "Four defenders, four midfielders and two forwards, counted from the back. The goalkeeper is not counted.",
+  "3-2-4-1": "Three at the back, two in front of them, four further up, one striker.",
+  "centre-back": "A defender who plays in the middle of the back line.",
+} as const;
+
+/**
+ * A 240 px static pitch of one frame for a formation card. No legend inside the card: the page
+ * legend sits next to the body that opens it.
+ */
+function MiniPitch({ shape }: { shape: ShapeState }) {
+  const s = SHAPES[shape];
+  return (
+    <Pitch
+      title={`Manchester City ${s.formation}, ${shape === "with" ? "with" : "without"} the ball`}
+      initialCssWidth={240}
+    >
+      <SceneLayer scene={CITY} t={s.t} mode="stepped" />
+    </Pitch>
+  );
 }
 
 /** `?state=with` opens the in-possession frame; anything else opens without the ball. */
@@ -348,6 +374,7 @@ export function TacticsScreen({ direction }: { direction: Direction }) {
   const blocks: Blocks = {
     shell: (className) => (
       <DirectionShellBar
+        confusion={<ConfusionButton headingClassName={`${DISPLAY} text-heading`} />}
         minutes={6}
         focus={focus}
         onFocusChange={setFocus}
@@ -362,10 +389,33 @@ export function TacticsScreen({ direction }: { direction: Direction }) {
     heading: <h2 className={`${DISPLAY} text-heading`}>Flip the shape</h2>,
     body: (
       <p className="max-w-[65ch] text-body">
-        Without the ball, City defended as a <span className="whitespace-nowrap">4-4-2</span>. With
-        it, John Stones stepped up from <span className="whitespace-nowrap">centre-back</span> into
-        midfield and the shape became a <span className="whitespace-nowrap">3-2-4-1</span>. Flip the
-        switch and watch who moves.
+        Without the ball, City defended as a{" "}
+        <GlossaryTerm
+          term="4-4-2"
+          definition={GLOSSARY["4-4-2"]}
+          titleClassName={`${DISPLAY} text-heading`}
+          visual={<MiniPitch shape="without" />}
+        >
+          4-4-2
+        </GlossaryTerm>
+        . With it, John Stones stepped up from{" "}
+        <GlossaryTerm
+          term="Centre-back"
+          definition={GLOSSARY["centre-back"]}
+          titleClassName={`${DISPLAY} text-heading`}
+        >
+          centre-back
+        </GlossaryTerm>{" "}
+        into midfield and the shape became a{" "}
+        <GlossaryTerm
+          term="3-2-4-1"
+          definition={GLOSSARY["3-2-4-1"]}
+          titleClassName={`${DISPLAY} text-heading`}
+          visual={<MiniPitch shape="with" />}
+        >
+          3-2-4-1
+        </GlossaryTerm>
+        . Flip the switch and watch who moves.
       </p>
     ),
     pitch: (

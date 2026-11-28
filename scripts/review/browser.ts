@@ -275,7 +275,15 @@ function collectPage(): PageData {
     selector: selectorOf(el),
     text: textOf(el),
     box: hitBox(el),
-    runningText: el.tagName === "A" && el.closest("p, li") !== null,
+    // A link, or a button laid out inline (a glossary term), inside a sentence: the inline
+    // exception of WCAG 2.5.8 applies, so it is not held to 44 px.
+    runningText:
+      (el.tagName === "A" ||
+        // Chrome computes a <button> set to `display: inline` as inline-block.
+        (el.tagName === "BUTTON" &&
+          el.closest("p") !== null &&
+          /^inline(-block)?$/.test(getComputedStyle(el).display))) &&
+      el.closest("p, li") !== null,
   }));
   const controls: PageData["controls"] = controlEls.map((el) => {
     const labelledBy = (el.getAttribute("aria-labelledby") ?? "")

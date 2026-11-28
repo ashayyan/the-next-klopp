@@ -64,6 +64,97 @@ for (const id of DIRECTIONS) {
   });
 }
 
+test.describe("lesson chrome", () => {
+  for (const id of DIRECTIONS) {
+    test(`${id} has one current step and focus mode keeps only the step`, async ({ page }) => {
+      await page.goto(`/dev/directions/${id}/tactics`);
+      await expect(page.locator(`[data-direction="${id}"][data-ready="1"]`)).toBeVisible();
+      await expect(page.locator('[aria-current="step"]')).toHaveCount(1);
+
+      await page.goto(`/dev/directions/${id}/tactics?focus=1`);
+      await expect(page.locator(`[data-direction="${id}"][data-ready="1"]`)).toBeVisible();
+      await expect(page.locator("[data-step-rail]")).toHaveCount(0);
+      await expect(page.getByText(/^Source: The Analyst/)).toHaveCount(0);
+      await expect(page.locator("[data-legend]")).toBeVisible();
+      await expect(page.getByRole("switch", { name: "Focus mode" })).toBeVisible();
+      await expect(page.getByRole("button", { name: "Continue to Predict" })).toBeVisible();
+    });
+  }
+
+  test("the theme menu switches floodlit to light and the choice survives a reload", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/dev/directions/floodlit/tactics");
+    const root = page.locator('div[data-direction="floodlit"]');
+    await expect(root).toHaveAttribute("data-theme", "dark");
+    await page.getByRole("button", { name: "Theme" }).click();
+    await page.getByRole("menuitemradio", { name: "Light" }).click();
+    await expect(root).toHaveAttribute("data-theme", "light");
+    expect(await page.evaluate(() => localStorage.getItem("tnk:theme"))).toBe("light");
+    await page.reload();
+    await expect(page.locator('div[data-direction="floodlit"]')).toHaveAttribute(
+      "data-theme",
+      "light",
+    );
+  });
+
+  test("a blocked localStorage falls back without a console error", async ({ page }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(String(e)));
+    page.on("console", (m) => {
+      if (m.type() === "error" && !m.text().includes("Failed to load resource"))
+        errors.push(m.text());
+    });
+    await page.addInitScript(() => {
+      Object.defineProperty(window, "localStorage", {
+        get() {
+          throw new Error("SecurityError: storage is blocked");
+        },
+      });
+    });
+    await page.goto("/dev/directions/programme/tactics");
+    await expect(page.locator('[data-direction="programme"][data-ready="1"]')).toBeVisible();
+    await expect(page.locator('div[data-direction="programme"]')).toHaveAttribute(
+      "data-theme",
+      "light",
+    );
+    expect(errors).toEqual([]);
+  });
+
+  test("Save note stores nothing and closes the popover", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/dev/directions/notebook/tactics");
+    await expect(page.locator('[data-direction="notebook"][data-ready="1"]')).toBeVisible();
+    const keysBefore = await page.evaluate(() => Object.keys(localStorage).sort());
+    await page.getByRole("button", { name: "I'm confused here" }).click();
+    await expect(page.getByRole("heading", { name: "What's confusing here?" })).toBeVisible();
+    await expect(
+      page.getByText(
+        "In this preview the note is not stored. Saving arrives with the progress system.",
+      ),
+    ).toBeVisible();
+    await page.getByLabel("Note (optional)").fill("Why does Stones move and not the DM?");
+    await page.getByRole("button", { name: "Save note" }).click();
+    await expect(page.getByRole("heading", { name: "What's confusing here?" })).toHaveCount(0);
+    expect(await page.evaluate(() => Object.keys(localStorage).sort())).toEqual(keysBefore);
+  });
+
+  test("the 4-4-2 term opens its glossary card", async ({ page }) => {
+    await page.goto("/dev/directions/floodlit/tactics");
+    await expect(page.locator('[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+    await page.getByRole("button", { name: "4-4-2" }).click();
+    const card = page.locator("[data-glossary-card]");
+    await expect(card).toContainText(
+      "Four defenders, four midfielders and two forwards, counted from the back. The goalkeeper is not counted.",
+    );
+    await expect(card.locator('[role="img"]')).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(card).toHaveCount(0);
+    await expect(page.getByRole("button", { name: "4-4-2" })).toBeFocused();
+  });
+});
+
 test("an unknown direction shows the fallback with links to the three directions", async ({
   page,
 }) => {
