@@ -36,7 +36,18 @@ body {
 }
 
 /* State-forcing variants: the gallery shows hover, focus and pressed states statically. */
-@custom-variant hov (&:is(:hover, [data-state~="hover"]));
+/* Real hover only where the device can hover (as Tailwind's own hover: does), so a tapped control
+   on a touch screen does not keep its hover fill; the forced gallery look applies everywhere. */
+@custom-variant hov {
+  @media (hover: hover) {
+    &:hover {
+      @slot;
+    }
+  }
+  &[data-state~="hover"] {
+    @slot;
+  }
+}
 @custom-variant fv (&:is(:focus-visible, [data-state~="focus-visible"]));
 @custom-variant act (&:is(:active, [data-state~="pressed"]));
 
