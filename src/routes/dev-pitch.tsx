@@ -1,12 +1,22 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link } from "react-router";
+import { SceneLayer } from "../pitch/glyphs/SceneLayer.tsx";
+import { describeScene } from "../pitch/legend/glyphIds.ts";
+import { Legend } from "../pitch/legend/Legend.tsx";
 import { Pitch } from "../pitch/Pitch.tsx";
 import { autoOrientation, type Orientation } from "../pitch/view.ts";
+import { DEV_SCENES, findDevScene } from "../scene/fixtures/index.ts";
+import type { Scene } from "../scene/schema.ts";
+import { parseScene, type SceneIssue } from "../scene/validate.ts";
 
 // Dev-only page (registered inside the includeDev && import.meta.env.DEV branch of buildRoutes).
 // The subline text below is the marker scripts/smoke.ts looks for in the study build.
 
-const SCENES = [{ id: "pitch-only", label: "Pitch only" }] as const;
+type SceneState =
+  | { status: "none" }
+  | { status: "loading" }
+  | { status: "ready"; scene: Scene }
+  | { status: "invalid"; issues: SceneIssue[] };
 
 const PITCH_SIZES = [
   { id: "105x68", length: 105, width: 68, label: "105 × 68 m (Premier League standard)" },
@@ -53,9 +63,35 @@ export default function DevPitchPage() {
     return () => observer.disconnect();
   }, []);
 
-  const sceneLabel = SCENES.find((s) => s.id === scene)?.label ?? "Pitch only";
+  const devScene = findDevScene(scene) ?? DEV_SCENES[0];
+  const [state, setState] = useState<SceneState>({ status: "none" });
+  useEffect(() => {
+    const pending = devScene?.load();
+    if (!pending) {
+      setState({ status: "none" });
+      return;
+    }
+    let cancelled = false;
+    setState({ status: "loading" });
+    pending.then((raw) => {
+      if (cancelled) return;
+      const parsed = parseScene(raw);
+      setState(
+        parsed.ok
+          ? { status: "ready", scene: parsed.scene }
+          : { status: "invalid", issues: parsed.issues },
+      );
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [devScene]);
+
+  const loaded = state.status === "ready" ? state.scene : null;
+  const sceneLabel = loaded?.label ?? devScene?.label ?? "Pitch only";
   const size = PITCH_SIZES.find((s) => s.id === sizeKey) ?? PITCH_SIZES[0];
-  const { length, width } = size;
+  const length = loaded?.pitch.length ?? size.length;
+  const width = loaded?.pitch.width ?? size.width;
   const orientation: Orientation = choice === "auto" ? autoOrientation(stageWidth) : choice;
   const onPitch =
     pointer !== null &&
@@ -91,7 +127,7 @@ export default function DevPitchPage() {
             value={scene}
             onChange={(e) => setScene(e.target.value)}
           >
-            {SCENES.map((s) => (
+            {DEV_SCENES.map((s) => (
               <option key={s.id} value={s.id}>
                 {s.label}
               </option>
@@ -148,14 +184,18 @@ export default function DevPitchPage() {
         <section ref={stageRef} aria-label="Pitch stage" data-stage className="min-w-0">
           <Pitch
             title={sceneLabel}
+            desc={loaded ? describeScene(loaded) : undefined}
             length={length}
             width={width}
             orientation={orientation}
             onPointerCanonical={setPointer}
-          />
+          >
+            {loaded ? <SceneLayer scene={loaded} t={0} mode="smooth" /> : null}
+          </Pitch>
         </section>
 
         <aside className="flex min-w-0 flex-col gap-4 md:gap-6">
+          <Legend scene={loaded} density={false} />
           <section aria-labelledby={inspectorId} className="bg-surface-panel p-4">
             <h2 id={inspectorId} className="text-base leading-tight font-semibold">
               Scene
