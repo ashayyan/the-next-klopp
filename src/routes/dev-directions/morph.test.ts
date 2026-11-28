@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { Scene, SceneAnnotation } from "../../scene/schema.ts";
 import { parseScene } from "../../scene/validate.ts";
+import { cubicBezier, lineOf, morphPositions } from "./morph.ts";
 import raw from "./scenes/city-2022-23-shapes.json";
 
 const ROLE_CODES = new Set(["GK", "RB", "CB", "LB", "DM", "CM", "RW", "LW", "ST"]);
@@ -112,5 +113,70 @@ describe("City 2022/23 shapes scene", () => {
     expect(source.sourceIds).toEqual(["src-theanalyst-stones-hybrid-role"]);
     expect(source.attribution).toMatch(/illustrative/);
     expect(source.shippable).toBe(true);
+  });
+});
+
+describe("cubicBezier", () => {
+  it("maps 0 to 0, 1 to 1 and 0.5 to 0.5 for a symmetric curve", () => {
+    const ease = cubicBezier(0.65, 0, 0.35, 1);
+    expect(ease(0)).toBeCloseTo(0, 3);
+    expect(ease(1)).toBeCloseTo(1, 3);
+    expect(ease(0.5)).toBeCloseTo(0.5, 3);
+  });
+
+  it("is monotone on 10 samples", () => {
+    const ease = cubicBezier(0.65, 0, 0.35, 1);
+    const samples = Array.from({ length: 10 }, (_, i) => ease(i / 9));
+    for (let i = 1; i < samples.length; i += 1) {
+      expect(samples[i] as number).toBeGreaterThanOrEqual(samples[i - 1] as number);
+    }
+    expect(samples[3] as number).toBeLessThan(1 / 3);
+  });
+});
+
+describe("lineOf", () => {
+  it("puts GK in 0, RB CB LB in 1, DM CM in 2 and RW LW ST in 3", () => {
+    const byLabel = (label: string) => lineOf({ id: "x", type: "player", label });
+    expect(lineOf({ id: "gk", type: "goalkeeper", label: "GK" })).toBe(0);
+    expect(["RB", "CB", "LB"].map(byLabel)).toEqual([1, 1, 1]);
+    expect(["DM", "CM"].map(byLabel)).toEqual([2, 2]);
+    expect(["RW", "LW", "ST"].map(byLabel)).toEqual([3, 3, 3]);
+  });
+});
+
+describe("morphPositions", () => {
+  const scene = city();
+  const from = scene.frames[0]?.positions ?? {};
+  const to = scene.frames[1]?.positions ?? {};
+  const lines = Object.fromEntries(scene.entities.map((e) => [e.id, lineOf(e)]));
+  const ease = cubicBezier(0.65, 0, 0.35, 1);
+  const run = (elapsedMs: number, staggerMs: number) =>
+    morphPositions({ from, to, lines, elapsedMs, durationMs: 640, staggerMs, ease });
+
+  it("returns frame 0 at elapsed 0 and frame 1 once every line has finished", () => {
+    const start = run(0, 60);
+    const end = run(640 + 3 * 60, 60);
+    for (const id of Object.keys(to)) {
+      expect(start.get(id)).toEqual(from[id]);
+      expect(end.get(id)?.x).toBeCloseTo(to[id]?.x ?? Number.NaN, 6);
+      expect(end.get(id)?.y).toBeCloseTo(to[id]?.y ?? Number.NaN, 6);
+    }
+  });
+
+  it("starts the back line first: at 60 ms with a 60 ms stagger the forwards have not moved", () => {
+    const at = run(60, 60);
+    expect(at.get("city-stones")).not.toEqual(from["city-stones"]);
+    expect(at.get("city-gk")).not.toEqual(from["city-gk"]);
+    expect(at.get("city-st")).toEqual(from["city-st"]);
+    expect(at.get("city-rw")).toEqual(from["city-rw"]);
+  });
+
+  it("moves every line together with a 0 ms stagger (programme)", () => {
+    const at = run(60, 0);
+    for (const id of Object.keys(to)) {
+      if (from[id]?.x === to[id]?.x && from[id]?.y === to[id]?.y) continue;
+      expect(at.get(id), id).toBeDefined();
+      expect(at.get(id), id).not.toEqual(from[id]);
+    }
   });
 });
