@@ -6,7 +6,8 @@ export interface BuildRoutesOptions {
 }
 
 // URL surface: `/`, `/dev`, `/dev/pitch`, `/dev/review-fixture`, `/dev/directions` and
-// `/dev/directions/:id/:screen` (dev only) and the catch-all not-found route.
+// `/dev/directions/:id/:screen`, `/dev/gallery` and `/dev/gallery/:primitiveId` (dev only) and the
+// catch-all not-found route.
 // `/learn/:trackId/:chapterId/:lessonId`, `/review` and `/whats-new` arrive with their phases.
 export function buildRoutes({ includeDev }: BuildRoutesOptions): RouteObject[] {
   const routes: RouteObject[] = [
@@ -38,7 +39,7 @@ export function buildRoutes({ includeDev }: BuildRoutesOptions): RouteObject[] {
         Component: (await import("./routes/dev-review-fixture.tsx")).default,
       }),
     });
-    // Visual directions (04-UI-SPEC): removed when the picked direction becomes DESIGN.md (04-13).
+    // The picked direction's two reference screens (ADR 0010); the other two live in git history.
     routes.push({
       path: "/dev/directions",
       lazy: async () => ({
@@ -49,6 +50,19 @@ export function buildRoutes({ includeDev }: BuildRoutesOptions): RouteObject[] {
       path: "/dev/directions/:id/:screen",
       lazy: async () => ({
         Component: (await import("./routes/dev-directions.tsx")).DirectionScreen,
+      }),
+    });
+    // Component gallery (DSGN-04): every primitive and interaction with its states, at 3 widths.
+    routes.push({
+      path: "/dev/gallery",
+      lazy: async () => ({
+        Component: (await import("./routes/dev-gallery.tsx")).GalleryIndex,
+      }),
+    });
+    routes.push({
+      path: "/dev/gallery/:primitiveId",
+      lazy: async () => ({
+        Component: (await import("./routes/dev-gallery.tsx")).GalleryPrimitive,
       }),
     });
   }

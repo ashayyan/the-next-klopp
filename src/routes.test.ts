@@ -11,6 +11,8 @@ describe("buildRoutes", () => {
       "/dev/review-fixture",
       "/dev/directions",
       "/dev/directions/:id/:screen",
+      "/dev/gallery",
+      "/dev/gallery/:primitiveId",
       "*",
     ]);
   });

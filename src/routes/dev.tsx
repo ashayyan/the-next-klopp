@@ -18,6 +18,11 @@ export default function DevPage() {
             Visual directions
           </Link>
         </li>
+        <li>
+          <Link to="/dev/gallery" className="underline">
+            Component gallery
+          </Link>
+        </li>
       </ul>
       <p className="mt-4">
         <Link to="/" className="underline">

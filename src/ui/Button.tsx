@@ -10,7 +10,32 @@ export interface ButtonProps extends Omit<ComponentProps<typeof BaseButton>, "cl
    * `data-state`, which the `hov:`, `fv:` and `act:` variants match like the real states.
    */
   state?: string;
+  /**
+   * Work in progress: the label stays, `aria-busy` is set, a static three-dot mark follows it and the
+   * button ignores presses (it stays focusable, so a keyboard user does not lose their place).
+   */
+  loading?: boolean;
   className?: string;
+}
+
+/** Three static dots (no animation, so a screenshot is deterministic and reduced motion is honoured). */
+function LoadingMark() {
+  return (
+    <svg
+      width="20"
+      height="4"
+      viewBox="0 0 20 4"
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+      data-loading-mark
+      className="shrink-0"
+    >
+      <circle cx="2" cy="2" r="2" />
+      <circle cx="10" cy="2" r="2" />
+      <circle cx="18" cy="2" r="2" />
+    </svg>
+  );
 }
 
 /** Shared by every control: 44 px target, 2 px focus ring with a 2 px gap, motion on opacity and transform only. */
@@ -27,15 +52,32 @@ const VARIANTS: Record<ButtonVariant, string> = {
 };
 
 /** Primary, quiet and icon-only buttons on Base UI. An icon-only button needs `aria-label`. */
-export function Button({ variant = "primary", state, className, type, ...props }: ButtonProps) {
+export function Button({
+  variant = "primary",
+  state,
+  loading = false,
+  disabled,
+  className,
+  type,
+  children,
+  onClick,
+  ...props
+}: ButtonProps) {
   return (
     <BaseButton
       type={type ?? "button"}
       data-state={state}
       data-variant={variant}
       data-fill-edge={variant === "primary" ? "always" : undefined}
+      aria-busy={loading ? true : undefined}
+      focusableWhenDisabled={loading ? true : undefined}
+      disabled={disabled || loading || undefined}
       className={`${CONTROL_BASE} ${VARIANTS[variant]}${className ? ` ${className}` : ""}`}
+      onClick={loading ? undefined : onClick}
       {...props}
-    />
+    >
+      {loading && variant === "icon" ? null : children}
+      {loading ? <LoadingMark /> : null}
+    </BaseButton>
   );
 }
