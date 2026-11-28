@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 4
 current_phase_name: Design Direction & System
 status: executing
-stopped_at: Completed 04-08-PLAN.md
-last_updated: "2026-11-28T07:20:15.540Z"
+stopped_at: Completed 04-09-PLAN.md
+last_updated: "2026-11-28T07:40:32.440Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 execution started
-state_head: d3c18af4702cdbf9cac287143292cb82fdc81811
+state_head: "0bb23e4c4a4ca109b75733da91d0bf1224186ba4"
 progress:
   total_phases: 8
   completed_phases: 3
   total_plans: 58
-  completed_plans: 49
+  completed_plans: 50
   percent: 38
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 4 (Design Direction & System) — EXECUTING
-Plan: 9 of 17
+Plan: 10 of 17
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 4 execution started
 
@@ -96,6 +96,7 @@ Progress: [████░░░░░░] 38%
 | Phase 4 P06 | 52min | 3 tasks | 7 files |
 | Phase 4 P07 | 30min | 3 tasks | 16 files |
 | Phase 4 P08 | 35min | 3 tasks | 18 files |
+| Phase 4 P09 | 35min | 3 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -160,6 +161,8 @@ Recent decisions affecting current work:
 - [Phase 4]: 04-07: the formation morph is state = f(elapsed) in one rAF loop; readout, title and live region change at its end
 - [Phase 4]: 04-08: ShellBar builds both theme menus from theme/onThemeChange; choosing a theme drops ?theme= so the choice shows
 - [Phase 4]: 04-08: data-fill-edge plus one directions.css rule draws programme-light yellow fills with an ink edge, including portalled popups
+- [Phase 4]: 04-09: data-screen numbers come only from deriveGoal, tested against the published scene; the 1–5 note sums the rounded table values
+- [Phase 4]: 04-09: review collector measures a control through its label only for a wrapped checkbox or radio (fixes the 20 px select false positive)
 
 ### Pending Todos
 
@@ -187,6 +190,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T07:20:15.059Z
-Stopped at: Completed 04-08-PLAN.md
+Last session: 2026-11-28T07:40:31.823Z
+Stopped at: Completed 04-09-PLAN.md
 Resume file: None

@@ -166,7 +166,7 @@ Plans:
   3. Design tokens are generated from DESIGN.md and drive the Tailwind theme: changing a token and regenerating visibly changes the app and the pitch.
   4. A dev gallery (`/dev/gallery`) shows every primitive and interaction at 3 widths, and visual baselines are generated only by CI on Linux, never overwritten by a local run.
   5. A screenshot-review command captures any screen at 3 widths and runs the taste-skill review against DESIGN.md, producing a pass/fail report.
-**Plans**: 8/17 plans executed in 15 waves
+**Plans**: 9/17 plans executed in 15 waves
 
 Plans:
 **Wave 1**
@@ -192,7 +192,7 @@ Plans:
 - [x] 04-08-PLAN.md — Lesson chrome: shell bar, step rail, focus mode, theme menu, confusion and glossary popovers (wave 7)
 
 **Wave 8** *(blocked on Wave 7 completion)*
-- [ ] 04-09-PLAN.md — Data screen in three directions, derived values, linked chart and table, six clean reviews (wave 8)
+- [x] 04-09-PLAN.md — Data screen in three directions, derived values, linked chart and table, six clean reviews (wave 8)
 
 **Wave 9** *(blocked on Wave 8 completion)*
 - [ ] 04-10-PLAN.md — Independent pick by a fresh Opus reviewer, ADR 0010, learner follow-up (wave 9)
@@ -290,7 +290,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 | 1. Setup & Contracts | 9/9 | Complete    | 2026-11-28 |
 | 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
 | 3. Pitch Standard & Data Pipeline | 11/11 | Complete    | 2026-11-28 |
-| 4. Design Direction & System | 8/17 | In Progress | - |
+| 4. Design Direction & System | 9/17 | In Progress | - |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |
 | 6. Learner Experience & Progress | 0/TBD | Not started | - |
 | 7. Golden Lesson & Track 0 | 0/TBD | Not started | - |

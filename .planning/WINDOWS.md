@@ -1,10 +1,10 @@
 ---
 schema_version: 1
-open_count: 1
+open_count: 0
 waived_count: 1
-fixed_count: 1
+fixed_count: 2
 total_count: 3
-last_updated: 2026-11-28T07:19:28.917Z
+last_updated: 2026-11-28T07:40:26.825Z
 ---
 
 # Broken Windows Ledger
@@ -15,7 +15,7 @@ last_updated: 2026-11-28T07:19:28.917Z
 
 | id | phase | kind | file | line | description | status | reason | recorded_at | resolved_at |
 |----|-------|------|------|------|-------------|--------|--------|-------------|-------------|
-| 1 | 4 | stub | src/routes/dev-directions.tsx |  | Data screen route shows 'not built yet' until 04-09 | open |  | 2026-11-28T06:55:50.585Z |  |
+| 1 | 4 | stub | src/routes/dev-directions.tsx |  | Data screen route shows 'not built yet' until 04-09 | fixed |  | 2026-11-28T06:55:50.585Z | 2026-11-28T07:40:26.825Z |
 | 2 | 4 | stub | src/routes/dev-directions/TacticsScreen.tsx |  | Step rail column and programme step strip slot empty until 04-08 | fixed |  | 2026-11-28T06:55:51.273Z | 2026-11-28T07:19:28.917Z |
 | 3 | 4 | stub | src/routes/dev-directions.tsx |  | x | waived | Recorded by mistake while checking the ledger output; duplicate of entry 1 | 2026-11-28T06:55:56.796Z | 2026-11-28T06:56:07.648Z |
 
@@ -28,10 +28,10 @@ last_updated: 2026-11-28T07:19:28.917Z
     "file": "src/routes/dev-directions.tsx",
     "line": null,
     "description": "Data screen route shows 'not built yet' until 04-09",
-    "status": "open",
+    "status": "fixed",
     "reason": "",
     "recorded_at": "2026-11-28T06:55:50.585Z",
-    "resolved_at": null,
+    "resolved_at": "2026-11-28T07:40:26.825Z",
     "milestone": null
   },
   {
