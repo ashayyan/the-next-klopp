@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { createSampler, type MotionMode } from "../../scene/playback/sample.ts";
 import type { Scene, SceneTeam } from "../../scene/schema.ts";
 import { usePitch } from "../Pitch.tsx";
+import type { View } from "../view.ts";
 import { BallGlyph } from "./BallGlyph.tsx";
 import { discDiameter } from "./glyphSize.ts";
 import { PlayerGlyph } from "./PlayerGlyph.tsx";
@@ -69,4 +70,9 @@ export function SceneLayer({ scene, t, mode }: SceneLayerProps) {
       {ball ? <BallGlyph x={ball.x} y={ball.y} /> : null}
     </g>
   );
+}
+
+/** Density draw callback for <CanvasLayer>; implemented in the GREEN step. */
+export function drawDensity(_scene: Scene): (ctx: CanvasRenderingContext2D, view: View) => void {
+  return () => {};
 }
