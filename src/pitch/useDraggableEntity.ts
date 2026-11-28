@@ -95,12 +95,18 @@ export function useDraggableEntity(options: UseDraggableEntityOptions): Draggabl
   // A run of arrow presses is announced once, 500 ms after the last one.
   const nudged = useRef<Pt | null>(null);
   const nudgeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  useEffect(
-    () => () => {
-      if (nudgeTimer.current !== null) clearTimeout(nudgeTimer.current);
-    },
-    [],
-  );
+  const clearNudge = useCallback(() => {
+    nudged.current = null;
+    if (nudgeTimer.current !== null) clearTimeout(nudgeTimer.current);
+    nudgeTimer.current = null;
+  }, []);
+  useEffect(() => clearNudge, [clearNudge]);
+  // A position that is not the one the last nudge produced came from outside (a reset, another
+  // drag): forget the pending nudge so it is neither announced nor used as the next start point.
+  useEffect(() => {
+    const pending = nudged.current;
+    if (pending && (pending.x !== position.x || pending.y !== position.y)) clearNudge();
+  }, [position.x, position.y, clearNudge]);
 
   const finish = useCallback(() => {
     active.current = null;
@@ -112,9 +118,10 @@ export function useDraggableEntity(options: UseDraggableEntityOptions): Draggabl
     const a = active.current;
     if (!a) return;
     release(a.target, a.pointerId);
+    clearNudge();
     latest.current.onMove(a.start);
     finish();
-  }, [finish]);
+  }, [finish, clearNudge]);
 
   // Page text is not selected while a drag runs; Escape works wherever the focus is.
   const dragging = start !== null;
@@ -134,10 +141,13 @@ export function useDraggableEntity(options: UseDraggableEntityOptions): Draggabl
 
   function onPointerDown(e: ReactPointerEvent<SVGElement>): void {
     if (e.pointerType === "mouse" && e.button !== 0) return;
+    // A second finger must not replace the drag that is already running.
+    if (active.current) return;
     const root = e.currentTarget.closest<SVGGElement>("[data-canonical-root]");
     if (!root) return;
     const pointer = pointerToCanonical(root, e.clientX, e.clientY);
     if (!pointer) return;
+    clearNudge();
     const at = latest.current.position;
     e.currentTarget.setPointerCapture(e.pointerId);
     // Pointer-down default is cancelled so no text selection starts; the player takes focus itself.
