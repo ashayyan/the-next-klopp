@@ -4,6 +4,8 @@
 // Vitest covers all of it in CI. The browser module collects the data; thresholds live here.
 // Erasable TypeScript only (run by `node` directly).
 
+import { composite, contrast, parseCssColor, toHex } from "../design/lib/color.ts";
+
 export type Theme = "light" | "dark";
 export type Severity = "fail" | "warn";
 export type CheckSource = "dom" | "static" | "taste";
@@ -12,6 +14,12 @@ export type Box = [number, number, number, number];
 
 export const DEFAULT_WIDTHS = [375, 768, 1440] as const;
 const HEIGHTS: Record<number, number> = { 375: 812, 768: 1024, 1440: 900 };
+export const TAP_MIN_PX = 44;
+export const TAP_GAP_PX = 8;
+export const STEP_WORD_LIMIT = 60;
+export const TEXT_RATIO = 4.5;
+export const LARGE_TEXT_RATIO = 3;
+
 export const heightFor = (width: number): number => HEIGHTS[width] ?? 900;
 
 // ---------------------------------------------------------------- arguments and routes
@@ -222,6 +230,265 @@ export function evalBannedGradient(elements: readonly GradientProbe[]): Outcome 
       offenders.length === 0
         ? "no gradient in any computed background-image"
         : `${offenders.length} element(s) with a gradient background`,
+    offenders,
+  };
+}
+
+export interface TapTarget {
+  selector: string;
+  text: string;
+  box: Box;
+  /** True for a link inside running text (`p`, `li`): exempt from size and spacing. */
+  runningText: boolean;
+}
+
+function gapBetween(a: Box, b: Box): number {
+  const dx = Math.max(a[0] - (b[0] + b[2]), b[0] - (a[0] + a[2]), 0);
+  const dy = Math.max(a[1] - (b[1] + b[3]), b[1] - (a[1] + a[3]), 0);
+  return Math.hypot(dx, dy);
+}
+
+function contains(outer: Box, inner: Box): boolean {
+  return (
+    inner[0] >= outer[0] - 0.5 &&
+    inner[1] >= outer[1] - 0.5 &&
+    inner[0] + inner[2] <= outer[0] + outer[2] + 0.5 &&
+    inner[1] + inner[3] <= outer[1] + outer[3] + 0.5
+  );
+}
+
+export function evalTapSize(targets: readonly TapTarget[]): Outcome {
+  const live = targets.filter((t) => t.box[2] > 0 && t.box[3] > 0 && !t.runningText);
+  const found = new Map<string, Offender>();
+  const add = (t: TapTarget, value: string) => {
+    const key = `${t.selector}@${t.box.join(",")}`;
+    const prior = found.get(key);
+    if (prior) prior.value = `${prior.value}; ${value}`;
+    else found.set(key, { selector: t.selector, text: clip(t.text), box: t.box, value });
+  };
+  for (const t of live) {
+    const w = round1(t.box[2]);
+    const h = round1(t.box[3]);
+    if (w < TAP_MIN_PX || h < TAP_MIN_PX)
+      add(t, `${w} x ${h} px, needs ${TAP_MIN_PX} x ${TAP_MIN_PX}`);
+  }
+  for (let i = 0; i < live.length; i += 1) {
+    for (let j = i + 1; j < live.length; j += 1) {
+      const a = live[i] as TapTarget;
+      const b = live[j] as TapTarget;
+      if (contains(a.box, b.box) || contains(b.box, a.box)) continue;
+      const gap = gapBetween(a.box, b.box);
+      if (gap < TAP_GAP_PX) {
+        add(a, `${round1(gap)} px from ${b.selector}, needs ${TAP_GAP_PX}`);
+        add(b, `${round1(gap)} px from ${a.selector}, needs ${TAP_GAP_PX}`);
+      }
+    }
+  }
+  const offenders = [...found.values()];
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? `${live.length} target(s) at least ${TAP_MIN_PX} x ${TAP_MIN_PX} px and ${TAP_GAP_PX} px apart`
+        : `${offenders.length} of ${live.length} target(s) too small or too close`,
+    offenders,
+  };
+}
+
+export interface TextProbe {
+  selector: string;
+  text: string;
+  box: Box;
+  /** Computed text colour (`color`, or `fill` for SVG text). */
+  color: string;
+  /** Computed background colours from the element outward, up to the root. */
+  bgChain: string[];
+  fontSize: number;
+  fontWeight: number;
+  /** True for SVG text inside the pitch and for disabled controls. */
+  exempt: boolean;
+}
+
+/** WCAG large text: 24 px, or 18.66 px at weight 600 or more. */
+export function isLargeText(fontSize: number, fontWeight: number): boolean {
+  return fontSize >= 24 || (fontSize >= 18.66 && fontWeight >= 600);
+}
+
+/** Resolved opaque background: alpha layers composited from the nearest opaque ancestor out. */
+export function resolveBackground(chain: readonly string[]): string {
+  let layer: ReturnType<typeof composite> | null = null;
+  for (const css of chain) {
+    const c = parseCssColor(css);
+    if (!c || c.a === 0) continue;
+    layer = layer === null ? c : composite(layer, c);
+    if (layer.a >= 0.999) break;
+  }
+  const base = { r: 255, g: 255, b: 255, a: 1 };
+  return toHex(layer === null ? base : composite(layer, base));
+}
+
+export function evalTextContrast(items: readonly TextProbe[]): Outcome {
+  const offenders: Offender[] = [];
+  let checked = 0;
+  for (const it of items) {
+    if (it.exempt || it.text.trim() === "") continue;
+    const fg = parseCssColor(it.color);
+    if (!fg) continue;
+    const bg = resolveBackground(it.bgChain);
+    const bgRgba = parseCssColor(bg);
+    if (!bgRgba) continue;
+    checked += 1;
+    const ink = toHex(fg.a >= 0.999 ? fg : composite(fg, bgRgba));
+    const ratio = contrast(ink, bg);
+    const needed = isLargeText(it.fontSize, it.fontWeight) ? LARGE_TEXT_RATIO : TEXT_RATIO;
+    if (ratio + 1e-9 < needed) {
+      offenders.push({
+        selector: it.selector,
+        text: clip(it.text),
+        box: it.box,
+        value: `${ratio.toFixed(2)}:1 (${ink} on ${bg}), needs ${needed}:1`,
+      });
+    }
+  }
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? `${checked} text element(s) meet 4.5:1 (3:1 for large text)`
+        : `${offenders.length} of ${checked} text element(s) below the ratio`,
+    offenders,
+  };
+}
+
+export interface HeadingProbe {
+  level: number;
+  text: string;
+  selector: string;
+}
+
+export function evalHeadingOrder(headings: readonly HeadingProbe[]): Outcome {
+  const offenders: Offender[] = [];
+  const h1s = headings.filter((h) => h.level === 1);
+  if (h1s.length !== 1) {
+    offenders.push({
+      selector: "h1",
+      text: "",
+      box: ZERO_BOX,
+      value: `${h1s.length} h1 element(s), needs exactly 1`,
+    });
+  }
+  let prev = 0;
+  for (const h of headings) {
+    if (prev > 0 && h.level > prev + 1) {
+      offenders.push({
+        selector: h.selector,
+        text: clip(h.text),
+        box: ZERO_BOX,
+        value: `h${h.level} follows h${prev}`,
+      });
+    }
+    prev = h.level;
+  }
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? `${headings.length} heading(s), one h1, no skipped level`
+        : `${offenders.length} heading problem(s)`,
+    offenders,
+  };
+}
+
+export interface ControlProbe {
+  selector: string;
+  /** Visible text content of the control. */
+  text: string;
+  box: Box;
+  ariaLabel: string;
+  /** Text of the elements named by aria-labelledby. */
+  labelledByText: string;
+  /** Text of the associated label elements. */
+  labelText: string;
+  title: string;
+  /** Alt text of a child image or the control's own alt (image buttons). */
+  alt: string;
+}
+
+export function evalControlNames(controls: readonly ControlProbe[]): Outcome {
+  const offenders = controls
+    .filter(
+      (c) =>
+        ![c.ariaLabel, c.labelledByText, c.labelText, c.text, c.title, c.alt].some(
+          (s) => s.trim() !== "",
+        ),
+    )
+    .map((c) => ({
+      selector: c.selector,
+      text: "",
+      box: c.box,
+      value: "no accessible name",
+    }));
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? `${controls.length} control(s) have an accessible name`
+        : `${offenders.length} of ${controls.length} control(s) without a name`,
+    offenders,
+  };
+}
+
+export function evalLegendPresent(input: { glyphCount: number; legendVisible: boolean }): Outcome {
+  const violated = input.glyphCount > 0 && !input.legendVisible;
+  return {
+    violated,
+    detail:
+      input.glyphCount === 0
+        ? "no glyph on the page"
+        : violated
+          ? `${input.glyphCount} glyph(s) and no visible legend`
+          : `${input.glyphCount} glyph(s) with a visible legend`,
+    offenders: violated
+      ? [
+          {
+            selector: "[data-glyph]",
+            text: "",
+            box: ZERO_BOX,
+            value: "no visible [data-legend] on the page",
+          },
+        ]
+      : [],
+  };
+}
+
+export interface StepProbe {
+  selector: string;
+  text: string;
+  box: Box;
+}
+
+export function countWords(text: string): number {
+  return text.split(/\s+/).filter((w) => w !== "").length;
+}
+
+export function evalStepWords(steps: readonly StepProbe[]): Outcome {
+  const offenders = steps
+    .map((s) => ({ s, words: countWords(s.text) }))
+    .filter((x) => x.words > STEP_WORD_LIMIT)
+    .map((x) => ({
+      selector: x.s.selector,
+      text: clip(x.s.text),
+      box: x.s.box,
+      value: `${x.words} words, limit ${STEP_WORD_LIMIT}`,
+    }));
+  return {
+    violated: offenders.length > 0,
+    detail:
+      steps.length === 0
+        ? "no [data-lesson-step] on the page"
+        : offenders.length === 0
+          ? `${steps.length} step(s) within ${STEP_WORD_LIMIT} words`
+          : `${offenders.length} of ${steps.length} step(s) over ${STEP_WORD_LIMIT} words`,
     offenders,
   };
 }

@@ -10,10 +10,21 @@ import { type Browser, chromium } from "@playwright/test";
 import {
   type Box,
   type CheckResult,
+  type ControlProbe,
   evalBannedGradient,
+  evalControlNames,
+  evalHeadingOrder,
+  evalLegendPresent,
   evalNoOverflow,
+  evalStepWords,
+  evalTapSize,
+  evalTextContrast,
+  type HeadingProbe,
   heightFor,
   type ScreenshotRecord,
+  type StepProbe,
+  type TapTarget,
+  type TextProbe,
   type Theme,
   toResult,
 } from "./lib.ts";
@@ -153,6 +164,13 @@ interface PageData {
   scrollWidth: number;
   innerWidth: number;
   gradients: { selector: string; text: string; box: Box; backgroundImage: string }[];
+  targets: TapTarget[];
+  texts: TextProbe[];
+  headings: HeadingProbe[];
+  controls: ControlProbe[];
+  glyphCount: number;
+  legendVisible: boolean;
+  steps: StepProbe[];
 }
 
 /** Runs inside the page: returns plain data only. Self-contained, Playwright serialises it. */
@@ -198,10 +216,111 @@ function collectPage(): PageData {
       }
     }
   }
+
+  const CONTROLS =
+    'a[href], button, input:not([type="hidden"]), select, textarea, [role=button], [role=tab], [role=switch], [role=checkbox], [role=radio], [role=slider], [role=option], [role=menuitem], [tabindex]:not([tabindex="-1"])';
+  const shown = (el: Element): boolean => {
+    const r = el.getBoundingClientRect();
+    if (r.width <= 0 || r.height <= 0) return false;
+    const s = getComputedStyle(el);
+    return s.visibility !== "hidden" && s.display !== "none";
+  };
+  const textOf = (el: Element): string =>
+    ((el as HTMLElement).innerText ?? el.textContent ?? "").replace(/\s+/g, " ").trim();
+
+  const controlEls = [...document.querySelectorAll(CONTROLS)].filter(shown);
+  // A checkbox or radio wrapped by its label is hit through the label, so the label's box counts.
+  const hitBox = (el: Element): [number, number, number, number] => {
+    const label = (el as HTMLInputElement).labels?.[0];
+    return label && shown(label) ? boxOf(label) : boxOf(el);
+  };
+  const targets: PageData["targets"] = controlEls.map((el) => ({
+    selector: selectorOf(el),
+    text: textOf(el),
+    box: hitBox(el),
+    runningText: el.tagName === "A" && el.closest("p, li") !== null,
+  }));
+  const controls: PageData["controls"] = controlEls.map((el) => {
+    const labelledBy = (el.getAttribute("aria-labelledby") ?? "")
+      .split(/\s+/)
+      .map((id) => (id ? (document.getElementById(id)?.textContent ?? "") : ""))
+      .join(" ");
+    const labels = "labels" in el ? [...((el as HTMLInputElement).labels ?? [])] : [];
+    const own = el as HTMLInputElement;
+    return {
+      selector: selectorOf(el),
+      text: textOf(el) || (/^(button|submit|reset)$/.test(own.type ?? "") ? (own.value ?? "") : ""),
+      box: boxOf(el),
+      ariaLabel: el.getAttribute("aria-label") ?? "",
+      labelledByText: labelledBy,
+      labelText: labels.map((l) => l.textContent ?? "").join(" "),
+      title: el.getAttribute("title") ?? el.querySelector("svg > title")?.textContent ?? "",
+      alt: el.getAttribute("alt") ?? el.querySelector("img[alt]")?.getAttribute("alt") ?? "",
+    };
+  });
+
+  const texts: PageData["texts"] = [];
+  const seen = new Set<Element>();
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+  for (let n = walker.nextNode(); n; n = walker.nextNode()) {
+    const el = n.parentElement;
+    if (!el || seen.has(el) || !(n.textContent ?? "").trim()) continue;
+    if (/^(script|style|noscript|title|desc)$/i.test(el.tagName)) continue;
+    seen.add(el);
+    if (!shown(el)) continue;
+    const style = getComputedStyle(el);
+    const svg = el instanceof SVGElement;
+    const chain: string[] = [];
+    for (let a: Element | null = el; a; a = a.parentElement) {
+      chain.push(getComputedStyle(a).backgroundColor);
+    }
+    texts.push({
+      selector: selectorOf(el),
+      text: (el.textContent ?? "").replace(/\s+/g, " ").trim(),
+      box: boxOf(el),
+      color: svg ? style.fill : style.color,
+      bgChain: chain,
+      fontSize: Number.parseFloat(style.fontSize),
+      fontWeight: Number.parseInt(style.fontWeight, 10) || 400,
+      exempt:
+        // Text drawn on a pitch or glyph sits on SVG shapes, not on a CSS background; the palette
+        // gate covers those pairs (player ink on team fills), so the DOM check skips them.
+        el.closest("[data-pitch], [data-glyph]") !== null ||
+        el.closest(":disabled, [aria-disabled='true']") !== null,
+    });
+  }
+
+  const headings: PageData["headings"] = [
+    ...document.querySelectorAll("h1, h2, h3, h4, h5, h6, [role=heading]"),
+  ]
+    .filter(shown)
+    .map((el) => ({
+      level: /^h[1-6]$/i.test(el.tagName)
+        ? Number(el.tagName.slice(1))
+        : Number(el.getAttribute("aria-level") ?? 2),
+      text: textOf(el),
+      selector: selectorOf(el),
+    }));
+
+  const legendVisible = [...document.querySelectorAll("[data-legend]")].some(shown);
+  const steps: PageData["steps"] = [...document.querySelectorAll("[data-lesson-step]")].map(
+    (el) => ({
+      selector: selectorOf(el),
+      text: textOf(el),
+      box: boxOf(el),
+    }),
+  );
   return {
     scrollWidth: document.documentElement.scrollWidth,
     innerWidth: window.innerWidth,
     gradients,
+    targets,
+    texts,
+    headings,
+    controls,
+    glyphCount: document.querySelectorAll("[data-glyph]").length,
+    legendVisible,
+    steps,
   };
 }
 
@@ -285,6 +404,16 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
           results.push(
             toResult("no-overflow", ctx, evalNoOverflow(data)),
             toResult("banned-gradient", ctx, evalBannedGradient(data.gradients)),
+            toResult("tap-size", ctx, evalTapSize(data.targets)),
+            toResult("text-contrast", ctx, evalTextContrast(data.texts)),
+            toResult("heading-order", ctx, evalHeadingOrder(data.headings)),
+            toResult("control-names", ctx, evalControlNames(data.controls)),
+            toResult(
+              "legend-present",
+              ctx,
+              evalLegendPresent({ glyphCount: data.glyphCount, legendVisible: data.legendVisible }),
+            ),
+            toResult("step-words", ctx, evalStepWords(data.steps)),
           );
           if (width === 375) {
             await page.setViewportSize({ width: 320, height: heightFor(width) });

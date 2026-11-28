@@ -5,12 +5,22 @@ import {
   buildReport,
   CHECKS,
   type CheckResult,
+  type ControlProbe,
+  countWords,
   evalBannedGradient,
+  evalControlNames,
+  evalHeadingOrder,
+  evalLegendPresent,
   evalNoOverflow,
+  evalStepWords,
+  evalTapSize,
+  evalTextContrast,
   exitCodeFor,
   parseArgs,
   renderReportMd,
+  resolveBackground,
   slugRoute,
+  type TextProbe,
   toResult,
   undoMsysPathConversion,
 } from "./lib.ts";
@@ -222,5 +232,166 @@ describe("Git Bash path rewriting", () => {
     expect(undoMsysPathConversion("C:/Program Files/Git/dev/x", undefined)).toBe(
       "C:/Program Files/Git/dev/x",
     );
+  });
+});
+
+const btn = (selector: string, box: [number, number, number, number], runningText = false) => ({
+  selector,
+  text: "",
+  box,
+  runningText,
+});
+
+describe("tap-size", () => {
+  it("fails a 40 x 40 button and names its selector and box", () => {
+    const out = evalTapSize([btn("button.small", [10, 10, 40, 40])]);
+    expect(out.violated).toBe(true);
+    expect(out.offenders[0]?.selector).toBe("button.small");
+    expect(out.offenders[0]?.box).toEqual([10, 10, 40, 40]);
+  });
+
+  it("fails two 44 x 44 buttons 4 px apart and passes them 8 px apart", () => {
+    const close = evalTapSize([btn("a", [0, 0, 44, 44]), btn("b", [48, 0, 44, 44])]);
+    expect(close.violated).toBe(true);
+    expect(close.offenders.map((o) => o.selector).sort()).toEqual(["a", "b"]);
+    const apart = evalTapSize([btn("a", [0, 0, 44, 44]), btn("b", [52, 0, 44, 44])]);
+    expect(apart.violated).toBe(false);
+  });
+
+  it("exempts a link in running text and skips zero-size elements", () => {
+    expect(evalTapSize([btn("p a", [0, 0, 30, 16], true)]).violated).toBe(false);
+    expect(evalTapSize([btn("hidden", [0, 0, 0, 0])]).violated).toBe(false);
+  });
+
+  it("does not count a control nested inside another as too close", () => {
+    expect(
+      evalTapSize([btn("label", [0, 0, 100, 44]), btn("input", [4, 0, 44, 44])]).violated,
+    ).toBe(false);
+  });
+});
+
+const text = (over: Partial<TextProbe>): TextProbe => ({
+  selector: "p",
+  text: "Words",
+  box: [0, 0, 100, 20],
+  color: "#767676",
+  bgChain: ["rgba(0, 0, 0, 0)", "#FFFFFF"],
+  fontSize: 16,
+  fontWeight: 400,
+  exempt: false,
+  ...over,
+});
+
+describe("text-contrast", () => {
+  it("passes #767676 on white at 16 px (4.54:1) and fails #808080 (3.95:1)", () => {
+    expect(evalTextContrast([text({})]).violated).toBe(false);
+    const bad = evalTextContrast([text({ color: "#808080" })]);
+    expect(bad.violated).toBe(true);
+    expect(bad.offenders[0]?.value).toContain("3.95:1");
+  });
+
+  it("accepts 3:1 at 24 px and at 18.66 px with weight 600", () => {
+    expect(evalTextContrast([text({ color: "#808080", fontSize: 24 })]).violated).toBe(false);
+    expect(
+      evalTextContrast([text({ color: "#808080", fontSize: 18.66, fontWeight: 600 })]).violated,
+    ).toBe(false);
+    expect(
+      evalTextContrast([text({ color: "#808080", fontSize: 18.66, fontWeight: 400 })]).violated,
+    ).toBe(true);
+  });
+
+  it("composites a semi-transparent panel over its opaque ancestor", () => {
+    // 50% black over white is #808080: #767676 text on it is 0.9 below 4.5.
+    const onPanel = text({ bgChain: ["rgba(0, 0, 0, 0.5)", "#FFFFFF"] });
+    expect(resolveBackground(onPanel.bgChain)).toBe("#808080");
+    expect(evalTextContrast([onPanel]).violated).toBe(true);
+  });
+
+  it("composites translucent text over the resolved background", () => {
+    const faint = text({ color: "rgba(0, 0, 0, 0.2)" });
+    expect(evalTextContrast([faint]).violated).toBe(true);
+    expect(evalTextContrast([text({ color: "rgba(0, 0, 0, 0.9)" })]).violated).toBe(false);
+  });
+
+  it("skips exempt text (pitch SVG, disabled controls) and empty text", () => {
+    expect(evalTextContrast([text({ color: "#CCCCCC", exempt: true })]).violated).toBe(false);
+    expect(evalTextContrast([text({ color: "#CCCCCC", text: "  " })]).violated).toBe(false);
+  });
+});
+
+const heading = (level: number) => ({ level, text: `h${level}`, selector: `h${level}` });
+
+describe("heading-order", () => {
+  it("fails two h1", () => {
+    expect(evalHeadingOrder([heading(1), heading(2), heading(1)]).violated).toBe(true);
+  });
+
+  it("fails an h2 followed by an h4", () => {
+    const out = evalHeadingOrder([heading(1), heading(2), heading(4)]);
+    expect(out.violated).toBe(true);
+    expect(out.offenders[0]?.value).toBe("h4 follows h2");
+  });
+
+  it("passes h1, h2, h3, h2 and fails a page without an h1", () => {
+    expect(evalHeadingOrder([heading(1), heading(2), heading(3), heading(2)]).violated).toBe(false);
+    expect(evalHeadingOrder([heading(2)]).violated).toBe(true);
+  });
+});
+
+const control = (over: Partial<ControlProbe>): ControlProbe => ({
+  selector: "button",
+  text: "",
+  box: [0, 0, 44, 44],
+  ariaLabel: "",
+  labelledByText: "",
+  labelText: "",
+  title: "",
+  alt: "",
+  ...over,
+});
+
+describe("control-names", () => {
+  it("fails an icon-only button without aria-label and names it", () => {
+    const out = evalControlNames([control({ selector: "button.icon" })]);
+    expect(out.violated).toBe(true);
+    expect(out.offenders[0]?.selector).toBe("button.icon");
+  });
+
+  it("passes visible text, a label, aria-labelledby, aria-label, title and alt", () => {
+    for (const named of [
+      control({ text: "Continue" }),
+      control({ selector: "input", labelText: "Name" }),
+      control({ labelledByText: "Heading" }),
+      control({ ariaLabel: "Close" }),
+      control({ title: "Close" }),
+      control({ alt: "Play" }),
+    ]) {
+      expect(evalControlNames([named]).violated).toBe(false);
+    }
+  });
+});
+
+describe("legend-present", () => {
+  it("fails a glyph without a visible legend and passes with one or with no glyph", () => {
+    expect(evalLegendPresent({ glyphCount: 3, legendVisible: false }).violated).toBe(true);
+    expect(evalLegendPresent({ glyphCount: 3, legendVisible: true }).violated).toBe(false);
+    expect(evalLegendPresent({ glyphCount: 0, legendVisible: false }).violated).toBe(false);
+  });
+});
+
+describe("step-words", () => {
+  const words = (n: number) => Array.from({ length: n }, (_, i) => `w${i}`).join(" ");
+  it("fails 61 words and passes 60, counting any whitespace", () => {
+    expect(
+      evalStepWords([{ selector: "section", text: words(61), box: [0, 0, 1, 1] }]).violated,
+    ).toBe(true);
+    expect(
+      evalStepWords([{ selector: "section", text: words(60), box: [0, 0, 1, 1] }]).violated,
+    ).toBe(false);
+    expect(countWords("one\n two\t three  ")).toBe(3);
+  });
+
+  it("passes a page with no step", () => {
+    expect(evalStepWords([]).violated).toBe(false);
   });
 });
