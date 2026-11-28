@@ -270,6 +270,8 @@ export interface TapTarget {
   runningText: boolean;
 }
 
+const TAP_GAP_ROUNDING_PX = 0.15;
+
 function gapBetween(a: Box, b: Box): number {
   const dx = Math.max(a[0] - (b[0] + b[2]), b[0] - (a[0] + a[2]), 0);
   const dy = Math.max(a[1] - (b[1] + b[3]), b[1] - (a[1] + a[3]), 0);
@@ -306,7 +308,8 @@ export function evalTapSize(targets: readonly TapTarget[]): Outcome {
       const b = live[j] as TapTarget;
       if (contains(a.box, b.box) || contains(b.box, a.box)) continue;
       const gap = gapBetween(a.box, b.box);
-      if (gap < TAP_GAP_PX) {
+      // Boxes are captured to 0.1 px, so a true 8 px gap can read 7.9; allow that rounding only.
+      if (gap + TAP_GAP_ROUNDING_PX < TAP_GAP_PX) {
         add(a, `${round1(gap)} px from ${b.selector}, needs ${TAP_GAP_PX}`);
         add(b, `${round1(gap)} px from ${a.selector}, needs ${TAP_GAP_PX}`);
       }

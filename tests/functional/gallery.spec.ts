@@ -314,3 +314,39 @@ test.describe("controls: input", () => {
     expect(box?.width ?? 0).toBeLessThanOrEqual(375);
   });
 });
+
+test.describe("controls: choices", () => {
+  test("clicking a checkbox or radio label changes it, and the radio keeps one checked", async ({
+    page,
+  }) => {
+    await page.goto("/dev/gallery/checkbox-radio-switch?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    const off = page.locator('[data-gallery-state="checkbox-radio-switch/off"]');
+    const box = off.getByRole("checkbox", { name: "Show xG on the map" });
+    await expect(box).toHaveAttribute("aria-checked", "false");
+    await off.getByText("Show xG on the map").click();
+    await expect(box).toHaveAttribute("aria-checked", "true");
+    await off.getByText("Without the ball").click();
+    await expect(off.getByRole("radio", { name: "Without the ball" })).toHaveAttribute(
+      "aria-checked",
+      "true",
+    );
+    await expect(off.getByRole("radio", { name: "With the ball" })).toHaveAttribute(
+      "aria-checked",
+      "false",
+    );
+  });
+
+  test("the open select shows its popup inside its own cell with the selected option checked", async ({
+    page,
+  }) => {
+    await page.goto("/dev/gallery/select?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    const cell = page.locator('[data-gallery-state="select/open"]');
+    await expect(cell.getByRole("listbox")).toBeVisible();
+    await expect(cell.getByRole("option", { name: "4-4-2" })).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+  });
+});

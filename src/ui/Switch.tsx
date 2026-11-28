@@ -6,6 +6,7 @@ export interface SwitchProps {
   label: ReactNode;
   checked: boolean;
   onCheckedChange: (checked: boolean) => void;
+  disabled?: boolean;
   /** Forced look for the gallery ("hover", "focus-visible"), written to `data-state`. */
   state?: string;
   className?: string;
@@ -17,15 +18,23 @@ export interface SwitchProps {
  * accent (04-UI-SPEC "Accent reserved for", item 3); `data-fill-edge` lets a direction whose
  * accent is too light against its page draw the track's edge in ink.
  */
-export function Switch({ label, checked, onCheckedChange, state, className }: SwitchProps) {
+export function Switch({
+  label,
+  checked,
+  onCheckedChange,
+  disabled,
+  state,
+  className,
+}: SwitchProps) {
   return (
     <BaseSwitch.Root
       checked={checked}
       onCheckedChange={(next) => onCheckedChange(next)}
       nativeButton
+      disabled={disabled}
       render={<button type="button" />}
       data-state={state}
-      className={`group inline-flex min-h-11 cursor-pointer select-none items-center gap-2 rounded-md px-2 text-label text-ink outline-offset-2 hov:bg-surface-panel fv:outline-2 fv:outline-focus-ring${className ? ` ${className}` : ""}`}
+      className={`group inline-flex min-h-11 cursor-pointer select-none items-center gap-2 rounded-md px-2 text-label text-ink outline-offset-2 hov:bg-surface-panel fv:outline-2 fv:outline-focus-ring disabled:cursor-not-allowed disabled:opacity-50${className ? ` ${className}` : ""}`}
     >
       <span>{label}</span>
       <span

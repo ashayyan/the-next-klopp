@@ -4,11 +4,14 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { loadTokens } from "../../scripts/design/build-tokens.ts";
 import { SYSTEM_INPUT } from "../../scripts/design/tokens.ts";
+import { Checkbox, RadioGroup } from "./Choice.tsx";
 import { DataTable } from "./data/DataTable.tsx";
 import { StatCard } from "./data/StatCard.tsx";
 import { NumberInput, TextInput } from "./Field.tsx";
 import { ShellBar } from "./lesson/ShellBar.tsx";
 import { LESSON_LOOP_STEPS, StepRail } from "./lesson/StepRail.tsx";
+import { Slider } from "./Slider.tsx";
+import { Tabs } from "./Tabs.tsx";
 import {
   applyDocumentTheme,
   readStoredTheme,
@@ -341,5 +344,58 @@ describe("Field", () => {
     expect(input).toContain('aria-invalid="true"');
     expect(input).toContain("aria-describedby=");
     expect(html).toContain(ERROR);
+  });
+});
+
+describe("Choice, Tabs and Slider", () => {
+  it("marks the checked radio aria-checked true and the others false", () => {
+    const html = renderToStaticMarkup(
+      <RadioGroup
+        label="Possession"
+        options={[
+          { value: "with", label: "With the ball" },
+          { value: "without", label: "Without the ball" },
+        ]}
+        defaultValue="with"
+      />,
+    );
+    expect(count(html, 'role="radio"')).toBe(2);
+    expect(count(html, 'aria-checked="true"')).toBe(1);
+    expect(count(html, 'aria-checked="false"')).toBe(1);
+    expect(html).toContain('role="radiogroup"');
+  });
+
+  it("renders a checked checkbox with its label inside the target", () => {
+    const html = renderToStaticMarkup(<Checkbox label="Show xG" defaultChecked />);
+    expect(html).toContain('role="checkbox"');
+    expect(html).toContain('aria-checked="true"');
+    expect(html.startsWith("<label")).toBe(true);
+  });
+
+  it("gives the tab list role tablist, an accessible name and the selected tab", () => {
+    const html = renderToStaticMarkup(
+      <Tabs
+        label="Team plan"
+        tabs={[
+          { value: "a", label: "Shape", content: "One" },
+          { value: "b", label: "Press", content: "Two" },
+        ]}
+        defaultValue="b"
+      />,
+    );
+    expect(html).toContain('role="tablist"');
+    expect(html).toContain('aria-label="Team plan"');
+    expect(count(html, 'role="tab"')).toBe(2);
+    expect(html).toMatch(
+      /role="tab"[^>]*aria-selected="true"[^>]*>Press|aria-selected="true"[^>]*role="tab"/,
+    );
+  });
+
+  it("names the slider and shows its value", () => {
+    const html = renderToStaticMarkup(
+      <Slider label="Sample size" min={10} max={200} step={10} defaultValue={100} />,
+    );
+    expect(html).toContain("Sample size");
+    expect(html).toContain("100");
   });
 });

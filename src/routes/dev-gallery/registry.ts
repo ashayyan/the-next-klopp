@@ -1,5 +1,14 @@
 import type { ComponentType } from "react";
-import { ButtonDemo, InputDemo } from "./demos/controls.tsx";
+import {
+  ButtonDemo,
+  ChoiceDemo,
+  InputDemo,
+  LinkDemo,
+  SegmentedDemo,
+  SelectDemo,
+  SliderDemo,
+  TabsDemo,
+} from "./demos/controls.tsx";
 import {
   ColourDemo,
   IconsDemo,
@@ -96,6 +105,55 @@ export const GALLERY: readonly Primitive[] = [
     label: "Input",
     states: ["empty", "filled", "focus", "invalid", "disabled", "long-value"],
     Demo: InputDemo,
+  },
+  {
+    id: "link",
+    group: "Controls",
+    label: "Link",
+    states: [
+      "inline-default",
+      "inline-hover",
+      "inline-focus-visible",
+      "standalone-default",
+      "standalone-hover",
+      "standalone-focus-visible",
+    ],
+    Demo: LinkDemo,
+  },
+  {
+    id: "select",
+    group: "Controls",
+    label: "Select",
+    states: ["closed", "open", "focus", "disabled"],
+    Demo: SelectDemo,
+  },
+  {
+    id: "checkbox-radio-switch",
+    group: "Controls",
+    label: "Checkbox, radio and switch",
+    states: ["off", "on", "focus", "disabled"],
+    Demo: ChoiceDemo,
+  },
+  {
+    id: "segmented",
+    group: "Controls",
+    label: "Segmented",
+    states: ["two-option", "three-first", "three-second", "three-third", "focus", "wrap"],
+    Demo: SegmentedDemo,
+  },
+  {
+    id: "slider",
+    group: "Controls",
+    label: "Slider",
+    states: ["min", "mid", "max", "focus", "disabled"],
+    Demo: SliderDemo,
+  },
+  {
+    id: "tabs",
+    group: "Controls",
+    label: "Tabs",
+    states: ["first", "second", "focus", "many"],
+    Demo: TabsDemo,
   },
   {
     id: "pitch",

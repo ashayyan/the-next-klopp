@@ -13,8 +13,10 @@ export interface SegmentedProps<V extends string> {
   options: readonly SegmentedOption<V>[];
   value: V;
   onValueChange: (value: V) => void;
-  /** Forced look for the gallery, written to `data-state` on every option. */
+  /** Forced look for the gallery, written to `data-state` on every option (or on `stateValue` only). */
   state?: string;
+  /** Limits the forced `state` to this one option, so a focus ring shows on one option. */
+  stateValue?: V;
   /** Classes for the group (width, alignment). */
   className?: string;
   /** Classes added to every option (a direction's border on the selected fill). */
@@ -32,6 +34,7 @@ export function Segmented<V extends string>({
   value,
   onValueChange,
   state,
+  stateValue,
   className,
   optionClassName,
 }: SegmentedProps<V>) {
@@ -50,7 +53,7 @@ export function Segmented<V extends string>({
         <Toggle<V>
           key={option.value}
           value={option.value}
-          data-state={state}
+          data-state={stateValue === undefined || stateValue === option.value ? state : undefined}
           data-fill-edge="pressed"
           className={`${CONTROL_BASE} flex-1 rounded-md border-2 border-transparent px-4 font-normal whitespace-nowrap text-ink not-data-pressed:hov:bg-surface-page data-pressed:bg-accent data-pressed:font-semibold data-pressed:text-accent-ink act:translate-y-px${optionClassName ? ` ${optionClassName}` : ""}`}
         >

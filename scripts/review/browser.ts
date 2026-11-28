@@ -261,8 +261,11 @@ function collectPage(): PageData {
 
   // A form control that is aria-hidden and out of the tab order (the hidden <input> Base UI keeps
   // beside a switch or checkbox for form submission) is not a target anyone can reach or name.
+  // The 1 px focus guards Base UI places around an open popup are aria-hidden and only catch focus
+  // to move it back inside, so they are not targets either.
   const unreachable = (el: Element): boolean =>
-    el.closest('[aria-hidden="true"]') !== null && (el as HTMLElement).tabIndex < 0;
+    el.hasAttribute("data-base-ui-focus-guard") ||
+    (el.closest('[aria-hidden="true"]') !== null && (el as HTMLElement).tabIndex < 0);
   const controlEls = [...document.querySelectorAll(CONTROLS)].filter(
     (el) => shown(el) && !unreachable(el),
   );
