@@ -99,7 +99,7 @@ export function main(argv: string[]): number {
     const r = git([
       "diff",
       "--name-status",
-      "--diff-filter=MDR",
+      "--diff-filter=MDRT",
       `${base}...HEAD`,
       "--",
       "data",
