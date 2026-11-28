@@ -19,14 +19,6 @@ export interface GoalRow {
   approximate: boolean;
 }
 
-export interface GoalNote {
-  /** The badge numbers the note is about, as shown: "1–5", "6", "10". */
-  range: string;
-  /** First badge number, for placing the note beside its badge. */
-  badge: number;
-  text: string;
-}
-
 export interface DerivedGoal {
   rows: GoalRow[];
   /** Shot time minus first pass time, one decimal. */
@@ -35,7 +27,6 @@ export interface DerivedGoal {
   upfieldMetres: number;
   /** Distinct players with an action. */
   playersOnBall: number;
-  notes: GoalNote[];
 }
 
 const round1 = (v: number) => Math.round(v * 10) / 10;
@@ -114,37 +105,5 @@ export function deriveGoal(scene: Scene): DerivedGoal {
   const upfieldMetres = shot && first ? round1(shot.start.x - first.start.x) : 0;
   const playersOnBall = new Set(events.flatMap((e) => (e.player ? [e.player] : []))).size;
 
-  // Notes are computed from the table (the rounded per-action values), as the margin reads them.
-  const firstFive = rows.slice(0, 5);
-  const net = round1(firstFive.reduce((sum, r) => sum + r.metres, 0));
-  const biggest = rows.reduce<GoalRow | undefined>(
-    (best, r) => (best === undefined || r.metres > best.metres ? r : best),
-    undefined,
-  );
-  const shotRow = rows.find((r) => r.eventId === shot?.id);
-  const fromGoalLine = shot ? round1(scene.pitch.length - shot.start.x) : 0;
-  const notes: GoalNote[] = [];
-  if (firstFive.length === 5) {
-    notes.push({
-      range: "1–5",
-      badge: 1,
-      text: `1–5: the ball moves back and across, net ${formatMetres(net)} m.`,
-    });
-  }
-  if (biggest) {
-    notes.push({
-      range: String(biggest.n),
-      badge: biggest.n,
-      text: `${biggest.n}: the biggest gain, ${formatMetres(biggest.metres)} m.`,
-    });
-  }
-  if (shotRow) {
-    notes.push({
-      range: String(shotRow.n),
-      badge: shotRow.n,
-      text: `${shotRow.n}: ${shotRow.who} shoots ${formatSeconds(fromGoalLine)} m from the goal line.`,
-    });
-  }
-
-  return { rows, firstToShotSec, upfieldMetres, playersOnBall, notes };
+  return { rows, firstToShotSec, upfieldMetres, playersOnBall };
 }

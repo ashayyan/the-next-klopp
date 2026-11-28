@@ -70,15 +70,6 @@ describe("deriveGoal on the published Sané goal", () => {
     expect(goal.upfieldMetres).toBe(59.3);
     expect(goal.playersOnBall).toBe(7);
   });
-
-  it("writes the three notebook notes from the table values", () => {
-    expect(goal.notes.map((n) => n.text)).toEqual([
-      "1–5: the ball moves back and across, net −1.9 m.",
-      "6: the biggest gain, +31.5 m.",
-      "10: Sané shoots 5.5 m from the goal line.",
-    ]);
-    expect(goal.notes.map((n) => n.badge)).toEqual([1, 6, 10]);
-  });
 });
 
 describe("formatMetres", () => {

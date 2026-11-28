@@ -1,8 +1,8 @@
-// DSGN-01: the three visual directions render the same tactics screen and the shape toggle works
-// in each one (04-UI-SPEC "Screen 1 — Tactics lesson").
+// DSGN-01: the picked direction (floodlit, ADR 0010) renders the tactics and data reference screens
+// from the DESIGN.md tokens, and the shape toggle works (04-UI-SPEC "Screen 1 — Tactics lesson").
 import { expect, type Page, test } from "@playwright/test";
 
-const DIRECTIONS = ["floodlit", "programme", "notebook"] as const;
+const DIRECTIONS = ["floodlit"] as const;
 
 /** Canonical centre (metres) of the disc whose <title> names John Stones. */
 async function stonesCentre(page: Page): Promise<{ x: number; y: number } | null> {
@@ -113,19 +113,19 @@ test.describe("lesson chrome", () => {
         },
       });
     });
-    await page.goto("/dev/directions/programme/tactics");
-    await expect(page.locator('[data-direction="programme"][data-ready="1"]')).toBeVisible();
-    await expect(page.locator('div[data-direction="programme"]')).toHaveAttribute(
+    await page.goto("/dev/directions/floodlit/tactics");
+    await expect(page.locator('[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
+    await expect(page.locator('div[data-direction="floodlit"]')).toHaveAttribute(
       "data-theme",
-      "light",
+      "dark",
     );
     expect(errors).toEqual([]);
   });
 
   test("Save note stores nothing and closes the popover", async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
-    await page.goto("/dev/directions/notebook/tactics");
-    await expect(page.locator('[data-direction="notebook"][data-ready="1"]')).toBeVisible();
+    await page.goto("/dev/directions/floodlit/tactics");
+    await expect(page.locator('[data-direction="floodlit"][data-ready="1"]')).toBeVisible();
     const keysBefore = await page.evaluate(() => Object.keys(localStorage).sort());
     await page.getByRole("button", { name: "I'm confused here" }).click();
     await expect(page.getByRole("heading", { name: "What's confusing here?" })).toBeVisible();
@@ -187,7 +187,7 @@ test.describe("data screen", () => {
       await held;
       await route.continue();
     });
-    await page.goto("/dev/directions/notebook/data");
+    await page.goto("/dev/directions/floodlit/data");
     const status = page.getByRole("status").filter({ hasText: "Loading the goal…" });
     await expect(status).toBeVisible();
     await expect(page.locator('[data-pitch] [data-marking="halfway-line"]')).toBeAttached();
@@ -208,7 +208,7 @@ test.describe("data screen", () => {
     await page.route("**/scene-wyscout-*.json", (route) =>
       route.fulfill({ status: 404, body: "not found" }),
     );
-    await page.goto("/dev/directions/programme/data");
+    await page.goto("/dev/directions/floodlit/data");
     const panel = page.locator("[data-error-panel]");
     await expect(panel).toBeVisible();
     await expect(panel.getByRole("heading", { name: "The goal data didn't load" })).toBeVisible();
@@ -233,16 +233,32 @@ test.describe("data screen", () => {
   });
 });
 
-test("an unknown direction shows the fallback with links to the three directions", async ({
+test("an unknown direction shows the fallback with one link to the picked direction", async ({
   page,
 }) => {
-  await page.goto("/dev/directions/nope/tactics");
+  await page.goto("/dev/directions/programme/tactics");
   await expect(
-    page.getByRole("heading", {
-      name: "No direction called “nope”. Pick floodlit, programme or notebook.",
-    }),
+    page.getByRole("heading", { name: "No direction called “programme”. Pick floodlit." }),
   ).toBeVisible();
-  for (const name of ["Floodlit", "Matchday Programme", "Analyst’s Notebook"]) {
-    await expect(page.getByRole("link", { name })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Floodlit" })).toBeVisible();
+  for (const name of ["Matchday Programme", "Analyst’s Notebook"]) {
+    await expect(page.getByRole("link", { name })).toHaveCount(0);
   }
+});
+
+test("the index lists the two floodlit screens in both themes and names ADR 0010", async ({
+  page,
+}) => {
+  await page.goto("/dev/directions");
+  await expect(page.getByRole("row", { name: /Floodlit/ })).toHaveCount(1);
+  for (const screen of ["tactics", "data"]) {
+    for (const theme of ["light", "dark"]) {
+      await expect(
+        page.locator(`a[href="/dev/directions/floodlit/${screen}?theme=${theme}"]`),
+      ).toHaveCount(1);
+    }
+  }
+  await expect(page.getByText("ADR 0010")).toBeVisible();
+  await expect(page.locator('a[href*="/dev/directions/programme"]')).toHaveCount(0);
+  await expect(page.locator('a[href*="/dev/directions/notebook"]')).toHaveCount(0);
 });

@@ -1,7 +1,7 @@
 // Helpers shared by the two direction screens.
 import { useEffect, useRef, useState } from "react";
 
-/** The display face with the direction's stretch (Mona Sans 125 %, Archivo 75 %, Newsreader 100 %). */
+/** The display face with the direction's stretch (Mona Sans at 125 % stretch). */
 export const DISPLAY = "font-display [font-stretch:var(--font-display-stretch)]";
 
 /** An element's measured CSS width, so the pitch orientation and the chart follow their space. */

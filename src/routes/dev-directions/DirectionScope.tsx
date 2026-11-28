@@ -19,7 +19,6 @@ import {
   type ThemeName,
   writeStoredTheme,
 } from "../../ui/theme.ts";
-import "./directions.css";
 
 export type { ThemeName };
 
