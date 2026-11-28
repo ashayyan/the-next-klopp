@@ -1,0 +1,283 @@
+{
+  "id": "authored-back-four-shift",
+  "schemaVersion": 1,
+  "kind": "authored",
+  "label": "Back four shifting with the ball",
+  "pitch": {
+    "length": 105,
+    "width": 68
+  },
+  "teams": [
+    {
+      "id": "home",
+      "name": "Home",
+      "side": "a",
+      "venue": "home",
+      "attack": {
+        "1": "ltr"
+      }
+    },
+    {
+      "id": "away",
+      "name": "Away",
+      "side": "b",
+      "venue": "away",
+      "attack": {
+        "1": "rtl"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "id": "home-1",
+      "type": "goalkeeper",
+      "team": "home",
+      "number": 1,
+      "role": "Goalkeeper"
+    },
+    {
+      "id": "home-2",
+      "type": "player",
+      "team": "home",
+      "number": 2,
+      "role": "Right back"
+    },
+    {
+      "id": "home-5",
+      "type": "player",
+      "team": "home",
+      "number": 5,
+      "role": "Right centre back"
+    },
+    {
+      "id": "home-4",
+      "type": "player",
+      "team": "home",
+      "number": 4,
+      "role": "Left centre back"
+    },
+    {
+      "id": "home-3",
+      "type": "player",
+      "team": "home",
+      "number": 3,
+      "role": "Left back"
+    },
+    {
+      "id": "away-9",
+      "type": "player",
+      "team": "away",
+      "number": 9,
+      "role": "Striker"
+    },
+    {
+      "id": "away-10",
+      "type": "player",
+      "team": "away",
+      "number": 10,
+      "role": "Second striker"
+    },
+    {
+      "id": "ball",
+      "type": "ball"
+    }
+  ],
+  "frames": [
+    {
+      "t": 0,
+      "positions": {
+        "home-1": {
+          "x": 6,
+          "y": 38
+        },
+        "home-2": {
+          "x": 24,
+          "y": 52
+        },
+        "home-5": {
+          "x": 22,
+          "y": 42
+        },
+        "home-4": {
+          "x": 22,
+          "y": 32
+        },
+        "home-3": {
+          "x": 24,
+          "y": 22
+        },
+        "away-9": {
+          "x": 40,
+          "y": 24
+        },
+        "away-10": {
+          "x": 43,
+          "y": 52
+        },
+        "ball": {
+          "x": 42,
+          "y": 52
+        }
+      },
+      "ballOwner": "away-10"
+    },
+    {
+      "t": 2,
+      "positions": {
+        "home-1": {
+          "x": 6,
+          "y": 32
+        },
+        "home-2": {
+          "x": 25,
+          "y": 44
+        },
+        "home-5": {
+          "x": 23,
+          "y": 36
+        },
+        "home-4": {
+          "x": 23,
+          "y": 27
+        },
+        "home-3": {
+          "x": 25,
+          "y": 18
+        },
+        "away-9": {
+          "x": 38,
+          "y": 22
+        },
+        "away-10": {
+          "x": 42,
+          "y": 50
+        },
+        "ball": {
+          "x": 37.4,
+          "y": 22
+        }
+      },
+      "ballOwner": "away-9"
+    },
+    {
+      "t": 4,
+      "positions": {
+        "home-1": {
+          "x": 6,
+          "y": 30
+        },
+        "home-2": {
+          "x": 26,
+          "y": 40
+        },
+        "home-5": {
+          "x": 24,
+          "y": 31
+        },
+        "home-4": {
+          "x": 24,
+          "y": 22
+        },
+        "home-3": {
+          "x": 26,
+          "y": 14
+        },
+        "away-9": {
+          "x": 38,
+          "y": 22
+        },
+        "away-10": {
+          "x": 36,
+          "y": 40
+        },
+        "ball": {
+          "x": 37.4,
+          "y": 22
+        }
+      },
+      "ballOwner": "away-9"
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-switch",
+      "type": "pass",
+      "t": 0,
+      "tEnd": 2,
+      "team": "away",
+      "player": "away-10",
+      "receiver": "away-9",
+      "start": {
+        "x": 42,
+        "y": 52
+      },
+      "end": {
+        "x": 38,
+        "y": 22
+      }
+    },
+    {
+      "id": "ev-run",
+      "type": "run",
+      "t": 2,
+      "tEnd": 4,
+      "team": "away",
+      "player": "away-10",
+      "start": {
+        "x": 42,
+        "y": 50
+      },
+      "end": {
+        "x": 36,
+        "y": 40
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "zone-between-lines",
+      "type": "zone",
+      "points": [
+        {
+          "x": 28,
+          "y": 18
+        },
+        {
+          "x": 36,
+          "y": 18
+        },
+        {
+          "x": 36,
+          "y": 34
+        },
+        {
+          "x": 28,
+          "y": 34
+        }
+      ],
+      "label": "Space between the lines"
+    },
+    {
+      "id": "shape-back-four",
+      "type": "shape",
+      "team": "home",
+      "members": ["home-3", "home-4", "home-5", "home-2"]
+    },
+    {
+      "id": "note-slide",
+      "type": "note",
+      "text": "The back four slide toward the ball",
+      "at": {
+        "x": 30,
+        "y": 62
+      }
+    }
+  ],
+  "source": {
+    "type": "authored",
+    "sourceIds": [],
+    "licence": "project-authored",
+    "attribution": "Authored for The Next Klopp",
+    "shippable": true
+  }
+}

@@ -1,0 +1,298 @@
+{
+  "id": "board-433-v-442",
+  "schemaVersion": 1,
+  "kind": "board",
+  "label": "Saved board: 4-3-3 against 4-4-2",
+  "pitch": {
+    "length": 105,
+    "width": 68
+  },
+  "teams": [
+    {
+      "id": "home",
+      "name": "Home 4-3-3",
+      "side": "a",
+      "venue": "home",
+      "attack": {
+        "1": "ltr"
+      }
+    },
+    {
+      "id": "away",
+      "name": "Away 4-4-2",
+      "side": "b",
+      "venue": "away",
+      "attack": {
+        "1": "rtl"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "id": "home-1",
+      "type": "goalkeeper",
+      "team": "home",
+      "number": 1,
+      "role": "Goalkeeper"
+    },
+    {
+      "id": "home-2",
+      "type": "player",
+      "team": "home",
+      "number": 2,
+      "role": "Right back"
+    },
+    {
+      "id": "home-3",
+      "type": "player",
+      "team": "home",
+      "number": 3,
+      "role": "Left back"
+    },
+    {
+      "id": "home-4",
+      "type": "player",
+      "team": "home",
+      "number": 4,
+      "role": "Left centre back"
+    },
+    {
+      "id": "home-5",
+      "type": "player",
+      "team": "home",
+      "number": 5,
+      "role": "Right centre back"
+    },
+    {
+      "id": "home-6",
+      "type": "player",
+      "team": "home",
+      "number": 6,
+      "role": "Defensive midfielder"
+    },
+    {
+      "id": "home-7",
+      "type": "player",
+      "team": "home",
+      "number": 7,
+      "role": "Right winger"
+    },
+    {
+      "id": "home-8",
+      "type": "player",
+      "team": "home",
+      "number": 8,
+      "role": "Right central midfielder"
+    },
+    {
+      "id": "home-9",
+      "type": "player",
+      "team": "home",
+      "number": 9,
+      "role": "Striker"
+    },
+    {
+      "id": "home-10",
+      "type": "player",
+      "team": "home",
+      "number": 10,
+      "role": "Left central midfielder"
+    },
+    {
+      "id": "home-11",
+      "type": "player",
+      "team": "home",
+      "number": 11,
+      "role": "Left winger"
+    },
+    {
+      "id": "away-1",
+      "type": "goalkeeper",
+      "team": "away",
+      "number": 1,
+      "role": "Goalkeeper"
+    },
+    {
+      "id": "away-2",
+      "type": "player",
+      "team": "away",
+      "number": 2,
+      "role": "Right back"
+    },
+    {
+      "id": "away-3",
+      "type": "player",
+      "team": "away",
+      "number": 3,
+      "role": "Left back"
+    },
+    {
+      "id": "away-4",
+      "type": "player",
+      "team": "away",
+      "number": 4,
+      "role": "Right centre back"
+    },
+    {
+      "id": "away-5",
+      "type": "player",
+      "team": "away",
+      "number": 5,
+      "role": "Left centre back"
+    },
+    {
+      "id": "away-6",
+      "type": "player",
+      "team": "away",
+      "number": 6,
+      "role": "Right central midfielder"
+    },
+    {
+      "id": "away-7",
+      "type": "player",
+      "team": "away",
+      "number": 7,
+      "role": "Right midfielder"
+    },
+    {
+      "id": "away-8",
+      "type": "player",
+      "team": "away",
+      "number": 8,
+      "role": "Left central midfielder"
+    },
+    {
+      "id": "away-9",
+      "type": "player",
+      "team": "away",
+      "number": 9,
+      "role": "Striker"
+    },
+    {
+      "id": "away-10",
+      "type": "player",
+      "team": "away",
+      "number": 10,
+      "role": "Striker"
+    },
+    {
+      "id": "away-11",
+      "type": "player",
+      "team": "away",
+      "number": 11,
+      "role": "Left midfielder"
+    },
+    {
+      "id": "ball",
+      "type": "ball"
+    }
+  ],
+  "frames": [
+    {
+      "t": 0,
+      "positions": {
+        "home-1": {
+          "x": 5,
+          "y": 34
+        },
+        "home-2": {
+          "x": 25,
+          "y": 58
+        },
+        "home-3": {
+          "x": 25,
+          "y": 10
+        },
+        "home-4": {
+          "x": 22,
+          "y": 27
+        },
+        "home-5": {
+          "x": 22,
+          "y": 41
+        },
+        "home-6": {
+          "x": 38,
+          "y": 34
+        },
+        "home-7": {
+          "x": 60,
+          "y": 60
+        },
+        "home-8": {
+          "x": 45,
+          "y": 46
+        },
+        "home-9": {
+          "x": 64,
+          "y": 34
+        },
+        "home-10": {
+          "x": 45,
+          "y": 22
+        },
+        "home-11": {
+          "x": 60,
+          "y": 8
+        },
+        "away-1": {
+          "x": 100,
+          "y": 34
+        },
+        "away-2": {
+          "x": 80,
+          "y": 10
+        },
+        "away-3": {
+          "x": 80,
+          "y": 58
+        },
+        "away-4": {
+          "x": 83,
+          "y": 27
+        },
+        "away-5": {
+          "x": 83,
+          "y": 41
+        },
+        "away-6": {
+          "x": 70,
+          "y": 28
+        },
+        "away-7": {
+          "x": 68,
+          "y": 12
+        },
+        "away-8": {
+          "x": 70,
+          "y": 40
+        },
+        "away-9": {
+          "x": 58,
+          "y": 30
+        },
+        "away-10": {
+          "x": 58,
+          "y": 40
+        },
+        "away-11": {
+          "x": 68,
+          "y": 56
+        },
+        "ball": {
+          "x": 52.5,
+          "y": 34
+        }
+      }
+    }
+  ],
+  "events": [],
+  "annotations": [],
+  "source": {
+    "type": "authored",
+    "sourceIds": [],
+    "licence": "project-authored",
+    "attribution": "Authored for The Next Klopp",
+    "shippable": true
+  }
+}

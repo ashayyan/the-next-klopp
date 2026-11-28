@@ -16,9 +16,9 @@ The quality gates (QA-01 to QA-05) are standing gates for every lesson. Each is 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Setup & Contracts** - Verified toolchain, guarded private repo with CI, running app skeleton, decision records and shared schemas
+- [x] **Phase 1: Setup & Contracts** - Verified toolchain, guarded private repo with CI, running app skeleton, decision records and shared schemas (completed 2026-11-28)
 - [x] **Phase 2: Research Wave 1** - Parallel research, data-coverage matrix, clip-supply decision, machine-readable registry and concept map, learner approval checkpoint (completed 2026-11-28)
-- [ ] **Phase 3: Pitch Standard & Data Pipeline** - Canonical pitch renderer, coordinate converters, glyphs and legend, Scene/Frame format, kloppy pipeline with licence gates
+- [x] **Phase 3: Pitch Standard & Data Pipeline** - Canonical pitch renderer, coordinate converters, glyphs and legend, Scene/Frame format, kloppy pipeline with licence gates (completed 2026-11-28)
 - [ ] **Phase 4: Design Direction & System** - 2-3 rendered directions, learner pick, DESIGN.md, tokens, component gallery, screenshot-review gate
 - [ ] **Phase 5: Content Engine, App Shell & Deploy** - Lesson-as-data engine, validator, claim components, Playwright walker, quality gates, shell, protected Vercel deploy
 - [ ] **Phase 6: Learner Experience & Progress** - Lesson Loop runtime, glossary, focus mode, confusion button, accessibility, local progress, capped FSRS queue, low-energy and welcome-back
@@ -38,7 +38,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The private repo `the-next-klopp` exists with protected `main`, and a PR must pass lint, typecheck, unit tests, build and the Windows smoke job; a test commit containing a raw-data file, an oversized file or a fake secret is rejected by the repo guards (`.gitignore`, `.gitattributes` with `eol=lf`, size/path guard, secret scanning, `.env.example` present).
   4. Querying agentmemory returns the learner profile and the project rules, and no raw research dumps are stored in it.
   5. `docs/decisions/` holds a record for each of: Vite SPA vs Next.js, router, storage engine, Vercel scope, study/dev server split, path-with-spaces handling; `/schemas` holds source, concept, competency and role schemas that sample fixtures validate against, before any research agent is spawned.
-**Plans**: 8/9 plans executed in 5 waves
+**Plans**: 9/9 plans complete in 5 waves
 
 Plans:
 **Wave 1**
@@ -58,7 +58,7 @@ Plans:
 - [x] 01-08-PLAN.md — docs/SETUP.md toolchain record, learner profile and rules stored in agentmemory (wave 4)
 
 **Wave 5** *(blocked on Wave 4 completion)*
-- [ ] 01-09-PLAN.md — CI workflow, branch protection attempt + ADR 0007, Phase 1 PR with six green checks (wave 5)
+- [x] 01-09-PLAN.md — CI workflow, branch protection attempt + ADR 0007, Phase 1 PR with six green checks (wave 5)
 **Research flag**: none (standard patterns). Two decisions need the learner's confirmation at the next checkpoint: study vs dev server split (D6) and moving the project to a path without spaces (D10).
 
 ### Phase 2: Research Wave 1
@@ -127,7 +127,31 @@ Plans:
   2. StatsBomb, Opta, Wyscout and tracking coordinate converters pass landmark and round-trip tests built from the provider specs, including a left/right asymmetry test, so the same landmark lands on the same spot of the pitch whichever provider it came from.
   3. `npm run data` runs the pipeline on Windows with no `make`: it downloads only allow-listed open sources, standardises them with kloppy and writes small immutable versioned artifacts with a manifest; raw data stays git-ignored, and CI fails when raw or licensed data, or an oversized file, is staged or would enter the bundle.
   4. At least one open-data sequence recipe produces a Scene/Frame sequence that plays back on the canonical pitch, and the same Scene/Frame format also holds a hand-authored board, a quiz answer and a reconstruction (one fixture of each renders).
-**Plans**: TBD
+**Plans**: 11/11 plans complete in 6 waves
+
+Plans:
+**Wave 1**
+- [x] 03-01-PLAN.md — Canonical pitch renderer: Law 1 geometry, one view matrix, Pitch + CanvasLayer, tokens, dev-only /dev/pitch (wave 1)
+- [x] 03-02-PLAN.md — Scene/Frame format v1: JSON Schema + Zod + integrity, presence semantics, f(t) sampler, four kind fixtures, pinned deps (wave 1)
+- [x] 03-03-PLAN.md — Provider converters ported from kloppy 3.19.1 with a kloppy-generated parity fixture and pytest network block (wave 1)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [x] 03-04-PLAN.md — Glyph registry and glyphs, always-visible auto legend, every fixture kind on /dev/pitch (wave 2)
+- [x] 03-05-PLAN.md — Pipeline allow-list fetch, Wyscout standardise, wyscout-goal recipe, pydantic Scene parity (wave 2)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [x] 03-06-PLAN.md — Immutable versioned artifacts with manifests, publish + catalog, `npm run data`, committed Wyscout scene (wave 3)
+- [x] 03-07-PLAN.md — Playback: Zustand clock, rAF loop, playback bar, keyboard, motion modes, 22-player stress scene (wave 3)
+
+**Wave 4** *(blocked on Wave 3 completion)*
+- [x] 03-08-PLAN.md — Licence and size gates: deny-manifest, check-bundle, check-immutable, guard + .gitignore, CI wiring and pipeline job (wave 4)
+- [x] 03-09-PLAN.md — Drag spike on the board, keyboard nudge, converter probe, provider landmarks overlay (wave 4)
+
+**Wave 5** *(blocked on Wave 4 completion)*
+- [x] 03-10-PLAN.md — Published artifact on /dev/pitch, load states, local-only StatsBomb freeze-frame recipe (wave 5)
+
+**Wave 6** *(blocked on Wave 5 completion)*
+- [x] 03-11-PLAN.md — Headless Edge browser checks (backstops, screenshots) and ADR 0009 pitch layer API (wave 6)
 **UI hint**: yes
 **Research flag**: needs deeper research on provider coordinate specs (encode from the specs, not from memory) and metric reference values. Includes a spike on the pitch layer API against three consumers: static markings, Tactics Board drag, 22-player playback.
 
@@ -215,9 +239,9 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Setup & Contracts | 8/9 | In Progress | - |
+| 1. Setup & Contracts | 9/9 | Complete    | 2026-11-28 |
 | 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
-| 3. Pitch Standard & Data Pipeline | 0/TBD | Not started | - |
+| 3. Pitch Standard & Data Pipeline | 11/11 | Complete    | 2026-11-28 |
 | 4. Design Direction & System | 0/TBD | Not started | - |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |
 | 6. Learner Experience & Progress | 0/TBD | Not started | - |

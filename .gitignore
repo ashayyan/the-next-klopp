@@ -13,10 +13,25 @@ coverage/
 # Raw or licensed data stays local; only publishable parquet under public/data/ is tracked
 pipeline/data/raw/
 pipeline/.venv/
+__pycache__/
+*.pyc
 data/raw/
 **/raw/
 *.parquet
 !public/data/**/*.parquet
+
+# Staging folders of an interrupted pipeline write (.<version>.tmp)
+.*.tmp/
+
+# Local-only datasets (ADR 0008): never committed
+data/statsbomb/
+data/last-row/
+data/metrica/
+data/skillcorner/
+public/data/statsbomb/
+public/data/last-row/
+public/data/metrica/
+public/data/skillcorner/
 
 # Local-only runtime output
 feedback/

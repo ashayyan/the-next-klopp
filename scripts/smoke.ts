@@ -99,9 +99,12 @@ try {
     if (!deep.ok) throw new Error(`deep link /dev returned HTTP ${deep.status}`);
     // Text taken from src/routes/dev.tsx; update both together if that copy changes.
     const devMarker = "left out of the study build";
+    // Text taken from the subline in src/routes/dev-pitch.tsx; update both together.
+    const devPitchMarker = "Dev view of the canonical pitch";
     const assetsDir = join(process.cwd(), "dist", "assets");
     for (const file of readdirSync(assetsDir).filter((f) => f.endsWith(".js"))) {
-      if (readFileSync(join(assetsDir, file), "utf8").includes(devMarker)) {
+      const text = readFileSync(join(assetsDir, file), "utf8");
+      if (text.includes(devMarker) || text.includes(devPitchMarker)) {
         throw new Error(`dev route code leaked into dist/assets/${file}`);
       }
     }

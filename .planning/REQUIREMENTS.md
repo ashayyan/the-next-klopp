@@ -35,17 +35,17 @@
 
 ### Pitch Standard
 
-- [ ] **PITCH-01**: One canonical pitch renderer (SVG + Canvas layer) draws standard dimensions and markings in canonical metres
-- [ ] **PITCH-02**: Coordinate converters for StatsBomb, Opta, Wyscout and tracking coordinates pass landmark and round-trip tests verified against provider specs
-- [ ] **PITCH-03**: Standard glyphs for players, ball, passes, carries, runs, pressure, zones and shapes are used everywhere, with an auto-generated notation legend always visible
-- [ ] **PITCH-04**: A single Scene/Frame format describes authored visuals, saved boards, quiz answers and pipeline reconstructions
+- [x] **PITCH-01**: One canonical pitch renderer (SVG + Canvas layer) draws standard dimensions and markings in canonical metres
+- [x] **PITCH-02**: Coordinate converters for StatsBomb, Opta, Wyscout and tracking coordinates pass landmark and round-trip tests verified against provider specs
+- [x] **PITCH-03**: Standard glyphs for players, ball, passes, carries, runs, pressure, zones and shapes are used everywhere, with an auto-generated notation legend always visible
+- [x] **PITCH-04**: A single Scene/Frame format describes authored visuals, saved boards, quiz answers and pipeline reconstructions
 
 ### Data Pipeline
 
-- [ ] **PIPE-01**: `/pipeline` (Python 3.12, uv) downloads only allow-listed open sources, standardises them with kloppy, and writes small immutable versioned artifacts with a manifest
-- [ ] **PIPE-02**: One npm script (e.g. `npm run data`) runs the pipeline on Windows with no `make`
-- [ ] **PIPE-03**: Raw and licensed data never enter git or the Vercel bundle (size/licence gates enforced in CI)
-- [ ] **PIPE-04**: At least one recipe turns an open-data sequence into a canonical Scene/Frame sequence the app can play
+- [x] **PIPE-01**: `/pipeline` (Python 3.12, uv) downloads only allow-listed open sources, standardises them with kloppy, and writes small immutable versioned artifacts with a manifest
+- [x] **PIPE-02**: One npm script (e.g. `npm run data`) runs the pipeline on Windows with no `make`
+- [x] **PIPE-03**: Raw and licensed data never enter git or the Vercel bundle (size/licence gates enforced in CI)
+- [x] **PIPE-04**: At least one recipe turns an open-data sequence into a canonical Scene/Frame sequence the app can play
 
 ### Platform and App Shell
 
@@ -177,14 +177,14 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 | RSCH-04 | Phase 2 | Complete |
 | RSCH-05 | Phase 2 | Complete |
 | RSCH-06 | Phase 2 | Complete |
-| PITCH-01 | Phase 3 | Pending |
-| PITCH-02 | Phase 3 | Pending |
-| PITCH-03 | Phase 3 | Pending |
-| PITCH-04 | Phase 3 | Pending |
-| PIPE-01 | Phase 3 | Pending |
-| PIPE-02 | Phase 3 | Pending |
-| PIPE-03 | Phase 3 | Pending |
-| PIPE-04 | Phase 3 | Pending |
+| PITCH-01 | Phase 3 | Complete |
+| PITCH-02 | Phase 3 | Complete |
+| PITCH-03 | Phase 3 | Complete |
+| PITCH-04 | Phase 3 | Complete |
+| PIPE-01 | Phase 3 | Complete |
+| PIPE-02 | Phase 3 | Complete |
+| PIPE-03 | Phase 3 | Complete |
+| PIPE-04 | Phase 3 | Complete |
 | DSGN-01 | Phase 4 | Pending |
 | DSGN-02 | Phase 4 | Pending |
 | DSGN-03 | Phase 4 | Pending |

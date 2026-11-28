@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "wyscout",
+      "licence": "CC-BY-4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "shippable": true,
+      "attribution": "Pappalardo, L. et al. A public data set of spatio-temporal match events in soccer competitions. Sci Data 6, 236 (2019). doi:10.1038/s41597-019-0247-7",
+      "files": [
+        {
+          "name": "events.zip",
+          "url": "https://ndownloader.figshare.com/files/14464685",
+          "bytes": 77323413,
+          "maxBytes": 100000000,
+          "sha256": "877e015b716ffdeea18f04418e3f24fed307ed03c37ff305cabe1f47c4822a45",
+          "figshareMd5": "7c20e8647e7eda58d7838a0c7b1ec6ab"
+        },
+        {
+          "name": "matches.zip",
+          "url": "https://ndownloader.figshare.com/files/14464622",
+          "bytes": 645097,
+          "maxBytes": 5000000,
+          "sha256": "c8f92bb7533e5c127e043cee764c991b5c25b4f5e70a65be931baae0b1765ce9"
+        },
+        {
+          "name": "players.json",
+          "url": "https://ndownloader.figshare.com/files/15073721",
+          "bytes": 1737347,
+          "maxBytes": 5000000,
+          "sha256": "877a111cb1005b73df5645e9338bd74fb4b496bace2fbc545a72abb3b73efa2e"
+        },
+        {
+          "name": "teams.json",
+          "url": "https://ndownloader.figshare.com/files/15073697",
+          "bytes": 27404,
+          "maxBytes": 5000000,
+          "sha256": "9f7a4a3b3d92c0be33f40613ad6e6eb4316c3b9771ec74c61a22c9b8ece23a4d"
+        }
+      ]
+    },
+    {
+      "id": "statsbomb",
+      "licence": "statsbomb-public-data-user-agreement",
+      "licenceUrl": "https://raw.githubusercontent.com/statsbomb/open-data/master/LICENSE.pdf",
+      "shippable": false,
+      "logoRequired": true,
+      "attribution": "Data: StatsBomb open data (StatsBomb logo required)",
+      "files": [
+        {
+          "name": "matches-2-27.json",
+          "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/matches/2/27.json",
+          "maxBytes": 8000000,
+          "sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
+        },
+        {
+          "name": "events-3754047.json",
+          "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3754047.json",
+          "maxBytes": 8000000,
+          "sha256": "7a4f89a7d787e68026fa224252e241fc15ddb0e25b25776f66dc7809dc19e41d"
+        },
+        {
+          "name": "lineups-3754047.json",
+          "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/lineups/3754047.json",
+          "maxBytes": 8000000,
+          "sha256": "7c46f6f1647506da86c46efac31db36b8b0cc1430d9c7989f3391bc5ac770f78"
+        }
+      ]
+    },
+    {
+      "id": "dfl",
+      "licence": "CC-BY-4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "shippable": true,
+      "attribution": "DFL / Sportec IDSSE open event and tracking data (Bassek et al.), CC BY 4.0",
+      "files": []
+    },
+    {
+      "id": "last-row",
+      "licence": "none-stated-informal-credit",
+      "licenceUrl": "https://github.com/Friends-of-Tracking-Data-FoTD/Last-Row",
+      "shippable": false,
+      "attribution": "Last Row: Liverpool 2019 positional data, Friends of Tracking",
+      "files": []
+    },
+    {
+      "id": "metrica",
+      "licence": "none-stated-informal-credit",
+      "licenceUrl": "https://github.com/metrica-sports/sample-data",
+      "shippable": false,
+      "attribution": "Metrica Sports sample data",
+      "files": []
+    },
+    {
+      "id": "skillcorner",
+      "licence": "MIT",
+      "licenceUrl": "https://raw.githubusercontent.com/SkillCorner/opendata/master/LICENSE",
+      "shippable": false,
+      "attribution": "SkillCorner open data",
+      "files": []
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "attribution": "Pappalardo, L. et al. A public data set of spatio-temporal match events in soccer competitions. Sci Data 6, 236 (2019). doi:10.1038/s41597-019-0247-7",
+  "dataset": "wyscout",
+  "files": [
+    {
+      "bytes": 8910,
+      "path": "scene-wyscout-2499754-sane-goal.json",
+      "sha256": "2eefca2baf7016c0e2f1ad05484cd48c8aff5379ce2074de9161765d1ca4a7bd"
+    }
+  ],
+  "generatedAt": "2026-11-28T01:48:01Z",
+  "inputs": [
+    {
+      "name": "events.zip",
+      "sha256": "877e015b716ffdeea18f04418e3f24fed307ed03c37ff305cabe1f47c4822a45"
+    },
+    {
+      "name": "matches.zip",
+      "sha256": "c8f92bb7533e5c127e043cee764c991b5c25b4f5e70a65be931baae0b1765ce9"
+    },
+    {
+      "name": "players.json",
+      "sha256": "877a111cb1005b73df5645e9338bd74fb4b496bace2fbc545a72abb3b73efa2e"
+    },
+    {
+      "name": "teams.json",
+      "sha256": "9f7a4a3b3d92c0be33f40613ad6e6eb4316c3b9771ec74c61a22c9b8ece23a4d"
+    }
+  ],
+  "kloppyVersion": "3.19.1",
+  "licenceUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "license": "CC-BY-4.0",
+  "logoRequired": false,
+  "recipe": "wyscout-goal",
+  "rowCounts": {
+    "entities": 8,
+    "events": 10,
+    "frames": 11,
+    "scenes": 1
+  },
+  "schemaVersion": 1,
+  "shippable": true,
+  "sourceId": "wyscout",
+  "version": "v1-809b8aff1fda"
+}

@@ -2,9 +2,9 @@ import { describe, expect, it } from "vitest";
 import { buildRoutes } from "./routes.ts";
 
 describe("buildRoutes", () => {
-  it("includes /dev in the dev build", () => {
+  it("includes /dev and /dev/pitch in the dev build", () => {
     const paths = buildRoutes({ includeDev: true }).map((route) => route.path);
-    expect(paths).toEqual(["/", "/dev", "*"]);
+    expect(paths).toEqual(["/", "/dev", "/dev/pitch", "*"]);
   });
 
   it("leaves /dev out of the study build", () => {

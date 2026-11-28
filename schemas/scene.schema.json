@@ -1,0 +1,356 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-next-klopp.example/schemas/scene.schema.json",
+  "title": "Scene",
+  "$comment": "Scene/Frame format v1 (PITCH-04). One format for authored visuals, saved boards, quiz answers and pipeline reconstructions. All coordinates are canonical metres: origin top-left of the field, x along the touchline 0..length, y down 0..width. Presence rule (frozen, A7): effectivePresence(scene, entity) = entity.presence ?? (scene.kind === 'reconstruction' ? 'sampled' : 'always'). 'sampled' entities are hidden before their first and after their last sample and interpolated between their own consecutive samples; 'always' entities hold their first sample before it and their last sample after it. Semantic rules JSON Schema cannot express (frame order, references, pitch-relative bounds, licence rules) live in src/scene/validate.ts. Only additive changes after Phase 3.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "schemaVersion",
+    "kind",
+    "label",
+    "pitch",
+    "teams",
+    "entities",
+    "frames",
+    "events",
+    "annotations",
+    "source"
+  ],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+    "schemaVersion": { "const": 1 },
+    "kind": { "enum": ["authored", "board", "quiz-answer", "reconstruction"] },
+    "label": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "pitch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["length", "width"],
+      "properties": {
+        "length": { "type": "number", "minimum": 90, "maximum": 120 },
+        "width": { "type": "number", "minimum": 45, "maximum": 90 }
+      }
+    },
+    "teams": {
+      "type": "array",
+      "maxItems": 2,
+      "items": { "$ref": "#/$defs/team" }
+    },
+    "entities": {
+      "type": "array",
+      "maxItems": 64,
+      "items": { "$ref": "#/$defs/entity" }
+    },
+    "frames": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5000,
+      "items": { "$ref": "#/$defs/frame" }
+    },
+    "events": {
+      "type": "array",
+      "maxItems": 500,
+      "items": { "$ref": "#/$defs/event" }
+    },
+    "annotations": {
+      "type": "array",
+      "maxItems": 100,
+      "items": { "$ref": "#/$defs/annotation" }
+    },
+    "source": { "$ref": "#/$defs/source" }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "number", "minimum": -10, "maximum": 130 },
+        "y": { "type": "number", "minimum": -10, "maximum": 100 }
+      }
+    },
+    "seconds": { "type": "number", "minimum": 0 },
+    "team": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "side", "attack"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "name": { "type": "string", "minLength": 1, "maxLength": 60 },
+        "side": { "enum": ["a", "b"] },
+        "venue": { "enum": ["home", "away"] },
+        "attack": {
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 5,
+          "additionalProperties": false,
+          "patternProperties": {
+            "^[1-5]$": { "enum": ["ltr", "rtl"] }
+          }
+        }
+      }
+    },
+    "entity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "enum": ["player", "goalkeeper", "ball"] },
+        "team": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "number": { "type": "integer", "minimum": 1, "maximum": 99 },
+        "label": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "name": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "role": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "presence": { "enum": ["always", "sampled"] }
+      }
+    },
+    "frame": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["t", "positions"],
+      "properties": {
+        "t": { "type": "number", "minimum": 0, "maximum": 10800 },
+        "positions": {
+          "type": "object",
+          "maxProperties": 64,
+          "propertyNames": { "$ref": "common.schema.json#/$defs/kebabId" },
+          "additionalProperties": { "$ref": "#/$defs/point" }
+        },
+        "ballOwner": { "$ref": "common.schema.json#/$defs/kebabId" }
+      }
+    },
+    "event": {
+      "oneOf": [
+        { "$ref": "#/$defs/passEvent" },
+        { "$ref": "#/$defs/carryEvent" },
+        { "$ref": "#/$defs/runEvent" },
+        { "$ref": "#/$defs/shotEvent" },
+        { "$ref": "#/$defs/pressureEvent" }
+      ]
+    },
+    "passEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "t", "team", "start", "end"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "pass" },
+        "t": { "$ref": "#/$defs/seconds" },
+        "tEnd": { "$ref": "#/$defs/seconds" },
+        "team": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "player": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "start": { "$ref": "#/$defs/point" },
+        "end": { "$ref": "#/$defs/point" },
+        "ref": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "receiver": { "$ref": "common.schema.json#/$defs/kebabId" }
+      }
+    },
+    "carryEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "t", "team", "player", "start", "end"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "carry" },
+        "t": { "$ref": "#/$defs/seconds" },
+        "tEnd": { "$ref": "#/$defs/seconds" },
+        "team": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "player": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "start": { "$ref": "#/$defs/point" },
+        "end": { "$ref": "#/$defs/point" },
+        "ref": { "type": "string", "minLength": 1, "maxLength": 64 }
+      }
+    },
+    "runEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "t", "team", "player", "start", "end"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "run" },
+        "t": { "$ref": "#/$defs/seconds" },
+        "tEnd": { "$ref": "#/$defs/seconds" },
+        "team": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "player": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "start": { "$ref": "#/$defs/point" },
+        "end": { "$ref": "#/$defs/point" },
+        "ref": { "type": "string", "minLength": 1, "maxLength": 64 }
+      }
+    },
+    "shotEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "t", "team", "start", "end", "goal"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "shot" },
+        "t": { "$ref": "#/$defs/seconds" },
+        "tEnd": { "$ref": "#/$defs/seconds" },
+        "team": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "player": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "start": { "$ref": "#/$defs/point" },
+        "end": { "$ref": "#/$defs/point" },
+        "ref": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "goal": { "type": "boolean" },
+        "endApprox": { "type": "boolean" }
+      }
+    },
+    "pressureEvent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "t", "team", "player", "start", "end"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "pressure" },
+        "t": { "$ref": "#/$defs/seconds" },
+        "tEnd": { "$ref": "#/$defs/seconds" },
+        "team": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "player": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "start": { "$ref": "#/$defs/point" },
+        "end": { "$ref": "#/$defs/point" },
+        "ref": { "type": "string", "minLength": 1, "maxLength": 64 },
+        "target": { "$ref": "common.schema.json#/$defs/kebabId" }
+      }
+    },
+    "annotation": {
+      "oneOf": [
+        { "$ref": "#/$defs/zoneAnnotation" },
+        { "$ref": "#/$defs/shapeAnnotation" },
+        { "$ref": "#/$defs/highlightAnnotation" },
+        { "$ref": "#/$defs/noteAnnotation" },
+        { "$ref": "#/$defs/pointAnnotation" },
+        { "$ref": "#/$defs/sequenceAnnotation" }
+      ]
+    },
+    "zoneAnnotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "points"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "zone" },
+        "points": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/point" }
+        },
+        "label": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "from": { "$ref": "#/$defs/seconds" },
+        "to": { "$ref": "#/$defs/seconds" }
+      }
+    },
+    "shapeAnnotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "team", "members"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "shape" },
+        "team": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "members": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 11,
+          "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+        },
+        "closed": { "type": "boolean" },
+        "from": { "$ref": "#/$defs/seconds" },
+        "to": { "$ref": "#/$defs/seconds" }
+      }
+    },
+    "highlightAnnotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "highlight" },
+        "target": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "at": { "$ref": "#/$defs/point" },
+        "from": { "$ref": "#/$defs/seconds" },
+        "to": { "$ref": "#/$defs/seconds" }
+      }
+    },
+    "noteAnnotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "text", "at"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "note" },
+        "text": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "at": { "$ref": "#/$defs/point" },
+        "anchor": { "$ref": "#/$defs/point" },
+        "from": { "$ref": "#/$defs/seconds" },
+        "to": { "$ref": "#/$defs/seconds" }
+      }
+    },
+    "pointAnnotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "at"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "point" },
+        "at": { "$ref": "#/$defs/point" },
+        "label": { "type": "string", "minLength": 1, "maxLength": 12 },
+        "from": { "$ref": "#/$defs/seconds" },
+        "to": { "$ref": "#/$defs/seconds" }
+      }
+    },
+    "sequenceAnnotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "events"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "sequence" },
+        "events": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "sourceIds", "licence", "attribution", "shippable"],
+      "properties": {
+        "type": { "enum": ["authored", "open-data"] },
+        "provider": {
+          "enum": ["wyscout", "statsbomb", "dfl", "metrica", "skillcorner", "last-row"]
+        },
+        "sourceIds": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "string",
+            "pattern": "^src-[a-z0-9]+(?:-[a-z0-9]+)*(?:#[a-z0-9]+(?:-[a-z0-9]+)*)?$"
+          }
+        },
+        "licence": { "type": "string", "minLength": 1, "maxLength": 80 },
+        "licenceUrl": { "$ref": "common.schema.json#/$defs/httpUrl" },
+        "attribution": { "type": "string", "minLength": 1, "maxLength": 400 },
+        "shippable": { "type": "boolean" },
+        "localOnly": { "type": "boolean" },
+        "logoRequired": { "type": "boolean" },
+        "matchId": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "clock": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["period", "offsetSec"],
+          "properties": {
+            "period": { "type": "integer", "minimum": 1, "maximum": 5 },
+            "offsetSec": { "type": "number", "minimum": 0 }
+          }
+        },
+        "recipe": { "$ref": "common.schema.json#/$defs/kebabId" }
+      }
+    }
+  }
+}

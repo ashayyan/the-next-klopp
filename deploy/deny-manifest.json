@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "scope": ["public/**", "dist/**"],
+  "denyGlobs": [
+    "public/data/statsbomb/**",
+    "**/*statsbomb*",
+    "**/statsbomb/**",
+    "public/data/last-row/**",
+    "**/*last-row*",
+    "**/last-row/**",
+    "public/data/metrica/**",
+    "**/*metrica*",
+    "**/metrica/**",
+    "public/data/skillcorner/**",
+    "**/*skillcorner*",
+    "**/skillcorner/**"
+  ],
+  "shipDirs": ["public/data/wyscout/**", "public/data/dfl/**"],
+  "localOnlyDatasets": ["last-row", "metrica", "skillcorner", "statsbomb"],
+  "contentMarkers": ["data/statsbomb/", "data/last-row/", "data/metrica/", "data/skillcorner/"],
+  "limits": {
+    "dataFileBytes": 1048576,
+    "dataTotalBytes": 5242880,
+    "assetFileBytes": 5242880
+  }
+}

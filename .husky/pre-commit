@@ -1,2 +1,3 @@
 node scripts/guard-files.ts --staged
+node scripts/check-immutable.ts --staged
 npx lint-staged

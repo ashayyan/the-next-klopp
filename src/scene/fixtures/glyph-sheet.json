@@ -1,0 +1,275 @@
+{
+  "id": "glyph-sheet",
+  "schemaVersion": 1,
+  "kind": "authored",
+  "label": "Glyph sheet",
+  "pitch": {
+    "length": 105,
+    "width": 68
+  },
+  "teams": [
+    {
+      "id": "home",
+      "name": "Home",
+      "side": "a",
+      "venue": "home",
+      "attack": {
+        "1": "ltr"
+      }
+    },
+    {
+      "id": "away",
+      "name": "Away",
+      "side": "b",
+      "venue": "away",
+      "attack": {
+        "1": "rtl"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "id": "home-1",
+      "type": "goalkeeper",
+      "team": "home",
+      "number": 1,
+      "role": "Goalkeeper"
+    },
+    {
+      "id": "home-7",
+      "type": "player",
+      "team": "home",
+      "number": 7,
+      "role": "Right winger"
+    },
+    {
+      "id": "home-8",
+      "type": "player",
+      "team": "home",
+      "number": 8,
+      "role": "Central midfielder"
+    },
+    {
+      "id": "home-9",
+      "type": "player",
+      "team": "home",
+      "number": 9,
+      "role": "Striker"
+    },
+    {
+      "id": "away-1",
+      "type": "goalkeeper",
+      "team": "away",
+      "number": 1,
+      "role": "Goalkeeper"
+    },
+    {
+      "id": "away-4",
+      "type": "player",
+      "team": "away",
+      "number": 4,
+      "role": "Centre back"
+    },
+    {
+      "id": "away-9",
+      "type": "player",
+      "team": "away",
+      "number": 9,
+      "role": "Striker"
+    },
+    {
+      "id": "ball",
+      "type": "ball"
+    }
+  ],
+  "frames": [
+    {
+      "t": 0,
+      "positions": {
+        "home-1": {
+          "x": 6,
+          "y": 34
+        },
+        "home-7": {
+          "x": 26,
+          "y": 37
+        },
+        "home-8": {
+          "x": 41,
+          "y": 28
+        },
+        "home-9": {
+          "x": 52,
+          "y": 48
+        },
+        "away-1": {
+          "x": 101,
+          "y": 34
+        },
+        "away-4": {
+          "x": 78,
+          "y": 40
+        },
+        "away-9": {
+          "x": 34,
+          "y": 40
+        },
+        "ball": {
+          "x": 27.5,
+          "y": 37
+        }
+      },
+      "ballOwner": "home-7"
+    }
+  ],
+  "events": [
+    {
+      "id": "ev-pass",
+      "type": "pass",
+      "t": 0,
+      "team": "home",
+      "player": "home-7",
+      "receiver": "home-8",
+      "start": {
+        "x": 29,
+        "y": 35
+      },
+      "end": {
+        "x": 43,
+        "y": 26
+      }
+    },
+    {
+      "id": "ev-carry",
+      "type": "carry",
+      "t": 0,
+      "team": "home",
+      "player": "home-8",
+      "start": {
+        "x": 43,
+        "y": 26
+      },
+      "end": {
+        "x": 60,
+        "y": 22
+      }
+    },
+    {
+      "id": "ev-run",
+      "type": "run",
+      "t": 0,
+      "team": "home",
+      "player": "home-9",
+      "start": {
+        "x": 52,
+        "y": 48
+      },
+      "end": {
+        "x": 68,
+        "y": 42
+      }
+    },
+    {
+      "id": "ev-shot",
+      "type": "shot",
+      "t": 0,
+      "team": "home",
+      "player": "home-8",
+      "start": {
+        "x": 70,
+        "y": 28
+      },
+      "end": {
+        "x": 95,
+        "y": 31
+      },
+      "goal": true
+    },
+    {
+      "id": "ev-pressure",
+      "type": "pressure",
+      "t": 0,
+      "team": "away",
+      "player": "away-9",
+      "target": "home-7",
+      "start": {
+        "x": 34,
+        "y": 40
+      },
+      "end": {
+        "x": 27,
+        "y": 37
+      }
+    }
+  ],
+  "annotations": [
+    {
+      "id": "zone-final-third",
+      "type": "zone",
+      "points": [
+        {
+          "x": 78,
+          "y": 16
+        },
+        {
+          "x": 96,
+          "y": 16
+        },
+        {
+          "x": 96,
+          "y": 52
+        },
+        {
+          "x": 78,
+          "y": 52
+        }
+      ],
+      "label": "Zone"
+    },
+    {
+      "id": "shape-attack",
+      "type": "shape",
+      "team": "home",
+      "members": ["home-7", "home-8", "home-9"]
+    },
+    {
+      "id": "highlight-striker",
+      "type": "highlight",
+      "target": "away-9"
+    },
+    {
+      "id": "note-press",
+      "type": "note",
+      "text": "The press forces the pass wide, then the trap shuts.",
+      "at": {
+        "x": 58,
+        "y": 34
+      },
+      "anchor": {
+        "x": 34,
+        "y": 40
+      }
+    },
+    {
+      "id": "point-spot",
+      "type": "point",
+      "at": {
+        "x": 20,
+        "y": 14
+      },
+      "label": "Spot"
+    },
+    {
+      "id": "sequence-chain",
+      "type": "sequence",
+      "events": ["ev-pass", "ev-carry", "ev-shot"]
+    }
+  ],
+  "source": {
+    "type": "authored",
+    "sourceIds": [],
+    "licence": "project-authored",
+    "attribution": "Authored for The Next Klopp",
+    "shippable": true
+  }
+}

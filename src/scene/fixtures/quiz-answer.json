@@ -1,0 +1,159 @@
+{
+  "id": "quiz-answer-space",
+  "schemaVersion": 1,
+  "kind": "quiz-answer",
+  "label": "Quiz answer: where is the space?",
+  "pitch": {
+    "length": 105,
+    "width": 68
+  },
+  "teams": [
+    {
+      "id": "home",
+      "name": "Home",
+      "side": "a",
+      "venue": "home",
+      "attack": {
+        "1": "ltr"
+      }
+    },
+    {
+      "id": "away",
+      "name": "Away",
+      "side": "b",
+      "venue": "away",
+      "attack": {
+        "1": "rtl"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "id": "home-6",
+      "type": "player",
+      "team": "home",
+      "number": 6
+    },
+    {
+      "id": "home-9",
+      "type": "player",
+      "team": "home",
+      "number": 9
+    },
+    {
+      "id": "home-11",
+      "type": "player",
+      "team": "home",
+      "number": 11
+    },
+    {
+      "id": "away-4",
+      "type": "player",
+      "team": "away",
+      "number": 4
+    },
+    {
+      "id": "away-5",
+      "type": "player",
+      "team": "away",
+      "number": 5
+    },
+    {
+      "id": "away-6",
+      "type": "player",
+      "team": "away",
+      "number": 6
+    },
+    {
+      "id": "ball",
+      "type": "ball"
+    }
+  ],
+  "frames": [
+    {
+      "t": 0,
+      "positions": {
+        "home-6": {
+          "x": 50,
+          "y": 34
+        },
+        "home-9": {
+          "x": 80,
+          "y": 36
+        },
+        "home-11": {
+          "x": 66,
+          "y": 12
+        },
+        "away-4": {
+          "x": 80,
+          "y": 28
+        },
+        "away-5": {
+          "x": 80,
+          "y": 42
+        },
+        "away-6": {
+          "x": 64,
+          "y": 38
+        },
+        "ball": {
+          "x": 51,
+          "y": 34
+        }
+      },
+      "ballOwner": "home-6"
+    }
+  ],
+  "events": [],
+  "annotations": [
+    {
+      "id": "zone-correct",
+      "type": "zone",
+      "points": [
+        {
+          "x": 66,
+          "y": 18
+        },
+        {
+          "x": 77,
+          "y": 18
+        },
+        {
+          "x": 77,
+          "y": 30
+        },
+        {
+          "x": 66,
+          "y": 30
+        }
+      ],
+      "label": "Correct area"
+    },
+    {
+      "id": "point-answer",
+      "type": "point",
+      "at": {
+        "x": 71,
+        "y": 24
+      },
+      "label": "Your tap"
+    },
+    {
+      "id": "note-why",
+      "type": "note",
+      "text": "Between the midfield and back lines",
+      "at": {
+        "x": 56,
+        "y": 58
+      }
+    }
+  ],
+  "source": {
+    "type": "authored",
+    "sourceIds": [],
+    "licence": "project-authored",
+    "attribution": "Authored for The Next Klopp",
+    "shippable": true
+  }
+}

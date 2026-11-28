@@ -14,6 +14,8 @@
       "!!.agents",
       "!!pipeline/.venv",
       "!!pipeline/tests/fixtures",
+      "!!data",
+      "!!public/data",
       "!!research/summary",
       "!!**/package-lock.json",
       "!!skills-lock.json",
@@ -30,6 +32,11 @@
     "enabled": true,
     "rules": {
       "preset": "recommended"
+    }
+  },
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
     }
   },
   "javascript": {
