@@ -230,7 +230,29 @@ Plans:
   3. The generic Playwright walker completes a fixture lesson end-to-end with no per-lesson test code and runs axe, keyboard, reduced-motion, contrast and performance-budget checks; CI blocks merging when any fails or when a frozen lesson, step or item ID or data artifact version changes non-additively.
   4. A lesson cannot be marked shippable without a verification record from a verifier other than its author (checked against fetched source excerpts) and without role and competency tags; a role-coverage report generates.
   5. Learner opens the home screen with one obvious next action, navigates by track and chapter, and reads the "What's new" page; the app is deployed to the learner's Vercel account with protection scope "All Deployments", a smoke script proves the production URL and a PR preview URL are not public, and a deny-manifest check fails the build if licensed raw data is in the deployed bundle.
-**Plans**: TBD
+**Plans**: 20 plans in 13 waves
+
+Plans:
+- [ ] 05-01-PLAN.md — Tracer: deps gate, MDX + virtual:tnk-lessons, fixture renders at /learn, build-time selection (wave 1)
+- [ ] 05-02-PLAN.md — Lesson, verification and What's new schemas v1; curriculum, sources and order in the virtual module; ADR 0011 (wave 2)
+- [ ] 05-03-PLAN.md — Validator CLI, manifest, shared countWords, structural and safety rules, pre-commit and CI test job (wave 3)
+- [ ] 05-04-PLAN.md — Generic walker with axe, required build job in the Playwright image, review:screens --fixtures (wave 4)
+- [ ] 05-06-PLAN.md — Rules: screen-words, heading-words, loop-stage, unknown-ids, duration, prereq-cycle, template-unbuilt (wave 4)
+- [ ] 05-05-PLAN.md — Lesson frame: rail mapping, step nav and CTA copy, deep links, focus, complete view, layout (wave 5)
+- [ ] 05-08-PLAN.md — Registry effective_date, claim extractor, rule-dates, citation, data-ref, bare-number (wave 5)
+- [ ] 05-07-PLAN.md — Lesson states: StatusPanel, loading, failed chunk, unknown ids, dev badges (wave 6)
+- [ ] 05-09-PLAN.md — Claim components: chips, popover, source line, Rule, Contested, Stat, Visual scene (wave 7)
+- [ ] 05-10-PLAN.md — Shell A: app bar, home with nextAction, not-found, route error (wave 7)
+- [ ] 05-11-PLAN.md — Interaction registry, slot, quiz-choice, predict-then-reveal, interaction rules (wave 8)
+- [ ] 05-17-PLAN.md — Shell B: tracks, track, part, What's new, shell review (wave 8)
+- [ ] 05-12-PLAN.md — order-sequence, scene-playback, drag-player, converter-probe, second fixture (wave 9)
+- [ ] 05-13-PLAN.md — Shippable gate: content hash, verification rules, verifier helper, What's new rule (wave 9)
+- [ ] 05-14-PLAN.md — Walker keyboard pass at three widths, reduced-motion pass, axe on every state (wave 10)
+- [ ] 05-16-PLAN.md — Frozen ids (content:freeze, check-frozen in guards) and role-coverage report (wave 10)
+- [ ] 05-15-PLAN.md — Performance budget, word-count parity, full fixture review (wave 11)
+- [ ] 05-19-PLAN.md — build:vercel with content-leak gate, vercel.json, .vercelignore, smoke:protection (wave 11)
+- [ ] 05-18-PLAN.md — Fresh Opus verifier writes the fixture's verification record; fixture becomes shippable (wave 12)
+- [ ] 05-20-PLAN.md — Live Vercel: protection before first deploy, production and preview proven protected, docs (wave 13)
 **UI hint**: yes
 **Checkpoint**: learner logs into Vercel and `gh` themselves; Claude never handles their passwords.
 **Research flag**: needs deeper research on Vercel plan availability for the "All Deployments" protection scope (verify in the dashboard, then with `curl -I`).
