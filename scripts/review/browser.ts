@@ -267,9 +267,15 @@ function collectPage(): PageData {
     (el) => shown(el) && !unreachable(el),
   );
   // A checkbox or radio wrapped by its label is hit through the label, so the label's box counts.
+  // Any other control (a select beside its "Speed" label) is measured by its own box.
   const hitBox = (el: Element): [number, number, number, number] => {
-    const label = (el as HTMLInputElement).labels?.[0];
-    return label && shown(label) ? boxOf(label) : boxOf(el);
+    const input = el as HTMLInputElement;
+    const label = input.labels?.[0];
+    const wrapped =
+      el.tagName === "INPUT" &&
+      (input.type === "checkbox" || input.type === "radio") &&
+      label?.contains(el) === true;
+    return wrapped && label && shown(label) ? boxOf(label) : boxOf(el);
   };
   const targets: PageData["targets"] = controlEls.map((el) => ({
     selector: selectorOf(el),

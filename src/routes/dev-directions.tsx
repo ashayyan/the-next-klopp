@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router";
+import { DataScreen } from "./dev-directions/DataScreen.tsx";
 import { DIRECTIONS, type Direction, findDirection } from "./dev-directions/DirectionScope.tsx";
 import { TacticsScreen } from "./dev-directions/TacticsScreen.tsx";
 
@@ -138,16 +139,7 @@ function Fallback({ message, links }: { message: string; links: { to: string; la
 
 function renderScreen(direction: Direction, screen: string | undefined) {
   if (screen === "tactics") return <TacticsScreen key={direction.id} direction={direction} />;
-  if (screen === "data") {
-    return (
-      <Fallback
-        message="The data screen is not built yet."
-        links={[
-          { to: `/dev/directions/${direction.id}/tactics`, label: "Open the tactics screen" },
-        ]}
-      />
-    );
-  }
+  if (screen === "data") return <DataScreen key={direction.id} direction={direction} />;
   return (
     <Fallback
       message={`No screen called “${screen ?? ""}”. Pick tactics or data.`}

@@ -98,7 +98,7 @@ export function PlaybackBar({ store }: PlaybackBarProps) {
           step={0.04}
           value={t}
           onChange={(e) => seek(Number(e.target.value))}
-          className="order-5 min-h-11 min-w-0 basis-[calc(100%-9rem)] accent-accent md:order-4 md:basis-0 md:flex-1"
+          className={`order-5 min-h-11 min-w-0 basis-[calc(100%-9rem)] accent-accent md:order-4 md:basis-0 md:flex-1 ${focusRing}`}
         />
         <output className="order-4 font-mono text-sm tabular-nums md:order-5">
           {`${seconds(t)} s / ${seconds(duration)} s`}
@@ -111,7 +111,7 @@ export function PlaybackBar({ store }: PlaybackBarProps) {
             id={speedId}
             value={speed}
             onChange={(e) => setSpeed(Number(e.target.value))}
-            className={`min-h-11 rounded-sm border border-control-border bg-surface-page px-2 text-sm text-ink ${focusRing}`}
+            className={`h-11 min-h-11 rounded-sm border border-control-border bg-surface-page px-2 text-sm text-ink ${focusRing}`}
           >
             {SPEEDS.map((s) => (
               <option key={s} value={s}>

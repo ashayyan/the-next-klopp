@@ -1,5 +1,7 @@
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
+import { DataTable } from "./data/DataTable.tsx";
+import { StatCard } from "./data/StatCard.tsx";
 import { ShellBar } from "./lesson/ShellBar.tsx";
 import { LESSON_LOOP_STEPS, StepRail } from "./lesson/StepRail.tsx";
 import { readStoredTheme, resolveTheme, THEME_KEY, writeStoredTheme } from "./theme.ts";
@@ -141,5 +143,79 @@ describe("resolveTheme", () => {
 
   it("ignores an invalid param", () => {
     expect(resolveTheme({ param: "sepia", stored: "dark", prefersDark: false })).toBe("dark");
+  });
+});
+
+describe("StatCard", () => {
+  it("shows three figures in the mono family with each label beside its figure", () => {
+    const html = renderToStaticMarkup(
+      <StatCard
+        figures={[
+          { value: "18.4", unit: "s", label: "first pass to shot" },
+          { value: "59.3", unit: "m", label: "ball moved upfield before the shot" },
+          { value: "7", label: "City players on the ball" },
+        ]}
+      />,
+    );
+    expect(count(html, "data-stat-figure")).toBe(3);
+    const figures = html.split("data-stat-figure").slice(1);
+    for (const f of figures) expect(f).toMatch(/^[^>]*class="[^"]*font-mono[^"]*tabular-nums/);
+    // Each figure and its label share one row (a flex line), label second.
+    const rows = html.split('<div class="flex min-w-0 items-baseline gap-2">').slice(1);
+    expect(rows).toHaveLength(3);
+    expect(rows[0]).toContain("first pass to shot");
+    expect(rows[0]).toContain("18.4");
+  });
+});
+
+describe("DataTable", () => {
+  const rows = [
+    { id: "a", n: 1, who: "Mangala", metres: "+14.4" },
+    { id: "b", n: 2, who: "Danilo", metres: "−15.3" },
+  ];
+  const columns = [
+    { id: "n", header: "#", numeric: true, cell: (r: (typeof rows)[number]) => r.n },
+    { id: "who", header: "Who", cell: (r: (typeof rows)[number]) => r.who },
+    { id: "m", header: "Metres", numeric: true, cell: (r: (typeof rows)[number]) => r.metres },
+  ];
+
+  it("has a caption, right-aligned mono numerals and aria-selected on the active row", () => {
+    const html = renderToStaticMarkup(
+      <DataTable
+        caption="All ten actions"
+        columns={columns}
+        rows={rows}
+        rowKey={(r) => r.id}
+        activeRow="b"
+        onRowEnter={() => {}}
+      />,
+    );
+    expect(html).toMatch(/<caption[^>]*>All ten actions<\/caption>/);
+    const cells = [...html.matchAll(/<td class="([^"]*)">([^<]*)<\/td>/g)];
+    const numeric = cells.filter((m) => m[2] === "+14.4" || m[2] === "1");
+    expect(numeric.length).toBe(2);
+    for (const m of numeric) {
+      expect(m[1]).toContain("text-right");
+      expect(m[1]).toContain("font-mono");
+    }
+    expect(html).toMatch(/data-row="b" aria-selected="true"/);
+    expect(html).toMatch(/data-row="a" aria-selected="false"/);
+  });
+
+  it("shows the empty copy when there are no rows", () => {
+    const html = renderToStaticMarkup(
+      <DataTable
+        caption="All ten actions"
+        columns={columns}
+        rows={[]}
+        rowKey={(r) => r.id}
+        empty={{
+          heading: "No events in this window",
+          body: "Widen the time window or pick another match to see events here.",
+        }}
+      />,
+    );
+    expect(html).toContain("No events in this window");
+    expect(html).not.toContain("<table");
   });
 });

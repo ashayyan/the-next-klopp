@@ -23,6 +23,7 @@ import {
   parseEase,
 } from "./morph.ts";
 import rawCity from "./scenes/city-2022-23-shapes.json";
+import { DISPLAY, useMeasuredWidth } from "./shared.ts";
 
 // Screen 1 of 04-UI-SPEC: the tactics lesson ("concept" template, Lesson Loop step 3: Touch it).
 // The content blocks and copy are fixed for all three directions; only the layout wrappers differ.
@@ -104,23 +105,6 @@ export function shapeFromQuery(param: string | null): ShapeState {
   return param === "with" ? "with" : "without";
 }
 
-/** The pitch container's CSS width, measured, so orientation follows the space it has. */
-function useMeasuredWidth(initial: number) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(initial);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el || typeof ResizeObserver === "undefined") return;
-    const observer = new ResizeObserver((entries) => {
-      const w = entries[0]?.contentRect.width;
-      if (w !== undefined && w > 0) setWidth(w);
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-  return [ref, width] as const;
-}
-
 /** Every block of the screen, built once; a direction layout only decides where each one sits. */
 interface Blocks {
   shell: (className: string) => ReactNode;
@@ -138,8 +122,6 @@ interface Blocks {
   source: ReactNode;
   cta: (className: string) => ReactNode;
 }
-
-const DISPLAY = "font-display [font-stretch:var(--font-display-stretch)]";
 
 /**
  * floodlit: a stage. At 1440 the title runs across the top, then a 12-column grid: step rail
