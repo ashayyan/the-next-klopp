@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 3
 current_phase_name: Pitch Standard & Data Pipeline
 status: executing
-stopped_at: Completed 03-08-PLAN.md
-last_updated: "2026-11-28T02:14:05.221Z"
+stopped_at: Completed 03-09-PLAN.md
+last_updated: "2026-11-28T02:27:40.571Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 3 execution started
-state_head: 1b83ddcb7bc5014aa98aad1def3cb9efead8e802
+state_head: fb0307cf19ceeee4abc8ffe3c1829a23f04c7c02
 progress:
   total_phases: 8
   completed_phases: 2
   total_plans: 41
-  completed_plans: 38
+  completed_plans: 39
   percent: 25
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 3 (Pitch Standard & Data Pipeline) — EXECUTING
-Plan: 9 of 11
+Plan: 10 of 11
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 3 execution started
 
@@ -84,6 +84,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 03 P06 | 9min | 3 tasks | 14 files |
 | Phase 03 P07 | 14min | 3 tasks | 12 files |
 | Phase 03 P08 | 25min | 3 tasks | 14 files |
+| Phase 03 P09 | 40min | 3 tasks | 13 files |
 
 ## Accumulated Context
 
@@ -131,6 +132,7 @@ Recent decisions affecting current work:
 - [Phase 03]: Dataset versions are content-addressed and never overwritten; publish copies only versions where manifest and allow-list both say shippable; run-all fetches only sources a registered recipe reads
 - [Phase 03]: Playback clock is a per-scene vanilla zustand store with a pure tick; one rAF loop runs only while playing; keyboard map is a pure handler on the stage region; added --accent-ink token
 - [Phase 03]: 03-08: deny-manifest is the single licence gate config; path.posix.matchesGlob used without picomatch (no warning on Node 24.21)
+- [Phase 03]: 03-09: draggable handle lives in an interaction layer separate from the visible disc so pointer capture survives the dragged-on-top reorder
 
 ### Pending Todos
 
@@ -158,6 +160,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T02:14:04.814Z
-Stopped at: Completed 03-08-PLAN.md
+Last session: 2026-11-28T02:27:40.301Z
+Stopped at: Completed 03-09-PLAN.md
 Resume file: None
