@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -362,7 +363,9 @@ def test_the_cli_fetch_help_lists_offline_and_all() -> None:
 
     result = CliRunner().invoke(app, ["fetch", "--help"])
     assert result.exit_code == 0
-    assert "--offline" in result.output and "--all" in result.output
+    # GitHub Actions makes rich force colour, which splits "--offline" with escape codes.
+    plain = re.sub(r"\x1b\[[0-9;]*m", "", result.output)
+    assert "--offline" in plain and "--all" in plain
 
 
 def test_the_cli_refuses_a_source_and_all_together_and_an_unknown_recipe(tmp_path: Path) -> None:
