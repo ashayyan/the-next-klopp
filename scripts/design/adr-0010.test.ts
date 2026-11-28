@@ -139,12 +139,56 @@ describe("ADR 0010: gates and evidence", () => {
 });
 
 describe("ADR 0010: scores, totals and the pick", () => {
-  // Scores arrive in Task 2 of plan 04-10; these become real tests then.
-  it.todo("has the 7 criteria with the rubric weights");
-  it.todo("scores every qualified direction 1-4 on every criterion with an evidence line");
-  it.todo("does not score a direction that failed a gate");
-  it.todo("totals equal sum of weight x score / 4 within 0.05");
-  it.todo("names the highest total after the tie-break as the pick");
-  it.todo("carries the delegation line verbatim, once");
-  it.todo("is Accepted");
+  it("has the 7 criteria with the rubric weights", () => {
+    const rows = scoreRows().filter((r) => r[1] !== "Total");
+    expect(rows.map((r) => [r[1], Number(r[2])])).toEqual(CRITERIA);
+  });
+
+  it("scores every qualified direction 1-4 on every criterion with an evidence line", () => {
+    const s = scores();
+    const evidence = tableAfter(/^\| Criterion \| Direction \| Score \| Evidence \|$/);
+    for (const d of qualified()) {
+      for (const [name] of CRITERIA) {
+        const score = s.get(d)?.get(name);
+        expect(score, `${d} ${name}`).toBeGreaterThanOrEqual(1);
+        expect(score, `${d} ${name}`).toBeLessThanOrEqual(4);
+        const row = evidence.find((r) => r[0] === name && r[1].replace(/`/g, "") === d);
+        expect(row, `evidence for ${d} ${name}`).toBeDefined();
+        expect(Number(row?.[2]), `evidence score for ${d} ${name}`).toBe(score);
+        expect((row?.[3] ?? "").length, `evidence text for ${d} ${name}`).toBeGreaterThan(20);
+      }
+    }
+  });
+
+  it("does not score a direction that failed a gate", () => {
+    const q = qualified();
+    for (const d of DIRECTIONS.filter((x) => !q.includes(x))) {
+      expect(scores().get(d)?.size ?? 0, d).toBe(0);
+    }
+  });
+
+  it("totals equal sum of weight x score / 4 within 0.05", () => {
+    const total = scoreRows().find((r) => r[1] === "Total");
+    expect(total).toBeDefined();
+    DIRECTIONS.forEach((d, i) => {
+      if (!qualified().includes(d)) return;
+      expect(Math.abs(Number(total?.[3 + i]) - recomputed(d)), d).toBeLessThan(0.05);
+    });
+  });
+
+  it("names the highest total after the tie-break as the pick", () => {
+    const picked = lines.filter((l) => l.startsWith("Picked: "));
+    expect(picked).toHaveLength(1);
+    expect(picked[0].replace("Picked: ", "").replace(/`/g, "").trim()).toBe(winner());
+  });
+
+  it("carries the delegation line verbatim, once", () => {
+    expect(text.split(DELEGATION).length - 1).toBe(1);
+  });
+
+  it("is Accepted", () => {
+    const i = lines.findIndex((l) => l.trim() === "## Status");
+    const first = lines.slice(i + 1).find((l) => l.trim() !== "") ?? "";
+    expect(first).toMatch(/^Accepted\b/);
+  });
 });

@@ -1,12 +1,12 @@
-# 0010. Visual direction: pick one of floodlit, programme and notebook
+# 0010. Visual direction: floodlit, picked over programme and notebook
 
 Date: 2026-11-28
 
 ## Status
 
-Proposed
+Accepted
 
-Gates recorded; the scores, totals and the pick follow after the independent review of the screenshots.
+Picked by an independent review of the rendered screens. The learner may override it (see Decision).
 
 ## Context
 
@@ -18,8 +18,15 @@ Gates recorded; the scores, totals and the pick follow after the independent rev
 - The design needs come from brief section 1 (a visual, hands-on learner with ADHD; the Premier League as the default reference) and section 8 (Lesson Loop, one idea per screen, at most 60 words per step, focus mode, reduced motion, colour-blind-safe palettes). This ADR paraphrases them and quotes no personal detail.
 - The learner delegated this checkpoint for the autonomous run. The pick is made by a fresh reviewer that did not build the directions and did not read their plans, summaries or source code (04-RESEARCH pitfall "same-agent screenshot review rubber-stamps").
 - Inputs, and nothing else: the 36 default screenshots (3 directions × 2 screens × 2 themes × 3 widths), the 24 deuteranopia and achromatopsia captures at 375 px, the state captures (`state=with`, `t=11.48`), the 6 `report.json` and `report.md` files, `npm run palette -- --json`, the rubric, brief sections 1 and 8, and the cliché calibration list in the `frontend-design` skill with section 5 of the `design-taste-frontend` skill.
+- What the reviewer looked at: all 36 default screenshots; all 12 colour-vision captures in each direction's primary theme plus 3 in the other theme (one per direction); the `t=11.48` data capture at 375 in each direction's primary theme.
 
 ## Decision
+
+Picked: `floodlit`
+
+Floodlit is the only direction where the pitch leads at every width on both screens while the chrome stays quiet, and it keeps the text column inside the 70-character measure at 1440. Programme has the strongest Premier League voice but its yellow readout and stat blocks compete with the pitch, and notebook is calm but puts text and stat lines ahead of the pitch at every width; both totals sit 7.5 points behind, so the tie-break did not apply.
+
+picked by Claude under learner delegation; learner may override by asking
 
 Route commit: `f6e513df6cbf0c72bfdef89d036bbf59a7b6cd9a` (branch `gsd/phase-04-design-direction-system`, committed 2026-11-28T10:40:32+03:00). The working tree had no tracked change when the evidence was generated. All six reports were generated after that commit time, between 07:42:56Z and 07:46:12Z, with `REVIEW_PORT=5184 node scripts/review-screens.ts /dev/directions/<id>/<screen>` (tactics with `--states state=with`, data with `--states t=11.48`).
 
@@ -36,6 +43,61 @@ G1 is `npm run palette -- --json`, both themes (44 checks per theme). G2 is 0 FA
 - G1 detail: 0 failed checks in all six direction-theme pairs. Worst colour-blind team delta E: floodlit 24.4 dark and 21.9 light, programme 21.9 light and 24.4 dark, notebook 22.2 light and 23.4 dark (threshold 8).
 - G2 detail: every report has 234 pass, 0 fail and 1 warn. The warn is `taste-copy` in every report: `copy-contrast` (4 contrast frames, budget 2) on the tactics screens and `copy-stat-strip` on the data screens; the programme tactics screen also has one `copy-stat-strip`. `taste-layout` passes everywhere; `edge-left` is ignored as a landing-page rule on floodlit tactics, programme tactics and programme data.
 - G3 detail: `token-colours` and `font-local` pass at every width in both themes; each report has 16 screenshots.
+
+### Scores
+
+All three directions passed every gate, so all three are scored. Score 3 sits between the 4 and 2 anchors.
+
+| # | Criterion | Weight | floodlit | programme | notebook |
+| --- | --- | --- | --- | --- | --- |
+| 1 | ADHD calm and focus | 20 | 3 | 2 | 3 |
+| 2 | Pitch legibility | 20 | 3 | 3 | 3 |
+| 3 | Readability at 375 | 15 | 4 | 3 | 3 |
+| 4 | Visual-first | 15 | 4 | 3 | 2 |
+| 5 | Anti-slop and taste | 15 | 2 | 3 | 3 |
+| 6 | Colour-blind safety in use | 10 | 4 | 4 | 4 |
+| 7 | Premier League feel | 5 | 3 | 4 | 3 |
+|  | Total | 100 | 81.25 | 73.75 | 73.75 |
+
+Arithmetic: floodlit 15 + 15 + 15 + 15 + 7.5 + 10 + 3.75 = 81.25; programme 10 + 15 + 11.25 + 11.25 + 11.25 + 10 + 5 = 73.75; notebook 15 + 15 + 11.25 + 7.5 + 11.25 + 10 + 3.75 = 73.75. The lead is 7.5 points, more than the 3-point tie-break window.
+
+### Evidence per score
+
+| Criterion | Direction | Score | Evidence |
+| --- | --- | --- | --- |
+| ADHD calm and focus | `floodlit` | 3 | tactics 375 dark: title, pitch, toggle and readout stack in one column and the pitch is the one focal point; but the accent also fills the toggle and the Play button, and on data 1440 dark the right column (text, stats, 10-row table, notation) runs twice the pitch height |
+| ADHD calm and focus | `programme` | 2 | tactics 375 light: a full-width yellow "Shape now" box above the pitch, the yellow toggle and the yellow CTA compete with the pitch; data 375 light: a yellow stat slab sits right under the pitch; heavy black rules add chrome |
+| ADHD calm and focus | `notebook` | 3 | tactics 375 light: quiet grey-green sheet, deep green accent on the CTA and current step (also the toggle and Play); data 1440 light: title, step text, a three-number stat strip, pitch and margin notes share the first screen, so the stat strip competes with the pitch |
+| Pitch legibility | `floodlit` | 3 | data 375 dark `t=11.48`: badges 1, 3 and 6 touch each other and Mangala's disc (shared pitch layer); otherwise labels, pass arrows and run lines are clear and the legend sits under the pitch; in 375 dark achromatopsia the dark labels on mid-grey discs are readable but the weakest of the three |
+| Pitch legibility | `programme` | 3 | data 375 light `t=11.48`: the same badge cluster around Mangala's disc; dark blue discs with white labels on a white pitch read cleanly, also in achromatopsia; tactics 1440 light has the widest pitch of the three (about 900 px) with the notation directly below |
+| Pitch legibility | `notebook` | 3 | data 375 light `t=11.48`: the same badge cluster around Mangala's disc; white labels on blue discs stay readable and achromatopsia keeps dark discs on a light pitch; margin notes beside the pitch at 1440 help, but the 1440 pitch is the smallest of the three (about 650-720 px) |
+| Readability at 375 | `floodlit` | 4 | data 375 dark: body about 16 px at full contrast, the 10-row table becomes two columns (who, metres) with no sideways scroll, no overflow or tap-size failure; at 1440 the text column holds about 55 characters per line |
+| Readability at 375 | `programme` | 3 | 375 light on both screens: 16 px body, two-column table, no overflow; but data 1440 light runs the "Follow the ball" text at about 80 characters per line, over the 70ch measure |
+| Readability at 375 | `notebook` | 3 | 375 light on both screens: 16 px hyperlegible body, two-column table, no sideways scroll; but tactics 1440 light runs the step text at about 90 characters per line, and the notation column wraps each entry to two or three lines |
+| Visual-first | `floodlit` | 4 | tactics 375 dark: the pitch comes straight after the title and step heading and is the largest element; at 1440 the pitch holds the centre column on tactics and the top-left on data, with the text beside it |
+| Visual-first | `programme` | 3 | the pitch is the largest element at every width and comes before the step text at 375, but the yellow readout and stat blocks carry nearly as much weight; on tactics 1440 light the text column comes first in reading order |
+| Visual-first | `notebook` | 2 | text leads at every width: data 375 light puts the step text and three stat lines before the pitch, which starts about 640 px down; data 1440 light puts heading, text and the stat strip above a pitch that fills half the sheet |
+| Anti-slop and taste | `floodlit` | 2 | taste-layout pass and taste-copy warn only (copy-contrast, stat strip); but a near-black navy ground with one bright mint accent and a mono face for the numbers sits close to clichés 2 and 5 of the frontend-design list; clean, and less specific to football than the other two |
+| Anti-slop and taste | `programme` | 3 | condensed headlines, a scoreline as the data title, a highlighter accent and heavy rules read as a matchday programme, not a template; taste checks clean except the copy warns; square corners and ruled tables lean toward the broadsheet cliché (3) without its dense columns |
+| Anti-slop and taste | `notebook` | 3 | a serif display face on a paper sheet, a hyperlegible body and margin notes read as an analyst's notebook made for this course; taste checks clean except the copy warns; serif on light paper sits near cliché 1, though the ground is cool grey-green, not cream with terracotta |
+| Colour-blind safety in use | `floodlit` | 4 | 375 dark deuteranopia and achromatopsia: filled disc versus white ball, square goalkeeper, solid pass arrow versus dotted run and shot-with-circle stay distinct, and the selected chart bar keeps its outline; only one team is on these screens |
+| Colour-blind safety in use | `programme` | 4 | 375 light deuteranopia and achromatopsia: discs, ball, goalkeeper square, pass, run and shot line styles and the outlined chart bar stay distinct; the yellow current-step segment fades to the empty grey, but the "step 3 of 7" text carries it |
+| Colour-blind safety in use | `notebook` | 4 | 375 light deuteranopia and achromatopsia (and 375 dark achromatopsia): discs, ball, goalkeeper square, line styles and the outlined chart bar stay distinct; only one team is on these screens |
+| Premier League feel | `floodlit` | 3 | subtitles carry Manchester City, Premier League 2022/23 and City 5-0 Liverpool on 9 September 2017 with real players in the table; the type and layout read as a neutral night-match sports app more than football print |
+| Premier League feel | `programme` | 4 | data 1440 light: "Manchester City 5-0 Liverpool" is the headline, with the date and scorer under it, in condensed programme type; reads as about a Premier League match without any crest |
+| Premier League feel | `notebook` | 3 | the same real subtitles (Manchester City, Premier League 2022/23; City 5-0 Liverpool, 9 September 2017); the serif sheet reads as a study tool more than football |
+
+### Defects recorded against the directions (not fixed here)
+
+These come from the shared pitch layer and copy, so they appear in all three directions and do not change the ranking. They are inputs for DESIGN.md (04-11), not fixes made by this review.
+
+- At 375 in the `t=11.48` data state, sequence badges 1, 3 and 6 touch each other and Mangala's disc (`dev-directions-*-data/375-*-t-11-48.png`).
+- At `t=0` on the data screen the ball circle sits over the right edge of the "EM" disc label (`1440-*` and `768-*` data captures).
+- Player discs carry position initials (GK, CB, ST) while the notation says "Filled disc with shirt number".
+- Both screens show one team only, so the rule "team A filled, team B ring disc with hollow arrowheads" is not visible in any capture and could not be judged from this evidence; the 04-11 gallery should show both teams in both themes and the achromatopsia capture.
+- Focus mode and motion cannot be judged from still captures; the `reduced-motion` check passes in every report.
+
+Floodlit-specific inputs for DESIGN.md: keep the mint accent to the CTA and the current step (the toggle and the Play button use it today), and give the dark ground and the type a choice that reads as football rather than a generic dark app, since criterion 5 scored lowest.
 
 ### Evidence
 
@@ -123,8 +185,17 @@ Reversibility: costly — DESIGN.md (04-11), the token set and every later scree
 
 ## Consequences
 
-- To be completed with the pick.
+- DESIGN.md (plan 04-11) takes the floodlit token set: dark primary theme, the floodlit light theme as the second theme, its type pairing and its accent rules, with the inputs listed under "Defects recorded against the directions".
+- After DESIGN.md is locked (plan 04-13), the programme and notebook directions and all three direction token files are removed; the floodlit tactics and data screens stay as the concept and data-lab template references.
+- Good: the learner gets the direction that puts the pitch first at every width, which is the brief's "the visual is never decoration" rule.
+- Bad: floodlit scored lowest on anti-slop (2 of 4). DESIGN.md has to make the dark ground and type more specific to football, or the app will look like a generic dark dashboard.
+- Bad: programme's Premier League voice (scoreline headline, programme type) is lost unless DESIGN.md borrows the scoreline-as-title idea into floodlit.
+- To see the three directions again: `git switch --detach f6e513df6cbf0c72bfdef89d036bbf59a7b6cd9a`, `npm run dev`, open `/dev/directions`, then `git switch gsd/phase-04-design-direction-system`. To regenerate the screenshots and hashes at that commit, run `npm run review:screens -- /dev/directions/<id>/tactics --states state=with` and `npm run review:screens -- /dev/directions/<id>/data --states t=11.48` for each id (`REVIEW_PORT` for a non-default dev port). Pixel hashes can differ on another machine or browser build; the scores rest on what the screens show, not on byte-equal files.
+- The learner override path: ask, and a new ADR supersedes this one before Phase 5 lessons ship.
 
 ## Alternatives
 
-- To be completed with the pick.
+- **`programme` (73.75):** the strongest Premier League feel (4) and a distinct matchday-programme identity (anti-slop 3). Lost on ADHD calm (2): the yellow "Shape now" box, stat slab, toggle and CTA compete with the pitch at 375, and the data text runs past 70 characters at 1440.
+- **`notebook` (73.75):** as calm as floodlit (3) with useful margin notes and a hyperlegible body. Lost on visual-first (2): text and stat lines come before the pitch at every width, the 1440 pitch is the smallest of the three, and the tactics text runs about 90 characters per line at 1440.
+- **Ask the learner to choose now:** rejected for this run. The learner delegated the checkpoint; the override stays open as a non-blocking follow-up in STATE.md.
+- **Blend the three:** rejected. A blend has no rendered evidence behind it; DESIGN.md may borrow single ideas (the scoreline title, margin notes) into floodlit and must justify each.
