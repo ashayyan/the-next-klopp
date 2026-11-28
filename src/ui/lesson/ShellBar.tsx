@@ -52,6 +52,12 @@ export interface ShellBarProps {
   /** Classes for the wordmark: the display face and its stretch. */
   wordmarkClassName?: string;
   state?: string;
+  /**
+   * Hold one menu open for the gallery: "theme" is the menu shown from 768 px, "overflow" the
+   * "More options" menu shown below it. The popup draws into `menuContainer`.
+   */
+  openMenu?: "theme" | "overflow";
+  menuContainer?: HTMLElement | null;
 }
 
 /**
@@ -69,6 +75,8 @@ export function ShellBar({
   className,
   wordmarkClassName,
   state,
+  openMenu,
+  menuContainer,
 }: ShellBarProps) {
   return (
     <header
@@ -101,6 +109,8 @@ export function ShellBar({
                 value={theme}
                 onValueChange={onThemeChange}
                 options={THEME_OPTIONS}
+                open={openMenu === "theme" ? true : undefined}
+                portalContainer={openMenu === "theme" ? menuContainer : undefined}
               />
             </span>
             <span className="inline-flex md:hidden">
@@ -111,6 +121,8 @@ export function ShellBar({
                 onValueChange={onThemeChange}
                 options={THEME_OPTIONS}
                 before={`About ${minutes} min`}
+                open={openMenu === "overflow" ? true : undefined}
+                portalContainer={openMenu === "overflow" ? menuContainer : undefined}
               />
             </span>
           </>

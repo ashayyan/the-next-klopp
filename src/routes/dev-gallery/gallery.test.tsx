@@ -250,21 +250,8 @@ describe("registry after the Controls and Overlays groups", () => {
 });
 
 describe("inventory (the 04-UI-SPEC gallery table)", () => {
-  // The ids Tasks 2 and 3 of plan 04-16 still have to build; emptied when the inventory is complete.
-  const PENDING = new Set<string>([
-    "shell-bar",
-    "step-rail",
-    "focus-toggle",
-    "confusion-button",
-    "glossary-card",
-    "progress-ring",
-    "badge",
-    "surface",
-    "stat-card",
-    "chart-primitives",
-    "data-table",
-    "scales",
-  ]);
+  // The ids Task 3 of plan 04-16 still has to build.
+  const PENDING = new Set<string>(["stat-card", "chart-primitives", "data-table", "scales"]);
 
   it("holds the 37 primitives of the contract, each id once, in a known group", () => {
     expect(inventory.length).toBe(37);

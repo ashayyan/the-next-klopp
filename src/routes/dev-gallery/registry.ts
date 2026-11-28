@@ -9,6 +9,7 @@ import {
   SliderDemo,
   TabsDemo,
 } from "./demos/controls.tsx";
+import { ChartPrimitivesDemo, DataTableDemo, ScalesDemo, StatCardDemo } from "./demos/data.tsx";
 import {
   ColourDemo,
   IconsDemo,
@@ -16,7 +17,17 @@ import {
   SpaceRadiusDemo,
   TypeDemo,
 } from "./demos/foundations.tsx";
-import { QuizOptionDemo } from "./demos/lesson.tsx";
+import {
+  BadgeDemo,
+  ConfusionButtonDemo,
+  FocusToggleDemo,
+  GlossaryCardDemo,
+  ProgressRingDemo,
+  QuizOptionDemo,
+  ShellBarDemo,
+  StepRailDemo,
+  SurfaceDemo,
+} from "./demos/lesson.tsx";
 import {
   AlertDialogDemo,
   DialogDemo,
@@ -199,11 +210,78 @@ export const GALLERY: readonly Primitive[] = [
     Demo: ToastDemo,
   },
   {
+    id: "shell-bar",
+    group: "Lesson",
+    label: "Shell bar",
+    states: ["default", "focus-mode-on", "overflow-menu-open"],
+    Demo: ShellBarDemo,
+    wide: true,
+  },
+  {
+    id: "step-rail",
+    group: "Lesson",
+    label: "Step rail",
+    states: [
+      "hook",
+      "see-it",
+      "touch-it",
+      "predict",
+      "do-it",
+      "lock-it-in",
+      "connect-it",
+      "compact",
+    ],
+    Demo: StepRailDemo,
+    wide: true,
+  },
+  {
+    id: "focus-toggle",
+    group: "Lesson",
+    label: "Focus toggle",
+    states: ["off", "on"],
+    Demo: FocusToggleDemo,
+  },
+  {
+    id: "confusion-button",
+    group: "Lesson",
+    label: "Confusion button",
+    states: ["idle", "note-open", "note-typed"],
+    Demo: ConfusionButtonDemo,
+  },
+  {
+    id: "glossary-card",
+    group: "Lesson",
+    label: "Glossary card",
+    states: ["short-term", "long-definition", "mini-pitch"],
+    Demo: GlossaryCardDemo,
+  },
+  {
     id: "quiz-option",
     group: "Lesson",
     label: "Quiz option",
     states: ["idle", "hover", "focus", "selected", "correct", "incorrect", "disabled"],
     Demo: QuizOptionDemo,
+  },
+  {
+    id: "progress-ring",
+    group: "Lesson",
+    label: "Progress ring",
+    states: ["0-percent", "40-percent", "100-percent", "labelled"],
+    Demo: ProgressRingDemo,
+  },
+  {
+    id: "badge",
+    group: "Lesson",
+    label: "Badge",
+    states: ["neutral", "done", "new"],
+    Demo: BadgeDemo,
+  },
+  {
+    id: "surface",
+    group: "Lesson",
+    label: "Surface",
+    states: ["page", "panel", "raised", "sheet", "stat-card"],
+    Demo: SurfaceDemo,
   },
   {
     id: "pitch",

@@ -20,6 +20,10 @@ export interface RadioMenuProps<V extends string> {
   before?: ReactNode;
   /** Forced look for the gallery, written to `data-state` on the trigger. */
   state?: string;
+  /** Hold the menu open (the gallery's static open state); leave undefined for the normal toggle. */
+  open?: boolean;
+  /** Render the popup inside this element instead of <body> (the gallery cell). */
+  portalContainer?: HTMLElement | null;
 }
 
 const ICON_TRIGGER = `${CONTROL_BASE} size-11 rounded-md border border-control-border bg-transparent text-ink hov:bg-surface-panel data-popup-open:bg-surface-panel`;
@@ -38,15 +42,17 @@ export function RadioMenu<V extends string>({
   options,
   before,
   state,
+  open,
+  portalContainer,
 }: RadioMenuProps<V>) {
   return (
-    <BaseMenu.Root>
+    <BaseMenu.Root open={open} modal={open === undefined}>
       <Tooltip label={label}>
         <BaseMenu.Trigger aria-label={label} data-state={state} className={ICON_TRIGGER}>
           {icon}
         </BaseMenu.Trigger>
       </Tooltip>
-      <BaseMenu.Portal>
+      <BaseMenu.Portal container={portalContainer ?? undefined}>
         <BaseMenu.Positioner side="bottom" align="end" sideOffset={8}>
           <BaseMenu.Popup
             className={`min-w-48 rounded-md border border-control-border bg-surface-raised p-1 font-sans text-label text-ink outline-none ${POPUP_MOTION}`}

@@ -8,10 +8,13 @@ import { Checkbox, RadioGroup } from "./Choice.tsx";
 import { DataTable } from "./data/DataTable.tsx";
 import { StatCard } from "./data/StatCard.tsx";
 import { NumberInput, TextInput } from "./Field.tsx";
+import { Badge } from "./lesson/Badge.tsx";
+import { ProgressRing } from "./lesson/ProgressRing.tsx";
 import { QuizOption, type QuizOptionState } from "./lesson/QuizOption.tsx";
 import { ShellBar } from "./lesson/ShellBar.tsx";
 import { LESSON_LOOP_STEPS, StepRail } from "./lesson/StepRail.tsx";
 import { Slider } from "./Slider.tsx";
+import { Surface } from "./Surface.tsx";
 import { Tabs } from "./Tabs.tsx";
 import {
   applyDocumentTheme,
@@ -434,5 +437,62 @@ describe("QuizOption", () => {
   it("writes the forced hover and focus looks to data-state", () => {
     expect(render("hover")).toContain('data-state="hover"');
     expect(render("focus")).toContain('data-state="focus-visible"');
+  });
+});
+
+describe("ProgressRing", () => {
+  it("exposes Base UI meter semantics for 4 of 10 concepts", () => {
+    const html = renderToStaticMarkup(<ProgressRing value={4} max={10} label="4 of 10 concepts" />);
+    expect(html).toContain('role="meter"');
+    expect(html).toContain('aria-valuenow="4"');
+    expect(html).toContain('aria-valuemin="0"');
+    expect(html).toContain('aria-valuemax="10"');
+    expect(html).toContain("4 of 10 concepts");
+    expect(html).toContain("40%");
+    expect(html).toContain("stroke-accent");
+  });
+
+  it("draws no fill at 0 and a full ring at 100 percent", () => {
+    const empty = renderToStaticMarkup(
+      <ProgressRing value={0} max={10} label="0 of 10 concepts" />,
+    );
+    expect(empty).not.toContain("data-ring-fill");
+    expect(empty).toContain("0%");
+    const full = renderToStaticMarkup(
+      <ProgressRing value={10} max={10} label="10 of 10 concepts" />,
+    );
+    expect(full).toContain('stroke-dasharray="100 0"');
+  });
+
+  it("keeps a value above the maximum inside the ring", () => {
+    const html = renderToStaticMarkup(
+      <ProgressRing value={14} max={10} label="10 of 10 concepts" />,
+    );
+    expect(html).toContain('aria-valuenow="10"');
+  });
+});
+
+describe("Badge", () => {
+  it("renders the words for every kind and the check icon only for done", () => {
+    const neutral = renderToStaticMarkup(<Badge kind="neutral">Chapter 2</Badge>);
+    const done = renderToStaticMarkup(<Badge kind="done">Done</Badge>);
+    const fresh = renderToStaticMarkup(<Badge kind="new">New</Badge>);
+    expect(neutral).toContain(">Chapter 2<");
+    expect(done).toContain(">Done<");
+    expect(done).toContain("M4.5 10.5 L8.5 14.5 L15.5 5.5");
+    expect(fresh).toContain(">New<");
+    expect(neutral).not.toContain("<svg");
+    expect(fresh).not.toContain("<svg");
+  });
+});
+
+describe("Surface", () => {
+  it("maps the levels to the surface tokens and adds the shadow token only for a sheet", () => {
+    expect(renderToStaticMarkup(<Surface level="page" />)).toContain("bg-surface-page");
+    expect(renderToStaticMarkup(<Surface level="panel" />)).toContain("bg-surface-panel");
+    const raised = renderToStaticMarkup(<Surface level="raised" />);
+    expect(raised).toContain("bg-surface-raised");
+    expect(raised).not.toContain("shadow-sheet");
+    expect(renderToStaticMarkup(<Surface level="raised" sheet />)).toContain("shadow-sheet");
   });
 });

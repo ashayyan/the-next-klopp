@@ -8,6 +8,14 @@ export interface ConfusionButtonProps {
   headingClassName?: string;
   /** Forced look for the gallery, written to `data-state` on the trigger. */
   state?: string;
+  /** The popover starts open (the gallery's static open state). */
+  initialOpen?: boolean;
+  /** A note already typed (the gallery's "note typed" state). */
+  initialNote?: string;
+  /** Render the popover inside this element instead of <body> (the gallery cell). */
+  portalContainer?: HTMLElement | null;
+  /** `false` keeps focus where it is when the popover opens (a stable screenshot). */
+  initialFocus?: boolean;
 }
 
 const HELPER = "In this preview the note is not stored. Saving arrives with the progress system.";
@@ -18,16 +26,25 @@ const HELPER = "In this preview the note is not stored. Saving arrives with the 
  * accessible name at every width, and the tooltip echoes it. The typed note lives in component
  * state only: Save note stores and sends nothing, and closes the popover.
  */
-export function ConfusionButton({ headingClassName, state }: ConfusionButtonProps) {
+export function ConfusionButton({
+  headingClassName,
+  state,
+  initialOpen = false,
+  initialNote = "",
+  portalContainer,
+  initialFocus,
+}: ConfusionButtonProps) {
   const fieldId = useId();
   const helperId = useId();
-  const [open, setOpen] = useState(false);
-  const [note, setNote] = useState("");
+  const [open, setOpen] = useState(initialOpen);
+  const [note, setNote] = useState(initialNote);
 
   return (
     <Popover
       open={open}
       onOpenChange={setOpen}
+      portalContainer={portalContainer}
+      initialFocus={initialFocus}
       tooltip="I'm confused here"
       title="What's confusing here?"
       titleClassName={headingClassName ?? "text-heading font-semibold"}

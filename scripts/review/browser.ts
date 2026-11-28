@@ -620,6 +620,11 @@ async function collectFocusStops(page: Page): Promise<FocusStop[]> {
   await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur?.());
   for (let i = 0; i < 40; i += 1) {
     await page.keyboard.press("Tab");
+    // Base UI's invisible focus guards around an open popup are not controls: step past them.
+    const onGuard = await page.evaluate(
+      () => document.activeElement?.hasAttribute("data-base-ui-focus-guard") ?? false,
+    );
+    if (onGuard) continue;
     const stop = await page.evaluate(collectFocus);
     if (stop === null || seen.has(stop.key)) break;
     seen.add(stop.key);
