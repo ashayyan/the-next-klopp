@@ -1,5 +1,12 @@
 import type { ComponentType } from "react";
 import { ButtonDemo } from "./demos/controls.tsx";
+import {
+  ColourDemo,
+  IconsDemo,
+  MotionDemo,
+  SpaceRadiusDemo,
+  TypeDemo,
+} from "./demos/foundations.tsx";
 
 // The gallery's primitive registry. A URL `:primitiveId` is only ever looked up here by id
 // (findPrimitive); it is never used as a path or an import specifier (threat T-04-26).
@@ -28,6 +35,41 @@ export interface Primitive {
 }
 
 export const GALLERY: readonly Primitive[] = [
+  {
+    id: "colour",
+    group: "Foundations",
+    label: "Colour",
+    states: ["color", "pitch", "data"],
+    Demo: ColourDemo,
+  },
+  {
+    id: "type",
+    group: "Foundations",
+    label: "Type",
+    states: ["roles", "numerals", "glyph-sample"],
+    Demo: TypeDemo,
+  },
+  {
+    id: "space-radius",
+    group: "Foundations",
+    label: "Space and radius",
+    states: ["space", "radius", "elevation"],
+    Demo: SpaceRadiusDemo,
+  },
+  {
+    id: "icons",
+    group: "Foundations",
+    label: "Icons",
+    states: ["ink", "muted", "on-accent"],
+    Demo: IconsDemo,
+  },
+  {
+    id: "motion",
+    group: "Foundations",
+    label: "Motion",
+    states: ["ui", "draw", "morph", "reduced-motion"],
+    Demo: MotionDemo,
+  },
   {
     id: "button",
     group: "Controls",

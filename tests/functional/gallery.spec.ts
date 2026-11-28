@@ -116,3 +116,65 @@ test.describe("bare state matrix", () => {
     await expect(page.locator('[data-gallery-state="button/hover"]')).toHaveCount(2);
   });
 });
+
+test.describe("index, fallbacks and foundations", () => {
+  test("/dev links the gallery and the index lists the primitives by group", async ({ page }) => {
+    await page.goto("/dev");
+    await page.getByRole("link", { name: "Component gallery" }).click();
+    await expect(page).toHaveURL(/\/dev\/gallery$/);
+    await expect(page.getByRole("heading", { level: 1, name: "Component gallery" })).toBeVisible();
+    await expect(
+      page.getByText(
+        "Every primitive and interaction, with its states, at 375, 768 and 1440 px. Dev only.",
+      ),
+    ).toBeVisible();
+    for (const group of ["Foundations", "Controls"]) {
+      await expect(page.getByRole("heading", { name: group })).toBeVisible();
+    }
+    await expect(page.getByRole("link", { name: "Colour" })).toBeVisible();
+  });
+
+  test("an unknown primitive and an unknown state explain themselves", async ({ page }) => {
+    await page.goto("/dev/gallery/nope");
+    await expect(
+      page.getByRole("heading", { name: "No primitive called “nope”. Pick one from the list." }),
+    ).toBeVisible();
+    await page.goto("/dev/gallery/button?w=375&theme=light#state-nope");
+    await expect(
+      page.getByText("No state called “nope” for Button. Showing all states."),
+    ).toBeVisible();
+    await expect(page.locator("iframe")).toHaveCount(1);
+  });
+
+  test("the primitive picker is a native select below 1280 px", async ({ page }) => {
+    await page.setViewportSize({ width: 768, height: 900 });
+    await page.goto("/dev/gallery/button?w=375&theme=light");
+    const select = page.getByLabel("Primitive", { exact: true });
+    await expect(select).toBeVisible();
+    await select.selectOption("colour");
+    await expect(page).toHaveURL(/\/dev\/gallery\/colour/);
+  });
+
+  test("the colour demo shows every token with its hex and a contrast ratio", async ({ page }) => {
+    await page.goto("/dev/gallery/colour?bare=1&theme=dark");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    const row = page.locator('[data-gallery-state="colour/color"] tr[data-token="surface-page"]');
+    await expect(row).toContainText("#");
+    await expect(row).toContainText("1.0:1");
+    await expect(page.locator('[data-gallery-state="colour/pitch"] tr[data-token]')).toHaveCount(
+      17,
+    );
+    await expect(page.locator('[data-gallery-state="colour/data"] tr[data-token]')).toHaveCount(12);
+  });
+
+  test("the motion demo is paused at progress 0 and follows the scrubber", async ({ page }) => {
+    await page.goto("/dev/gallery/motion?bare=1&theme=light");
+    const ui = page.locator('[data-gallery-state="motion/ui"]');
+    await expect(ui).toContainText("time 0.00, eased 0.00");
+    await ui.getByLabel("Progress").fill("1");
+    await expect(ui).toContainText("time 1.00, eased 1.00");
+    await expect(page.locator('[data-gallery-state="motion/reduced-motion"]')).toContainText(
+      "Reduced motion: 0 ms",
+    );
+  });
+});
