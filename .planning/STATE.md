@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 3
 current_phase_name: Pitch Standard & Data Pipeline
 status: executing
-stopped_at: Completed 03-01-PLAN.md
-last_updated: "2026-11-28T00:58:44.521Z"
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-11-28T01:09:21.316Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 3 execution started
-state_head: bbdb59834f89ed244d95121a977294955c30a8cf
+state_head: a6c403e9c3409575eaa551a30c120bb6668e5222
 progress:
   total_phases: 8
   completed_phases: 2
   total_plans: 41
-  completed_plans: 31
+  completed_plans: 32
   percent: 25
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 3 (Pitch Standard & Data Pipeline) — EXECUTING
-Plan: 2 of 11
+Plan: 3 of 11
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 3 execution started
 
@@ -77,6 +77,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 02 P20 | 25min | 3 tasks | 7 files |
 | Phase 02 P21 | 45 min | 3 tasks | 9 files |
 | Phase 3 P01 | 10 min | 3 tasks | 14 files |
+| Phase 3 P02 | 10 min | 3 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -114,6 +115,8 @@ Recent decisions affecting current work:
 - [Phase 02]: 02-21: approval rule derived in approval.test.ts: approved iff APPROVAL.md approved, track t00-t04 and at least one verified cited source
 - [Phase 3]: 03-01: Pitch stage is section[aria-label=Pitch stage][data-stage] (implicit region; Biome noRedundantRoles); Biome CSS tailwindDirectives on
 - [Phase 3]: 03-01: canonical-root group carries orientation; pointer inverse via its getScreenCTM; tokens only in src/index.css (palette scan test)
+- [Phase 3]: 03-02: Scene v1 frozen (schemas/scene.schema.json + Zod mirror); presence = entity.presence ?? (reconstruction ? sampled : always)
+- [Phase 3]: 03-02: eventState window [t, tEnd ?? next event t ?? duration); StatsBomb scenes must be localOnly, not shippable, logoRequired
 
 ### Pending Todos
 
@@ -141,6 +144,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T00:58:44.318Z
-Stopped at: Completed 03-01-PLAN.md
+Last session: 2026-11-28T01:09:21.084Z
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None
