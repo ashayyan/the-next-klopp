@@ -39,7 +39,7 @@ export function ShellBarDemo({ state }: { state: string }) {
   const [theme, setTheme] = useState<ThemeChoice>("system");
   const open = state === "overflow-menu-open";
   return (
-    <div ref={cell.ref} className={`relative w-full ${open ? "min-h-72" : ""}`}>
+    <div ref={cell.ref} className={`relative w-full ${open ? "min-h-72 overflow-x-clip" : ""}`}>
       <ShellBar
         minutes={12}
         focus={focus}
@@ -81,7 +81,10 @@ export function ConfusionButtonDemo({ state }: { state: string }) {
   const cell = useCellContainer();
   const open = state !== "idle";
   return (
-    <div ref={cell.ref} className={`relative w-full ${open ? "min-h-[32rem]" : ""}`}>
+    <div
+      ref={cell.ref}
+      className={`relative w-full ${open ? "min-h-[32rem] overflow-x-clip" : ""}`}
+    >
       {open && !cell.el ? null : (
         <ConfusionButton
           initialOpen={open}
