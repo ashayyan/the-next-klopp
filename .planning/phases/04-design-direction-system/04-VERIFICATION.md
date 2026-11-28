@@ -1,16 +1,27 @@
 ---
 phase: 04-design-direction-system
-verified: 2026-11-28T11:45:00Z
+verified: 2026-11-28T15:20:00Z
 status: passed
-score: 5/5 roadmap success criteria verified; 17/17 plans' must-haves verified (2 direction-era checks superseded by 04-13 as designed)
-covered_files: [".github/workflows/ci.yml", ".github/workflows/update-snapshots.yml", ".planning/phases/04-design-direction-system/04-01-PLAN.md", ".planning/phases/04-design-direction-system/04-01-SUMMARY.md", ".planning/phases/04-design-direction-system/04-02-PLAN.md", ".planning/phases/04-design-direction-system/04-02-SUMMARY.md", ".planning/phases/04-design-direction-system/04-03-PLAN.md", ".planning/phases/04-design-direction-system/04-03-SUMMARY.md", ".planning/phases/04-design-direction-system/04-04-PLAN.md", ".planning/phases/04-design-direction-system/04-04-SUMMARY.md", ".planning/phases/04-design-direction-system/04-05-PLAN.md", ".planning/phases/04-design-direction-system/04-05-SUMMARY.md", ".planning/phases/04-design-direction-system/04-06-PLAN.md", ".planning/phases/04-design-direction-system/04-06-SUMMARY.md", ".planning/phases/04-design-direction-system/04-07-PLAN.md", ".planning/phases/04-design-direction-system/04-07-SUMMARY.md", ".planning/phases/04-design-direction-system/04-08-PLAN.md", ".planning/phases/04-design-direction-system/04-08-SUMMARY.md", ".planning/phases/04-design-direction-system/04-09-PLAN.md", ".planning/phases/04-design-direction-system/04-09-SUMMARY.md", ".planning/phases/04-design-direction-system/04-10-PLAN.md", ".planning/phases/04-design-direction-system/04-10-SUMMARY.md", ".planning/phases/04-design-direction-system/04-11-PLAN.md", ".planning/phases/04-design-direction-system/04-11-SUMMARY.md", ".planning/phases/04-design-direction-system/04-12-PLAN.md", ".planning/phases/04-design-direction-system/04-12-SUMMARY.md", ".planning/phases/04-design-direction-system/04-13-PLAN.md", ".planning/phases/04-design-direction-system/04-13-SUMMARY.md", ".planning/phases/04-design-direction-system/04-14-PLAN.md", ".planning/phases/04-design-direction-system/04-14-SUMMARY.md", ".planning/phases/04-design-direction-system/04-15-PLAN.md", ".planning/phases/04-design-direction-system/04-15-SUMMARY.md", ".planning/phases/04-design-direction-system/04-16-PLAN.md", ".planning/phases/04-design-direction-system/04-16-SUMMARY.md", ".planning/phases/04-design-direction-system/04-17-PLAN.md", ".planning/phases/04-design-direction-system/04-17-SUMMARY.md", "docs/DESIGN.md", "docs/decisions/0010-visual-direction.md", "index.html", "playwright.config.ts", "public/fonts/LICENSES.md", "scripts/design/baselines-guard.test.ts", "scripts/design/build-tokens.ts", "scripts/design/check-palette.ts", "scripts/design/copy-fonts.ts", "scripts/design/tokens-schema.ts", "scripts/design/tokens.ts", "scripts/review-screens.ts", "scripts/review/browser.ts", "scripts/review/lib.ts", "scripts/review/taste.ts", "src/index.css", "src/pitch/glyphs/placement.ts", "src/routes/dev-directions.tsx", "src/routes/dev-directions/DataScreen.tsx", "src/routes/dev-directions/DirectionScope.tsx", "src/routes/dev-directions/TacticsScreen.tsx", "src/routes/dev-gallery.tsx", "src/routes/dev-gallery/inventory.json", "src/routes/dev-gallery/registry.ts", "src/styles/tokens.css", "src/ui/theme.ts", "tests/functional/directions.spec.ts", "tests/functional/gallery.spec.ts", "tests/functional/pitch-fixes.spec.ts", "tests/functional/theme.spec.ts", "tests/functional/tokens.spec.ts", "tests/visual/gallery.visual.spec.ts"]
-covered_digest: "v4:sha256:0f026899a0beba77be1230515909a1451b9ce059d55520235f9c727da7abfcc8"
+score: 5/5 roadmap success criteria verified; 17/17 plans' must-haves verified (2 direction-era checks superseded by 04-13 as designed); 3/3 previous warnings closed
+covered_files: [".github/workflows/ci.yml", ".github/workflows/update-snapshots.yml", ".planning/phases/04-design-direction-system/04-01-PLAN.md", ".planning/phases/04-design-direction-system/04-01-SUMMARY.md", ".planning/phases/04-design-direction-system/04-02-PLAN.md", ".planning/phases/04-design-direction-system/04-02-SUMMARY.md", ".planning/phases/04-design-direction-system/04-03-PLAN.md", ".planning/phases/04-design-direction-system/04-03-SUMMARY.md", ".planning/phases/04-design-direction-system/04-04-PLAN.md", ".planning/phases/04-design-direction-system/04-04-SUMMARY.md", ".planning/phases/04-design-direction-system/04-05-PLAN.md", ".planning/phases/04-design-direction-system/04-05-SUMMARY.md", ".planning/phases/04-design-direction-system/04-06-PLAN.md", ".planning/phases/04-design-direction-system/04-06-SUMMARY.md", ".planning/phases/04-design-direction-system/04-07-PLAN.md", ".planning/phases/04-design-direction-system/04-07-SUMMARY.md", ".planning/phases/04-design-direction-system/04-08-PLAN.md", ".planning/phases/04-design-direction-system/04-08-SUMMARY.md", ".planning/phases/04-design-direction-system/04-09-PLAN.md", ".planning/phases/04-design-direction-system/04-09-SUMMARY.md", ".planning/phases/04-design-direction-system/04-10-PLAN.md", ".planning/phases/04-design-direction-system/04-10-SUMMARY.md", ".planning/phases/04-design-direction-system/04-11-PLAN.md", ".planning/phases/04-design-direction-system/04-11-SUMMARY.md", ".planning/phases/04-design-direction-system/04-12-PLAN.md", ".planning/phases/04-design-direction-system/04-12-SUMMARY.md", ".planning/phases/04-design-direction-system/04-13-PLAN.md", ".planning/phases/04-design-direction-system/04-13-SUMMARY.md", ".planning/phases/04-design-direction-system/04-14-PLAN.md", ".planning/phases/04-design-direction-system/04-14-SUMMARY.md", ".planning/phases/04-design-direction-system/04-15-PLAN.md", ".planning/phases/04-design-direction-system/04-15-SUMMARY.md", ".planning/phases/04-design-direction-system/04-16-PLAN.md", ".planning/phases/04-design-direction-system/04-16-SUMMARY.md", ".planning/phases/04-design-direction-system/04-17-PLAN.md", ".planning/phases/04-design-direction-system/04-17-SUMMARY.md", "docs/DESIGN.md", "docs/decisions/0010-visual-direction.md", "index.html", "package.json", "playwright.config.ts", "public/fonts/LICENSES.md", "scripts/design/baselines-guard.test.ts", "scripts/design/build-tokens.ts", "scripts/design/check-palette.ts", "scripts/design/copy-fonts.ts", "scripts/design/tokens-schema.ts", "scripts/design/tokens.ts", "scripts/review-screens.ts", "scripts/review/browser.ts", "scripts/review/lib.ts", "scripts/review/taste.ts", "src/index.css", "src/pitch/glyphs/PlayerGlyph.tsx", "src/pitch/glyphs/SceneLayer.tsx", "src/pitch/glyphs/glyphSize.ts", "src/pitch/glyphs/glyphs.test.tsx", "src/pitch/glyphs/placement.test.ts", "src/pitch/glyphs/placement.ts", "src/pitch/glyphs/registry.ts", "src/pitch/legend/Legend.tsx", "src/pitch/legend/glyphIds.ts", "src/pitch/legend/legend.test.tsx", "src/routes/dev-directions.tsx", "src/routes/dev-directions/DataScreen.tsx", "src/routes/dev-directions/DirectionScope.tsx", "src/routes/dev-directions/TacticsScreen.tsx", "src/routes/dev-gallery.tsx", "src/routes/dev-gallery/gallery.test.tsx", "src/routes/dev-gallery/inventory.json", "src/routes/dev-gallery/registry.ts", "src/routes/dev.tsx", "src/styles/tokens.css", "src/ui/theme.ts", "tests/functional/directions.spec.ts", "tests/functional/gallery.spec.ts", "tests/functional/pitch-fixes.spec.ts", "tests/functional/theme.spec.ts", "tests/functional/tokens.spec.ts", "tests/visual/gallery.visual.spec.ts"]
+covered_digest: "v4:sha256:7308c2f17d541a47b40025369a694d17e0476e29bf4526385cd38a8de2e076be"
 behavior_unverified: 0
 overrides_applied: 0
+re_verification:
+  previous_status: passed
+  previous_score: "5/5 roadmap success criteria; 17/17 plans (3 warnings)"
+  previous_commit: 420b1b5
+  reason: "Stale: the 04-UI-REVIEW fix commits (ee958e3..0d2e27c) changed covered files"
+  gaps_closed:
+    - "Warning 1: legend said 'shirt number' while discs show position codes / initials"
+    - "Warning 2: sequence badges collided with each other; ball covered the EM disc label at t=0"
+    - "Warning 3: DESIGN.md section 2 contradicted section 4 (known gaps)"
+  gaps_remaining: []
+  regressions: []
 deferred:
   - truth: "Visual baselines are generated only by CI on Linux (first baseline set exists and the `visual` job is green)"
     addressed_in: "Phase 4 post-merge step (STATE.md Deferred Verification)"
-    evidence: "GitHub only dispatches workflow_dispatch workflows that exist on the default branch; update-snapshots.yml answered 404 on the phase branch. Mechanism verified in place: visual job in mcr.microsoft.com/playwright:v1.65.1-noble, update-snapshots.yml (dispatch-only, refuses main, two-job, commits only *-linux.png, re-dispatches ci), updateSnapshots 'none' unless CI && UPDATE_BASELINES=1, test.skip without CI, Vitest platform guard. CI run 46135577547: 98 functional passed on Linux; all 222 visual failures (37 ids x 2 themes x 3 widths) are exactly 'A snapshot doesn't exist', no other error."
+    evidence: "GitHub only dispatches workflow_dispatch workflows that exist on the default branch; update-snapshots.yml answered 404 on the phase branch. Mechanism in place: visual job in mcr.microsoft.com/playwright:v1.65.1-noble, update-snapshots.yml (dispatch-only, refuses main, commits only *-linux.png), updateSnapshots 'none' unless CI && UPDATE_BASELINES=1, test.skip without CI, Vitest platform guard. CI run 46135577547: 98 functional passed on Linux; all 222 visual failures were exactly 'A snapshot doesn't exist'."
 human_verification: []
 ---
 
@@ -18,18 +29,22 @@ human_verification: []
 
 **Phase Goal:** As a learner, I want to pick a visual direction from real rendered screens and get a design system that enforces it, so that every lesson looks designed, accessible and consistent instead of generic.
 **Mode:** mvp (goal is a valid User Story)
-**Verified:** 2026-11-28T11:45:00Z
+**Verified:** 2026-11-28T15:20:00Z
 **Status:** passed
-**Re-verification:** No (initial verification, after the 04-REVIEW fix pass, HEAD 420b1b5)
+**Re-verification:** Yes. The previous report (passed, HEAD 420b1b5) was stale after the 04-UI-REVIEW fix commits. This run is at HEAD `0d2e27c`. Every gate was re-run, and the three previous warnings were checked against the code, the tests and fresh captures.
+
+## Commits since the previous verification
+
+`git log 420b1b5..HEAD`: `f757e7b` (docs), `ee958e3` UI-1 fit labels, `22fdcd1` UI-2 legend disc text, `799f8e5` UI-3 badge-vs-badge + real note-chip check, `f13c8d5` UI-4 ball beside disc, `59b30ce` UI-5 DESIGN.md §2/§4, `4d2dcbe`/`d6c3dfd` UI-6 "1 state", `b78dfff` UI-7 /dev focus ring, `b40b6d9` UI-8 drop 5 unused font packages, `0d2e27c` docs.
 
 ## User Flow Coverage (MVP)
 
 | Story step | Expected | Evidence in codebase | Status |
 |---|---|---|---|
-| See real rendered directions | 3 directions x 2 real screens x 3 widths | Route commit `f6e513d` holds `src/routes/dev-directions/tokens/{floodlit,programme,notebook}.*`; ADR 0010 lists 60 screenshot paths with SHA-256; on-disk hashes re-checked here (programme data 1440-light `14bdec11…`, notebook tactics 375-light `44bf5d57…`) match the ADR | VERIFIED |
-| Pick a direction | Pick recorded in `docs/decisions/` | ADR 0010 picks `floodlit` (81.25 vs 73.75 / 73.75), carries the delegation line; `adr-0010.test.ts` recomputes totals and winner (passes); learner override todo in STATE.md Pending Todos | VERIFIED (delegated checkpoint, per ROADMAP Checkpoint line and 04-CONTEXT) |
-| Get a design system that enforces it | DESIGN.md + generated tokens + gates | DESIGN.md 8 sections, single `tokens` block, `tokens:check` / `palette` / `review:screens` gates all pass (below) | VERIFIED |
-| Outcome: lessons look designed, accessible, consistent | Enforcement mechanism exists and the picked screens pass it | `review:screens` PASS (0 fail) on both floodlit screens and `/dev/gallery`; seeded gradient fixture FAILs with exit 1 | VERIFIED |
+| See real rendered directions | 3 directions x 2 real screens x 3 widths | Route commit `f6e513d` holds the three direction token sets; ADR 0010 lists 60 screenshot paths with SHA-256 (unchanged since 420b1b5) | VERIFIED |
+| Pick a direction | Pick recorded in `docs/decisions/` | ADR 0010 picks `floodlit` (81.25 vs 73.75 / 73.75), with the delegation line; `adr-0010.test.ts` passes in this run | VERIFIED (delegated checkpoint) |
+| Get a design system that enforces it | DESIGN.md + generated tokens + gates | DESIGN.md 8 sections; `tokens:check`, `palette`, `review:screens` all pass in this run | VERIFIED |
+| Outcome: lessons look designed, accessible, consistent | Enforcement exists and the picked screens pass it | `review:screens` PASS (0 fail) on `/dev`, floodlit tactics, floodlit data, floodlit data at `t=11.48`, and `/dev/gallery`. The seeded gradient fixture FAILs (6 fail, exit 1) | VERIFIED |
 
 ## Goal Achievement
 
@@ -37,150 +52,123 @@ human_verification: []
 
 | # | Truth | Status | Evidence |
 |---|---|---|---|
-| 1 | Learner opens 2-3 distinct directions (tactics + data screen each, screenshots at 3 widths), picks one, pick recorded in `docs/decisions/` | ✓ VERIFIED | ADR 0010 (gates, 7 weighted criteria, per-score evidence, 60 screenshot hashes, route commit `f6e513d` which `git cat-file` confirms exists and contains the three direction token sets). Pick delegated to an independent Opus reviewer as the ROADMAP Checkpoint line and 04-CONTEXT state; learner may override (STATE.md todo with checkout command). The losing directions were removed after lock by design (04-13). |
-| 2 | DESIGN.md covers anti-slop rules, colour system (dark/light, team A/B, ball, zones, data scales) with a passing colour-blind-safety script, typography, spacing, motion, lesson templates, data-viz standards, quality bar | ✓ VERIFIED | `docs/DESIGN.md` (1690 lines): §1 Do/Don't with check id per banned pattern, §2 direction, §3.1-3.7 foundations + tokens block, §4 Pitch Standard, §5 all brief 9.5 components x 6 fields, §6 seven templates, §7 data-viz, §8 quality bar. `npm run palette` → PASS floodlit dark and light (teams ΔE 24.4/27.4 and 21.9/31.2). `design-md.test.ts` locks sections against the CHECKS and TASTE_IGNORED registries (passes). |
-| 3 | Tokens generated from DESIGN.md drive the Tailwind theme; changing a token and regenerating visibly changes the app and the pitch | ✓ VERIFIED | `npm run tokens:check` → "tokens ok: 1 file(s)"; `src/styles/tokens.css` header names DESIGN.md as source; `@theme inline`/`@theme static` blocks; Phase 3 `--team-*`, `--pitch-*`, `--ball-*`, `--zone-*` names kept. `tests/functional/tokens.spec.ts` (real generator on a modified copy of the DESIGN.md block, injected in Chrome) passed: disc fill → `rgb(158, 42, 43)`, body background → `rgb(251, 243, 228)`. `build-tokens.test.ts` proves `--check` exits 1 on one changed byte. |
-| 4 | `/dev/gallery` shows every primitive and interaction at 3 widths; visual baselines generated only by CI on Linux, never overwritten locally | ✓ VERIFIED (baseline generation deferred to post-merge) | 37-id inventory (`gallery.test.tsx` passes), 101/101 functional specs pass locally incl. width/theme/deep-link/fallback and "every state of <id> is on its bare page" for all 37 ids. Gallery excluded from production bundle (no gallery strings in `dist/`). Baseline mechanism: see `deferred` above. No baseline exists yet; see Deferred Items. |
-| 5 | A screenshot-review command captures any screen at 3 widths, runs the taste-skill review against DESIGN.md, writes a pass/fail report | ✓ VERIFIED | Run here: `/dev/directions/floodlit/tactics --states state=with` → PASS 0 fail 1 warn (exit 0); `/data --states t=11.48` → PASS (exit 0); `/dev/gallery` → PASS 0 warn (exit 0); `/dev/review-fixture` → PASS (exit 0); `?case=gradient` → FAIL 2 fail (exit 1); unreachable port → exit 2, no orphan server left on 5199. report.json schemaVersion 1, 22 check ids incl. `taste-layout` and `taste-copy`, 16 screenshots with SHA-256 and vision mode. The re-run floodlit tactics 375-dark hash equals the ADR 0010 hash (`5f67f092…`), so the picked screen still renders the reviewed pixels. |
+| 1 | Learner opens 2-3 distinct directions (tactics + data screen each, screenshots at 3 widths), picks one, pick recorded in `docs/decisions/` | VERIFIED | ADR 0010 is unchanged since 420b1b5. It holds the gates, weighted criteria, per-score evidence, 60 hashes and route commit `f6e513d`. The pick was delegated per the ROADMAP Checkpoint line and 04-CONTEXT. The learner may override (STATE.md todo). |
+| 2 | DESIGN.md covers anti-slop rules, colour system (dark/light, team A/B, ball, zones, data scales) with a passing colour-blind-safety script, typography, spacing, motion, lesson templates, data-viz standards, quality bar | VERIFIED | §1-§8 are present. `npm run palette` gives PASS floodlit dark (teams 24.4/27.4) and PASS floodlit light (21.9/31.2). `design-md.test.ts` passes. §2 and §4 now agree: §2 names the rules that keep the pitch-layer defects fixed, and §4 replaces the "Known gaps" bullet with "Checked in a browser" (the rules are spelled out in §4 Placement and Sizing). |
+| 3 | Tokens generated from DESIGN.md drive the Tailwind theme; changing a token and regenerating visibly changes the app and the pitch | VERIFIED | `npm run tokens:check` gives "tokens ok: 1 file(s)". `tests/functional/tokens.spec.ts` (real generator on a modified DESIGN.md copy, run in Chrome) passes within the 109 functional tests. |
+| 4 | `/dev/gallery` shows every primitive and interaction at 3 widths; visual baselines generated only by CI on Linux, never overwritten locally | VERIFIED (baseline generation deferred to post-merge) | 37-id inventory; `gallery.test.tsx` passes; the functional gallery specs (all 37 bare pages, widths, themes, fallbacks, the new "1 state" assertion) pass. `review:screens /dev/gallery` gives PASS with 0 warn. No gallery strings in `dist/` (`guard:bundle` ok). Baseline mechanism: see Deferred. |
+| 5 | A screenshot-review command captures any screen at 3 widths, runs the taste-skill review against DESIGN.md, writes a pass/fail report | VERIFIED | Run here on port 5184: `/dev` PASS 0 warn (exit 0; it had 6 fail before UI-7). Floodlit tactics: PASS, 1 warn. Floodlit data: PASS, 1 warn. Data `--states t=11.48`: PASS. `/dev/gallery`: PASS. `/dev/review-fixture?case=gradient`: FAIL, 6 fail (exit 1). Reports and screenshots are in `test-results/review/<slug>/`. |
 
 **Score:** 5/5 roadmap truths verified (0 present, behavior-unverified)
 
+### Previous warnings: re-checked
+
+| # | Warning (420b1b5) | Fix in code | Behavioral evidence | Status |
+|---|---|---|---|---|
+| 1 | Legend says "Filled disc with shirt number" while discs show position codes | `registry.ts` descriptions carry a `{disc-text}` slot. `glyphIds.ts` `discTextKinds`/`describeDiscText` derive it from the scene entities: number gives "shirt number", label + role gives "position code", label + name gives "player initials". `Legend.tsx` uses `descriptionFor` | directions.spec "the legend says position code on the tactics screen and player initials on the data screen" passes (it asserts no "shirt number"). `legend.test.tsx` passes. The 1440-dark tactics capture reads "Filled disc with position code."; the 375 data capture at t=11.48 reads "Filled disc with player initials." | CLOSED |
+| 2a | `placeBadge` ignores earlier badges | `placement.ts` adds `badges` obstacles with a `BADGE_GAP_PX` of 2. A disc-only fallback pass means a badge never lands on a disc to dodge a badge. `SceneLayer.tsx` places badges in sequence-annotation order and feeds `placed` | pitch-fixes.spec "375 px / 1440 px: no badge overlaps a player disc or another badge in any frame" passes. It steps every frame, compares every badge pair, and requires a frame with 3+ badges, so it is not vacuous. `placement.test.ts` passes. The 375 capture at t=11.48 shows badges 1-6 apart. | CLOSED |
+| 2b | Ball over the "EM" label at t=0 | `SceneLayer.tsx`: the owned-ball offset is now `(discDiameter + ballDiameter) / 2`, replacing `0.6 * d` | pitch-fixes.spec "375 / 768 / 1440 px: at 0.0 s the ball sits beside the EM disc, clear of its label" passes. It asserts the ring-to-label-ink gap is over 1 px and does not cover the fill. | CLOSED |
+| 3 | DESIGN.md §2 contradicts §4 | `59b30ce`: §2 now says the defects are fixed and names the rules; §4 drops "Known gaps" and describes the browser checks | Read the diff: no remaining "known gap" or open-defect statement in §4 Placement. deferred-items.md marks the 04-12 items resolved. | CLOSED |
+
+Extra UI fixes verified: UI-1 label fit (`fitLabel`, condensed `font-stretch: 75%`, `textLength` fallback). The functional test "every position code and initial sits inside its disc" (tactics both shapes, data screen, glyph sheet; 375 and 1440) measures ink boxes against the inner disc and passes. The 1440-dark capture shows CM/DM/RW/LW inside the discs. UI-6: "1 state" is asserted in gallery.spec. UI-7: the `/dev` review passes. UI-8: `copy-fonts.ts --check` gives "fonts ok"; `git grep` finds no reference to archivo/newsreader/martian-mono/atkinson outside the lockfile and planning; `npm ls --depth=0` shows no missing or extraneous packages.
+
 ### Plan must-haves (04-01 … 04-17)
 
-`verify.artifacts`: 66/67 pass; `verify.key-links`: 43/44 pass. The two misses are deliberate supersessions by 04-13 (CONTEXT: "Losing directions are kept as dev routes only until DESIGN.md is locked, then removed"):
+`verify.artifacts` over all 17 plans: 61/62. `verify.key-links`: 41/42. The two misses are the same deliberate 04-13 supersessions as at 420b1b5:
 
-- 04-01 artifact `src/routes/dev-directions/tokens/floodlit.tokens.json`: deleted by 04-13; present at `f6e513d`; `build-tokens.test.ts` asserts "the folder is deleted and a missing folder gives no direction sets".
-- 04-07 key link DirectionScope → `tokens/*.css`: replaced by the 04-13 key link DirectionScope → `DESIGN.md?raw` (verified).
+- 04-01 artifact `src/routes/dev-directions/tokens/floodlit.tokens.json`: 04-13 deleted it by design (losing and pre-lock direction sets removed after lock). It is present at `f6e513d`, and `build-tokens.test.ts` asserts the folder is gone.
+- 04-07 key link DirectionScope → `tokens/*.css`: the 04-13 link DirectionScope → `DESIGN.md?raw` replaces it (verified).
 
-Behavior-dependent plan truths, each backed by a passing named test or a run made here:
-
-| Truth (abridged) | Evidence |
-|---|---|
-| Theme: system default, persisted `tnk:theme`, `?theme=` priority, throwing localStorage falls back (04-08, 04-11) | theme.spec.ts (8 tests) + directions.spec.ts "theme menu … survives a reload", "blocked localStorage … no console error": pass |
-| Light subtree under a dark root (CR-01 fix) | theme.spec.ts "a light subtree wins under a dark root": pass |
-| Shape toggle morph + announcement; reduced motion swaps instantly (04-07, 04-09 backstop) | directions.spec.ts "opens without the ball and flips to the 3-2-4-1 with an announcement", "with reduced motion › swaps the frame within one animation frame": pass; `reduced-motion` check pass in both review reports |
-| Focus mode hides rail/time/source/theme, keeps step content (04-08) | directions.spec.ts "focus mode keeps only the step": pass |
-| Data screen: paused at 0.0 s, row/bar Enter seeks 9.74 s, loading line, error panel (04-09) | directions.spec.ts data-screen tests (5): pass; `derived.test.ts` recomputes 18.4 s / 59.3 m / 7 players: pass |
-| Badge vs disc, chip inside SVG at 375 and 1440, "Play sequence" at 768+ (04-02, 04-17) | pitch-fixes.spec.ts (6): pass; `placement.test.ts`: pass |
-| 375 no overflow, 44 px targets (04-09 backstop) | `no-overflow` and `tap-size` pass in both floodlit reports run here |
-| CVD captures keep teams and events distinct (04-10 backstop) | Viewed `dev-gallery-glyphs-bare-1/375-light-achromatopsia.png`: team A filled vs team B ring discs, hollow vs filled arrowheads, square goalkeepers stay distinct; `npm run palette` passes |
-| Overlays: alert dialog focus/Escape/return, dialog focus trap, long popover 60vh at 375 (04-15) | gallery.spec.ts overlay tests: pass |
+Behavior-dependent plan truths are each backed by a passing named functional or unit test in this run's suites: theme persistence and fallback (theme.spec, directions.spec), light subtree under a dark root, shape morph and reduced motion, focus mode, data screen seek/loading/error, badge and chip placement, 44 px targets, overlay focus handling (gallery.spec), and CVD (palette gate plus achromatopsia captures).
 
 ### Deferred Items
 
 | # | Item | Addressed In | Evidence |
 |---|---|---|---|
-| 1 | First Linux visual baseline set and a green `visual` job | Post-merge: `gh workflow run update-snapshots.yml --ref <branch>` (STATE.md Deferred Verification) | Workflow dispatch needs the file on `main` (404 before merge). CI run 46135577547 at 92f68bd: lint, typecheck, test, build, guards, windows-smoke, pipeline green; `visual` red with 222/222 failures = missing snapshot only, 98 functional pass on Linux. `visual` is not a required check (ADR 0007 six checks unchanged). |
+| 1 | First Linux visual baseline set and a green `visual` job | Post-merge: `gh workflow run update-snapshots.yml --ref <branch>` (STATE.md Deferred Verification) | Workflow dispatch needs the file on `main`. CI run 46135577547: every failure was a missing snapshot only. `visual` is not a required check (ADR 0007). |
 
 ### Required Artifacts
 
 | Artifact | Status | Details |
 |---|---|---|
-| `docs/DESIGN.md` | ✓ VERIFIED | 8 sections, one `tokens` block, palette table between markers equals `check-palette --markdown` (design-md.test) |
-| `docs/decisions/0010-visual-direction.md` | ✓ VERIFIED | Gates, scores, evidence, hashes, delegation line; arithmetic test passes |
-| `scripts/design/{tokens,tokens-schema,build-tokens,check-palette,copy-fonts}.ts` | ✓ VERIFIED | All CLIs ran here: tokens ok, palette PASS, fonts ok |
-| `src/styles/tokens.css` | ✓ VERIFIED | Generated, byte-equal to generator output, imported by `src/index.css` |
-| `public/fonts/` + `LICENSES.md` | ✓ VERIFIED | Only `mona-sans`, `geist-mono` (the DESIGN.md families); OFL-1.1; copied to `dist/fonts` |
-| `scripts/review-screens.ts`, `scripts/review/{lib,browser,taste}.ts` | ✓ VERIFIED | Exit codes 0/1/2 shown live |
-| `src/routes/dev-gallery*`, `src/ui/**` (Base UI 1.9.0, no Radix) | ✓ VERIFIED | 37 ids; `grep radix` in src/package.json: none |
-| `playwright.config.ts`, `tests/visual/gallery.visual.spec.ts`, `.github/workflows/{ci,update-snapshots}.yml`, `scripts/design/baselines-guard.test.ts` | ✓ VERIFIED | Gating and static workflow checks pass |
+| `docs/DESIGN.md` | VERIFIED | 8 sections, one `tokens` block, §2/§4 consistent, §4 documents disc-text, label-fit, ball-offset and badge rules matching the code |
+| `docs/decisions/0010-visual-direction.md` | VERIFIED | Unchanged; arithmetic test passes |
+| `scripts/design/*` | VERIFIED | tokens ok, palette PASS, fonts ok |
+| `src/styles/tokens.css` | VERIFIED | Byte-equal to generator output |
+| `src/pitch/glyphs/{placement,glyphSize,SceneLayer,PlayerGlyph,registry}.ts(x)` | VERIFIED | Substantive changes (diff read), wired: `SceneLayer` → `placeBadge({badges})`, `PlayerShape` → `fitLabel`, `Legend` → `describeDiscText` |
+| `src/pitch/legend/{Legend.tsx,glyphIds.ts}` | VERIFIED | Description derived from scene data, not hand-typed |
+| `scripts/review-screens.ts`, `scripts/review/*` | VERIFIED | Exit 0 / 1 shown live |
+| `src/routes/dev-gallery*`, `src/ui/**`, `src/routes/dev.tsx` | VERIFIED | 37 ids; `/dev` links carry the focus token outline |
+| `playwright.config.ts`, `tests/visual/*`, `.github/workflows/*`, `baselines-guard.test.ts` | VERIFIED | Gating unchanged since 420b1b5 |
 
 ### Key Link Verification
 
-All 43 current key links WIRED (gsd `verify.key-links`); the one miss is the superseded 04-07 link noted above. Spot-checked manually: `src/index.css` → `@import "./styles/tokens.css"`; `PlayerGlyph` → `var(--team-a)` (proven at runtime by tokens.spec); `tokens.ts` → `SYSTEM_INPUT = docs/DESIGN.md`; `index.html` → `tnk:theme`.
+41/42 key links are WIRED per gsd `verify.key-links`; the one miss is superseded (above). Manually traced new links: `SceneLayer.tsx` badge loop → `placeBadge(... badges: placed ...)`; the render at line 276 reads `badgeAt.get(id)`. `PlayerGlyph.tsx` → `fitLabel` → `textLength`/`fontStretch`. `Legend.tsx` → `describeDiscText` → `discTextKinds`.
 
 ### Data-Flow Trace (Level 4)
 
 | Artifact | Data | Source | Real data | Status |
 |---|---|---|---|---|
-| DataScreen stat card, chart, table | 18.4 s, 59.3 m, 7 players, metres forward | `deriveGoal()` over the published Wyscout scene via `loadDevScene` | Yes (derived.test recomputes from the scene file; 1440 capture shows the values) | ✓ FLOWING |
-| Gallery foundations swatches | token values and contrast | `DESIGN.md?raw` → `parseTokens` + `color.ts` | Yes | ✓ FLOWING |
-| Pitch glyph colours | `--team-*`, `--pitch-*` | generated tokens.css | Yes (tokens.spec) | ✓ FLOWING |
+| Legend description | disc-text kind | `scene.entities` (number / label / role / name) via `discTextKinds` | Yes: "position code" on the City scene, "player initials" on the Wyscout scene (functional test + captures) | FLOWING |
+| DataScreen stats, chart, table | 18.4 s, 59.3 m, 7 players | `deriveGoal()` over the Wyscout scene | Yes (`derived.test`, 375 capture) | FLOWING |
+| Pitch glyph colours | `--team-*`, `--pitch-*` | generated tokens.css | Yes (tokens.spec) | FLOWING |
 
 ### Behavioral Spot-Checks
 
 | Behavior | Command | Result | Status |
 |---|---|---|---|
-| Unit suite | `npx vitest run` | 53 files, 1250 passed, 6 skipped (all Phase 2 research `skipIf`), exit 0 | ✓ PASS |
-| Typecheck | `npx tsc --noEmit` | exit 0 | ✓ PASS |
-| Token drift | `npm run tokens:check` | `tokens ok: 1 file(s)` | ✓ PASS |
-| Palette gate | `npm run palette` | PASS floodlit dark, PASS floodlit light | ✓ PASS |
-| Repo guard | `npm run guard` | `517 file(s) ok (tracked)` | ✓ PASS |
-| Fonts | `node scripts/design/copy-fonts.ts --check` | `fonts ok` | ✓ PASS |
-| Lint | `npx biome ci .` | 260 files, exit 0 (1 info) | ✓ PASS |
-| Build + bundle guard | `npm run build && npm run guard:bundle` | built; `bundle ok: 11 files` | ✓ PASS |
-| Functional E2E | `REVIEW_PORT=5184 npx playwright test --project functional` | 101 passed | ✓ PASS |
-| Review command | `review:screens` x4 + seeded fail + unreachable | exits 0,0,0,0,1,2 | ✓ PASS |
+| Unit suite | `npx vitest run` | 53 files, 1261 passed, 6 skipped, exit 0 | PASS |
+| Typecheck | `npx tsc --noEmit` | exit 0 | PASS |
+| Lint | `npx biome ci .` | 260 files, exit 0 (1 pre-existing info, `src/ui/Dialog.tsx`) | PASS |
+| Token drift | `npm run tokens:check` | `tokens ok: 1 file(s)` | PASS |
+| Palette gate | `npm run palette` | PASS floodlit dark, PASS floodlit light | PASS |
+| Repo guard | `npm run guard` | `520 file(s) ok (tracked)` | PASS |
+| Build + bundle guard | `npm run build && npm run guard:bundle` | built in 302 ms; `bundle ok: 11 files` | PASS |
+| Functional E2E | `REVIEW_PORT=5184 npx playwright test --project functional` (reused the running 5184 server) | 109 passed, exit 0 | PASS |
+| Fonts | `node scripts/design/copy-fonts.ts --check` | `fonts ok` | PASS |
+| Review command | `review:screens` on `/dev`, floodlit tactics, floodlit data, data at t=11.48, `/dev/gallery`, plus the gradient fixture | exit 0 x5 (PASS), then exit 1 (FAIL, 6 fail) | PASS |
 
 ### Probe Execution
 
-Step 7c: no `scripts/*/tests/probe-*.sh` declared or present for this phase. SKIPPED.
+Step 7c: no `scripts/*/tests/probe-*.sh` is declared or present for this phase. SKIPPED.
 
 ### Requirements Coverage
 
 | Requirement | Description | Status | Evidence |
 |---|---|---|---|
-| DSGN-01 | 2-3 directions as real screens, screenshotted at 3 widths, pick | ✓ SATISFIED | Truth 1 |
-| DSGN-02 | DESIGN.md coverage incl. CVD-validated colour system | ✓ SATISFIED | Truth 2 |
-| DSGN-03 | Tokens from DESIGN.md drive the Tailwind theme | ✓ SATISFIED | Truth 3 |
-| DSGN-04 | Gallery at 3 widths, CI-only baselines | ✓ SATISFIED (baseline generation deferred post-merge) | Truth 4 |
-| QA-02 | Taste-skill screenshot review at 3 widths against DESIGN.md (mechanism) | ✓ SATISFIED | Truth 5 |
+| DSGN-01 | 2-3 directions as real screens, screenshotted at 3 widths, pick | SATISFIED | Truth 1 |
+| DSGN-02 | DESIGN.md coverage incl. CVD-validated colour system | SATISFIED | Truth 2 |
+| DSGN-03 | Tokens from DESIGN.md drive the Tailwind theme | SATISFIED | Truth 3 |
+| DSGN-04 | Gallery at 3 widths, CI-only baselines | SATISFIED (baseline generation deferred post-merge) | Truth 4 |
+| QA-02 | Taste-skill screenshot review at 3 widths against DESIGN.md | SATISFIED | Truth 5 |
 
 No orphaned requirements: REQUIREMENTS.md maps exactly these five IDs to Phase 4.
 
-### Decision Coverage
-
-`check.decision-coverage-verify`: skipped ("No trackable decisions in CONTEXT.md": the decisions are prose, not D-xx ids). Manual check of every 04-CONTEXT decision: 3 directions behind `/dev/directions/:id/{tactics,data}` (at `f6e513d`), independent reviewer pick + ADR 0010 + STATE follow-up, losing directions removed, single tokens block, `build-tokens --check` in tests, token-change headless test, theme default/persist/try-catch, palette CVD gate, self-hosted OFL WOFF2, motion tokens + reduced motion, `@base-ui/react` only, `@playwright/test` 1.65.1 exact, `updateSnapshots` gating, visual job not required, review CLI outputs under `test-results/review/<slug>/`, exit 2 when the skill folder is absent. All honoured.
-
-### Test Quality Audit
-
-| Test File | Linked Req | Active | Skipped | Circular | Assertion Level | Verdict |
-|---|---|---|---|---|---|---|
-| tests/functional/tokens.spec.ts | DSGN-03 | 1 | 0 | No (fixed literals `#9E2A2B`/`#FBF3E4` vs computed style) | Value | OK |
-| scripts/design/build-tokens.test.ts | DSGN-03 | all | 0 | No | Value/behavioral (exit codes) | OK |
-| scripts/design/check-palette.test.ts | DSGN-02 | all | 0 | No (seeded `#00A000` must fail) | Value | OK |
-| scripts/design/design-md.test.ts | DSGN-02, QA-02 | all | 0 | Partial: palette table equals generator output (consistency by design) | Value | OK |
-| src/routes/dev-gallery/gallery.test.tsx + gallery.spec.ts | DSGN-04 | all | 0 | No (inventory copied from UI-SPEC) | Behavioral | OK |
-| tests/visual/gallery.visual.spec.ts | DSGN-04 | 222 (CI only) | skipped locally by design | No | Screenshot | OK (deferred baselines) |
-| scripts/review/review.test.ts | QA-02 | all | 0 | No | Value | OK |
-
-Disabled tests on requirements: 0. Circular patterns: 0 blocking. Insufficient assertions: 0.
-
 ### Anti-Patterns Found
 
-No `TBD`/`FIXME`/`XXX`/`TODO`/`HACK` markers in the 236 files changed on the branch versus `main`.
+No `TBD`/`FIXME`/`XXX`/`TODO`/`HACK` markers were added in `420b1b5..HEAD`. The only match in the diff is the previous report's own sentence.
 
 | File | Line | Pattern | Severity | Impact |
 |---|---|---|---|---|
-| src/routes/dev-directions/TacticsScreen.tsx (+ DataScreen) via `registry.ts` descriptions | n/a | Discs show position codes (GK, CB, ST, EM) while the legend says "Filled disc with shirt number". DESIGN.md §4 requires such a screen to say so in its legend description, so the concept and data-lab reference screens break their own constitution | ⚠️ Warning | Known gap (ADR 0010 defects, deferred-items.md). Lessons start in Phase 5; must be closed before a lesson copies these screens |
-| src/pitch/glyphs/placement.ts | n/a | `placeBadge` avoids discs, not earlier badges (badges 1, 3, 6 touch at 375, `t=11.48`); ball over the "EM" label at `t=0` (visible in the 1440-dark data capture) | ⚠️ Warning | Documented as "Known gaps … to close before Phase 5 lessons ship" in DESIGN.md §4; tracked only in deferred-items.md, with no ROADMAP or STATE todo |
-| docs/DESIGN.md §2 | "What this document does…" | Says the pitch-layer defects "are fixed in the Pitch Standard (section 4)", but §4 lists them as open known gaps | ⚠️ Warning | Internal contradiction in the constitution |
-| src/routes/dev-gallery.tsx | 79 | `${p.states.length} states` renders "1 states" for tooltip and toast | ℹ️ Info | Copy grammar on a dev page |
-| package.json devDependencies | n/a | `@fontsource-variable/{archivo,newsreader,martian-mono,atkinson-hyperlegible-next,atkinson-hyperlegible-mono}` stay installed after the 04-13 collapse | ℹ️ Info | Unused packages; public/fonts is correctly pruned |
-| scripts/review/browser.ts, lib.ts | n/a | `text-contrast` ignores ancestor `opacity` (04-REVIEW IN-04, skipped with a reason) | ℹ️ Info | Gate may over-report contrast for faded elements |
+| src/pitch/glyphs/PlayerGlyph.tsx | 260, 263 | The legend swatch draws the number "7" while the description may say "position code" or "player initials" | Info | The swatch is decorative (Swatch.tsx: "the label carries the meaning"). Already noted as residual in 04-UI-REVIEW. |
+| src/pitch/glyphs/SceneLayer.tsx | team shape lines | Dark-theme shape lines share the disc blue (UI-REVIEW optional item, not done) | Info | DESIGN.md has no shape-line token. Not inventing an unvalidated colour is the correct call. |
+| scripts/review/browser.ts, lib.ts | n/a | `text-contrast` ignores ancestor `opacity` (04-REVIEW IN-04, skipped with reason) | Info | Unchanged since 420b1b5 |
+| review:screens floodlit tactics / data | n/a | 1 taste-copy warn each (copy-contrast / stat strip) | Info | Warn, not fail; reviewed in 04-UI-REVIEW |
 
 ### Human Verification Required
 
-None. The learner delegated human checks; each one was settled with evidence:
+None. The learner delegated human checks to Claude, and each was settled here with evidence:
 
-- Visual quality and anti-slop: the independent reviewer recorded scores in ADR 0010, and this verifier looked at the floodlit tactics 375-dark, the data 1440-dark, the gallery 768-dark and the glyphs achromatopsia captures.
-- Colour-blind safety: palette gate plus the CVD captures I looked at.
-- Interactions: Playwright functional specs.
+- Visual fixes: I viewed `test-results/review/dev-directions-floodlit-tactics/1440-dark.png`. The condensed two-letter labels (LB, CB, CM, DM, LW, RW, ST, GK) sit inside their discs, and the legend reads "Filled disc with position code." I viewed `dev-directions-floodlit-data/375-light-t-11-48.png`. Badges 1-6 are separated with no overlap, the legend reads "Filled disc with player initials.", and the page and stat block render correctly.
+- Colour-blind safety: the palette gate passes; the CVD captures are regenerated by `review:screens`.
+- Interactions: Playwright functional specs (109 pass).
 
-Two items remain and neither is a verification gap:
-
-- The learner may optionally override the pick (STATE.md todo). This is a choice, not a check.
-- The baseline generation after the merge (Deferred Items).
+The optional learner override of the pick remains a choice, not a check. Baseline generation is deferred until after merge.
 
 ### Gaps Summary
 
-No blocking gaps. All five roadmap success criteria and all five requirements are met in the codebase. Every gate command was re-run during this verification and passed. Three warnings should be tracked before Phase 5 lessons copy the reference screens:
-
-1. Close the legend/position-code mismatch. Either label the City and Wyscout discs with shirt numbers, or pass a legend description override that says "position code".
-2. Make `placeBadge` treat already placed badges as obstacles. Offset the ball so it does not cover the disc label at `t=0`.
-3. Fix the DESIGN.md §2 sentence so it matches §4. Add these items to STATE.md Pending Todos or to the Phase 5 plan, because deferred-items.md is their only tracker today.
+No gaps. All five roadmap success criteria and all five requirements hold at HEAD `0d2e27c`. The three warnings from the previous report (legend mismatch, badge/ball placement, DESIGN.md §2/§4 contradiction) are fixed in code. Real-browser tests prove each fix, and those tests fail on the old behaviour: badge pairs compared with a 3+ badge frame required, ball-to-label ink gap, legend text asserted per scene. No regressions: unit suite 1261 passed (up from 1250), functional suite 109 passed (up from 101), and all gates are green. The only open item is the post-merge Linux baseline generation, which is deferred by design.
 
 ---
 
-_Verified: 2026-11-28T11:45:00Z_
+_Verified: 2026-11-28T15:20:00Z_
 _Verifier: Claude (gsd-verifier)_
