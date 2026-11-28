@@ -6,24 +6,41 @@ import { type ChildProcess, spawn, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { type Browser, chromium } from "@playwright/test";
+import { type Browser, chromium, type Page } from "@playwright/test";
+import type { TokenDocument } from "../design/tokens.ts";
 import {
+  allowedColours,
   type Box,
+  type CardContainer,
   type CheckResult,
+  type ColourGroup,
   type ControlProbe,
+  type EyebrowProbe,
+  evalArrowSuffix,
+  evalBannedEmoji,
+  evalBannedEyebrow,
+  evalBannedGlass,
   evalBannedGradient,
+  evalBannedStripes,
+  evalCardGrid,
   evalControlNames,
+  evalFocusVisible,
   evalHeadingOrder,
   evalLegendPresent,
   evalNoOverflow,
   evalStepWords,
   evalTapSize,
   evalTextContrast,
+  evalTokenColours,
+  evalTransitionAll,
+  type FocusStop,
   type HeadingProbe,
   heightFor,
+  type PropertyProbe,
   ReviewUnavailableError,
   type ScreenshotRecord,
   type StepProbe,
+  type StripeProbe,
   type TapTarget,
   type TextProbe,
   type Theme,
@@ -170,6 +187,13 @@ interface PageData {
   glyphCount: number;
   legendVisible: boolean;
   steps: StepProbe[];
+  colourGroups: ColourGroup[];
+  glass: PropertyProbe[];
+  eyebrows: EyebrowProbe[];
+  cardContainers: CardContainer[];
+  transitionAll: PropertyProbe[];
+  ariaLabels: { selector: string; text: string; box: Box; where: "aria-label" }[];
+  pitches: StripeProbe[];
 }
 
 /** Runs inside the page: returns plain data only. Self-contained, Playwright serialises it. */
@@ -310,6 +334,161 @@ function collectPage(): PageData {
       box: boxOf(el),
     }),
   );
+
+  // ---- style and token collectors
+  const ownText = (el: Element): string =>
+    [...el.childNodes]
+      .filter((n) => n.nodeType === 3)
+      .map((n) => n.textContent ?? "")
+      .join(" ")
+      .replace(/\s+/g, " ")
+      .trim();
+  const painted = [...document.querySelectorAll("html, body, body *")].filter(
+    (el) => !/^(script|style|noscript|title|desc|meta|link|defs)$/i.test(el.tagName),
+  );
+  const colourMap = new Map<string, PageData["colourGroups"][number]>();
+  const addColour = (el: Element, property: string, value: string) => {
+    if (!value || value === "none" || value === "transparent") return;
+    const key = `${property}|${value}`;
+    let g = colourMap.get(key);
+    if (!g) {
+      g = { property, value, count: 0, examples: [] };
+      colourMap.set(key, g);
+    }
+    g.count += 1;
+    if (g.examples.length < 3) {
+      g.examples.push({ selector: selectorOf(el), text: ownText(el), box: boxOf(el) });
+    }
+  };
+  const glass: PageData["glass"] = [];
+  const eyebrows: PageData["eyebrows"] = [];
+  const cardContainers: PageData["cardContainers"] = [];
+  for (const el of painted) {
+    if (el.getClientRects().length === 0 || el.closest("canvas")) continue;
+    const style = getComputedStyle(el);
+    const svgEl = el instanceof SVGElement;
+    const text = ownText(el);
+    if (!svgEl && (text !== "" || /^(input|select|textarea|button)$/i.test(el.tagName))) {
+      addColour(el, "color", style.color);
+    }
+    if (style.backgroundColor !== "rgba(0, 0, 0, 0)") {
+      addColour(el, "background-color", style.backgroundColor);
+    }
+    for (const side of ["top", "right", "bottom", "left"] as const) {
+      const w = Number.parseFloat(style.getPropertyValue(`border-${side}-width`));
+      const s = style.getPropertyValue(`border-${side}-style`);
+      if (w > 0 && s !== "none" && s !== "hidden") {
+        addColour(el, "border-color", style.getPropertyValue(`border-${side}-color`));
+      }
+    }
+    if (
+      svgEl &&
+      /^(path|circle|rect|ellipse|line|polyline|polygon|text|tspan)$/i.test(el.tagName)
+    ) {
+      addColour(el, "fill", style.fill);
+      if (Number.parseFloat(style.strokeWidth) > 0) addColour(el, "stroke", style.stroke);
+    }
+    const backdrop = style.backdropFilter || style.getPropertyValue("-webkit-backdrop-filter");
+    if (backdrop && backdrop !== "none") {
+      glass.push({ selector: selectorOf(el), text, box: boxOf(el), value: backdrop });
+    }
+    if (text !== "" && style.textTransform === "uppercase") {
+      const spacing = Number.parseFloat(style.letterSpacing);
+      const size = Number.parseFloat(style.fontSize);
+      eyebrows.push({
+        selector: selectorOf(el),
+        text,
+        box: boxOf(el),
+        textTransform: style.textTransform,
+        letterSpacingEm: Number.isFinite(spacing) && size > 0 ? spacing / size : 0,
+      });
+    }
+    if (/grid|flex/.test(style.display) && el.children.length >= 3) {
+      const kids = [...el.children].filter((c) => c.getClientRects().length > 0).slice(0, 40);
+      if (kids.length >= 3) {
+        cardContainers.push({
+          selector: selectorOf(el),
+          box: boxOf(el),
+          children: kids.map((c) => {
+            const cs = getComputedStyle(c);
+            const r = c.getBoundingClientRect();
+            return {
+              radius: cs.borderTopLeftRadius,
+              shadow: cs.boxShadow,
+              background: cs.backgroundColor,
+              width: r.width,
+              height: r.height,
+            };
+          }),
+        });
+      }
+    }
+  }
+
+  // `transition: all` is read from the authored rules: the computed value is `all` on every element
+  // (the default), and the reduced-motion rule zeroes the durations the review emulates.
+  const transitionAll: PageData["transitionAll"] = [];
+  const marked = new Set<Element>();
+  const markAll = (el: Element) => {
+    if (marked.has(el)) return;
+    marked.add(el);
+    transitionAll.push({
+      selector: selectorOf(el),
+      text: ownText(el),
+      box: boxOf(el),
+      value: getComputedStyle(el).transitionProperty,
+    });
+  };
+  const namesAll = (v: string) => v.split(",").some((p) => p.trim() === "all");
+  for (const el of painted) {
+    if (namesAll((el as HTMLElement).style?.transitionProperty ?? "")) markAll(el);
+  }
+  const STATE_PSEUDO =
+    /:{1,2}(?:hover|focus|focus-visible|focus-within|active|disabled|checked|before|after|placeholder|selection)/g;
+  const walkRules = (rules: CSSRuleList) => {
+    for (const rule of rules) {
+      if (rule instanceof CSSStyleRule && namesAll(rule.style.transitionProperty)) {
+        for (const sel of [rule.selectorText, rule.selectorText.replace(STATE_PSEUDO, "")]) {
+          try {
+            const found = document.querySelectorAll(sel);
+            if (found.length > 0) {
+              for (const el of found) markAll(el);
+              break;
+            }
+          } catch {
+            // a selector the page cannot query (nested or vendor): skip it
+          }
+        }
+      }
+      if ("cssRules" in rule) walkRules((rule as CSSGroupingRule).cssRules);
+    }
+  };
+  for (const sheet of document.styleSheets) {
+    try {
+      walkRules(sheet.cssRules);
+    } catch {
+      // a cross-origin sheet cannot be read
+    }
+  }
+
+  const ariaLabels: PageData["ariaLabels"] = [...document.querySelectorAll("[aria-label]")].map(
+    (el) => ({
+      selector: selectorOf(el),
+      text: el.getAttribute("aria-label") ?? "",
+      box: boxOf(el),
+      where: "aria-label" as const,
+    }),
+  );
+  const pitches: PageData["pitches"] = [...document.querySelectorAll("[data-pitch]")].map((p) => ({
+    paintServers: p.querySelectorAll("pattern, linearGradient, radialGradient").length,
+    fieldFills: [...p.querySelectorAll('[data-layer="field"]')].map(
+      (f) => getComputedStyle(f).fill,
+    ),
+    stageImages: [p, p.parentElement]
+      .filter((e): e is Element => e !== null)
+      .map((e) => getComputedStyle(e).backgroundImage)
+      .filter((v) => v !== "none"),
+  }));
   return {
     scrollWidth: document.documentElement.scrollWidth,
     innerWidth: window.innerWidth,
@@ -321,6 +500,54 @@ function collectPage(): PageData {
     glyphCount: document.querySelectorAll("[data-glyph]").length,
     legendVisible,
     steps,
+    colourGroups: [...colourMap.values()],
+    glass,
+    eyebrows,
+    cardContainers,
+    transitionAll,
+    ariaLabels,
+    pitches,
+  };
+}
+
+/** Runs inside the page after a Tab press: the focused element's ring data, or null at the end. */
+function collectFocus(): (FocusStop & { key: string }) | null {
+  const el = document.activeElement;
+  if (!el || el === document.body || el === document.documentElement) return null;
+  const round = (n: number) => Math.round(n * 10) / 10;
+  const r = el.getBoundingClientRect();
+  const box: [number, number, number, number] = [
+    round(r.x + scrollX),
+    round(r.y + scrollY),
+    round(r.width),
+    round(r.height),
+  ];
+  const style = getComputedStyle(el);
+  const surfaceChain: string[] = [];
+  for (let a = el.parentElement; a; a = a.parentElement) {
+    surfaceChain.push(getComputedStyle(a).backgroundColor);
+  }
+  const ringStrokes: { color: string; width: number }[] = [];
+  for (const ring of el.querySelectorAll("[data-focus-ring]")) {
+    if (getComputedStyle(ring).visibility === "hidden") continue;
+    for (const shape of [ring, ...ring.querySelectorAll("*")]) {
+      const s = getComputedStyle(shape);
+      const width = Number.parseFloat(s.strokeWidth);
+      if (s.stroke !== "none" && width > 0) ringStrokes.push({ color: s.stroke, width });
+    }
+  }
+  const tag = el.tagName.toLowerCase() + (el.id ? `#${el.id}` : "");
+  return {
+    key: `${tag}@${box.join(",")}`,
+    selector: tag + (el.classList.length > 0 ? `.${[...el.classList].slice(0, 2).join(".")}` : ""),
+    text: (el.textContent ?? "").replace(/\s+/g, " ").trim().slice(0, 60),
+    box,
+    outlineWidth: Number.parseFloat(style.outlineWidth) || 0,
+    outlineStyle: style.outlineStyle,
+    outlineColor: style.outlineColor,
+    boxShadow: style.boxShadow,
+    ringStrokes,
+    surfaceChain,
   };
 }
 
@@ -335,6 +562,8 @@ export interface CaptureInput {
   outDir: string;
   /** The theme whose capture supplies the visible text for copy-lint. */
   primaryTheme: Theme;
+  /** The active token set; token-colours allows exactly its colours. */
+  tokens: TokenDocument;
 }
 
 export interface CaptureOutput {
@@ -357,6 +586,22 @@ export function urlFor(base: string, route: string, theme: Theme, state: string 
     for (const [k, v] of new URLSearchParams(state)) url.searchParams.set(k, v);
   }
   return url.toString();
+}
+
+/** Tabs through the first 40 focusable elements and reads each one's focus ring. */
+async function collectFocusStops(page: Page): Promise<FocusStop[]> {
+  const stops: FocusStop[] = [];
+  const seen = new Set<string>();
+  await page.evaluate(() => (document.activeElement as HTMLElement | null)?.blur?.());
+  for (let i = 0; i < 40; i += 1) {
+    await page.keyboard.press("Tab");
+    const stop = await page.evaluate(collectFocus);
+    if (stop === null || seen.has(stop.key)) break;
+    seen.add(stop.key);
+    const { key: _key, ...rest } = stop;
+    stops.push(rest);
+  }
+  return stops;
 }
 
 export async function capture(browser: Browser, input: CaptureInput): Promise<CaptureOutput> {
@@ -409,7 +654,10 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
           });
 
           if (theme === copyTheme && width === copyWidth && state === null) {
-            copyText = await page.evaluate(() => document.body.innerText);
+            copyText = await page.evaluate(
+              // biome-ignore lint/performance/useDomNodeTextContent: the rendered text is what a visitor reads.
+              () => document.body.innerText,
+            );
           }
           const data = await page.evaluate(collectPage);
           const ctx = { width, theme, state };
@@ -426,6 +674,33 @@ export async function capture(browser: Browser, input: CaptureInput): Promise<Ca
               evalLegendPresent({ glyphCount: data.glyphCount, legendVisible: data.legendVisible }),
             ),
             toResult("step-words", ctx, evalStepWords(data.steps)),
+            toResult(
+              "token-colours",
+              ctx,
+              evalTokenColours(data.colourGroups, allowedColours(input.tokens.resolved[theme])),
+            ),
+            toResult("banned-glass", ctx, evalBannedGlass(data.glass)),
+            toResult(
+              "banned-emoji",
+              ctx,
+              evalBannedEmoji([
+                ...data.texts.map((x) => ({
+                  selector: x.selector,
+                  text: x.text,
+                  box: x.box,
+                  where: "text" as const,
+                })),
+                ...data.ariaLabels,
+              ]),
+            ),
+            toResult("banned-stripes", ctx, evalBannedStripes(data.pitches)),
+            toResult("banned-transition-all", ctx, evalTransitionAll(data.transitionAll)),
+            toResult("banned-eyebrow", ctx, evalBannedEyebrow(data.eyebrows)),
+            toResult("card-grid", ctx, evalCardGrid(data.cardContainers)),
+            toResult("arrow-suffix", ctx, evalArrowSuffix(data.controls)),
+          );
+          results.push(
+            toResult("focus-visible", ctx, evalFocusVisible(await collectFocusStops(page))),
           );
           if (width === 375) {
             await page.setViewportSize({ width: 320, height: heightFor(width) });

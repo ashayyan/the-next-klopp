@@ -4,7 +4,7 @@
 // Vitest covers all of it in CI. The browser module collects the data; thresholds live here.
 // Erasable TypeScript only (run by `node` directly).
 
-import { existsSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { join } from "node:path";
 import { loadTokens } from "../design/build-tokens.ts";
 import { composite, contrast, parseCssColor, toHex } from "../design/lib/color.ts";
@@ -517,6 +517,461 @@ export function evalStepWords(steps: readonly StepProbe[]): Outcome {
         : offenders.length === 0
           ? `${steps.length} step(s) within ${STEP_WORD_LIMIT} words`
           : `${offenders.length} of ${steps.length} step(s) over ${STEP_WORD_LIMIT} words`,
+    offenders,
+  };
+}
+
+// ---------------------------------------------------------------- style and token evaluators
+
+export interface ColourGroup {
+  /** CSS property the value came from: color, background-color, border-color, fill or stroke. */
+  property: string;
+  /** Computed value as the browser prints it. */
+  value: string;
+  /** Number of elements using this property and value. */
+  count: number;
+  examples: { selector: string; text: string; box: Box }[];
+}
+
+/** Every colour the active theme defines, as sRGB triples (color, pitch and data groups). */
+export function allowedColours(
+  resolved: Record<string, Record<string, string>>,
+): [number, number, number][] {
+  const out: [number, number, number][] = [];
+  for (const group of ["color", "pitch", "data"]) {
+    for (const value of Object.values(resolved[group] ?? {})) {
+      const c = parseCssColor(value);
+      if (c) out.push([Math.round(c.r), Math.round(c.g), Math.round(c.b)]);
+    }
+  }
+  return out;
+}
+
+/** Computed colour values must be a token colour of the active theme; alpha is ignored. */
+export function evalTokenColours(
+  groups: readonly ColourGroup[],
+  allowed: readonly [number, number, number][],
+): Outcome {
+  const offenders: Offender[] = [];
+  let checked = 0;
+  for (const g of groups) {
+    const c = parseCssColor(g.value);
+    if (!c || c.a === 0) continue;
+    checked += g.count;
+    const ok = allowed.some(
+      ([r, gr, b]) => Math.abs(c.r - r) <= 1 && Math.abs(c.g - gr) <= 1 && Math.abs(c.b - b) <= 1,
+    );
+    if (ok) continue;
+    for (const e of g.examples) {
+      offenders.push({
+        selector: e.selector,
+        text: clip(e.text),
+        box: e.box,
+        value: `${g.property} ${g.value} is not a token colour (${g.count} element(s))`,
+      });
+    }
+  }
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? `${checked} colour use(s) are token colours`
+        : `${offenders.length} colour use(s) outside the token set`,
+    offenders,
+  };
+}
+
+// 3, 4, 6 or 8 hex digits after '#', ending at a word boundary (same rule as pitch.test.tsx).
+const HEX_LITERAL = /#(?:[0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})\b/;
+const RGB_LITERAL = /\brgba?\(/;
+
+export interface SourceFile {
+  path: string;
+  text: string;
+}
+
+/** Every .ts and .tsx file under src/, with a repo-relative forward-slash path. */
+export function listSourceFiles(root: string): SourceFile[] {
+  const out: SourceFile[] = [];
+  const walk = (dir: string) => {
+    for (const name of readdirSync(join(root, dir))) {
+      const rel = `${dir}/${name}`;
+      if (statSync(join(root, rel)).isDirectory()) walk(rel);
+      else if (/\.(ts|tsx)$/.test(name))
+        out.push({ path: rel, text: readFileSync(join(root, rel), "utf8") });
+    }
+  };
+  if (existsSync(join(root, "src"))) walk("src");
+  return out;
+}
+
+/** No hex or rgb( literal in a source file; test files are skipped, comments still count. */
+export function evalHexInSource(files: readonly SourceFile[]): Outcome {
+  const offenders: Offender[] = [];
+  let scanned = 0;
+  for (const f of files) {
+    if (/\.test\.(ts|tsx)$/.test(f.path)) continue;
+    scanned += 1;
+    const lines = f.text.split("\n");
+    for (let i = 0; i < lines.length; i += 1) {
+      const line = lines[i] as string;
+      const hit = HEX_LITERAL.exec(line) ?? RGB_LITERAL.exec(line);
+      if (hit) {
+        offenders.push({
+          selector: `${f.path}:${i + 1}`,
+          text: "",
+          box: ZERO_BOX,
+          value: `literal ${hit[0]}`,
+        });
+      }
+    }
+  }
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? `${scanned} source file(s) hold no colour literal`
+        : `${offenders.length} colour literal(s) in source`,
+    offenders,
+  };
+}
+
+export interface PropertyProbe {
+  selector: string;
+  text: string;
+  box: Box;
+  /** The computed value being judged (transition-property, backdrop-filter, ...). */
+  value: string;
+}
+
+/** `transition: all` animates properties nobody chose; a list that names `all` fails. */
+export function evalTransitionAll(elements: readonly PropertyProbe[]): Outcome {
+  const offenders = elements
+    .filter((e) => e.value.split(",").some((p) => p.trim() === "all"))
+    .map((e) => ({
+      selector: e.selector,
+      text: clip(e.text),
+      box: e.box,
+      value: `transition-property: ${e.value}`,
+    }));
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? "no transition-property: all"
+        : `${offenders.length} element(s) transition all properties`,
+    offenders,
+  };
+}
+
+/** Any backdrop-filter other than none is glass. */
+export function evalBannedGlass(elements: readonly PropertyProbe[]): Outcome {
+  const offenders = elements
+    .filter((e) => e.value.trim() !== "" && e.value.trim() !== "none")
+    .map((e) => ({
+      selector: e.selector,
+      text: clip(e.text),
+      box: e.box,
+      value: `backdrop-filter: ${e.value}`,
+    }));
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? "no backdrop-filter"
+        : `${offenders.length} element(s) use backdrop-filter`,
+    offenders,
+  };
+}
+
+const PICTOGRAPHIC = /\p{Extended_Pictographic}/u;
+
+/** No pictographic character in visible text or in an aria-label. */
+export function evalBannedEmoji(
+  items: readonly { selector: string; text: string; box: Box; where: "text" | "aria-label" }[],
+): Outcome {
+  const offenders = items
+    .filter((i) => PICTOGRAPHIC.test(i.text))
+    .map((i) => ({
+      selector: i.selector,
+      text: clip(i.text),
+      box: i.box,
+      value: `pictographic character in ${i.where}`,
+    }));
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? "no emoji in text or aria-label"
+        : `${offenders.length} emoji use(s)`,
+    offenders,
+  };
+}
+
+export interface StripeProbe {
+  /** Pattern and gradient elements inside the pitch SVG. */
+  paintServers: number;
+  /** Computed fill of each `[data-layer="field"]`. */
+  fieldFills: string[];
+  /** Computed background-image of the pitch stage and its parent when not none. */
+  stageImages: string[];
+}
+
+/** The pitch field is one flat fill: no pattern, gradient or image behind it. */
+export function evalBannedStripes(pitches: readonly StripeProbe[]): Outcome {
+  const offenders: Offender[] = [];
+  for (const p of pitches) {
+    if (p.paintServers > 0) {
+      offenders.push({
+        selector: "[data-pitch] svg",
+        text: "",
+        box: ZERO_BOX,
+        value: `${p.paintServers} pattern or gradient element(s) in the pitch SVG`,
+      });
+    }
+    for (const fill of p.fieldFills) {
+      if (/^url\(/i.test(fill)) {
+        offenders.push({
+          selector: '[data-layer="field"]',
+          text: "",
+          box: ZERO_BOX,
+          value: `field fill is a paint server: ${fill}`,
+        });
+      }
+    }
+    for (const img of p.stageImages) {
+      offenders.push({
+        selector: "[data-pitch]",
+        text: "",
+        box: ZERO_BOX,
+        value: `stage background-image: ${clip(img, 80)}`,
+      });
+    }
+  }
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? pitches.length === 0
+          ? "no pitch on the page"
+          : `${pitches.length} pitch(es) with one flat field fill`
+        : `${offenders.length} stripe or pattern problem(s)`,
+    offenders,
+  };
+}
+
+export interface FocusStop {
+  selector: string;
+  text: string;
+  box: Box;
+  outlineWidth: number;
+  outlineStyle: string;
+  outlineColor: string;
+  boxShadow: string;
+  /** Visible [data-focus-ring] strokes inside the focused element (SVG players). */
+  ringStrokes: { color: string; width: number }[];
+  /** Background colours of the focused element's parents, nearest first. */
+  surfaceChain: string[];
+}
+
+export const FOCUS_RING_MIN_PX = 2;
+export const FOCUS_RING_RATIO = 3;
+
+interface Ring {
+  width: number;
+  color: string;
+}
+
+function splitTopLevel(value: string): string[] {
+  const parts: string[] = [];
+  let depth = 0;
+  let current = "";
+  for (const ch of value) {
+    if (ch === "(") depth += 1;
+    if (ch === ")") depth -= 1;
+    if (ch === "," && depth === 0) {
+      parts.push(current.trim());
+      current = "";
+    } else current += ch;
+  }
+  if (current.trim() !== "") parts.push(current.trim());
+  return parts;
+}
+
+/** Solid, unblurred, non-inset shadows with no offset are rings; width is the spread. */
+export function shadowRings(boxShadow: string): Ring[] {
+  if (boxShadow.trim() === "" || boxShadow.trim() === "none") return [];
+  const rings: Ring[] = [];
+  for (const part of splitTopLevel(boxShadow)) {
+    if (/\binset\b/.test(part)) continue;
+    const colour =
+      /(rgba?\([^)]*\)|color\([^)]*\)|oklab\([^)]*\)|oklch\([^)]*\)|#[0-9a-fA-F]+)/.exec(part)?.[0];
+    if (!colour) continue;
+    const nums = part
+      .replace(colour, " ")
+      .split(/\s+/)
+      .filter((s) => s !== "")
+      .map((s) => Number.parseFloat(s));
+    const [x = 0, y = 0, blur = 0, spread = 0] = nums;
+    if (x === 0 && y === 0 && blur === 0 && spread > 0)
+      rings.push({ width: spread, color: colour });
+  }
+  return rings;
+}
+
+export function evalFocusVisible(stops: readonly FocusStop[]): Outcome {
+  const offenders: Offender[] = [];
+  for (const s of stops) {
+    const surface = resolveBackground(s.surfaceChain);
+    const surfaceRgba = parseCssColor(surface);
+    const rings: Ring[] = [];
+    if (s.outlineStyle !== "none" && s.outlineStyle !== "hidden" && s.outlineWidth > 0) {
+      rings.push({ width: s.outlineWidth, color: s.outlineColor });
+    }
+    rings.push(...shadowRings(s.boxShadow));
+    for (const r of s.ringStrokes) rings.push({ width: r.width, color: r.color });
+    let best = 0;
+    let bestWidth = 0;
+    for (const ring of rings) {
+      const c = parseCssColor(ring.color);
+      if (!c || c.a === 0 || !surfaceRgba) continue;
+      const ink = toHex(c.a >= 0.999 ? c : composite(c, surfaceRgba));
+      const ratio = contrast(ink, surface);
+      if (ring.width >= FOCUS_RING_MIN_PX && ratio > best) {
+        best = ratio;
+        bestWidth = ring.width;
+      }
+    }
+    if (best + 1e-9 < FOCUS_RING_RATIO) {
+      const widest = Math.max(0, ...rings.map((r) => r.width));
+      offenders.push({
+        selector: s.selector,
+        text: clip(s.text),
+        box: s.box,
+        value:
+          bestWidth === 0
+            ? `no ring of ${FOCUS_RING_MIN_PX} px or more (widest ${round1(widest)} px)`
+            : `ring contrast ${best.toFixed(2)}:1, needs ${FOCUS_RING_RATIO}:1`,
+      });
+    }
+  }
+  return {
+    violated: offenders.length > 0,
+    detail:
+      stops.length === 0
+        ? "no focusable element on the page"
+        : offenders.length === 0
+          ? `${stops.length} focus stop(s) show a ring of ${FOCUS_RING_MIN_PX} px or more at ${FOCUS_RING_RATIO}:1`
+          : `${offenders.length} of ${stops.length} focus stop(s) without a visible ring`,
+    offenders,
+  };
+}
+
+export interface EyebrowProbe {
+  selector: string;
+  text: string;
+  box: Box;
+  textTransform: string;
+  /** letter-spacing in em. */
+  letterSpacingEm: number;
+}
+
+/** Uppercase with tracking above 0.05em is the eyebrow pattern. Warn only. */
+export function evalBannedEyebrow(elements: readonly EyebrowProbe[]): Outcome {
+  const offenders = elements
+    .filter((e) => e.textTransform === "uppercase" && e.letterSpacingEm > 0.05)
+    .map((e) => ({
+      selector: e.selector,
+      text: clip(e.text),
+      box: e.box,
+      value: `uppercase with letter-spacing ${round1(e.letterSpacingEm * 100) / 100}em`,
+    }));
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? "no uppercase tracked eyebrow"
+        : `${offenders.length} uppercase tracked label(s)`,
+    offenders,
+  };
+}
+
+export interface CardChild {
+  radius: string;
+  shadow: string;
+  background: string;
+  width: number;
+  height: number;
+}
+
+export interface CardContainer {
+  selector: string;
+  box: Box;
+  children: CardChild[];
+}
+
+const isBoxy = (c: CardChild): boolean => {
+  const bg = parseCssColor(c.background);
+  return (
+    (c.radius !== "" && c.radius !== "0px") ||
+    (c.shadow !== "" && c.shadow !== "none") ||
+    (bg !== null && bg.a > 0)
+  );
+};
+
+/** Three or more equal boxes (radius, shadow, background, size within 2 px) in one row or grid. */
+export function evalCardGrid(containers: readonly CardContainer[]): Outcome {
+  const offenders: Offender[] = [];
+  for (const c of containers) {
+    const boxes = c.children.filter(isBoxy);
+    for (const first of boxes) {
+      const same = boxes.filter(
+        (o) =>
+          o.radius === first.radius &&
+          o.shadow === first.shadow &&
+          o.background === first.background &&
+          Math.abs(o.width - first.width) <= 2 &&
+          Math.abs(o.height - first.height) <= 2,
+      );
+      if (same.length >= 3) {
+        offenders.push({
+          selector: c.selector,
+          text: "",
+          box: c.box,
+          value: `${same.length} identical boxes (${round1(first.width)} x ${round1(first.height)} px)`,
+        });
+        break;
+      }
+    }
+  }
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? "no run of three identical boxes"
+        : `${offenders.length} card grid(s)`,
+    offenders,
+  };
+}
+
+/** Button or link text that ends in a right arrow. Warn only. */
+export function evalArrowSuffix(
+  controls: readonly { selector: string; text: string; box: Box }[],
+): Outcome {
+  const offenders = controls
+    .filter((c) => /[→⟶➜➔➡]\s*$/.test(c.text))
+    .map((c) => ({
+      selector: c.selector,
+      text: clip(c.text),
+      box: c.box,
+      value: "ends in an arrow",
+    }));
+  return {
+    violated: offenders.length > 0,
+    detail:
+      offenders.length === 0
+        ? "no control text ends in an arrow"
+        : `${offenders.length} control(s) end in an arrow`,
     offenders,
   };
 }

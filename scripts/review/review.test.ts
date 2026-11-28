@@ -4,28 +4,44 @@ import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { hexToLin, oklab } from "../design/lib/color.ts";
 import { DIRECTION_DIR, SYSTEM_INPUT } from "../design/tokens.ts";
 import {
   activeTokenInput,
+  allowedColours,
   buildReport,
+  type CardChild,
   CHECKS,
   type CheckResult,
   type ControlProbe,
   countWords,
+  evalArrowSuffix,
+  evalBannedEmoji,
+  evalBannedEyebrow,
+  evalBannedGlass,
   evalBannedGradient,
+  evalBannedStripes,
+  evalCardGrid,
   evalControlNames,
+  evalFocusVisible,
   evalHeadingOrder,
+  evalHexInSource,
   evalLegendPresent,
   evalNoOverflow,
   evalStepWords,
   evalTapSize,
   evalTextContrast,
+  evalTokenColours,
+  evalTransitionAll,
   exitCodeFor,
+  type FocusStop,
+  listSourceFiles,
   loadActiveTokens,
   parseArgs,
   ReviewUnavailableError,
   renderReportMd,
   resolveBackground,
+  shadowRings,
   slugRoute,
   type TextProbe,
   tasteCopyResult,
@@ -572,5 +588,227 @@ describe("taste profile folder", () => {
     expect(a).not.toContain("..");
     expect(tasteProfile(10, 2000)).not.toBe(a);
     expect(tasteProfile(11, 1000)).not.toBe(a);
+  });
+});
+
+const group = (property: string, value: string, count = 1) => ({
+  property,
+  value,
+  count,
+  examples: [
+    {
+      selector: `${property}.el`,
+      text: "x",
+      box: [0, 0, 10, 10] as [number, number, number, number],
+    },
+  ],
+});
+
+describe("token-colours", () => {
+  const allowed = allowedColours({
+    color: { ink: "#0E151D", accent: "#0A7558" },
+    pitch: { "zone-fill-opacity": "0.45" },
+  });
+
+  it("builds the allowed set from colour values only", () => {
+    expect(allowed).toEqual([
+      [14, 21, 29],
+      [10, 117, 88],
+    ]);
+  });
+
+  it("allows rgb, rgba, color(srgb) and oklab forms of a token colour, with alpha", () => {
+    const [L, a, b] = oklab(hexToLin("#0E151D"));
+    for (const value of [
+      "rgb(14, 21, 29)",
+      "rgba(14, 21, 29, 0.5)",
+      "color(srgb 0.0549 0.0824 0.1137 / 0.5)",
+      `oklab(${L} ${a} ${b} / 0.5)`,
+    ]) {
+      expect(evalTokenColours([group("color", value)], allowed).violated, value).toBe(false);
+    }
+  });
+
+  it("fails rgb(255, 0, 0) with the selector and value, and passes transparent and none", () => {
+    const out = evalTokenColours([group("background-color", "rgb(255, 0, 0)", 3)], allowed);
+    expect(out.violated).toBe(true);
+    expect(out.offenders[0]?.selector).toBe("background-color.el");
+    expect(out.offenders[0]?.value).toContain("rgb(255, 0, 0)");
+    const quiet = [
+      group("color", "rgba(0, 0, 0, 0)"),
+      group("fill", "none"),
+      group("stroke", "transparent"),
+    ];
+    expect(evalTokenColours(quiet, allowed).violated).toBe(false);
+  });
+});
+
+describe("no-hex-in-source", () => {
+  it("fails a hex and an rgb( literal and names file and line", () => {
+    const out = evalHexInSource([
+      { path: "src/a.tsx", text: "const a = 1;\nconst c = '#FFF';\n" },
+      { path: "src/b.ts", text: "const d = 'rgb(1, 2, 3)';" },
+    ]);
+    expect(out.offenders.map((o) => o.selector)).toEqual(["src/a.tsx:2", "src/b.ts:1"]);
+  });
+
+  it("skips test files, still counts a hex inside a comment, and passes clean source", () => {
+    expect(
+      evalHexInSource([{ path: "src/a.test.ts", text: "const c = '#FFFFFF';" }]).violated,
+    ).toBe(false);
+    expect(evalHexInSource([{ path: "src/a.ts", text: "// was #0E151D" }]).violated).toBe(true);
+    expect(evalHexInSource([{ path: "src/a.ts", text: "const issue = '#12';" }]).violated).toBe(
+      false,
+    );
+  });
+
+  it("the repo's own src folder is clean", () => {
+    expect(evalHexInSource(listSourceFiles(process.cwd())).offenders).toEqual([]);
+  });
+});
+
+const prop = (value: string) => ({
+  selector: "button",
+  text: "",
+  box: [0, 0, 5, 5] as [number, number, number, number],
+  value,
+});
+
+describe("banned patterns", () => {
+  it("transition-all fails a list that names all and passes opacity, transform", () => {
+    expect(evalTransitionAll([prop("all")]).violated).toBe(true);
+    expect(evalTransitionAll([prop("opacity, all")]).violated).toBe(true);
+    expect(evalTransitionAll([prop("opacity, transform")]).violated).toBe(false);
+  });
+
+  it("banned-glass fails any backdrop-filter except none", () => {
+    expect(evalBannedGlass([prop("blur(8px)")]).violated).toBe(true);
+    expect(evalBannedGlass([prop("none"), prop("")]).violated).toBe(false);
+  });
+
+  it("banned-emoji fails a pictographic character in text or aria-label", () => {
+    const item = (text: string, where: "text" | "aria-label" = "text") => ({
+      selector: "p",
+      text,
+      box: [0, 0, 1, 1] as [number, number, number, number],
+      where,
+    });
+    expect(evalBannedEmoji([item("Goal ⚽")]).violated).toBe(true);
+    expect(evalBannedEmoji([item("\u{1F680} Go", "aria-label")]).violated).toBe(true);
+    expect(evalBannedEmoji([item("Goal 1 – 0, 1×2")]).violated).toBe(false);
+  });
+
+  it("banned-stripes fails paint servers, a url fill and a stage image; passes one flat fill", () => {
+    const flat = { paintServers: 0, fieldFills: ["rgb(1, 2, 3)"], stageImages: [] as string[] };
+    expect(evalBannedStripes([{ ...flat, paintServers: 1 }]).violated).toBe(true);
+    expect(evalBannedStripes([{ ...flat, fieldFills: ['url("#grass")'] }]).violated).toBe(true);
+    expect(evalBannedStripes([{ ...flat, stageImages: ['url("a.png")'] }]).violated).toBe(true);
+    expect(evalBannedStripes([flat]).violated).toBe(false);
+    expect(evalBannedStripes([]).violated).toBe(false);
+  });
+});
+
+const stop = (over: Partial<FocusStop>): FocusStop => ({
+  selector: "button",
+  text: "Go",
+  box: [0, 0, 44, 44],
+  outlineWidth: 0,
+  outlineStyle: "none",
+  outlineColor: "rgb(0, 0, 0)",
+  boxShadow: "none",
+  ringStrokes: [],
+  surfaceChain: ["rgb(255, 255, 255)"],
+  ...over,
+});
+
+const outline = (width: number, color: string) =>
+  stop({ outlineWidth: width, outlineStyle: "solid", outlineColor: color });
+
+describe("focus-visible", () => {
+  it("fails a 1 px outline", () => {
+    const out = evalFocusVisible([outline(1, "rgb(0, 0, 0)")]);
+    expect(out.violated).toBe(true);
+    expect(out.offenders[0]?.value).toContain("no ring of 2 px or more");
+  });
+
+  it("passes a 2 px ring at 3:1 or better and fails one at 1.4:1", () => {
+    expect(evalFocusVisible([outline(2, "rgb(118, 118, 118)")]).violated).toBe(false);
+    const weak = evalFocusVisible([outline(2, "rgb(221, 221, 221)")]);
+    expect(weak.violated).toBe(true);
+    expect(weak.offenders[0]?.value).toContain("needs 3:1");
+  });
+
+  it("accepts a solid box-shadow ring and an SVG ring stroke, ignores inset and blurred shadows", () => {
+    expect(
+      evalFocusVisible([stop({ boxShadow: "rgb(10, 117, 88) 0px 0px 0px 2px" })]).violated,
+    ).toBe(false);
+    expect(
+      evalFocusVisible([stop({ ringStrokes: [{ color: "rgb(14, 21, 29)", width: 3 }] })]).violated,
+    ).toBe(false);
+    expect(
+      evalFocusVisible([stop({ boxShadow: "rgb(10, 117, 88) 0px 0px 0px 2px inset" })]).violated,
+    ).toBe(true);
+    expect(
+      evalFocusVisible([stop({ boxShadow: "rgb(10, 117, 88) 0px 0px 8px 2px" })]).violated,
+    ).toBe(true);
+    expect(shadowRings("rgb(1, 2, 3) 0px 0px 0px 2px, rgb(4, 5, 6) 0px 0px 0px 4px")).toHaveLength(
+      2,
+    );
+  });
+
+  it("measures the ring against the parent surface, composited", () => {
+    const dark = stop({
+      outlineWidth: 2,
+      outlineStyle: "solid",
+      outlineColor: "rgb(14, 21, 29)",
+      surfaceChain: ["rgb(14, 21, 29)"],
+    });
+    expect(evalFocusVisible([dark]).violated).toBe(true);
+    expect(evalFocusVisible([]).detail).toBe("no focusable element on the page");
+  });
+});
+
+describe("warn checks", () => {
+  const at = [0, 0, 1, 1] as [number, number, number, number];
+
+  it("banned-eyebrow flags uppercase above 0.05em and always yields a warning", () => {
+    const el = (textTransform: string, letterSpacingEm: number) => ({
+      selector: "p",
+      text: "NEW",
+      box: at,
+      textTransform,
+      letterSpacingEm,
+    });
+    const out = evalBannedEyebrow([el("uppercase", 0.12)]);
+    expect(out.violated).toBe(true);
+    expect(toResult("banned-eyebrow", ctx, out).status).toBe("warn");
+    expect(evalBannedEyebrow([el("uppercase", 0.05), el("none", 0.2)]).violated).toBe(false);
+  });
+
+  it("card-grid flags three identical boxes and always yields a warning", () => {
+    const card = (over: Partial<CardChild> = {}): CardChild => ({
+      radius: "6px",
+      shadow: "none",
+      background: "rgb(255, 255, 255)",
+      width: 100,
+      height: 80,
+      ...over,
+    });
+    const container = (children: CardChild[]) => ({ selector: "ul.grid", box: at, children });
+    const three = evalCardGrid([container([card(), card({ width: 101 }), card({ height: 81 })])]);
+    expect(three.violated).toBe(true);
+    expect(toResult("card-grid", ctx, three).status).toBe("warn");
+    expect(evalCardGrid([container([card(), card()])]).violated).toBe(false);
+    const sizes = [card({ width: 100 }), card({ width: 150 }), card({ width: 200 })];
+    expect(evalCardGrid([container(sizes)]).violated).toBe(false);
+    const flat = card({ radius: "0px", background: "rgba(0, 0, 0, 0)" });
+    expect(evalCardGrid([container([flat, flat, flat])]).violated).toBe(false);
+  });
+
+  it("arrow-suffix flags a trailing right arrow and always yields a warning", () => {
+    const c = (text: string) => ({ selector: "a", text, box: at });
+    const out = evalArrowSuffix([c("Read more →"), c("Continue")]);
+    expect(out.offenders).toHaveLength(1);
+    expect(toResult("arrow-suffix", ctx, out).status).toBe("warn");
   });
 });

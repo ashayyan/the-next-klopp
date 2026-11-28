@@ -18,7 +18,9 @@ import {
 } from "./review/browser.ts";
 import {
   buildReport,
+  evalHexInSource,
   exitCodeFor,
+  listSourceFiles,
   loadActiveTokens,
   parseArgs,
   ReviewUnavailableError,
@@ -27,6 +29,7 @@ import {
   type Theme,
   tasteCopyResult,
   tasteLayoutResult,
+  toResult,
 } from "./review/lib.ts";
 import { assertTasteSkill, runCopyLint, runLayoutCheck, tasteBlock } from "./review/taste.ts";
 
@@ -75,7 +78,15 @@ async function main(): Promise<number> {
       states: args.states,
       outDir,
       primaryTheme: primary,
+      tokens,
     });
+    results.push(
+      toResult(
+        "no-hex-in-source",
+        { width: null, theme: null, state: null },
+        evalHexInSource(listSourceFiles(root)),
+      ),
+    );
 
     // Taste skill: once per review, at the primary theme only (about 20 s per run).
     const layout = await runLayoutCheck(root, urlFor(server.baseUrl, args.route, primary, null));
