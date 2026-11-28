@@ -1,0 +1,16 @@
+/*
+ * Hand-written direction rules that the token generator does not express.
+ *
+ * programme light: the yellow accent and highlight fills are 1.4:1 on the page, so every yellow
+ * element draws its edge in ink (04-UI-SPEC "Direction 2 — programme"). Primitives mark such fills
+ * with data-fill-edge and a transparent 2 px border; this rule only changes the border colour.
+ * Body carries the same data-direction and data-theme, so portalled popups match too.
+ */
+[data-direction="programme"][data-theme="light"]
+  :is(
+    [data-fill-edge="always"],
+    [data-fill-edge="pressed"][data-pressed],
+    [data-checked] > [data-fill-edge="checked-child"]
+  ) {
+  border-color: var(--ink);
+}

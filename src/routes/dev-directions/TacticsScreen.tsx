@@ -9,6 +9,8 @@ import { autoOrientation } from "../../pitch/view.ts";
 import type { Scene, ScenePoint } from "../../scene/schema.ts";
 import { parseScene } from "../../scene/validate.ts";
 import { Button } from "../../ui/Button.tsx";
+import { ShellBar } from "../../ui/lesson/ShellBar.tsx";
+import { StepRail, type StepRailForms } from "../../ui/lesson/StepRail.tsx";
 import { Segmented } from "../../ui/Segmented.tsx";
 import { type Direction, DirectionScope } from "./DirectionScope.tsx";
 import {
@@ -96,7 +98,9 @@ function useMeasuredWidth(initial: number) {
 
 /** Every block of the screen, built once; a direction layout only decides where each one sits. */
 interface Blocks {
-  wordmark: ReactNode;
+  shell: (className: string) => ReactNode;
+  /** The step rail in the given forms, or null in focus mode. */
+  rail: (form: StepRailForms, numbered?: boolean) => ReactNode;
   title: ReactNode;
   context: ReactNode;
   heading: ReactNode;
@@ -105,6 +109,7 @@ interface Blocks {
   toggle: (className: string, optionClassName?: string) => ReactNode;
   readout: (className: string) => ReactNode;
   legend: (columnsClassName: string) => ReactNode;
+  /** The source line, or null in focus mode. */
   source: ReactNode;
   cta: (className: string) => ReactNode;
 }
@@ -120,15 +125,18 @@ const DISPLAY = "font-display [font-stretch:var(--font-display-stretch)]";
 function FloodlitLayout({ b }: { b: Blocks }) {
   return (
     <>
-      <header className="flex h-14 items-center px-4 md:px-6 xl:px-8">{b.wordmark}</header>
+      {b.shell("px-4 md:px-6 xl:px-8")}
       <main>
         <div className="wrap flex flex-col gap-6 px-4 pt-2 pb-16 md:px-6 md:pt-4 xl:grid xl:grid-cols-12 xl:gap-x-8 xl:gap-y-6 xl:px-8 xl:pt-6">
           <div className="order-2 flex flex-col gap-1 xl:order-none xl:col-span-12">
             {b.title}
             {b.context}
           </div>
-          {/* Step rail column: the Lesson Loop rail arrives with the lesson chrome (04-08). */}
-          <div data-rail-slot className="hidden xl:col-span-2 xl:block" />
+          <div className="order-1 xl:order-none xl:col-span-2">
+            <div className="xl:sticky xl:top-6">
+              {b.rail({ base: "compact", md: "strip", xl: "vertical" })}
+            </div>
+          </div>
           <div className="contents xl:col-span-7 xl:flex xl:min-w-0 xl:flex-col xl:gap-6">
             <div className="order-4 md:order-3 xl:order-none">{b.pitch}</div>
             <div className="order-5 flex flex-col gap-4 md:order-4 md:flex-row md:items-center md:justify-between xl:order-none xl:flex-col xl:justify-start">
@@ -147,7 +155,7 @@ function FloodlitLayout({ b }: { b: Blocks }) {
             <div className="order-7 xl:order-none">
               {b.legend("grid-cols-1 md:grid-cols-2 xl:grid-cols-1")}
             </div>
-            <div className="order-8 xl:order-none">{b.source}</div>
+            {b.source ? <div className="order-8 xl:order-none">{b.source}</div> : null}
             <div className="order-9 xl:order-none xl:mt-auto">{b.cta("w-full xl:w-auto")}</div>
           </div>
         </div>
@@ -170,14 +178,15 @@ const RULE = "border-ink [border-width:var(--border-rule)]";
 function ProgrammeLayout({ b }: { b: Blocks }) {
   return (
     <>
-      <header className="flex h-14 items-center border-ink border-b-[length:var(--border-rule)] px-4 md:px-6 xl:px-8">
-        {b.wordmark}
-      </header>
+      {b.shell("border-ink border-b-[length:var(--border-rule)] px-4 md:px-6 xl:px-8")}
       <main>
         <div className="wrap flex flex-col gap-6 px-4 pt-4 pb-16 md:grid md:grid-cols-2 md:gap-x-6 md:px-6 md:pt-6 xl:grid-cols-12 xl:gap-x-8 xl:gap-y-8 xl:px-8">
-          <div className="order-1 flex flex-col gap-1 border-ink border-b-[length:var(--border-rule)] pb-4 md:col-span-2 xl:order-none xl:col-span-12">
-            {b.title}
-            {b.context}
+          <div className="order-1 flex flex-col gap-4 border-ink border-b-[length:var(--border-rule)] pb-4 md:col-span-2 xl:order-none xl:col-span-12 xl:flex-row xl:items-end xl:justify-between xl:gap-8">
+            <div className="flex flex-col gap-1">
+              {b.title}
+              {b.context}
+            </div>
+            {b.rail({ base: "compact", md: "strip" }, true)}
           </div>
           <div className="contents xl:col-span-4 xl:flex xl:min-w-0 xl:flex-col xl:gap-6">
             <div className="contents md:order-4 md:flex md:min-w-0 md:flex-col md:gap-4 xl:order-none">
@@ -188,21 +197,18 @@ function ProgrammeLayout({ b }: { b: Blocks }) {
                 {b.heading}
                 {b.body}
               </div>
-              <div className="order-5 md:order-none">
-                {b.toggle(
-                  "w-full",
-                  "border-2 border-transparent in-data-[theme=light]:data-pressed:border-ink",
-                )}
-              </div>
+              <div className="order-5 md:order-none">{b.toggle("w-full")}</div>
             </div>
             <div className="order-3 md:order-5 md:self-start xl:order-none">
               {b.readout(
                 `bg-surface-highlight px-4 py-3 text-surface-highlight-ink ${INK_EDGE_LIGHT}`,
               )}
             </div>
-            <div className="order-9 md:order-7 md:col-span-2 xl:order-none">{b.source}</div>
+            {b.source ? (
+              <div className="order-9 md:order-7 md:col-span-2 xl:order-none">{b.source}</div>
+            ) : null}
             <div className="order-10 md:order-8 md:col-span-2 xl:order-none">
-              {b.cta(`w-full xl:w-auto ${INK_EDGE_LIGHT}`)}
+              {b.cta("w-full xl:w-auto")}
             </div>
           </div>
           <div className="contents xl:col-span-8 xl:flex xl:min-w-0 xl:flex-col xl:gap-6">
@@ -228,15 +234,16 @@ function ProgrammeLayout({ b }: { b: Blocks }) {
 function NotebookLayout({ b }: { b: Blocks }) {
   return (
     <>
-      <header className="flex h-14 items-center px-4 md:px-6 xl:mx-auto xl:max-w-[1144px] xl:px-0">
-        {b.wordmark}
-      </header>
+      {b.shell("px-4 md:px-6 xl:mx-auto xl:max-w-[1144px] xl:px-0")}
       <main>
         <div className="wrap md:px-6 md:pb-16 xl:px-8">
           <div className="flex flex-col gap-6 bg-surface-raised px-4 pt-4 pb-8 md:rounded-lg md:p-8 md:[box-shadow:var(--shadow-sheet)] xl:mx-auto xl:max-w-[1144px] xl:p-12">
-            <div className="flex flex-col gap-1">
-              {b.title}
-              {b.context}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-1">
+                {b.title}
+                {b.context}
+              </div>
+              {b.rail({ base: "compact", md: "row" })}
             </div>
             <div className="flex flex-col gap-6 xl:grid xl:grid-cols-[720px_280px] xl:gap-12">
               <div className="flex min-w-0 flex-col gap-6">
@@ -276,6 +283,7 @@ export function TacticsScreen({ direction }: { direction: Direction }) {
   const [params] = useSearchParams();
   const reduced = useReducedMotion() === true;
   const [initial] = useState<ShapeState>(() => shapeFromQuery(params.get("state")));
+  const [focus, setFocus] = useState(() => params.get("focus") === "1");
   // `target` is what the toggle shows; `settled` is the shape the readout, title and live region
   // report, which changes at the end of the morph. `moving` holds the in-between positions.
   const [target, setTarget] = useState<ShapeState>(initial);
@@ -339,7 +347,17 @@ export function TacticsScreen({ direction }: { direction: Direction }) {
   };
 
   const blocks: Blocks = {
-    wordmark: <span className={`${DISPLAY} text-heading`}>The Next Klopp</span>,
+    shell: (className) => (
+      <ShellBar
+        minutes={6}
+        focus={focus}
+        onFocusChange={setFocus}
+        className={className}
+        wordmarkClassName={DISPLAY}
+      />
+    ),
+    rail: (form, numbered) =>
+      focus ? null : <StepRail current="touch-it" form={form} numbered={numbered} />,
     title: <h1 className={`${DISPLAY} text-display text-balance`}>One team, two shapes</h1>,
     context: <p className="text-label text-ink-muted">Manchester City, Premier League 2022/23</p>,
     heading: <h2 className={`${DISPLAY} text-heading`}>Flip the shape</h2>,
@@ -389,7 +407,7 @@ export function TacticsScreen({ direction }: { direction: Direction }) {
     legend: (columnsClassName) => (
       <Legend scene={CITY} density={false} sticky={false} columnsClassName={columnsClassName} />
     ),
-    source: <p className="text-label text-ink-muted">{SOURCE_LINE}</p>,
+    source: focus ? null : <p className="text-label text-ink-muted">{SOURCE_LINE}</p>,
     cta: (className) => (
       <Button variant="primary" className={className}>
         Continue to Predict

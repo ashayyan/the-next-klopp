@@ -51,7 +51,8 @@ export function Segmented<V extends string>({
           key={option.value}
           value={option.value}
           data-state={state}
-          className={`${CONTROL_BASE} flex-1 rounded-md px-4 font-normal whitespace-nowrap text-ink not-data-pressed:hov:bg-surface-page data-pressed:bg-accent data-pressed:font-semibold data-pressed:text-accent-ink act:translate-y-px${optionClassName ? ` ${optionClassName}` : ""}`}
+          data-fill-edge="pressed"
+          className={`${CONTROL_BASE} flex-1 rounded-md border-2 border-transparent px-4 font-normal whitespace-nowrap text-ink not-data-pressed:hov:bg-surface-page data-pressed:bg-accent data-pressed:font-semibold data-pressed:text-accent-ink act:translate-y-px${optionClassName ? ` ${optionClassName}` : ""}`}
         >
           {option.label}
         </Toggle>

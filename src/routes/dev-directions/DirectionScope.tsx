@@ -7,6 +7,7 @@ import programmeTokens from "./tokens/programme.tokens.json";
 import "./tokens/floodlit.css";
 import "./tokens/programme.css";
 import "./tokens/notebook.css";
+import "./directions.css";
 
 export type ThemeName = "light" | "dark";
 
