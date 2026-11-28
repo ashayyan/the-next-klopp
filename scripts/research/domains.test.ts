@@ -104,8 +104,11 @@ describe("research completeness (only under npm run research:gate)", () => {
   });
 });
 
-describe("phase metadata", () => {
-  const brief = readFileSync(join(root, "NEW_PROJECT_INPUT.md"), "utf8");
+// The brief holds the learner profile and is git-ignored (not in the public repo);
+// these cross-checks run locally where the file exists and skip in CI.
+const briefPath = join(root, "NEW_PROJECT_INPUT.md");
+describe.skipIf(!existsSync(briefPath))("phase metadata", () => {
+  const brief = existsSync(briefPath) ? readFileSync(briefPath, "utf8") : "";
 
   it("has 29 kebab track ids t00 to t28 with a Part per brief section 7", () => {
     expect(TRACKS).toHaveLength(29);
