@@ -8,6 +8,7 @@ import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { GLYPH_IDS } from "../../src/pitch/glyphs/registry.ts";
 import { CHECKS } from "../review/lib.ts";
+import { TASTE_IGNORE_REASON, TASTE_IGNORED } from "../review/taste.ts";
 import { loadTokens } from "./build-tokens.ts";
 import { checkPalette, renderMarkdown } from "./check-palette.ts";
 import {
@@ -428,5 +429,121 @@ describe("section 7: data-viz standards", () => {
     expect(s7).toContain("Bars start at zero");
     expect(s7).toContain("at most two marks");
     expect(s7).toContain('"n ="');
+  });
+});
+
+const TEMPLATES = [
+  "Concept",
+  "Simulation",
+  "Data lab",
+  "Case study (scrollytelling)",
+  "Regulation",
+  "Review",
+  "Capstone",
+] as const;
+
+/** `/^hero-.+$/` is written `hero-*` in DESIGN.md. */
+function displayPattern(re: RegExp): string {
+  return re.source
+    .replace(/^\^/, "")
+    .replace(/\$$/, "")
+    .replace(/\.[+*]$/, "*");
+}
+
+describe("section 6: lesson templates", () => {
+  const s6 = section(6);
+
+  it("has the seven templates in order, each with 375, 768 and 1440 and the step it hosts", () => {
+    const heads = s6
+      .split("\n")
+      .filter((l) => l.startsWith("### "))
+      .map((l) => l.slice(4));
+    expect(heads).toEqual([...TEMPLATES]);
+    for (const t of TEMPLATES) {
+      const body = under(s6, `### ${t}`) as string;
+      for (const w of ["375", "768", "1440"]) expect(body, `${t} at ${w}`).toContain(`**${w}:**`);
+      expect(body, `${t} hosts`).toContain("**Hosts:**");
+    }
+  });
+
+  it("cites the picked direction's two screens as the concept and data-lab references", () => {
+    expect(under(s6, "### Concept")).toContain(`/dev/directions/${pickedId()}/tactics`);
+    expect(under(s6, "### Data lab")).toContain(`/dev/directions/${pickedId()}/data`);
+  });
+
+  it("dates regulations, caps the review queue and keeps scrolling free of motion", () => {
+    expect(under(s6, "### Regulation")).toMatch(/Effective from .* As of /);
+    expect(under(s6, "### Review")).toContain("no backlog count");
+    expect(under(s6, "### Case study (scrollytelling)")).toContain("No scroll-triggered motion");
+  });
+});
+
+describe("section 8: quality bar, locked to the review registry", () => {
+  const s8 = section(8);
+
+  it("lists every CHECKS id once with its severity", () => {
+    const rows = new Map<string, string>();
+    for (const line of s8.split("\n")) {
+      const m = /^\| `([a-z-]+)` \| (fail|warn) \|/.exec(line);
+      if (m) {
+        expect(rows.has(m[1] as string), `duplicate row ${m[1]}`).toBe(false);
+        rows.set(m[1] as string, m[2] as string);
+      }
+    }
+    expect(rows.size).toBe(CHECKS.length);
+    for (const c of CHECKS) expect(rows.get(c.id), c.id).toBe(c.severity);
+  });
+
+  it("lists every TASTE_IGNORED pattern with its reason, and the FAIL ids", () => {
+    expect(TASTE_IGNORE_REASON).toBe("landing-page rule, not an app-screen rule");
+    const lines = s8.split("\n");
+    for (const re of TASTE_IGNORED) {
+      const shown = `| \`${displayPattern(re)}\` | ${TASTE_IGNORE_REASON} |`;
+      expect(lines, shown).toContain(shown);
+    }
+    expect(s8).toContain("`overflow-x` and `spill`");
+    expect(s8).toContain("Primary theme only");
+    expect(s8).toContain("Local only");
+  });
+
+  it("states the exit codes, the budget, the baseline rule and the environment variables", () => {
+    for (const code of ["`0` pass", "`1` at least one FAIL", "`2` the review could not run"]) {
+      expect(s8).toContain(code);
+    }
+    for (const budget of ["200 KB", "180 KB gzip", "CLS below 0.1", "60 fps"]) {
+      expect(s8).toContain(budget);
+    }
+    expect(s8).toContain("`@visual`");
+    expect(s8).toContain("v1.65.1-noble");
+    for (const env of [
+      "REVIEW_PORT",
+      "REVIEW_CHANNEL",
+      "REVIEW_START_TIMEOUT_MS",
+      "CHROME_PATH",
+      "UPDATE_BASELINES",
+    ]) {
+      expect(s8).toContain(`| \`${env}\` |`);
+    }
+    expect(s8).toContain("`reviewer` block");
+  });
+});
+
+describe("DESIGN.md is complete", () => {
+  it("has at least 80 words under every one of the 8 headings", () => {
+    for (let n = 1; n <= 8; n += 1) {
+      const body = section(n).split("\n").slice(1).join(" ");
+      const words = body.split(/\s+/).filter((w) => /[A-Za-z0-9]/.test(w)).length;
+      expect(words, DESIGN_HEADINGS[n - 1]).toBeGreaterThanOrEqual(80);
+    }
+  });
+
+  it("no longer holds a one-sentence 'This section covers' stub on its own", () => {
+    for (let n = 1; n <= 8; n += 1) {
+      const paragraphs = section(n)
+        .split("\n\n")
+        .map((p) => p.trim())
+        .filter((p) => p.length > 0 && !p.startsWith("## "));
+      expect(paragraphs.length, DESIGN_HEADINGS[n - 1]).toBeGreaterThan(1);
+    }
   });
 });

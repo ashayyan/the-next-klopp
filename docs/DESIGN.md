@@ -1455,7 +1455,70 @@ These rules hold for every entry below:
 
 ## 6. Lesson templates
 
-This section covers brief section 9.6 (page layouts for the concept, simulation, data lab, case study, regulation, review and capstone lessons).
+This section covers brief section 9.6 (page layouts for the concept, simulation, data lab, case study, regulation, review and capstone lessons). Every template uses the floodlit stage composition from section 2. That means the 56 px top bar (wordmark, lesson time, Focus mode, "I'm confused here", Theme), then the Lesson Loop step rail, then the visual, which is the largest region at every width. One primary button per screen sits at the foot of the reading column.
+
+Shared rules for every template:
+
+- **Widths.** 375 px is one column (pitch vertical, step rail compact: "Touch it, step 3 of 7" with a 7-segment bar). 768 px is one column with the step rail as a horizontal strip. 1440 px is the stage grid: step rail left (200 px, sticky), visual centre, reading column right (320 to 360 px).
+- **Focus mode** hides the step rail, lesson time, source line and Theme button. It keeps the step heading, body, visual, legend, controls, primary button, focus switch and "I'm confused here".
+- **Reading order equals visual order.** The DOM order is the order listed below for each width, so keyboard and screen-reader users meet the regions in the same order.
+- **Region names used below:** title (`h1` and context line), step (step heading `h2` and body of at most 60 words), visual (pitch, chart or simulation stage, with its playback bar), controls (the step's inputs), readout (live result), legend (Notation), source (source line) and CTA (primary button).
+
+### Concept
+
+- **Hosts:** Hook, See it, Touch it and Predict for one idea (a shape, a role, a law).
+- **Reference:** the floodlit tactics screen, `/dev/directions/floodlit/tactics` (Lesson Loop step 3, Touch it).
+- **375:** top bar, compact step line, title, step heading, visual (vertical pitch), controls full width, readout, body, legend (1 column), source, CTA full width.
+- **768:** top bar, step strip, title, visual (horizontal pitch, about 720 px), controls and readout in one row, step, legend (2 columns), source, CTA full width.
+- **1440:** top bar; grid `200px minmax(0,1fr) 320px`. Left: the step rail. Centre: title, visual (about 840 px wide), and the controls and readout centred under it. Right: step, legend, source, and the CTA at the column foot.
+
+### Simulation
+
+- **Hosts:** Touch it, Predict and Do it, where the learner changes a model and watches the result (xG Playground, Pitch Control Live, Metric Noise Lab).
+- **375:** top bar, compact step line, title, step heading, visual (the simulation stage), readout directly under it, controls (sliders and toggles stacked, 44 px targets), body, legend, source, CTA.
+- **768:** top bar, step strip, title, visual, then controls (left) and readout (right) in a two-column row, step, legend (2 columns), source, CTA.
+- **1440:** top bar; grid `200px minmax(0,1fr) 360px`. Left: the step rail. Centre: title, the visual at full stage width, and the readout under it. Right: step, controls grouped under a heading, legend, source, CTA. The controls sit beside the visual, so each change can be seen without scrolling.
+- **Predict:** before a reveal the controls lock, the learner commits a guess, and the answer marker then draws in over `--duration-draw`.
+
+### Data lab
+
+- **Hosts:** See it, Touch it and Do it, with real data (event tables, metrics, charts linked to the pitch).
+- **Reference:** the floodlit data screen, `/dev/directions/floodlit/data` (Lesson Loop step 2, See it).
+- **375:** compact step line, title, step heading, visual (vertical pitch and its playback bar), stat card (figures stacked in one panel), body, chart (343 px wide), table (3 columns, no sideways scroll), legend, source, CTA.
+- **768:** step strip, title, context, visual and playback bar, stat card (figures in a row), step, chart, table, legend (2 columns), source, CTA.
+- **1440:** grid `200px minmax(0,1fr) 360px`. Left: the step rail. Centre: title, context, visual and playback bar, and the chart at full stage width. Right: step, stat card (figures stacked), event table, legend, source, CTA.
+- **Linking:** the chart, the table and the pitch select the same event (section 7). Data credit (provider and licence) is always in the source line.
+
+### Case study (scrollytelling)
+
+- **Hosts:** Hook, See it and Connect it, through a real match story told in short text steps beside one visual.
+- **375:** title, then text steps (each 60 words or fewer), each followed by its own static visual state. Nothing is sticky, so the text never covers the visual.
+- **768:** title; the visual is sticky at the top (at most 50 % of the viewport height), with the text steps scrolling under it.
+- **1440:** title across the stage; the visual is sticky in the centre column, with the text steps in the right reading column and the step rail left.
+- **No scroll-triggered motion.** Scrolling alone never animates or reveals anything. Each step has a "Show this on the pitch" button, or its state is set when the learner presses Next, and the visual then changes with the normal motion rules. Under reduced motion the change is instant.
+
+### Regulation
+
+- **Hosts:** See it, Do it and Lock it in, for a law or a rule (offside, transfer rules, squad-cost rules).
+- **Date line:** every regulation screen shows a date line under the title: "Effective from {date} · As of {date}", with the official source in the source line. A rule that changed after its as-of date is flagged on the screen.
+- **375:** title and date line, compact step line, step heading, visual (a flowchart from the Regulation Navigator or a pitch situation), controls (the yes or no answers), body, source, CTA.
+- **768:** title and date line, step strip, visual, then controls and the outcome readout in one row, step, source, CTA.
+- **1440:** grid `200px minmax(0,1fr) 360px`. Left: the step rail. Centre: title, date line and visual. Right: step, the rule card (the rule paraphrased in plain words, with a link to the official text), controls, readout, source, CTA.
+
+### Review
+
+- **Hosts:** Lock it in, outside a lesson: the spaced-repetition queue.
+- **Queue rules:** the queue is capped per day; one card fills the screen; there is no backlog count and no "you missed" message. After a break, a warm "welcome back" card offers one easy first step, and the overflow is quietly rescheduled. A 3 to 5 minute low-energy session counts as a full day.
+- **375:** top bar, progress as text ("Card 4 of 12 today"), card (question with its visual), answer controls, feedback (icon and words), Next.
+- **768:** the same order, with the card's visual at up to 720 px.
+- **1440:** a centred column of at most 720 px holding the card, controls and feedback. No step rail (a review is not a Lesson Loop), and a quiet "Stop for today" link at the top right.
+
+### Capstone
+
+- **Hosts:** Do it and Connect it at the end of a chapter or track: a brief, real work and a rubric (a scouting report, an opposition analysis, a deal).
+- **375:** title, the brief (what to produce, by what standard), the workspace (the relevant component from section 5), the rubric as a checklist, submit, then the model answer for comparison.
+- **768:** title, brief, workspace, and the rubric under the workspace; the model answer opens beside the learner's work in two columns after submitting.
+- **1440:** grid `200px minmax(0,1fr) 360px`. Left: the chapter steps. Centre: the workspace at full stage width. Right: the brief, rubric and submit. After submitting, the right column shows the model answer and the self-score.
 
 ## 7. Data-viz standards
 
@@ -1522,4 +1585,106 @@ The data-lab reference screen (`/dev/directions/floodlit/data`) follows every ru
 
 ## 8. Quality bar
 
-This section covers brief section 9.8 (how every screen is reviewed: screenshots at 3 widths, the taste rubric, accessibility and the performance budget).
+This section covers brief section 9.8 (how every screen is reviewed: screenshots at 3 widths, the taste rubric, accessibility and the performance budget). A screen is shippable only when the machine review passes and an independent reviewer agrees (QA-02).
+
+### The review command
+
+`npm run review:screens -- <route> [--widths 375,768,1440] [--theme light|dark|both] [--port <n>] [--states <query,query>]`
+
+- **Server.** Routes under `/dev/` are reviewed on the Vite dev server (they are compiled out of the study build); every other route on `vite preview`. If no server answers, the command starts one and stops it afterwards.
+- **Capture.** Chromium (installed Chrome, then Edge, then the bundled Chromium), full page, at each width (heights 812, 1024 and 900), each theme and each `--states` query. At 375 px it also captures deuteranopia and achromatopsia emulations.
+- **Output.** `test-results/review/<route-slug>/` holds `report.json`, `report.md` (its first line is `REVIEW: PASS …` or `REVIEW: FAIL …`) and the screenshots. Nothing in it is committed.
+- **Exit codes.** `0` pass (warnings allowed), `1` at least one FAIL, `2` the review could not run (no server, no browser, or the taste skill missing).
+
+### Checks
+
+Every check reports pass, fail or warn for each width and theme. A `fail` check fails the review; a `warn` check is listed and must be looked at by the reviewer.
+
+| Check | Severity | Pass condition |
+|-------|----------|----------------|
+| `no-overflow` | fail | No horizontal scroll at any width, and none at 320 px for a 375 run |
+| `tap-size` | fail | Every control outside running text is at least 44 by 44 px and at least 8 px from the next |
+| `focus-visible` | fail | Tabbing through the first 40 focusable elements, each shows a ring of at least 2 px with 3:1 against its surroundings |
+| `text-contrast` | fail | Every text node has at least 4.5:1 against its background (3:1 for large text) |
+| `token-colours` | fail | Every computed colour, background, border, fill and stroke is a token value of the active theme |
+| `no-hex-in-source` | fail | No hex or `rgb(` literal in `src/**/*.{ts,tsx}` (the generated `tokens.css` is exempt) |
+| `banned-gradient` | fail | No linear, radial or conic gradient in any background |
+| `banned-glass` | fail | No `backdrop-filter` other than `none` |
+| `banned-emoji` | fail | No emoji in visible text or in an `aria-label` |
+| `banned-stripes` | fail | The pitch field is one flat `--pitch-surface` fill, with no pattern or image |
+| `banned-transition-all` | fail | No computed `transition-property: all` |
+| `banned-eyebrow` | warn | No uppercase text with letter-spacing above 0.05em |
+| `card-grid` | warn | No three or more identical sibling boxes in a grid |
+| `arrow-suffix` | warn | No button or link text ending in an arrow |
+| `legend-present` | fail | When a pitch glyph is drawn, a visible Notation legend is on the page |
+| `step-words` | fail | Text inside a lesson step is 60 words or fewer |
+| `reduced-motion` | fail | With reduced motion emulated, nothing animates or transitions above 0 ms and nothing moves before input |
+| `font-local` | fail | No request leaves localhost, and every family in the active token set is loaded |
+| `heading-order` | fail | One `h1`, and headings descend one level at a time |
+| `control-names` | fail | Every button, link and form control has an accessible name; icon-only buttons have an `aria-label` |
+| `taste-layout` | fail | The taste-skill layout checker reports no finding outside the ignore list (mapping below) |
+| `taste-copy` | warn | The taste-skill copy linter reports no FAIL finding; its warnings are listed (a FAIL finding fails the review) |
+
+### Taste-skill mapping
+
+The `design-taste-frontend` skill's layout checker (`check.mjs`) and copy linter (`copy-lint.mjs`) run inside every review. The skill is written for landing pages, so its findings are mapped to app-screen severities:
+
+- **FAIL:** `overflow-x` and `spill`, the only layout findings that are real defects on an app screen.
+- **Ignored**, each listed in the report with its reason:
+
+| Ignored layout id | Reason |
+|-------------------|--------|
+| `edge-left` | landing-page rule, not an app-screen rule |
+| `container` | landing-page rule, not an app-screen rule |
+| `hero-*` | landing-page rule, not an app-screen rule |
+| `screen-short` | landing-page rule, not an app-screen rule |
+| `screen-height` | landing-page rule, not an app-screen rule |
+| `section-height` | landing-page rule, not an app-screen rule |
+| `one-section` | landing-page rule, not an app-screen rule |
+| `neighbour*` | landing-page rule, not an app-screen rule |
+| `moment-none` | landing-page rule, not an app-screen rule |
+| `hero-enter` | landing-page rule, not an app-screen rule |
+| `photo-*` | landing-page rule, not an app-screen rule |
+| `fold-*` | landing-page rule, not an app-screen rule |
+
+- **WARN:** every other layout finding.
+- **Copy:** a copy-lint FAIL fails `taste-copy`; its warnings are listed.
+- **Primary theme only.** The skill runs once per review, at the token set's primary theme (dark for floodlit), because one run takes about 20 seconds.
+- **Local only.** `.claude/skills/` is denied by the repo guard, so the skill exists only on the learner's machine. CI cannot run it; without the skill the command exits 2. CI covers the review module's pure logic with unit tests instead.
+
+### The independent reviewer
+
+The machine verdict is necessary, not sufficient. For a lesson screen, QA-02 needs both a machine PASS and a reviewer pass. The reviewer is an agent that did not build the screen and has not read its plan or code. It reads the screenshots at the three widths, the colour-vision captures and the report, and judges it against the rubric criteria (calm and focus, pitch legibility, readability at 375, visual-first, anti-slop and taste, colour-blind safety, Premier League feel). It records its verdict in the report's `reviewer` block: `status` (`pass` or `fail`), its id, and notes with one line of evidence per problem.
+
+### Accessibility
+
+- **Now (Phase 4):** keyboard paths for every interaction, visible focus (`focus-visible`), reduced motion (`reduced-motion`), contrast (`text-contrast` and the palette gate), names for every control (`control-names`), heading order, and colour never the only cue.
+- **Phase 5 (QA-03):** axe-core assertions on every lesson page, plus a keyboard-only and reduced-motion pass in the generic lesson walker.
+
+### Performance budget
+
+| Budget | Limit | Checked by |
+|--------|-------|------------|
+| Fonts | 200 KB of WOFF2 in total (floodlit: 121 KB) | `npm run fonts -- --check` |
+| Initial route JavaScript | 180 KB gzip, with lazy labs (DuckDB, Pyodide) excluded | the build report, and the walker from Phase 5 |
+| Layout shift | CLS below 0.1 (fonts preloaded, `font-display: swap`, pitch height fixed by its aspect ratio) | the walker from Phase 5 |
+| Pitch playback | 60 fps: mean frame work at most 6 ms, p95 frame interval at most 20 ms | `npm run check:pitch` |
+
+### Visual baselines
+
+- Visual tests are tagged `@visual` and run only on Linux CI, in the official Playwright 1.65.1 image (`mcr.microsoft.com/playwright:v1.65.1-noble`). Fonts and anti-aliasing differ between Windows and Linux, so CI is the single source of baselines.
+- A local Windows run never writes a baseline: `updateSnapshots` is `none` unless both `CI` and `UPDATE_BASELINES=1` are set.
+- New baselines come only from the manual `update-snapshots` workflow, which commits the Linux images under `tests/visual/__baselines__/`.
+- The visual job is not one of the required branch-protection checks.
+
+### Environment variables
+
+| Variable | Effect |
+|----------|--------|
+| `REVIEW_PORT` | Port of the server `review:screens` and Playwright use; a port other than 5173 starts Vite with `--bypass-lock` so it can run beside the learner's own dev server |
+| `REVIEW_CHANNEL` | The browser channel to use (`chrome`, `msedge`); unset tries Chrome, then Edge, then the bundled Chromium |
+| `REVIEW_START_TIMEOUT_MS` | How long the review waits for a server it started (default 60000) |
+| `CHROME_PATH` | Chrome executable for the taste-skill layout checker when Chrome is not in its default place |
+| `UPDATE_BASELINES` | Set to `1` together with `CI` to let the visual project write baselines (only in the `update-snapshots` workflow) |
+| `CHECK_PITCH_PORT` | Port for `npm run check:pitch` |
+| `CI` | Marks a CI run: the bundled Chromium, one worker, the HTML report, and `@visual` tests enabled |
