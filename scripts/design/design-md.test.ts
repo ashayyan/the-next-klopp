@@ -200,3 +200,167 @@ describe("build-tokens on Markdown input", () => {
     expect(r.stderr).toContain("tokens drift:");
   });
 });
+
+// ---------------------------------------------------------------------------------------------
+// Coverage locks (04-12): the catalogue against brief section 9.5, the gallery ids, and later the
+// templates and the review registry.
+
+/** Text of one `##` section, from its heading to the next `##` heading. */
+function section(n: number): string {
+  const heading = DESIGN_HEADINGS[n - 1] as string;
+  const start = design.indexOf(`${heading}\n`);
+  const next = DESIGN_HEADINGS[n];
+  const end = next === undefined ? design.length : design.indexOf(`${next}\n`);
+  return design.slice(start, end);
+}
+
+/** Text under a heading line, up to the next heading of the same or a higher level. */
+function under(text: string, headingLine: string): string | null {
+  const lines = text.split("\n");
+  const at = lines.indexOf(headingLine);
+  if (at < 0) return null;
+  const level = (/^#+/.exec(headingLine)?.[0] ?? "").length;
+  const out: string[] = [];
+  for (const line of lines.slice(at + 1)) {
+    const m = /^(#+) /.exec(line);
+    if (m && (m[1] as string).length <= level) break;
+    out.push(line);
+  }
+  return out.join("\n");
+}
+
+/** Every bold component name of brief section 9.5, in the brief's order, exactly as written. */
+const CATALOGUE = [
+  "Tactics Board",
+  "Phase Animator",
+  "Zone Explorer",
+  "Shape Comparator",
+  "Pressing Trigger Trainer",
+  "Event Inspector",
+  "Shot Map and xG Playground",
+  "xT Grid Lab",
+  "Pitch Control Live",
+  "Pass Network Builder",
+  "Radar/Pizza Builder",
+  "Metric Noise Lab",
+  "Role Signature Explorer",
+  "Role KPI Explorer",
+  "Stat Lie Detector",
+  "Player vs Player Court",
+  "Signal vs Noise Meter",
+  "Squad Planner",
+  "Scouting Report Builder",
+  "Transfer Deal Builder",
+  'Player Price Lab ("set the number")',
+  "Sell-or-Keep Simulator",
+  "Wage Structure Builder",
+  "Negotiation Simulator",
+  "Regulation Navigator",
+  "Session Designer",
+  "Load Monitor",
+  "Decision Simulator",
+  "Concept Map",
+  "Python Cell",
+  "Video Note Player",
+  "Watch Gym Player",
+  "Live Watch Notebook",
+  "Report Writer",
+  "Speak-It Coach",
+  "Player Scout Card",
+  "Role Map and Readiness Meter",
+  "Matchday Command Centre (head coach)",
+  "Microcycle Planner",
+  "Team Talk and Press Conference Simulator",
+  "Analysis Department Workflow Board",
+  "ML Model Lab",
+  "Computer Vision Demo",
+  "AI Scout Assistant Lab",
+  "Data Department Builder",
+  "Org Chart and Budget Builder (sporting director)",
+  "Coach Hiring Lab",
+  "Academy Pathway Planner",
+  "Club P&L Dashboard (CEO)",
+  "Quiz / Flashcards / Spaced-Repetition Review",
+] as const;
+
+const FIELDS = [
+  "Purpose",
+  "Inputs and controls",
+  "Learning goal",
+  "States",
+  "Data needed",
+  "Accessibility fallback",
+] as const;
+
+/** The 37 primitive ids of the 04-UI-SPEC `/dev/gallery` table. */
+const GALLERY_IDS = [
+  "colour",
+  "type",
+  "space-radius",
+  "icons",
+  "motion",
+  "button",
+  "link",
+  "input",
+  "select",
+  "checkbox-radio-switch",
+  "segmented",
+  "slider",
+  "tabs",
+  "dialog",
+  "alert-dialog",
+  "popover",
+  "tooltip",
+  "toast",
+  "shell-bar",
+  "step-rail",
+  "focus-toggle",
+  "confusion-button",
+  "glossary-card",
+  "quiz-option",
+  "progress-ring",
+  "badge",
+  "surface",
+  "stat-card",
+  "chart-primitives",
+  "data-table",
+  "scales",
+  "pitch",
+  "glyphs",
+  "legend",
+  "playback",
+  "drag",
+  "converter-probe",
+] as const;
+
+describe("section 5: interaction component catalogue", () => {
+  const s5 = section(5);
+
+  it("holds the 50 brief components, once each, in brief order", () => {
+    expect(CATALOGUE).toHaveLength(50);
+    const headings = s5
+      .split("\n")
+      .filter((l) => l.startsWith("#### "))
+      .map((l) => l.slice(5));
+    expect(headings).toEqual([...CATALOGUE]);
+  });
+
+  for (const name of CATALOGUE) {
+    it(`${name}: has the six fields, each with text`, () => {
+      const body = under(s5, `#### ${name}`);
+      expect(body, `missing #### ${name}`).not.toBeNull();
+      for (const field of FIELDS) {
+        const line = (body as string).split("\n").find((l) => l.startsWith(`- **${field}**: `));
+        expect(line, `${name}: missing **${field}**`).toBeDefined();
+        expect((line as string).slice(`- **${field}**: `.length).trim().length).toBeGreaterThan(10);
+      }
+    });
+  }
+
+  it("lists every gallery primitive id with its /dev/gallery link before the components", () => {
+    const prim = under(s5, "### Primitives");
+    expect(prim).not.toBeNull();
+    for (const id of GALLERY_IDS) expect(prim).toContain(`/dev/gallery/${id})`);
+    expect(s5.indexOf("### Primitives")).toBeLessThan(s5.indexOf("### Interaction components"));
+  });
+});
