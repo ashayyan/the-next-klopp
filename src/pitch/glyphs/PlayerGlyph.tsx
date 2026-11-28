@@ -1,5 +1,7 @@
 import type { SceneEntity, SceneTeam } from "../../scene/schema.ts";
 import { usePitch } from "../Pitch.tsx";
+import { useDraggableEntity } from "../useDraggableEntity.ts";
+import type { Pt } from "../view.ts";
 import { discDiameter, GLYPH_TEXT_PX, unitsPerPx } from "./glyphSize.ts";
 import { SwatchFrame } from "./Swatch.tsx";
 
@@ -102,13 +104,17 @@ export interface PlayerGlyphProps {
   team: SceneTeam | undefined;
   x: number;
   y: number;
+  /** The accessible name comes from a draggable handle elsewhere, so the glyph carries no title. */
+  decorative?: boolean;
+  /** Ghost of a dragged player: drawn dimmed at its start position. */
+  ghost?: boolean;
 }
 
 /** A player or goalkeeper drawn at canonical (x, y) inside <Pitch>. */
-export function PlayerGlyph({ entity, team, x, y }: PlayerGlyphProps) {
+export function PlayerGlyph({ entity, team, x, y, decorative, ghost }: PlayerGlyphProps) {
   const { view, upright } = usePitch();
   const side = team?.side ?? "a";
-  return (
+  const shape = (
     <PlayerShape
       id={playerGlyphId(entity, side)}
       x={x}
@@ -117,8 +123,66 @@ export function PlayerGlyph({ entity, team, x, y }: PlayerGlyphProps) {
       u={unitsPerPx(view.pxPerMetre)}
       text={playerText(entity)}
       textTransform={upright(x, y)}
-      title={playerTitle(entity, team)}
+      title={decorative ? undefined : playerTitle(entity, team)}
     />
+  );
+  return ghost ? (
+    <g data-ghost={entity.id} opacity={0.3}>
+      {shape}
+    </g>
+  ) : (
+    shape
+  );
+}
+
+export interface DraggableHandleProps {
+  entity: SceneEntity;
+  team: SceneTeam | undefined;
+  x: number;
+  y: number;
+  onMove: (id: string, p: Pt) => void;
+  onEnd?: (id: string, p: Pt) => void;
+  onDragChange?: (id: string, start: Pt | null) => void;
+}
+
+/**
+ * The interactive part of a draggable player: an invisible 22 px hit circle (a 44 px target even
+ * when the disc is 20 px) inside a focusable group. The visible disc is drawn separately by
+ * PlayerGlyph so the dragged disc can be painted on top without moving this element in the DOM
+ * (moving it would drop the pointer capture).
+ */
+export function DraggableHandle({
+  entity,
+  team,
+  x,
+  y,
+  onMove,
+  onEnd,
+  onDragChange,
+}: DraggableHandleProps) {
+  const { view, length, width, runoff } = usePitch();
+  const u = unitsPerPx(view.pxPerMetre);
+  const binding = useDraggableEntity({
+    position: { x, y },
+    pitch: { length, width },
+    runoff,
+    onMove: (p) => onMove(entity.id, p),
+    onEnd: (p) => onEnd?.(entity.id, p),
+    onDragChange: (start) => onDragChange?.(entity.id, start),
+  });
+  return (
+    <g data-draggable="" data-entity={entity.id} data-team={team?.side ?? "a"}>
+      <circle
+        data-hit=""
+        cx={x}
+        cy={y}
+        r={22 * u}
+        fill="none"
+        pointerEvents="all"
+        style={{ cursor: binding.dragging ? "grabbing" : "grab", touchAction: "none" }}
+        {...binding.hit}
+      />
+    </g>
   );
 }
 

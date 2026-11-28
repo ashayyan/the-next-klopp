@@ -1,8 +1,14 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { createSampler, eventState, type MotionMode } from "../../scene/playback/sample.ts";
-import type { Scene, SceneAnnotation, SceneEvent, SceneTeam } from "../../scene/schema.ts";
+import type {
+  Scene,
+  SceneAnnotation,
+  SceneEntity,
+  SceneEvent,
+  SceneTeam,
+} from "../../scene/schema.ts";
 import { usePitch } from "../Pitch.tsx";
-import type { View } from "../view.ts";
+import type { Pt, View } from "../view.ts";
 import { BallGlyph } from "./BallGlyph.tsx";
 import { EventGlyph, type Side } from "./EventGlyphs.tsx";
 import { discDiameter } from "./glyphSize.ts";
@@ -14,13 +20,29 @@ import {
   ShapeGlyph,
   ZoneGlyph,
 } from "./MarkGlyphs.tsx";
-import { PlayerGlyph } from "./PlayerGlyph.tsx";
+import { DraggableHandle, PlayerGlyph } from "./PlayerGlyph.tsx";
 
 export interface SceneLayerProps {
   scene: Scene;
   /** Playback time in seconds. */
   t: number;
   mode: MotionMode;
+  /** Positions that replace the sampled ones (a board the learner changed), canonical metres. */
+  positions?: Readonly<Record<string, Pt>>;
+  /** Which entities the learner can drag; none when omitted. */
+  draggable?: (entity: SceneEntity) => boolean;
+  onEntityMove?: (id: string, p: Pt) => void;
+  /** A drag, or a settled run of nudges, finished at p. */
+  onEntityEnd?: (id: string, p: Pt) => void;
+}
+
+/** Tab order for draggable players: team A by shirt number, then team B by shirt number. */
+function handleOrder(scene: Scene, a: SceneEntity, b: SceneEntity): number {
+  const sideOf = (e: SceneEntity) => scene.teams.find((t) => t.id === e.team)?.side ?? "a";
+  const sa = sideOf(a);
+  const sb = sideOf(b);
+  if (sa !== sb) return sa === "a" ? -1 : 1;
+  return (a.number ?? Number.POSITIVE_INFINITY) - (b.number ?? Number.POSITIVE_INFINITY);
 }
 
 /** Attacking direction for a team in the scene period: +1 left to right, -1 right to left. */
@@ -48,14 +70,28 @@ const LINE_EVENTS: ReadonlySet<SceneEvent["type"]> = new Set(["pass", "carry", "
  * lines, events (pass, carry, run, shot), pressure, players, ball, highlights, notes and sequence
  * badges, points.
  */
-export function SceneLayer({ scene, t, mode }: SceneLayerProps) {
+export function SceneLayer({
+  scene,
+  t,
+  mode,
+  positions,
+  draggable,
+  onEntityMove,
+  onEntityEnd,
+}: SceneLayerProps) {
   const { view } = usePitch();
+  const [drag, setDrag] = useState<{ id: string; start: Pt } | null>(null);
   const sample = useMemo(() => createSampler(scene), [scene]);
   const sampled = sample(t, mode);
   const sideOfTeam = (id: string | undefined): Side =>
     scene.teams.find((team) => team.id === id)?.side ?? "a";
   const entityById = new Map(scene.entities.map((entity) => [entity.id, entity]));
-  const at = new Map(sampled.entities.map((e) => [e.id, e]));
+  const at = new Map(
+    sampled.entities.map((e) => {
+      const moved = positions?.[e.id];
+      return [e.id, moved ? { ...e, x: moved.x, y: moved.y } : e] as const;
+    }),
+  );
 
   const visibleEvents = scene.events.flatMap((event) => {
     const state = eventState(scene, event, sampled.t);
@@ -74,11 +110,20 @@ export function SceneLayer({ scene, t, mode }: SceneLayerProps) {
         />
       ));
 
-  const players = scene.entities.flatMap((entity) => {
-    const p = at.get(entity.id);
-    if (!p || entity.type === "ball") return [];
-    return [{ entity, p }];
-  });
+  const isDraggable = (entity: SceneEntity) =>
+    entity.type !== "ball" && draggable?.(entity) === true;
+  // The dragged disc is painted last so it sits on top; only visuals reorder, never the handles.
+  const players = scene.entities
+    .flatMap((entity) => {
+      const p = at.get(entity.id);
+      if (!p || entity.type === "ball") return [];
+      return [{ entity, p }];
+    })
+    .sort((a, b) => Number(a.entity.id === drag?.id) - Number(b.entity.id === drag?.id));
+  const ghostEntity = drag ? scene.entities.find((e) => e.id === drag.id) : undefined;
+  const handles = scene.entities
+    .filter((entity) => isDraggable(entity) && at.has(entity.id))
+    .sort((a, b) => handleOrder(scene, a, b));
 
   const ballEntity = scene.entities.find((e) => e.type === "ball");
   const ballAt = ballEntity ? at.get(ballEntity.id) : undefined;
@@ -119,6 +164,17 @@ export function SceneLayer({ scene, t, mode }: SceneLayerProps) {
       <g data-layer="events">{eventLayer(LINE_EVENTS)}</g>
       <g data-layer="pressure">{eventLayer(new Set(["pressure"]))}</g>
       <g data-layer="players">
+        {drag && ghostEntity ? (
+          <PlayerGlyph
+            key={`ghost-${drag.id}`}
+            entity={ghostEntity}
+            team={scene.teams.find((team) => team.id === ghostEntity.team)}
+            x={drag.start.x}
+            y={drag.start.y}
+            decorative
+            ghost
+          />
+        ) : null}
         {players.map(({ entity, p }) => (
           <PlayerGlyph
             key={entity.id}
@@ -126,6 +182,7 @@ export function SceneLayer({ scene, t, mode }: SceneLayerProps) {
             team={scene.teams.find((team) => team.id === entity.team)}
             x={p.x}
             y={p.y}
+            decorative={isDraggable(entity)}
           />
         ))}
       </g>
@@ -168,6 +225,26 @@ export function SceneLayer({ scene, t, mode }: SceneLayerProps) {
           a.type === "point" ? <PointGlyph key={a.id} at={a.at} label={a.label} /> : null,
         )}
       </g>
+      {handles.length > 0 ? (
+        <g data-layer="interaction">
+          {handles.map((entity) => {
+            const p = at.get(entity.id);
+            if (!p) return null;
+            return (
+              <DraggableHandle
+                key={entity.id}
+                entity={entity}
+                team={scene.teams.find((team) => team.id === entity.team)}
+                x={p.x}
+                y={p.y}
+                onMove={(id, to) => onEntityMove?.(id, to)}
+                onEnd={(id, to) => onEntityEnd?.(id, to)}
+                onDragChange={(id, start) => setDrag(start ? { id, start } : null)}
+              />
+            );
+          })}
+        </g>
+      ) : null}
     </g>
   );
 }

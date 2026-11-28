@@ -7,7 +7,7 @@ import { drawDensity, SceneLayer } from "../pitch/glyphs/SceneLayer.tsx";
 import { describeScene } from "../pitch/legend/glyphIds.ts";
 import { Legend } from "../pitch/legend/Legend.tsx";
 import { Pitch } from "../pitch/Pitch.tsx";
-import { autoOrientation, type Orientation } from "../pitch/view.ts";
+import { autoOrientation, type Orientation, type Pt } from "../pitch/view.ts";
 import { DEV_SCENES, FALLBACK_SCENE_ID, findDevScene } from "../scene/fixtures/index.ts";
 import { FrameReadout } from "../scene/playback/FrameReadout.tsx";
 import { handleTransportKey } from "../scene/playback/keys.ts";
@@ -15,7 +15,7 @@ import { markCommitted, startPlaybackLoop } from "../scene/playback/loop.ts";
 import { PlaybackBar } from "../scene/playback/PlaybackBar.tsx";
 import { sceneDuration } from "../scene/playback/sample.ts";
 import { createPlaybackStore, defaultMotion, type PlaybackState } from "../scene/playback/store.ts";
-import type { Scene } from "../scene/schema.ts";
+import type { Scene, SceneEntity } from "../scene/schema.ts";
 import { parseScene, type SceneIssue } from "../scene/validate.ts";
 
 // Dev-only page (registered inside the includeDev && import.meta.env.DEV branch of buildRoutes).
@@ -47,6 +47,14 @@ const ORIENTATIONS: readonly { id: OrientationChoice; label: string }[] = [
 const focusRing =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 const control = `min-h-11 w-full rounded-sm border border-control-border bg-surface-page px-2 text-sm text-ink sm:w-auto ${focusRing}`;
+
+const quietButton =
+  "min-h-11 rounded-sm border border-control-border bg-transparent px-4 text-sm text-ink hover:bg-surface-panel";
+
+/** Saved-board spike: every outfield player is draggable, goalkeepers and the ball are not. */
+function isOutfieldPlayer(entity: SceneEntity): boolean {
+  return entity.type === "player";
+}
 
 function formatMetres(n: number): string {
   return n.toFixed(2);
@@ -109,6 +117,12 @@ export default function DevPitchPage() {
   const [choice, setChoice] = useState<OrientationChoice>("auto");
   const [densityChoice, setDensityChoice] = useState<Record<string, boolean>>({});
   const [pointer, setPointer] = useState<{ x: number; y: number } | null>(null);
+  // Saved-board spike: positions the learner changed (canonical metres, 0.1 m), per scene id.
+  // Nothing is persisted; the reset button clears them.
+  const [moved, setMoved] = useState<{ sceneId: string; positions: Record<string, Pt> } | null>(
+    null,
+  );
+  const [announcement, setAnnouncement] = useState<{ sceneId: string; text: string } | null>(null);
 
   // ?scene= is looked up only through the fixed registry: it is never a path or import specifier.
   const requested = params.get("scene");
@@ -190,6 +204,9 @@ export default function DevPitchPage() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     store.getState().setMotion(defaultMotion(reduced));
   }, [store]);
+  const isBoard = scene?.kind === "board";
+  const boardPositions = scene && moved?.sceneId === scene.id ? moved.positions : undefined;
+  const boardAnnouncement = scene && announcement?.sceneId === scene.id ? announcement.text : "";
   const orientation: Orientation = choice === "auto" ? autoOrientation(stageWidth) : choice;
   const onPitch =
     pointer !== null &&
@@ -197,6 +214,20 @@ export default function DevPitchPage() {
     pointer.x <= length &&
     pointer.y >= 0 &&
     pointer.y <= width;
+  const boardSceneId = scene?.id ?? "";
+  const moveEntity = (id: string, p: Pt) =>
+    setMoved((prev) => ({
+      sceneId: boardSceneId,
+      positions: { ...(prev?.sceneId === boardSceneId ? prev.positions : {}), [id]: p },
+    }));
+  const endEntity = (id: string, p: Pt) => {
+    const entity = scene?.entities.find((e) => e.id === id);
+    const who = entity?.number ?? entity?.label ?? id;
+    setAnnouncement({
+      sceneId: boardSceneId,
+      text: `Number ${who} moved to x ${p.x.toFixed(1)} m, y ${p.y.toFixed(1)} m.`,
+    });
+  };
   const sceneLabel = scene?.label ?? devScene?.label ?? "Pitch only";
   const source = scene?.source;
 
@@ -349,11 +380,22 @@ export default function DevPitchPage() {
             length={length}
             width={width}
             orientation={orientation}
+            interactive={isBoard}
             canvas={densityOn && draw ? <CanvasLayer draw={draw} /> : undefined}
             onPointerCanonical={setPointer}
           >
             {scene && store ? <PlaybackLayer scene={scene} store={store} /> : null}
-            {scene && !store ? <SceneLayer scene={scene} t={0} mode="smooth" /> : null}
+            {scene && !store ? (
+              <SceneLayer
+                scene={scene}
+                t={0}
+                mode="smooth"
+                positions={boardPositions}
+                draggable={isBoard ? isOutfieldPlayer : undefined}
+                onEntityMove={moveEntity}
+                onEntityEnd={endEntity}
+              />
+            ) : null}
           </Pitch>
           <div className="mt-2 flex flex-col gap-1 text-sm text-ink-muted">
             {unknownId !== null ? (
@@ -365,6 +407,28 @@ export default function DevPitchPage() {
               <p>{`Source: ${source.attribution} · Licence: ${source.licence}${source.localOnly ? " · Local only, not shipped" : ""}`}</p>
             ) : null}
           </div>
+          {isBoard ? (
+            <div className="mt-2 flex flex-wrap items-center gap-4">
+              <button
+                type="button"
+                className={`${quietButton} ${focusRing}`}
+                onClick={() => {
+                  setMoved(null);
+                  setAnnouncement(null);
+                }}
+              >
+                Reset positions
+              </button>
+              <p
+                role="status"
+                aria-live="polite"
+                data-readout="announcement"
+                className="min-w-0 text-sm text-ink-muted"
+              >
+                {boardAnnouncement}
+              </p>
+            </div>
+          ) : null}
           {store ? <PlaybackBar store={store} /> : null}
           {store && activeId === "stress" ? <FrameReadout /> : null}
         </section>
