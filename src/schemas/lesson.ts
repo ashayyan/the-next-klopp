@@ -1,5 +1,6 @@
 // Content contracts of Phase 5: hand-written Zod 4 mirrors of schemas/lesson.schema.json (lesson
-// spec v1, CONT-01). JSON Schema is the language-neutral source of truth; schemas/schemas.test.ts
+// spec v1, CONT-01), schemas/verification.schema.json (QA-01) and schemas/whats-new.schema.json
+// (PLAT-02). JSON Schema is the language-neutral source of truth; schemas/schemas.test.ts
 // proves both validators reach the same verdict on every fixture. Frozen: additive changes only.
 //
 // Cross-document and authoring rules (MDX step parity, stage order, duration 5-12, ids that exist,
@@ -114,3 +115,59 @@ export const lessonSchema = z.strictObject({
 export type LessonStep = z.infer<typeof lessonStepSchema>;
 export type QuizItem = z.infer<typeof quizItemSchema>;
 export type LessonSpec = z.infer<typeof lessonSchema>;
+
+// Shared helpers for the verification record, mirroring schemas/common.schema.json $defs.
+const utcDateTime = z.iso
+  .datetime()
+  .regex(/^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d:[0-5]\d(\.\d+)?Z$/);
+const sha256 = z.string().regex(/^[a-f0-9]{64}$/);
+
+export const VERIFICATION_VERDICTS = ["supported", "unsupported", "contested"] as const;
+
+/**
+ * One verified claim. `claimId` is `<stepId>/<component>-<n>`, counted per step in document order,
+ * with `.side-<n>` for each `<Contested>` side (05-RESEARCH Pattern 7). `url` is http(s) or a
+ * root-relative `/data/` path for a data-bound stat. The 25-word excerpt limit is the validator's.
+ */
+export const verificationClaimSchema = z.strictObject({
+  claimId: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*\/[a-z]+-\d+(?:\.side-\d+)?$/),
+  sourceId: kebabId,
+  dataRef: dataRef.optional(),
+  url: z.string().regex(/^(?:https?:\/\/[^\s/$.?#][^\s]*|\/data\/[A-Za-z0-9._/-]+)$/),
+  fetchedAt: utcDateTime,
+  excerptSha256: sha256,
+  excerpt: text(300),
+  excerptId: kebabId.optional(),
+  verdict: z.enum(VERIFICATION_VERDICTS),
+});
+
+/** verification.json next to a lesson (QA-01). Semantic checks are the validator's (05-13). */
+export const verificationSchema = z.strictObject({
+  lessonId: kebabId,
+  lessonVersion: z.number().int().min(1),
+  contentSha256: sha256,
+  author: text(120),
+  verifier: text(120),
+  verifierModel: text(80),
+  verifiedAt: utcDateTime,
+  claims: z.array(verificationClaimSchema).max(200),
+});
+
+export type VerificationClaim = z.infer<typeof verificationClaimSchema>;
+export type VerificationRecord = z.infer<typeof verificationSchema>;
+
+/** content/whats-new.json (PLAT-02), newest entry first. */
+export const whatsNewEntrySchema = z.strictObject({
+  date: isoDate,
+  title: text(60),
+  summary: text(200),
+  lessonIds: unique(kebabId),
+});
+
+export const whatsNewSchema = z.strictObject({
+  schemaVersion: z.literal(1),
+  entries: z.array(whatsNewEntrySchema).max(500),
+});
+
+export type WhatsNewEntry = z.infer<typeof whatsNewEntrySchema>;
+export type WhatsNew = z.infer<typeof whatsNewSchema>;

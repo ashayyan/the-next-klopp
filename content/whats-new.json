@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "date": "2026-11-28",
+      "title": "The app is ready for lessons",
+      "summary": "Tracks, What’s new and the lesson player are in place. Track 0, Start here, is the first track to ship.",
+      "lessonIds": []
+    }
+  ]
+}
