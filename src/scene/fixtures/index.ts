@@ -5,13 +5,19 @@
 export interface DevScene {
   id: string;
   label: string;
-  /** Resolves to the raw scene JSON, or null for the pitch-only option. */
+  /** Resolves to the raw scene JSON, or null for the pitch-only and the fetched/local options. */
   load: () => Promise<unknown> | null;
+  /** No scene at all: the page draws only the pitch markings, so there is nothing to load. */
+  blank?: true;
+  /** Fetched through /data/catalog.json, the way the shipped app would read the pipeline output. */
+  published?: { dataset: string };
+  /** Read from a local-only artifact under data/ (never shipped); see routes/dev-pitch/sceneSources.ts. */
+  local?: { dataset: string };
 }
 
 // Order follows the 03-UI-SPEC "Scene options" table for the options that exist so far.
 export const DEV_SCENES: readonly DevScene[] = [
-  { id: "pitch-only", label: "Pitch only", load: () => null },
+  { id: "pitch-only", label: "Pitch only", load: () => null, blank: true },
   {
     id: "glyph-sheet",
     label: "Glyph sheet",
@@ -33,10 +39,12 @@ export const DEV_SCENES: readonly DevScene[] = [
     load: () => import("./quiz-answer.json").then((m) => m.default),
   },
   {
-    // The fixture file is the pipeline's published scene (03-06); 03-10 may load it from the catalog.
+    // The published pipeline output, fetched from the catalog. reconstruction.json stays as the
+    // schema fixture the tests check; the page no longer imports it.
     id: "reconstruction",
     label: "Reconstruction · Wyscout PL 2017/18",
-    load: () => import("./reconstruction.json").then((m) => m.default),
+    load: () => null,
+    published: { dataset: "wyscout" },
   },
   {
     id: "stress",

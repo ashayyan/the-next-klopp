@@ -17,19 +17,16 @@ import { PlaybackBar } from "../scene/playback/PlaybackBar.tsx";
 import { sceneDuration } from "../scene/playback/sample.ts";
 import { createPlaybackStore, defaultMotion, type PlaybackState } from "../scene/playback/store.ts";
 import type { Scene, SceneEntity } from "../scene/schema.ts";
-import { parseScene, type SceneIssue } from "../scene/validate.ts";
 import { ConverterProbe, type ProbeInput } from "./dev-pitch/ConverterProbe.tsx";
 import { LandmarksLayer } from "./dev-pitch/LandmarksLayer.tsx";
 import { probeConvert } from "./dev-pitch/probe.ts";
+import { type LoadResult, loadDevScene } from "./dev-pitch/sceneSources.ts";
 
 // Dev-only page (registered inside the includeDev && import.meta.env.DEV branch of buildRoutes).
 // The subline text below is the marker scripts/smoke.ts looks for in the study build.
 
-type SceneState =
-  | { id: string; status: "none" }
-  | { id: string; status: "loading" }
-  | { id: string; status: "ready"; scene: Scene }
-  | { id: string; status: "invalid"; issues: SceneIssue[] };
+/** The load state of the scene the page is showing, tagged with the registry id it belongs to. */
+type SceneState = { id: string } & (LoadResult | { status: "loading" });
 
 const PITCH_SIZES = [
   { id: "105x68", length: 105, width: 68, label: "105 × 68 m (Premier League standard)" },
@@ -156,21 +153,14 @@ export default function DevPitchPage() {
 
   const [state, setState] = useState<SceneState>({ id: "pitch-only", status: "none" });
   useEffect(() => {
-    const pending = devScene?.load();
-    if (!pending) {
+    if (!devScene || devScene.blank) {
       setState({ id: activeId, status: "none" });
       return;
     }
     let cancelled = false;
     setState({ id: activeId, status: "loading" });
-    pending.then((raw) => {
-      if (cancelled) return;
-      const parsed = parseScene(raw);
-      setState(
-        parsed.ok
-          ? { id: activeId, status: "ready", scene: parsed.scene }
-          : { id: activeId, status: "invalid", issues: parsed.issues },
-      );
+    loadDevScene(devScene).then((result) => {
+      if (!cancelled) setState({ id: activeId, ...result });
     });
     return () => {
       cancelled = true;
@@ -181,7 +171,7 @@ export default function DevPitchPage() {
   const current: SceneState = state.id === activeId ? state : { id: activeId, status: "loading" };
   const usesSizeSelect = SIZE_SELECT_SCENES.has(activeId);
   const size = PITCH_SIZES.find((s) => s.id === sizeKey) ?? PITCH_SIZES[0];
-  const loaded = current.status === "ready" ? current.scene : null;
+  const loaded = current.status === "ready" || current.status === "empty" ? current.scene : null;
   // The glyph sheet is drawn on the chosen pitch size; every other scene keeps its own pitch.
   const scene = useMemo<Scene | null>(
     () =>
