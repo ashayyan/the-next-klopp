@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 4
 current_phase_name: Design Direction & System
 status: executing
-stopped_at: Completed 04-07-PLAN.md
-last_updated: "2026-11-28T06:56:21.515Z"
+stopped_at: Completed 04-08-PLAN.md
+last_updated: "2026-11-28T07:20:15.540Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 execution started
-state_head: 1da27839df0dd9448796b124c778e7ad9ad12dfa
+state_head: d3c18af4702cdbf9cac287143292cb82fdc81811
 progress:
   total_phases: 8
   completed_phases: 3
   total_plans: 58
-  completed_plans: 48
+  completed_plans: 49
   percent: 38
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 4 (Design Direction & System) — EXECUTING
-Plan: 8 of 17
+Plan: 9 of 17
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 4 execution started
 
@@ -95,6 +95,7 @@ Progress: [████░░░░░░] 38%
 | Phase 4 P05 | 38min | 3 tasks | 12 files |
 | Phase 4 P06 | 52min | 3 tasks | 7 files |
 | Phase 4 P07 | 30min | 3 tasks | 16 files |
+| Phase 4 P08 | 35min | 3 tasks | 18 files |
 
 ## Accumulated Context
 
@@ -157,6 +158,8 @@ Recent decisions affecting current work:
 - [Phase 4]: 04-07: floodlit 200/1fr/320 sits on the 12-column 32 px grid (2/7/3 columns) so the layout checker measures real column lines
 - [Phase 4]: 04-07: DirectionScope mirrors data-direction and data-theme onto body so the page background and Base UI portals read the direction tokens
 - [Phase 4]: 04-07: the formation morph is state = f(elapsed) in one rAF loop; readout, title and live region change at its end
+- [Phase 4]: 04-08: ShellBar builds both theme menus from theme/onThemeChange; choosing a theme drops ?theme= so the choice shows
+- [Phase 4]: 04-08: data-fill-edge plus one directions.css rule draws programme-light yellow fills with an ink edge, including portalled popups
 
 ### Pending Todos
 
@@ -184,6 +187,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T06:56:21.025Z
-Stopped at: Completed 04-07-PLAN.md
+Last session: 2026-11-28T07:20:15.059Z
+Stopped at: Completed 04-08-PLAN.md
 Resume file: None
