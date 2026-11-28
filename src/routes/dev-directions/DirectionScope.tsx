@@ -141,11 +141,16 @@ export function DirectionScope({ direction, ready = true, children }: DirectionS
 
   useLayoutEffect(() => {
     const body = document.body;
+    // Restore the values that were there before this screen, not just delete them.
+    const prior = { direction: body.dataset.direction, theme: body.dataset.theme };
     body.dataset.direction = direction.id;
     body.dataset.theme = theme;
     return () => {
-      delete body.dataset.direction;
-      delete body.dataset.theme;
+      for (const key of ["direction", "theme"] as const) {
+        const value = prior[key];
+        if (value === undefined) delete body.dataset[key];
+        else body.dataset[key] = value;
+      }
     };
   }, [direction.id, theme]);
 

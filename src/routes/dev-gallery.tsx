@@ -155,9 +155,12 @@ function BareMatrix({ primitive, themes }: { primitive: Primitive; themes: reado
   useLayoutEffect(() => {
     if (!single) return;
     const root = document.documentElement;
+    // Restore what was there (the pre-paint script's stored choice), not just delete it.
+    const prior = root.dataset.theme;
     root.dataset.theme = single;
     return () => {
-      delete root.dataset.theme;
+      if (prior === undefined) delete root.dataset.theme;
+      else root.dataset.theme = prior;
     };
   }, [single]);
 

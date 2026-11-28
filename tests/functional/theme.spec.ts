@@ -99,6 +99,21 @@ test.describe("system scheme dark", () => {
     expect(await bodyBackground(page)).toBe(PAGE.light);
   });
 
+  // IN-01 (04-REVIEW): leaving a single-theme gallery page restores the stored choice on <html>.
+  test("leaving a gallery page in-app restores the stored theme on html", async ({ page }) => {
+    await storeTheme(page, "light");
+    await page.goto("/dev/gallery/button?bare=1&theme=dark");
+    await expect(page.locator('main[data-ready="1"]')).toBeAttached();
+    expect(await htmlTheme(page)).toBe("dark");
+    await page.evaluate(() => {
+      window.history.pushState({}, "", "/dev");
+      window.dispatchEvent(new PopStateEvent("popstate"));
+    });
+    await expect(page.getByRole("heading", { name: "Dev", exact: true })).toBeVisible();
+    expect(await htmlTheme(page)).toBe("light");
+    expect(await bodyBackground(page)).toBe(PAGE.light);
+  });
+
   test("a throwing localStorage loads with no error and follows the system", async ({ page }) => {
     const errors = collectErrors(page);
     await page.addInitScript(() => {
