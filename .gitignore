@@ -13,6 +13,8 @@ coverage/
 # Raw or licensed data stays local; only publishable parquet under public/data/ is tracked
 pipeline/data/raw/
 pipeline/.venv/
+__pycache__/
+*.pyc
 data/raw/
 **/raw/
 *.parquet

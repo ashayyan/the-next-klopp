@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import unicodedata
 import zipfile
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -186,3 +187,29 @@ def test_an_unknown_shot_event_is_refused() -> None:
 def test_the_recipe_is_registered() -> None:
     recipe = RECIPES["wyscout-goal"]
     assert (recipe.source_id, recipe.dataset) == ("wyscout", "wyscout")
+
+
+# --- the real pinned goal (gated: needs the 77 MB Wyscout cache from `klopp-pipeline fetch wyscout`) ---
+
+REAL_EVENTS_ZIP = Path(__file__).resolve().parents[1] / "data" / "raw" / "wyscout" / "events.zip"
+
+
+@pytest.mark.skipif(
+    not REAL_EVENTS_ZIP.exists(),
+    reason="run `uv run --project pipeline klopp-pipeline fetch wyscout` once to cache the real data",
+)
+def test_the_real_pinned_goal_comes_out_as_a_valid_reconstruction_scene() -> None:
+    from klopp_pipeline.fetch import RAW_ROOT
+
+    real = RECIPES["wyscout-goal"].build(RAW_ROOT, True)  # offline: cached files only
+    assert len(real.events) == 10
+    assert real.events[0].id.endswith("185704173")
+    assert real.events[-1].id.endswith("185704194")
+    shooter = next(e for e in real.entities if e.id == real.events[-1].player)
+    assert shooter.name == "Leroy Sané"
+    assert real.teams[0].name == "Manchester City"
+    assert 18.5 <= real.frames[-1].t <= 19.5
+    first = real.events[0]
+    assert abs(first.start.x - 40.22) < 0.01 and abs(first.start.y - 19.34) < 0.01
+    assert real.source.shippable is True and real.source.licence == "CC-BY-4.0"
+    assert Scene.model_validate_json(dump_scene(real)) == real
