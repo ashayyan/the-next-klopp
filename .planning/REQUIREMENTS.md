@@ -28,9 +28,9 @@
 
 ### Design System
 
-- [ ] **DSGN-01**: 2–3 distinct visual directions are rendered as real screens (one tactics lesson, one data lesson) and screenshotted at 3 widths; the learner picks one
+- [x] **DSGN-01**: 2–3 distinct visual directions are rendered as real screens (one tactics lesson, one data lesson) and screenshotted at 3 widths; the learner picks one
 - [x] **DSGN-02**: `docs/DESIGN.md` covers anti-slop rules, colour system (dark/light, team A/B, ball, zones, data scales) validated for colour-blind safety, typography, spacing, motion language, lesson templates, data-viz standards and the quality bar
-- [ ] **DSGN-03**: Design tokens generated from DESIGN.md drive the app's Tailwind theme
+- [x] **DSGN-03**: Design tokens generated from DESIGN.md drive the app's Tailwind theme
 - [ ] **DSGN-04**: A dev component gallery shows every primitive and interaction at 3 widths, with visual baselines generated in CI only
 
 ### Pitch Standard
@@ -185,9 +185,9 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 | PIPE-02 | Phase 3 | Complete |
 | PIPE-03 | Phase 3 | Complete |
 | PIPE-04 | Phase 3 | Complete |
-| DSGN-01 | Phase 4 | Pending |
+| DSGN-01 | Phase 4 | Complete |
 | DSGN-02 | Phase 4 | Complete |
-| DSGN-03 | Phase 4 | Pending |
+| DSGN-03 | Phase 4 | Complete |
 | DSGN-04 | Phase 4 | Pending |
 | QA-02 | Phase 4 | Pending |
 | CONT-01 | Phase 5 | Pending |
