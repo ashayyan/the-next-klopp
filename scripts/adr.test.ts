@@ -63,6 +63,16 @@ const required: Array<[string, string[]]> = [
   ["0006", ["spaces"]],
   ["0008", ["Watch Gym", "YouTube", "StatsBomb", "Wyscout"]],
   ["0009", ["Pitch", "CanvasLayer", "getScreenCTM", "Zustand"]],
+  [
+    "0010",
+    [
+      "Visual direction",
+      "floodlit",
+      "programme",
+      "notebook",
+      "picked by Claude under learner delegation",
+    ],
+  ],
 ];
 
 describe("ADR coverage", () => {

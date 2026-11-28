@@ -163,10 +163,12 @@ Recent decisions affecting current work:
 - [Phase 4]: 04-08: data-fill-edge plus one directions.css rule draws programme-light yellow fills with an ink edge, including portalled popups
 - [Phase 4]: 04-09: data-screen numbers come only from deriveGoal, tested against the published scene; the 1–5 note sums the rounded table values
 - [Phase 4]: 04-09: review collector measures a control through its label only for a wrapped checkbox or radio (fixes the 20 px select false positive)
+- [Phase 4]: 04-10: visual direction floodlit picked by an independent reviewer under learner delegation (ADR 0010)
 
 ### Pending Todos
 
 - [Phase 2] Learner: open research/summary/index.html and confirm or re-open the research approval (non-blocking; approved by Claude under delegation 2026-11-27)
+- [Phase 4] Learner: look at the three directions and override the pick if wanted (non-blocking). ADR 0010 lists the screenshots; to see them live run `git switch --detach f6e513df6cbf0c72bfdef89d036bbf59a7b6cd9a`, `npm run dev`, open /dev/directions, then `git switch gsd/phase-04-design-direction-system`.
 
 ### Blockers/Concerns
 
