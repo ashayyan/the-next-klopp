@@ -1,0 +1,6 @@
+content/_fixtures/invalid/mdx-code/lesson.mdx:1 mdx-code: Line 1 holds code (import or export). Lessons may not contain import, export or {…} expressions; use a lesson component instead.
+content/_fixtures/invalid/mdx-code/lesson.mdx:3 mdx-code: Line 3 holds code (import or export). Lessons may not contain import, export or {…} expressions; use a lesson component instead.
+content/_fixtures/invalid/mdx-code/lesson.mdx:17 mdx-code: Line 17 holds code (expression). Lessons may not contain import, export or {…} expressions; use a lesson component instead.
+content/_fixtures/invalid/mdx-code/lesson.mdx:27 mdx-code: Line 27 holds code (expression). Lessons may not contain import, export or {…} expressions; use a lesson component instead.
+content/_fixtures/invalid/mdx-code/lesson.mdx:29 mdx-code: Line 29 holds code (attribute expression on <Visual>). Lessons may not contain import, export or {…} expressions; use a lesson component instead.
+content/_fixtures/invalid/mdx-code/lesson.mdx:55 mdx-code: Line 55 holds code (attribute expression on <Contested>). Lessons may not contain import, export or {…} expressions; use a lesson component instead.

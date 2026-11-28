@@ -1,0 +1,4 @@
+content/_fixtures/invalid/link-scheme/lesson.mdx:13 link-scheme: Link “javascript:alert” in step “see-the-line” is not https or a path inside the app. Use an https link or cite the source with a claim component.
+content/_fixtures/invalid/link-scheme/lesson.mdx:21 link-scheme: Link “http://example.org/line” in step “touch-the-ball” is not https or a path inside the app. Use an https link or cite the source with a claim component.
+content/_fixtures/invalid/link-scheme/lesson.mdx:23 link-scheme: Link “data:image/png;base64,AAAA” in step “touch-the-ball” is not https or a path inside the app. Use an https link or cite the source with a claim component.
+content/_fixtures/invalid/link-scheme/lesson.mdx:65 link-scheme: Link “http://example.org/pitch.svg” in step “connect-next” is not https or a path inside the app. Use an https link or cite the source with a claim component.

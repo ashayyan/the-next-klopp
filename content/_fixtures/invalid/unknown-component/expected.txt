@@ -1,0 +1,1 @@
+content/_fixtures/invalid/unknown-component/lesson.mdx:23 unknown-component: <Script> is not a lesson component. Use one of Step, Visual, Fact, Stat, Rule, Contested or Num.

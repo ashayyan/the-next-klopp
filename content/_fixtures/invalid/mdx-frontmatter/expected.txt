@@ -1,0 +1,1 @@
+content/_fixtures/invalid/mdx-frontmatter/lesson.mdx:1 mdx-frontmatter: lesson.mdx starts with a frontmatter block. Lessons keep all metadata in lesson.json; delete the block.

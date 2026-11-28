@@ -1,0 +1,2 @@
+content/_fixtures/invalid/block-component/lesson.mdx:21 block-component: <Rule> must sit on its own line with a blank line after it. Put the opening tag on a line of its own.
+content/_fixtures/invalid/block-component/lesson.mdx:47 block-component: <Fact> belongs inside a sentence, not on its own line. Move it into the paragraph.
