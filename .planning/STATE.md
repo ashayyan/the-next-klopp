@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 3
 current_phase_name: Pitch Standard & Data Pipeline
 status: executing
-stopped_at: Completed 03-05-PLAN.md
-last_updated: "2026-11-28T01:46:01.210Z"
+stopped_at: Completed 03-06-PLAN.md
+last_updated: "2026-11-28T01:53:00.543Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 3 execution started
-state_head: aa55cc2a50decfdc8b3e22bacd6d99bc96b937d8
+state_head: b2f42d843f90ec1f7d897141b5ea0eb5b7ec25d2
 progress:
   total_phases: 8
   completed_phases: 2
   total_plans: 41
-  completed_plans: 35
+  completed_plans: 36
   percent: 25
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 3 (Pitch Standard & Data Pipeline) — EXECUTING
-Plan: 6 of 11
+Plan: 7 of 11
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 3 execution started
 
@@ -81,6 +81,7 @@ Progress: [███░░░░░░░] 25%
 | Phase 3 P03 | 8 min | 3 tasks | 9 files |
 | Phase 3 P04 | 12 min | 3 tasks | 15 files |
 | Phase 03 P05 | 14min | 3 tasks | 14 files |
+| Phase 03 P06 | 9min | 3 tasks | 14 files |
 
 ## Accumulated Context
 
@@ -125,6 +126,7 @@ Recent decisions affecting current work:
 - [Phase 3]: Legend and glyph ids are derived from scene data; notes truncate to 40 characters with full text in the SVG desc
 - [Phase 03]: Fetch keeps its own sha256-verified copy; a cached raw file is trusted only while it hashes to the pin, StatsBomb pinned by commit id in the URL
 - [Phase 03]: Per-match extract cache stores input sha256 values and rebuilds when they differ; recipes declare extract_ids
+- [Phase 03]: Dataset versions are content-addressed and never overwritten; publish copies only versions where manifest and allow-list both say shippable; run-all fetches only sources a registered recipe reads
 
 ### Pending Todos
 
@@ -152,6 +154,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T01:46:00.985Z
-Stopped at: Completed 03-05-PLAN.md
+Last session: 2026-11-28T01:53:00.277Z
+Stopped at: Completed 03-06-PLAN.md
 Resume file: None
