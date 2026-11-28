@@ -23,7 +23,8 @@ import {
 export type { ThemeName };
 
 export interface Direction {
-  id: "floodlit" | "programme" | "notebook";
+  /** Only the picked direction (ADR 0010); programme and notebook live in git history only. */
+  id: "floodlit";
   name: string;
   idea: string;
   primaryTheme: ThemeName;
