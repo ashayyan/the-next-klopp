@@ -43,12 +43,18 @@ class PublishResult:
 
 
 def _versions(root: Path) -> list[Path]:
-    """Version directories ``root/<dataset>/<version>`` that hold a manifest, sorted."""
+    """Version directories ``root/<dataset>/<version>`` that hold a manifest, sorted.
+
+    Dot-prefixed folders are skipped: ``.<version>.tmp`` is a staging folder that already holds
+    its manifest, and a crash can leave one behind. It is not a published version.
+    """
     if not root.is_dir():
         return []
     found: list[Path] = []
-    for dataset_dir in sorted(p for p in root.iterdir() if p.is_dir()):
-        for version_dir in sorted(p for p in dataset_dir.iterdir() if p.is_dir()):
+    for dataset_dir in sorted(p for p in root.iterdir() if p.is_dir() and not p.name.startswith(".")):
+        for version_dir in sorted(
+            p for p in dataset_dir.iterdir() if p.is_dir() and not p.name.startswith(".")
+        ):
             if (version_dir / MANIFEST_NAME).is_file():
                 found.append(version_dir)
     return found

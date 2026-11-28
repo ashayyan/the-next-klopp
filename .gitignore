@@ -20,6 +20,9 @@ data/raw/
 *.parquet
 !public/data/**/*.parquet
 
+# Staging folders of an interrupted pipeline write (.<version>.tmp)
+.*.tmp/
+
 # Local-only datasets (ADR 0008): never committed
 data/statsbomb/
 data/last-row/

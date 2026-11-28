@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 from pathlib import Path
 
 import pytest
@@ -192,6 +193,17 @@ def test_catalog_orders_versions_of_a_dataset_by_generated_at_not_by_hash(tmp_pa
         publish(data_root=data, public_root=public, allow=allow())
         catalog = json.loads((public / "catalog.json").read_bytes())
         assert [d["version"] for d in catalog["datasets"]] == [first.name, second.name]
+
+
+def test_a_leftover_staging_folder_does_not_break_publish_or_the_catalog(tmp_path: Path) -> None:
+    data, public = tmp_path / "data", tmp_path / "public"
+    version = write_version("demo", FILES, meta(), data_root=data).path
+    # What a hard crash leaves behind: a staging copy that already holds its manifest.
+    shutil.copytree(version, version.parent / f".{version.name}.tmp")
+    publish(data_root=data, public_root=public, allow=allow())
+    shutil.copytree(version, public / "demo" / f".{version.name}.tmp")
+    catalog = json.loads(build_catalog(public))
+    assert [d["version"] for d in catalog["datasets"]] == [version.name]
 
 
 def test_publish_skips_a_version_whose_manifest_says_not_shippable(tmp_path: Path) -> None:
