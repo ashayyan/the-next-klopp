@@ -130,5 +130,5 @@ jobs:
         with:
           version: "0.12.5"
       - run: uv sync --project pipeline --frozen
-      - run: uv run --project pipeline pytest pipeline/tests -q
-      - run: uv run --project pipeline klopp-pipeline landmarks --check
+      - run: uv run --locked --project pipeline pytest pipeline/tests -q
+      - run: uv run --locked --project pipeline klopp-pipeline landmarks --check
