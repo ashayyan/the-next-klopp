@@ -37,3 +37,6 @@ THE_NEXT_KLOPP_MASTER_PROMPT*.md
 
 # learner-owned scratch folder (never commit)
 scratch_tmp_review/
+
+# learner brief with personal profile: keep local, never public
+NEW_PROJECT_INPUT.md
