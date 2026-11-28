@@ -51,19 +51,19 @@
           "name": "matches-2-27.json",
           "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/matches/2/27.json",
           "maxBytes": 8000000,
-          "sha256": null
+          "sha256": "e07d6d360b30e0cd17f9aeea0db1502d2a5666d298f1b44b83a2d2f21ba3d21b"
         },
         {
           "name": "events-3754047.json",
           "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/events/3754047.json",
           "maxBytes": 8000000,
-          "sha256": null
+          "sha256": "7a4f89a7d787e68026fa224252e241fc15ddb0e25b25776f66dc7809dc19e41d"
         },
         {
           "name": "lineups-3754047.json",
           "url": "https://raw.githubusercontent.com/statsbomb/open-data/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/data/lineups/3754047.json",
           "maxBytes": 8000000,
-          "sha256": null
+          "sha256": "7c46f6f1647506da86c46efac31db36b8b0cc1430d9c7989f3391bc5ac770f78"
         }
       ]
     },

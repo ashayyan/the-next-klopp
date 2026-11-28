@@ -93,11 +93,12 @@ def test_the_wyscout_files_are_pinned() -> None:
     assert all(f.maxBytes == 5_000_000 for f in wyscout.files[1:])
 
 
-def test_statsbomb_files_are_commit_pinned_not_hash_pinned() -> None:
+def test_statsbomb_files_are_commit_pinned_and_hash_pinned() -> None:
+    """The commit fixes the first download; the sha256 stops a cached file being swapped later."""
     statsbomb = next(s for s in load_allow_list().sources if s.id == "statsbomb")
     assert len(statsbomb.files) == 3
     assert all("/4b73468fc5b0f1950f9f66fada70ad3a4f9327cb/" in f.url for f in statsbomb.files)
-    assert all(f.sha256 is None for f in statsbomb.files)
+    assert all(f.sha256 and len(f.sha256) == 64 for f in statsbomb.files)
 
 
 def test_sources_without_files_stay_listed_for_the_licence_record() -> None:

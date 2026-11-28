@@ -37,7 +37,10 @@ def _cached_ok(path: Path, spec: SourceFile) -> bool:
     """True when a file is already cached and still matches its pin.
 
     A pinned file whose hash differs is deleted. An unpinned (commit-pinned) file is trusted as
-    long as it is within the size cap, because the commit in the URL fixes its content.
+    long as it is within the size cap, because the commit in the URL fixes its content on first
+    download only; a later change on disk would go unnoticed. The shipped allow-list therefore
+    carries a sha256 for every file, and the commit-only form is kept for new sources whose hash
+    is not known yet.
     """
     if not path.is_file():
         return False
