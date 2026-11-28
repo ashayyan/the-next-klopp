@@ -2,6 +2,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { ShellBar } from "./lesson/ShellBar.tsx";
 import { LESSON_LOOP_STEPS, StepRail } from "./lesson/StepRail.tsx";
+import { readStoredTheme, resolveTheme, THEME_KEY, writeStoredTheme } from "./theme.ts";
 
 const count = (html: string, needle: string) => html.split(needle).length - 1;
 
@@ -71,5 +72,74 @@ describe("ShellBar", () => {
     expect(html).not.toContain("About 6 min");
     expect(html).toContain('role="switch"');
     expect(html).toContain('aria-checked="true"');
+  });
+});
+
+function memoryStorage(initial: Record<string, string> = {}) {
+  const data = new Map(Object.entries(initial));
+  return {
+    data,
+    getItem: (key: string) => data.get(key) ?? null,
+    setItem: (key: string, value: string) => {
+      data.set(key, value);
+    },
+  };
+}
+
+const throwingStorage = {
+  getItem: (): string | null => {
+    throw new Error("SecurityError: storage is blocked");
+  },
+  setItem: (): void => {
+    throw new Error("QuotaExceededError");
+  },
+};
+
+describe("theme storage", () => {
+  it("stores the choice under tnk:theme", () => {
+    expect(THEME_KEY).toBe("tnk:theme");
+    const storage = memoryStorage();
+    writeStoredTheme("dark", storage);
+    expect(storage.data.get("tnk:theme")).toBe("dark");
+  });
+
+  it("reads dark back, and falls back to system for an unknown value or a throwing storage", () => {
+    expect(readStoredTheme(memoryStorage({ "tnk:theme": "dark" }))).toBe("dark");
+    expect(readStoredTheme(memoryStorage({ "tnk:theme": "sepia" }))).toBe("system");
+    expect(readStoredTheme(memoryStorage())).toBe("system");
+    expect(readStoredTheme(throwingStorage)).toBe("system");
+  });
+
+  it("swallows a throwing setItem", () => {
+    expect(() => writeStoredTheme("light", throwingStorage)).not.toThrow();
+  });
+});
+
+describe("resolveTheme", () => {
+  it("lets a valid ?theme= win over everything", () => {
+    expect(
+      resolveTheme({ param: "light", stored: "dark", prefersDark: true, primary: "dark" }),
+    ).toBe("light");
+  });
+
+  it("uses a stored light or dark choice when there is no param", () => {
+    expect(
+      resolveTheme({ param: null, stored: "dark", prefersDark: false, primary: "light" }),
+    ).toBe("dark");
+  });
+
+  it("uses the direction's primary theme for a stored system choice", () => {
+    expect(
+      resolveTheme({ param: null, stored: "system", prefersDark: true, primary: "light" }),
+    ).toBe("light");
+  });
+
+  it("follows prefers-color-scheme for a stored system choice when there is no primary", () => {
+    expect(resolveTheme({ param: null, stored: "system", prefersDark: true })).toBe("dark");
+    expect(resolveTheme({ param: null, stored: "system", prefersDark: false })).toBe("light");
+  });
+
+  it("ignores an invalid param", () => {
+    expect(resolveTheme({ param: "sepia", stored: "dark", prefersDark: false })).toBe("dark");
   });
 });
