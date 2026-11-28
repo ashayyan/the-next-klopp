@@ -256,7 +256,7 @@ export default function DevPitchPage() {
           study build.
         </p>
         <p className="mt-2 text-sm">
-          <Link to="/dev" className={`underline ${focusRing}`}>
+          <Link to="/dev" className={`inline-flex min-h-11 items-center underline ${focusRing}`}>
             Back to dev routes
           </Link>
         </p>

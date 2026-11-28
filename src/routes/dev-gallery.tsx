@@ -65,13 +65,13 @@ function PrimitiveList({ current, counts }: { current?: string; counts: boolean 
           <h2 id={`group-${group}`} className="text-label font-semibold text-ink-muted">
             {group}
           </h2>
-          <ul className="mt-1 flex flex-col">
+          <ul className="mt-1 flex flex-col gap-2">
             {primitives.map((p) => (
               <li key={p.id} className="flex flex-wrap items-baseline gap-x-3">
                 <Link
                   to={`/dev/gallery/${p.id}`}
                   aria-current={p.id === current ? "page" : undefined}
-                  className={`inline-flex min-h-11 items-center text-body ${link}${p.id === current ? " font-semibold" : ""}`}
+                  className={`inline-flex min-h-11 min-w-11 items-center text-body ${link}${p.id === current ? " font-semibold" : ""}`}
                 >
                   {p.label}
                 </Link>
@@ -101,7 +101,7 @@ function Header() {
 function BackLink() {
   return (
     <p className="mt-8 text-label">
-      <Link to="/dev" className={link}>
+      <Link to="/dev" className={`inline-flex min-h-11 items-center ${link}`}>
         Back to dev routes
       </Link>
     </p>

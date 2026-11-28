@@ -51,12 +51,12 @@ export function DirectionsIndex() {
               </th>
               {SCREENS.map((s) => (
                 <td key={s.id} className="py-3 pr-4">
-                  <span className="flex flex-wrap gap-x-4 gap-y-1">
+                  <span className="flex flex-wrap gap-x-4 gap-y-2">
                     {THEMES.map((theme) => (
                       <Link
                         key={theme}
                         to={`/dev/directions/${d.id}/${s.id}?theme=${theme}`}
-                        className={`inline-flex min-h-11 items-center ${link}`}
+                        className={`inline-flex min-h-11 min-w-11 items-center ${link}`}
                       >
                         {theme === "light" ? "Light" : "Dark"}
                         {theme === d.primaryTheme ? " (primary)" : ""}
@@ -74,7 +74,7 @@ export function DirectionsIndex() {
         <code className="font-mono">{ROUTE_COMMIT.slice(0, 7)}</code> (full hash in the ADR).
       </p>
       <p className="mt-8 text-label">
-        <Link to="/dev" className={link}>
+        <Link to="/dev" className={`inline-flex min-h-11 items-center ${link}`}>
           Back to dev routes
         </Link>
       </p>
@@ -86,7 +86,7 @@ function Fallback({ message, links }: { message: string; links: { to: string; la
   return (
     <main className="mx-auto max-w-[960px] p-4 font-sans text-ink md:p-8">
       <h1 className="text-heading font-display">{message}</h1>
-      <ul className="mt-4 flex flex-col gap-1 text-body">
+      <ul className="mt-4 flex flex-col gap-2 text-body">
         {links.map((l) => (
           <li key={l.to}>
             <Link to={l.to} className={`inline-flex min-h-11 items-center ${link}`}>

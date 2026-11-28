@@ -280,19 +280,34 @@ function collectPage(): PageData {
       label?.contains(el) === true;
     return wrapped && label && shown(label) ? boxOf(label) : boxOf(el);
   };
+  // The inline exception of WCAG 2.5.8 covers a target inside a sentence only: an inline link, or
+  // a button laid out inline (a glossary term), whose paragraph or list item also holds words that
+  // are not themselves a link or a button. A lone link in a <p> or an `li > a` navigation list is a
+  // standalone target and is held to 44 px like any other.
+  const inSentence = (el: Element): boolean => {
+    const display = getComputedStyle(el).display;
+    if (el.tagName === "A") {
+      if (display !== "inline") return false;
+    } else if (el.tagName === "BUTTON") {
+      // Chrome computes a <button> set to `display: inline` as inline-block.
+      if (!/^inline(-block)?$/.test(display) || el.closest("p") === null) return false;
+    } else {
+      return false;
+    }
+    const block = el.closest("p, li");
+    if (!block) return false;
+    const words = document.createTreeWalker(block, NodeFilter.SHOW_TEXT);
+    for (let n = words.nextNode(); n; n = words.nextNode()) {
+      if (n.parentElement?.closest("a[href], button")) continue;
+      if (/[\p{L}\p{N}]/u.test(n.textContent ?? "")) return true;
+    }
+    return false;
+  };
   const targets: PageData["targets"] = controlEls.map((el) => ({
     selector: selectorOf(el),
     text: textOf(el),
     box: hitBox(el),
-    // A link, or a button laid out inline (a glossary term), inside a sentence: the inline
-    // exception of WCAG 2.5.8 applies, so it is not held to 44 px.
-    runningText:
-      (el.tagName === "A" ||
-        // Chrome computes a <button> set to `display: inline` as inline-block.
-        (el.tagName === "BUTTON" &&
-          el.closest("p") !== null &&
-          /^inline(-block)?$/.test(getComputedStyle(el).display))) &&
-      el.closest("p, li") !== null,
+    runningText: inSentence(el),
   }));
   const controls: PageData["controls"] = controlEls.map((el) => {
     const labelledBy = (el.getAttribute("aria-labelledby") ?? "")

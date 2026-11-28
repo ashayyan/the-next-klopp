@@ -266,7 +266,10 @@ export interface TapTarget {
   selector: string;
   text: string;
   box: Box;
-  /** True for a link inside running text (`p`, `li`): exempt from size and spacing. */
+  /**
+   * True for an inline link (or inline button) inside a sentence: its `p` or `li` also holds words
+   * outside any link or button (WCAG 2.5.8 inline exception). Exempt from size and spacing.
+   */
   runningText: boolean;
 }
 
