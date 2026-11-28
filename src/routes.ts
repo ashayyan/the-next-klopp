@@ -5,7 +5,7 @@ export interface BuildRoutesOptions {
   includeDev: boolean;
 }
 
-// URL surface: `/`, `/dev` and `/dev/pitch` (dev only) and the catch-all not-found route.
+// URL surface: `/`, `/dev`, `/dev/pitch` and `/dev/review-fixture` (dev only) and the catch-all not-found route.
 // `/learn/:trackId/:chapterId/:lessonId`, `/review` and `/whats-new` arrive with their phases.
 export function buildRoutes({ includeDev }: BuildRoutesOptions): RouteObject[] {
   const routes: RouteObject[] = [
@@ -29,6 +29,12 @@ export function buildRoutes({ includeDev }: BuildRoutesOptions): RouteObject[] {
       path: "/dev/pitch",
       lazy: async () => ({
         Component: (await import("./routes/dev-pitch.tsx")).default,
+      }),
+    });
+    routes.push({
+      path: "/dev/review-fixture",
+      lazy: async () => ({
+        Component: (await import("./routes/dev-review-fixture.tsx")).default,
       }),
     });
   }

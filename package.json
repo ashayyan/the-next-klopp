@@ -35,7 +35,8 @@
     "tokens": "node scripts/design/build-tokens.ts",
     "tokens:check": "node scripts/design/build-tokens.ts --check",
     "palette": "node scripts/design/check-palette.ts",
-    "fonts": "node scripts/design/copy-fonts.ts"
+    "fonts": "node scripts/design/copy-fonts.ts",
+    "review:screens": "node scripts/review-screens.ts"
   },
   "lint-staged": {
     "*.{ts,tsx,js,mjs,cjs,json,jsonc,css}": [
