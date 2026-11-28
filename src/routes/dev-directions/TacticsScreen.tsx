@@ -1,3 +1,4 @@
+import { useReducedMotion } from "motion/react";
 import { type ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router";
 import { SceneLayer } from "../../pitch/glyphs/SceneLayer.tsx";
@@ -5,11 +6,19 @@ import { describeScene } from "../../pitch/legend/glyphIds.ts";
 import { Legend } from "../../pitch/legend/Legend.tsx";
 import { Pitch } from "../../pitch/Pitch.tsx";
 import { autoOrientation } from "../../pitch/view.ts";
-import type { Scene } from "../../scene/schema.ts";
+import type { Scene, ScenePoint } from "../../scene/schema.ts";
 import { parseScene } from "../../scene/validate.ts";
 import { Button } from "../../ui/Button.tsx";
 import { Segmented } from "../../ui/Segmented.tsx";
 import { type Direction, DirectionScope } from "./DirectionScope.tsx";
+import {
+  type Line,
+  lineOf,
+  morphLengthMs,
+  morphPositions,
+  parseDurationMs,
+  parseEase,
+} from "./morph.ts";
 import rawCity from "./scenes/city-2022-23-shapes.json";
 
 // Screen 1 of 04-UI-SPEC: the tactics lesson ("concept" template, Lesson Loop step 3: Touch it).
@@ -17,9 +26,24 @@ import rawCity from "./scenes/city-2022-23-shapes.json";
 
 export type ShapeState = "without" | "with";
 
-const SHAPES: Record<ShapeState, { t: number; formation: string; title: string }> = {
-  without: { t: 0, formation: "4-4-2", title: "Manchester City shape, without the ball" },
-  with: { t: 1, formation: "3-2-4-1", title: "Manchester City shape, with the ball" },
+const SHAPES: Record<
+  ShapeState,
+  { t: number; frame: number; formation: string; title: string; announcement: string }
+> = {
+  without: {
+    t: 0,
+    frame: 0,
+    formation: "4-4-2",
+    title: "Manchester City shape, without the ball",
+    announcement: "Shape now 4-4-2.",
+  },
+  with: {
+    t: 1,
+    frame: 1,
+    formation: "3-2-4-1",
+    title: "Manchester City shape, with the ball",
+    announcement: "Shape now 3-2-4-1. Stones moved into midfield.",
+  },
 };
 
 const POSSESSION_OPTIONS = [
@@ -38,6 +62,15 @@ function loadCity(): Scene {
 }
 
 const CITY = loadCity();
+
+/** Each player's line from the frame-0 role code: the morph moves the lines from the back. */
+const LINES: Readonly<Record<string, Line>> = Object.fromEntries(
+  CITY.entities.map((e) => [e.id, lineOf(e)]),
+);
+
+function framePositions(state: ShapeState): Readonly<Record<string, ScenePoint>> {
+  return CITY.frames[SHAPES[state].frame]?.positions ?? {};
+}
 
 /** `?state=with` opens the in-possession frame; anything else opens without the ball. */
 export function shapeFromQuery(param: string | null): ShapeState {
@@ -241,11 +274,69 @@ const LAYOUTS = {
 
 export function TacticsScreen({ direction }: { direction: Direction }) {
   const [params] = useSearchParams();
-  const [shape, setShape] = useState<ShapeState>(() => shapeFromQuery(params.get("state")));
+  const reduced = useReducedMotion() === true;
+  const [initial] = useState<ShapeState>(() => shapeFromQuery(params.get("state")));
+  // `target` is what the toggle shows; `settled` is the shape the readout, title and live region
+  // report, which changes at the end of the morph. `moving` holds the in-between positions.
+  const [target, setTarget] = useState<ShapeState>(initial);
+  const [settled, setSettled] = useState<ShapeState>(initial);
+  const [moving, setMoving] = useState<Readonly<Record<string, ScenePoint>> | null>(null);
+  const [announcement, setAnnouncement] = useState("");
   const [stageRef, stageWidth] = useMeasuredWidth(840);
-  const current = SHAPES[shape];
+  const lastPositions = useRef<Readonly<Record<string, ScenePoint>>>(framePositions(initial));
+  const frame = useRef<number | null>(null);
+  const current = SHAPES[settled];
   const orientation = autoOrientation(stageWidth);
   const description = useMemo(() => describeScene(CITY), []);
+
+  useEffect(
+    () => () => {
+      if (frame.current !== null) cancelAnimationFrame(frame.current);
+    },
+    [],
+  );
+
+  /** One requestAnimationFrame loop per change; positions are f(elapsed) (ADR 0009). */
+  const changeShape = (next: ShapeState) => {
+    if (frame.current !== null) cancelAnimationFrame(frame.current);
+    frame.current = null;
+    setTarget(next);
+    const to = framePositions(next);
+    const finish = () => {
+      lastPositions.current = to;
+      setMoving(null);
+      setSettled(next);
+      setAnnouncement(SHAPES[next].announcement);
+    };
+    if (reduced) {
+      finish();
+      return;
+    }
+    // Motion tokens are read from the direction root, so each direction moves its own way.
+    const tokens = getComputedStyle(stageRef.current ?? document.documentElement);
+    const durationMs = parseDurationMs(tokens.getPropertyValue("--duration-morph"), 640);
+    const staggerMs = parseDurationMs(tokens.getPropertyValue("--stagger-line"), 0);
+    const ease = parseEase(tokens.getPropertyValue("--ease-morph"));
+    const total = morphLengthMs(durationMs, staggerMs);
+    const from = lastPositions.current;
+    let start: number | null = null;
+    const step = (now: number) => {
+      start ??= now;
+      const elapsedMs = now - start;
+      if (elapsedMs >= total) {
+        frame.current = null;
+        finish();
+        return;
+      }
+      const positions = Object.fromEntries(
+        morphPositions({ from, to, lines: LINES, elapsedMs, durationMs, staggerMs, ease }),
+      );
+      lastPositions.current = positions;
+      setMoving(positions);
+      frame.current = requestAnimationFrame(step);
+    };
+    frame.current = requestAnimationFrame(step);
+  };
 
   const blocks: Blocks = {
     wordmark: <span className={`${DISPLAY} text-heading`}>The Next Klopp</span>,
@@ -261,18 +352,31 @@ export function TacticsScreen({ direction }: { direction: Direction }) {
       </p>
     ),
     pitch: (
-      <div ref={stageRef} data-stage className="min-w-0">
+      <div
+        ref={stageRef}
+        data-stage
+        data-morphing={moving ? "" : undefined}
+        className="min-w-0 [&_[data-layer=shapes]]:transition-opacity [&_[data-layer=shapes]]:duration-(--duration-ui) [&_[data-layer=shapes]]:ease-(--ease-ui) [&[data-morphing]_[data-layer=shapes]]:opacity-0"
+      >
         <Pitch title={current.title} desc={description} orientation={orientation}>
-          <SceneLayer scene={CITY} t={current.t} mode="stepped" />
+          <SceneLayer
+            scene={CITY}
+            t={SHAPES[moving ? target : settled].t}
+            mode="stepped"
+            positions={moving ?? undefined}
+          />
         </Pitch>
+        <p aria-live="polite" data-announcer className="sr-only">
+          {announcement}
+        </p>
       </div>
     ),
     toggle: (className, optionClassName) => (
       <Segmented
         label="Possession"
         options={POSSESSION_OPTIONS}
-        value={shape}
-        onValueChange={setShape}
+        value={target}
+        onValueChange={changeShape}
         className={className}
         optionClassName={optionClassName}
       />

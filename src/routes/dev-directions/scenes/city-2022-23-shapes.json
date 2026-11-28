@@ -145,8 +145,8 @@
       "id": "stones-note",
       "type": "note",
       "text": "Stones steps into midfield",
-      "at": { "x": 38, "y": 62 },
-      "anchor": { "x": 44, "y": 41 },
+      "at": { "x": 20, "y": 60 },
+      "anchor": { "x": 34, "y": 41 },
       "from": 1
     }
   ],
