@@ -230,7 +230,7 @@ Plans:
   3. The generic Playwright walker completes a fixture lesson end-to-end with no per-lesson test code and runs axe, keyboard, reduced-motion, contrast and performance-budget checks; CI blocks merging when any fails or when a frozen lesson, step or item ID or data artifact version changes non-additively.
   4. A lesson cannot be marked shippable without a verification record from a verifier other than its author (checked against fetched source excerpts) and without role and competency tags; a role-coverage report generates.
   5. Learner opens the home screen with one obvious next action, navigates by track and chapter, and reads the "What's new" page; the app is deployed to the learner's Vercel account with protection scope "All Deployments", a smoke script proves the production URL and a PR preview URL are not public, and a deny-manifest check fails the build if licensed raw data is in the deployed bundle.
-**Plans**: 2/20 plans executed in 13 waves
+**Plans**: 3/20 plans executed in 13 waves
 
 Plans:
 **Wave 1**
@@ -240,7 +240,7 @@ Plans:
 - [x] 05-02-PLAN.md — Lesson, verification and What's new schemas v1; curriculum, sources and order in the virtual module; ADR 0011 (wave 2)
 
 **Wave 3** *(blocked on Wave 2 completion)*
-- [ ] 05-03-PLAN.md — Validator CLI, manifest, shared countWords, structural and safety rules, pre-commit and CI test job (wave 3)
+- [x] 05-03-PLAN.md — Validator CLI, manifest, shared countWords, structural and safety rules, pre-commit and CI test job (wave 3)
 
 **Wave 4** *(blocked on Wave 3 completion)*
 - [ ] 05-04-PLAN.md — Generic walker with axe, required build job in the Playwright image, review:screens --fixtures (wave 4)
@@ -338,7 +338,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 | 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
 | 3. Pitch Standard & Data Pipeline | 11/11 | Complete    | 2026-11-28 |
 | 4. Design Direction & System | 17/17 | Complete    | 2026-11-28 |
-| 5. Content Engine, App Shell & Deploy | 2/20 | In Progress | - |
+| 5. Content Engine, App Shell & Deploy | 3/20 | In Progress | - |
 | 6. Learner Experience & Progress | 0/TBD | Not started | - |
 | 7. Golden Lesson & Track 0 | 0/TBD | Not started | - |
 | 8. Track 1 & Watch Gym Level 1 | 0/TBD | Not started | - |
