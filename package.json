@@ -29,6 +29,7 @@
     "research:summary": "node scripts/research/build-summary.ts",
     "smoke": "node scripts/smoke.ts",
     "smoke:dev": "node scripts/smoke.ts dev",
+    "check:pitch": "node scripts/check-pitch-browser.ts",
     "verify:setup": "node scripts/verify-setup.ts all",
     "prepare": "husky"
   },
