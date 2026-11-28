@@ -10,6 +10,8 @@ export type Speed = 0.25 | 0.5 | 1;
 export const SPEEDS: readonly Speed[] = [0.25, 0.5, 1];
 /** Stepped mode holds each keyframe for this long at speed 1 (divided by the speed). */
 export const STEP_HOLD_MS = 500;
+/** Two times closer than this are the same time (float noise from summing small ticks). */
+const EPSILON = 1e-9;
 
 export interface PlaybackState {
   /** Playback time in seconds, 0..duration. */
@@ -100,25 +102,54 @@ export function createPlaybackStore(
       seek(t) {
         moveTo(t);
       },
-      stepNext() {},
-      stepPrev() {},
-      jumpBy() {},
-      first() {},
-      last() {},
-      setSpeed() {},
+      stepNext() {
+        const { t, keyframes, duration } = get();
+        moveTo(keyframes.find((k) => k > t + EPSILON) ?? duration);
+      },
+      stepPrev() {
+        const { t, keyframes } = get();
+        moveTo([...keyframes].reverse().find((k) => k < t - EPSILON) ?? 0);
+      },
+      jumpBy(seconds) {
+        moveTo(get().t + seconds);
+      },
+      first() {
+        moveTo(0);
+      },
+      last() {
+        moveTo(get().duration);
+      },
+      setSpeed(speed) {
+        const allowed = SPEEDS.find((s) => s === speed);
+        if (allowed !== undefined) set({ speed: allowed, holdMs: 0 });
+      },
       setMotion(motion) {
         set({ motion, holdMs: 0 });
       },
 
       tick(dtMs) {
-        const { playing, t, duration, speed } = get();
+        const { playing, t, duration, speed, motion, keyframes, holdMs } = get();
         if (!playing || dtMs <= 0) return;
-        const next = Math.min(duration, t + (dtMs / 1000) * speed);
-        if (next >= duration) {
-          set({ t: duration, playing: false, ended: true, holdMs: 0 });
-        } else {
-          set({ t: next });
+        const finish = () => set({ t: duration, playing: false, ended: true, holdMs: 0 });
+
+        if (motion === "stepped") {
+          // Hold each keyframe for STEP_HOLD_MS / speed, then jump to the next; no interpolation.
+          const hold = STEP_HOLD_MS / speed;
+          let spent = holdMs + dtMs;
+          let at = t;
+          while (spent >= hold) {
+            spent -= hold;
+            const next = keyframes.find((k) => k > at + EPSILON);
+            if (next === undefined || next >= duration) return finish();
+            at = next;
+          }
+          set({ t: at, holdMs: spent });
+          return;
         }
+
+        const next = Math.min(duration, t + (dtMs / 1000) * speed);
+        if (next >= duration) finish();
+        else set({ t: next });
       },
 
       load(next) {

@@ -1,7 +1,7 @@
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router";
 import { useStore } from "zustand";
-import type { StoreApi } from "zustand/vanilla";
+import { createStore, type StoreApi } from "zustand/vanilla";
 import { CanvasLayer } from "../pitch/CanvasLayer.tsx";
 import { drawDensity, SceneLayer } from "../pitch/glyphs/SceneLayer.tsx";
 import { describeScene } from "../pitch/legend/glyphIds.ts";
@@ -9,10 +9,11 @@ import { Legend } from "../pitch/legend/Legend.tsx";
 import { Pitch } from "../pitch/Pitch.tsx";
 import { autoOrientation, type Orientation } from "../pitch/view.ts";
 import { DEV_SCENES, FALLBACK_SCENE_ID, findDevScene } from "../scene/fixtures/index.ts";
+import { handleTransportKey } from "../scene/playback/keys.ts";
 import { markCommitted, startPlaybackLoop } from "../scene/playback/loop.ts";
 import { PlaybackBar } from "../scene/playback/PlaybackBar.tsx";
 import { sceneDuration } from "../scene/playback/sample.ts";
-import { createPlaybackStore, type PlaybackState } from "../scene/playback/store.ts";
+import { createPlaybackStore, defaultMotion, type PlaybackState } from "../scene/playback/store.ts";
 import type { Scene } from "../scene/schema.ts";
 import { parseScene, type SceneIssue } from "../scene/validate.ts";
 
@@ -48,6 +49,42 @@ const control = `min-h-11 w-full rounded-sm border border-control-border bg-surf
 
 function formatMetres(n: number): string {
   return n.toFixed(2);
+}
+
+const MOTIONS = [
+  { id: "smooth", label: "Smooth" },
+  { id: "stepped", label: "Stepped" },
+] as const;
+
+/** Smooth or Stepped; disabled (Smooth shown) for scenes without a clock. */
+function MotionGroup({ store }: { store: StoreApi<PlaybackState> | null }) {
+  const [idle] = useState(() =>
+    createStore<{ motion: "smooth" | "stepped" }>(() => ({ motion: "smooth" })),
+  );
+  const motion = useStore(store ?? idle, (s) => s.motion);
+  return (
+    <fieldset className="flex min-w-0 flex-col gap-1" disabled={store === null}>
+      <legend className="text-sm">Motion</legend>
+      <div className="flex flex-wrap gap-2">
+        {MOTIONS.map((m) => (
+          <label
+            key={m.id}
+            className="flex min-h-11 cursor-pointer items-center gap-2 rounded-sm px-2 text-sm has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent"
+          >
+            <input
+              type="radio"
+              name="motion"
+              value={m.id}
+              checked={motion === m.id}
+              onChange={() => store?.getState().setMotion(m.id)}
+              className="size-4 accent-accent"
+            />
+            <span className={motion === m.id ? "font-semibold" : undefined}>{m.label}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
 }
 
 /** Draws the scene at the clock's time; subscribes to `t` and `motion` only. */
@@ -146,6 +183,12 @@ export default function DevPitchPage() {
     [scene],
   );
   useEffect(() => (store ? startPlaybackLoop(store) : undefined), [store]);
+  // Default motion follows the system setting; it is read once per scene and the learner can change it.
+  useEffect(() => {
+    if (!store || typeof window.matchMedia !== "function") return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    store.getState().setMotion(defaultMotion(reduced));
+  }, [store]);
   const orientation: Orientation = choice === "auto" ? autoOrientation(stageWidth) : choice;
   const onPitch =
     pointer !== null &&
@@ -234,6 +277,8 @@ export default function DevPitchPage() {
           </div>
         </fieldset>
 
+        <MotionGroup store={store} />
+
         <fieldset className="flex min-w-0 flex-col gap-1">
           <legend className="text-sm">Layers</legend>
           <label className="flex min-h-11 cursor-pointer items-center gap-2 rounded-sm px-2 text-sm has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent">
@@ -254,7 +299,27 @@ export default function DevPitchPage() {
 
       <div className="mt-4 grid grid-cols-1 gap-4 md:mt-6 md:gap-6 lg:grid-cols-[minmax(0,1fr)_288px] lg:gap-8">
         {/* A <section> with an accessible name has the implicit role "region" (Biome noRedundantRoles). */}
-        <section ref={stageRef} aria-label="Pitch stage" data-stage className="min-w-0">
+        <section
+          ref={stageRef}
+          aria-label="Pitch stage"
+          data-stage
+          className="min-w-0"
+          onKeyDown={(e) => {
+            if (!store) return;
+            const handled = handleTransportKey(
+              {
+                key: e.key,
+                shiftKey: e.shiftKey,
+                ctrlKey: e.ctrlKey,
+                metaKey: e.metaKey,
+                altKey: e.altKey,
+                target: e.target as HTMLElement,
+              },
+              store,
+            );
+            if (handled) e.preventDefault();
+          }}
+        >
           {current.status === "invalid" ? (
             <div
               role="alert"
