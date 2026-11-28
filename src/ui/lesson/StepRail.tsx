@@ -99,7 +99,12 @@ function bands(form: StepRailForm | StepRailForms): [Band, StepRailForm][] {
  * links: there is no other step to open yet.
  */
 export function StepRail({ current, form, numbered = false, state, className }: StepRailProps) {
-  const index = LESSON_LOOP_STEPS.findIndex((s) => s.id === current);
+  // Lesson specs arrive as JSON from outside the type system: an unknown step falls back to the
+  // first one everywhere (list, sentence and bar), never to "step 0".
+  const index = Math.max(
+    0,
+    LESSON_LOOP_STEPS.findIndex((s) => s.id === current),
+  );
   const currentStep = LESSON_LOOP_STEPS[index] ?? LESSON_LOOP_STEPS[0];
   const forms = bands(form);
   const listClass = forms.map(([band, f]) => LIST[f][band]).join(" ");

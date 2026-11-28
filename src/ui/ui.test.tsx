@@ -14,7 +14,7 @@ import { GlossaryCard } from "./lesson/GlossaryCard.tsx";
 import { ProgressRing } from "./lesson/ProgressRing.tsx";
 import { QuizOption, type QuizOptionState } from "./lesson/QuizOption.tsx";
 import { ShellBar } from "./lesson/ShellBar.tsx";
-import { LESSON_LOOP_STEPS, StepRail } from "./lesson/StepRail.tsx";
+import { LESSON_LOOP_STEPS, type LessonStepId, StepRail } from "./lesson/StepRail.tsx";
 import { Slider } from "./Slider.tsx";
 import { Surface } from "./Surface.tsx";
 import { Tabs } from "./Tabs.tsx";
@@ -67,6 +67,15 @@ describe("StepRail", () => {
     expect(text).toContain("Touch it, step 3 of 7");
     expect(count(html, "data-segment=")).toBe(7);
     expect(count(html, 'data-segment="done"') + count(html, 'data-segment="current"')).toBe(3);
+  });
+
+  it("falls back to the first step for an unknown id, never “step 0” (IN-09)", () => {
+    const html = renderToStaticMarkup(
+      <StepRail current={"not-a-step" as LessonStepId} form="compact" />,
+    );
+    const text = html.replace(/<[^>]+>/g, "");
+    expect(text).toContain(`${LESSON_LOOP_STEPS[0]?.label}, step 1 of 7`);
+    expect(count(html, 'aria-current="step"')).toBe(1);
   });
 
   it("numbers the steps when asked", () => {
