@@ -5,38 +5,10 @@
 declare module "virtual:tnk-lessons" {
   import type { MDXContent } from "mdx/types";
 
+  /** The frozen lesson spec v1, inferred from the Zod mirror of schemas/lesson.schema.json. */
+  export type LessonSpec = import("./schemas/lesson.ts").LessonSpec;
   /** One screen of a lesson: a stable id (the `<Step id>` in lesson.mdx) and its Lesson Loop stage. */
-  export interface LessonStepSpec {
-    id: string;
-    stage: string;
-    [key: string]: unknown;
-  }
-
-  /**
-   * The parsed `lesson.json`. Provisional shape until the frozen v1 schema and its Zod mirror land
-   * (05-02 replaces this with `LessonSpec` from src/schemas/lesson.ts).
-   */
-  export interface LessonSpec {
-    id: string;
-    version: number;
-    title: string;
-    track: string;
-    chapter: string;
-    concepts: string[];
-    prerequisites: string[];
-    durationMin: number;
-    effort: string;
-    status: string;
-    author: string;
-    roles: string[];
-    competencies: string[];
-    template: string;
-    steps: LessonStepSpec[];
-    quiz: unknown[];
-    sources: string[];
-    dataRefs: string[];
-    [key: string]: unknown;
-  }
+  export type LessonStepSpec = import("./schemas/lesson.ts").LessonStep;
 
   /** A lesson this build includes. `dir` is root-relative with forward slashes. */
   export type LessonEntry = LessonSpec & { fixture: boolean; dir: string };

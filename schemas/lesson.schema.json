@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://the-next-klopp.example/schemas/lesson.schema.json",
+  "title": "Lesson spec",
+  "$comment": "Lesson spec v1 (CONT-01): the lesson.json next to every lesson.mdx. Frozen: only additive changes after Phase 5 (CONT-06). Each <Step id> in the MDX matches a steps[].id in order; steps[].screen names the MDX anchor and defaults to id. Cross-document and authoring rules (step parity, stage order, duration 5-12, ids that exist, prerequisite cycles, citations, interaction props per registry id, quiz answer is one of its options, shippable needs verification.json) live in the content validator (scripts/lib/content/), not here. ADR 0011.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "version",
+    "title",
+    "track",
+    "chapter",
+    "concepts",
+    "prerequisites",
+    "durationMin",
+    "effort",
+    "status",
+    "author",
+    "roles",
+    "competencies",
+    "template",
+    "steps",
+    "quiz",
+    "sources",
+    "dataRefs"
+  ],
+  "properties": {
+    "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+    "version": { "type": "integer", "minimum": 1 },
+    "title": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "track": { "type": "string", "pattern": "^t\\d{2}-[a-z0-9-]+$" },
+    "chapter": { "type": "string", "pattern": "^part-[a-g]$" },
+    "concepts": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+    },
+    "prerequisites": { "$ref": "#/$defs/idList" },
+    "durationMin": { "type": "integer", "minimum": 1, "maximum": 60 },
+    "effort": { "enum": ["low", "normal"] },
+    "status": { "enum": ["draft", "review", "shippable", "shipped"] },
+    "author": { "type": "string", "minLength": 1, "maxLength": 120 },
+    "roles": { "$ref": "#/$defs/idList" },
+    "competencies": { "$ref": "#/$defs/idList" },
+    "template": {
+      "enum": [
+        "concept",
+        "simulation",
+        "data-lab",
+        "case-study",
+        "regulation",
+        "review",
+        "capstone"
+      ]
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 40,
+      "items": { "$ref": "#/$defs/step" }
+    },
+    "quiz": {
+      "type": "array",
+      "maxItems": 20,
+      "items": { "$ref": "#/$defs/quizItem" }
+    },
+    "sources": { "$ref": "#/$defs/idList" },
+    "dataRefs": { "$ref": "#/$defs/dataRefList" },
+    "shippedAt": { "$ref": "common.schema.json#/$defs/isoDate" }
+  },
+  "$defs": {
+    "idList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "common.schema.json#/$defs/kebabId" }
+    },
+    "dataRef": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+/v\\d+-[a-z0-9]+/[A-Za-z0-9._-]+$"
+    },
+    "dataRefList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/dataRef" }
+    },
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "stage", "dataRefs"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "stage": {
+          "enum": ["hook", "see", "touch", "predict", "reveal", "do", "lock-in", "connect"]
+        },
+        "screen": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "interaction": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["id", "props"],
+          "properties": {
+            "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+            "props": { "type": "object" }
+          }
+        },
+        "dataRefs": { "$ref": "#/$defs/dataRefList" }
+      }
+    },
+    "quizItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "question", "options", "answer", "explanation"],
+      "properties": {
+        "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "type": { "const": "choice" },
+        "question": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "label"],
+            "properties": {
+              "id": { "$ref": "common.schema.json#/$defs/kebabId" },
+              "label": { "type": "string", "minLength": 1, "maxLength": 120 }
+            }
+          }
+        },
+        "answer": { "$ref": "common.schema.json#/$defs/kebabId" },
+        "explanation": { "type": "string", "minLength": 1, "maxLength": 400 }
+      }
+    }
+  }
+}

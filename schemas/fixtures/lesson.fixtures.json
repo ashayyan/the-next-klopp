@@ -1,0 +1,390 @@
+{
+  "valid": [
+    {
+      "name": "fixture-lesson-spec",
+      "doc": {
+        "id": "fx-a-goal-in-ten-actions",
+        "version": 1,
+        "title": "A goal in ten actions",
+        "track": "t01-the-game",
+        "chapter": "part-a",
+        "concepts": ["scoring-a-goal", "formation-notation", "formation-vs-structure"],
+        "prerequisites": [],
+        "durationMin": 7,
+        "effort": "normal",
+        "status": "draft",
+        "author": "gsd-executor/phase-05-fixture",
+        "roles": [
+          "first-team-analyst",
+          "head-coach",
+          "head-of-performance-analysis",
+          "set-piece-coach"
+        ],
+        "competencies": ["match-reading", "opposition-analysis"],
+        "template": "data-lab",
+        "steps": [
+          { "id": "hook-ten-actions", "stage": "hook", "dataRefs": [] },
+          { "id": "see-the-chain", "stage": "see", "dataRefs": [] },
+          { "id": "touch-the-order", "stage": "touch", "dataRefs": [] },
+          { "id": "predict-the-shooter", "stage": "predict", "dataRefs": [] },
+          { "id": "reveal-the-shooter", "stage": "reveal", "dataRefs": [] },
+          { "id": "do-the-goal-rule", "stage": "do", "dataRefs": [] },
+          { "id": "lock-in-quiz", "stage": "lock-in", "dataRefs": [] },
+          { "id": "lock-in-recall", "stage": "lock-in", "dataRefs": [] },
+          { "id": "connect-shapes", "stage": "connect", "dataRefs": [] }
+        ],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": []
+      }
+    },
+    {
+      "name": "minimal-draft",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [{ "id": "hook", "stage": "hook", "dataRefs": [] }],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": []
+      }
+    },
+    {
+      "name": "quiz-item-interaction-step-and-shipped-at",
+      "doc": {
+        "id": "what-a-goal-is",
+        "version": 2,
+        "title": "What a goal is, in one rule",
+        "track": "t01-the-game",
+        "chapter": "part-a",
+        "concepts": ["scoring-a-goal"],
+        "prerequisites": ["fx-a-goal-in-ten-actions"],
+        "durationMin": 12,
+        "effort": "normal",
+        "status": "shipped",
+        "author": "gsd-executor/phase-07",
+        "roles": ["head-coach"],
+        "competencies": ["match-reading"],
+        "template": "regulation",
+        "steps": [
+          { "id": "hook-the-line", "stage": "hook", "screen": "hook-screen", "dataRefs": [] },
+          {
+            "id": "touch-the-ball",
+            "stage": "touch",
+            "interaction": { "id": "drag-a-player", "props": { "sceneId": "minimal-authored" } },
+            "dataRefs": ["wyscout/v1-809b8aff1fda/scene-wyscout-2499754-sane-goal.json"]
+          },
+          {
+            "id": "lock-in-quiz",
+            "stage": "lock-in",
+            "interaction": { "id": "quiz-choice", "props": {} },
+            "dataRefs": []
+          }
+        ],
+        "quiz": [
+          {
+            "id": "whole-ball-over",
+            "type": "choice",
+            "question": "When does a goal count?",
+            "options": [
+              { "id": "part-over", "label": "Part of the ball is over the line" },
+              { "id": "whole-over", "label": "The whole ball is over the line" }
+            ],
+            "answer": "whole-over",
+            "explanation": "The whole ball must cross the goal line between the posts."
+          }
+        ],
+        "sources": ["src-ifab-laws-of-the-game"],
+        "dataRefs": ["wyscout/v1-809b8aff1fda/scene-wyscout-2499754-sane-goal.json"],
+        "shippedAt": "2026-12-01"
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "unknown-top-level-key",
+      "reason": "additionalProperties is false: frontmatter-style extras are rejected",
+      "expect_path": "/summary",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [{ "id": "hook", "stage": "hook", "dataRefs": [] }],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": [],
+        "summary": "not a spec field"
+      }
+    },
+    {
+      "name": "title-over-40-characters",
+      "reason": "the title is the h1 and sits inside \"Start: {title}\" (UI-SPEC Typography)",
+      "expect_path": "/title",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A lesson title that runs well past forty characters",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [{ "id": "hook", "stage": "hook", "dataRefs": [] }],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": []
+      }
+    },
+    {
+      "name": "stage-outside-the-loop",
+      "reason": "stage must be one of the eight Lesson Loop stages",
+      "expect_path": "/steps/0/stage",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [{ "id": "hook", "stage": "warm-up", "dataRefs": [] }],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": []
+      }
+    },
+    {
+      "name": "template-outside-the-seven",
+      "reason": "template must be one of the seven DESIGN.md section 6 templates",
+      "expect_path": "/template",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "video",
+        "steps": [{ "id": "hook", "stage": "hook", "dataRefs": [] }],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": []
+      }
+    },
+    {
+      "name": "chapter-part-z",
+      "reason": "chapter ids are part-a to part-g from the concept-map part field",
+      "expect_path": "/chapter",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-z",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [{ "id": "hook", "stage": "hook", "dataRefs": [] }],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": []
+      }
+    },
+    {
+      "name": "malformed-data-ref",
+      "reason": "a data ref is <dataset>/<version>/<file> with a pinned v<N>-<hash> version",
+      "expect_path": "/dataRefs/0",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [{ "id": "hook", "stage": "hook", "dataRefs": [] }],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": ["wyscout/latest/scene.json"]
+      }
+    },
+    {
+      "name": "quiz-item-with-five-options",
+      "reason": "a choice item has two to four options",
+      "expect_path": "/quiz/0/options",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [{ "id": "hook", "stage": "hook", "dataRefs": [] }],
+        "quiz": [
+          {
+            "id": "too-many",
+            "type": "choice",
+            "question": "Which one?",
+            "options": [
+              { "id": "a", "label": "A" },
+              { "id": "b", "label": "B" },
+              { "id": "c", "label": "C" },
+              { "id": "d", "label": "D" },
+              { "id": "e", "label": "E" }
+            ],
+            "answer": "a",
+            "explanation": "A."
+          }
+        ],
+        "sources": [],
+        "dataRefs": []
+      }
+    },
+    {
+      "name": "interaction-props-not-an-object",
+      "reason": "interaction props are an object; the registry checks its shape per id (05-11)",
+      "expect_path": "/steps/0/interaction/props",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [
+          {
+            "id": "hook",
+            "stage": "hook",
+            "interaction": { "id": "quiz-choice", "props": ["a"] },
+            "dataRefs": []
+          }
+        ],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": []
+      }
+    },
+    {
+      "name": "step-missing-data-refs",
+      "reason": "every step lists its data refs, empty when it has none",
+      "expect_path": "/steps/0/dataRefs",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "draft",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [{ "id": "hook", "stage": "hook" }],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": []
+      }
+    },
+    {
+      "name": "status-outside-the-four",
+      "reason": "status is draft, review, shippable or shipped",
+      "expect_path": "/status",
+      "doc": {
+        "id": "minimal-draft",
+        "version": 1,
+        "title": "A",
+        "track": "t00-start-here",
+        "chapter": "part-a",
+        "concepts": ["role-map"],
+        "prerequisites": [],
+        "durationMin": 5,
+        "effort": "low",
+        "status": "published",
+        "author": "author",
+        "roles": [],
+        "competencies": [],
+        "template": "concept",
+        "steps": [{ "id": "hook", "stage": "hook", "dataRefs": [] }],
+        "quiz": [],
+        "sources": [],
+        "dataRefs": []
+      }
+    }
+  ]
+}

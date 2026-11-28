@@ -23,13 +23,19 @@ function loadLessonMdx(id: string): Promise<{ default: MDXContent }> {
 }
 
 /** The screen to show: the `?step=` id when the lesson has it, otherwise the first screen. */
-export function resolveStepId(steps: readonly LessonStepSpec[], requested: string | null): string {
+export function resolveStepId(
+  steps: readonly Pick<LessonStepSpec, "id">[],
+  requested: string | null,
+): string {
   const match = requested === null ? undefined : steps.find((s) => s.id === requested);
   return match?.id ?? steps[0]?.id ?? "";
 }
 
 /** The screen after `current`, or null on the last screen. */
-export function nextStepId(steps: readonly LessonStepSpec[], current: string): string | null {
+export function nextStepId(
+  steps: readonly Pick<LessonStepSpec, "id">[],
+  current: string,
+): string | null {
   const index = steps.findIndex((s) => s.id === current);
   return index === -1 ? null : (steps[index + 1]?.id ?? null);
 }

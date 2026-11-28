@@ -5,6 +5,7 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, relative } from "node:path";
 import type { Plugin } from "vite";
+import { type LessonSpec, lessonSchema } from "../../../src/schemas/lesson.ts";
 import { type SelectMode, selectLessons } from "./select.ts";
 
 export const VIRTUAL_ID = "virtual:tnk-lessons";
@@ -14,7 +15,8 @@ const RESOLVED_ID = `\0${VIRTUAL_ID}`;
 const INVALID_FIXTURES = "invalid";
 
 export interface DiscoveredLesson {
-  spec: { id: string; status: string; [key: string]: unknown };
+  /** The parsed, schema-valid lesson.json (lesson spec v1). */
+  spec: LessonSpec;
   fixture: boolean;
   /** Root-relative folder with forward slashes, e.g. `/content/_fixtures/fx-a-goal-in-ten-actions`. */
   dir: string;
@@ -28,17 +30,32 @@ function subdirs(abs: string): string[] {
     .sort();
 }
 
+/** The first schema issue as `<json-pointer>: <message>`, e.g. `/steps/0/stage: Invalid option…`. */
+export function firstIssue(
+  issues: readonly { path: readonly PropertyKey[]; message: string }[],
+): string {
+  const issue = issues[0];
+  if (!issue) return "invalid lesson spec";
+  const pointer = issue.path.map((p) => `/${String(p)}`).join("") || "/";
+  return `${pointer}: ${issue.message}`;
+}
+
 function readLesson(root: string, segments: string[], fixture: boolean): DiscoveredLesson | null {
   const file = join(root, ...segments, "lesson.json");
   if (!existsSync(file)) return null;
   const dir = `/${segments.join("/")}`;
-  let spec: DiscoveredLesson["spec"];
+  let raw: unknown;
   try {
-    spec = JSON.parse(readFileSync(file, "utf8"));
+    raw = JSON.parse(readFileSync(file, "utf8"));
   } catch (error) {
     throw new Error(`${dir}/lesson.json: not valid JSON (${(error as Error).message})`);
   }
-  return { spec, fixture, dir };
+  // A lesson that breaks spec v1 stops the build and the dev server (threat T-05-16).
+  const parsed = lessonSchema.safeParse(raw);
+  if (!parsed.success) {
+    throw new Error(`${dir}/lesson.json: ${firstIssue(parsed.error.issues)}`);
+  }
+  return { spec: parsed.data, fixture, dir };
 }
 
 /**

@@ -2,6 +2,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
+import type { LessonSpec } from "../../../src/schemas/lesson.ts";
 import { discoverLessons, isLessonFile, renderModule } from "./vite-plugin.ts";
 
 const temps: string[] = [];
@@ -20,6 +21,31 @@ function root(): string {
   return dir;
 }
 
+/** A minimal spec-v1 lesson; overrides replace top-level fields. */
+function spec(overrides: Partial<LessonSpec> & Record<string, unknown> = {}): LessonSpec {
+  return {
+    id: "l-one",
+    version: 1,
+    title: "T",
+    track: "t01-the-game",
+    chapter: "part-a",
+    concepts: ["scoring-a-goal"],
+    prerequisites: [],
+    durationMin: 5,
+    effort: "low",
+    status: "draft",
+    author: "test",
+    roles: [],
+    competencies: [],
+    template: "concept",
+    steps: [{ id: "hook", stage: "hook", dataRefs: [] }],
+    quiz: [],
+    sources: [],
+    dataRefs: [],
+    ...overrides,
+  } as LessonSpec;
+}
+
 function lesson(base: string, segments: string[], spec: Record<string, unknown>): void {
   const dir = join(base, ...segments);
   mkdirSync(dir, { recursive: true });
@@ -30,8 +56,8 @@ function lesson(base: string, segments: string[], spec: Record<string, unknown>)
 describe("discoverLessons", () => {
   it("finds track lessons and fixtures, never content/_fixtures/invalid", () => {
     const base = root();
-    lesson(base, ["content", "tracks", "t01", "part-a", "l-one"], { id: "l-one", status: "draft" });
-    lesson(base, ["content", "_fixtures", "fx-one"], { id: "fx-one", status: "draft" });
+    lesson(base, ["content", "tracks", "t01", "part-a", "l-one"], spec({ id: "l-one" }));
+    lesson(base, ["content", "_fixtures", "fx-one"], spec({ id: "fx-one" }));
     lesson(base, ["content", "_fixtures", "invalid", "no-frontmatter"], {
       id: "bad",
       status: "draft",
@@ -65,7 +91,7 @@ describe("discoverLessons", () => {
 describe("renderModule", () => {
   it("writes root-relative ids through JSON.stringify and no absolute path", () => {
     const code = renderModule([
-      { spec: { id: 'x"y', status: "shipped", title: "T" }, fixture: false, dir: "/content/a b" },
+      { spec: spec({ id: 'x"y', status: "shipped" }), fixture: false, dir: "/content/a b" },
     ]);
     expect(code).toContain('"x\\"y": () => import("/content/a b/lesson.mdx"),');
     expect(code).toContain('"fixture":false,"dir":"/content/a b"');
