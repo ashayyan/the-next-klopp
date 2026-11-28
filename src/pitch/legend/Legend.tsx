@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
 import type { Scene } from "../../scene/schema.ts";
-import { GLYPHS, type GlyphEntry } from "../glyphs/registry.ts";
+import { GLYPHS, type GlyphEntry, type GlyphId } from "../glyphs/registry.ts";
 import { glyphIdsForScene } from "./glyphIds.ts";
 
 export interface LegendProps {
@@ -8,6 +8,8 @@ export interface LegendProps {
   scene: Scene | null;
   /** True when the Canvas density layer is drawn. */
   density: boolean;
+  /** Glyph ids drawn outside the scene (dev overlays such as the probe point). */
+  extraGlyphs?: readonly GlyphId[];
   /** Legend state on first render. Default expanded at every width. */
   initialExpanded?: boolean;
 }
@@ -25,11 +27,14 @@ function labelFor(entry: GlyphEntry, scene: Scene | null): string {
  * order. Two states only, expanded and collapsed. Collapsed keeps every swatch with its label so no
  * entry is ever a bare shape or colour (03-UI-SPEC "Legend Contract").
  */
-export function Legend({ scene, density, initialExpanded = true }: LegendProps) {
+export function Legend({ scene, density, extraGlyphs = [], initialExpanded = true }: LegendProps) {
   const headingId = useId();
   const listId = useId();
   const [expanded, setExpanded] = useState(initialExpanded);
-  const ids = scene ? glyphIdsForScene(scene, { density }) : [];
+  const ids: readonly GlyphId[] = [
+    ...(scene ? glyphIdsForScene(scene, { density }) : []),
+    ...extraGlyphs,
+  ];
   const entries = GLYPHS.filter((g) => ids.includes(g.id));
 
   return (

@@ -24,7 +24,7 @@ const CHIP_PAD_PX = 4;
  * in screen axes inside a group that undoes the vertical rotation, so it reads upright. `anchor`
  * says which chip corner sits at (x, y): the top-left corner, or the centre.
  */
-function Chip({
+export function Chip({
   x,
   y,
   text,

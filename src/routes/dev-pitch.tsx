@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router";
 import { useStore } from "zustand";
 import { createStore, type StoreApi } from "zustand/vanilla";
 import { CanvasLayer } from "../pitch/CanvasLayer.tsx";
+import { PointGlyph } from "../pitch/glyphs/MarkGlyphs.tsx";
 import { drawDensity, SceneLayer } from "../pitch/glyphs/SceneLayer.tsx";
 import { describeScene } from "../pitch/legend/glyphIds.ts";
 import { Legend } from "../pitch/legend/Legend.tsx";
@@ -17,6 +18,9 @@ import { sceneDuration } from "../scene/playback/sample.ts";
 import { createPlaybackStore, defaultMotion, type PlaybackState } from "../scene/playback/store.ts";
 import type { Scene, SceneEntity } from "../scene/schema.ts";
 import { parseScene, type SceneIssue } from "../scene/validate.ts";
+import { ConverterProbe, type ProbeInput } from "./dev-pitch/ConverterProbe.tsx";
+import { LandmarksLayer } from "./dev-pitch/LandmarksLayer.tsx";
+import { probeConvert } from "./dev-pitch/probe.ts";
 
 // Dev-only page (registered inside the includeDev && import.meta.env.DEV branch of buildRoutes).
 // The subline text below is the marker scripts/smoke.ts looks for in the study build.
@@ -122,6 +126,8 @@ export default function DevPitchPage() {
   const [moved, setMoved] = useState<{ sceneId: string; positions: Record<string, Pt> } | null>(
     null,
   );
+  const [landmarksOn, setLandmarksOn] = useState(false);
+  const [probe, setProbe] = useState<ProbeInput>({ provider: "statsbomb", xText: "", yText: "" });
   const [announcement, setAnnouncement] = useState<{ sceneId: string; text: string } | null>(null);
 
   // ?scene= is looked up only through the fixed registry: it is never a path or import specifier.
@@ -204,6 +210,8 @@ export default function DevPitchPage() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     store.getState().setMotion(defaultMotion(reduced));
   }, [store]);
+  const probeResult = probeConvert(probe.provider, probe.xText, probe.yText, { length, width });
+  const extraGlyphs = landmarksOn || probeResult.ok ? (["point"] as const) : [];
   const isBoard = scene?.kind === "board";
   const boardPositions = scene && moved?.sceneId === scene.id ? moved.positions : undefined;
   const boardAnnouncement = scene && announcement?.sceneId === scene.id ? announcement.text : "";
@@ -326,6 +334,16 @@ export default function DevPitchPage() {
             />
             <span>Density layer (Canvas)</span>
           </label>
+          <label className="flex min-h-11 cursor-pointer items-center gap-2 rounded-sm px-2 text-sm has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-accent">
+            <input
+              type="checkbox"
+              name="layer-landmarks"
+              checked={landmarksOn}
+              onChange={(e) => setLandmarksOn(e.target.checked)}
+              className="size-4 accent-accent"
+            />
+            <span>Provider landmarks</span>
+          </label>
         </fieldset>
       </div>
 
@@ -384,6 +402,8 @@ export default function DevPitchPage() {
             canvas={densityOn && draw ? <CanvasLayer draw={draw} /> : undefined}
             onPointerCanonical={setPointer}
           >
+            {landmarksOn ? <LandmarksLayer /> : null}
+            {probeResult.ok ? <PointGlyph at={probeResult.point} label="Probe" /> : null}
             {scene && store ? <PlaybackLayer scene={scene} store={store} /> : null}
             {scene && !store ? (
               <SceneLayer
@@ -434,7 +454,7 @@ export default function DevPitchPage() {
         </section>
 
         <aside className="flex min-w-0 flex-col gap-4 md:gap-6">
-          <Legend scene={scene} density={densityOn} />
+          <Legend scene={scene} density={densityOn} extraGlyphs={extraGlyphs} />
           <section aria-labelledby={inspectorId} className="bg-surface-panel p-4">
             <h2 id={inspectorId} className="text-base leading-tight font-semibold">
               Scene
@@ -473,6 +493,7 @@ export default function DevPitchPage() {
                 : "Pointer off pitch"}
             </p>
           </section>
+          <ConverterProbe value={probe} onChange={setProbe} result={probeResult} />
         </aside>
       </div>
     </main>
