@@ -44,7 +44,7 @@
 
 - [x] **PIPE-01**: `/pipeline` (Python 3.12, uv) downloads only allow-listed open sources, standardises them with kloppy, and writes small immutable versioned artifacts with a manifest
 - [x] **PIPE-02**: One npm script (e.g. `npm run data`) runs the pipeline on Windows with no `make`
-- [ ] **PIPE-03**: Raw and licensed data never enter git or the Vercel bundle (size/licence gates enforced in CI)
+- [x] **PIPE-03**: Raw and licensed data never enter git or the Vercel bundle (size/licence gates enforced in CI)
 - [ ] **PIPE-04**: At least one recipe turns an open-data sequence into a canonical Scene/Frame sequence the app can play
 
 ### Platform and App Shell
@@ -183,7 +183,7 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 | PITCH-04 | Phase 3 | Complete |
 | PIPE-01 | Phase 3 | Complete |
 | PIPE-02 | Phase 3 | Complete |
-| PIPE-03 | Phase 3 | Pending |
+| PIPE-03 | Phase 3 | Complete |
 | PIPE-04 | Phase 3 | Pending |
 | DSGN-01 | Phase 4 | Pending |
 | DSGN-02 | Phase 4 | Pending |
