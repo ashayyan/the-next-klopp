@@ -19,7 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 1: Setup & Contracts** - Verified toolchain, guarded private repo with CI, running app skeleton, decision records and shared schemas (completed 2026-11-28)
 - [x] **Phase 2: Research Wave 1** - Parallel research, data-coverage matrix, clip-supply decision, machine-readable registry and concept map, learner approval checkpoint (completed 2026-11-28)
 - [x] **Phase 3: Pitch Standard & Data Pipeline** - Canonical pitch renderer, coordinate converters, glyphs and legend, Scene/Frame format, kloppy pipeline with licence gates (completed 2026-11-28)
-- [ ] **Phase 4: Design Direction & System** - 2-3 rendered directions, learner pick, DESIGN.md, tokens, component gallery, screenshot-review gate
+- [x] **Phase 4: Design Direction & System** - 2-3 rendered directions, learner pick, DESIGN.md, tokens, component gallery, screenshot-review gate (completed 2026-11-28)
 - [ ] **Phase 5: Content Engine, App Shell & Deploy** - Lesson-as-data engine, validator, claim components, Playwright walker, quality gates, shell, protected Vercel deploy
 - [ ] **Phase 6: Learner Experience & Progress** - Lesson Loop runtime, glossary, focus mode, confusion button, accessibility, local progress, capped FSRS queue, low-energy and welcome-back
 - [ ] **Phase 7: Golden Lesson & Track 0** - Tracer lesson through every layer, polished golden lesson, app tour, placement diagnostic, goals page, Role Map
@@ -166,7 +166,7 @@ Plans:
   3. Design tokens are generated from DESIGN.md and drive the Tailwind theme: changing a token and regenerating visibly changes the app and the pitch.
   4. A dev gallery (`/dev/gallery`) shows every primitive and interaction at 3 widths, and visual baselines are generated only by CI on Linux, never overwritten by a local run.
   5. A screenshot-review command captures any screen at 3 widths and runs the taste-skill review against DESIGN.md, producing a pass/fail report.
-**Plans**: 17/17 plans executed in 15 waves
+**Plans**: 17/17 plans complete in 15 waves
 
 Plans:
 **Wave 1**
@@ -290,7 +290,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8. Phases 2 
 | 1. Setup & Contracts | 9/9 | Complete    | 2026-11-28 |
 | 2. Research Wave 1 | 21/21 | Complete    | 2026-11-28 |
 | 3. Pitch Standard & Data Pipeline | 11/11 | Complete    | 2026-11-28 |
-| 4. Design Direction & System | 17/17 | In Progress | - |
+| 4. Design Direction & System | 17/17 | Complete    | 2026-11-28 |
 | 5. Content Engine, App Shell & Deploy | 0/TBD | Not started | - |
 | 6. Learner Experience & Progress | 0/TBD | Not started | - |
 | 7. Golden Lesson & Track 0 | 0/TBD | Not started | - |
