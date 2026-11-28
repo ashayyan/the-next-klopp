@@ -17,6 +17,13 @@ import {
   TypeDemo,
 } from "./demos/foundations.tsx";
 import {
+  AlertDialogDemo,
+  DialogDemo,
+  PopoverDemo,
+  ToastDemo,
+  TooltipDemo,
+} from "./demos/overlays.tsx";
+import {
   ConverterProbeDemo,
   DragDemo,
   GlyphsDemo,
@@ -154,6 +161,41 @@ export const GALLERY: readonly Primitive[] = [
     label: "Tabs",
     states: ["first", "second", "focus", "many"],
     Demo: TabsDemo,
+  },
+  {
+    id: "dialog",
+    group: "Overlays",
+    label: "Dialog",
+    states: ["open", "interactive"],
+    Demo: DialogDemo,
+  },
+  {
+    id: "alert-dialog",
+    group: "Overlays",
+    label: "Alert dialog",
+    states: ["open", "interactive"],
+    Demo: AlertDialogDemo,
+  },
+  {
+    id: "popover",
+    group: "Overlays",
+    label: "Popover",
+    states: ["short", "long-text"],
+    Demo: PopoverDemo,
+  },
+  {
+    id: "tooltip",
+    group: "Overlays",
+    label: "Tooltip",
+    states: ["open"],
+    Demo: TooltipDemo,
+  },
+  {
+    id: "toast",
+    group: "Overlays",
+    label: "Toast",
+    states: ["saved"],
+    Demo: ToastDemo,
   },
   {
     id: "pitch",

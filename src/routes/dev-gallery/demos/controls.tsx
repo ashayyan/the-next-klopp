@@ -104,7 +104,7 @@ const SHAPES = [
 ] as const;
 
 /** A cell element a Base UI popup can render into, so one screenshot shows it open. */
-function useCellContainer() {
+export function useCellContainer() {
   const [el, setEl] = useState<HTMLElement | null>(null);
   return { el, ref: setEl };
 }

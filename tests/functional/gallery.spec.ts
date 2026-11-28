@@ -350,3 +350,89 @@ test.describe("controls: choices", () => {
     );
   });
 });
+
+test.describe("overlays", () => {
+  test("the alert dialog opens with Keep board focused, Escape closes it and focus returns to the trigger", async ({
+    page,
+  }) => {
+    await page.goto("/dev/gallery/alert-dialog?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    // The static open state shows the real copy and both buttons in its own cell.
+    const open = page.locator('[data-gallery-state="alert-dialog/open"]');
+    await expect(open.getByText("Clear this board?")).toBeVisible();
+    await expect(open.getByRole("button", { name: "Clear board" })).toBeVisible();
+    await expect(open.getByRole("button", { name: "Keep board" })).toBeVisible();
+
+    const trigger = page
+      .locator('[data-gallery-state="alert-dialog/interactive"]')
+      .getByRole("button", { name: "Clear board" });
+    await trigger.click();
+    const dialog = page.getByRole("alertdialog");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole("button", { name: "Keep board" })).toBeFocused();
+    await page.keyboard.press("Escape");
+    // Only the static copy in the "open" cell is left; it is reachable again once the modal is gone.
+    await expect(dialog).toHaveCount(1);
+    await expect(page.locator(".fixed").getByRole("alertdialog")).toHaveCount(0);
+    await expect(trigger).toBeFocused();
+  });
+
+  test("the dialog traps focus while open and returns it to the trigger on close", async ({
+    page,
+  }) => {
+    await page.goto("/dev/gallery/dialog?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    const trigger = page
+      .locator('[data-gallery-state="dialog/interactive"]')
+      .getByRole("button", { name: "Open dialog" });
+    await trigger.click();
+    const dialog = page.getByRole("dialog", { name: "Save to your notes?" });
+    await expect(dialog).toBeVisible();
+    for (let i = 0; i < 6; i += 1) {
+      await page.keyboard.press("Tab");
+      // The focus guards at the popup's edges hand focus back a moment after Tab lands on them.
+      await expect
+        .poll(() => dialog.evaluate((el) => el.contains(document.activeElement)))
+        .toBe(true);
+    }
+    await page.keyboard.press("Escape");
+    await expect(dialog).toHaveCount(1);
+    await expect(trigger).toBeFocused();
+  });
+
+  test("the long popover scrolls inside a 60vh box and never widens a 375 px page", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 375, height: 800 });
+    await page.goto("/dev/gallery/popover?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    const popup = page.locator('[data-gallery-state="popover/long-text"]').getByRole("dialog");
+    await expect(popup).toBeVisible();
+    const style = await popup.evaluate((el) => {
+      const s = getComputedStyle(el);
+      return { overflowY: s.overflowY, maxHeight: Number.parseFloat(s.maxHeight) };
+    });
+    expect(style.overflowY).toBe("auto");
+    expect(Math.round(style.maxHeight)).toBe(Math.round(0.6 * 800));
+    const widths = await page.evaluate(() => ({
+      scroll: document.documentElement.scrollWidth,
+      client: document.documentElement.clientWidth,
+    }));
+    expect(widths.scroll).toBe(widths.client);
+    expect(widths.client).toBe(375);
+  });
+
+  test("the tooltip and the toast show their text in their own cells", async ({ page }) => {
+    await page.goto("/dev/gallery/tooltip?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    await expect(
+      page.locator('[data-gallery-state="tooltip/open"]').getByText("Close", { exact: true }),
+    ).toBeVisible();
+    await page.goto("/dev/gallery/toast?bare=1&theme=light");
+    await expect(page.locator('[data-ready="1"]')).toBeAttached();
+    const toast = page.locator('[data-gallery-state="toast/saved"]');
+    await expect(toast.getByText("Note saved")).toBeVisible();
+    // Base UI hides the Dismiss button from the accessibility tree until the toast has focus.
+    await expect(toast.getByText("Dismiss", { exact: true })).toBeVisible();
+  });
+});

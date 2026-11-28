@@ -1,5 +1,5 @@
 import { Popover as BasePopover } from "@base-ui/react/popover";
-import type { ReactElement, ReactNode } from "react";
+import type { ReactElement, ReactNode, RefObject } from "react";
 import { POPUP_MOTION, Tooltip } from "./Tooltip.tsx";
 
 export interface PopoverProps {
@@ -14,6 +14,10 @@ export interface PopoverProps {
   onOpenChange?: (open: boolean) => void;
   /** Width classes for the popup; default a 20 rem card. */
   className?: string;
+  /** Render the popup inside this element instead of <body> (the gallery cell). */
+  portalContainer?: HTMLElement | RefObject<HTMLElement | null> | null;
+  /** `false` keeps focus where it is when the popover opens (the gallery's static open state). */
+  initialFocus?: boolean;
   children: ReactNode;
 }
 
@@ -30,6 +34,8 @@ export function Popover({
   open,
   onOpenChange,
   className,
+  portalContainer,
+  initialFocus,
   children,
 }: PopoverProps) {
   const triggerElement = <BasePopover.Trigger render={trigger} />;
@@ -39,9 +45,10 @@ export function Popover({
       onOpenChange={onOpenChange ? (next) => onOpenChange(next) : undefined}
     >
       {tooltip ? <Tooltip label={tooltip}>{triggerElement}</Tooltip> : triggerElement}
-      <BasePopover.Portal>
+      <BasePopover.Portal container={portalContainer ?? undefined}>
         <BasePopover.Positioner side="bottom" align="center" sideOffset={8} collisionPadding={16}>
           <BasePopover.Popup
+            initialFocus={initialFocus}
             className={`flex max-h-[60vh] max-w-[calc(100vw-32px)] flex-col gap-3 overflow-y-auto overscroll-contain rounded-md border border-control-border bg-surface-raised p-4 font-sans text-body text-ink outline-none ${POPUP_MOTION} ${className ?? "w-80"}`}
           >
             {title ? (

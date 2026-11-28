@@ -207,3 +207,37 @@ describe("registry after the Pitch and Interactions groups", () => {
     expect(findPrimitive("legend")?.states).toEqual(["expanded", "collapsed", "empty"]);
   });
 });
+
+describe("registry after the Controls and Overlays groups", () => {
+  it("registers every control and overlay primitive with its states", () => {
+    const ids = (group: string) => GALLERY.filter((p) => p.group === group).map((p) => p.id);
+    expect(ids("Controls")).toEqual([
+      "button",
+      "input",
+      "link",
+      "select",
+      "checkbox-radio-switch",
+      "segmented",
+      "slider",
+      "tabs",
+    ]);
+    expect(ids("Overlays")).toEqual(["dialog", "alert-dialog", "popover", "tooltip", "toast"]);
+    expect(findPrimitive("input")?.states).toEqual([
+      "empty",
+      "filled",
+      "focus",
+      "invalid",
+      "disabled",
+      "long-value",
+    ]);
+    expect(findPrimitive("slider")?.states).toEqual(["min", "mid", "max", "focus", "disabled"]);
+  });
+
+  it("renders the destructive confirmation copy in the alert dialog's static open state", () => {
+    const html = page("/dev/gallery/alert-dialog?bare=1&theme=light");
+    // The popup draws into its cell after mount, so the server markup holds the cell, not the copy.
+    expect(html).toContain('data-gallery-state="alert-dialog/open"');
+    expect(html).toContain('data-gallery-state="alert-dialog/interactive"');
+    expect(html).toContain("Clear board");
+  });
+});
