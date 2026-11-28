@@ -51,6 +51,17 @@ export const DEV_SCENES: readonly DevScene[] = [
     label: "Stress · 22 players",
     load: () => import("./stress.ts").then((m) => m.makeStressScene()),
   },
+  {
+    id: "empty",
+    label: "Empty scene",
+    load: () => import("./empty.json").then((m) => m.default),
+  },
+  {
+    // Deliberately broken: lives in invalid/ so the valid-fixture tests never see it.
+    id: "invalid",
+    label: "Invalid scene",
+    load: () => import("./invalid/frames-out-of-order.json").then((m) => m.default),
+  },
 ];
 
 /** The scene shown when ?scene= names nothing known. */

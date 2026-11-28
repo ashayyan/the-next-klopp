@@ -1,0 +1,27 @@
+{
+  "id": "empty-scene",
+  "schemaVersion": 1,
+  "kind": "authored",
+  "label": "Empty scene",
+  "pitch": {
+    "length": 105,
+    "width": 68
+  },
+  "teams": [],
+  "entities": [],
+  "frames": [
+    {
+      "t": 0,
+      "positions": {}
+    }
+  ],
+  "events": [],
+  "annotations": [],
+  "source": {
+    "type": "authored",
+    "sourceIds": [],
+    "licence": "project-authored",
+    "attribution": "Authored for The Next Klopp",
+    "shippable": true
+  }
+}

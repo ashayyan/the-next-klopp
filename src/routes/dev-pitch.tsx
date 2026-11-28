@@ -20,6 +20,7 @@ import type { Scene, SceneEntity } from "../scene/schema.ts";
 import { ConverterProbe, type ProbeInput } from "./dev-pitch/ConverterProbe.tsx";
 import { LandmarksLayer } from "./dev-pitch/LandmarksLayer.tsx";
 import { probeConvert } from "./dev-pitch/probe.ts";
+import { StatePanel } from "./dev-pitch/StatePanels.tsx";
 import { type LoadResult, loadDevScene } from "./dev-pitch/sceneSources.ts";
 
 // Dev-only page (registered inside the includeDev && import.meta.env.DEV branch of buildRoutes).
@@ -360,27 +361,11 @@ export default function DevPitchPage() {
             if (handled) e.preventDefault();
           }}
         >
-          {current.status === "invalid" ? (
-            <div
-              role="alert"
-              className="mb-4 border-l-4 border-danger bg-surface-panel p-4"
-              data-state="invalid-scene"
-            >
-              <h2 className="text-base leading-tight font-semibold">Scene failed validation</h2>
-              <p className="mt-2 text-base">
-                {`${current.issues.length} ${current.issues.length === 1 ? "problem" : "problems"} in “${activeId}”. Fix the fixture file and save; the page reloads with the change.`}
-              </p>
-              <ul className="mt-2 font-mono text-sm">
-                {current.issues.slice(0, 5).map((issue) => (
-                  <li
-                    key={`${issue.path}:${issue.message}`}
-                  >{`${issue.path}: ${issue.message}`}</li>
-                ))}
-              </ul>
-              {current.issues.length > 5 ? (
-                <p className="mt-1 text-sm">{`and ${current.issues.length - 5} more`}</p>
-              ) : null}
-            </div>
+          {current.status === "empty" ||
+          current.status === "invalid" ||
+          current.status === "missing-local" ||
+          current.status === "error" ? (
+            <StatePanel state={current} sceneId={activeId} />
           ) : null}
           <Pitch
             title={sceneLabel}

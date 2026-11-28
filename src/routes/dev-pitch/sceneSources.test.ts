@@ -154,7 +154,8 @@ describe("loadDevScene: bundled fixtures", () => {
 
   it("loads every plain fixture as ready, none, or empty without fetching", async () => {
     for (const s of DEV_SCENES) {
-      if (s.published || s.local) continue;
+      // The invalid option is broken on purpose; StatePanels.test.tsx covers it.
+      if (s.published || s.local || s.id === "invalid") continue;
       const result = await loadDevScene(s, never);
       expect(["none", "ready", "empty"]).toContain(result.status);
     }

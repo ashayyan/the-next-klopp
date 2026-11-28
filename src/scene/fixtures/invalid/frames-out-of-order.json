@@ -1,0 +1,91 @@
+{
+  "id": "invalid-frames-out-of-order",
+  "schemaVersion": 1,
+  "kind": "authored",
+  "label": "Invalid scene: frames out of order",
+  "pitch": {
+    "length": 105,
+    "width": 68
+  },
+  "teams": [
+    {
+      "id": "home",
+      "name": "Home",
+      "side": "a",
+      "venue": "home",
+      "attack": {
+        "1": "ltr"
+      }
+    }
+  ],
+  "entities": [
+    {
+      "id": "home-9",
+      "type": "player",
+      "team": "home",
+      "number": 9,
+      "role": "Striker"
+    },
+    {
+      "id": "home-10",
+      "type": "player",
+      "team": "home",
+      "number": 10,
+      "role": "Attacking midfielder"
+    }
+  ],
+  "frames": [
+    {
+      "t": 0.4,
+      "positions": {
+        "home-9": {
+          "x": 60,
+          "y": 34
+        },
+        "home-10": {
+          "x": 50,
+          "y": 30
+        }
+      }
+    },
+    {
+      "t": 1.2,
+      "positions": {
+        "home-9": {
+          "x": 62,
+          "y": 34
+        },
+        "home-10": {
+          "x": 52,
+          "y": 30
+        }
+      }
+    },
+    {
+      "t": 0.8,
+      "positions": {
+        "home-9": {
+          "x": 64,
+          "y": 34
+        },
+        "home-10": {
+          "x": 54,
+          "y": 30
+        },
+        "home-7": {
+          "x": 40,
+          "y": 20
+        }
+      }
+    }
+  ],
+  "events": [],
+  "annotations": [],
+  "source": {
+    "type": "authored",
+    "sourceIds": [],
+    "licence": "project-authored",
+    "attribution": "Authored for The Next Klopp",
+    "shippable": true
+  }
+}
