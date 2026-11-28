@@ -10,12 +10,14 @@ import typer
 
 from klopp_pipeline import landmarks as landmarks_mod
 from klopp_pipeline import net, standardise
+from klopp_pipeline import publish as publish_mod
 from klopp_pipeline.coverage import PROVIDERS, run_coverage, write_outputs
 from klopp_pipeline.fetch import RAW_ROOT, fetch_source
+from klopp_pipeline.manifest import ManifestError, write_scene_version
 from klopp_pipeline.net import FetchError
 from klopp_pipeline.recipes import RECIPES
 from klopp_pipeline.scene import dump_scene
-from klopp_pipeline.sources import load_allow_list
+from klopp_pipeline.sources import get_source, load_allow_list
 
 app = typer.Typer(help="Open-data pipeline for The Next Klopp.", no_args_is_help=True)
 
@@ -23,6 +25,8 @@ app = typer.Typer(help="Open-data pipeline for The Next Klopp.", no_args_is_help
 REPO_ROOT = Path(__file__).resolve().parents[3]
 DEFAULT_OUT = REPO_ROOT / "research" / "pl-data-sources"
 DEFAULT_LANDMARKS = REPO_ROOT / "src" / "pitch" / "fixtures" / "landmarks.json"
+DEFAULT_DATA = REPO_ROOT / "data"
+DEFAULT_PUBLIC = REPO_ROOT / "public" / "data"
 
 
 @app.callback()
@@ -71,6 +75,8 @@ def landmarks(
 
 
 RAW_DIR_HELP = "Folder for downloaded raw files (git-ignored)."
+DATA_DIR_HELP = "Folder for immutable dataset versions (data/<dataset>/<version>/)."
+PUBLIC_DIR_HELP = "Folder served by the app (shippable versions and catalog.json)."
 OFFLINE_HELP = "Use only files already in the raw folder; never touch the network."
 
 
@@ -118,18 +124,50 @@ def standardise_cmd(
 @app.command()
 def recipe(
     name: Annotated[str, typer.Argument(help=f"Recipe name: {', '.join(RECIPES)}.")],
-    out: Annotated[Path, typer.Option(help="Scene JSON file to write.")],
+    out: Annotated[Path | None, typer.Option(help="Also write the scene JSON here (a preview).")] = None,
     offline: Annotated[bool, typer.Option(help=OFFLINE_HELP)] = False,
     raw_dir: Annotated[Path, typer.Option(help=RAW_DIR_HELP)] = RAW_ROOT,
+    data_dir: Annotated[Path, typer.Option(help=DATA_DIR_HELP)] = DEFAULT_DATA,
 ) -> None:
-    """Build one scene from a registered recipe and write it as canonical JSON."""
+    """Build one scene from a registered recipe and write it as an immutable version."""
     if name not in RECIPES:
         raise typer.BadParameter(f"unknown recipe {name!r}; choose from {list(RECIPES)}")
+    chosen = RECIPES[name]
+    allow = load_allow_list()
     try:
-        scene = RECIPES[name].build(raw_dir, offline)
-    except (FetchError, standardise.StandardiseError) as exc:
+        scene = chosen.build(raw_dir, offline)
+        result = write_scene_version(
+            scene,
+            source=get_source(allow, chosen.source_id),
+            recipe=chosen.name,
+            dataset=chosen.dataset,
+            raw_root=raw_dir,
+            data_root=data_dir,
+        )
+    except (FetchError, standardise.StandardiseError, ManifestError) as exc:
         typer.echo(f"recipe failed: {exc}")
         raise typer.Exit(code=1) from exc
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_bytes(dump_scene(scene))
-    typer.echo(f"wrote {out}: {scene.id} ({len(scene.events)} events, {scene.frames[-1].t:.1f} s)")
+    state = "wrote" if result.created else "already present"
+    typer.echo(f"{state} {result.path} ({scene.id}, {len(scene.events)} events, {scene.frames[-1].t:.1f} s)")
+    if out is not None:
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_bytes(dump_scene(scene))
+        typer.echo(f"preview {out}")
+
+
+@app.command("publish")
+def publish_cmd(
+    data_dir: Annotated[Path, typer.Option(help=DATA_DIR_HELP)] = DEFAULT_DATA,
+    public_dir: Annotated[Path, typer.Option(help=PUBLIC_DIR_HELP)] = DEFAULT_PUBLIC,
+) -> None:
+    """Copy shippable versions into public/data and refresh catalog.json."""
+    try:
+        result = publish_mod.publish(data_root=data_dir, public_root=public_dir, allow=load_allow_list())
+    except ManifestError as exc:
+        typer.echo(f"publish failed: {exc}")
+        raise typer.Exit(code=1) from exc
+    for path in result.copied:
+        typer.echo(f"published {path}")
+    for label in result.skipped:
+        typer.echo(f"not shippable, kept local: {label}")
+    typer.echo(f"catalog {'written' if result.catalog_written else 'unchanged'}: {result.catalog}")
