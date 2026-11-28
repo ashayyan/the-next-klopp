@@ -35,7 +35,7 @@
 
 ### Pitch Standard
 
-- [ ] **PITCH-01**: One canonical pitch renderer (SVG + Canvas layer) draws standard dimensions and markings in canonical metres
+- [x] **PITCH-01**: One canonical pitch renderer (SVG + Canvas layer) draws standard dimensions and markings in canonical metres
 - [ ] **PITCH-02**: Coordinate converters for StatsBomb, Opta, Wyscout and tracking coordinates pass landmark and round-trip tests verified against provider specs
 - [ ] **PITCH-03**: Standard glyphs for players, ball, passes, carries, runs, pressure, zones and shapes are used everywhere, with an auto-generated notation legend always visible
 - [ ] **PITCH-04**: A single Scene/Frame format describes authored visuals, saved boards, quiz answers and pipeline reconstructions
@@ -177,7 +177,7 @@ Populated during roadmap creation (2026-11-27). Each requirement maps to exactly
 | RSCH-04 | Phase 2 | Complete |
 | RSCH-05 | Phase 2 | Complete |
 | RSCH-06 | Phase 2 | Complete |
-| PITCH-01 | Phase 3 | Pending |
+| PITCH-01 | Phase 3 | Complete |
 | PITCH-02 | Phase 3 | Pending |
 | PITCH-03 | Phase 3 | Pending |
 | PITCH-04 | Phase 3 | Pending |
