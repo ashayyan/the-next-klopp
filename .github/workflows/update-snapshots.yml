@@ -7,7 +7,8 @@ name: update-snapshots
 #
 # Two jobs, so the write token never sits next to `npm ci`: `generate` runs the third-party image with
 # read-only permissions, `commit` runs on the hosted runner (which has the gh CLI) and only handles the
-# artefact. Dispatch with: gh workflow run update-snapshots.yml --ref <branch>
+# artefact. It runs for a branch only (a tag dispatch is refused) and pushes to the fully qualified
+# refs/heads/<branch>. Dispatch with: gh workflow run update-snapshots.yml --ref <branch>
 
 on:
   workflow_dispatch:
@@ -15,12 +16,17 @@ on:
 permissions:
   contents: read
 
+# Two dispatches on one branch run one after the other, so the second never races the first push.
+concurrency:
+  group: update-snapshots-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
   HUSKY: "0"
 
 jobs:
   generate:
-    if: github.ref != 'refs/heads/main'
+    if: startsWith(github.ref, 'refs/heads/') && github.ref != 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     permissions:
@@ -49,7 +55,7 @@ jobs:
           retention-days: 3
 
   commit:
-    if: github.ref != 'refs/heads/main'
+    if: startsWith(github.ref, 'refs/heads/') && github.ref != 'refs/heads/main'
     needs: generate
     runs-on: ubuntu-24.04
     timeout-minutes: 10
@@ -76,5 +82,5 @@ jobs:
             exit 0
           fi
           git commit -m "test(visual): update Linux baselines"
-          git push origin "HEAD:$BRANCH"
+          git push origin "HEAD:refs/heads/$BRANCH"
           gh workflow run ci --ref "$BRANCH"

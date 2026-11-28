@@ -123,8 +123,13 @@ describe("update-snapshots workflow", () => {
     expect(UPDATE.slice(generateStart, commitStart)).not.toContain("write");
   });
 
-  it("refuses main, uses the pinned image and writes baselines only with CI and UPDATE_BASELINES", () => {
-    expect(occurrences(UPDATE, "if: github.ref != 'refs/heads/main'")).toBe(2);
+  it("refuses main and tags, uses the pinned image and writes baselines only with CI and UPDATE_BASELINES", () => {
+    expect(
+      occurrences(
+        UPDATE,
+        "if: startsWith(github.ref, 'refs/heads/') && github.ref != 'refs/heads/main'",
+      ),
+    ).toBe(2);
     expect(UPDATE).toContain(`image: ${IMAGE}`);
     expect(UPDATE).toContain('CI: "true"');
     expect(UPDATE).toContain('UPDATE_BASELINES: "1"');
@@ -134,9 +139,14 @@ describe("update-snapshots workflow", () => {
   it("stages only the Linux baselines, pushes to the branch and dispatches ci", () => {
     expect(UPDATE).toContain("git add tests/visual/__baselines__/*-linux.png");
     expect(occurrences(UPDATE, "git add ")).toBe(1);
-    expect(UPDATE).toContain('git push origin "HEAD:$BRANCH"');
+    expect(UPDATE).toContain('git push origin "HEAD:refs/heads/$BRANCH"');
     expect(UPDATE).toContain('gh workflow run ci --ref "$BRANCH"');
     expect(UPDATE).toContain(`BRANCH: ${EXPRESSION_OPEN} github.ref_name }}`);
+  });
+
+  it("queues two dispatches on one branch instead of racing them", () => {
+    expect(UPDATE).toContain(`group: update-snapshots-${EXPRESSION_OPEN} github.ref }}`);
+    expect(UPDATE).toContain("cancel-in-progress: false");
   });
 });
 
