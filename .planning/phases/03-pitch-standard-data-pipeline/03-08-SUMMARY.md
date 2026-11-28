@@ -147,14 +147,20 @@ Tracer gate: the Task 1 verify (`vitest run scripts/check-bundle.test.ts`, `npm 
 **3. [Process] Design skill files not applicable**
 - No UI in this plan.
 
-**Total deviations:** 3, none changing a frozen contract.
+**4. [Rule 1 - Bug] CLI help test broke on coloured output in CI**
+- The first live run (46098104070) failed `test_the_cli_fetch_help_lists_offline_and_all` in the `pipeline` and `windows-smoke` jobs: with colour on, the CLI help splits `--offline` across ANSI sequences. The test now strips ANSI escapes before asserting (`c0287c7`); checked locally with `FORCE_COLOR=1 GITHUB_ACTIONS=true` (147 passed).
+
+**5. [Rule 3 - Blocking] No CI trigger for a branch without a pull request**
+- `ci.yml` ran only on pull requests and pushes to main, so a branch push produced no run. Added `workflow_dispatch`, and the immutability base falls back to `origin/main` when the event is neither a pull request nor a push (`fb0307c`). The six required job names are unchanged.
+
+**Total deviations:** 5, none changing a frozen contract.
 
 ## Issues Encountered
 - A bash heredoc swallowed a backslash in `globs.ts` (a regex literal); caught by the first vitest run and rewritten with the Write tool.
 - `lint-staged` creates and removes its own backup stash during commits; the working tree afterwards matched what it was before (unrelated pipeline file changes from earlier work stayed untouched and uncommitted).
 
 ## CI
-Live proof pending the next push; see the final handback for the result of `gh run list` on the branch. Local equivalents all pass: `npx vitest run scripts` (415 passed, 6 skipped), `npm run guard`, `node scripts/check-immutable.ts --base origin/main`, `npm run pipeline:test` (147 passed), `klopp-pipeline landmarks --check`, `npx biome check .`, `npx tsc --noEmit`, yaml parse of `ci.yml`.
+Live runs on `gsd/phase-03-pitch-standard-data-pipeline` (manual dispatch): 46098104070 failed on the ANSI help test (deviation 4); 46098332647 passed after the fix; 46099928131 passed on the head after plan 03-10 (all seven jobs: lint, typecheck, test, build, guards, windows-smoke, pipeline). Local equivalents also pass: `npx vitest run scripts`, `npm run guard`, `node scripts/check-immutable.ts --base origin/main`, `npm run pipeline:test`, `klopp-pipeline landmarks --check`, `npx biome check .`, `npx tsc --noEmit`, yaml parse of `ci.yml`.
 
 ## Package legitimacy
 No packages installed; `path.posix.matchesGlob` is built in (T-03-SC accepted).
