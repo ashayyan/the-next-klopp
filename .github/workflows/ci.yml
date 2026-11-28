@@ -135,8 +135,8 @@ jobs:
 
   # Not a required check (docs/decisions/0007-branch-protection.md keeps its six). Runs the browser
   # specs on Linux in the Playwright image whose tag equals the @playwright/test pin, and compares the
-  # visual baselines that the manual update-snapshots workflow commits. The `visual` step fails until
-  # the first baselines exist.
+  # visual baselines that the manual update-snapshots workflow commits. The visual tests fail until
+  # the first baselines exist; the functional specs of the same run report separately in the log.
   visual:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
@@ -149,10 +149,9 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npx playwright test --project=functional
-        env:
-          HOME: /root
-      - run: npx playwright test --project=visual
+      # One invocation, one dev server: a second `playwright test` step would find the first step's
+      # server still holding the Vite command lock and port 5173 inside the job container.
+      - run: npx playwright test --project=functional --project=visual
         env:
           HOME: /root
       - if: ${{ !cancelled() }}
