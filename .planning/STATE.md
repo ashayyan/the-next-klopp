@@ -3,16 +3,16 @@ gsd_state_version: "1.0"
 current_phase: 4
 current_phase_name: Design Direction & System
 status: executing
-stopped_at: Completed 04-14-PLAN.md
-last_updated: "2026-11-28T08:59:33.213Z"
+stopped_at: Completed 04-15-PLAN.md
+last_updated: "2026-11-28T09:38:46.586Z"
 last_activity: 2026-11-28
 last_activity_desc: Phase 4 execution started
-state_head: 58283040c92a93b684729f377fad9a6a003448db
+state_head: 3694459ab930d22a780b3231e8ace9f7c615af78
 progress:
   total_phases: 8
   completed_phases: 3
   total_plans: 58
-  completed_plans: 55
+  completed_plans: 56
   percent: 38
 ---
 
@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-11-27)
 ## Current Position
 
 Phase: 4 (Design Direction & System) — EXECUTING
-Plan: 15 of 17
+Plan: 16 of 17
 Status: Ready to execute
 Last activity: 2026-11-28 — Phase 4 execution started
 
@@ -102,6 +102,7 @@ Progress: [████░░░░░░] 38%
 | Phase 4 P12 | 10 min | 3 tasks | 3 files |
 | Phase 04 P13 | 20min | 2 tasks | 24 files |
 | Phase 04 P14 | 75min | 3 tasks | 15 files |
+| Phase 4 P15 | 95 min | 3 tasks | 21 files |
 
 ## Accumulated Context
 
@@ -176,6 +177,7 @@ Recent decisions affecting current work:
 - [Phase 4]: 04-12: Case study template reveals nothing on scroll alone (button or Next drives each step); Review template has a capped queue and no backlog count
 - [Phase 04]: 04-13: keep the floodlit tactics and data screens as reference routes; remove the other two directions' token files, layouts and fonts
 - [Phase 04]: 04-14: gallery frames are real same-origin iframes; glyph sheet has a team B state so ring discs and hollow arrowheads are reviewed in both themes; wide primitives use fewer columns; drag uses a six-player board
+- [Phase 4]: 04-15: Base UI controls and overlays shown in the gallery; the open AlertDialog state is a non-modal Dialog with role alertdialog so a screenshot is not made inert; the safe action Keep board takes focus on open
 
 ### Pending Todos
 
@@ -204,6 +206,6 @@ Items acknowledged and deferred at milestone close, most recent first:
 
 ## Session Continuity
 
-Last session: 2026-11-28T08:59:32.631Z
-Stopped at: Completed 04-14-PLAN.md
+Last session: 2026-11-28T09:38:45.979Z
+Stopped at: Completed 04-15-PLAN.md
 Resume file: None
