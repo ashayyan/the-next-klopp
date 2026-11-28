@@ -12,6 +12,9 @@ const lock = port === 5173 ? "" : " --bypass-lock";
 
 export default defineConfig({
   testDir: "tests",
+  // Playwright empties its output folder at the start of every run; keep it apart from the review
+  // artefacts that `npm run review:screens` writes under test-results/review/.
+  outputDir: "test-results/playwright",
   snapshotPathTemplate: "{testDir}/visual/__baselines__/{arg}-{platform}{ext}",
   // Local runs never write a baseline; CI writes only changed ones, and only on request.
   updateSnapshots: ci && process.env.UPDATE_BASELINES === "1" ? "changed" : "none",
