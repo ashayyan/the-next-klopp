@@ -112,7 +112,8 @@ export function SceneLayer({
     scene.teams.find((team) => team.id === id)?.side ?? "a";
   const entityById = new Map(scene.entities.map((entity) => [entity.id, entity]));
   const at = atMap(sampled, positions);
-  // Sequence badges sit beside the passer, clear of every disc (04-UI-SPEC Phase 3 observation 1).
+  // Sequence badges sit beside the passer, clear of every disc (04-UI-SPEC Phase 3 observation 1)
+  // and of each other.
   // Placement is memoised per sampled t, so paused frames cost nothing.
   const badgeAt = useMemo(() => {
     const s = sample(t, mode);
@@ -121,13 +122,26 @@ export function SceneLayer({
       const p = pos.get(e.id);
       return e.type === "ball" || !p ? [] : [{ x: p.x, y: p.y }];
     });
+    // Badges are placed in sequence order, each clear of the ones placed before it, so an earlier
+    // badge never moves when a later one appears (04-UI-REVIEW fix 3).
     const out = new Map<string, ScenePoint>();
-    for (const event of scene.events) {
-      if (eventState(scene, event, s.t) === "hidden") continue;
-      out.set(
-        event.id,
-        placeBadge({ start: event.start, end: event.end ?? event.start, discs, view }),
-      );
+    const placed: ScenePoint[] = [];
+    const events = new Map(scene.events.map((event) => [event.id, event]));
+    for (const annotation of scene.annotations) {
+      if (annotation.type !== "sequence") continue;
+      for (const id of annotation.events) {
+        const event = events.get(id);
+        if (!event || out.has(id) || eventState(scene, event, s.t) === "hidden") continue;
+        const at = placeBadge({
+          start: event.start,
+          end: event.end ?? event.start,
+          discs,
+          badges: placed,
+          view,
+        });
+        out.set(id, at);
+        placed.push(at);
+      }
     }
     return out;
   }, [scene, sample, t, mode, positions, view]);

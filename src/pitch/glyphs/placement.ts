@@ -20,6 +20,8 @@ export interface Box {
 export const BADGE_RADIUS_PX = 8;
 /** Gap between the disc edge and the badge centre beyond the badge radius: disc radius + 8 px. */
 export const BADGE_OFFSET_PX = 8;
+/** Clear space kept between two badges, so their 1 px ink rings never touch. */
+export const BADGE_GAP_PX = 2;
 // Average advance of 12 px semibold sans text; chips are sized from it so no text is measured.
 export const CHAR_PX = 7.2;
 export const CHIP_PAD_PX = 4;
@@ -52,6 +54,8 @@ export interface PlaceBadgeInput {
   end: ScenePoint;
   /** Player disc centres, canonical metres. */
   discs: readonly Pt[];
+  /** Centres of the badges already placed in this frame, canonical metres. Default none. */
+  badges?: readonly Pt[];
   view: View;
 }
 
@@ -59,10 +63,13 @@ export interface PlaceBadgeInput {
  * Canonical position of the badge centre. The badge starts disc radius + 8 px from the event start
  * point and tries the left of travel, the right of travel, behind the start and ahead of it. A
  * sloping direction of travel puts the square box of the badge on the corner of the start disc's
- * box, so the same four sides are tried again further out (x 1.42 then x 2) before giving up and
- * returning the left-of-travel position at the base distance.
+ * box, so the same four sides are tried again further out (x 1.42 then x 2). A side is clear when
+ * the badge box stays inside the pitch and meets no player disc and no badge placed before it (with
+ * a 2 px gap). When no side clears both, the first side clear of the discs alone wins, so a badge
+ * never lands on a disc to dodge another badge; failing that, the left-of-travel position at the
+ * base distance.
  */
-export function placeBadge({ start, end, discs, view }: PlaceBadgeInput): ScenePoint {
+export function placeBadge({ start, end, discs, badges = [], view }: PlaceBadgeInput): ScenePoint {
   const s = canonicalToScreen(view, start);
   const e = canonicalToScreen(view, end);
   let dx = e.x - s.x;
@@ -85,12 +92,17 @@ export function placeBadge({ start, end, discs, view }: PlaceBadgeInput): SceneP
   ];
   const discBoxes = discs.map((d) => centredBox(canonicalToScreen(view, d), discPx, discPx));
   const size = 2 * BADGE_RADIUS_PX;
-  for (const scale of [1, Math.SQRT2, 2]) {
-    for (const side of sides) {
-      const c = { x: s.x + side.x * base * scale, y: s.y + side.y * base * scale };
-      const box = centredBox(c, size, size);
-      if (insideView(box, view) && discBoxes.every((d) => !boxesIntersect(box, d))) {
-        return screenToCanonical(view, c.x, c.y);
+  const badgeBoxes = badges.map((b) =>
+    centredBox(canonicalToScreen(view, b), size + 2 * BADGE_GAP_PX, size + 2 * BADGE_GAP_PX),
+  );
+  for (const obstacles of [[...discBoxes, ...badgeBoxes], discBoxes]) {
+    for (const scale of [1, Math.SQRT2, 2]) {
+      for (const side of sides) {
+        const c = { x: s.x + side.x * base * scale, y: s.y + side.y * base * scale };
+        const box = centredBox(c, size, size);
+        if (insideView(box, view) && obstacles.every((o) => !boxesIntersect(box, o))) {
+          return screenToCanonical(view, c.x, c.y);
+        }
       }
     }
   }

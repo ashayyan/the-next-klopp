@@ -1,6 +1,8 @@
-// Phase 3 open observations 1, 2 and 5 (04-UI-SPEC), checked in a real browser on the Wyscout
-// reconstruction scene: no sequence badge sits on a player disc, every note chip stays inside the
-// pitch SVG, and "Play sequence" reads in words from 768 px.
+// Phase 3 open observations 1, 2 and 5 (04-UI-SPEC) and the 04-UI-REVIEW pitch fixes, checked in a
+// real browser: on the Wyscout reconstruction scene no sequence badge sits on a player disc or on
+// another badge; on the scenes that carry notes every note chip stays inside the pitch SVG; disc
+// labels fit inside their discs; the ball leaves the disc label readable; and "Play sequence" reads
+// in words from 768 px.
 import { expect, type Page, test } from "@playwright/test";
 
 type Box = { x: number; y: number; width: number; height: number };
@@ -31,52 +33,42 @@ async function boxes(page: Page, selector: string): Promise<Box[]> {
   );
 }
 
-/** Checks the current frame; returns how many badges and notes it looked at. */
-async function checkFrame(page: Page, label: string): Promise<{ badges: number; notes: number }> {
+/** Checks the badges of the current frame against the discs and each other; returns the count. */
+async function checkBadges(page: Page, label: string): Promise<number> {
   const badges = await boxes(page, '[data-glyph="sequence-badge"]');
   const discs = await boxes(page, DISCS);
   for (const [i, badge] of badges.entries()) {
     for (const disc of discs) {
       expect(overlaps(badge, disc), `${label}: badge ${i + 1} overlaps a player disc`).toBe(false);
     }
+    for (const [j, other] of badges.entries()) {
+      if (j <= i) continue;
+      expect(overlaps(badge, other), `${label}: badge ${i + 1} overlaps badge ${j + 1}`).toBe(
+        false,
+      );
+    }
   }
-  const svg = await page
-    .locator("[data-pitch] svg[role]")
-    .first()
-    .evaluate((el) => {
-      const r = el.getBoundingClientRect();
-      return { x: r.x, y: r.y, width: r.width, height: r.height };
-    });
-  const notes = await boxes(page, '[data-part="note-text"]');
-  for (const [i, note] of notes.entries()) {
-    expect(note.x, `${label}: note ${i + 1} left edge`).toBeGreaterThanOrEqual(svg.x - 0.5);
-    expect(note.y, `${label}: note ${i + 1} top edge`).toBeGreaterThanOrEqual(svg.y - 0.5);
-    expect(note.x + note.width, `${label}: note ${i + 1} right edge`).toBeLessThanOrEqual(
-      svg.x + svg.width + 0.5,
-    );
-    expect(note.y + note.height, `${label}: note ${i + 1} bottom edge`).toBeLessThanOrEqual(
-      svg.y + svg.height + 0.5,
-    );
-  }
-  return { badges: badges.length, notes: notes.length };
+  return badges.length;
 }
 
 for (const [width, height] of [
   [375, 812],
   [1440, 900],
 ] as const) {
-  test(`${width} px: no badge overlaps a player disc and every note chip lies inside the pitch`, async ({
+  test(`${width} px: no badge overlaps a player disc or another badge in any frame`, async ({
     page,
   }) => {
     await openScene(page, width, height);
     let badges = 0;
+    let most = 0;
     let frames = 0;
     const next = page.getByRole("button", { name: "Next frame" });
     // Step through every keyframe; the loop ends when the clock stops moving.
     let previous = "";
     for (let i = 0; i < 40; i += 1) {
-      const seen = await checkFrame(page, `${width}px frame ${i}`);
-      badges += seen.badges;
+      const seen = await checkBadges(page, `${width}px frame ${i}`);
+      badges += seen;
+      most = Math.max(most, seen);
       frames += 1;
       const clock = await page.locator('input[type="range"]').first().inputValue();
       if (clock === previous) break;
@@ -86,6 +78,71 @@ for (const [width, height] of [
     }
     expect(frames, "the scene has several frames").toBeGreaterThan(3);
     expect(badges, "the scene draws sequence badges in at least one frame").toBeGreaterThan(0);
+    expect(most, "some frame draws several badges, so badge pairs were compared").toBeGreaterThan(
+      2,
+    );
+  });
+}
+
+/** Note chips (the rect and its text) of the current page, in CSS pixels. */
+async function noteChips(page: Page): Promise<Box[]> {
+  return page.locator('[data-pitch] [data-part="note-text"]').evaluateAll((els) =>
+    els.flatMap((el) => {
+      const rect = el.parentElement?.querySelector("rect");
+      return [el, ...(rect ? [rect] : [])].map((part) => {
+        const r = part.getBoundingClientRect();
+        return { x: r.x, y: r.y, width: r.width, height: r.height };
+      });
+    }),
+  );
+}
+
+// The Wyscout scene has no notes, so the chip rule is checked on the scenes that do: the glyph
+// sheet, the authored scene and the quiz answer, plus the tactics screen with the ball.
+for (const [width, height] of [
+  [375, 812],
+  [1440, 900],
+] as const) {
+  test(`${width} px: every note chip lies inside the pitch SVG`, async ({ page }) => {
+    await page.setViewportSize({ width, height });
+    const pages: [string, () => Promise<void>][] = [
+      ["/dev/pitch?scene=glyph-sheet", async () => {}],
+      ["/dev/pitch?scene=authored", async () => {}],
+      ["/dev/pitch?scene=quiz-answer", async () => {}],
+      [
+        "/dev/directions/floodlit/tactics",
+        async () => {
+          await page.getByRole("button", { name: "With the ball" }).click();
+          await expect(page.locator('[data-readout="shape"]')).toHaveText("Shape now: 3-2-4-1");
+        },
+      ],
+    ];
+    for (const [url, prepare] of pages) {
+      await page.goto(url);
+      await page.locator('[data-layer="scene"]').first().waitFor({ state: "attached" });
+      await prepare();
+      await page.evaluate(() => document.fonts.ready);
+      const chips = await noteChips(page);
+      expect(chips.length, `${url} draws at least one note chip`).toBeGreaterThan(0);
+      const svg = await page
+        .locator("[data-pitch] svg[role]")
+        .first()
+        .evaluate((el) => {
+          const r = el.getBoundingClientRect();
+          return { x: r.x, y: r.y, width: r.width, height: r.height };
+        });
+      for (const [i, chip] of chips.entries()) {
+        const label = `${width}px ${url}: chip part ${i + 1}`;
+        expect(chip.x, `${label} left edge`).toBeGreaterThanOrEqual(svg.x - 0.5);
+        expect(chip.y, `${label} top edge`).toBeGreaterThanOrEqual(svg.y - 0.5);
+        expect(chip.x + chip.width, `${label} right edge`).toBeLessThanOrEqual(
+          svg.x + svg.width + 0.5,
+        );
+        expect(chip.y + chip.height, `${label} bottom edge`).toBeLessThanOrEqual(
+          svg.y + svg.height + 0.5,
+        );
+      }
+    }
   });
 }
 

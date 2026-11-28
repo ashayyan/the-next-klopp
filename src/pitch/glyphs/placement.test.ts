@@ -68,7 +68,7 @@ describe("sequence badges clear the player discs (Wyscout scene)", () => {
   ];
 
   for (const [name, orientation, cssWidth] of cases) {
-    it(`no badge box meets a disc box and every badge is inside the SVG at ${name}`, () => {
+    it(`no badge box meets a disc box or another badge, and every badge is inside the SVG at ${name}`, () => {
       const view = viewFor(orientation, cssWidth);
       const sample = createSampler(scene);
       const times = [0, ...scene.events.map((e) => e.t)];
@@ -83,10 +83,17 @@ describe("sequence badges clear the player discs (Wyscout scene)", () => {
         const discs = sample(t, "smooth").entities.map((e) =>
           centred(canonicalToScreen(view, e), discPx),
         );
-        for (const c of badges) {
+        const badgeBoxes = badges.map((c) => centred(canonicalToScreen(view, c), 16));
+        for (const [i, c] of badges.entries()) {
           const box = centred(canonicalToScreen(view, c), 16);
           badgesChecked += 1;
           for (const d of discs) expect(boxesIntersect(box, d), `t=${t}`).toBe(false);
+          for (const [j, other] of badgeBoxes.entries()) {
+            if (j === i) continue;
+            expect(boxesIntersect(box, other), `t=${t}: badge ${i + 1} meets badge ${j + 1}`).toBe(
+              false,
+            );
+          }
           expect(box.x).toBeGreaterThanOrEqual(0);
           expect(box.y).toBeGreaterThanOrEqual(0);
           expect(box.x + box.w).toBeLessThanOrEqual(view.cssWidth);
@@ -116,6 +123,33 @@ describe("sequence badges clear the player discs (Wyscout scene)", () => {
     const blocked = placeBadge({ start, end: { x: 60, y: 34 }, discs: [free], view });
     const a = canonicalToScreen(view, start);
     expect(canonicalToScreen(view, blocked).y).toBeGreaterThan(a.y); // right of travel
+  });
+
+  it("moves to the next side when the left of travel is taken by an earlier badge", () => {
+    const view = viewFor("horizontal", 840);
+    const start = { x: 50, y: 34 };
+    const free = placeBadge({ start, end: { x: 60, y: 34 }, discs: [], view });
+    const next = placeBadge({ start, end: { x: 60, y: 34 }, discs: [], badges: [free], view });
+    const a = canonicalToScreen(view, start);
+    expect(canonicalToScreen(view, next).y).toBeGreaterThan(a.y); // right of travel
+  });
+
+  it("keeps a badge off a disc even when every disc-free side is taken by a badge", () => {
+    const view = viewFor("horizontal", 840);
+    const start = { x: 50, y: 34 };
+    const end = { x: 60, y: 34 };
+    // Fill every side at every distance with earlier badges: the placer may then sit on a badge,
+    // but never on the disc that blocks the left of travel.
+    const discBlock = placeBadge({ start, end, discs: [], view });
+    const ring: { x: number; y: number }[] = [];
+    for (let k = 0; k < 12; k += 1) {
+      const p = placeBadge({ start, end, discs: [discBlock], badges: ring, view });
+      ring.push(p);
+    }
+    const c = placeBadge({ start, end, discs: [discBlock], badges: ring, view });
+    const discPx = discDiameter(view.pxPerMetre) * view.pxPerMetre;
+    const box = centred(canonicalToScreen(view, c), 16);
+    expect(boxesIntersect(box, centred(canonicalToScreen(view, discBlock), discPx))).toBe(false);
   });
 
   it("treats a zero-length event as travelling up the screen (badge on its left)", () => {
